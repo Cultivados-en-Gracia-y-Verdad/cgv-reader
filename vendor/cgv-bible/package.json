@@ -1,0 +1,10 @@
+{
+  "name": "cgv-bible",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Shared CGV Bible reference parsing and NBLA lookup",
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

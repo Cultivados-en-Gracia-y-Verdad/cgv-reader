@@ -1,0 +1,4666 @@
+{
+  "meta": {
+    "book": "tito",
+    "spanish": "LBF",
+    "greekSpine": "MorphGNT/BLE",
+    "note": "Greek token -> LBF word index. Bootstrap used Mission Mutual RV1909 targets + BLE glosses; finite-verb gaps filled manually. Spanish surface is LBF only."
+  },
+  "records": [
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 1,
+      "greekSurface": "Παῦλος",
+      "lbfSurface": "Pablo",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 2,
+      "greekSurface": "δοῦλος",
+      "lbfSurface": "siervo",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 3,
+      "greekSurface": "θεοῦ,",
+      "lbfSurface": "de",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 4,
+      "greekSurface": "ἀπόστολος",
+      "lbfSurface": "apóstol",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 5,
+      "greekSurface": "δὲ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 6,
+      "greekSurface": "Ἰησοῦ",
+      "lbfSurface": "de",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 7,
+      "greekSurface": "Χριστοῦ",
+      "lbfSurface": "de",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 8,
+      "greekSurface": "κατὰ",
+      "lbfSurface": "según",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 9,
+      "greekSurface": "πίστιν",
+      "lbfSurface": "fe",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 10,
+      "greekSurface": "ἐκλεκτῶν",
+      "lbfSurface": "elegidos",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 11,
+      "greekSurface": "θεοῦ",
+      "lbfSurface": "Dios",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 13,
+      "greekSurface": "ἐπίγνωσιν",
+      "lbfSurface": "conocimiento",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 14,
+      "greekSurface": "ἀληθείας",
+      "lbfSurface": "verdad",
+      "lbfWordIndex": 21
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 15,
+      "greekSurface": "τῆς",
+      "lbfSurface": "la",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 17,
+      "greekSurface": "εὐσέβειαν",
+      "lbfSurface": "piedad",
+      "lbfWordIndex": 26
+    },
+    {
+      "chapter": 1,
+      "verse": 2,
+      "token": 1,
+      "greekSurface": "ἐπ’",
+      "lbfSurface": "para",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 1,
+      "verse": 2,
+      "token": 2,
+      "greekSurface": "ἐλπίδι",
+      "lbfSurface": "esperanza",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 1,
+      "verse": 2,
+      "token": 3,
+      "greekSurface": "ζωῆς",
+      "lbfSurface": "vida",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 2,
+      "token": 4,
+      "greekSurface": "αἰωνίου,",
+      "lbfSurface": "eterna",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 1,
+      "verse": 2,
+      "token": 5,
+      "greekSurface": "ἣν",
+      "lbfSurface": "cual",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 2,
+      "token": 6,
+      "greekSurface": "ἐπηγγείλατο",
+      "lbfSurface": "prometió",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 1,
+      "verse": 2,
+      "token": 7,
+      "greekSurface": "ὁ",
+      "lbfSurface": "el",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 2,
+      "token": 8,
+      "greekSurface": "ἀψευδὴς",
+      "lbfSurface": "que",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 2,
+      "token": 9,
+      "greekSurface": "θεὸς",
+      "lbfSurface": "Dios",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 2,
+      "token": 10,
+      "greekSurface": "πρὸ",
+      "lbfSurface": "antes",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 1,
+      "verse": 2,
+      "token": 11,
+      "greekSurface": "χρόνων",
+      "lbfSurface": "de",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 1,
+      "verse": 2,
+      "token": 12,
+      "greekSurface": "αἰωνίων",
+      "lbfSurface": "eternos",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 1,
+      "greekSurface": "ἐφανέρωσεν",
+      "lbfSurface": "manifestó",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 2,
+      "greekSurface": "δὲ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 3,
+      "greekSurface": "καιροῖς",
+      "lbfSurface": "a",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 4,
+      "greekSurface": "ἰδίοις,",
+      "lbfSurface": "su",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 5,
+      "greekSurface": "τὸν",
+      "lbfSurface": "la",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 6,
+      "greekSurface": "λόγον",
+      "lbfSurface": "palabra",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 7,
+      "greekSurface": "αὐτοῦ",
+      "lbfSurface": "el",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 8,
+      "greekSurface": "ἐν",
+      "lbfSurface": "por",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 9,
+      "greekSurface": "κηρύγματι",
+      "lbfSurface": "predicación",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 10,
+      "greekSurface": "ὃ",
+      "lbfSurface": "cual",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 11,
+      "greekSurface": "ἐπιστεύθην",
+      "lbfSurface": "confiada",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 12,
+      "greekSurface": "ἐγὼ",
+      "lbfSurface": "me",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 13,
+      "greekSurface": "κατ’",
+      "lbfSurface": "según",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 16,
+      "greekSurface": "σωτῆρος",
+      "lbfSurface": "Salvador",
+      "lbfWordIndex": 22
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 17,
+      "greekSurface": "ἡμῶν",
+      "lbfSurface": "de",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 18,
+      "greekSurface": "θεοῦ,",
+      "lbfSurface": "Dios",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 1,
+      "greekSurface": "Τίτῳ",
+      "lbfSurface": "Tito",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 2,
+      "greekSurface": "γνησίῳ",
+      "lbfSurface": "genuino",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 3,
+      "greekSurface": "τέκνῳ",
+      "lbfSurface": "hijo",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 4,
+      "greekSurface": "κατὰ",
+      "lbfSurface": "según",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 5,
+      "greekSurface": "κοινὴν",
+      "lbfSurface": "común",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 6,
+      "greekSurface": "πίστιν·",
+      "lbfSurface": "fe",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 7,
+      "greekSurface": "χάρις",
+      "lbfSurface": "gracia",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 8,
+      "greekSurface": "⸀καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 9,
+      "greekSurface": "εἰρήνη",
+      "lbfSurface": "paz",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 10,
+      "greekSurface": "ἀπὸ",
+      "lbfSurface": "de",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 11,
+      "greekSurface": "θεοῦ",
+      "lbfSurface": "Dios",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 12,
+      "greekSurface": "πατρὸς",
+      "lbfSurface": "Padre",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 13,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 14,
+      "greekSurface": "⸂Χριστοῦ",
+      "lbfSurface": "de",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 15,
+      "greekSurface": "Ἰησοῦ⸃",
+      "lbfSurface": "Jesús",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 17,
+      "greekSurface": "σωτῆρος",
+      "lbfSurface": "Salvador",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 18,
+      "greekSurface": "ἡμῶν.",
+      "lbfSurface": "nuestro",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 1,
+      "greekSurface": "Τούτου",
+      "lbfSurface": "esta",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 2,
+      "greekSurface": "χάριν",
+      "lbfSurface": "Por",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 3,
+      "greekSurface": "⸀ἀπέλιπόν",
+      "lbfSurface": "dejé",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 4,
+      "greekSurface": "σε",
+      "lbfSurface": "te",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 5,
+      "greekSurface": "ἐν",
+      "lbfSurface": "en",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 6,
+      "greekSurface": "Κρήτῃ",
+      "lbfSurface": "Creta",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 7,
+      "greekSurface": "ἵνα",
+      "lbfSurface": "para",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 8,
+      "greekSurface": "τὰ",
+      "lbfSurface": "lo",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 9,
+      "greekSurface": "λείποντα",
+      "lbfSurface": "falta",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 10,
+      "greekSurface": "ἐπιδιορθώσῃ,",
+      "lbfSurface": "corrigieras",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 11,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 12,
+      "greekSurface": "καταστήσῃς",
+      "lbfSurface": "pusieras",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 14,
+      "greekSurface": "πόλιν",
+      "lbfSurface": "ciudad",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 15,
+      "greekSurface": "πρεσβυτέρους,",
+      "lbfSurface": "ancianos",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 16,
+      "greekSurface": "ὡς",
+      "lbfSurface": "como",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 17,
+      "greekSurface": "ἐγώ",
+      "lbfSurface": "yo",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 18,
+      "greekSurface": "σοι",
+      "lbfSurface": "te",
+      "lbfWordIndex": 21
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 19,
+      "greekSurface": "διεταξάμην,",
+      "lbfSurface": "ordené",
+      "lbfWordIndex": 22
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "token": 1,
+      "greekSurface": "εἴ",
+      "lbfSurface": "si",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "token": 2,
+      "greekSurface": "τίς",
+      "lbfSurface": "alguien",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "token": 3,
+      "greekSurface": "ἐστιν",
+      "lbfSurface": "es",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "token": 5,
+      "greekSurface": "μιᾶς",
+      "lbfSurface": "una",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "token": 6,
+      "greekSurface": "γυναικὸς",
+      "lbfSurface": "mujer",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "token": 7,
+      "greekSurface": "ἀνήρ,",
+      "lbfSurface": "marido",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "token": 8,
+      "greekSurface": "τέκνα",
+      "lbfSurface": "hijos",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "token": 10,
+      "greekSurface": "πιστά,",
+      "lbfSurface": "fieles",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "token": 11,
+      "greekSurface": "μὴ",
+      "lbfSurface": "no",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "token": 13,
+      "greekSurface": "κατηγορίᾳ",
+      "lbfSurface": "acusación",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "token": 14,
+      "greekSurface": "ἀσωτίας",
+      "lbfSurface": "disolución",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "token": 15,
+      "greekSurface": "ἢ",
+      "lbfSurface": "o",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "token": 16,
+      "greekSurface": "ἀνυπότακτα.",
+      "lbfSurface": "insubordinados",
+      "lbfWordIndex": 22
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 1,
+      "greekSurface": "δεῖ",
+      "lbfSurface": "necesario",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 2,
+      "greekSurface": "γὰρ",
+      "lbfSurface": "Porque",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 3,
+      "greekSurface": "τὸν",
+      "lbfSurface": "el",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 4,
+      "greekSurface": "ἐπίσκοπον",
+      "lbfSurface": "obispo",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 6,
+      "greekSurface": "εἶναι",
+      "lbfSurface": "sea",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 7,
+      "greekSurface": "ὡς",
+      "lbfSurface": "como",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 8,
+      "greekSurface": "θεοῦ",
+      "lbfSurface": "de",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 9,
+      "greekSurface": "οἰκονόμον,",
+      "lbfSurface": "mayordomo",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 10,
+      "greekSurface": "μὴ",
+      "lbfSurface": "no",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 11,
+      "greekSurface": "αὐθάδη,",
+      "lbfSurface": "soberbio",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 12,
+      "greekSurface": "μὴ",
+      "lbfSurface": "no",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 13,
+      "greekSurface": "ὀργίλον,",
+      "lbfSurface": "iracundo",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 14,
+      "greekSurface": "μὴ",
+      "lbfSurface": "no",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 16,
+      "greekSurface": "μὴ",
+      "lbfSurface": "no",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 18,
+      "greekSurface": "μὴ",
+      "lbfSurface": "no",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 19,
+      "greekSurface": "αἰσχροκερδῆ,",
+      "lbfSurface": "codicioso",
+      "lbfWordIndex": 21
+    },
+    {
+      "chapter": 1,
+      "verse": 8,
+      "token": 1,
+      "greekSurface": "ἀλλὰ",
+      "lbfSurface": "sino",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 1,
+      "verse": 8,
+      "token": 2,
+      "greekSurface": "φιλόξενον,",
+      "lbfSurface": "hospitalario",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 8,
+      "token": 3,
+      "greekSurface": "φιλάγαθον,",
+      "lbfSurface": "bueno",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 8,
+      "token": 4,
+      "greekSurface": "σώφρονα,",
+      "lbfSurface": "prudente",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 1,
+      "verse": 8,
+      "token": 5,
+      "greekSurface": "δίκαιον,",
+      "lbfSurface": "justo",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 8,
+      "token": 6,
+      "greekSurface": "ὅσιον,",
+      "lbfSurface": "santo",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 8,
+      "token": 7,
+      "greekSurface": "ἐγκρατῆ,",
+      "lbfSurface": "dueño",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 2,
+      "greekSurface": "τοῦ",
+      "lbfSurface": "la",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 3,
+      "greekSurface": "κατὰ",
+      "lbfSurface": "que",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 4,
+      "greekSurface": "τὴν",
+      "lbfSurface": "la",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 5,
+      "greekSurface": "διδαχὴν",
+      "lbfSurface": "enseñanza",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 6,
+      "greekSurface": "πιστοῦ",
+      "lbfSurface": "fiel",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 7,
+      "greekSurface": "λόγου,",
+      "lbfSurface": "palabra",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 8,
+      "greekSurface": "ἵνα",
+      "lbfSurface": "para",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 9,
+      "greekSurface": "δυνατὸς",
+      "lbfSurface": "poderoso",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 10,
+      "greekSurface": "ᾖ",
+      "lbfSurface": "sea",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 12,
+      "greekSurface": "παρακαλεῖν",
+      "lbfSurface": "exhortar",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 13,
+      "greekSurface": "ἐν",
+      "lbfSurface": "con",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 14,
+      "greekSurface": "τῇ",
+      "lbfSurface": "la",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 15,
+      "greekSurface": "διδασκαλίᾳ",
+      "lbfSurface": "doctrina",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 16,
+      "greekSurface": "τῇ",
+      "lbfSurface": "a",
+      "lbfWordIndex": 22
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 17,
+      "greekSurface": "ὑγιαινούσῃ",
+      "lbfSurface": "sana",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 19,
+      "greekSurface": "τοὺς",
+      "lbfSurface": "los",
+      "lbfWordIndex": 23
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 20,
+      "greekSurface": "ἀντιλέγοντας",
+      "lbfSurface": "que",
+      "lbfWordIndex": 24
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 21,
+      "greekSurface": "ἐλέγχειν.",
+      "lbfSurface": "reprender",
+      "lbfWordIndex": 21
+    },
+    {
+      "chapter": 1,
+      "verse": 10,
+      "token": 1,
+      "greekSurface": "Εἰσὶν",
+      "lbfSurface": "hay",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 10,
+      "token": 2,
+      "greekSurface": "γὰρ",
+      "lbfSurface": "Porque",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 1,
+      "verse": 10,
+      "token": 3,
+      "greekSurface": "πολλοὶ",
+      "lbfSurface": "muchos",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 1,
+      "verse": 10,
+      "token": 4,
+      "greekSurface": "⸀καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 10,
+      "token": 5,
+      "greekSurface": "ἀνυπότακτοι,",
+      "lbfSurface": "insubordinados",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 1,
+      "verse": 10,
+      "token": 6,
+      "greekSurface": "ματαιολόγοι",
+      "lbfSurface": "habladores",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 1,
+      "verse": 10,
+      "token": 8,
+      "greekSurface": "φρεναπάται,",
+      "lbfSurface": "engañadores",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 10,
+      "token": 10,
+      "greekSurface": "οἱ",
+      "lbfSurface": "los",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 10,
+      "token": 11,
+      "greekSurface": "ἐκ",
+      "lbfSurface": "de",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 10,
+      "token": 12,
+      "greekSurface": "⸀τῆς",
+      "lbfSurface": "la",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 10,
+      "token": 13,
+      "greekSurface": "περιτομῆς,",
+      "lbfSurface": "circuncisión",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 2,
+      "greekSurface": "δεῖ",
+      "lbfSurface": "necesario",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 3,
+      "greekSurface": "ἐπιστομίζειν,",
+      "lbfSurface": "tapar",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 4,
+      "greekSurface": "οἵτινες",
+      "lbfSurface": "que",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 5,
+      "greekSurface": "ὅλους",
+      "lbfSurface": "enteras",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 6,
+      "greekSurface": "οἴκους",
+      "lbfSurface": "casas",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 7,
+      "greekSurface": "ἀνατρέπουσιν",
+      "lbfSurface": "trastornan",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 8,
+      "greekSurface": "διδάσκοντες",
+      "lbfSurface": "enseñando",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 9,
+      "greekSurface": "ἃ",
+      "lbfSurface": "que",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 10,
+      "greekSurface": "μὴ",
+      "lbfSurface": "no",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 11,
+      "greekSurface": "δεῖ",
+      "lbfSurface": "conviene",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 12,
+      "greekSurface": "αἰσχροῦ",
+      "lbfSurface": "vergonzosa",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 13,
+      "greekSurface": "κέρδους",
+      "lbfSurface": "ganancia",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 14,
+      "greekSurface": "χάριν.",
+      "lbfSurface": "causa",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 1,
+      "greekSurface": "εἶπέν",
+      "lbfSurface": "Dijo",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 2,
+      "greekSurface": "τις",
+      "lbfSurface": "uno",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 3,
+      "greekSurface": "ἐξ",
+      "lbfSurface": "de",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 4,
+      "greekSurface": "αὐτῶν,",
+      "lbfSurface": "ellos",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 5,
+      "greekSurface": "ἴδιος",
+      "lbfSurface": "propio",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 7,
+      "greekSurface": "προφήτης,",
+      "lbfSurface": "profeta",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 8,
+      "greekSurface": "Κρῆτες",
+      "lbfSurface": "cretenses",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 9,
+      "greekSurface": "ἀεὶ",
+      "lbfSurface": "siempre",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 10,
+      "greekSurface": "ψεῦσται,",
+      "lbfSurface": "mentirosos",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 11,
+      "greekSurface": "κακὰ",
+      "lbfSurface": "malas",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 12,
+      "greekSurface": "θηρία,",
+      "lbfSurface": "bestias",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 13,
+      "greekSurface": "γαστέρες",
+      "lbfSurface": "vientres",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 14,
+      "greekSurface": "ἀργαί·",
+      "lbfSurface": "ociosos",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 1,
+      "greekSurface": "ἡ",
+      "lbfSurface": "la",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 2,
+      "greekSurface": "μαρτυρία",
+      "lbfSurface": "testimonio",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 3,
+      "greekSurface": "αὕτη",
+      "lbfSurface": "Este",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 4,
+      "greekSurface": "ἐστὶν",
+      "lbfSurface": "es",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 5,
+      "greekSurface": "ἀληθής.",
+      "lbfSurface": "verdadero",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 6,
+      "greekSurface": "δι’",
+      "lbfSurface": "Por",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 8,
+      "greekSurface": "αἰτίαν",
+      "lbfSurface": "razón",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 9,
+      "greekSurface": "ἔλεγχε",
+      "lbfSurface": "repréndelos",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 11,
+      "greekSurface": "ἀποτόμως,",
+      "lbfSurface": "severamente",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 12,
+      "greekSurface": "ἵνα",
+      "lbfSurface": "para",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 13,
+      "greekSurface": "ὑγιαίνωσιν",
+      "lbfSurface": "sanos",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 14,
+      "greekSurface": "ἐν",
+      "lbfSurface": "en",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 16,
+      "greekSurface": "πίστει,",
+      "lbfSurface": "fe",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 1,
+      "verse": 14,
+      "token": 1,
+      "greekSurface": "μὴ",
+      "lbfSurface": "no",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 1,
+      "verse": 14,
+      "token": 2,
+      "greekSurface": "προσέχοντες",
+      "lbfSurface": "atención",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 1,
+      "verse": 14,
+      "token": 3,
+      "greekSurface": "Ἰουδαϊκοῖς",
+      "lbfSurface": "judíos",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 14,
+      "token": 4,
+      "greekSurface": "μύθοις",
+      "lbfSurface": "mitos",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 1,
+      "verse": 14,
+      "token": 5,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 1,
+      "verse": 14,
+      "token": 6,
+      "greekSurface": "ἐντολαῖς",
+      "lbfSurface": "mandamientos",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 14,
+      "token": 7,
+      "greekSurface": "ἀνθρώπων",
+      "lbfSurface": "hombres",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 14,
+      "token": 8,
+      "greekSurface": "ἀποστρεφομένων",
+      "lbfSurface": "apartan",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 14,
+      "token": 9,
+      "greekSurface": "τὴν",
+      "lbfSurface": "la",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 1,
+      "verse": 14,
+      "token": 10,
+      "greekSurface": "ἀλήθειαν.",
+      "lbfSurface": "verdad",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 1,
+      "greekSurface": "⸀πάντα",
+      "lbfSurface": "Todas",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 2,
+      "greekSurface": "καθαρὰ",
+      "lbfSurface": "las",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 3,
+      "greekSurface": "τοῖς",
+      "lbfSurface": "los",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 4,
+      "greekSurface": "καθαροῖς·",
+      "lbfSurface": "cosas",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 5,
+      "greekSurface": "τοῖς",
+      "lbfSurface": "los",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 7,
+      "greekSurface": "μεμιαμμένοις",
+      "lbfSurface": "contaminados",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 8,
+      "greekSurface": "καὶ",
+      "lbfSurface": "e",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 9,
+      "greekSurface": "ἀπίστοις",
+      "lbfSurface": "incrédulos",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 10,
+      "greekSurface": "οὐδὲν",
+      "lbfSurface": "nada",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 11,
+      "greekSurface": "καθαρόν,",
+      "lbfSurface": "son",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 12,
+      "greekSurface": "ἀλλὰ",
+      "lbfSurface": "pero",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 13,
+      "greekSurface": "μεμίανται",
+      "lbfSurface": "están",
+      "lbfWordIndex": 25
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 14,
+      "greekSurface": "αὐτῶν",
+      "lbfSurface": "su",
+      "lbfWordIndex": 23
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 17,
+      "greekSurface": "νοῦς",
+      "lbfSurface": "mente",
+      "lbfWordIndex": 21
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 20,
+      "greekSurface": "συνείδησις.",
+      "lbfSurface": "conciencia",
+      "lbfWordIndex": 24
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 1,
+      "greekSurface": "θεὸν",
+      "lbfSurface": "Dios",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 2,
+      "greekSurface": "ὁμολογοῦσιν",
+      "lbfSurface": "Profesan",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 3,
+      "greekSurface": "εἰδέναι,",
+      "lbfSurface": "conocer",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 4,
+      "greekSurface": "τοῖς",
+      "lbfSurface": "a",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 5,
+      "greekSurface": "δὲ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 6,
+      "greekSurface": "ἔργοις",
+      "lbfSurface": "obras",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 7,
+      "greekSurface": "ἀρνοῦνται,",
+      "lbfSurface": "niegan",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 8,
+      "greekSurface": "βδελυκτοὶ",
+      "lbfSurface": "abominables",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 9,
+      "greekSurface": "ὄντες",
+      "lbfSurface": "siendo",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 14,
+      "greekSurface": "πᾶν",
+      "lbfSurface": "toda",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 15,
+      "greekSurface": "ἔργον",
+      "lbfSurface": "obra",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 16,
+      "greekSurface": "ἀγαθὸν",
+      "lbfSurface": "buena",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 17,
+      "greekSurface": "ἀδόκιμοι.",
+      "lbfSurface": "reprobados",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 2,
+      "verse": 1,
+      "token": 1,
+      "greekSurface": "Σὺ",
+      "lbfSurface": "tú",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 2,
+      "verse": 1,
+      "token": 3,
+      "greekSurface": "λάλει",
+      "lbfSurface": "habla",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 2,
+      "verse": 1,
+      "token": 4,
+      "greekSurface": "ἃ",
+      "lbfSurface": "que",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 2,
+      "verse": 1,
+      "token": 5,
+      "greekSurface": "πρέπει",
+      "lbfSurface": "conviene",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 2,
+      "verse": 1,
+      "token": 6,
+      "greekSurface": "τῇ",
+      "lbfSurface": "a",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 2,
+      "verse": 1,
+      "token": 7,
+      "greekSurface": "ὑγιαινούσῃ",
+      "lbfSurface": "sana",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 2,
+      "verse": 1,
+      "token": 8,
+      "greekSurface": "διδασκαλίᾳ.",
+      "lbfSurface": "doctrina",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 2,
+      "verse": 2,
+      "token": 1,
+      "greekSurface": "πρεσβύτας",
+      "lbfSurface": "Que",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 2,
+      "verse": 2,
+      "token": 2,
+      "greekSurface": "νηφαλίους",
+      "lbfSurface": "sobrios",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 2,
+      "verse": 2,
+      "token": 3,
+      "greekSurface": "εἶναι,",
+      "lbfSurface": "sean",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 2,
+      "verse": 2,
+      "token": 5,
+      "greekSurface": "σώφρονας,",
+      "lbfSurface": "prudentes",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 2,
+      "verse": 2,
+      "token": 6,
+      "greekSurface": "ὑγιαίνοντας",
+      "lbfSurface": "sanos",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 2,
+      "verse": 2,
+      "token": 7,
+      "greekSurface": "τῇ",
+      "lbfSurface": "la",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 2,
+      "verse": 2,
+      "token": 8,
+      "greekSurface": "πίστει,",
+      "lbfSurface": "fe",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 2,
+      "verse": 2,
+      "token": 10,
+      "greekSurface": "ἀγάπῃ,",
+      "lbfSurface": "amor",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 2,
+      "verse": 2,
+      "token": 11,
+      "greekSurface": "τῇ",
+      "lbfSurface": "la",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 2,
+      "verse": 2,
+      "token": 12,
+      "greekSurface": "ὑπομονῇ.",
+      "lbfSurface": "paciencia",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 2,
+      "verse": 3,
+      "token": 1,
+      "greekSurface": "Πρεσβύτιδας",
+      "lbfSurface": "Las",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 2,
+      "verse": 3,
+      "token": 2,
+      "greekSurface": "ὡσαύτως",
+      "lbfSurface": "igualmente",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 2,
+      "verse": 3,
+      "token": 3,
+      "greekSurface": "ἐν",
+      "lbfSurface": "en",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 2,
+      "verse": 3,
+      "token": 4,
+      "greekSurface": "καταστήματι",
+      "lbfSurface": "conducta",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 2,
+      "verse": 3,
+      "token": 5,
+      "greekSurface": "ἱεροπρεπεῖς,",
+      "lbfSurface": "reverentes",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 2,
+      "verse": 3,
+      "token": 6,
+      "greekSurface": "μὴ",
+      "lbfSurface": "no",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 2,
+      "verse": 3,
+      "token": 7,
+      "greekSurface": "διαβόλους",
+      "lbfSurface": "calumniadoras",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 2,
+      "verse": 3,
+      "token": 8,
+      "greekSurface": "⸀μηδὲ",
+      "lbfSurface": "ni",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 2,
+      "verse": 3,
+      "token": 9,
+      "greekSurface": "οἴνῳ",
+      "lbfSurface": "vino",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 2,
+      "verse": 3,
+      "token": 10,
+      "greekSurface": "πολλῷ",
+      "lbfSurface": "mucho",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 2,
+      "verse": 3,
+      "token": 11,
+      "greekSurface": "δεδουλωμένας,",
+      "lbfSurface": "esclavizadas",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 2,
+      "verse": 3,
+      "token": 12,
+      "greekSurface": "καλοδιδασκάλους,",
+      "lbfSurface": "maestras",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 2,
+      "verse": 4,
+      "token": 1,
+      "greekSurface": "ἵνα",
+      "lbfSurface": "para",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 2,
+      "verse": 4,
+      "token": 2,
+      "greekSurface": "⸀σωφρονίζωσι",
+      "lbfSurface": "a",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 2,
+      "verse": 4,
+      "token": 3,
+      "greekSurface": "τὰς",
+      "lbfSurface": "las",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 2,
+      "verse": 4,
+      "token": 4,
+      "greekSurface": "νέας",
+      "lbfSurface": "jóvenes",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 2,
+      "verse": 4,
+      "token": 5,
+      "greekSurface": "φιλάνδρους",
+      "lbfSurface": "amantes",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 2,
+      "verse": 4,
+      "token": 6,
+      "greekSurface": "εἶναι,",
+      "lbfSurface": "ser",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 2,
+      "verse": 4,
+      "token": 7,
+      "greekSurface": "φιλοτέκνους,",
+      "lbfSurface": "de",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 1,
+      "greekSurface": "σώφρονας,",
+      "lbfSurface": "prudentes",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 2,
+      "greekSurface": "ἁγνάς,",
+      "lbfSurface": "puras",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 3,
+      "greekSurface": "⸀οἰκουργούς,",
+      "lbfSurface": "trabajadoras",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 4,
+      "greekSurface": "ἀγαθάς,",
+      "lbfSurface": "buenas",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 5,
+      "greekSurface": "ὑποτασσομένας",
+      "lbfSurface": "sometidas",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 6,
+      "greekSurface": "τοῖς",
+      "lbfSurface": "a",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 7,
+      "greekSurface": "ἰδίοις",
+      "lbfSurface": "sus",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 8,
+      "greekSurface": "ἀνδράσιν,",
+      "lbfSurface": "maridos",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 9,
+      "greekSurface": "ἵνα",
+      "lbfSurface": "para",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 10,
+      "greekSurface": "μὴ",
+      "lbfSurface": "no",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 11,
+      "greekSurface": "ὁ",
+      "lbfSurface": "la",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 12,
+      "greekSurface": "λόγος",
+      "lbfSurface": "palabra",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 13,
+      "greekSurface": "τοῦ",
+      "lbfSurface": "del",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 14,
+      "greekSurface": "θεοῦ",
+      "lbfSurface": "de",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 2,
+      "verse": 5,
+      "token": 15,
+      "greekSurface": "βλασφημῆται.",
+      "lbfSurface": "blasfemada",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 2,
+      "verse": 6,
+      "token": 1,
+      "greekSurface": "Τοὺς",
+      "lbfSurface": "los",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 2,
+      "verse": 6,
+      "token": 3,
+      "greekSurface": "ὡσαύτως",
+      "lbfSurface": "igualmente",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 2,
+      "verse": 6,
+      "token": 4,
+      "greekSurface": "παρακάλει",
+      "lbfSurface": "Exhorta",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 2,
+      "verse": 6,
+      "token": 5,
+      "greekSurface": "σωφρονεῖν·",
+      "lbfSurface": "a",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 2,
+      "verse": 7,
+      "token": 1,
+      "greekSurface": "περὶ",
+      "lbfSurface": "en",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 2,
+      "verse": 7,
+      "token": 2,
+      "greekSurface": "πάντα",
+      "lbfSurface": "todo",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 2,
+      "verse": 7,
+      "token": 3,
+      "greekSurface": "σεαυτὸν",
+      "lbfSurface": "de",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 2,
+      "verse": 7,
+      "token": 4,
+      "greekSurface": "παρεχόμενος",
+      "lbfSurface": "mostrándote",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 2,
+      "verse": 7,
+      "token": 5,
+      "greekSurface": "τύπον",
+      "lbfSurface": "ejemplo",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 2,
+      "verse": 7,
+      "token": 6,
+      "greekSurface": "καλῶν",
+      "lbfSurface": "buenas",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 2,
+      "verse": 7,
+      "token": 7,
+      "greekSurface": "ἔργων,",
+      "lbfSurface": "obras",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 2,
+      "verse": 7,
+      "token": 8,
+      "greekSurface": "ἐν",
+      "lbfSurface": "en",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 2,
+      "verse": 7,
+      "token": 9,
+      "greekSurface": "τῇ",
+      "lbfSurface": "la",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 2,
+      "verse": 7,
+      "token": 11,
+      "greekSurface": "⸀ἀφθορίαν,",
+      "lbfSurface": "integridad",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 2,
+      "verse": 7,
+      "token": 12,
+      "greekSurface": "⸀σεμνότητα,",
+      "lbfSurface": "dignidad",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
+      "token": 1,
+      "greekSurface": "λόγον",
+      "lbfSurface": "palabra",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
+      "token": 2,
+      "greekSurface": "ὑγιῆ",
+      "lbfSurface": "sana",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
+      "token": 3,
+      "greekSurface": "ἀκατάγνωστον,",
+      "lbfSurface": "irreprensible",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
+      "token": 4,
+      "greekSurface": "ἵνα",
+      "lbfSurface": "para",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
+      "token": 5,
+      "greekSurface": "ὁ",
+      "lbfSurface": "el",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
+      "token": 6,
+      "greekSurface": "ἐξ",
+      "lbfSurface": "de",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
+      "token": 7,
+      "greekSurface": "ἐναντίας",
+      "lbfSurface": "contraria",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
+      "token": 8,
+      "greekSurface": "ἐντραπῇ",
+      "lbfSurface": "avergüence",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
+      "token": 10,
+      "greekSurface": "ἔχων",
+      "lbfSurface": "no",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
+      "token": 11,
+      "greekSurface": "⸂λέγειν",
+      "lbfSurface": "decir",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
+      "token": 12,
+      "greekSurface": "περὶ",
+      "lbfSurface": "de",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
+      "token": 13,
+      "greekSurface": "ἡμῶν⸃",
+      "lbfSurface": "nosotros",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
+      "token": 14,
+      "greekSurface": "φαῦλον.",
+      "lbfSurface": "malo",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 2,
+      "verse": 9,
+      "token": 1,
+      "greekSurface": "Δούλους",
+      "lbfSurface": "siervos",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 2,
+      "verse": 9,
+      "token": 2,
+      "greekSurface": "ἰδίοις",
+      "lbfSurface": "sus",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 2,
+      "verse": 9,
+      "token": 4,
+      "greekSurface": "ὑποτάσσεσθαι",
+      "lbfSurface": "a",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 2,
+      "verse": 9,
+      "token": 5,
+      "greekSurface": "ἐν",
+      "lbfSurface": "en",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 2,
+      "verse": 9,
+      "token": 6,
+      "greekSurface": "πᾶσιν,",
+      "lbfSurface": "todo",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 2,
+      "verse": 9,
+      "token": 7,
+      "greekSurface": "εὐαρέστους",
+      "lbfSurface": "agradables",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 2,
+      "verse": 9,
+      "token": 8,
+      "greekSurface": "εἶναι,",
+      "lbfSurface": "ser",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 2,
+      "verse": 9,
+      "token": 9,
+      "greekSurface": "μὴ",
+      "lbfSurface": "no",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 1,
+      "greekSurface": "μὴ",
+      "lbfSurface": "no",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 4,
+      "greekSurface": "⸂πᾶσαν",
+      "lbfSurface": "toda",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 6,
+      "greekSurface": "ἐνδεικνυμένους",
+      "lbfSurface": "demostrando",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 7,
+      "greekSurface": "ἀγαθήν,",
+      "lbfSurface": "buena",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 8,
+      "greekSurface": "ἵνα",
+      "lbfSurface": "para",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 9,
+      "greekSurface": "τὴν",
+      "lbfSurface": "la",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 10,
+      "greekSurface": "διδασκαλίαν",
+      "lbfSurface": "doctrina",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 13,
+      "greekSurface": "σωτῆρος",
+      "lbfSurface": "Salvador",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 14,
+      "greekSurface": "ἡμῶν",
+      "lbfSurface": "de",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 15,
+      "greekSurface": "θεοῦ",
+      "lbfSurface": "Dios",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 16,
+      "greekSurface": "κοσμῶσιν",
+      "lbfSurface": "adornen",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 17,
+      "greekSurface": "ἐν",
+      "lbfSurface": "en",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 18,
+      "greekSurface": "πᾶσιν.",
+      "lbfSurface": "todo",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 2,
+      "verse": 11,
+      "token": 1,
+      "greekSurface": "Ἐπεφάνη",
+      "lbfSurface": "se",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 2,
+      "verse": 11,
+      "token": 2,
+      "greekSurface": "γὰρ",
+      "lbfSurface": "Porque",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 2,
+      "verse": 11,
+      "token": 3,
+      "greekSurface": "ἡ",
+      "lbfSurface": "la",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 2,
+      "verse": 11,
+      "token": 4,
+      "greekSurface": "χάρις",
+      "lbfSurface": "gracia",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 2,
+      "verse": 11,
+      "token": 5,
+      "greekSurface": "τοῦ",
+      "lbfSurface": "de",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 2,
+      "verse": 11,
+      "token": 6,
+      "greekSurface": "⸀θεοῦ",
+      "lbfSurface": "Dios",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 2,
+      "verse": 11,
+      "token": 7,
+      "greekSurface": "σωτήριος",
+      "lbfSurface": "salvadora",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 2,
+      "verse": 11,
+      "token": 8,
+      "greekSurface": "πᾶσιν",
+      "lbfSurface": "todos",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 2,
+      "verse": 11,
+      "token": 9,
+      "greekSurface": "ἀνθρώποις",
+      "lbfSurface": "hombres",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 3,
+      "greekSurface": "ἵνα",
+      "lbfSurface": "para",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 4,
+      "greekSurface": "ἀρνησάμενοι",
+      "lbfSurface": "renunciado",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 5,
+      "greekSurface": "τὴν",
+      "lbfSurface": "la",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 6,
+      "greekSurface": "ἀσέβειαν",
+      "lbfSurface": "impiedad",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 7,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 8,
+      "greekSurface": "τὰς",
+      "lbfSurface": "los",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 9,
+      "greekSurface": "κοσμικὰς",
+      "lbfSurface": "mundanos",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 10,
+      "greekSurface": "ἐπιθυμίας",
+      "lbfSurface": "deseos",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 11,
+      "greekSurface": "σωφρόνως",
+      "lbfSurface": "prudentemente",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 12,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 13,
+      "greekSurface": "δικαίως",
+      "lbfSurface": "justamente",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 15,
+      "greekSurface": "εὐσεβῶς",
+      "lbfSurface": "piadosamente",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 16,
+      "greekSurface": "ζήσωμεν",
+      "lbfSurface": "vivamos",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 17,
+      "greekSurface": "ἐν",
+      "lbfSurface": "en",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 18,
+      "greekSurface": "τῷ",
+      "lbfSurface": "a",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 20,
+      "greekSurface": "αἰῶνι,",
+      "lbfSurface": "siglo",
+      "lbfWordIndex": 21
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 2,
+      "greekSurface": "τὴν",
+      "lbfSurface": "la",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 3,
+      "greekSurface": "μακαρίαν",
+      "lbfSurface": "bienaventurada",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 4,
+      "greekSurface": "ἐλπίδα",
+      "lbfSurface": "esperanza",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 5,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 6,
+      "greekSurface": "ἐπιφάνειαν",
+      "lbfSurface": "manifestación",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 7,
+      "greekSurface": "τῆς",
+      "lbfSurface": "la",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 8,
+      "greekSurface": "δόξης",
+      "lbfSurface": "gloria",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 9,
+      "greekSurface": "τοῦ",
+      "lbfSurface": "del",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 10,
+      "greekSurface": "μεγάλου",
+      "lbfSurface": "gran",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 11,
+      "greekSurface": "θεοῦ",
+      "lbfSurface": "Dios",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 12,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 13,
+      "greekSurface": "σωτῆρος",
+      "lbfSurface": "Salvador",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 14,
+      "greekSurface": "ἡμῶν",
+      "lbfSurface": "nuestro",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 15,
+      "greekSurface": "⸂Ἰησοῦ",
+      "lbfSurface": "Jesús",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 16,
+      "greekSurface": "Χριστοῦ⸃,",
+      "lbfSurface": "Cristo",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 2,
+      "greekSurface": "ἔδωκεν",
+      "lbfSurface": "se",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 3,
+      "greekSurface": "ἑαυτὸν",
+      "lbfSurface": "sí",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 4,
+      "greekSurface": "ὑπὲρ",
+      "lbfSurface": "por",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 5,
+      "greekSurface": "ἡμῶν",
+      "lbfSurface": "nosotros",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 6,
+      "greekSurface": "ἵνα",
+      "lbfSurface": "para",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 7,
+      "greekSurface": "λυτρώσηται",
+      "lbfSurface": "redimirnos",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 9,
+      "greekSurface": "ἀπὸ",
+      "lbfSurface": "de",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 10,
+      "greekSurface": "πάσης",
+      "lbfSurface": "toda",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 11,
+      "greekSurface": "ἀνομίας",
+      "lbfSurface": "iniquidad",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 12,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 13,
+      "greekSurface": "καθαρίσῃ",
+      "lbfSurface": "purificar",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 14,
+      "greekSurface": "ἑαυτῷ",
+      "lbfSurface": "sí",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 15,
+      "greekSurface": "λαὸν",
+      "lbfSurface": "pueblo",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 16,
+      "greekSurface": "περιούσιον,",
+      "lbfSurface": "propio",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 17,
+      "greekSurface": "ζηλωτὴν",
+      "lbfSurface": "celoso",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 18,
+      "greekSurface": "καλῶν",
+      "lbfSurface": "buenas",
+      "lbfWordIndex": 22
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
+      "token": 19,
+      "greekSurface": "ἔργων.",
+      "lbfSurface": "obras",
+      "lbfWordIndex": 23
+    },
+    {
+      "chapter": 2,
+      "verse": 15,
+      "token": 2,
+      "greekSurface": "λάλει",
+      "lbfSurface": "habla",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 2,
+      "verse": 15,
+      "token": 3,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 2,
+      "verse": 15,
+      "token": 4,
+      "greekSurface": "παρακάλει",
+      "lbfSurface": "exhorta",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 2,
+      "verse": 15,
+      "token": 5,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 2,
+      "verse": 15,
+      "token": 6,
+      "greekSurface": "ἔλεγχε",
+      "lbfSurface": "reprende",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 2,
+      "verse": 15,
+      "token": 7,
+      "greekSurface": "μετὰ",
+      "lbfSurface": "con",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 2,
+      "verse": 15,
+      "token": 8,
+      "greekSurface": "πάσης",
+      "lbfSurface": "toda",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 2,
+      "verse": 15,
+      "token": 9,
+      "greekSurface": "ἐπιταγῆς·",
+      "lbfSurface": "autoridad",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 2,
+      "verse": 15,
+      "token": 10,
+      "greekSurface": "μηδείς",
+      "lbfSurface": "nadie",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 2,
+      "verse": 15,
+      "token": 11,
+      "greekSurface": "σου",
+      "lbfSurface": "te",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 2,
+      "verse": 15,
+      "token": 12,
+      "greekSurface": "περιφρονείτω.",
+      "lbfSurface": "menosprecie",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 3,
+      "verse": 1,
+      "token": 1,
+      "greekSurface": "Ὑπομίμνῃσκε",
+      "lbfSurface": "Recuérdales",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 3,
+      "verse": 1,
+      "token": 2,
+      "greekSurface": "αὐτοὺς",
+      "lbfSurface": "los",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 3,
+      "verse": 1,
+      "token": 3,
+      "greekSurface": "⸀ἀρχαῖς",
+      "lbfSurface": "a",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 3,
+      "verse": 1,
+      "token": 4,
+      "greekSurface": "ἐξουσίαις",
+      "lbfSurface": "autoridades",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 3,
+      "verse": 1,
+      "token": 6,
+      "greekSurface": "πειθαρχεῖν,",
+      "lbfSurface": "obedezcan",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 3,
+      "verse": 1,
+      "token": 7,
+      "greekSurface": "πρὸς",
+      "lbfSurface": "a",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 3,
+      "verse": 1,
+      "token": 8,
+      "greekSurface": "πᾶν",
+      "lbfSurface": "toda",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 3,
+      "verse": 1,
+      "token": 9,
+      "greekSurface": "ἔργον",
+      "lbfSurface": "obra",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 3,
+      "verse": 1,
+      "token": 10,
+      "greekSurface": "ἀγαθὸν",
+      "lbfSurface": "buena",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 3,
+      "verse": 1,
+      "token": 11,
+      "greekSurface": "ἑτοίμους",
+      "lbfSurface": "listos",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 3,
+      "verse": 1,
+      "token": 12,
+      "greekSurface": "εἶναι,",
+      "lbfSurface": "que",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 3,
+      "verse": 2,
+      "token": 1,
+      "greekSurface": "μηδένα",
+      "lbfSurface": "nadie",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 3,
+      "verse": 2,
+      "token": 2,
+      "greekSurface": "βλασφημεῖν,",
+      "lbfSurface": "blasfemar",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 3,
+      "verse": 2,
+      "token": 3,
+      "greekSurface": "ἀμάχους",
+      "lbfSurface": "no",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 3,
+      "verse": 2,
+      "token": 4,
+      "greekSurface": "εἶναι,",
+      "lbfSurface": "ser",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 3,
+      "verse": 2,
+      "token": 5,
+      "greekSurface": "ἐπιεικεῖς,",
+      "lbfSurface": "amables",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 3,
+      "verse": 2,
+      "token": 6,
+      "greekSurface": "πᾶσαν",
+      "lbfSurface": "toda",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 3,
+      "verse": 2,
+      "token": 7,
+      "greekSurface": "ἐνδεικνυμένους",
+      "lbfSurface": "mostrando",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 3,
+      "verse": 2,
+      "token": 8,
+      "greekSurface": "πραΰτητα",
+      "lbfSurface": "mansedumbre",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 3,
+      "verse": 2,
+      "token": 9,
+      "greekSurface": "πρὸς",
+      "lbfSurface": "a",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 3,
+      "verse": 2,
+      "token": 10,
+      "greekSurface": "πάντας",
+      "lbfSurface": "todos",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 3,
+      "verse": 2,
+      "token": 11,
+      "greekSurface": "ἀνθρώπους.",
+      "lbfSurface": "hombres",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 1,
+      "greekSurface": "ἦμεν",
+      "lbfSurface": "éramos",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 2,
+      "greekSurface": "γάρ",
+      "lbfSurface": "Porque",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 3,
+      "greekSurface": "ποτε",
+      "lbfSurface": "otro",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 4,
+      "greekSurface": "καὶ",
+      "lbfSurface": "también",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 5,
+      "greekSurface": "ἡμεῖς",
+      "lbfSurface": "nosotros",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 6,
+      "greekSurface": "ἀνόητοι,",
+      "lbfSurface": "necios",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 7,
+      "greekSurface": "ἀπειθεῖς,",
+      "lbfSurface": "desobedientes",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 8,
+      "greekSurface": "πλανώμενοι,",
+      "lbfSurface": "extraviados",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 10,
+      "greekSurface": "ἐπιθυμίαις",
+      "lbfSurface": "deseos",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 11,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 12,
+      "greekSurface": "ἡδοναῖς",
+      "lbfSurface": "placeres",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 13,
+      "greekSurface": "ποικίλαις,",
+      "lbfSurface": "diversos",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 14,
+      "greekSurface": "ἐν",
+      "lbfSurface": "en",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 15,
+      "greekSurface": "κακίᾳ",
+      "lbfSurface": "malicia",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 16,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 17,
+      "greekSurface": "φθόνῳ",
+      "lbfSurface": "envidia",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 18,
+      "greekSurface": "διάγοντες,",
+      "lbfSurface": "viviendo",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 19,
+      "greekSurface": "στυγητοί,",
+      "lbfSurface": "odiosos",
+      "lbfWordIndex": 21
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
+      "token": 21,
+      "greekSurface": "ἀλλήλους.",
+      "lbfSurface": "unos",
+      "lbfWordIndex": 23
+    },
+    {
+      "chapter": 3,
+      "verse": 4,
+      "token": 1,
+      "greekSurface": "ὅτε",
+      "lbfSurface": "cuando",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 3,
+      "verse": 4,
+      "token": 2,
+      "greekSurface": "δὲ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 3,
+      "verse": 4,
+      "token": 3,
+      "greekSurface": "ἡ",
+      "lbfSurface": "la",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 3,
+      "verse": 4,
+      "token": 4,
+      "greekSurface": "χρηστότης",
+      "lbfSurface": "bondad",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 3,
+      "verse": 4,
+      "token": 7,
+      "greekSurface": "φιλανθρωπία",
+      "lbfSurface": "amor",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 3,
+      "verse": 4,
+      "token": 8,
+      "greekSurface": "ἐπεφάνη",
+      "lbfSurface": "manifestó",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 3,
+      "verse": 4,
+      "token": 10,
+      "greekSurface": "σωτῆρος",
+      "lbfSurface": "Salvador",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 3,
+      "verse": 4,
+      "token": 11,
+      "greekSurface": "ἡμῶν",
+      "lbfSurface": "nuestro",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 3,
+      "verse": 4,
+      "token": 12,
+      "greekSurface": "θεοῦ,",
+      "lbfSurface": "Dios",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 1,
+      "greekSurface": "οὐκ",
+      "lbfSurface": "no",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 2,
+      "greekSurface": "ἐξ",
+      "lbfSurface": "por",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 3,
+      "greekSurface": "ἔργων",
+      "lbfSurface": "obras",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 4,
+      "greekSurface": "τῶν",
+      "lbfSurface": "de",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 5,
+      "greekSurface": "ἐν",
+      "lbfSurface": "de",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 6,
+      "greekSurface": "δικαιοσύνῃ",
+      "lbfSurface": "justicia",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 7,
+      "greekSurface": "⸀ἃ",
+      "lbfSurface": "que",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 8,
+      "greekSurface": "ἐποιήσαμεν",
+      "lbfSurface": "hicimos",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 9,
+      "greekSurface": "ἡμεῖς",
+      "lbfSurface": "nosotros",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 11,
+      "greekSurface": "κατὰ",
+      "lbfSurface": "según",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 12,
+      "greekSurface": "⸂τὸ",
+      "lbfSurface": "la",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 13,
+      "greekSurface": "αὐτοῦ",
+      "lbfSurface": "el",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 14,
+      "greekSurface": "ἔλεος⸃",
+      "lbfSurface": "misericordia",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 15,
+      "greekSurface": "ἔσωσεν",
+      "lbfSurface": "salvó",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 16,
+      "greekSurface": "ἡμᾶς",
+      "lbfSurface": "nos",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 18,
+      "greekSurface": "λουτροῦ",
+      "lbfSurface": "lavamiento",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 19,
+      "greekSurface": "παλιγγενεσίας",
+      "lbfSurface": "regeneración",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 20,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 21,
+      "greekSurface": "ἀνακαινώσεως",
+      "lbfSurface": "renovación",
+      "lbfWordIndex": 22
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 22,
+      "greekSurface": "πνεύματος",
+      "lbfSurface": "Espíritu",
+      "lbfWordIndex": 24
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 23,
+      "greekSurface": "ἁγίου,",
+      "lbfSurface": "Santo",
+      "lbfWordIndex": 25
+    },
+    {
+      "chapter": 3,
+      "verse": 6,
+      "token": 1,
+      "greekSurface": "οὗ",
+      "lbfSurface": "cual",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 3,
+      "verse": 6,
+      "token": 2,
+      "greekSurface": "ἐξέχεεν",
+      "lbfSurface": "derramó",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 3,
+      "verse": 6,
+      "token": 3,
+      "greekSurface": "ἐφ’",
+      "lbfSurface": "sobre",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 3,
+      "verse": 6,
+      "token": 4,
+      "greekSurface": "ἡμᾶς",
+      "lbfSurface": "nosotros",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 3,
+      "verse": 6,
+      "token": 5,
+      "greekSurface": "πλουσίως",
+      "lbfSurface": "abundantemente",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 3,
+      "verse": 6,
+      "token": 6,
+      "greekSurface": "διὰ",
+      "lbfSurface": "por",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 3,
+      "verse": 6,
+      "token": 7,
+      "greekSurface": "Ἰησοῦ",
+      "lbfSurface": "de",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 3,
+      "verse": 6,
+      "token": 8,
+      "greekSurface": "Χριστοῦ",
+      "lbfSurface": "Cristo",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 3,
+      "verse": 6,
+      "token": 10,
+      "greekSurface": "σωτῆρος",
+      "lbfSurface": "Salvador",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 3,
+      "verse": 6,
+      "token": 11,
+      "greekSurface": "ἡμῶν,",
+      "lbfSurface": "nuestro",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 3,
+      "verse": 7,
+      "token": 1,
+      "greekSurface": "ἵνα",
+      "lbfSurface": "para",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 3,
+      "verse": 7,
+      "token": 2,
+      "greekSurface": "δικαιωθέντες",
+      "lbfSurface": "justificados",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 3,
+      "verse": 7,
+      "token": 3,
+      "greekSurface": "τῇ",
+      "lbfSurface": "la",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 3,
+      "verse": 7,
+      "token": 4,
+      "greekSurface": "ἐκείνου",
+      "lbfSurface": "aquel",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 3,
+      "verse": 7,
+      "token": 5,
+      "greekSurface": "χάριτι",
+      "lbfSurface": "gracia",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 3,
+      "verse": 7,
+      "token": 6,
+      "greekSurface": "κληρονόμοι",
+      "lbfSurface": "herederos",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 3,
+      "verse": 7,
+      "token": 7,
+      "greekSurface": "⸀γενηθῶμεν",
+      "lbfSurface": "a",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 3,
+      "verse": 7,
+      "token": 8,
+      "greekSurface": "κατ’",
+      "lbfSurface": "según",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 3,
+      "verse": 7,
+      "token": 9,
+      "greekSurface": "ἐλπίδα",
+      "lbfSurface": "esperanza",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 3,
+      "verse": 7,
+      "token": 10,
+      "greekSurface": "ζωῆς",
+      "lbfSurface": "vida",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 3,
+      "verse": 7,
+      "token": 11,
+      "greekSurface": "αἰωνίου.",
+      "lbfSurface": "eterna",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 1,
+      "greekSurface": "Πιστὸς",
+      "lbfSurface": "Fiel",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 2,
+      "greekSurface": "ὁ",
+      "lbfSurface": "la",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 3,
+      "greekSurface": "λόγος,",
+      "lbfSurface": "palabra",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 4,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 5,
+      "greekSurface": "περὶ",
+      "lbfSurface": "acerca",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 6,
+      "greekSurface": "τούτων",
+      "lbfSurface": "estas",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 7,
+      "greekSurface": "βούλομαί",
+      "lbfSurface": "quiero",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 8,
+      "greekSurface": "σε",
+      "lbfSurface": "que",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 10,
+      "greekSurface": "ἵνα",
+      "lbfSurface": "para",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 11,
+      "greekSurface": "φροντίζωσιν",
+      "lbfSurface": "dediquen",
+      "lbfWordIndex": 23
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 12,
+      "greekSurface": "καλῶν",
+      "lbfSurface": "buenas",
+      "lbfWordIndex": 25
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 13,
+      "greekSurface": "ἔργων",
+      "lbfSurface": "obras",
+      "lbfWordIndex": 26
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 15,
+      "greekSurface": "οἱ",
+      "lbfSurface": "los",
+      "lbfWordIndex": 34
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 16,
+      "greekSurface": "πεπιστευκότες",
+      "lbfSurface": "creído",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 17,
+      "greekSurface": "θεῷ.",
+      "lbfSurface": "Dios",
+      "lbfWordIndex": 21
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 19,
+      "greekSurface": "⸀ἐστιν",
+      "lbfSurface": "cosas",
+      "lbfWordIndex": 28
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 20,
+      "greekSurface": "καλὰ",
+      "lbfSurface": "buenas",
+      "lbfWordIndex": 30
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 21,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 31
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 22,
+      "greekSurface": "ὠφέλιμα",
+      "lbfSurface": "provechosas",
+      "lbfWordIndex": 32
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 23,
+      "greekSurface": "τοῖς",
+      "lbfSurface": "a",
+      "lbfWordIndex": 24
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 24,
+      "greekSurface": "ἀνθρώποις·",
+      "lbfSurface": "hombres",
+      "lbfWordIndex": 35
+    },
+    {
+      "chapter": 3,
+      "verse": 9,
+      "token": 1,
+      "greekSurface": "μωρὰς",
+      "lbfSurface": "necias",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 3,
+      "verse": 9,
+      "token": 2,
+      "greekSurface": "δὲ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 3,
+      "verse": 9,
+      "token": 4,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 3,
+      "verse": 9,
+      "token": 5,
+      "greekSurface": "γενεαλογίας",
+      "lbfSurface": "genealogías",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 3,
+      "verse": 9,
+      "token": 7,
+      "greekSurface": "⸀ἔρεις",
+      "lbfSurface": "contiendas",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 3,
+      "verse": 9,
+      "token": 9,
+      "greekSurface": "μάχας",
+      "lbfSurface": "peleas",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 3,
+      "verse": 9,
+      "token": 10,
+      "greekSurface": "νομικὰς",
+      "lbfSurface": "de",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 3,
+      "verse": 9,
+      "token": 11,
+      "greekSurface": "περιΐστασο,",
+      "lbfSurface": "evita",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 3,
+      "verse": 9,
+      "token": 12,
+      "greekSurface": "εἰσὶν",
+      "lbfSurface": "son",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 3,
+      "verse": 9,
+      "token": 13,
+      "greekSurface": "γὰρ",
+      "lbfSurface": "porque",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 3,
+      "verse": 9,
+      "token": 14,
+      "greekSurface": "ἀνωφελεῖς",
+      "lbfSurface": "inútiles",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 3,
+      "verse": 9,
+      "token": 16,
+      "greekSurface": "μάταιοι.",
+      "lbfSurface": "vanas",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 3,
+      "verse": 10,
+      "token": 2,
+      "greekSurface": "ἄνθρωπον",
+      "lbfSurface": "hombre",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 3,
+      "verse": 10,
+      "token": 3,
+      "greekSurface": "μετὰ",
+      "lbfSurface": "después",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 3,
+      "verse": 10,
+      "token": 4,
+      "greekSurface": "μίαν",
+      "lbfSurface": "una",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 3,
+      "verse": 10,
+      "token": 5,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 3,
+      "verse": 10,
+      "token": 6,
+      "greekSurface": "δευτέραν",
+      "lbfSurface": "segunda",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 3,
+      "verse": 10,
+      "token": 7,
+      "greekSurface": "νουθεσίαν",
+      "lbfSurface": "amonestación",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 3,
+      "verse": 10,
+      "token": 8,
+      "greekSurface": "παραιτοῦ,",
+      "lbfSurface": "recházalo",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 3,
+      "verse": 11,
+      "token": 2,
+      "greekSurface": "ὅτι",
+      "lbfSurface": "que",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 3,
+      "verse": 11,
+      "token": 3,
+      "greekSurface": "ἐξέστραπται",
+      "lbfSurface": "pervertido",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 3,
+      "verse": 11,
+      "token": 5,
+      "greekSurface": "τοιοῦτος",
+      "lbfSurface": "tal",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 3,
+      "verse": 11,
+      "token": 6,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 3,
+      "verse": 11,
+      "token": 7,
+      "greekSurface": "ἁμαρτάνει,",
+      "lbfSurface": "peca",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 3,
+      "verse": 11,
+      "token": 8,
+      "greekSurface": "ὢν",
+      "lbfSurface": "siendo",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 3,
+      "verse": 11,
+      "token": 9,
+      "greekSurface": "αὐτοκατάκριτος.",
+      "lbfSurface": "autocondenado",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 1,
+      "greekSurface": "Ὅταν",
+      "lbfSurface": "Cuando",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 2,
+      "greekSurface": "πέμψω",
+      "lbfSurface": "envíe",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 3,
+      "greekSurface": "Ἀρτεμᾶν",
+      "lbfSurface": "Artemas",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 4,
+      "greekSurface": "πρὸς",
+      "lbfSurface": "a",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 5,
+      "greekSurface": "σὲ",
+      "lbfSurface": "ti",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 6,
+      "greekSurface": "ἢ",
+      "lbfSurface": "o",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 7,
+      "greekSurface": "Τυχικόν,",
+      "lbfSurface": "a",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 8,
+      "greekSurface": "σπούδασον",
+      "lbfSurface": "apresúrate",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 9,
+      "greekSurface": "ἐλθεῖν",
+      "lbfSurface": "venir",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 10,
+      "greekSurface": "πρός",
+      "lbfSurface": "a",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 11,
+      "greekSurface": "με",
+      "lbfSurface": "mí",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 12,
+      "greekSurface": "εἰς",
+      "lbfSurface": "a",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 13,
+      "greekSurface": "Νικόπολιν,",
+      "lbfSurface": "Nicópolis",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 14,
+      "greekSurface": "ἐκεῖ",
+      "lbfSurface": "allí",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 15,
+      "greekSurface": "γὰρ",
+      "lbfSurface": "porque",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 16,
+      "greekSurface": "κέκρικα",
+      "lbfSurface": "decidido",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 3,
+      "verse": 12,
+      "token": 17,
+      "greekSurface": "παραχειμάσαι.",
+      "lbfSurface": "pasar",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 3,
+      "verse": 13,
+      "token": 1,
+      "greekSurface": "ζηνᾶν",
+      "lbfSurface": "Zenas",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 3,
+      "verse": 13,
+      "token": 2,
+      "greekSurface": "τὸν",
+      "lbfSurface": "el",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 3,
+      "verse": 13,
+      "token": 4,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 3,
+      "verse": 13,
+      "token": 5,
+      "greekSurface": "⸀Ἀπολλῶν",
+      "lbfSurface": "Apolos",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 3,
+      "verse": 13,
+      "token": 6,
+      "greekSurface": "σπουδαίως",
+      "lbfSurface": "diligentemente",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 3,
+      "verse": 13,
+      "token": 7,
+      "greekSurface": "πρόπεμψον,",
+      "lbfSurface": "envíalos",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 3,
+      "verse": 13,
+      "token": 8,
+      "greekSurface": "ἵνα",
+      "lbfSurface": "para",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 3,
+      "verse": 13,
+      "token": 9,
+      "greekSurface": "μηδὲν",
+      "lbfSurface": "nada",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 3,
+      "verse": 13,
+      "token": 10,
+      "greekSurface": "αὐτοῖς",
+      "lbfSurface": "les",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 3,
+      "verse": 13,
+      "token": 11,
+      "greekSurface": "λείπῃ.",
+      "lbfSurface": "falte",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "token": 1,
+      "greekSurface": "μανθανέτωσαν",
+      "lbfSurface": "aprendan",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "token": 2,
+      "greekSurface": "δὲ",
+      "lbfSurface": "Y",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "token": 4,
+      "greekSurface": "οἱ",
+      "lbfSurface": "los",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "token": 5,
+      "greekSurface": "ἡμέτεροι",
+      "lbfSurface": "nuestros",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "token": 6,
+      "greekSurface": "καλῶν",
+      "lbfSurface": "buenas",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "token": 7,
+      "greekSurface": "ἔργων",
+      "lbfSurface": "obras",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "token": 8,
+      "greekSurface": "προΐστασθαι",
+      "lbfSurface": "a",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "token": 9,
+      "greekSurface": "εἰς",
+      "lbfSurface": "a",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "token": 12,
+      "greekSurface": "χρείας,",
+      "lbfSurface": "necesidades",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "token": 13,
+      "greekSurface": "ἵνα",
+      "lbfSurface": "para",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "token": 14,
+      "greekSurface": "μὴ",
+      "lbfSurface": "no",
+      "lbfWordIndex": 16
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "token": 15,
+      "greekSurface": "ὦσιν",
+      "lbfSurface": "sean",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 1,
+      "greekSurface": "Ἀσπάζονταί",
+      "lbfSurface": "saludan",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 2,
+      "greekSurface": "σε",
+      "lbfSurface": "Te",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 3,
+      "greekSurface": "οἱ",
+      "lbfSurface": "los",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 4,
+      "greekSurface": "μετ’",
+      "lbfSurface": "conmigo",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 6,
+      "greekSurface": "πάντες.",
+      "lbfSurface": "todos",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 7,
+      "greekSurface": "ἄσπασαι",
+      "lbfSurface": "Saluda",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 8,
+      "greekSurface": "τοὺς",
+      "lbfSurface": "los",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 9,
+      "greekSurface": "φιλοῦντας",
+      "lbfSurface": "aman",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 10,
+      "greekSurface": "ἡμᾶς",
+      "lbfSurface": "nos",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 11,
+      "greekSurface": "ἐν",
+      "lbfSurface": "en",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 12,
+      "greekSurface": "πίστει.",
+      "lbfSurface": "fe",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 13,
+      "greekSurface": "ἡ",
+      "lbfSurface": "la",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 14,
+      "greekSurface": "χάρις",
+      "lbfSurface": "gracia",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 15,
+      "greekSurface": "μετὰ",
+      "lbfSurface": "con",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 16,
+      "greekSurface": "πάντων",
+      "lbfSurface": "todos",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 3,
+      "verse": 15,
+      "token": 17,
+      "greekSurface": "⸀ὑμῶν.",
+      "lbfSurface": "ustedes",
+      "lbfWordIndex": 21
+    }
+  ]
+}

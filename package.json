@@ -1,0 +1,20 @@
+{
+  "name": "cgv-suite",
+  "private": true,
+  "version": "0.1.0",
+  "description": "CGV Reader suite — Reader app with optional Observer and teacher-only Compiler",
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "vendor/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w @cgv/reader",
+    "build": "npm run build -w @cgv/reader",
+    "preview": "npm run preview -w @cgv/reader"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

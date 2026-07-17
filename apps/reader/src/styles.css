@@ -1,0 +1,3602 @@
+:root {
+  color-scheme: light;
+  --reader-bg: #f7f4ed;
+  --reader-page: #fffdfa;
+  --reader-text: #23201b;
+  --reader-soft: #777066;
+  --reader-border: #e4ddd1;
+  --reader-accent: #6f5e43;
+  --reader-note-bg: #f4efe5;
+  --reader-note-text: #5d5549;
+  --reader-shadow: rgba(61, 47, 28, 0.08);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--reader-bg);
+  color: var(--reader-text);
+}
+
+button,
+textarea {
+  font: inherit;
+}
+
+/* The R/O toggle — the one seam between the Reader and Observer zones. */
+.rzo-toggle {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 7;
+  display: flex;
+  gap: 0.15rem;
+  border: 1px solid var(--reader-border);
+  border-radius: 999px;
+  padding: 0.2rem;
+  background: rgba(255, 253, 250, 0.92);
+  box-shadow: 0 2px 10px var(--reader-shadow);
+}
+
+.rzo-toggle-option {
+  min-width: 2.1rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.32rem 0.7rem;
+  background: transparent;
+  color: var(--reader-soft);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rzo-toggle-option:hover,
+.rzo-toggle-option:focus-visible {
+  color: var(--reader-text);
+  outline: none;
+}
+
+.rzo-toggle-option--active {
+  background: var(--reader-accent);
+  color: #fff;
+}
+
+/* Interface language toggle — Reader only for now, per
+   cgv-product-suite-spec.md's Reader preferences (Bible version, Language,
+   Font are separate knobs; this is Language). Independent of the R/O toggle:
+   this only ever changes Reader's own chrome text, never the loaded Bible
+   text or which zone is showing. */
+.language-toggle {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 5;
+  display: flex;
+  gap: 0.15rem;
+  border: 1px solid var(--reader-border);
+  border-radius: 999px;
+  padding: 0.2rem;
+  background: rgba(255, 253, 250, 0.82);
+}
+
+.language-toggle-option {
+  min-width: 2.1rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.32rem 0.6rem;
+  background: transparent;
+  color: var(--reader-soft);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.language-toggle-option:hover,
+.language-toggle-option:focus-visible {
+  color: var(--reader-text);
+  outline: none;
+}
+
+.language-toggle-option--active {
+  background: var(--reader-accent);
+  color: #fff;
+}
+
+/* Observer's own internal nav between its three tools — distinct from the
+   R/O toggle above, which only switches zones. */
+.observer-tool-nav {
+  position: fixed;
+  top: 3.3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 6;
+  display: flex;
+  gap: 0.3rem;
+}
+
+.observer-tool-link {
+  border: 1px solid var(--reader-border);
+  border-radius: 999px;
+  padding: 0.32rem 0.7rem;
+  background: rgba(255, 253, 250, 0.82);
+  color: var(--reader-soft);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.observer-tool-link:hover,
+.observer-tool-link:focus-visible {
+  background: var(--reader-note-bg);
+  color: var(--reader-text);
+  outline: none;
+}
+
+.observer-tool-link--active {
+  background: var(--reader-accent);
+  color: #fff;
+  border-color: var(--reader-accent);
+}
+
+.prototype-link {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 5;
+  border: 1px solid var(--reader-border);
+  border-radius: 999px;
+  padding: 0.5rem 0.78rem;
+  background: rgba(255, 253, 250, 0.82);
+  color: var(--reader-soft);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.prototype-link:hover,
+.prototype-link:focus-visible {
+  background: var(--reader-note-bg);
+  color: var(--reader-text);
+  outline: none;
+}
+
+.progress-controls {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 5;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.progress-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 1px solid var(--reader-border);
+  border-radius: 999px;
+  padding: 0;
+  background: rgba(255, 253, 250, 0.82);
+  color: var(--reader-soft);
+  cursor: pointer;
+}
+
+.progress-btn:hover,
+.progress-btn:focus-visible {
+  background: var(--reader-note-bg);
+  color: var(--reader-text);
+  outline: none;
+}
+
+.progress-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.progress-file-input {
+  display: none;
+}
+
+.reader-shell {
+  min-height: 100vh;
+  padding: 7vh clamp(18px, 5vw, 72px) 18vh;
+}
+
+.reader-page {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.reader-header {
+  width: min(720px, 100%);
+  margin: 0 0 clamp(40px, 7vw, 88px) clamp(0px, 15vw, 156px);
+}
+
+.reader-kicker,
+.reader-version {
+  margin: 0;
+  color: var(--reader-soft);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 1.12rem;
+  letter-spacing: 0;
+}
+
+.reader-header h1 {
+  margin: 0.08em 0;
+  font-size: clamp(4rem, 11vw, 8rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: 0;
+}
+
+.reader-book {
+  display: grid;
+  gap: clamp(52px, 9vw, 112px);
+}
+
+.reader-chapter {
+  display: grid;
+  grid-template-columns: minmax(64px, 0.22fr) minmax(0, 780px) minmax(170px, 0.34fr);
+  column-gap: clamp(18px, 4vw, 56px);
+}
+
+.reader-chapter h2 {
+  grid-column: 1;
+  grid-row: 1 / span 99;
+  align-self: start;
+  position: sticky;
+  top: 32px;
+  margin: 0;
+  color: #b8ab9b;
+  font-size: clamp(3.5rem, 9vw, 7.2rem);
+  font-weight: 400;
+  line-height: 0.85;
+}
+
+.reader-line {
+  display: grid;
+  grid-column: 2 / 4;
+  grid-template-columns: minmax(0, 780px) minmax(170px, 0.34fr);
+  column-gap: clamp(18px, 4vw, 56px);
+  position: relative;
+  padding: 0.18rem 0;
+}
+
+.reader-line--active .reader-verse {
+  color: #000;
+}
+
+.reader-verse {
+  grid-column: 1;
+  margin: 0 0 0.92rem;
+  font-size: clamp(1.78rem, 2.55vw, 2.32rem);
+  font-weight: 400;
+  line-height: 1.72;
+  letter-spacing: 0;
+  cursor: text;
+}
+
+.reader-verse sup {
+  margin-right: 0.36rem;
+  color: var(--reader-soft);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.82rem;
+  line-height: 0;
+  vertical-align: super;
+}
+
+.reader-note-mark {
+  position: absolute;
+  left: -2.3rem;
+  top: 0.66rem;
+  width: 1.65rem;
+  height: 1.65rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: #b4a795;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 160ms ease, color 160ms ease, background 160ms ease;
+}
+
+.reader-line:hover .reader-note-mark,
+.reader-note-mark:focus-visible,
+.reader-note-mark--has-note {
+  opacity: 1;
+}
+
+.reader-note-mark:hover,
+.reader-note-mark:focus-visible {
+  background: var(--reader-note-bg);
+  color: var(--reader-accent);
+  outline: none;
+}
+
+.reader-margin-notes {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.48rem;
+  padding-top: 0.32rem;
+}
+
+.reader-note {
+  max-width: 18rem;
+  border: 0;
+  border-left: 2px solid #d8cebf;
+  border-radius: 0;
+  padding: 0.1rem 0 0.16rem 0.76rem;
+  background: transparent;
+  color: var(--reader-note-text);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.45;
+  text-align: left;
+  cursor: pointer;
+}
+
+.reader-note:hover,
+.reader-note:focus-visible {
+  color: var(--reader-text);
+  outline: none;
+}
+
+.reader-note-panel {
+  position: fixed;
+  right: clamp(18px, 5vw, 72px);
+  bottom: clamp(18px, 5vw, 72px);
+  width: min(430px, calc(100vw - 36px));
+  z-index: 10;
+}
+
+.reader-note-panel-inner {
+  border: 1px solid var(--reader-border);
+  border-radius: 8px;
+  padding: 1rem;
+  background: rgba(255, 253, 250, 0.96);
+  box-shadow: 0 18px 60px var(--reader-shadow);
+  backdrop-filter: blur(10px);
+}
+
+.reader-note-panel p {
+  margin: 0 0 0.72rem;
+  color: var(--reader-soft);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 1.05rem;
+}
+
+.reader-note-panel textarea {
+  width: 100%;
+  min-height: 8rem;
+  resize: vertical;
+  border: 1px solid var(--reader-border);
+  border-radius: 6px;
+  padding: 0.82rem 0.9rem;
+  background: #fffdfa;
+  color: var(--reader-text);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 1.12rem;
+  line-height: 1.55;
+}
+
+.reader-note-panel textarea:focus {
+  border-color: #b8a98f;
+  outline: 2px solid rgba(184, 169, 143, 0.28);
+}
+
+.reader-note-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.72rem;
+}
+
+.reader-note-actions button {
+  border: 1px solid var(--reader-border);
+  border-radius: 6px;
+  padding: 0.52rem 0.78rem;
+  background: transparent;
+  color: var(--reader-note-text);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 1.02rem;
+  cursor: pointer;
+}
+
+.reader-note-actions button:hover,
+.reader-note-actions button:focus-visible {
+  background: var(--reader-note-bg);
+  color: var(--reader-text);
+  outline: none;
+}
+
+.reader-note-actions .reader-note-save {
+  border-color: var(--reader-accent);
+  background: var(--reader-accent);
+  color: #fffdfa;
+}
+
+.reader-note-actions .reader-note-save:hover,
+.reader-note-actions .reader-note-save:focus-visible {
+  background: #5d4e37;
+  color: #fffdfa;
+}
+
+.o-shell {
+  min-height: 100vh;
+  padding: 6rem clamp(1rem, 3vw, 2rem) 3rem;
+  background: #f5f2eb;
+  color: #22201c;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+
+.o-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 1240px;
+  margin: 0 auto 1.25rem;
+  border-bottom: 1px solid #ded5c7;
+  padding-bottom: 0.8rem;
+}
+
+.o-kicker,
+.result-label {
+  margin: 0 0 0.22rem;
+  color: #756e64;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+}
+
+.o-header h1 {
+  margin: 0;
+  font-size: clamp(1.65rem, 2.8vw, 2.45rem);
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.o-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 380px);
+  gap: clamp(1rem, 2vw, 1.6rem);
+  align-items: start;
+  max-width: 1240px;
+  height: calc(100vh - 8.4rem);
+  min-height: 620px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.greek-panel {
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  padding: clamp(1.2rem, 3vw, 2.4rem);
+  background: #fffdf8;
+  box-shadow: 0 18px 60px rgba(59, 47, 31, 0.08);
+  max-height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.participation-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.28rem;
+  margin-bottom: 1.35rem;
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  padding: 0.22rem;
+  background: #f5f2eb;
+}
+
+.participation-option {
+  flex: 1 1 9.5rem;
+  border: 0;
+  border-radius: 6px;
+  padding: 0.42rem 0.66rem;
+  background: transparent;
+  color: #756e64;
+  font: inherit;
+  font-size: 1.08rem;
+  line-height: 1.22;
+  cursor: pointer;
+}
+
+.participation-option:hover,
+.participation-option:focus-visible {
+  background: rgba(255, 253, 248, 0.86);
+  color: #22201c;
+  outline: none;
+}
+
+.participation-option--active {
+  background: #fffdf8;
+  color: #22201c;
+  box-shadow: 0 1px 5px rgba(59, 47, 31, 0.08);
+}
+
+.brick-check {
+  display: inline-block;
+  margin-left: 0.4em;
+  color: #3f7d4a;
+  font-weight: 700;
+}
+
+.greek-chapter {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 0 1rem;
+}
+
+.greek-chapter + .greek-chapter {
+  margin-top: 3rem;
+}
+
+.greek-chapter h2 {
+  grid-row: 1 / span 99;
+  margin: 0;
+  color: #b8ac99;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 3.8rem;
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.greek-verse {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.52rem;
+  padding: 0.16rem 0 0.86rem;
+}
+
+.greek-verse--active {
+  background: linear-gradient(90deg, rgba(228, 234, 220, 0.34), transparent 62%);
+}
+
+.verse-label {
+  align-self: start;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.22rem 0;
+  background: transparent;
+  color: #756e64;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.verse-label:hover,
+.verse-label:focus-visible {
+  background: #e4eadc;
+  color: #22201c;
+  outline: none;
+}
+
+.token-flow {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.34rem;
+  row-gap: 0.5rem;
+  align-items: baseline;
+  padding-top: 0.05rem;
+}
+
+.greek-token {
+  position: relative;
+  display: inline-grid;
+  gap: 0.04rem;
+  min-width: 0;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 0.06rem 0.08rem 0.02rem;
+  background: transparent;
+  color: #22201c;
+  text-align: left;
+  cursor: pointer;
+}
+
+.greek-token:hover,
+.greek-token:focus-visible {
+  border-color: transparent;
+  background: rgba(228, 234, 220, 0.42);
+  outline: none;
+}
+
+/* Reference popover — hover/focus only, never blocks the click-to-mark
+   interaction it sits on top of. See interlinear-correction-spec.md: this is
+   the relocated Greek/lemma/Strong's/gloss detail, available at the same
+   place and moment as marking, not a separate screen. */
+.token-detail-popover {
+  position: absolute;
+  bottom: calc(100% + 0.3rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  min-width: 7rem;
+  max-width: 16rem;
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #ded5c7;
+  border-radius: 7px;
+  background: #fffdf8;
+  box-shadow: 0 8px 24px rgba(59, 47, 31, 0.16);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s ease, transform 0.1s ease;
+  pointer-events: none;
+  white-space: normal;
+  text-align: center;
+}
+
+.greek-token:hover .token-detail-popover,
+.greek-token:focus-visible .token-detail-popover,
+.clause-word:hover .token-detail-popover,
+.clause-word:focus-visible .token-detail-popover,
+.clause-greek-token:hover .token-detail-popover,
+.clause-greek-token:focus-visible .token-detail-popover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.token-detail-surface {
+  color: #22201c;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.1rem;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.token-detail-lemma {
+  color: #a39a89;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.86rem;
+  white-space: nowrap;
+}
+
+.token-detail-strongs {
+  color: #6f5e43;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.token-detail-morph-desc {
+  color: #756e64;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.7rem;
+}
+
+.token-detail-gloss {
+  margin-top: 0.05rem;
+  color: #23201b;
+  font-size: 0.82rem;
+}
+
+.greek-token:disabled {
+  cursor: default;
+}
+
+.greek-token:disabled:hover {
+  background: transparent;
+}
+
+.greek-token--finite-marked {
+  border-color: #d7b65d;
+  background: #f3d48c;
+  padding-inline: 0.2rem;
+}
+
+.greek-token--finite-candidate {
+  border-color: rgba(215, 182, 93, 0.36);
+  background: rgba(243, 212, 140, 0.3);
+  padding-inline: 0.2rem;
+}
+
+.greek-token--command-marked {
+  border-color: #8b6fa8;
+  background: #ded0eb;
+  padding-inline: 0.2rem;
+}
+
+.greek-token--statement-marked {
+  border-color: #6f8f86;
+  background: #d5e8df;
+  padding-inline: 0.2rem;
+}
+
+.greek-token--subjunctive-marked {
+  border-color: #6b929d;
+  background: #cfe5e7;
+  padding-inline: 0.2rem;
+}
+
+.greek-token--optative-marked {
+  border-color: #a98255;
+  background: #ead6bd;
+  padding-inline: 0.2rem;
+}
+
+/* Same rose/plum family used for the participle layer in the Clause
+   Workspace, kept visually distinct from --command-marked's blue-violet. */
+.greek-token--participle-marked {
+  border-color: #a85d7a;
+  background: #eed3dd;
+  padding-inline: 0.2rem;
+}
+
+.greek-token--dependent-candidate {
+  border-color: rgba(107, 146, 157, 0.32);
+  background: rgba(207, 229, 231, 0.34);
+  padding-inline: 0.2rem;
+}
+
+.greek-token--dependent-marked {
+  border-color: #6b929d;
+  background: #cfe5e7;
+  box-shadow: 0 0 0 2px rgba(107, 146, 157, 0.14);
+}
+
+.greek-token--recipient-grouped {
+  border-color: #6f8f86;
+  background: #d5e8df;
+  padding-inline: 0.2rem;
+}
+
+.greek-token--recipient-draft {
+  border-color: #4f837b;
+  background: #bfe2da;
+  box-shadow: 0 0 0 2px rgba(79, 131, 123, 0.16);
+  padding-inline: 0.2rem;
+}
+
+.token-surface {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: clamp(1.56rem, 2.35vw, 1.98rem);
+  line-height: 1.04;
+  white-space: nowrap;
+}
+
+.token-morph {
+  color: #756e64;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.68rem;
+  line-height: 1;
+  opacity: 0.68;
+  white-space: nowrap;
+}
+
+.spanish-panel {
+  padding-top: clamp(1rem, 2.4vw, 1.8rem);
+}
+
+.spanish-book {
+  display: grid;
+  gap: 2.4rem;
+}
+
+.spanish-chapter {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  gap: 0 1rem;
+}
+
+.spanish-chapter h2 {
+  grid-row: 1 / span 99;
+  margin: 0;
+  color: #b8ac99;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 3.8rem;
+  font-weight: 400;
+  line-height: 0.9;
+}
+
+.spanish-verse {
+  display: grid;
+  grid-template-columns: 2rem minmax(0, 1fr);
+  gap: 0.52rem;
+  padding: 0.12rem 0 0.84rem;
+}
+
+.spanish-verse p {
+  margin: 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: clamp(1.48rem, 2.1vw, 1.78rem);
+  line-height: 1.68;
+}
+
+.spanish-candidate {
+  display: inline;
+  border: 0;
+  border-bottom: 2px solid rgba(127, 160, 170, 0.38);
+  border-radius: 3px;
+  padding: 0 0.06rem;
+  background: rgba(207, 229, 231, 0.34);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.spanish-candidate:hover,
+.spanish-candidate:focus-visible {
+  background: rgba(207, 229, 231, 0.62);
+  outline: none;
+}
+
+.spanish-candidate--selected {
+  border-bottom-color: #6b929d;
+  background: #cfe5e7;
+}
+
+.spanish-finite-context {
+  border-radius: 3px;
+  padding: 0 0.05rem;
+  background: rgba(243, 212, 140, 0.32);
+}
+
+.result-panel {
+  position: sticky;
+  top: 1rem;
+  display: grid;
+  gap: 0.8rem;
+  max-height: 100%;
+  overflow-y: auto;
+  padding-right: 0.18rem;
+  overscroll-behavior: contain;
+}
+
+.result-card {
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  padding: 1rem;
+  background: rgba(255, 253, 248, 0.86);
+  box-shadow: 0 10px 36px rgba(59, 47, 31, 0.05);
+}
+
+.result-card h2 {
+  margin: 0;
+  font-size: 1.28rem;
+  font-weight: 600;
+}
+
+.participation-card {
+  background: rgba(255, 253, 248, 0.74);
+}
+
+.participation-note,
+.reference-note,
+.terminology-note {
+  margin: 0.7rem 0 0;
+  color: #756e64;
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.terminology-note {
+  color: #5f4d75;
+}
+
+.lens-control {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.36rem;
+  margin-top: 0.8rem;
+}
+
+.lens-option {
+  border: 1px solid #ded5c7;
+  border-radius: 999px;
+  padding: 0.32rem 0.52rem;
+  background: #f5f2eb;
+  color: #756e64;
+  font-size: 0.98rem;
+  cursor: pointer;
+}
+
+.lens-option:hover,
+.lens-option:focus-visible,
+.lens-option--active {
+  background: #e4eadc;
+  color: #22201c;
+  outline: none;
+}
+
+.command-jump-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.36rem;
+  margin-top: 0.85rem;
+  border-top: 1px solid #ded5c7;
+  padding-top: 0.78rem;
+}
+
+.command-jump {
+  border: 1px solid rgba(139, 111, 168, 0.38);
+  border-radius: 999px;
+  padding: 0.24rem 0.5rem;
+  background: #ded0eb;
+  color: #2d2634;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.command-jump:hover,
+.command-jump:focus-visible {
+  border-color: #8b6fa8;
+  background: #d1bee3;
+  outline: none;
+}
+
+.command-jump--assigned {
+  border-color: rgba(111, 143, 134, 0.5);
+  background: #d5e8df;
+}
+
+.recipient-card {
+  background: rgba(255, 253, 248, 0.94);
+}
+
+.draft-command-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+
+.recipient-options {
+  display: grid;
+  gap: 0.42rem;
+  margin: 0.85rem 0 0;
+  border: 0;
+  padding: 0;
+}
+
+.recipient-options label {
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  color: #22201c;
+  font-size: 1.04rem;
+}
+
+.recipient-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.42rem;
+  margin-top: 0.95rem;
+}
+
+.recipient-actions button {
+  border: 1px solid #ded5c7;
+  border-radius: 6px;
+  padding: 0.38rem 0.58rem;
+  background: transparent;
+  color: #756e64;
+  cursor: pointer;
+}
+
+.recipient-actions .recipient-save {
+  border-color: #6f8f86;
+  background: #6f8f86;
+  color: #fffdf8;
+}
+
+.recipient-token {
+  background: #d5e8df;
+}
+
+.statement-token {
+  background: #d5e8df;
+}
+
+.dependent-token {
+  background: #cfe5e7;
+}
+
+.person-number-reference {
+  display: grid;
+  gap: 0.34rem;
+  margin-top: 0.85rem;
+  border-top: 1px solid #ded5c7;
+  padding-top: 0.75rem;
+}
+
+.person-number-reference p {
+  margin: 0;
+  color: #756e64;
+  font-size: 1.06rem;
+  line-height: 1.42;
+}
+
+.person-number-reference p:not(.result-label) {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.person-number-reference span {
+  color: #22201c;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.98rem;
+  white-space: nowrap;
+}
+
+.recipient-verse-context {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  border-top: 1px solid #ded5c7;
+  padding-top: 0.75rem;
+}
+
+.interlinear-verse-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin: 0;
+}
+
+.interlinear-verse-line--prior {
+  opacity: 0.62;
+}
+
+.interlinear-verse-ref {
+  flex: 0 0 100%;
+  color: #756e64;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.interlinear-token {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.1rem;
+  padding: 0.15rem 0.3rem;
+  border-radius: 5px;
+}
+
+.interlinear-token--selected {
+  background: #d5e8df;
+}
+
+/* Spanish carries the meaning the student actually needs here (who's being
+   addressed) — it leads, larger and darker; Greek stays as reference below. */
+.interlinear-token-gloss {
+  color: #22201c;
+  font-size: 1rem;
+  white-space: nowrap;
+}
+
+.interlinear-token-greek {
+  color: #a39a89;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.connector-reference {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.38rem;
+  margin-top: 0.8rem;
+}
+
+.connector-reference span {
+  border: 1px solid #ded5c7;
+  border-radius: 999px;
+  padding: 0.22rem 0.48rem;
+  background: #f5f2eb;
+  color: #22201c;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.18rem;
+}
+
+.spanish-result {
+  margin: 0.85rem 0 0;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.25rem;
+  line-height: 1.62;
+}
+
+.result-placeholder {
+  margin: 0.7rem 0 0;
+  color: #756e64;
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.marked-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.result-count {
+  margin: 0.3rem 0 0;
+  color: #756e64;
+  font-size: 1.05rem;
+}
+
+.marked-heading button {
+  align-self: start;
+  border: 1px solid #ded5c7;
+  border-radius: 6px;
+  padding: 0.38rem 0.58rem;
+  background: transparent;
+  color: #756e64;
+  cursor: pointer;
+}
+
+.marked-heading button:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.marked-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.9rem;
+}
+
+.marked-list p {
+  margin: 0;
+  color: #756e64;
+  line-height: 1.45;
+}
+
+.marked-token {
+  border-radius: 999px;
+  padding: 0.24rem 0.5rem;
+  background: #e4eadc;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.12rem;
+}
+
+@media (max-width: 920px) {
+  .o-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+}
+
+@media (max-width: 760px) {
+  .o-layout {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .result-panel {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+
+  .greek-panel {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .greek-chapter {
+    grid-template-columns: 1fr;
+  }
+
+  .greek-chapter h2 {
+    margin-bottom: 0.8rem;
+  }
+
+  .spanish-chapter {
+    grid-template-columns: 1fr;
+  }
+
+  .spanish-chapter h2 {
+    margin-bottom: 0.8rem;
+  }
+}
+
+@media (max-width: 860px) {
+  .reader-shell {
+    padding: 5vh clamp(16px, 5vw, 28px) 24vh;
+  }
+
+  .reader-header {
+    margin-left: 0;
+  }
+
+  .reader-chapter,
+  .reader-line {
+    display: block;
+  }
+
+  .reader-chapter h2 {
+    position: static;
+    margin-bottom: 1.3rem;
+    font-size: 3.8rem;
+  }
+
+  .reader-verse {
+    padding-right: 2.1rem;
+    font-size: clamp(1.34rem, 6vw, 1.62rem);
+    line-height: 1.68;
+  }
+
+  .reader-note-mark {
+    left: auto;
+    right: 0;
+    top: 0.3rem;
+    opacity: 1;
+  }
+
+  .reader-margin-notes {
+    padding: 0 0 1.3rem 1.3rem;
+  }
+}
+
+/* Spanish Clause Builder prototype */
+.clause-link {
+  top: 3.2rem;
+}
+
+.clause-builder {
+  max-width: 82rem;
+  margin: 0 auto;
+  padding: 6rem clamp(1.25rem, 4vw, 2rem) 8rem;
+  color: #23201b;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+.clause-builder-header h1 {
+  margin: 0.2rem 0 0.4rem;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 400;
+  line-height: 0.92;
+}
+
+.clause-builder-scope {
+  margin: 0.2rem 0;
+  color: #756e64;
+  font-size: 1.05rem;
+}
+
+.clause-workspace {
+  margin-top: clamp(2.5rem, 7vw, 5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 23rem);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+
+.clause-view-switch {
+  display: inline-flex;
+  gap: 0.25rem;
+  margin-top: 1.5rem;
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  padding: 0.22rem;
+  background: rgba(250, 247, 240, 0.68);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+
+.clause-view-option {
+  border: 0;
+  border-radius: 6px;
+  padding: 0.42rem 0.7rem;
+  background: transparent;
+  color: #756e64;
+  font: inherit;
+  cursor: pointer;
+}
+
+.clause-view-option:hover,
+.clause-view-option:focus-visible,
+.clause-view-option--active {
+  background: #fffdf8;
+  color: #23201b;
+  outline: none;
+}
+
+.clause-view-option:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.clause-builder-body {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.clause-verse {
+  display: grid;
+  grid-template-columns: 2.8rem minmax(0, 1fr);
+  gap: 0.8rem;
+}
+
+/* Three direct children now (label, Greek row, Spanish reference row)
+   against only two explicit columns — without explicit placement, grid
+   auto-flow wraps the 3rd child into column 1 (the ~45px label column),
+   squeezing every Spanish word onto its own line. Label spans both content
+   rows; Greek and Spanish reference both pin to column 2. */
+.clause-verse-label {
+  grid-column: 1;
+  grid-row: 1 / -1;
+  margin: 0.2rem 0 0;
+  color: #b8ac99;
+  font-size: 1.35rem;
+}
+
+.clause-verse-text {
+  grid-column: 2;
+  margin: 0;
+  font-size: clamp(1.55rem, 2.4vw, 2rem);
+  line-height: 1.74;
+}
+
+/* Spanish is a comprehension aid now, not the tap target — smaller, muted,
+   no pointer cursor. See clause-selection-greek-spec.md. */
+.clause-verse-text--reference {
+  grid-column: 2;
+  margin-top: 0.3rem;
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  color: #756e64;
+  line-height: 1.5;
+}
+
+/* The Greek interlinear row — now the authoritative tap target for building
+   a clause span. Mirrors O Prototype's token-flow/token-surface/token-morph
+   pattern for visual consistency across both marking screens. */
+.clause-greek-row {
+  grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.4rem;
+  row-gap: 0.6rem;
+  align-items: baseline;
+  margin: 0.2rem 0 0;
+}
+
+.clause-greek-token {
+  position: relative;
+  display: inline-grid;
+  gap: 0.05rem;
+  min-width: 0;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 0.06rem 0.12rem 0.02rem;
+  background: transparent;
+  color: #22201c;
+  text-align: left;
+  cursor: pointer;
+}
+
+.clause-greek-token:hover,
+.clause-greek-token:focus-visible {
+  border-color: transparent;
+  background: rgba(228, 234, 220, 0.42);
+  outline: none;
+}
+
+.clause-greek-token:disabled {
+  cursor: default;
+}
+
+.clause-greek-token:disabled:hover {
+  background: transparent;
+}
+
+.clause-greek-token-surface {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
+  line-height: 1.05;
+  white-space: nowrap;
+}
+
+.clause-greek-token-gloss {
+  color: #a39a89;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.68rem;
+  white-space: nowrap;
+}
+
+.clause-greek-token--verb {
+  border-bottom: 2px solid rgba(181, 137, 29, 0.42);
+}
+
+.clause-greek-token--belonging {
+  background: rgba(133, 184, 190, 0.48);
+  box-shadow: 0 0 0 1px rgba(77, 127, 139, 0.7);
+}
+
+.clause-greek-token--saved {
+  background: rgba(207, 229, 231, 0.14);
+}
+
+.clause-greek-token--active-verb {
+  border-bottom-color: #c9a227;
+  background: #f3d48c;
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.35);
+}
+
+.clause-greek-token--overlap {
+  text-decoration: underline dotted #9a7750 2px;
+  text-underline-offset: 0.18em;
+}
+
+.clause-word {
+  position: relative;
+  border: 0;
+  border-radius: 3px;
+  padding: 0 0.03rem;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.clause-word--reference {
+  cursor: default;
+}
+
+/* Multiple Greek tokens under one Spanish word (a periphrastic construction
+   collapsing into one RV1909 word) each get their own row in the popover. */
+.token-detail-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.token-detail-entry + .token-detail-entry {
+  margin-top: 0.3rem;
+  padding-top: 0.3rem;
+  border-top: 1px solid rgba(222, 213, 199, 0.6);
+}
+
+.clause-word--verb {
+  border-bottom: 2px solid rgba(181, 137, 29, 0.42);
+}
+
+.clause-word--belonging {
+  background: rgba(133, 184, 190, 0.48);
+  box-shadow: 0 0 0 1px rgba(77, 127, 139, 0.7);
+}
+
+.clause-panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.clause-clear,
+.clause-print-btn {
+  border: 1px solid #ded5c7;
+  border-radius: 6px;
+  padding: 0.45rem 0.9rem;
+  background: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.clause-word--saved {
+  background: rgba(207, 229, 231, 0.14);
+}
+
+.clause-word--verb-saved {
+  border-bottom-color: rgba(107, 146, 157, 0.55);
+  background: rgba(207, 229, 231, 0.14);
+}
+
+.clause-word--active-verb {
+  border-bottom-color: #c9a227;
+  background: #f3d48c;
+  box-shadow: 0 0 0 2px rgba(201, 162, 39, 0.35);
+}
+
+.clause-word--overlap {
+  text-decoration: underline dotted #9a7750 2px;
+  text-underline-offset: 0.18em;
+}
+
+.clause-word:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.clause-selection-panel {
+  position: fixed;
+  right: clamp(1rem, 4vw, 2rem);
+  bottom: clamp(1rem, 4vw, 2rem);
+  left: clamp(1rem, 4vw, 2rem);
+  z-index: 5;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.55rem 1rem;
+  align-items: center;
+  max-width: 58rem;
+  margin: 0 auto;
+  padding: 0.85rem 1rem;
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  background: rgba(250, 247, 240, 0.97);
+  box-shadow: 0 16px 36px rgba(73, 58, 35, 0.12);
+  backdrop-filter: blur(8px);
+}
+
+.clause-active-verb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+  align-items: baseline;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.clause-belonging-list,
+.clause-empty,
+.clause-overlap-note {
+  grid-column: 1;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+.clause-active-verb span,
+.clause-empty,
+.clause-overlap-note {
+  color: #756e64;
+}
+
+.clause-save {
+  border: 1px solid #6b929d;
+  border-radius: 6px;
+  padding: 0.45rem 0.9rem;
+  background: #cfe5e7;
+  font: inherit;
+  cursor: pointer;
+}
+
+.clause-output {
+  position: sticky;
+  top: 1.5rem;
+  display: grid;
+  gap: 1.5rem;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+  padding-right: 0.25rem;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+
+.clause-output-section {
+  border-top: 1px solid #ded5c7;
+  padding-top: 0.85rem;
+}
+
+.clause-output-section h2 {
+  margin: 0 0 0.8rem;
+  color: #5f584e;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.clause-register-list,
+.clause-chain {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.clause-register-item {
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 0.55rem 0.6rem;
+  background: transparent;
+  color: #23201b;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.clause-register-item:hover,
+.clause-register-item:focus-visible,
+.clause-register-item--active {
+  border-color: #ded5c7;
+  background: rgba(250, 247, 240, 0.78);
+  outline: none;
+}
+
+.clause-output-meta {
+  display: block;
+  color: #82796d;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.clause-register-span {
+  display: block;
+  margin-top: 0.18rem;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.clause-register-span--empty,
+.clause-output-empty {
+  color: #aaa092;
+}
+
+.clause-chain-line,
+.clause-output-empty {
+  margin: 0;
+  font-size: 0.96rem;
+  line-height: 1.45;
+}
+
+.clause-chain-line > span:last-child {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.2rem;
+  line-height: 1.38;
+}
+
+.clause-only-view {
+  max-width: 54rem;
+  margin-top: clamp(2.5rem, 7vw, 5rem);
+}
+
+.clause-only-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid #ded5c7;
+  padding-bottom: 1rem;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+
+.clause-only-header h2 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.clause-only-header p {
+  margin: 0.22rem 0 0;
+  color: #756e64;
+  font-size: 0.96rem;
+}
+
+.clause-only-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(17rem, 24rem);
+  gap: clamp(1.25rem, 4vw, 2.4rem);
+  align-items: start;
+  margin-top: 1.3rem;
+}
+
+.clause-only-list {
+  display: grid;
+  gap: 0.35rem;
+  margin-top: 0;
+  max-height: calc(100vh - 9rem);
+  overflow: auto;
+}
+
+.clause-only-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.18rem;
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 0.62rem 0.7rem;
+  background: transparent;
+  color: #23201b;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.clause-only-item:hover,
+.clause-only-item:focus-visible {
+  color: #11100e;
+  outline: none;
+}
+
+.clause-only-item--inspecting {
+  border-color: #9fb7b9;
+  background: rgba(207, 229, 231, 0.28);
+}
+
+.clause-only-item--dependent {
+  margin-left: clamp(1.25rem, 4vw, 2.5rem);
+  width: calc(100% - clamp(1.25rem, 4vw, 2.5rem));
+}
+
+.clause-line-reference,
+.clause-only-meta {
+  display: block;
+  color: #82796d;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.clause-only-text {
+  display: block;
+  margin: 0;
+  font-size: clamp(1.08rem, 1.35vw, 1.2rem);
+  line-height: 1.36;
+}
+
+.clause-line-token--finite {
+  border-bottom: 2px solid rgba(181, 137, 29, 0.72);
+  background: rgba(243, 212, 140, 0.26);
+}
+
+.clause-line-token--dependent {
+  background: rgba(127, 168, 151, 0.28);
+  box-shadow: inset 0 -2px rgba(82, 121, 105, 0.45);
+}
+
+.clause-dependent-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  color: #5f584e;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.clause-dependent-toggle input {
+  width: 1rem;
+  height: 1rem;
+  accent-color: #6b929d;
+  cursor: pointer;
+}
+
+.clause-review-panel {
+  border: 1px solid #ded5c7;
+  border-radius: 12px;
+  background: var(--reader-note-bg);
+  box-shadow: 0 2px 14px var(--reader-shadow);
+  padding: 1.15rem 1.25rem 1.3rem;
+}
+
+.clause-review-progress {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  color: #756e64;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 1rem;
+}
+
+.clause-auto-advance-notice {
+  margin: 0 0 0.65rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid #d8b8a8;
+  border-radius: 8px;
+  background: #fbf0e9;
+  color: #9c4a3a;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.clause-active-card {
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  background: #fffdf8;
+}
+
+.clause-active-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.65rem;
+  color: #82796d;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 1rem;
+}
+
+.clause-active-span {
+  margin: 0;
+  font-size: clamp(1.65rem, 2.45vw, 2.25rem);
+  line-height: 1.35;
+}
+
+.clause-greek-toggle,
+.clause-step-save {
+  border: 1px solid #ded5c7;
+  border-radius: 999px;
+  padding: 0.38rem 0.72rem;
+  background: transparent;
+  color: #5f584e;
+  font: inherit;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.98rem;
+  cursor: pointer;
+}
+
+.clause-greek-toggle:hover,
+.clause-greek-toggle:focus-visible,
+.clause-step-save:hover,
+.clause-step-save:focus-visible {
+  background: #e4eadc;
+  color: #23201b;
+  outline: none;
+}
+
+.clause-step-save {
+  margin-top: 0.8rem;
+}
+
+.clause-step-save:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.clause-context-panel {
+  display: grid;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(222, 213, 199, 0.7);
+  padding-top: 0.8rem;
+}
+
+.clause-context-word {
+  border-radius: 3px;
+  padding: 0.02rem 0.04rem;
+}
+
+.clause-context-word--active {
+  background: rgba(243, 212, 140, 0.28);
+}
+
+.clause-review-state {
+  justify-self: start;
+  margin-top: 0.1rem;
+  border-radius: 999px;
+  padding: 0.16rem 0.44rem;
+  background: #f5f2eb;
+  color: #756e64;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+.clause-review-state--reviewed {
+  background: #e4eadc;
+  color: #4f675f;
+}
+
+.clause-review-state--attached {
+  background: #cfe5e7;
+  color: #405f66;
+}
+
+.clause-review-state--not-sure {
+  background: #ead6bd;
+  color: #6f5333;
+}
+
+.clause-beginning-panel {
+  position: sticky;
+  top: 1rem;
+  border-top: 1px solid #ded5c7;
+  border-bottom: 1px solid #ded5c7;
+  padding: 1rem 0;
+}
+
+.clause-beginning-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+
+.clause-beginning-header h3 {
+  margin: 0;
+  color: #5f584e;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.clause-beginning-header button {
+  border: 1px solid #ded5c7;
+  border-radius: 999px;
+  width: 1.7rem;
+  height: 1.7rem;
+  background: transparent;
+  color: #756e64;
+  cursor: pointer;
+}
+
+.clause-beginning-grid {
+  display: grid;
+  gap: 0.42rem 0.85rem;
+  align-items: baseline;
+  width: max-content;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.clause-beginning-grid--inline {
+  margin-top: 1rem;
+  border-bottom: 1px solid rgba(222, 213, 199, 0.7);
+  padding-bottom: 0.95rem;
+}
+
+.clause-beginning-label {
+  color: #82796d;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.86rem;
+}
+
+.clause-beginning-token {
+  color: #23201b;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.clause-beginning-token--first {
+  border-radius: 4px;
+  padding: 0.02rem 0.22rem;
+  background: rgba(243, 212, 140, 0.34);
+}
+
+.clause-beginning-token--ble {
+  color: #5f584e;
+  font-size: clamp(1rem, 1.4vw, 1.18rem);
+}
+
+.clause-observation {
+  margin-top: 1.35rem;
+  border-top: 1px solid rgba(222, 213, 199, 0.82);
+  padding-top: 1.15rem;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+
+.clause-observation-question {
+  margin: 0;
+  color: #23201b;
+  font-size: clamp(1.28rem, 2vw, 1.62rem);
+  line-height: 1.35;
+}
+
+.clause-observation-step {
+  margin-top: 1.1rem;
+  border-top: 1px solid rgba(222, 213, 199, 0.68);
+  padding-top: 0.95rem;
+}
+
+.clause-observation-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  margin-top: 0.65rem;
+}
+
+.clause-observation-option {
+  border: 1px solid #ded5c7;
+  border-radius: 999px;
+  padding: 0.46rem 0.8rem;
+  background: transparent;
+  color: #756e64;
+  font: inherit;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+.clause-observation-option:hover,
+.clause-observation-option:focus-visible,
+.clause-observation-option--active {
+  background: #e4eadc;
+  color: #23201b;
+  outline: none;
+}
+
+.clause-noun-picker {
+  margin-top: 0.9rem;
+}
+
+.clause-noun-picker p {
+  margin: 0;
+  color: #756e64;
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+.clause-noun-selection {
+  margin-top: 0.45rem !important;
+  color: #23201b !important;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.18rem !important;
+}
+
+.clause-noun-context {
+  display: grid;
+  gap: 0.48rem;
+  margin-top: 0.7rem;
+}
+
+.clause-noun-verse {
+  display: grid;
+  grid-template-columns: 1.7rem minmax(0, 1fr);
+  gap: 0.45rem;
+}
+
+.clause-noun-verse-label {
+  color: #b8ac99;
+}
+
+.clause-noun-word {
+  border: 0;
+  border-radius: 4px;
+  padding: 0.02rem 0.08rem;
+  background: transparent;
+  color: #23201b;
+  font: inherit;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.16rem;
+  cursor: pointer;
+}
+
+.clause-noun-word:hover,
+.clause-noun-word:focus-visible,
+.clause-noun-word--selected {
+  background: rgba(207, 229, 231, 0.7);
+  outline: none;
+}
+
+.clause-parent-picker {
+  margin-top: 0.85rem;
+}
+
+.clause-parent-picker p {
+  margin: 0;
+  color: #756e64;
+  font-size: 0.98rem;
+  line-height: 1.4;
+}
+
+.clause-parent-list {
+  display: grid;
+  gap: 0.42rem;
+  margin-top: 0.62rem;
+}
+
+.clause-parent-option {
+  border: 1px solid rgba(222, 213, 199, 0.9);
+  border-radius: 6px;
+  padding: 0.46rem 0.56rem;
+  background: transparent;
+  color: #23201b;
+  font: inherit;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.05rem;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+}
+
+.clause-parent-option span {
+  display: block;
+  color: #82796d;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.25;
+}
+
+.clause-parent-option:hover,
+.clause-parent-option:focus-visible,
+.clause-parent-option--selected {
+  border-color: #9fb7b9;
+  background: rgba(207, 229, 231, 0.42);
+  outline: none;
+}
+
+.clause-parent-option--likely {
+  border-color: rgba(181, 137, 29, 0.72);
+  background: rgba(243, 212, 140, 0.22);
+}
+
+.clause-observation-term {
+  margin: 0 0 0.5rem;
+  color: #6b929d;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.clause-step-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.clause-reconsider {
+  border: 0;
+  background: transparent;
+  color: #82796d;
+  font: inherit;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.clause-reconsider:hover,
+.clause-reconsider:focus-visible {
+  color: #23201b;
+}
+
+.clause-tutor-note {
+  margin: 0 0 0.9rem;
+  max-width: 62ch;
+  color: #756e64;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.clause-proposal {
+  border: 1px solid rgba(181, 137, 29, 0.72);
+  border-radius: 8px;
+  background: rgba(243, 212, 140, 0.22);
+  padding: 0.9rem 1rem;
+}
+
+.clause-proposal-label {
+  margin: 0 0 0.35rem;
+  color: #8a621c;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.clause-proposal-reason {
+  margin: 0;
+  max-width: 62ch;
+  color: #5f584e;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.clause-uncertain-note {
+  margin: 0 0 0.9rem;
+  max-width: 62ch;
+  border: 1px dashed #b8ac99;
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  color: #23201b;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.clause-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+}
+
+.clause-choice-btn {
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  padding: 0.65rem 0.8rem;
+  background: transparent;
+  color: #23201b;
+  font: inherit;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+}
+
+.clause-choice-btn:hover,
+.clause-choice-btn:focus-visible {
+  border-color: #9fb7b9;
+  background: rgba(207, 229, 231, 0.32);
+  outline: none;
+}
+
+.clause-choice-term {
+  display: block;
+  margin-bottom: 0.15rem;
+  color: #6b929d;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Unresolved-participle data warning — distinct from the plum participle
+   palette on purpose, since this isn't a sorting task, it's a bug report. */
+
+.clause-unresolved-participles {
+  margin: 0.9rem 0;
+  border: 1px solid rgba(156, 74, 58, 0.4);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  background: rgba(156, 74, 58, 0.06);
+}
+
+.o-mood-conflict {
+  max-width: 1240px;
+  margin: -0.25rem auto 1.25rem;
+}
+
+.clause-unresolved-participles h3 {
+  margin: 0 0 0.35rem;
+  color: #9c4a3a;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.clause-audit-chapter {
+  margin-top: 0.6rem;
+}
+
+.clause-audit-chapter h4 {
+  margin: 0 0 0.25rem;
+  color: #9c4a3a;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.clause-audit-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.clause-audit-list li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: baseline;
+  font-size: 0.82rem;
+}
+
+.clause-audit-ref {
+  color: #23201b;
+  font-weight: 600;
+}
+
+.clause-audit-ref--link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: #9c4a3a;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.clause-audit-ref--link:hover {
+  color: #7a3a2d;
+}
+
+.clause-audit-range {
+  color: #756e64;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.74rem;
+}
+
+/* Book-wide unsorted-participles checklist */
+
+.clause-unsorted-participles {
+  margin: 0.9rem 0;
+  border: 1px solid rgba(138, 96, 158, 0.28);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  background: rgba(138, 96, 158, 0.05);
+}
+
+.clause-unsorted-participles h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.35rem;
+  color: #6a4a7a;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.clause-unsorted-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  padding: 0 0.35rem;
+  border-radius: 999px;
+  background: #8a609e;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.clause-unsorted-reference {
+  display: block;
+  color: #8a609e;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Participle layer panel */
+
+.clause-participles-panel {
+  margin-top: 0.9rem;
+  border: 1px solid rgba(138, 96, 158, 0.28);
+  border-radius: 10px;
+  padding: 0.75rem 0.9rem;
+  background: rgba(138, 96, 158, 0.05);
+}
+
+.clause-participles-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.55rem;
+}
+
+.clause-participles-header h3 {
+  margin: 0;
+  color: #6a4a7a;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.clause-participle-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.clause-participle-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid rgba(138, 96, 158, 0.35);
+  border-radius: 999px;
+  padding: 0.28rem 0.7rem;
+  background: #fff;
+  color: #3a2f42;
+  font: inherit;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.clause-participle-chip--active {
+  border-color: #8a609e;
+  background: rgba(138, 96, 158, 0.14);
+}
+
+.clause-participle-chip-state {
+  color: #8a609e;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.clause-participle-detail {
+  margin-top: 0.7rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(138, 96, 158, 0.2);
+}
+
+.clause-participle-morph {
+  margin: 0 0 0.5rem;
+  color: #5f584e;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.85rem;
+}
+
+.clause-participle-fact {
+  color: #6b929d;
+}
+
+.clause-participle-flag {
+  color: #a5723c;
+  font-weight: 600;
+}
+
+.clause-choice-grid--participle {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.clause-context-panel--compact {
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+/* Skeleton tree panel */
+
+.clause-only-main {
+  min-width: 0;
+}
+
+.clause-skeleton-panel {
+  border-left: 1px solid rgba(222, 213, 199, 0.82);
+  padding-left: clamp(1rem, 3vw, 1.6rem);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+
+.clause-skeleton-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+}
+
+.clause-skeleton-header h2 {
+  margin: 0;
+  color: #23201b;
+  font-size: 1.1rem;
+}
+
+.clause-skeleton-count {
+  color: #82796d;
+  font-size: 0.85rem;
+}
+
+.clause-tree {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.clause-tree-node-wrap {
+  display: grid;
+  gap: 0.3rem;
+}
+
+/* A run of consecutive same-recipient root clauses (Titus 2's older men/
+   older women/young women/... sequence) reads as one block via a continuous
+   left accent — only the first/last member gets rounded corners, turning
+   the shared border into a bracket that opens at the first recipient and
+   closes after the last, per sequence-view-spec.md. Only ever applied to
+   top-level (root) wrappers — sequenceEntryByFiniteVerbId has no entry for
+   a dependent clause, so this never reaches nested rows. */
+.clause-tree-node-wrap--recipient-run {
+  padding-left: 0.7rem;
+  border-left: 3px solid rgba(63, 95, 138, 0.35);
+}
+
+.clause-tree-node-wrap--recipient-run-start {
+  border-top-left-radius: 6px;
+}
+
+.clause-tree-node-wrap--recipient-run-end {
+  border-bottom-left-radius: 6px;
+}
+
+.clause-tree-node {
+  display: block;
+  width: 100%;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  padding: 0.35rem 0.5rem;
+  background: transparent;
+  color: #23201b;
+  font: inherit;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.98rem;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+}
+
+.clause-tree-node:hover,
+.clause-tree-node:focus-visible {
+  border-color: #9fb7b9;
+  background: rgba(207, 229, 231, 0.32);
+  outline: none;
+}
+
+.clause-tree-node--active {
+  border-color: #9fb7b9;
+  background: rgba(207, 229, 231, 0.5);
+}
+
+.clause-tree-node--placeholder {
+  border-style: dashed;
+  border-color: #ded5c7;
+  color: #82796d;
+  font-style: italic;
+}
+
+.clause-tree-tag {
+  display: inline-block;
+  margin-right: 0.4rem;
+  border-radius: 4px;
+  padding: 0.02rem 0.4rem;
+  background: rgba(207, 229, 231, 0.55);
+  color: #3f6068;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+
+.clause-tree-children {
+  display: grid;
+  gap: 0.3rem;
+  margin-left: 1.05rem;
+  padding-left: 0.85rem;
+  border-left: 1.5px solid #ded5c7;
+}
+
+/* Participle layer — a plum/violet underline, deliberately distinct from the
+   tan tree-connector line above, the amber finite-verb highlight, the green
+   dependent-introducer highlight, and the teal relation-badge color, so it
+   never reads as the same kind of thing as any of those. */
+.clause-line-token--participle {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-decoration-color: rgba(138, 96, 158, 0.65);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+
+.clause-line-token--participle-unsorted {
+  text-decoration-color: rgba(138, 96, 158, 0.35);
+}
+
+.clause-line-token--participle:hover,
+.clause-line-token--participle:focus-visible {
+  text-decoration-color: rgba(138, 96, 158, 0.95);
+  outline: none;
+}
+
+.clause-line-token--participle-flow {
+  background: rgba(138, 96, 158, 0.14);
+  border-radius: 3px;
+}
+
+.clause-line-token-wrap {
+  position: relative;
+  display: inline;
+}
+
+.clause-line-token-flow-tag {
+  margin-left: 0.2rem;
+  color: rgba(138, 96, 158, 0.85);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.clause-participle-popover {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  z-index: 5;
+  display: grid;
+  gap: 0.15rem;
+  margin-bottom: 0.35rem;
+  border: 1px solid rgba(138, 96, 158, 0.4);
+  border-radius: 6px;
+  padding: 0.35rem 0.55rem;
+  background: #fbf7f2;
+  box-shadow: 0 2px 10px rgba(35, 32, 27, 0.14);
+  color: #3a2f42;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.clause-participle-popover strong {
+  color: #6a4a7a;
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.clause-participle-popover-morph {
+  color: #7a7168;
+  font-style: italic;
+}
+
+.clause-outline-section,
+.clause-parked-section,
+.clause-verbless-section,
+.clause-standalone-participles,
+.clause-telos-section {
+  margin-top: 1.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(222, 213, 199, 0.82);
+}
+
+.clause-standalone-participles h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0 0 0.5rem;
+  color: #6a4a7a;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.clause-standalone-group {
+  margin-bottom: 0.9rem;
+}
+
+.clause-outline-section h3,
+.clause-parked-section h3,
+.clause-verbless-section h3,
+.clause-telos-section h3 {
+  margin: 0 0 0.5rem;
+  color: #756e64;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.clause-section-note {
+  margin: 0 0 0.7rem;
+  color: #82796d;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.clause-outline-item,
+.clause-parked-item,
+.clause-verbless-item {
+  margin: 0 0 0.5rem;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.clause-verbless-item {
+  font-style: italic;
+  color: #756e64;
+}
+
+.clause-outline-item span,
+.clause-parked-item span,
+.clause-verbless-item span {
+  display: block;
+  color: #82796d;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-style: normal;
+}
+
+.clause-parked-ambiguous {
+  margin: 0.2rem 0 0.5rem;
+  color: #9c4a3a;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.4;
+}
+
+.clause-telos-item {
+  margin: 0 0 0.4rem;
+  border: 1px solid rgba(222, 213, 199, 0.9);
+  border-radius: 6px;
+  padding: 0.5rem 0.65rem;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.clause-telos-item--outline {
+  border-color: #9fb7b9;
+  background: rgba(207, 229, 231, 0.32);
+}
+
+.clause-telos-vs {
+  margin: 0 0 0.4rem;
+  color: #82796d;
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.clause-telos-note {
+  margin: 0.6rem 0 0;
+  color: #756e64;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 1100px) {
+  .clause-builder {
+    max-width: 58rem;
+  }
+
+  .clause-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .clause-only-workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .clause-skeleton-panel {
+    border-left: none;
+    border-top: 1px solid rgba(222, 213, 199, 0.82);
+    padding-left: 0;
+    padding-top: 1.2rem;
+    margin-top: 1.2rem;
+  }
+
+  .clause-beginning-panel {
+    position: static;
+    order: -1;
+  }
+
+  .clause-output {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .clause-builder {
+    padding-bottom: 9rem;
+  }
+
+  .clause-choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .clause-verse {
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 0.55rem;
+  }
+
+  .clause-only-header {
+    display: block;
+  }
+
+  .clause-only-header .clause-clear {
+    margin-top: 0.85rem;
+  }
+
+  .clause-only-item {
+    grid-template-columns: 1fr;
+    gap: 0.18rem;
+  }
+
+  .clause-selection-panel {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    grid-template-columns: 1fr;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: 0;
+    border-radius: 8px 8px 0 0;
+  }
+}
+
+/* Participle Mega-Views — book-level aggregates, deliberately separate from
+   the Skeleton/Outline/Telos panel. Same plum/violet family as the rest of
+   the participle layer. */
+.participle-views {
+  max-width: 54rem;
+  margin-top: clamp(2.5rem, 7vw, 5rem);
+}
+
+.participle-view-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1.1rem 0 1.4rem;
+}
+
+.participle-view-panel {
+  display: grid;
+  gap: 1rem;
+}
+
+.participle-view-ref {
+  border: none;
+  background: none;
+  padding: 0;
+  color: #8a609e;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.participle-view-ref:hover,
+.participle-view-ref:focus-visible {
+  color: #6a4a7a;
+  outline: none;
+}
+
+.participle-emphasis-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+
+.participle-emphasis-table th {
+  border-bottom: 1.5px solid #ded5c7;
+  padding: 0.4rem 0.6rem;
+  color: #756e64;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.participle-emphasis-table td {
+  border-bottom: 1px solid rgba(222, 213, 199, 0.6);
+  padding: 0.5rem 0.6rem;
+  vertical-align: top;
+}
+
+.participle-emphasis-gloss-note {
+  color: #a39a89;
+  font-size: 0.78rem;
+  font-style: italic;
+}
+
+.participle-emphasis-lemma {
+  color: #6f5e43;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  white-space: nowrap;
+}
+
+.participle-cast-group {
+  margin-bottom: 1rem;
+}
+
+.participle-cast-group h3 {
+  margin: 0 0 0.5rem;
+  color: #6a4a7a;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.participle-cast-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  border-bottom: 1px solid rgba(222, 213, 199, 0.6);
+  padding: 0.45rem 0;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+}
+
+.participle-cast-text {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1rem;
+}
+
+.participle-cast-count {
+  color: #8a609e;
+  font-weight: 700;
+}
+
+.participle-cast-refs {
+  color: #756e64;
+  font-size: 0.85rem;
+}
+
+.participle-flow-strip {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.2rem;
+  height: 8.5rem;
+  padding: 0.5rem 0.25rem;
+  border-bottom: 1.5px solid #ded5c7;
+}
+
+.participle-flow-marker {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.2rem;
+  height: 100%;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.participle-flow-bar {
+  width: 100%;
+  min-height: 2px;
+  border-radius: 2px 2px 0 0;
+  background: rgba(138, 96, 158, 0.4);
+}
+
+.participle-flow-marker:hover .participle-flow-bar,
+.participle-flow-marker--active .participle-flow-bar {
+  background: #8a609e;
+}
+
+.participle-flow-marker--zero .participle-flow-bar {
+  background: rgba(138, 96, 158, 0.16);
+}
+
+.participle-flow-marker--zero:hover .participle-flow-bar {
+  background: rgba(138, 96, 158, 0.4);
+}
+
+.participle-flow-count {
+  color: #756e64;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
+.participle-flow-ref {
+  color: #a39a89;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.6rem;
+  white-space: nowrap;
+}
+
+.participle-flow-marker--active .participle-flow-ref {
+  color: #6a4a7a;
+}
+
+.participle-flow-marker--active .participle-flow-count {
+  color: #6a4a7a;
+}
+
+.participle-flow-detail {
+  margin-top: 1rem;
+  border: 1px solid rgba(138, 96, 158, 0.28);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  background: rgba(138, 96, 158, 0.05);
+}
+
+.participle-flow-detail-root {
+  margin: 0 0 0.6rem;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.02rem;
+}
+
+.participle-flow-detail-list {
+  display: grid;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.9rem;
+}
+
+.participle-flow-detail-list li span {
+  color: #756e64;
+}
+
+/* Sequence view: Reason / Statement / Imperative / Purpose */
+
+.sequence-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem 1.6rem;
+  margin: 0 0 1.4rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid rgba(222, 213, 199, 0.82);
+  border-radius: 10px;
+  background: rgba(250, 246, 238, 0.6);
+}
+
+.sequence-legend > div {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.sequence-legend dd {
+  margin: 0;
+  color: #756e64;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+}
+
+.sequence-tag {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 0.06rem 0.45rem;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.sequence-tag--reason {
+  background: rgba(207, 229, 231, 0.7);
+  color: #3f6068;
+}
+
+.sequence-tag--statement {
+  background: rgba(230, 214, 165, 0.6);
+  color: #8a6d1f;
+}
+
+.sequence-tag--imperative {
+  background: rgba(226, 180, 166, 0.55);
+  color: #9c4a3a;
+}
+
+.sequence-tag--purpose {
+  background: rgba(138, 96, 158, 0.18);
+  color: #6a4a7a;
+}
+
+.sequence-tag--recipient {
+  background: rgba(191, 209, 230, 0.6);
+  color: #3f5f8a;
+}
+
+.sequence-item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-right: 0.4rem;
+  vertical-align: middle;
+}
+
+/* Grammatical-marker anchor line — cgv-product-suite-spec.md /
+   manual-markdown-format-spec.md: plain text, no bullet, no indent, never
+   merged onto the clause's own line. Distinct from the colored relation/
+   sequence tags (clause-tree-tag, sequence-tag) since this names a category
+   of word, not a resolved relation — kept quiet on purpose. */
+.clause-marker-line {
+  display: block;
+  margin: 0.2rem 0 0;
+  color: #8a8071;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.74rem;
+  font-style: italic;
+}
+
+.sequence-genitive-flag,
+.sequence-subject-note {
+  margin: 0.4rem 0 0;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #5f584e;
+}
+
+.sequence-genitive-flag {
+  color: #9c4a3a;
+  font-weight: 600;
+}
+
+/* Printed skeleton: JSON is a backup format, not something anyone reads —
+   this is the readable, paper (or PDF) version of the actual result. Only
+   the Skeleton / Outline / Telos panel prints; every interactive control and
+   the raw clause-editing list are hidden. */
+@media print {
+  .progress-controls,
+  .prototype-link,
+  .clause-view-switch,
+  .clause-only-main,
+  .clause-dependent-toggle,
+  .clause-clear,
+  .clause-print-btn {
+    display: none !important;
+  }
+
+  .clause-builder {
+    padding: 0.5in 0.4in;
+    max-width: none;
+  }
+
+  .clause-only-workspace {
+    display: block;
+    margin-top: 0.6rem;
+  }
+
+  .clause-skeleton-panel {
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .clause-tree-node-wrap,
+  .clause-outline-item,
+  .clause-parked-item,
+  .clause-verbless-item,
+  .clause-telos-item {
+    break-inside: avoid;
+  }
+
+  .clause-tree-children {
+    break-inside: avoid-page;
+  }
+}
+
+/* Compiler — one screen for this pass: generate, review, export. */
+.compiler-shell {
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: 6rem clamp(1.25rem, 4vw, 2rem) 8rem;
+  color: #23201b;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+.compiler-layout {
+  display: grid;
+  grid-template-columns: minmax(16rem, 20rem) minmax(0, 1fr);
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: start;
+  margin-top: 1.75rem;
+}
+
+.compiler-tools-panel {
+  position: sticky;
+  top: 6rem;
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  padding: 1rem;
+  background: rgba(250, 247, 240, 0.68);
+}
+
+.compiler-tools-heading {
+  margin: 0 0 0.75rem;
+  color: #756e64;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.compiler-main {
+  min-width: 0;
+}
+
+.compiler-tool h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.compiler-tool-note {
+  margin: 0 0 0.85rem;
+  color: #756e64;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.compiler-tool-field {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+}
+
+.compiler-tool-field span {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: #5f584e;
+  font-weight: 600;
+}
+
+.compiler-tool-field select,
+.compiler-tool-field input {
+  width: 100%;
+  border: 1px solid #ded5c7;
+  border-radius: 6px;
+  padding: 0.4rem 0.55rem;
+  background: #fffdf8;
+  color: #23201b;
+  font: inherit;
+}
+
+.compiler-occurrence-list {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  max-height: 24rem;
+  overflow-y: auto;
+  border-top: 1px solid #ded5c7;
+}
+
+.compiler-occurrence-list li {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr auto;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(222, 213, 199, 0.6);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.76rem;
+}
+
+.compiler-occurrence-ref {
+  color: #6f5e43;
+  font-weight: 700;
+}
+
+.compiler-occurrence-greek {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.9rem;
+}
+
+.compiler-occurrence-gloss {
+  color: #82796d;
+  font-style: italic;
+  text-align: right;
+}
+
+.compiler-header h1 {
+  margin: 0.2rem 0 0.4rem;
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 400;
+  line-height: 0.92;
+}
+
+.compiler-scope {
+  margin: 0.2rem 0 0;
+  color: #756e64;
+  font-size: 1rem;
+  max-width: 42rem;
+}
+
+.compiler-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.compiler-generate-btn,
+.compiler-export-btn {
+  border: 1px solid #ded5c7;
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  background: #fffdf8;
+  color: #23201b;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.compiler-generate-btn:hover,
+.compiler-export-btn:hover:not(:disabled) {
+  border-color: #9fb7b9;
+  background: rgba(207, 229, 231, 0.32);
+}
+
+.compiler-export-btn:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+.compiler-error {
+  margin-top: 1rem;
+  color: #9c4a3a;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-weight: 600;
+}
+
+.compiler-summary {
+  margin-top: 1.5rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  background: rgba(250, 247, 240, 0.68);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.86rem;
+  color: #5f584e;
+}
+
+.compiler-warnings {
+  margin-top: 0.6rem;
+}
+
+.compiler-warnings h3 {
+  margin: 0 0 0.3rem;
+  color: #9c4a3a;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.compiler-warnings ul {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.compiler-markdown-preview {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  background: #fffdf8;
+  max-height: 70vh;
+  overflow: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: "SF Mono", "Menlo", "Consolas", monospace;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.compiler-empty {
+  margin-top: 1.5rem;
+  color: #82796d;
+  font-style: italic;
+}
+
+
+/* ——— cgv-suite chrome (Reader is the app) ——— */
+
+.app-chrome {
+  position: fixed;
+  top: 0.85rem;
+  left: 0;
+  right: 0;
+  z-index: 8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  padding: 0 1rem;
+}
+
+.app-chrome > * {
+  pointer-events: auto;
+}
+
+.zone-toggle {
+  display: flex;
+  gap: 0.2rem;
+  border: 1px solid var(--reader-border);
+  border-radius: 999px;
+  padding: 0.2rem;
+  background: rgba(255, 253, 250, 0.94);
+  box-shadow: 0 2px 10px var(--reader-shadow);
+}
+
+.zone-toggle-option {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  background: transparent;
+  color: var(--reader-soft);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+}
+
+.zone-toggle-option:hover,
+.zone-toggle-option:focus-visible {
+  color: var(--reader-text);
+  outline: none;
+}
+
+.zone-toggle-option--active {
+  background: var(--reader-accent);
+  color: #fff;
+}
+
+.migration-banner {
+  position: fixed;
+  top: 3.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 7;
+  max-width: min(36rem, calc(100vw - 2rem));
+  margin: 0;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--reader-border);
+  border-radius: 0.55rem;
+  background: rgba(255, 253, 250, 0.96);
+  color: var(--reader-note-text);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  box-shadow: 0 2px 10px var(--reader-shadow);
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.migration-banner-dismiss {
+  border: 0;
+  background: transparent;
+  color: var(--reader-accent);
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 0;
+}
+
+.teacher-unlock {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 6;
+  border: 1px solid var(--reader-border);
+  border-radius: 999px;
+  padding: 0.4rem 0.75rem;
+  background: rgba(255, 253, 250, 0.9);
+  color: var(--reader-soft);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.teacher-unlock:hover,
+.teacher-unlock:focus-visible {
+  color: var(--reader-text);
+  outline: none;
+}
+
+.workshop-shell {
+  min-height: 100vh;
+  padding: 4.5rem 1.25rem 3rem;
+}
+
+.workshop-header {
+  max-width: 42rem;
+  margin: 0 auto 1.75rem;
+  text-align: center;
+}
+
+.workshop-header h1 {
+  margin: 0.15rem 0 0.55rem;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+}
+
+.workshop-lede {
+  margin: 0 auto 1.1rem;
+  max-width: 34rem;
+  color: var(--reader-soft);
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.workshop-layers {
+  display: inline-flex;
+  gap: 0.2rem;
+  border: 1px solid var(--reader-border);
+  border-radius: 999px;
+  padding: 0.18rem;
+  background: rgba(255, 253, 250, 0.9);
+}
+
+.workshop-layer {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  background: transparent;
+  color: var(--reader-soft);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.workshop-layer:hover,
+.workshop-layer:focus-visible {
+  color: var(--reader-text);
+  outline: none;
+}
+
+.workshop-layer--active {
+  background: var(--reader-accent);
+  color: #fff;
+}
+
+.workshop-stage {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+/* Hide legacy lab nav chrome superseded by workshop header */
+.observer-tool-nav,
+.rzo-toggle {
+  display: none !important;
+}
+
+/* Progress controls sit in app chrome on the right */
+.app-chrome .progress-controls {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+}

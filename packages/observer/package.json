@@ -1,0 +1,10 @@
+{
+  "name": "@cgv/observer",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Observer domain package — workshop logic lives here as it is extracted from the Reader app",
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

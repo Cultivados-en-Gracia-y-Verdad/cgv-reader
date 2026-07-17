@@ -1,0 +1,10 @@
+{
+  "name": "@cgv/compiler",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Compiler domain package — teacher gathering tools extracted here over time",
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}
