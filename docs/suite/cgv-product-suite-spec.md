@@ -47,10 +47,15 @@ matures by becoming a better and better place to just sit with the text — not 
 toward output.
 
 **Preferences (new, needed now):**
-- **Bible version** — which translation(s) are loaded/available to switch between.
-- **Language** — interface language, independent of Bible version (e.g. a Spanish-language
-  interface reading an English translation should be possible).
+- **Bible version** — Reader text only (`the-reader:titus:bible-version`). Titus sources from
+  cgv-data: NBLA (default), BLE, SPNBES, RV1909, plus suite LBF. Switching does **not** change
+  Observer (LBF + MorphGNT) or Compiler gathering data. Notes stay keyed by verse (`Tito.ch:vs`).
+- **Language** — interface language (`en` / `es` for now), independent of Bible version
+  (e.g. a Spanish-language interface reading an English translation should be possible).
+  Shared across Reader, Observer, and Compiler chrome via `the-reader:titus:language`.
+  Does not change Bible text or generated manual Spanish grammar notes.
 - **Font** — typeface and size.
+- UI: chrome **Prefs** panel holds language + Bible version; EN/ES quick toggle stays available.
 
 **Quality bar ("pristine"):** concrete levers, not vague polish —
 - Typographic measure (line length) capped for reading comfort regardless of screen width.
@@ -215,10 +220,9 @@ suite — Reader, Observer, Compiler, and Writer.
 
 ## Transition plan — what starts now vs. what stays deferred
 
-The suite above is the destination, but `cgv-reader` today is one codebase with Reader and
-Observer concerns mixed together. Rather than treating the four-app split as a future
-rewrite, start reflecting it in the current codebase's *shape* now, so every new feature
-from this point forward lands in the right place instead of adding to the mixed pile.
+The suite above is the destination. This product repo (`cgv-reader`, formerly `cgv-suite`)
+already separates Reader / Observer / Compiler at the zone and folder level. Keep landing
+new work in the right place so the mixed-pile problem from the archived lab does not return.
 
 **Start now:**
 - **Separate Reader and Observer at the code-organization level immediately** — distinct

@@ -1,8 +1,8 @@
 {
-  "name": "cgv-suite",
+  "name": "cgv-reader",
   "private": true,
   "version": "0.1.0",
-  "description": "CGV Reader suite — Reader app with optional Observer and teacher-only Compiler",
+  "description": "The Reader — Scripture reading with optional Observer and teacher-only Compiler",
   "type": "module",
   "workspaces": [
     "apps/*",

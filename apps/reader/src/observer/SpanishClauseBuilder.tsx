@@ -40,6 +40,7 @@ import {
   type ClauseSignalInput,
   type FrameType
 } from "./clause-signals";
+import { loadLbfTokenSurfaces } from "./lbf-alignment";
 import { describeRmac, getVerseInterlinear } from "./o-data";
 import {
   applyCoordinateInheritance,
@@ -52,7 +53,9 @@ import {
   type SkeletonNode
 } from "./clause-tree";
 
-type ClauseView = "passage" | "clauses" | "participle-views";
+// Structure = Passage + Clause Workspace as one continuous view (START-HERE Step 4).
+// Participle Views stay a deliberate pull-back aggregate screen.
+type ClauseView = "structure" | "participle-views";
 type ParticipleViewTab = "flow" | "emphasis" | "cast";
 type ClauseReviewState = "Unreviewed" | "Reviewed" | "Attached" | "Not sure";
 
@@ -74,6 +77,111 @@ const PARTICIPLE_MARKS_KEY = "roots:titus:brick4:participleCandidates";
 
 function capitalize(value: string): string {
   return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+/** `chapter:verse` from a `chapter:verse:n` id, or null. */
+function verseKeyFromId(id: string): string | null {
+  const [chapter, verse] = id.split(":");
+  if (!chapter || !verse) return null;
+  return `${chapter}:${verse}`;
+}
+
+/**
+ * Nearby clauses that could become the relative’s host by expanding their span.
+ * Only same-verse candidates: Greek clause ranges are verse-bound, so a 1:3
+ * host can never acquire a 1:2 noun id — offering it was a dead end.
+ */
+function findHostCandidatesForParked(
+  parked: ClauseSpanInfo,
+  nounIds: string[],
+  allClauses: ClauseSpanInfo[],
+  limit = 4
+): ClauseSpanInfo[] {
+  if (!nounIds.length) return [];
+  const nounVerses = new Set(
+    nounIds.map(verseKeyFromId).filter((key): key is string => Boolean(key))
+  );
+  if (!nounVerses.size) return [];
+  return allClauses
+    .filter(candidate => candidate.finiteVerbId !== parked.finiteVerbId)
+    .filter(candidate => !nounIds.some(id => candidate.wordIds.includes(id)))
+    .filter(candidate => {
+      const verse = verseKeyFromId(candidate.finiteVerbId);
+      return Boolean(verse && nounVerses.has(verse));
+    })
+    .sort((a, b) => {
+      const aBefore = a.order <= parked.order ? 0 : 1;
+      const bBefore = b.order <= parked.order ? 0 : 1;
+      if (aBefore !== bBefore) return aBefore - bBefore;
+      return Math.abs(a.order - parked.order) - Math.abs(b.order - parked.order);
+    })
+    .slice(0, limit);
+}
+
+interface HostFixHint {
+  hostVerbId: string;
+  parkedReference: string;
+  nounText: string;
+}
+
+/** Spanish-only reading: contiguous words sharing one clause membership. */
+type SpanishPhraseKind = "plain" | "clause" | "draft" | "reviewing" | "overlap";
+
+interface SpanishPhrase {
+  key: string;
+  kind: SpanishPhraseKind;
+  /** Alternating wash so adjacent settled clauses stay distinguishable. */
+  alt: boolean;
+  words: SpanishWord[];
+}
+
+function groupSpanishPhrases(
+  words: SpanishWord[],
+  ownersByWordId: Map<string, string[]>,
+  draftSpan: string[] | null,
+  activeBeginningVerbId: string | null
+): SpanishPhrase[] {
+  const phrases: SpanishPhrase[] = [];
+  let clausePaint = 0;
+
+  for (const word of words) {
+    const inDraft = wordInSpan(word, draftSpan);
+    const reviewing =
+      Boolean(activeBeginningVerbId) &&
+      Boolean(ownersByWordId.get(word.id)?.includes(activeBeginningVerbId!));
+    const owners = ownersByWordId.get(word.id) ?? [];
+
+    let key: string;
+    let kind: SpanishPhraseKind;
+    if (inDraft) {
+      key = "draft";
+      kind = "draft";
+    } else if (reviewing) {
+      key = `reviewing:${activeBeginningVerbId}`;
+      kind = "reviewing";
+    } else if (owners.length > 1) {
+      key = `overlap:${[...owners].sort().join("|")}`;
+      kind = "overlap";
+    } else if (owners.length === 1) {
+      key = `clause:${owners[0]}`;
+      kind = "clause";
+    } else {
+      key = "plain";
+      kind = "plain";
+    }
+
+    const last = phrases[phrases.length - 1];
+    if (last && last.key === key) {
+      last.words.push(word);
+      continue;
+    }
+
+    const alt = kind === "clause" ? clausePaint % 2 === 1 : false;
+    if (kind === "clause") clausePaint += 1;
+    phrases.push({ key, kind, alt, words: [word] });
+  }
+
+  return phrases;
 }
 
 // Every alignment id (finiteVerbId, a Greek token's own id) is
@@ -211,10 +319,16 @@ export default function SpanishClauseBuilder() {
   // longer itself something a click sets.
   const [draftGreekRange, setDraftGreekRange] = useState<{ start: number; end: number } | null>(null);
   const [greekRangeAnchorToken, setGreekRangeAnchorToken] = useState<number | null>(null);
-  const [view, setView] = useState<ClauseView>("passage");
+  const [view, setView] = useState<ClauseView>("structure");
   const [participleViewTab, setParticipleViewTab] = useState<ParticipleViewTab>("emphasis");
   const [expandedFlowRootId, setExpandedFlowRootId] = useState<string | null>(null);
-  const [showDependentLines, setShowDependentLines] = useState(true);
+  // Settled reading: LBF Spanish as the primary passage surface. Greek
+  // workstation stays one toggle away for span editing (connector order).
+  const [showSpanishOnly, setShowSpanishOnly] = useState(false);
+  // Skeleton lives in a popup (not the Structure canvas) — open/maximized.
+  const [skeletonOpen, setSkeletonOpen] = useState(false);
+  const [skeletonMaximized, setSkeletonMaximized] = useState(false);
+  const [hostFixHint, setHostFixHint] = useState<HostFixHint | null>(null);
   const [activeBeginningVerbId, setActiveBeginningVerbId] = useState<string | null>(null);
   const [observations, setObservations] = useState<ClauseObservations>(readClauseObservations);
   const [nounAnchorId, setNounAnchorId] = useState<string | null>(null);
@@ -236,6 +350,34 @@ export default function SpanishClauseBuilder() {
     setForceChoices(false);
   }, [activeBeginningVerbId]);
 
+  useEffect(() => {
+    if (!activeBeginningVerbId) return;
+    const node = document.querySelector(`[data-clause-nav-id="${CSS.escape(activeBeginningVerbId)}"]`);
+    if (node instanceof HTMLElement) node.scrollIntoView({ block: "nearest" });
+  }, [activeBeginningVerbId]);
+
+  useEffect(() => {
+    if (!skeletonOpen) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setSkeletonOpen(false);
+        setSkeletonMaximized(false);
+      }
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [skeletonOpen]);
+
+  const closeSkeletonPopup = useCallback(() => {
+    setSkeletonOpen(false);
+    setSkeletonMaximized(false);
+  }, []);
+
   const [showGreekBeginning, setShowGreekBeginning] = useState(false);
   const [participleObservations, setParticipleObservations] = useState<ParticipleObservations>(readParticipleObservations);
   const [activeParticipleId, setActiveParticipleId] = useState<string | null>(null);
@@ -243,6 +385,7 @@ export default function SpanishClauseBuilder() {
   const [participleNounAnchorId, setParticipleNounAnchorId] = useState<string | null>(null);
   const [showParticiples, setShowParticiples] = useState(false);
   const [openParticiplePopoverId, setOpenParticiplePopoverId] = useState<string | null>(null);
+  // Clear audit banners can be dismissed; they reappear if problems return.
 
   // Brick 4's own marks (Greek O-Prototype), converted from MorphGNT-line-id
   // format to "chapter:verse:token" alignment format — same conversion
@@ -294,6 +437,19 @@ export default function SpanishClauseBuilder() {
       assignment.selectedSpan.forEach(id => ids.add(id));
     }
     return ids;
+  }, [assignments]);
+
+  // word id → finite-verb clause ids that claim it (for Spanish-only phrase washes).
+  const clauseOwnersByWordId = useMemo(() => {
+    const owners = new Map<string, string[]>();
+    for (const [finiteVerbId, assignment] of Object.entries(assignments)) {
+      for (const id of assignment.selectedSpan) {
+        const list = owners.get(id) ?? [];
+        list.push(finiteVerbId);
+        owners.set(id, list);
+      }
+    }
+    return owners;
   }, [assignments]);
 
   // Same two sets, but keyed by Greek token alignment id instead of Spanish
@@ -473,15 +629,29 @@ export default function SpanishClauseBuilder() {
     [coordinateContinuationIds, observations]
   );
 
-  const workspaceClauseRows = useMemo(
-    () => reviewClauseRows.filter(row => showDependentLines || getClauseReviewState(row) !== "Attached"),
-    [getClauseReviewState, reviewClauseRows, showDependentLines]
-  );
+  const workspaceClauseRows = reviewClauseRows;
 
   const reviewedCount = useMemo(
     () => reviewClauseRows.filter(row => getClauseReviewState(row) !== "Unreviewed").length,
     [getClauseReviewState, reviewClauseRows]
   );
+
+  // Tokens belonging to the clause currently open in the review panel —
+  // highlighted in the (always-Greek) passage so the workstation and the
+  // panel stay visually linked without flipping language mid-verse.
+  const reviewingGreekTokenIds = useMemo(() => {
+    const ids = new Set<string>();
+    if (!activeBeginningVerbId) return ids;
+    const assignment = assignments[activeBeginningVerbId];
+    if (!assignment?.greekStartTokenId || !assignment.greekEndTokenId) return ids;
+    const start = parseGreekTokenId(assignment.greekStartTokenId);
+    const end = parseGreekTokenId(assignment.greekEndTokenId);
+    if (!start || !end) return ids;
+    for (let token = start.token; token <= end.token; token += 1) {
+      ids.add(`${start.chapter}:${start.verse}:${token}`);
+    }
+    return ids;
+  }, [activeBeginningVerbId, assignments]);
 
   const nearbyParentClauseRows = useMemo(() => {
     if (!activeBeginningRow) return [];
@@ -576,10 +746,25 @@ export default function SpanishClauseBuilder() {
     ? augmentedObservations[activeBeginningVerbId]?.frameType
     : undefined;
 
-  const isActiveClauseRoot =
-    activeObservation.describesNoun === "no" &&
-    activeObservation.isWhatWasExpressed === "no" &&
-    activeObservation.tellsWhenOrIf === "no";
+  // Skeleton/Compiler resolve against augmented observations (including
+  // coordinate inheritance). The review panel must use the same resolution —
+  // raw all-no answers look like "Independent" even when inheritance nests
+  // the clause as a dependent (the 1:5:12 pattern).
+  const activeResolved = useMemo(() => {
+    if (!activeBeginningVerbId) return null;
+    const info = clauseSpanInfos.find(clause => clause.finiteVerbId === activeBeginningVerbId);
+    if (!info) return null;
+    return resolveClause(info, augmentedObservations[activeBeginningVerbId], clauseSpanInfos);
+  }, [activeBeginningVerbId, augmentedObservations, clauseSpanInfos]);
+
+  const isActiveInherited = Boolean(
+    activeBeginningVerbId &&
+      coordinateContinuationIds.has(activeBeginningVerbId) &&
+      activeResolved?.relation &&
+      activeResolved.relation !== "root"
+  );
+
+  const isActiveClauseRoot = activeResolved?.relation === "root";
 
   const activeObservationContextVerses = useMemo(() => {
     if (!activeBeginningRow) return [];
@@ -944,24 +1129,46 @@ export default function SpanishClauseBuilder() {
     return entries.sort((a, b) => a.word.chapter * 100000 + a.word.verse * 1000 + a.word.index - (b.word.chapter * 100000 + b.word.verse * 1000 + b.word.index));
   }, [participleClauseAssignment, participleMarkedAlignmentIds, participleObservations, wordByParticipleId]);
 
+  const pendingObservationScrollRef = useRef(false);
+
+  const scrollObservationCenterIntoView = useCallback(() => {
+    window.setTimeout(() => {
+      document
+        .querySelector<HTMLElement>("[data-observation-center]")
+        ?.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+    }, 40);
+  }, []);
+
+  const requestObservationScroll = useCallback(() => {
+    pendingObservationScrollRef.current = true;
+  }, []);
+
+  useEffect(() => {
+    if (!pendingObservationScrollRef.current || !activeBeginningVerbId) return;
+    pendingObservationScrollRef.current = false;
+    scrollObservationCenterIntoView();
+  }, [activeBeginningVerbId, scrollObservationCenterIntoView]);
+
   const jumpToUnsortedParticiple = useCallback((entry: { participleId: string; clauseId: string | null }) => {
-    setView("clauses");
+    setView("structure");
     if (entry.clauseId) {
+      requestObservationScroll();
       setActiveBeginningVerbId(entry.clauseId);
       setActiveParticipleId(entry.participleId);
     } else {
       setActiveStandaloneParticipleId(entry.participleId);
     }
-  }, []);
+  }, [requestObservationScroll]);
 
   const jumpToParticipleClause = useCallback(
     (participleId: string) => {
       const clauseId = participleClauseAssignment.get(participleId);
       if (!clauseId) return;
-      setView("clauses");
+      setView("structure");
+      requestObservationScroll();
       setActiveBeginningVerbId(clauseId);
     },
-    [participleClauseAssignment]
+    [participleClauseAssignment, requestObservationScroll]
   );
 
   // Only participles Brick 4 actually found (and confirmed via morphology)
@@ -1284,7 +1491,7 @@ export default function SpanishClauseBuilder() {
   );
 
   useEffect(() => {
-    if (view !== "clauses" || activeBeginningVerbId || !reviewClauseRows.length) return;
+    if (view !== "structure" || activeBeginningVerbId || !reviewClauseRows.length) return;
     const firstOpenRow =
       reviewClauseRows.find(row => getClauseReviewState(row) === "Unreviewed") ?? reviewClauseRows[0];
     setActiveBeginningVerbId(firstOpenRow.finiteVerb.finiteVerbId ?? null);
@@ -1299,7 +1506,7 @@ export default function SpanishClauseBuilder() {
   }, [activeBeginningVerbId]);
 
   const selectVerb = useCallback(
-    (verb: SpanishWord) => {
+    (verb: SpanishWord, options?: { scrollTo?: "passage" | "observation" | "none" }) => {
       if (!verb.finiteVerbId) return;
       setActiveVerbId(verb.finiteVerbId);
 
@@ -1321,13 +1528,21 @@ export default function SpanishClauseBuilder() {
         setGreekRangeAnchorToken(null);
       }
 
+      const scrollTo = options?.scrollTo ?? "passage";
+      if (scrollTo === "observation") {
+        requestObservationScroll();
+        setActiveBeginningVerbId(verb.finiteVerbId);
+        return;
+      }
+      if (scrollTo === "none") return;
+
       window.setTimeout(() => {
         document
-          .querySelector<HTMLElement>(`[data-clause-word-id="${verb.id}"]`)
+          .querySelector<HTMLElement>(`[data-token-id="${verb.finiteVerbId}"]`)
           ?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
       }, 20);
     },
-    [assignments]
+    [assignments, requestObservationScroll]
   );
 
   // Greek tokens are already sequential per verse, so extending a range is
@@ -1365,10 +1580,59 @@ export default function SpanishClauseBuilder() {
     [activeVerb, applyGreekRange, finiteVerbByAlignmentId, greekRangeAnchorToken, selectVerb]
   );
 
-  const clearDraft = useCallback(() => {
+  // Clear must remove the *saved* assignment, not only the in-memory draft.
+  // Saved highlighting (clause-greek-token--saved) is derived from
+  // assignments in localStorage — wiping draft alone left 1:2 and every
+  // other saved clause looking permanently marked.
+  const clearActive = useCallback(() => {
     setDraftGreekRange(null);
     setGreekRangeAnchorToken(null);
-  }, []);
+    if (!activeVerbId) return;
+    setAssignments(current => {
+      if (!current[activeVerbId]) return current;
+      const next = { ...current };
+      delete next[activeVerbId];
+      writeClauseAssignments(next);
+      return next;
+    });
+  }, [activeVerbId]);
+
+  // One-click fix for span-audit rows: keep the stored Greek range, rewrite
+  // selectedSpan from it (Greek → LBF). Save used to look like a no-op because
+  // the audit still re-derived Greek from Spanish the other way.
+  const resyncSpanishFromStoredGreek = useCallback(
+    (finiteVerbId: string) => {
+      const assignment = assignments[finiteVerbId];
+      if (!assignment?.greekStartTokenId || !assignment.greekEndTokenId) return;
+      const start = parseGreekTokenId(assignment.greekStartTokenId);
+      const end = parseGreekTokenId(assignment.greekEndTokenId);
+      if (!start || !end) return;
+      const verseWords = wordsByVerse.get(`${start.chapter}:${start.verse}`) ?? [];
+      const selectedSpan = deriveSpanishSpanFromGreekRange(
+        start.chapter,
+        start.verse,
+        Math.min(start.token, end.token),
+        Math.max(start.token, end.token),
+        verseWords
+      );
+      if (!selectedSpan.length) return;
+      setAssignments(current => {
+        const existing = current[finiteVerbId];
+        if (!existing) return current;
+        const next = {
+          ...current,
+          [finiteVerbId]: {
+            ...existing,
+            selectedSpan,
+            greekConfirmedAt: existing.greekConfirmedAt ?? new Date().toISOString()
+          }
+        };
+        writeClauseAssignments(next);
+        return next;
+      });
+    },
+    [assignments, wordsByVerse]
+  );
 
   const saveActive = useCallback(() => {
     if (!activeVerbId || !activeVerb || !draftGreekRange) return;
@@ -1397,24 +1661,63 @@ export default function SpanishClauseBuilder() {
     setGreekRangeAnchorToken(null);
   }, [activeVerb, activeVerbId, draftGreekRange, draftSpan]);
 
+  // Reload draft from storage when the active verb changes — not on every
+  // assignments write. Otherwise deleting a span (Clear) or saving would
+  // fight the draft state, and a stale restore made cleared clauses look stuck.
   useEffect(() => {
-    if (!activeVerbId) return;
+    if (!activeVerbId) {
+      setDraftGreekRange(null);
+      return;
+    }
     const existing = assignments[activeVerbId];
     if (existing?.greekStartTokenId && existing.greekEndTokenId) {
       const start = parseGreekTokenId(existing.greekStartTokenId);
       const end = parseGreekTokenId(existing.greekEndTokenId);
       if (start && end) {
         setDraftGreekRange({ start: start.token, end: end.token });
+        setGreekRangeAnchorToken(start.token);
         return;
       }
     }
     setDraftGreekRange(null);
-  }, [activeVerbId, assignments]);
+    setGreekRangeAnchorToken(null);
+    // intentionally only when the selected verb changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- assignments read once per verb focus
+  }, [activeVerbId]);
 
-  const inspectClauseBeginning = useCallback((row: ClauseOutputRow) => {
-    if (!row.finiteVerb.finiteVerbId) return;
-    setActiveBeginningVerbId(row.finiteVerb.finiteVerbId);
-  }, []);
+  const inspectClauseBeginning = useCallback(
+    (row: ClauseOutputRow) => {
+      if (!row.finiteVerb.finiteVerbId) return;
+      requestObservationScroll();
+      setActiveBeginningVerbId(row.finiteVerb.finiteVerbId);
+      selectVerb(row.finiteVerb, { scrollTo: "none" });
+    },
+    [requestObservationScroll, selectVerb]
+  );
+
+  // Skeleton is for scanning; fixing happens in the review panel. Always close
+  // the popup so the selected clause is reachable (drawer-over-review was a trap).
+  const openClauseFromSkeleton = useCallback(
+    (finiteVerbId: string) => {
+      closeSkeletonPopup();
+      requestObservationScroll();
+      setActiveBeginningVerbId(finiteVerbId);
+      const row = finiteVerbIdToRow.get(finiteVerbId);
+      if (row) selectVerb(row.finiteVerb, { scrollTo: "observation" });
+    },
+    [closeSkeletonPopup, finiteVerbIdToRow, requestObservationScroll, selectVerb]
+  );
+
+  // Parked relatives nest under a *different* clause that contains their noun.
+  // Opening that host (not the relative) is the span edit that can actually unpark.
+  const openHostToIncludeNoun = useCallback(
+    (hostVerbId: string, parkedReference: string, nounText: string) => {
+      setHostFixHint({ hostVerbId, parkedReference, nounText });
+      setShowSpanishOnly(false);
+      openClauseFromSkeleton(hostVerbId);
+    },
+    [openClauseFromSkeleton]
+  );
 
   const updateActiveObservation = useCallback(
     (patch: ClauseObservation) => {
@@ -1458,8 +1761,9 @@ export default function SpanishClauseBuilder() {
       reviewClauseRows[0];
     const nextId = nextOpenRow?.finiteVerb.finiteVerbId ?? null;
     autoAdvanceRef.current = Boolean(nextId) && nextId !== activeBeginningRow.finiteVerb.finiteVerbId;
+    if (nextId) requestObservationScroll();
     setActiveBeginningVerbId(nextId);
-  }, [activeBeginningRow, getClauseReviewState, reviewClauseRows]);
+  }, [activeBeginningRow, getClauseReviewState, requestObservationScroll, reviewClauseRows]);
 
   // Single-choice classification: pick one shape, first-yes-wins, no separate
   // question for the other two. Choosing "describes"/"content"/"frame" only sets
@@ -1468,7 +1772,15 @@ export default function SpanishClauseBuilder() {
   // three answered like the old fixed-order flow did.
   const chooseRoot = useCallback(() => {
     setForceChoices(false);
-    updateActiveObservation({ describesNoun: "no", isWhatWasExpressed: "no", tellsWhenOrIf: "no" });
+    updateActiveObservation({
+      describesNoun: "no",
+      isWhatWasExpressed: "no",
+      tellsWhenOrIf: "no",
+      describedNounSpan: [],
+      expressedParentClauseId: "",
+      whenIfParentClauseId: "",
+      frameType: undefined
+    });
     moveToNextClause();
   }, [moveToNextClause, updateActiveObservation]);
 
@@ -1670,7 +1982,7 @@ export default function SpanishClauseBuilder() {
             ]
               .filter(Boolean)
               .join(" ")}
-            onClick={() => setActiveBeginningVerbId(node.finiteVerbId)}
+            onClick={() => openClauseFromSkeleton(node.finiteVerbId)}
           >
             {tagLabel ? <span className="clause-tree-tag">{tagLabel}</span> : null}
             {sequenceEntry ? (
@@ -1734,32 +2046,35 @@ export default function SpanishClauseBuilder() {
         </div>
       );
     },
-    [activeBeginningVerbId, clauseMarkers, finiteVerbIdToRow, jumpToParticipleClause, renderClauseWords, sequenceEntryByFiniteVerbId]
+    [
+      activeBeginningVerbId,
+      clauseMarkers,
+      finiteVerbIdToRow,
+      jumpToParticipleClause,
+      openClauseFromSkeleton,
+      renderClauseWords,
+      sequenceEntryByFiniteVerbId
+    ]
   );
 
   return (
     <main className="clause-builder">
       <header className="clause-builder-header">
-        <p className="reader-kicker">Prototype</p>
+        <p className="reader-kicker">Observer · Structure</p>
         <h1>Tito</h1>
-        <p className="clause-builder-scope">Titus · LBF</p>
+        <p className="clause-builder-scope">
+          Greek in token order with aligned LBF under each word. The verse line below is LBF in Spanish reading
+          order (word order will differ). Open Skeleton anytime to read the settled tree.
+        </p>
       </header>
 
-      <div className="clause-view-switch" aria-label="Clause workspace view">
+      <div className="clause-view-switch" aria-label="Structure layers">
         <button
           type="button"
-          className={view === "passage" ? "clause-view-option clause-view-option--active" : "clause-view-option"}
-          onClick={() => setView("passage")}
+          className={view === "structure" ? "clause-view-option clause-view-option--active" : "clause-view-option"}
+          onClick={() => setView("structure")}
         >
-          Passage
-        </button>
-        <button
-          type="button"
-          className={view === "clauses" ? "clause-view-option clause-view-option--active" : "clause-view-option"}
-          onClick={() => setView("clauses")}
-          disabled={!savedClauseRows.length}
-        >
-          Clause Workspace
+          Structure
         </button>
         <button
           type="button"
@@ -1771,241 +2086,157 @@ export default function SpanishClauseBuilder() {
         </button>
       </div>
 
-      {view === "passage" ? (
-        <div className="clause-workspace">
-        <section className="clause-builder-body" aria-label="Greek text of Titus, Spanish alongside">
-          {verses.map(verse => {
-            const verseTokens = getVerseInterlinear(verse.chapter, verse.verse);
-            const isActiveVerse = Boolean(activeVerb && activeVerb.chapter === verse.chapter && activeVerb.verse === verse.verse);
-
-            return (
-              <article className="clause-verse" key={`${verse.chapter}:${verse.verse}`}>
-                <p className="clause-verse-label">{verse.verse}</p>
-
-                {/* Greek is the tap target and the authoritative span now
-                    (clause-selection-greek-spec.md) — Spanish below is a
-                    comprehension aid, not something a click defines. */}
-                <p className="clause-greek-row">
-                  {verseTokens.map((token, index) => {
-                    const tokenNumber = index + 1;
-                    const tokenId = `${verse.chapter}:${verse.verse}:${tokenNumber}`;
-                    const isVerbToken = finiteVerbByAlignmentId.has(tokenId);
-                    const isActiveToken = activeVerbId === tokenId;
-                    const inDraft =
-                      isActiveVerse &&
-                      Boolean(draftGreekRange) &&
-                      tokenNumber >= (draftGreekRange?.start ?? Infinity) &&
-                      tokenNumber <= (draftGreekRange?.end ?? -Infinity);
-                    const inSaved = savedGreekTokenIds.has(tokenId);
-                    const overlaps = overlapGreekTokenIds.has(tokenId);
-
-                    let className = "clause-greek-token";
-                    if (isVerbToken) className += " clause-greek-token--verb";
-                    if (isActiveToken) className += " clause-greek-token--active-verb";
-                    if (inDraft) className += " clause-greek-token--belonging";
-                    if (inSaved && !inDraft && !isActiveToken) className += " clause-greek-token--saved";
-                    if (overlaps) className += " clause-greek-token--overlap";
-
-                    return (
-                      <button
-                        type="button"
-                        key={tokenId}
-                        className={className}
-                        onClick={event => handleGreekTokenClick(verse.chapter, verse.verse, tokenNumber, event)}
-                        aria-pressed={isActiveToken || inDraft}
-                        data-token-id={tokenId}
-                        disabled={!isVerbToken && !isActiveVerse}
-                      >
-                        <span className="clause-greek-token-surface">{token.surface.replace(/[⸀⸁⸂⸃,.;·]/g, "")}</span>
-                        <span className="clause-greek-token-gloss">{token.gloss}</span>
-                        <span className="token-detail-popover" role="tooltip">
-                          <span className="token-detail-entry">
-                            {token.lemma !== token.surface ? (
-                              <span className="token-detail-lemma">{token.lemma}</span>
-                            ) : null}
-                            <span className="token-detail-strongs">{token.strongs}</span>
-                            <span className="token-detail-morph-desc">{describeRmac(token.morph)}</span>
-                          </span>
-                        </span>
-                      </button>
-                    );
-                  })}
-                </p>
-
-                <p className="clause-verse-text clause-verse-text--reference">
-                  {verse.words.map((word, position) => {
-                    const isActiveVerb = Boolean(activeVerbId && word.finiteVerbId === activeVerbId);
-                    const inDraft = wordInSpan(word, draftSpan);
-                    const isSavedVerb = Boolean(word.finiteVerbId && assignments[word.finiteVerbId]?.selectedSpan.length);
-                    const inSaved = savedWordIds.has(word.id);
-                    const overlaps = overlapWordIds.has(word.id);
-
-                    let className = "clause-word clause-word--reference";
-                    if (word.finiteVerbId) className += " clause-word--verb";
-                    if (isSavedVerb) className += " clause-word--verb-saved";
-                    if (isActiveVerb) className += " clause-word--active-verb";
-                    if (inDraft) className += " clause-word--belonging";
-                    if (inSaved && !inDraft && !isActiveVerb) className += " clause-word--saved";
-                    if (overlaps) className += " clause-word--overlap";
-
-                    return (
-                      <span className={className} key={word.id}>
-                        {position > 0 ? " " : null}
-                        {word.text}
-                      </span>
-                    );
-                  })}
-                </p>
-              </article>
-            );
-          })}
-        </section>
-
-        <aside className="clause-output" aria-label="Clause output">
-          <section className="clause-output-section" aria-labelledby="clause-register-heading">
-            <h2 id="clause-register-heading">Clause Register</h2>
-            <div className="clause-register-list">
-              {clauseRows.length ? (
-                clauseRows.map(row => (
-                  <button
-                    type="button"
-                    className={`clause-register-item${row.finiteVerb.finiteVerbId === activeVerbId ? " clause-register-item--active" : ""}`}
-                    key={row.finiteVerb.finiteVerbId}
-                    onClick={() => selectVerb(row.finiteVerb)}
-                  >
-                    <span className="clause-output-meta">
-                      {row.reference} · {row.finiteVerb.text}
-                    </span>
-                    <span className={row.spanText ? "clause-register-span" : "clause-register-span clause-register-span--empty"}>
-                      {row.spanText || "Unsaved"}
-                    </span>
-                  </button>
-                ))
-              ) : (
-                <p className="clause-output-empty">No Brick 1 finite verbs marked yet.</p>
-              )}
-            </div>
-          </section>
-
-          <section className="clause-output-section" aria-labelledby="clause-reader-heading">
-            <h2 id="clause-reader-heading">Clause Reader</h2>
-            <div className="clause-chain">
-              {savedClauseRows.length ? (
-                savedClauseRows.map(row => (
-                  <p
-                    className="clause-chain-line"
-                    key={row.finiteVerb.finiteVerbId}
-                  >
-                    <span className="clause-output-meta">
-                      {row.reference} · {row.finiteVerb.text}
-                    </span>
-                    <span>{row.spanText}</span>
-                  </p>
-                ))
-              ) : (
-                <p className="clause-output-empty">No saved spans yet.</p>
-              )}
-            </div>
-          </section>
-        </aside>
-        </div>
-      ) : view === "clauses" ? (
-        <section className="clause-only-view" aria-labelledby="clause-only-heading">
-          <div className="clause-only-header">
+      {view === "structure" ? (
+        <section className="structure-canvas" aria-labelledby="structure-heading">
+          <div className="clause-only-header structure-toolbar">
             <div>
-              <h2 id="clause-only-heading">Clause Workspace</h2>
-              <p>{reviewedCount} of {reviewClauseRows.length} mood-tagged clauses reviewed</p>
+              <h2 id="structure-heading">Passage</h2>
+              <p>
+                {reviewedCount} of {reviewClauseRows.length} mood-tagged clauses reviewed
+                {clauseRows.length ? ` · ${savedClauseRows.length} of ${clauseRows.length} spans saved` : ""}
+                {greekSpanMismatches.length
+                  ? ` · ${greekSpanMismatches.length} span drift${greekSpanMismatches.length === 1 ? "" : "s"}`
+                  : ""}
+                {greekReconfirmationProgress.unconfirmed.length
+                  ? ` · ${greekReconfirmationProgress.unconfirmed.length} unconfirmed`
+                  : ""}
+                {relativeOfConnectionFlags.length
+                  ? ` · ${relativeOfConnectionFlags.length} relative-of-connection`
+                  : ""}
+              </p>
             </div>
             <label className="clause-dependent-toggle">
               <input
                 type="checkbox"
-                checked={showDependentLines}
-                onChange={event => setShowDependentLines(event.currentTarget.checked)}
+                checked={showSpanishOnly}
+                onChange={event => setShowSpanishOnly(event.currentTarget.checked)}
               />
-              <span>Show attached clauses</span>
+              <span>Show Spanish only</span>
             </label>
-            <button type="button" className="clause-print-btn" onClick={() => window.print()}>
-              Print skeleton
+            <button
+              type="button"
+              className="clause-print-btn"
+              onClick={() => {
+                setSkeletonOpen(true);
+                setSkeletonMaximized(false);
+              }}
+            >
+              Skeleton
+              {skeleton.roots.length ? ` (${skeleton.roots.length})` : ""}
             </button>
-            <button type="button" className="clause-clear" onClick={() => setView("passage")}>
-              Back to Passage
+            <button
+              type="button"
+              className="clause-print-btn"
+              onClick={() => {
+                setSkeletonOpen(true);
+                setSkeletonMaximized(true);
+                window.setTimeout(() => window.print(), 80);
+              }}
+            >
+              Print skeleton
             </button>
           </div>
 
+          <div className="structure-audits" aria-label="Structure audits and warnings">
           {greekSpanMismatches.length ? (
-            <section className="clause-unresolved-participles" aria-label="Greek span audit">
+          <section className="clause-unresolved-participles" aria-label="Greek span audit">
+            <div className="clause-audit-header">
               <h3>
-                Greek span audit — {greekSpanMismatches.length} of {greekSpanAudit.length} clause{greekSpanAudit.length === 1 ? "" : "s"} drifted
+                Greek span audit — {greekSpanMismatches.length} of {greekSpanAudit.length} clause
+                {greekSpanAudit.length === 1 ? "" : "s"} drifted
               </h3>
-              <p className="clause-section-note">
-                Per clause-selection-greek-spec.md: each clause's stored Greek range, re-derived fresh from its
-                current Spanish span, no longer matches what's actually saved — likely edited after the range was
-                first computed, since it's never recomputed automatically. Not auto-corrected; each one needs
-                re-selecting directly in Greek once that interaction ships.
-              </p>
-              {Object.entries(
-                greekSpanMismatches.reduce<Record<number, typeof greekSpanMismatches>>((byChapter, entry) => {
-                  (byChapter[entry.chapter] ??= []).push(entry);
-                  return byChapter;
-                }, {})
-              ).map(([chapter, entries]) => (
-                <div className="clause-audit-chapter" key={chapter}>
-                  <h4>
-                    Chapter {chapter} — {entries.length} of{" "}
-                    {greekSpanAudit.filter(entry => String(entry.chapter) === chapter).length}
-                  </h4>
-                  <ul className="clause-audit-list">
-                    {entries.map(entry => (
-                      <li key={entry.finiteVerbId}>
-                        <span className="clause-audit-ref">Tito {entry.chapter}:{entry.verse} ({entry.finiteVerbId})</span>
-                        <span className="clause-audit-range">
-                          stored {entry.storedRange ? `${entry.storedRange.greekStartTokenId}–${entry.storedRange.greekEndTokenId}` : "none"}
-                          {" → "}
-                          derived {entry.derivedRange ? `${entry.derivedRange.greekStartTokenId}–${entry.derivedRange.greekEndTokenId}` : "none"}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </section>
-          ) : null}
-
-          <section className="clause-unresolved-participles" aria-label="Greek re-confirmation progress">
-            <h3>
-              Greek re-confirmation — {greekReconfirmationProgress.confirmedCount} of {greekReconfirmationProgress.total} clauses confirmed
-            </h3>
+            </div>
             <p className="clause-section-note">
-              Per clause-selection-greek-spec.md: passing the span-consistency audit above only means a clause's
-              stored range matches itself — it does not mean a human has re-walked the boundary directly in Greek
-              since the migration. This count only rises when a clause is re-saved through the Greek-token
-              interaction. The clauses below are still carrying pre-migration confirmation.
+              Greek is authoritative. These clauses’ saved Spanish word-span no longer matches what their
+              stored Greek range maps to in LBF (often after an alignment fix). Resync keeps the Greek
+              boundary and rewrites the Spanish span — or open the verb and Save after adjusting Greek.
             </p>
-            {greekReconfirmationProgress.unconfirmed.length ? (
-              <ul className="clause-audit-list">
-                {greekReconfirmationProgress.unconfirmed.map(({ assignment, row }) => (
-                  <li key={assignment.finiteVerbId}>
-                    {row ? (
+            {Object.entries(
+              greekSpanMismatches.reduce<Record<number, typeof greekSpanMismatches>>((byChapter, entry) => {
+                (byChapter[entry.chapter] ??= []).push(entry);
+                return byChapter;
+              }, {})
+            ).map(([chapter, entries]) => (
+              <div className="clause-audit-chapter" key={chapter}>
+                <h4>
+                  Chapter {chapter} — {entries.length} of{" "}
+                  {greekSpanAudit.filter(entry => String(entry.chapter) === chapter).length}
+                </h4>
+                <ul className="clause-audit-list">
+                  {entries.map(entry => (
+                    <li key={entry.finiteVerbId}>
                       <button
                         type="button"
                         className="clause-audit-ref clause-audit-ref--link"
                         onClick={() => {
-                          selectVerb(row.finiteVerb);
-                          setView("passage");
+                          const row = clauseRows.find(
+                            candidate => candidate.finiteVerb.finiteVerbId === entry.finiteVerbId
+                          );
+                          if (row) selectVerb(row.finiteVerb, { scrollTo: "observation" });
                         }}
                       >
-                        {row.reference} ({assignment.finiteVerbId})
+                        Tito {entry.chapter}:{entry.verse} ({entry.finiteVerbId})
                       </button>
-                    ) : (
-                      <span className="clause-audit-ref">{assignment.finiteVerbId}</span>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="clause-section-note">All clauses confirmed under Greek selection.</p>
-            )}
+                      <span className="clause-audit-range">
+                        Greek{" "}
+                        {entry.storedRange
+                          ? `${entry.storedRange.greekStartTokenId}–${entry.storedRange.greekEndTokenId}`
+                          : "none"}
+                        {" · "}
+                        Spanish words {entry.actualSpanishSpan.length} saved /{" "}
+                        {entry.expectedSpanishSpan.length} expected from Greek
+                      </span>
+                      {entry.storedRange ? (
+                        <button
+                          type="button"
+                          className="clause-audit-ref clause-audit-ref--link"
+                          onClick={() => resyncSpanishFromStoredGreek(entry.finiteVerbId)}
+                        >
+                          Resync Spanish
+                        </button>
+                      ) : null}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </section>
+          ) : null}
+
+          {greekReconfirmationProgress.unconfirmed.length ? (
+          <section className="clause-unresolved-participles" aria-label="Greek re-confirmation progress">
+            <div className="clause-audit-header">
+              <h3>
+                Greek re-confirmation — {greekReconfirmationProgress.confirmedCount} of {greekReconfirmationProgress.total} clauses confirmed
+              </h3>
+            </div>
+            <p className="clause-section-note">
+              The span audit only checks Greek↔Spanish consistency. This count only rises when a clause is
+              re-saved (or Resync’d) through the Greek-token path — clauses below still carry pre-migration
+              confirmation.
+            </p>
+            <ul className="clause-audit-list">
+              {greekReconfirmationProgress.unconfirmed.map(({ assignment, row }) => (
+                <li key={assignment.finiteVerbId}>
+                  {row ? (
+                    <button
+                      type="button"
+                      className="clause-audit-ref clause-audit-ref--link"
+                      onClick={() => {
+                        setView("structure");
+                        selectVerb(row.finiteVerb, { scrollTo: "observation" });
+                      }}
+                    >
+                      {row.reference} ({assignment.finiteVerbId})
+                    </button>
+                  ) : (
+                    <span className="clause-audit-ref">{assignment.finiteVerbId}</span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </section>
+          ) : null}
 
           {relativeOfConnectionFlags.length ? (
             <section className="clause-unresolved-participles" aria-label="Relative-of-connection check">
@@ -2025,7 +2256,12 @@ export default function SpanishClauseBuilder() {
                     <button
                       type="button"
                       className="clause-audit-ref clause-audit-ref--link"
-                      onClick={() => setActiveBeginningVerbId(flag.finiteVerbId)}
+                      onClick={() => {
+                        requestObservationScroll();
+                        setActiveBeginningVerbId(flag.finiteVerbId);
+                        const row = finiteVerbIdToRow.get(flag.finiteVerbId);
+                        if (row) selectVerb(row.finiteVerb, { scrollTo: "none" });
+                      }}
                     >
                       {flag.reference} ({flag.finiteVerbId})
                     </button>
@@ -2078,10 +2314,228 @@ export default function SpanishClauseBuilder() {
             </section>
           ) : null}
 
+          </div>
+
+        <section
+          className={["clause-builder-body", "structure-passage", showSpanishOnly ? "structure-passage--spanish-only" : ""]
+            .filter(Boolean)
+            .join(" ")}
+          aria-label={
+            showSpanishOnly
+              ? "LBF Spanish text of Titus (settled reading)"
+              : "Greek text of Titus, Spanish alongside"
+          }
+        >
+          {verses.map(verse => {
+            const verseTokens = getVerseInterlinear(verse.chapter, verse.verse);
+            const lbfSurfaces = loadLbfTokenSurfaces(verse.chapter, verse.verse);
+            const isActiveVerse = Boolean(activeVerb && activeVerb.chapter === verse.chapter && activeVerb.verse === verse.verse);
+
+            return (
+              <article className="clause-verse" key={`${verse.chapter}:${verse.verse}`}>
+                <p className="clause-verse-label">{verse.verse}</p>
+
+                {/* Greek workstation — omit entirely in Spanish-only mode.
+                    (Do not use the HTML hidden attribute: .clause-greek-row's
+                    display:flex overrides [hidden] and left Greek on screen.) */}
+                {!showSpanishOnly ? (
+                <p className="clause-greek-row">
+                  {verseTokens.map((token, index) => {
+                    const tokenNumber = index + 1;
+                    const tokenId = `${verse.chapter}:${verse.verse}:${tokenNumber}`;
+                    const isVerbToken = finiteVerbByAlignmentId.has(tokenId);
+                    const isActiveToken = activeVerbId === tokenId;
+                    const inDraft =
+                      isActiveVerse &&
+                      Boolean(draftGreekRange) &&
+                      tokenNumber >= (draftGreekRange?.start ?? Infinity) &&
+                      tokenNumber <= (draftGreekRange?.end ?? -Infinity);
+                    const inSaved = savedGreekTokenIds.has(tokenId);
+                    const overlaps = overlapGreekTokenIds.has(tokenId);
+                    const reviewing = reviewingGreekTokenIds.has(tokenId);
+                    const lbfAid = lbfSurfaces.get(tokenNumber);
+                    // Prefer LBF; fall back to BLE gloss so unaligned tokens still
+                    // show a Spanish cue instead of an empty ·.
+                    const aidText = lbfAid ?? token.gloss;
+                    const aidIsFallback = !lbfAid && Boolean(token.gloss);
+
+                    let className = "clause-greek-token";
+                    if (isVerbToken) className += " clause-greek-token--verb";
+                    if (isActiveToken) className += " clause-greek-token--active-verb";
+                    if (inDraft) className += " clause-greek-token--belonging";
+                    if (inSaved && !inDraft && !isActiveToken) className += " clause-greek-token--saved";
+                    if (overlaps) className += " clause-greek-token--overlap";
+                    if (reviewing) className += " clause-greek-token--reviewing";
+                    if (!lbfAid) className += " clause-greek-token--unaligned";
+                    if (aidIsFallback) className += " clause-greek-token--ble-fallback";
+
+                    return (
+                      <button
+                        type="button"
+                        key={tokenId}
+                        className={className}
+                        onClick={event => handleGreekTokenClick(verse.chapter, verse.verse, tokenNumber, event)}
+                        aria-pressed={isActiveToken || inDraft || reviewing}
+                        data-token-id={tokenId}
+                        disabled={!isVerbToken && !isActiveVerse}
+                      >
+                        <span className="clause-greek-token-surface">
+                          {token.surface.replace(/[⸀⸁⸂⸃,.;·]/g, "")}
+                        </span>
+                        <span className="clause-greek-token-gloss">{aidText || "·"}</span>
+                        <span className="token-detail-popover" role="tooltip">
+                          <span className="token-detail-entry">
+                            {token.lemma !== token.surface ? (
+                              <span className="token-detail-lemma">{token.lemma}</span>
+                            ) : null}
+                            <span className="token-detail-codes">
+                              <span className="token-detail-strongs">{token.strongs}</span>
+                              {token.morph ? <span className="token-detail-rmac">{token.morph}</span> : null}
+                            </span>
+                            <span className="token-detail-morph-desc">{describeRmac(token.morph)}</span>
+                            {token.gloss ? <span className="token-detail-gloss">BLE: {token.gloss}</span> : null}
+                            <span className="token-detail-gloss">
+                              {lbfAid ? `LBF: ${lbfAid}` : "LBF: (unaligned — showing BLE under token)"}
+                            </span>
+                          </span>
+                        </span>
+                      </button>
+                    );
+                  })}
+                </p>
+                ) : null}
+
+                <p
+                  className={[
+                    "clause-verse-text",
+                    "clause-verse-text--reference",
+                    showSpanishOnly ? "clause-verse-text--spanish-primary" : ""
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                  aria-label="LBF verse in Spanish reading order"
+                >
+                  {showSpanishOnly
+                    ? groupSpanishPhrases(
+                        verse.words,
+                        clauseOwnersByWordId,
+                        isActiveVerse ? draftSpan : null,
+                        activeBeginningVerbId
+                      ).map((phrase, phraseIndex) => {
+                        const phraseClass = [
+                          "clause-phrase",
+                          `clause-phrase--${phrase.kind}`,
+                          phrase.alt ? "clause-phrase--alt" : ""
+                        ]
+                          .filter(Boolean)
+                          .join(" ");
+                        return (
+                          <span className={phraseClass} key={`${phrase.key}:${phraseIndex}`}>
+                            {phraseIndex > 0 ? " " : null}
+                            {phrase.words.map((word, wordIndex) => {
+                              const isActiveVerb = Boolean(activeVerbId && word.finiteVerbId === activeVerbId);
+                              const isSavedVerb = Boolean(
+                                word.finiteVerbId && assignments[word.finiteVerbId]?.selectedSpan.length
+                              );
+                              let wordClass = "clause-word clause-word--reference";
+                              if (word.finiteVerbId) wordClass += " clause-word--verb";
+                              if (isSavedVerb) wordClass += " clause-word--verb-saved";
+                              if (isActiveVerb) wordClass += " clause-word--active-verb";
+                              return (
+                                <span className={wordClass} key={word.id}>
+                                  {wordIndex > 0 ? " " : null}
+                                  {word.text}
+                                </span>
+                              );
+                            })}
+                          </span>
+                        );
+                      })
+                    : verse.words.map((word, position) => {
+                        const isActiveVerb = Boolean(activeVerbId && word.finiteVerbId === activeVerbId);
+                        const inDraft = wordInSpan(word, draftSpan);
+                        const isSavedVerb = Boolean(
+                          word.finiteVerbId && assignments[word.finiteVerbId]?.selectedSpan.length
+                        );
+                        const inSaved = savedWordIds.has(word.id);
+                        const overlaps = overlapWordIds.has(word.id);
+                        const reviewing =
+                          Boolean(activeBeginningVerbId) &&
+                          Boolean(assignments[activeBeginningVerbId!]?.selectedSpan.includes(word.id));
+
+                        let className = "clause-word clause-word--reference";
+                        if (word.finiteVerbId) className += " clause-word--verb";
+                        if (isSavedVerb) className += " clause-word--verb-saved";
+                        if (isActiveVerb) className += " clause-word--active-verb";
+                        if (inDraft) className += " clause-word--belonging";
+                        if (inSaved && !inDraft && !isActiveVerb) className += " clause-word--saved";
+                        if (overlaps) className += " clause-word--overlap";
+                        if (reviewing) className += " clause-word--reviewing";
+
+                        return (
+                          <span className={className} key={word.id}>
+                            {position > 0 ? " " : null}
+                            {word.text}
+                          </span>
+                        );
+                      })}
+                </p>
+              </article>
+            );
+          })}
+        </section>
+
           <div className="clause-only-workspace">
+          <nav className="clause-side-menu" aria-label="Clause list">
+            <div className="clause-side-menu-header">
+              <h3>Clauses</h3>
+              <span className="clause-side-menu-count">
+                {reviewedCount}/{reviewClauseRows.length}
+              </span>
+            </div>
+            {workspaceClauseRows.length ? (
+              <div className="clause-only-list">
+                {workspaceClauseRows.map(row => {
+                  const reviewState = getClauseReviewState(row);
+                  const isActive = row.finiteVerb.finiteVerbId === activeBeginningVerbId;
+                  return (
+                    <button
+                      type="button"
+                      className={[
+                        "clause-only-item",
+                        isActive ? "clause-only-item--inspecting" : ""
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                      key={row.finiteVerb.finiteVerbId}
+                      data-clause-nav-id={row.finiteVerb.finiteVerbId}
+                      onClick={() => inspectClauseBeginning(row)}
+                    >
+                      <span className="clause-only-item-top">
+                        <span className="clause-line-reference">{row.reference}</span>
+                        <span
+                          className={`clause-review-state clause-review-state--${reviewState.toLowerCase().replace(/\s/g, "-")}`}
+                        >
+                          {reviewState}
+                        </span>
+                      </span>
+                      <span className="clause-only-text">{renderClauseLine(row)}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="clause-output-empty">No mood-tagged clauses yet.</p>
+            )}
+          </nav>
+
           <div className="clause-only-main">
             {activeBeginningRow ? (
-              <section className="clause-review-panel" aria-label="Clause observation">
+              <section
+                className="clause-review-panel"
+                aria-label="Clause observation"
+                data-observation-center
+              >
                 <div className="clause-review-progress">
                   <span>{reviewedCount} of {reviewClauseRows.length} mood-tagged clauses reviewed</span>
                 </div>
@@ -2089,6 +2543,13 @@ export default function SpanishClauseBuilder() {
                 {autoAdvancedNoticeId && autoAdvancedNoticeId === activeBeginningVerbId ? (
                   <p className="clause-auto-advance-notice" role="status">
                     Moved to next clause: {activeBeginningRow.reference} · {renderClauseLine(activeBeginningRow)}
+                  </p>
+                ) : null}
+
+                {hostFixHint && hostFixHint.hostVerbId === activeBeginningVerbId ? (
+                  <p className="clause-parked-banner clause-parked-banner--host" role="status">
+                    Host for {hostFixHint.parkedReference} — expand <em>this</em> clause’s Greek span until it includes
+                    “{hostFixHint.nounText}”, then Save. Editing the relative itself cannot nest it.
                   </p>
                 ) : null}
 
@@ -2283,6 +2744,71 @@ export default function SpanishClauseBuilder() {
                   {activeObservation.describesNoun === "yes" ? (
                     <div className="clause-noun-picker">
                       <p className="clause-observation-term">Relative clause</p>
+                      {activeResolved?.parked ? (
+                        (() => {
+                          const parkedHosts =
+                            activeBeginningRow && (activeObservation.describedNounSpan?.length ?? 0)
+                              ? findHostCandidatesForParked(
+                                  {
+                                    finiteVerbId: activeBeginningRow.finiteVerb.finiteVerbId as string,
+                                    reference: activeBeginningRow.reference,
+                                    spanText: activeBeginningRow.spanText,
+                                    wordIds: activeBeginningRow.selectedWords.map(word => word.id),
+                                    order:
+                                      activeBeginningRow.finiteVerb.chapter * 100000 +
+                                      activeBeginningRow.finiteVerb.verse * 1000 +
+                                      activeBeginningRow.finiteVerb.index
+                                  },
+                                  activeObservation.describedNounSpan ?? [],
+                                  clauseSpanInfos
+                                )
+                              : [];
+                          return (
+                            <>
+                              <p className="clause-parked-banner" role="status">
+                                {parkedHosts.length ? (
+                                  <>
+                                    Parked — {describedNounText ? `“${describedNounText}”` : "the selected noun"} isn’t
+                                    inside any <em>other</em> clause’s span. Selecting this whole verse does nothing.
+                                    Expand a same-verse host below, or reconsider the class / noun.
+                                  </>
+                                ) : (
+                                  <>
+                                    Expected parked — {describedNounText ? `“${describedNounText}”` : "the selected noun"}{" "}
+                                    sits in material with no finite-verb host in this verse (often verbless 1:1–2 style
+                                    text). Clause spans can’t cross verses, so a later root can’t claim it here. Leave
+                                    it parked for the detailed pass; don’t keep stretching spans.
+                                  </>
+                                )}
+                              </p>
+                              {parkedHosts.length && describedNounText && activeBeginningRow ? (
+                                <div className="clause-parked-hosts">
+                                  <p className="clause-parked-hosts-label">
+                                    Open a same-verse host and expand its span to include the noun:
+                                  </p>
+                                  {parkedHosts.map(host => (
+                                    <button
+                                      type="button"
+                                      key={host.finiteVerbId}
+                                      className="clause-parked-host-button"
+                                      onClick={() =>
+                                        openHostToIncludeNoun(
+                                          host.finiteVerbId,
+                                          activeBeginningRow.reference,
+                                          describedNounText
+                                        )
+                                      }
+                                    >
+                                      {host.reference}
+                                      <span>{host.spanText || "(no span text)"}</span>
+                                    </button>
+                                  ))}
+                                </div>
+                              ) : null}
+                            </>
+                          );
+                        })()
+                      ) : null}
                       <p>Select the noun this clause describes, in the text above.</p>
                       {describedNounText ? <p className="clause-noun-selection">{describedNounText}</p> : null}
                       <div className="clause-step-actions">
@@ -2388,6 +2914,28 @@ export default function SpanishClauseBuilder() {
                         </button>
                       </div>
                     </div>
+                  ) : isActiveInherited && !forceChoices ? (
+                    <div className="clause-parent-picker">
+                      <p className="clause-observation-term">
+                        {activeResolved?.relation === "describes"
+                          ? "Relative clause"
+                          : activeResolved?.relation === "content"
+                            ? "Content clause"
+                            : activeResolved?.frameType
+                              ? `${capitalize(activeResolved.frameType)} clause`
+                              : "Dependent clause"}{" "}
+                        · continues previous
+                      </p>
+                      <p className="clause-tutor-note">
+                        Opens with a bare coordinator and shares the previous clause&apos;s dependency — not an
+                        independent root, even if Q1–Q3 would all read &quot;no&quot; on their own.
+                      </p>
+                      <div className="clause-step-actions">
+                        <button type="button" className="clause-reconsider" onClick={() => setForceChoices(true)}>
+                          Not this — reconsider
+                        </button>
+                      </div>
+                    </div>
                   ) : isActiveClauseRoot && !forceChoices ? (
                     // Root is the default outcome of Q1/Q2/Q3 (all three "no"), not the
                     // absence of an answer — it needs the same reviewed/revisable
@@ -2461,46 +3009,136 @@ export default function SpanishClauseBuilder() {
                 </section>
               </section>
             ) : (
-              <p className="clause-output-empty">No mood-tagged clauses ready for review.</p>
-            )}
-
-            {workspaceClauseRows.length ? (
-              <div className="clause-only-list" aria-label="Saved clause spans">
-                {workspaceClauseRows.map(row => {
-                  const reviewState = getClauseReviewState(row);
-                  return (
-                    <button
-                      type="button"
-                      className={[
-                        "clause-only-item",
-                        row.finiteVerb.finiteVerbId === activeBeginningVerbId ? "clause-only-item--inspecting" : ""
-                      ].filter(Boolean).join(" ")}
-                      key={row.finiteVerb.finiteVerbId}
-                      onClick={() => inspectClauseBeginning(row)}
-                    >
-                      <span className="clause-line-reference">{row.reference}</span>
-                      <span className="clause-only-text">{renderClauseLine(row)}</span>
-                      <span className={`clause-review-state clause-review-state--${reviewState.toLowerCase().replace(/\s/g, "-")}`}>
-                        {reviewState}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-            ) : (
-              <p className="clause-output-empty">No visible mood-tagged clauses.</p>
+              <p className="clause-output-empty">Select a clause from the side menu to review it here.</p>
             )}
           </div>
 
-          <aside className="clause-skeleton-panel" aria-label="Skeleton">
+          {skeletonOpen ? (
+          <div
+            className={[
+              "clause-skeleton-popup",
+              skeletonMaximized ? "clause-skeleton-popup--maximized" : ""
+            ]
+              .filter(Boolean)
+              .join(" ")}
+          >
+            <button
+              type="button"
+              className="clause-skeleton-backdrop"
+              aria-label="Close skeleton"
+              onClick={closeSkeletonPopup}
+            />
+            <aside
+              className="clause-skeleton-panel"
+              aria-label="Skeleton"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="skeleton-popup-heading"
+            >
             <div className="clause-skeleton-header">
-              <h2>Skeleton</h2>
-              {skeleton.roots.length ? (
-                <span className="clause-skeleton-count">
-                  {skeleton.roots.length} root{skeleton.roots.length === 1 ? "" : "s"}
-                </span>
-              ) : null}
+              <div className="clause-skeleton-title-row">
+                <h2 id="skeleton-popup-heading">Skeleton</h2>
+                {skeleton.roots.length ? (
+                  <span className="clause-skeleton-count">
+                    {skeleton.roots.length} root{skeleton.roots.length === 1 ? "" : "s"}
+                  </span>
+                ) : null}
+              </div>
+              <div className="clause-skeleton-actions">
+                <button
+                  type="button"
+                  className="clause-skeleton-action"
+                  onClick={() => setSkeletonMaximized(current => !current)}
+                >
+                  {skeletonMaximized ? "Restore" : "Maximize"}
+                </button>
+                <button type="button" className="clause-skeleton-action" onClick={closeSkeletonPopup}>
+                  Close
+                </button>
+              </div>
             </div>
+            <div className="clause-skeleton-body">
+
+            {skeleton.parked.length ? (
+              <div className="clause-parked-section clause-parked-section--priority">
+                <h3>Needs a home ({skeleton.parked.length})</h3>
+                <p className="clause-section-note">
+                  These relatives describe a noun outside every other finite-verb span. Selecting the relative’s
+                  verse cannot nest it. If a same-verse host exists, expand that host; if not (common for verbless
+                  material), leave parked for the detailed pass — that is settled for now, not a broken fix.
+                </p>
+                <div className="clause-parked-list">
+                  {skeleton.parked.map(parked => {
+                    const nounSpan = parked.describedNounSpan ?? [];
+                    const nounFirst = nounSpan.length ? wordById.get(nounSpan[0]) : undefined;
+                    const nounText = nounFirst
+                      ? formatClauseSpan(
+                          nounSpan,
+                          wordsByVerse.get(`${nounFirst.chapter}:${nounFirst.verse}`) ?? [],
+                          verseTextByKey.get(`${nounFirst.chapter}:${nounFirst.verse}`) ?? ""
+                        )
+                      : "";
+                    const ambiguousLabels = (parked.ambiguousOwnerIds ?? [])
+                      .map(id => clauseSpanInfos.find(candidate => candidate.finiteVerbId === id))
+                      .filter((candidate): candidate is ClauseSpanInfo => Boolean(candidate))
+                      .map(candidate => candidate.reference);
+                    const parkedInfo = clauseSpanInfos.find(clause => clause.finiteVerbId === parked.finiteVerbId);
+                    const hostCandidates =
+                      parkedInfo && nounSpan.length && !ambiguousLabels.length
+                        ? findHostCandidatesForParked(parkedInfo, nounSpan, clauseSpanInfos)
+                        : [];
+                    return (
+                      <div className="clause-parked-item" key={parked.finiteVerbId}>
+                        <button
+                          type="button"
+                          className="clause-parked-item-main"
+                          onClick={() => {
+                            setHostFixHint(null);
+                            openClauseFromSkeleton(parked.finiteVerbId);
+                          }}
+                        >
+                          <span className="clause-parked-ref">{parked.reference}</span>
+                          <span className="clause-parked-clause">{parked.spanText || "(no span text)"}</span>
+                          <span className="clause-parked-noun">
+                            Describes: {nounText ? `“${nounText}”` : "(no noun selected)"}
+                          </span>
+                          <span className="clause-parked-why">
+                            {ambiguousLabels.length
+                              ? `Tie — noun sits in more than one clause: ${ambiguousLabels.join(", ")}`
+                              : hostCandidates.length
+                                ? "No other clause contains this noun yet — expand a same-verse host"
+                                : "Expected parked — noun sits in unplaced/verbless material; no same-verse host can take it"}
+                          </span>
+                          {parked.children.length ? (
+                            <span className="clause-parked-dependents">
+                              {parked.children.length} dependent{parked.children.length === 1 ? "" : "s"} waiting on this
+                            </span>
+                          ) : null}
+                          <span className="clause-parked-action">
+                            {hostCandidates.length ? "Open relative" : "OK as parked — open if needed"}
+                          </span>
+                        </button>
+                        {hostCandidates.length && nounText ? (
+                          <div className="clause-parked-hosts">
+                            {hostCandidates.map(host => (
+                              <button
+                                type="button"
+                                key={host.finiteVerbId}
+                                className="clause-parked-host-button"
+                                onClick={() => openHostToIncludeNoun(host.finiteVerbId, parked.reference, nounText)}
+                              >
+                                Expand host {host.reference}
+                                <span>{host.spanText || "(no span text)"}</span>
+                              </button>
+                            ))}
+                          </div>
+                        ) : null}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ) : null}
 
             {sequenceEntryByFiniteVerbId.size ? (
               <dl className="sequence-legend">
@@ -2547,38 +3185,6 @@ export default function SpanishClauseBuilder() {
                     <span>{clause.reference}</span>
                     {clause.spanText}
                   </p>
-                ))}
-              </div>
-            ) : null}
-
-            {skeleton.parked.length ? (
-              <div className="clause-parked-section">
-                <h3>Not yet placed in the skeleton</h3>
-                <p className="clause-section-note">
-                  These describe a noun that isn't inside any indexed clause yet — often material like Tito 1:1 that
-                  has no finite verb of its own. Nothing to do here now; they get connected during closer clause-level
-                  work later, once the skeleton around them is settled.
-                </p>
-                {skeleton.parked.map(parked => (
-                  <div className="clause-parked-item" key={parked.finiteVerbId}>
-                    <p>
-                      <span>{parked.reference}</span>
-                      {parked.spanText}
-                    </p>
-                    {parked.ambiguousOwnerIds?.length ? (
-                      <p className="clause-parked-ambiguous">
-                        Describes a noun that falls inside more than one clause — a tie, not a guess. Candidates:{" "}
-                        {parked.ambiguousOwnerIds
-                          .map(id => clauseSpanInfos.find(candidate => candidate.finiteVerbId === id))
-                          .filter((candidate): candidate is ClauseSpanInfo => Boolean(candidate))
-                          .map(candidate => `${candidate.reference} (${candidate.spanText})`)
-                          .join("; ")}
-                      </p>
-                    ) : null}
-                    {parked.children.length ? (
-                      <div className="clause-tree-children">{parked.children.map(renderSkeletonNode)}</div>
-                    ) : null}
-                  </div>
                 ))}
               </div>
             ) : null}
@@ -2734,7 +3340,10 @@ export default function SpanishClauseBuilder() {
                 </p>
               </div>
             ) : null}
+            </div>
           </aside>
+          </div>
+          ) : null}
         </div>
         </section>
       ) : view === "participle-views" ? (
@@ -2956,7 +3565,7 @@ export default function SpanishClauseBuilder() {
         </section>
       ) : null}
 
-      {view === "passage" && activeVerb ? (
+      {view === "structure" && activeVerb ? (
         <aside className="clause-selection-panel" aria-live="polite">
           <p className="clause-active-verb">
             <span>Tito {activeVerb.chapter}:{activeVerb.verse}</span>
@@ -2971,7 +3580,12 @@ export default function SpanishClauseBuilder() {
             <button type="button" className="clause-save" onClick={saveActive} disabled={!draftGreekRange}>
               Save
             </button>
-            <button type="button" className="clause-clear" onClick={clearDraft}>
+            <button
+              type="button"
+              className="clause-clear"
+              onClick={clearActive}
+              disabled={!draftGreekRange && !(activeVerbId && assignments[activeVerbId])}
+            >
               Clear
             </button>
           </div>

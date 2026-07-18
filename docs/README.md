@@ -1,6 +1,6 @@
 # Docs
 
-Curated from the `cgv-reader` lab. Prefer these over root-level drafts in the old repo.
+Curated product + method specs for CGV Reader. Prefer these over drafts in `cgv-reader-old`.
 
 - `suite/` — product packaging, Reader principles, Writer markdown conventions
 - `observer/` — linguistic method specs for the workshop

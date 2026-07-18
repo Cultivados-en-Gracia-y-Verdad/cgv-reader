@@ -31,11 +31,28 @@ not required to read LBF Spanish over the current Greek spans.
 
 - Bootstrap: Mission Mutual RV1909 targets + BLE glosses (build-time only)
 - Finite-verb gaps: filled manually against the LBF Titus draft
-- Coverage at generation: 100% of finite verbs; ~88% of all tokens
-  (remaining misses are mostly function words that need no clause anchor)
+- Full-book hand pass (Jul 2026): fixed index theft (articles/prepositions
+  grabbing the wrong LBF word), relatives, and clear content gaps
+- Coverage ~95% of MorphGNT tokens; remaining misses are mostly absorbed
+  pronouns/articles or LBF expansions with no 1:1 Greek counterpart
+
+## Display rule (Structure passage)
+
+- Under each Greek token: **aligned LBF surface** (from this file), not the BLE gloss.
+- BLE gloss stays in the token popover for cross-check.
+- The full verse line under the interlinear is LBF in **Spanish reading order** — it will not
+  line up column-for-column with Greek; that is expected, not a bug.
+
+## Maintaining the map
+
+`scripts/rebuild-lbf-alignment.py` starts from the committed bootstrap, reapplies
+hand-verified overrides, then high-confidence BLE→LBF content remaps. Prefer
+adding overrides to that script over one-off JSON edits.
+
+Unaligned tokens (~11%) show the BLE gloss in italics as a fallback cue.
 
 ## Open follow-ups
 
-1. Hand-improve non-finite token coverage where reverse-interlinear display needs it.
+1. Continue hand overrides where BLE gloss and LBF wording diverge (esp. paraphrases).
 2. Publish LBF + alignment into `cgv-data` once stable.
 3. Plan TR1894 Greek spine switch when multi-book LBF work demands it.

@@ -169,3 +169,94 @@ export function listAvailableLemmas(): { lemma: string; count: number }[] {
     .map(([lemma, count]) => ({ lemma, count }))
     .sort((a, b) => b.count - a.count || a.lemma.localeCompare(b.lemma));
 }
+
+export interface BibleVerseHit {
+  reference: string;
+  book: string;
+  bookName: string;
+  chapter: number;
+  verse: number;
+  /** Spanish glosses joined for the verse (searchable reading surface). */
+  spanishText: string;
+  /** Greek surfaces joined (also matched in search). */
+  greekText: string;
+  before: string;
+  after: string;
+}
+
+interface VerseBundle {
+  book: string;
+  chapter: number;
+  verse: number;
+  spanishParts: string[];
+  greekParts: string[];
+}
+
+let cachedVerses: VerseBundle[] | null = null;
+
+function allVerses(): VerseBundle[] {
+  if (cachedVerses) return cachedVerses;
+  const map = new Map<string, VerseBundle>();
+  for (const row of allRows()) {
+    const key = `${row.book}:${row.ch}:${row.vs}`;
+    let bundle = map.get(key);
+    if (!bundle) {
+      bundle = {
+        book: row.book,
+        chapter: row.ch,
+        verse: row.vs,
+        spanishParts: [],
+        greekParts: []
+      };
+      map.set(key, bundle);
+    }
+    const gloss = row.es.replace(/·/g, " ").trim();
+    if (gloss) bundle.spanishParts.push(gloss);
+    const surface = row.surface.trim();
+    if (surface) bundle.greekParts.push(surface);
+  }
+  cachedVerses = Array.from(map.values()).sort((a, b) => {
+    const bookDiff = bookOrderIndex(a.book) - bookOrderIndex(b.book);
+    if (bookDiff) return bookDiff;
+    if (a.chapter !== b.chapter) return a.chapter - b.chapter;
+    return a.verse - b.verse;
+  });
+  return cachedVerses;
+}
+
+/**
+ * Phrase/word search across NT verse text (Spanish glosses + Greek surfaces).
+ * Returns verse hits with neighboring-verse context — Scripture only, no ranking.
+ */
+export function searchBibleText(query: string, limit = 40): BibleVerseHit[] {
+  const needle = query.trim().toLowerCase();
+  if (!needle) return [];
+  const verses = allVerses();
+  const hits: BibleVerseHit[] = [];
+  for (let index = 0; index < verses.length; index += 1) {
+    const verse = verses[index];
+    const spanishText = verse.spanishParts.join(" ");
+    const greekText = verse.greekParts.join(" ");
+    const haystack = `${spanishText} ${greekText}`.toLowerCase();
+    if (!haystack.includes(needle)) continue;
+    const before = index > 0 ? verses[index - 1] : null;
+    const after = index + 1 < verses.length ? verses[index + 1] : null;
+    hits.push({
+      reference: `${BOOK_DISPLAY_NAMES[verse.book] ?? verse.book} ${verse.chapter}:${verse.verse}`,
+      book: verse.book,
+      bookName: BOOK_DISPLAY_NAMES[verse.book] ?? verse.book,
+      chapter: verse.chapter,
+      verse: verse.verse,
+      spanishText,
+      greekText,
+      before: before
+        ? `${BOOK_DISPLAY_NAMES[before.book] ?? before.book} ${before.chapter}:${before.verse} · ${before.spanishParts.join(" ")}`
+        : "",
+      after: after
+        ? `${BOOK_DISPLAY_NAMES[after.book] ?? after.book} ${after.chapter}:${after.verse} · ${after.spanishParts.join(" ")}`
+        : ""
+    });
+    if (hits.length >= limit) break;
+  }
+  return hits;
+}

@@ -210,7 +210,10 @@ const GreekTokenButton = memo(function GreekTokenButton({
       <span className="token-morph">{token.rmac}</span>
       <span className="token-detail-popover" role="tooltip">
         {token.lemma !== token.surface ? <span className="token-detail-lemma">{token.lemma}</span> : null}
-        {strongs ? <span className="token-detail-strongs">{strongs}</span> : null}
+        <span className="token-detail-codes">
+          {strongs ? <span className="token-detail-strongs">{strongs}</span> : null}
+          {token.rmac ? <span className="token-detail-rmac">{token.rmac}</span> : null}
+        </span>
         <span className="token-detail-morph-desc">{describeRmac(token.rmac)}</span>
         {gloss ? <span className="token-detail-gloss">{gloss}</span> : null}
       </span>

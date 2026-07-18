@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useUiLanguage } from "../core/UiLanguageContext";
 import OPrototype from "./OPrototype";
 import SpanishClauseBuilder from "./SpanishClauseBuilder";
 
@@ -12,14 +13,12 @@ function readLayerFromHash(): WorkshopLayer {
 
 /**
  * Observer is a Reader-styled workshop: the text stays at the center.
- * Layers (marking → structure) change what gathers around the passage;
- * they are not separate destinations that abandon the reading surface.
- *
- * The full self-assembling canvas (one continuous nesting view) is the
- * next rebuild target. Until then, marking and structure remain two
- * layers over the same Titus data, under quieter Reader chrome.
+ * Mark = Brick 1–4 on the Greek interlinear. Structure = one continuous
+ * Passage + skeleton/review canvas (START-HERE Step 4). Participle Views
+ * remain a deliberate pull-back from that canvas.
  */
 export default function ObserverShell() {
+  const { t } = useUiLanguage();
   const [layer, setLayer] = useState<WorkshopLayer>(readLayerFromHash);
 
   useEffect(() => {
@@ -36,13 +35,10 @@ export default function ObserverShell() {
   return (
     <main className="workshop-shell">
       <header className="workshop-header">
-        <p className="reader-kicker">Observer</p>
-        <h1>Workshop — Tito</h1>
-        <p className="workshop-lede">
-          The text sits at the center. Mark what the Greek shows, then let structure settle in place —
-          never by drag-and-drop.
-        </p>
-        <div className="workshop-layers" role="tablist" aria-label="Workshop layers">
+        <p className="reader-kicker">{t.observerKicker}</p>
+        <h1>{t.observerTitle}</h1>
+        <p className="workshop-lede">{t.observerLede}</p>
+        <div className="workshop-layers" role="tablist" aria-label={t.workshopLayersAria}>
           <button
             type="button"
             className={`workshop-layer${layer === "mark" ? " workshop-layer--active" : ""}`}
@@ -50,7 +46,7 @@ export default function ObserverShell() {
             role="tab"
             aria-selected={layer === "mark"}
           >
-            Mark
+            {t.mark}
           </button>
           <button
             type="button"
@@ -59,7 +55,7 @@ export default function ObserverShell() {
             role="tab"
             aria-selected={layer === "structure"}
           >
-            Structure
+            {t.structure}
           </button>
         </div>
       </header>

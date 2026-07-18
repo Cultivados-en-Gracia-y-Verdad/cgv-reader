@@ -20,7 +20,7 @@ function resolveDataDir(): string {
 const cgvDataDir = resolveDataDir();
 
 export default defineConfig(({ command }) => ({
-  base: command === "build" ? "/cgv-suite/" : "/",
+  base: command === "build" ? "/cgv-reader/" : "/",
   plugins: [react()],
   clearScreen: false,
   resolve: {

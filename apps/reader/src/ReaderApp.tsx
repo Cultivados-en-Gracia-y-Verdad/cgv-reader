@@ -1,7 +1,17 @@
 import { useEffect, useState } from "react";
-import { countExistingProgressKeys, readCapabilities, setCapability, type CapabilityState } from "@cgv/core";
+import {
+  countExistingProgressKeys,
+  maybeRestoreFromAutosave,
+  readCapabilities,
+  recoverGreekConfirmationsFromAutosave,
+  setCapability,
+  startProgressAutosave,
+  type CapabilityState
+} from "@cgv/core";
 import CompilerShell from "./compiler/CompilerShell";
+import PreferencesPanel from "./core/PreferencesPanel";
 import ProgressControls from "./core/ProgressControls";
+import { LanguageToggle, UiLanguageProvider, useUiLanguage } from "./core/UiLanguageContext";
 import ObserverShell from "./observer/ObserverShell";
 import ReaderView from "./reader/ReaderView";
 
@@ -17,16 +27,12 @@ function readZoneFromHash(capabilities: CapabilityState): Zone {
   return "reader";
 }
 
-/**
- * The Reader is the app.
- * Observer is an optional unlock (student workshop).
- * Compiler is a specialized unlock (CGV teachers).
- * Writer stays a separate markdown editor.
- */
-export default function ReaderApp() {
+function ReaderAppInner() {
+  const { t } = useUiLanguage();
   const [capabilities, setCapabilities] = useState<CapabilityState>(() => readCapabilities());
   const [zone, setZone] = useState<Zone>(() => readZoneFromHash(readCapabilities()));
   const [progressHint, setProgressHint] = useState<string | null>(null);
+  const [progressCount, setProgressCount] = useState(0);
 
   useEffect(() => {
     const onHashChange = () => setZone(readZoneFromHash(capabilities));
@@ -35,12 +41,36 @@ export default function ReaderApp() {
   }, [capabilities]);
 
   useEffect(() => {
-    const count = countExistingProgressKeys();
-    if (count > 0) {
-      setProgressHint(
-        `Titus progress found in this browser (${count} saved item${count === 1 ? "" : "s"}) — same keys as cgv-reader, so your lab work carries over.`
-      );
-    }
+    let cancelled = false;
+
+    void (async () => {
+      const restored = await maybeRestoreFromAutosave();
+      if (cancelled) return;
+      if (restored) {
+        window.location.reload();
+        return;
+      }
+
+      const recoveredConfirmations = await recoverGreekConfirmationsFromAutosave();
+      if (cancelled) return;
+      if (recoveredConfirmations > 0) {
+        window.location.reload();
+        return;
+      }
+
+      await startProgressAutosave();
+      if (cancelled) return;
+
+      const count = countExistingProgressKeys();
+      if (count > 0) {
+        setProgressCount(count);
+        setProgressHint("show");
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   function openReader() {
@@ -70,8 +100,12 @@ export default function ReaderApp() {
 
   return (
     <>
-      <div className="app-chrome" aria-label="Reader controls">
-        <div className="zone-toggle" role="tablist" aria-label="Reader zones">
+      <div className="app-chrome" aria-label={t.chromeAria}>
+        <div className="app-chrome-left">
+          <LanguageToggle />
+          <PreferencesPanel />
+        </div>
+        <div className="zone-toggle" role="tablist" aria-label={t.zonesAria}>
           <button
             type="button"
             className={`zone-toggle-option${zone === "reader" ? " zone-toggle-option--active" : ""}`}
@@ -79,7 +113,7 @@ export default function ReaderApp() {
             role="tab"
             aria-selected={zone === "reader"}
           >
-            Reader
+            {t.reader}
           </button>
           {capabilities.observer ? (
             <button
@@ -89,7 +123,7 @@ export default function ReaderApp() {
               role="tab"
               aria-selected={zone === "observer"}
             >
-              Observer
+              {t.observer}
             </button>
           ) : null}
           {capabilities.compiler ? (
@@ -100,7 +134,7 @@ export default function ReaderApp() {
               role="tab"
               aria-selected={zone === "compiler"}
             >
-              Compiler
+              {t.compiler}
             </button>
           ) : null}
         </div>
@@ -110,9 +144,9 @@ export default function ReaderApp() {
 
       {progressHint && zone === "reader" ? (
         <p className="migration-banner" role="status">
-          {progressHint}
+          {t.progressHint(progressCount)}
           <button type="button" className="migration-banner-dismiss" onClick={() => setProgressHint(null)}>
-            Dismiss
+            {t.dismiss}
           </button>
         </p>
       ) : null}
@@ -120,7 +154,7 @@ export default function ReaderApp() {
       {/* Temporary teacher unlock for local development — replace with real entitlements later. */}
       {zone === "reader" ? (
         <button type="button" className="teacher-unlock" onClick={toggleCompilerUnlock}>
-          {capabilities.compiler ? "Lock Compiler" : "Unlock Compiler (teachers)"}
+          {capabilities.compiler ? t.lockCompiler : t.unlockCompiler}
         </button>
       ) : null}
 
@@ -132,5 +166,19 @@ export default function ReaderApp() {
         <ReaderView />
       )}
     </>
+  );
+}
+
+/**
+ * The Reader is the app.
+ * Observer is an optional unlock (student workshop).
+ * Compiler is a specialized unlock (CGV teachers).
+ * Writer stays a separate markdown editor.
+ */
+export default function ReaderApp() {
+  return (
+    <UiLanguageProvider>
+      <ReaderAppInner />
+    </UiLanguageProvider>
   );
 }

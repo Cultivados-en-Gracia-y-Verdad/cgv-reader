@@ -16,46 +16,75 @@ and nothing silently omitted.
 
 ## Confirmed output format
 
+Locked 2026-07-18. This markdown is the **presentation source**: **every blank line = a new
+slide.**
+
+Two axes: **grammar structure** (outline from the skeleton) and **commentary grain**
+(phrases). H1/H2 are context only — **not** part of the outline. The outline is
+`####` / `-` / `+` / `*`, with **indentation left→right** showing structural depth.
+
 ```markdown
-### Tito 1:5
+# TODO: contexto
+## TODO: unidad
 
-#### "Por esta causa te dejé en Creta"
-* "Por esta causa" es un conector relacional que retoma lo dicho antes y presenta esta
-  declaración como su razón o fundamento.
+### Tito 1:1–3 — *y a su propio tiempo manifestó su palabra por la predicación,*
 
-- "para que pusieras en orden lo que queda"
-  * "para que" es un marcador subordinante de propósito — introduce la meta hacia la cual se
-    dirige la acción de "dejé."
-- "y designaras ancianos en cada ciudad"
-  * Esta cláusula comparte el mismo "ἵνα" que la cláusula anterior, unida por "y" — no
-    introduce un propósito nuevo, continúa el ya declarado.
-- "como te mandé"
-  * "como" es un marcador subordinante de tiempo — conecta esta cláusula con una instrucción
-    previa ya dada.
+*Pablo, siervo de Dios, apóstol de Cristo Jesús, según la fe…*
+*para la esperanza de la vida eterna, la cual prometió…*
+*y a su propio tiempo manifestó su palabra por la predicación…*
+
++ *Pablo, siervo de Dios, apóstol de Cristo Jesús, según la fe…*
+
+- *la cual prometió el Dios que es sin mentira,*
+*la vida eterna*
+
+* "la cual" abre una frase que habla más de *la vida eterna*.
+
+#### *y a su propio tiempo manifestó su palabra por la predicación,*
+
+* "y" une esta frase a la anterior. Solo suma; no cambia el sentido ni da una razón.
+
+- *la cual me fue confiada según el mandato de Dios nuestro Salvador.*
+
+* "la cual" abre una frase que habla más de *su palabra*.
 ```
 
+**Slide / blank-line rules:**
+- **Blank line = new slide.** No exceptions.
+- **H3 unit claim = its own slide** — `### {reference} — *{independent clause}*`, then a
+  blank line.
+- **Reading quotes = the next slide** — no blanks between verse quotes; one trailing blank
+  ends that slide.
+- **Each `####` / `-` / `+` / `*` line is its own slide.** One trailing blank ends the slide.
+- **Keep slides short.** A clause slide may include at most its Scripture marker plus one
+  antecedent Scripture line. Reader notes, Def/XRef pins, and every `*` grammar note each
+  get **their own slide** (blank between). Do not stack many comment lines onto one slide —
+  that forces Writer cleanup later.
+- **Grammar labels:** Spanish first, then Greek in parentheses when known —
+  `"enseñando" (διδάσκοντες)`, `"para que" (ἵνα)`.
+
 **Structural rules:**
-- **H1** = context (left blank/TODO — human-assigned, not generated).
-- **H2** = unit (left blank/TODO — human-assigned, not generated).
-- **H3** = root clause span, tracking the actual grammatical unit, not a bare verse number
-  (e.g. `### Tito 1:1–3` when the root verb doesn't appear until verse 3 — see
-  `manual-markdown-format-spec.md`'s Tito 1:1 discussion).
-- **H4** = the root clause's own quoted, italicized text. This is now the anchor — mechanical,
-  generated, not writer-chosen.
-- **List level 1 (`-`)** = a dependent clause's own quoted, italicized text, in document order,
-  chronological — never batch multiple clauses before explaining the first.
-- **List level 2 (`*`)**, nested under level 1 (and directly under H4 for the root's own
-  marker) = the mechanical grammatical explanation. **Every marker gets one. Never blank.**
-- **List level 3 (`+`)**, nested under level 2 = reserved for a human writer's optional deep
-  dive into a sub-phrase or single word. **Compiler never generates level 3 content.**
+- **H1** = context (TODO — human-assigned). Not outline.
+- **H2** = unit (TODO — human-assigned). Not outline. Same slide as H1 (no blank between).
+- **H3** = `### {reference} — *{root clause}*` — span reference plus independent clause on
+  **one heading line** (auto from O). Own slide; blank after.
+- **Reading block** = every LBF verse for the unit, quoted in document order on the slide
+  after H3. No label line.
+- **Outline** (skeleton — this is the visible structure of the passage):
+  - **`####`** = root clause (finite, independent) — own outline slide; may repeat the H3 claim text
+  - **`-`** = dependent clause only (finite verb)
+  - **`+`** = phrase / verbless non-clause Scripture
+  - **`*`** = mechanical grammar note (its own slide, after the unit it explains)
+  - **Indentation** = dependency depth (left→right). Nested dependents indent further.
+- **`+` phrases:** every Spanish word not inside any finite-clause `selectedSpan` must
+  appear as `+` — whole verbless verses and intra-verse gaps alike. Finer splits inside a
+  `+` chunk = writer (or later O).
 
-**Typography, no exceptions:** any span of actual Scripture text, at any level (H4 heading,
-`-` clause, `+` deep-dive quote) — Spanish curly quotes + italic. Any explanatory text
-(`*` lines, headings other than H4, everything Compiler writes about the text) — plain roman,
-never quoted, never italicized.
-
-**Marker choice (`-`/`*`/`+`) is for human readability in the raw file only.** It does not
-guarantee visual distinction in rendered output — see `Output rendering note` at the end.
+**Typography (locked — Scripture-only style):**
+- **Scripture** (H3 claim, reading quotes, `####`, `-`, `+`, antecedents, and Scripture
+  named inside a note): markdown italics only → `*…*`. Nothing else is italicized.
+- **Grammar-note lines** open with `* ` (outline marker + space) and stay roman.
+  Metalinguistic tokens use straight `"…"`.
 
 ---
 
@@ -69,12 +98,31 @@ For each finite-verb clause already reviewed in O:
 - The clause's own opening marker word (connector or subordinating particle), and whether
   it's classified relational or subordinating (per `manual-markdown-format-spec.md`)
 - Attached participles (attributive/substantival/circumstantial) and what they attach to
+- Infinitives inside the clause span (morph mood N) — listed with a mechanical `*` naming
+  the host finite they complete (e.g. δεῖ + εἶναι). No O observation step yet; students
+  may later find them first, but Compiler states them for the manual now.
 - The Spanish text span for the clause (via the resolved Greek→Spanish alignment)
 
-For verbless material (e.g. Tito 1:1) not yet placed: per `skeleton-telos-spec.md`, this
-stays visibly parked, not silently dropped, until placed. **Nothing gets left out — every
-span of source text must appear somewhere in the output, either placed in the tree or
-visibly flagged as pending placement.**
+**Phrases vs parked — Compiler rules (locked):**
+- **Uncovered Scripture** (no word id inside any finite-clause span): emit as **`+`** in
+  document order inside the H3 unit of the following root — whole verbless verses and
+  leftover phrases inside verses that have other clauses. **No mechanical `*` on the `+`
+  itself** (participle notes for words in that phrase may follow). Writers may split further.
+- **Parked clauses** (Q1 describes a noun not inside any clause row yet): still emit as
+  **`-`** in document order under the following root’s unit. **No “pending” sentence in
+  the body** — list each id in generation flags so O can finish attachment. Do not drop them.
+- **Nothing omitted:** every LBF word appears in the reading block and in exactly one of
+  `####` / `-` / `+` in the dissection; unresolved attachment is a flag, not silence.
+- **`*` notes:** one explanation per fact; never emit the same `*` text twice in a row;
+  never park a bare Scripture line after a `*` (antecedents for relatives sit under `-`;
+  participle antecedents are named only inside the `*` prose).
+- **Reader notes:** plain `Nota (Lector):` lines under the matching verse’s parent (own slide).
+- **Compiler pins (definitions / cross-refs):** targeted by a line in the generated markdown
+  (UI: click a line or search). Stored with the **exact text of that line** as a durable
+  anchor, plus the current line number. Inserted after that line on Export as
+  `Def. (lemma):` / `XRef (lemma):` — each its own slide. **Never** as `*` grammar slides.
+  Regenerate **rematches** pins by anchor text (does not wipe them). If the target line
+  wording changed, the pin becomes an orphan until reattached in Occurrences.
 
 ---
 
@@ -82,87 +130,90 @@ visibly flagged as pending placement.**
 
 Walk root clauses in document order. For each:
 
-1. **Before emitting anything, check whether any of this root's dependents (or unplaced
-   verbless material eventually folding into it) appear *earlier* in the actual verse text
-   than the root clause itself.** If so, emit those first — still nested/indented to show
-   their dependent relationship, but positioned above the H4 heading, in their real document
-   order. **Nesting shows relationship; vertical position follows the text, not a rule that
-   forces root-first.** This will sometimes place indented bullets above the H4 they depend
-   on — that's expected and correct, not a formatting error to avoid.
-2. Emit `### {reference span}`.
-3. Emit `#### "{root clause quoted text}"`.
+1. Emit `### {reference} — *{root clause}*` on one heading line, then a blank (H3 slide).
+   Then emit the reading-block quotes as the next slide.
+2. Before emitting the dissected root, emit any dependents / `+` / parked items that appear
+   *earlier* in the text than the root — nested, in document order (bullets may sit above
+   the `####` they depend on).
+3. Emit `#### "{root clause quoted text}"` as its own outline slide (same text as the H3 claim).
 4. If the root clause opens with a relational connector, emit its `*` explanation
    (template below). If asyndeton (no connector), state that plainly too — asyndeton is a
    real finding, not a gap (per `root-clause-connectives-spec.md`).
-5. Walk every remaining clause attached to this root, **in document order, one at a time —
-   emit the `-` clause text, then immediately its `*` explanation, before moving to the next.**
-   Never list multiple clause texts before explaining any of them.
+5. Walk every remaining dependent attached to this root, **in document order, one at a time —
+   emit the `-`/`+` text, then immediately its `*` explanation, before moving to the next.**
 6. For a coordinate-inherited clause (shares a parent's `frameType` via plain connector),
    use the inheritance template, not the normal marker template — it should name what it
    shares and with which sibling.
-7. If any clause in this span has an attached participle, include its explanation as an
-   additional `*` line under the clause it modifies (or under H4 if it attaches to the root).
-8. If any verbless material logically belongs in this span and wasn't already handled in
-   step 1, fold it in as its own `-` bullet with a `*` explanation noting it has no finite
-   verb of its own and stating what it modifies.
+7. If any clause in this span has infinitives, emit each as its own `*` (completes the host
+   finite). Then emit attached participle explanations the same way.
+8. If any verbless material logically belongs in this span and wasn't already handled, fold
+   it in as its own **`+` phrase** (no mechanical `*` line). Never emit verbless material as
+   `-`. Parked finite clauses fold in as `-` and are flagged, not narrated in the body.
 
 **Before generating, verify the root clause itself is actually correctly classified —
 Compiler should not silently trust a clause tagged root without basis.** Concretely: if a
 clause tagged root sits immediately adjacent to still-unplaced verbless material, and that
-clause's own text plausibly describes a noun inside that unplaced material (a relative
-pronoun, a demonstrative), flag it rather than generating output that treats it as settled —
-this was exactly the `1:2:6` case (a relative clause describing "vida eterna," inside
-unplaced 1:1–2 material, incorrectly sitting as root rather than as a Q1 description). This
-doesn't need to be a sophisticated check — even a simple flag ("this root clause opens with a
-relative pronoun or demonstrative and sits next to unplaced material — verify before
-trusting") catches the pattern without requiring deep grammatical analysis.
+clause opens with a **relative pronoun**, flag it rather than generating output that treats
+it as settled — this was exactly the `1:2:6` case (a relative clause describing "vida eterna,"
+inside unplaced 1:1–2 material, incorrectly sitting as root rather than as a Q1 description).
+Do **not** flag bare demonstratives the same way: openings like Ταῦτα λάλει (2:15, "Estas
+cosas habla") or Τούτου χάριν (1:5) are ordinary deictic roots, not the 1:2:6 pattern. A
+simple relative-pronoun + unplaced-neighbor flag is enough.
 
 ---
 
 ## Mechanical explanation templates
 
 Fill in `{word}`, `{parent}`, `{noun}`, etc. from the actual data — these are patterns, not
-literal strings to reuse verbatim if the specific case needs different phrasing, but they
-must stay strictly at the grammatical level, never interpreting meaning or theological
-significance.
+literal strings to reuse verbatim if the specific case needs different phrasing.
+
+**Voice:** plain Spanish (roughly 5th-grade). State what the word is doing and why that is
+certain from the grammar. Explaining grammar and what is occurring is **not** interpretation.
+Do **not** add theology, application, or “what this means for us.”
 
 **Relational connectors (root-clause level):**
-- Adición (καί): `"{word}" es un conector relacional de adición — une esta declaración a la anterior sin introducir contraste ni motivo.`
-- Contraste (ἀλλά): `"{word}" es un conector relacional de contraste — presenta esta declaración como un giro respecto a la anterior.`
-- Razón/fundamento (γάρ): `"{word}" es un conector relacional que presenta esta declaración como razón o fundamento de la anterior.`
-- Inferencia (οὖν): `"{word}" es un conector relacional que presenta esta declaración como una conclusión de la anterior.`
-- Pivote suave (δέ): `"{word}" es un conector relacional que conecta esta declaración con la anterior.`
-- Asíndeton: `Esta cláusula no lleva conector — inicia sin partícula de enlace.`
+- Adición (καί): `"{word}" une esta frase a la anterior. Solo suma; no cambia el sentido ni da una razón.`
+- Contraste (ἀλλά): `"{word}" marca un giro: lo que sigue va en otra dirección respecto a lo anterior.`
+- Razón/fundamento (γάρ): `"{word}" da la razón de lo que se dijo antes.`
+- Inferencia (οὖν): `"{word}" saca una conclusión de lo que se dijo antes.`
+- Pivote suave (δέ): `"{word}" sigue la idea anterior y la une a esta frase.`
+- Asíndeton: `Esta frase empieza sola, sin una palabra de enlace (como «y» o «porque»).`
 
 **Subordinating markers (dependent clauses):**
-- Propósito (ἵνα/ὅπως): `"{word}" es un marcador subordinante de propósito — introduce la meta hacia la cual se dirige la acción de "{parent verb}."`
-- Contenido (ὅτι tras verbo de decir/pensar): `"{word}" introduce el contenido de lo que se afirma en la cláusula anterior.`
-- Condición (εἰ/ἐάν): `"{word}" es un marcador subordinante de condición — introduce una condición para la cláusula anterior.`
-- Tiempo (ὅτε/ὡς/ἐπεί): `"{word}" es un marcador subordinante de tiempo — conecta esta cláusula con un momento relacionado en la cláusula anterior.`
-- Descripción (pronombre relativo): `"{word}" introduce una cláusula que describe a "{noun}," mencionado antes.`
+- Propósito (ἵνα/ὅπως): `"{word}" dice el propósito de «{parent verb}» — para qué se hace esa acción.`
+- Contenido (ὅτι tras verbo de decir/pensar): `"{word}" abre lo que se dice o se piensa en la frase anterior — el contenido de esa idea.`
+- Condición (εἰ/ἐάν): `"{word}" pone una condición: «si esto…», entonces aplica lo de la frase anterior.`
+- Tiempo (ὅτε/ὡς/ἐπεί): `"{word}" dice el momento relacionado con la frase anterior — cuándo.`
+- Descripción (pronombre relativo): `"{word}" abre una frase que habla más de *{noun}*.`
+- Razón (subordinada): `"{word}" da el motivo de la frase anterior — por qué se dijo eso.`
 
 **Coordinate inheritance:**
-`Esta cláusula comparte el mismo "{shared particle}" que la cláusula anterior, unida por "{connector}" — no introduce un(a) {relation type} nuevo(a), continúa el/la ya declarado(a).`
+`Esta frase va unida con «{connector}» y sigue bajo el mismo «{shared particle}» de la frase anterior. No abre un(a) {relation type} nuevo(a); continúa el/la mismo(a).`
 
 **Participles:**
-- Atributivo: `"{participle}" es un participio atributivo que describe a "{noun}."`
-- Sustantivado: `"{participle}" es un participio sustantivado — funciona como el nombre de una persona o cosa, no describe algo más.`
-- Circunstancial: `"{participle}" es un participio circunstancial que acompaña la acción de "{finite verb}."`
+- Atributivo: `"{participle}" describe a *{noun}*. No es el verbo principal; añade detalle sobre esa persona o cosa.`
+- Sustantivado: `"{participle}" funciona como un nombre: señala a una persona o cosa (quién / qué), no solo describe a otra.`
+- Circunstancial: `"{participle}" va junto a «{finite verb}». No es el verbo principal; muestra algo que ocurre al mismo tiempo o en relación con esa acción.`
 
-**Verbless material:**
-`Esta expresión no tiene verbo finito propio (cláusula nominal) y se une aquí a "{governing clause}."`
+**Infinitives (Compiler lists them; O find-step later):**
+- With host finite: `"{infinitive}" completa a "{host}": dice *qué* se debe hacer o qué acción sigue.`
+- No host clause yet: `"{infinitive}" nombra una acción que depende de un verbo cercano (como «debe» o «pide»).`
+- One `*` slide per infinitive. Attachment = clause span containing the word, else nearest
+  same-verse clause (same rule as participles).
+
+**Verbless / phrase material (`+`):** no mechanical template — the `+` marker and unit
+placement carry the meaning. Writer comments (if any) go under the `+` with no bullet.
+Infinitive/`*` notes for words inside a `+` phrase may still follow that phrase.
 
 ---
 
 ## Output rendering note (separate, real work — not part of this pass)
 
-Marker character (`-`/`*`/`+`) is not preserved by standard Markdown renderers as a
-distinguishing signal — only nesting depth is. The LaTeX/pandoc template needs a per-depth
-style rule (distinct bullet/indentation/weight per list level) to make clause / mechanical
-explanation / deep-dive visually distinct in the final PDF. This is genuinely separate work
-from generating the markdown itself — per the earlier decision, do **not** rebuild the
-pandoc+latex pipeline under this deadline; find the fastest working path to a presentable PDF
-for this specific deadline, and treat the template's per-depth styling as its own later task.
+Standard Markdown renderers do not preserve `-` vs `+` vs `*` as distinct visual types —
+only nesting depth. The LaTeX/pandoc (or HTML) template needs **per-marker** style rules so
+phrase (`+`), dependent clause (`-`), and grammar note (`*`) read differently in the final
+PDF. Parent ownership (indented continuation under an item, including across blank lines)
+must be preserved in that pipeline. This is separate from generating the markdown itself.
 
 ---
 
@@ -184,7 +235,10 @@ pass** — do not attempt to build any of it now.
 - H1/H2 section assignment — left as TODO placeholders, human-assigned.
 - Term-tracking / scripture-gatherer reuse from the translator project — separate,
   not blocking this deliverable.
-- Any `+`-level deep-dive content — human-written only, whenever a writer chooses to add it.
+- Fine-grained phrase splits inside a verbless chunk (writer `+` lines, or a future O
+  phrase-span layer). Compiler emits whole verbless units as `+` for now.
+- Writer commentary under parents — human-written plain indented text; Compiler does not
+  generate interpretive notes.
 
 ## Confirmed next step, after the skeleton generator is working and verified — do not build concurrently with the above
 
@@ -195,9 +249,8 @@ data (same discipline as everything else tonight — verify before building furt
   confirmed located at `/herramientas/cgv-translator/` (verified — this is the real
   translator project, not a naming collision). Reuse that occurrence-generation logic
   directly rather than rebuilding word/term-lookup from scratch.
-- **Note on `cgv-reader` paths:** the working project is root `/cgv-reader`. The earlier,
-  unrelated same-named project at `/herramientas/cgv-reader` has been archived and renamed
-  to `/herramientas/cgv-reader-old` — nothing there is part of this project.
+- **Note on paths:** the product repo is `cgv-reader` (this tree; formerly `cgv-suite`).
+  The archived Titus lab is `cgv-reader-old` — nothing there is part of active development.
 - **A tools panel, on the left side of C's screen** — the home for gathering tools going
   forward (the reused word-gatherer, and whatever else C eventually holds).
 - **A simple cross-reference finder** — same Scripture-only discipline as everything else in

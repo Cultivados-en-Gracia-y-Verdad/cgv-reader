@@ -23,3 +23,4 @@ export const PROGRESS_KEYS: ProgressKeyInfo[] = [
 
 export const LANGUAGE_KEY = "the-reader:titus:language";
 export const NOTES_KEY = "the-reader:titus:notes";
+// Bible version key lives in bible-version.ts (BIBLE_VERSION_KEY).

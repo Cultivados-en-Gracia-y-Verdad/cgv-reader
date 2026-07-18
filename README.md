@@ -1,6 +1,6 @@
-# CGV Suite
+# CGV Reader
 
-Working name for the repo. **The product is The Reader.**
+**The product is The Reader.** This repo is the product home (formerly developed as `cgv-suite`).
 
 | Piece | Role |
 |-------|------|
@@ -9,7 +9,7 @@ Working name for the repo. **The product is The Reader.**
 | **Compiler** | Teacher-only unlock — Scripture-only gathering; markdown export for Writer |
 | **Writer** | Separate markdown editor (not in this repo) |
 
-`cgv-reader` is the frozen Titus research lab. This repo is the product home.
+The earlier Titus research lab lives at `cgv-reader-old` (archived). Progress keys stay compatible so lab work still migrates.
 
 ## Requirements
 
@@ -31,7 +31,7 @@ Observer uses **LBF (La Biblia Fiel)** for reverse/settled Spanish reading. Gree
 
 ## Titus progress migration
 
-Suite uses the **same localStorage keys** as `cgv-reader`. Opening Suite in a browser that already has lab progress picks that work up automatically. You can also import a schema-1 progress JSON exported from the lab (Save/Load in Observer or Compiler).
+This app uses the **same localStorage keys** as the archived lab (`cgv-reader-old`). Opening it in a browser that already has lab progress picks that work up automatically. You can also import a schema-1 progress JSON (Save/Load in Observer or Compiler).
 
 ## Layout
 

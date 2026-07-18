@@ -3,7 +3,15 @@
     "book": "tito",
     "spanish": "LBF",
     "greekSpine": "MorphGNT/BLE",
-    "note": "Greek token -> LBF word index. Bootstrap used Mission Mutual RV1909 targets + BLE glosses; finite-verb gaps filled manually. Spanish surface is LBF only."
+    "note": "Mission Mutual bootstrap + BLE glosses; hand-verified overrides; high-confidence content remaps/fills. Filled 7 Brick-4 participle LBF gaps (2026-07-17).",
+    "coverage": "593/659",
+    "repairs": {
+      "contentRemaps": 7,
+      "highConfidenceFills": 2,
+      "handOverrides": 45
+    },
+    "alignedTokens": 628,
+    "totalTokens": 659
   },
   "records": [
     {
@@ -27,8 +35,8 @@
       "verse": 1,
       "token": 3,
       "greekSurface": "θεοῦ,",
-      "lbfSurface": "de",
-      "lbfWordIndex": 2
+      "lbfSurface": "Dios",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 1,
@@ -51,16 +59,16 @@
       "verse": 1,
       "token": 6,
       "greekSurface": "Ἰησοῦ",
-      "lbfSurface": "de",
-      "lbfWordIndex": 14
+      "lbfSurface": "Jesús",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 1,
       "verse": 1,
       "token": 7,
       "greekSurface": "Χριστοῦ",
-      "lbfSurface": "de",
-      "lbfWordIndex": 11
+      "lbfSurface": "Cristo",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 1,
@@ -121,6 +129,14 @@
     {
       "chapter": 1,
       "verse": 1,
+      "token": 16,
+      "greekSurface": "κατ’",
+      "lbfSurface": "de acuerdo con",
+      "lbfWordIndex": 23
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
       "token": 17,
       "greekSurface": "εὐσέβειαν",
       "lbfSurface": "piedad",
@@ -163,7 +179,7 @@
       "verse": 2,
       "token": 5,
       "greekSurface": "ἣν",
-      "lbfSurface": "cual",
+      "lbfSurface": "la cual",
       "lbfWordIndex": 8
     },
     {
@@ -187,8 +203,8 @@
       "verse": 2,
       "token": 8,
       "greekSurface": "ἀψευδὴς",
-      "lbfSurface": "que",
-      "lbfWordIndex": 12
+      "lbfSurface": "mentira",
+      "lbfWordIndex": 15
     },
     {
       "chapter": 1,
@@ -211,8 +227,8 @@
       "verse": 2,
       "token": 11,
       "greekSurface": "χρόνων",
-      "lbfSurface": "de",
-      "lbfWordIndex": 17
+      "lbfSurface": "tiempos",
+      "lbfWordIndex": 19
     },
     {
       "chapter": 1,
@@ -243,24 +259,16 @@
       "verse": 3,
       "token": 3,
       "greekSurface": "καιροῖς",
-      "lbfSurface": "a",
-      "lbfWordIndex": 1
+      "lbfSurface": "tiempo",
+      "lbfWordIndex": 4
     },
     {
       "chapter": 1,
       "verse": 3,
       "token": 4,
       "greekSurface": "ἰδίοις,",
-      "lbfSurface": "su",
-      "lbfWordIndex": 2
-    },
-    {
-      "chapter": 1,
-      "verse": 3,
-      "token": 5,
-      "greekSurface": "τὸν",
-      "lbfSurface": "la",
-      "lbfWordIndex": 9
+      "lbfSurface": "propio",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 1,
@@ -275,8 +283,8 @@
       "verse": 3,
       "token": 7,
       "greekSurface": "αὐτοῦ",
-      "lbfSurface": "el",
-      "lbfWordIndex": 17
+      "lbfSurface": "su",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 1,
@@ -299,7 +307,7 @@
       "verse": 3,
       "token": 10,
       "greekSurface": "ὃ",
-      "lbfSurface": "cual",
+      "lbfSurface": "la cual",
       "lbfWordIndex": 12
     },
     {
@@ -329,6 +337,22 @@
     {
       "chapter": 1,
       "verse": 3,
+      "token": 14,
+      "greekSurface": "ἐπιταγὴν",
+      "lbfSurface": "mandato",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 15,
+      "greekSurface": "τοῦ",
+      "lbfSurface": "de",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
       "token": 16,
       "greekSurface": "σωτῆρος",
       "lbfSurface": "Salvador",
@@ -339,8 +363,8 @@
       "verse": 3,
       "token": 17,
       "greekSurface": "ἡμῶν",
-      "lbfSurface": "de",
-      "lbfWordIndex": 19
+      "lbfSurface": "nuestro",
+      "lbfWordIndex": 21
     },
     {
       "chapter": 1,
@@ -459,8 +483,8 @@
       "verse": 4,
       "token": 14,
       "greekSurface": "⸂Χριστοῦ",
-      "lbfSurface": "de",
-      "lbfWordIndex": 15
+      "lbfSurface": "Cristo",
+      "lbfWordIndex": 16
     },
     {
       "chapter": 1,
@@ -499,8 +523,8 @@
       "verse": 5,
       "token": 2,
       "greekSurface": "χάριν",
-      "lbfSurface": "Por",
-      "lbfWordIndex": 0
+      "lbfSurface": "Por esta razón",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 1,
@@ -585,6 +609,14 @@
     {
       "chapter": 1,
       "verse": 5,
+      "token": 13,
+      "greekSurface": "κατὰ",
+      "lbfSurface": "cada",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
       "token": 14,
       "greekSurface": "πόλιν",
       "lbfSurface": "ciudad",
@@ -657,6 +689,14 @@
     {
       "chapter": 1,
       "verse": 6,
+      "token": 4,
+      "greekSurface": "ἀνέγκλητος,",
+      "lbfSurface": "irreprochable",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
       "token": 5,
       "greekSurface": "μιᾶς",
       "lbfSurface": "una",
@@ -685,6 +725,14 @@
       "greekSurface": "τέκνα",
       "lbfSurface": "hijos",
       "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 6,
+      "token": 9,
+      "greekSurface": "ἔχων",
+      "lbfSurface": "con",
+      "lbfWordIndex": 9
     },
     {
       "chapter": 1,
@@ -769,6 +817,14 @@
     {
       "chapter": 1,
       "verse": 7,
+      "token": 5,
+      "greekSurface": "ἀνέγκλητον",
+      "lbfSurface": "irreprochable",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
       "token": 6,
       "greekSurface": "εἶναι",
       "lbfSurface": "sea",
@@ -787,8 +843,8 @@
       "verse": 7,
       "token": 8,
       "greekSurface": "θεοῦ",
-      "lbfSurface": "de",
-      "lbfWordIndex": 10
+      "lbfSurface": "Dios",
+      "lbfWordIndex": 11
     },
     {
       "chapter": 1,
@@ -841,10 +897,26 @@
     {
       "chapter": 1,
       "verse": 7,
+      "token": 15,
+      "greekSurface": "πάροινον,",
+      "lbfSurface": "bebedor",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
       "token": 16,
       "greekSurface": "μὴ",
       "lbfSurface": "no",
       "lbfWordIndex": 18
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 17,
+      "greekSurface": "πλήκτην,",
+      "lbfSurface": "violento",
+      "lbfWordIndex": 19
     },
     {
       "chapter": 1,
@@ -883,8 +955,8 @@
       "verse": 8,
       "token": 3,
       "greekSurface": "φιλάγαθον,",
-      "lbfSurface": "bueno",
-      "lbfWordIndex": 5
+      "lbfSurface": "amante de lo bueno",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 1,
@@ -921,6 +993,14 @@
     {
       "chapter": 1,
       "verse": 9,
+      "token": 1,
+      "greekSurface": "ἀντεχόμενον",
+      "lbfSurface": "reteniendo",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
       "token": 2,
       "greekSurface": "τοῦ",
       "lbfSurface": "la",
@@ -931,8 +1011,8 @@
       "verse": 9,
       "token": 3,
       "greekSurface": "κατὰ",
-      "lbfSurface": "que",
-      "lbfWordIndex": 9
+      "lbfSurface": "conforme",
+      "lbfWordIndex": 4
     },
     {
       "chapter": 1,
@@ -993,6 +1073,14 @@
     {
       "chapter": 1,
       "verse": 9,
+      "token": 11,
+      "greekSurface": "καὶ",
+      "lbfSurface": "tanto",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
       "token": 12,
       "greekSurface": "παρακαλεῖν",
       "lbfSurface": "exhortar",
@@ -1025,18 +1113,18 @@
     {
       "chapter": 1,
       "verse": 9,
-      "token": 16,
-      "greekSurface": "τῇ",
-      "lbfSurface": "a",
-      "lbfWordIndex": 22
-    },
-    {
-      "chapter": 1,
-      "verse": 9,
       "token": 17,
       "greekSurface": "ὑγιαινούσῃ",
       "lbfSurface": "sana",
       "lbfWordIndex": 17
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 18,
+      "greekSurface": "καὶ",
+      "lbfSurface": "como",
+      "lbfWordIndex": 19
     },
     {
       "chapter": 1,
@@ -1051,8 +1139,8 @@
       "verse": 9,
       "token": 20,
       "greekSurface": "ἀντιλέγοντας",
-      "lbfSurface": "que",
-      "lbfWordIndex": 24
+      "lbfSurface": "contradicen",
+      "lbfWordIndex": 25
     },
     {
       "chapter": 1,
@@ -1091,8 +1179,8 @@
       "verse": 10,
       "token": 4,
       "greekSurface": "⸀καὶ",
-      "lbfSurface": "y",
-      "lbfWordIndex": 7
+      "lbfSurface": "e",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 1,
@@ -1107,8 +1195,8 @@
       "verse": 10,
       "token": 6,
       "greekSurface": "ματαιολόγοι",
-      "lbfSurface": "habladores",
-      "lbfWordIndex": 6
+      "lbfSurface": "vanos habladores",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 1,
@@ -1117,6 +1205,14 @@
       "greekSurface": "φρεναπάται,",
       "lbfSurface": "engañadores",
       "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 10,
+      "token": 9,
+      "greekSurface": "μάλιστα",
+      "lbfSurface": "sobre todo",
+      "lbfWordIndex": 9
     },
     {
       "chapter": 1,
@@ -1153,6 +1249,14 @@
     {
       "chapter": 1,
       "verse": 11,
+      "token": 1,
+      "greekSurface": "οὓς",
+      "lbfSurface": "a quienes",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
       "token": 2,
       "greekSurface": "δεῖ",
       "lbfSurface": "necesario",
@@ -1163,7 +1267,7 @@
       "verse": 11,
       "token": 3,
       "greekSurface": "ἐπιστομίζειν,",
-      "lbfSurface": "tapar",
+      "lbfSurface": "tapar la boca",
       "lbfWordIndex": 4
     },
     {
@@ -1211,7 +1315,7 @@
       "verse": 11,
       "token": 9,
       "greekSurface": "ἃ",
-      "lbfSurface": "que",
+      "lbfSurface": "lo que",
       "lbfWordIndex": 13
     },
     {
@@ -1251,7 +1355,7 @@
       "verse": 11,
       "token": 14,
       "greekSurface": "χάριν.",
-      "lbfSurface": "causa",
+      "lbfSurface": "por causa de",
       "lbfWordIndex": 17
     },
     {
@@ -1361,14 +1465,6 @@
     {
       "chapter": 1,
       "verse": 13,
-      "token": 1,
-      "greekSurface": "ἡ",
-      "lbfSurface": "la",
-      "lbfWordIndex": 14
-    },
-    {
-      "chapter": 1,
-      "verse": 13,
       "token": 2,
       "greekSurface": "μαρτυρία",
       "lbfSurface": "testimonio",
@@ -1409,6 +1505,14 @@
     {
       "chapter": 1,
       "verse": 13,
+      "token": 7,
+      "greekSurface": "ἣν",
+      "lbfSurface": "esta",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
       "token": 8,
       "greekSurface": "αἰτίαν",
       "lbfSurface": "razón",
@@ -1435,7 +1539,7 @@
       "verse": 13,
       "token": 12,
       "greekSurface": "ἵνα",
-      "lbfSurface": "para",
+      "lbfSurface": "para que",
       "lbfWordIndex": 9
     },
     {
@@ -1443,7 +1547,7 @@
       "verse": 13,
       "token": 13,
       "greekSurface": "ὑγιαίνωσιν",
-      "lbfSurface": "sanos",
+      "lbfSurface": "sean sanos",
       "lbfWordIndex": 12
     },
     {
@@ -1453,6 +1557,14 @@
       "greekSurface": "ἐν",
       "lbfSurface": "en",
       "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 15,
+      "greekSurface": "τῇ",
+      "lbfSurface": "la",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
@@ -1475,8 +1587,8 @@
       "verse": 14,
       "token": 2,
       "greekSurface": "προσέχοντες",
-      "lbfSurface": "atención",
-      "lbfWordIndex": 2
+      "lbfSurface": "prestando atención",
+      "lbfWordIndex": 1
     },
     {
       "chapter": 1,
@@ -1555,8 +1667,8 @@
       "verse": 15,
       "token": 2,
       "greekSurface": "καθαρὰ",
-      "lbfSurface": "las",
-      "lbfWordIndex": 1
+      "lbfSurface": "puras",
+      "lbfWordIndex": 4
     },
     {
       "chapter": 1,
@@ -1571,8 +1683,8 @@
       "verse": 15,
       "token": 4,
       "greekSurface": "καθαροῖς·",
-      "lbfSurface": "cosas",
-      "lbfWordIndex": 2
+      "lbfSurface": "puros",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 1,
@@ -1581,6 +1693,14 @@
       "greekSurface": "τοῖς",
       "lbfSurface": "los",
       "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 6,
+      "greekSurface": "δὲ",
+      "lbfSurface": "pero",
+      "lbfWordIndex": 8
     },
     {
       "chapter": 1,
@@ -1619,24 +1739,24 @@
       "verse": 15,
       "token": 11,
       "greekSurface": "καθαρόν,",
-      "lbfSurface": "son",
-      "lbfWordIndex": 3
+      "lbfSurface": "puro",
+      "lbfWordIndex": 16
     },
     {
       "chapter": 1,
       "verse": 15,
       "token": 12,
       "greekSurface": "ἀλλὰ",
-      "lbfSurface": "pero",
-      "lbfWordIndex": 8
+      "lbfSurface": "sino que",
+      "lbfWordIndex": 17
     },
     {
       "chapter": 1,
       "verse": 15,
       "token": 13,
       "greekSurface": "μεμίανται",
-      "lbfSurface": "están",
-      "lbfWordIndex": 25
+      "lbfSurface": "están contaminadas",
+      "lbfWordIndex": 26
     },
     {
       "chapter": 1,
@@ -1644,7 +1764,15 @@
       "token": 14,
       "greekSurface": "αὐτῶν",
       "lbfSurface": "su",
-      "lbfWordIndex": 23
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 15,
+      "greekSurface": "καὶ",
+      "lbfSurface": "tanto",
+      "lbfWordIndex": 19
     },
     {
       "chapter": 1,
@@ -1653,6 +1781,14 @@
       "greekSurface": "νοῦς",
       "lbfSurface": "mente",
       "lbfWordIndex": 21
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 18,
+      "greekSurface": "καὶ",
+      "lbfSurface": "como",
+      "lbfWordIndex": 22
     },
     {
       "chapter": 1,
@@ -1699,8 +1835,8 @@
       "verse": 16,
       "token": 5,
       "greekSurface": "δὲ",
-      "lbfSurface": "y",
-      "lbfWordIndex": 14
+      "lbfSurface": "pero",
+      "lbfWordIndex": 4
     },
     {
       "chapter": 1,
@@ -1733,6 +1869,38 @@
       "greekSurface": "ὄντες",
       "lbfSurface": "siendo",
       "lbfWordIndex": 10
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 10,
+      "greekSurface": "καὶ",
+      "lbfSurface": "e",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 11,
+      "greekSurface": "ἀπειθεῖς",
+      "lbfSurface": "inobedientes",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 12,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 13,
+      "greekSurface": "πρὸς",
+      "lbfSurface": "para",
+      "lbfWordIndex": 16
     },
     {
       "chapter": 1,
@@ -1777,6 +1945,14 @@
     {
       "chapter": 2,
       "verse": 1,
+      "token": 2,
+      "greekSurface": "δὲ",
+      "lbfSurface": "Pero",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 2,
+      "verse": 1,
       "token": 3,
       "greekSurface": "λάλει",
       "lbfSurface": "habla",
@@ -1787,7 +1963,7 @@
       "verse": 1,
       "token": 4,
       "greekSurface": "ἃ",
-      "lbfSurface": "que",
+      "lbfSurface": "lo que",
       "lbfWordIndex": 4
     },
     {
@@ -1803,8 +1979,8 @@
       "verse": 1,
       "token": 6,
       "greekSurface": "τῇ",
-      "lbfSurface": "a",
-      "lbfWordIndex": 6
+      "lbfSurface": "la",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 2,
@@ -1827,8 +2003,8 @@
       "verse": 2,
       "token": 1,
       "greekSurface": "πρεσβύτας",
-      "lbfSurface": "Que",
-      "lbfWordIndex": 0
+      "lbfSurface": "ancianos",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 2,
@@ -1845,6 +2021,14 @@
       "greekSurface": "εἶναι,",
       "lbfSurface": "sean",
       "lbfWordIndex": 3
+    },
+    {
+      "chapter": 2,
+      "verse": 2,
+      "token": 4,
+      "greekSurface": "σεμνούς,",
+      "lbfSurface": "dignos",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 2,
@@ -1907,8 +2091,8 @@
       "verse": 3,
       "token": 1,
       "greekSurface": "Πρεσβύτιδας",
-      "lbfSurface": "Las",
-      "lbfWordIndex": 0
+      "lbfSurface": "ancianas",
+      "lbfWordIndex": 1
     },
     {
       "chapter": 2,
@@ -2011,8 +2195,8 @@
       "verse": 4,
       "token": 2,
       "greekSurface": "⸀σωφρονίζωσι",
-      "lbfSurface": "a",
-      "lbfWordIndex": 3
+      "lbfSurface": "instruyan",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 2,
@@ -2051,8 +2235,8 @@
       "verse": 4,
       "token": 7,
       "greekSurface": "φιλοτέκνους,",
-      "lbfSurface": "de",
-      "lbfWordIndex": 9
+      "lbfSurface": "amantes de sus hijos",
+      "lbfWordIndex": 12
     },
     {
       "chapter": 2,
@@ -2107,8 +2291,8 @@
       "verse": 5,
       "token": 7,
       "greekSurface": "ἰδίοις",
-      "lbfSurface": "sus",
-      "lbfWordIndex": 8
+      "lbfSurface": "propios",
+      "lbfWordIndex": 9
     },
     {
       "chapter": 2,
@@ -2155,16 +2339,16 @@
       "verse": 5,
       "token": 13,
       "greekSurface": "τοῦ",
-      "lbfSurface": "del",
-      "lbfWordIndex": 3
+      "lbfSurface": "de",
+      "lbfWordIndex": 15
     },
     {
       "chapter": 2,
       "verse": 5,
       "token": 14,
       "greekSurface": "θεοῦ",
-      "lbfSurface": "de",
-      "lbfWordIndex": 15
+      "lbfSurface": "Dios",
+      "lbfWordIndex": 16
     },
     {
       "chapter": 2,
@@ -2181,6 +2365,14 @@
       "greekSurface": "Τοὺς",
       "lbfSurface": "los",
       "lbfWordIndex": 3
+    },
+    {
+      "chapter": 2,
+      "verse": 6,
+      "token": 2,
+      "greekSurface": "νεωτέρους",
+      "lbfSurface": "jóvenes",
+      "lbfWordIndex": 4
     },
     {
       "chapter": 2,
@@ -2203,8 +2395,8 @@
       "verse": 6,
       "token": 5,
       "greekSurface": "σωφρονεῖν·",
-      "lbfSurface": "a",
-      "lbfWordIndex": 2
+      "lbfSurface": "prudentes",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 2,
@@ -2227,8 +2419,8 @@
       "verse": 7,
       "token": 3,
       "greekSurface": "σεαυτὸν",
-      "lbfSurface": "de",
-      "lbfWordIndex": 5
+      "lbfSurface": "mostrándote",
+      "lbfWordIndex": 0
     },
     {
       "chapter": 2,
@@ -2277,6 +2469,14 @@
       "greekSurface": "τῇ",
       "lbfSurface": "la",
       "lbfWordIndex": 9
+    },
+    {
+      "chapter": 2,
+      "verse": 7,
+      "token": 10,
+      "greekSurface": "διδασκαλίᾳ",
+      "lbfSurface": "enseñanza",
+      "lbfWordIndex": 10
     },
     {
       "chapter": 2,
@@ -2361,10 +2561,18 @@
     {
       "chapter": 2,
       "verse": 8,
+      "token": 9,
+      "greekSurface": "μηδὲν",
+      "lbfSurface": "nada",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 2,
+      "verse": 8,
       "token": 10,
       "greekSurface": "ἔχων",
-      "lbfSurface": "no",
-      "lbfWordIndex": 12
+      "lbfSurface": "teniendo",
+      "lbfWordIndex": 13
     },
     {
       "chapter": 2,
@@ -2411,16 +2619,24 @@
       "verse": 9,
       "token": 2,
       "greekSurface": "ἰδίοις",
-      "lbfSurface": "sus",
-      "lbfWordIndex": 5
+      "lbfSurface": "propios",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 2,
+      "verse": 9,
+      "token": 3,
+      "greekSurface": "δεσπόταις",
+      "lbfSurface": "amos",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 2,
       "verse": 9,
       "token": 4,
       "greekSurface": "ὑποτάσσεσθαι",
-      "lbfSurface": "a",
-      "lbfWordIndex": 4
+      "lbfSurface": "someterse",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 2,
@@ -2464,6 +2680,14 @@
     },
     {
       "chapter": 2,
+      "verse": 9,
+      "token": 10,
+      "greekSurface": "ἀντιλέγοντας,",
+      "lbfSurface": "contradiciendo",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 2,
       "verse": 10,
       "token": 1,
       "greekSurface": "μὴ",
@@ -2473,10 +2697,34 @@
     {
       "chapter": 2,
       "verse": 10,
+      "token": 2,
+      "greekSurface": "νοσφιζομένους,",
+      "lbfSurface": "apropiándose",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 3,
+      "greekSurface": "ἀλλὰ",
+      "lbfSurface": "sino",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
       "token": 4,
       "greekSurface": "⸂πᾶσαν",
       "lbfSurface": "toda",
       "lbfWordIndex": 4
+    },
+    {
+      "chapter": 2,
+      "verse": 10,
+      "token": 5,
+      "greekSurface": "πίστιν⸃",
+      "lbfSurface": "fidelidad",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 2,
@@ -2531,8 +2779,8 @@
       "verse": 10,
       "token": 14,
       "greekSurface": "ἡμῶν",
-      "lbfSurface": "de",
-      "lbfWordIndex": 14
+      "lbfSurface": "nuestro",
+      "lbfWordIndex": 16
     },
     {
       "chapter": 2,
@@ -2571,8 +2819,8 @@
       "verse": 11,
       "token": 1,
       "greekSurface": "Ἐπεφάνη",
-      "lbfSurface": "se",
-      "lbfWordIndex": 1
+      "lbfSurface": "manifestado",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 2,
@@ -2637,6 +2885,14 @@
       "greekSurface": "ἀνθρώποις",
       "lbfSurface": "hombres",
       "lbfWordIndex": 12
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 1,
+      "greekSurface": "παιδεύουσα",
+      "lbfSurface": "disciplinándonos",
+      "lbfWordIndex": 0
     },
     {
       "chapter": 2,
@@ -2755,8 +3011,16 @@
       "verse": 12,
       "token": 18,
       "greekSurface": "τῷ",
-      "lbfSurface": "a",
-      "lbfWordIndex": 9
+      "lbfSurface": "el",
+      "lbfWordIndex": 19
+    },
+    {
+      "chapter": 2,
+      "verse": 12,
+      "token": 19,
+      "greekSurface": "νῦν",
+      "lbfSurface": "presente",
+      "lbfWordIndex": 20
     },
     {
       "chapter": 2,
@@ -2765,6 +3029,14 @@
       "greekSurface": "αἰῶνι,",
       "lbfSurface": "siglo",
       "lbfWordIndex": 21
+    },
+    {
+      "chapter": 2,
+      "verse": 13,
+      "token": 1,
+      "greekSurface": "προσδεχόμενοι",
+      "lbfSurface": "aguardando",
+      "lbfWordIndex": 0
     },
     {
       "chapter": 2,
@@ -2889,18 +3161,26 @@
     {
       "chapter": 2,
       "verse": 14,
+      "token": 1,
+      "greekSurface": "ὃς",
+      "lbfSurface": "quien",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 2,
+      "verse": 14,
       "token": 2,
       "greekSurface": "ἔδωκεν",
-      "lbfSurface": "se",
-      "lbfWordIndex": 1
+      "lbfSurface": "dio",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 2,
       "verse": 14,
       "token": 3,
       "greekSurface": "ἑαυτὸν",
-      "lbfSurface": "sí",
-      "lbfWordIndex": 4
+      "lbfSurface": "mismo",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 2,
@@ -3025,6 +3305,14 @@
     {
       "chapter": 2,
       "verse": 15,
+      "token": 1,
+      "greekSurface": "Ταῦτα",
+      "lbfSurface": "Estas cosas",
+      "lbfWordIndex": 0
+    },
+    {
+      "chapter": 2,
+      "verse": 15,
       "token": 2,
       "greekSurface": "λάλει",
       "lbfSurface": "habla",
@@ -3121,18 +3409,10 @@
     {
       "chapter": 3,
       "verse": 1,
-      "token": 2,
-      "greekSurface": "αὐτοὺς",
-      "lbfSurface": "los",
-      "lbfWordIndex": 5
-    },
-    {
-      "chapter": 3,
-      "verse": 1,
       "token": 3,
       "greekSurface": "⸀ἀρχαῖς",
-      "lbfSurface": "a",
-      "lbfWordIndex": 4
+      "lbfSurface": "gobernantes",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 3,
@@ -3141,6 +3421,14 @@
       "greekSurface": "ἐξουσίαις",
       "lbfSurface": "autoridades",
       "lbfWordIndex": 10
+    },
+    {
+      "chapter": 3,
+      "verse": 1,
+      "token": 5,
+      "greekSurface": "ὑποτάσσεσθαι",
+      "lbfSurface": "sometan",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 3,
@@ -3155,8 +3443,8 @@
       "verse": 1,
       "token": 7,
       "greekSurface": "πρὸς",
-      "lbfSurface": "a",
-      "lbfWordIndex": 8
+      "lbfSurface": "para",
+      "lbfWordIndex": 15
     },
     {
       "chapter": 3,
@@ -3195,8 +3483,8 @@
       "verse": 1,
       "token": 12,
       "greekSurface": "εἶναι,",
-      "lbfSurface": "que",
-      "lbfWordIndex": 11
+      "lbfSurface": "estar",
+      "lbfWordIndex": 13
     },
     {
       "chapter": 3,
@@ -3219,8 +3507,8 @@
       "verse": 2,
       "token": 3,
       "greekSurface": "ἀμάχους",
-      "lbfSurface": "no",
-      "lbfWordIndex": 4
+      "lbfSurface": "contenciosos",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 3,
@@ -3267,8 +3555,8 @@
       "verse": 2,
       "token": 9,
       "greekSurface": "πρὸς",
-      "lbfSurface": "a",
-      "lbfWordIndex": 0
+      "lbfSurface": "hacia",
+      "lbfWordIndex": 10
     },
     {
       "chapter": 3,
@@ -3353,6 +3641,14 @@
     {
       "chapter": 3,
       "verse": 3,
+      "token": 9,
+      "greekSurface": "δουλεύοντες",
+      "lbfSurface": "esclavizados",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
       "token": 10,
       "greekSurface": "ἐπιθυμίαις",
       "lbfSurface": "deseos",
@@ -3433,6 +3729,14 @@
     {
       "chapter": 3,
       "verse": 3,
+      "token": 20,
+      "greekSurface": "μισοῦντες",
+      "lbfSurface": "odiándonos",
+      "lbfWordIndex": 22
+    },
+    {
+      "chapter": 3,
+      "verse": 3,
       "token": 21,
       "greekSurface": "ἀλλήλους.",
       "lbfSurface": "unos",
@@ -3451,8 +3755,8 @@
       "verse": 4,
       "token": 2,
       "greekSurface": "δὲ",
-      "lbfSurface": "y",
-      "lbfWordIndex": 6
+      "lbfSurface": "Pero",
+      "lbfWordIndex": 0
     },
     {
       "chapter": 3,
@@ -3469,6 +3773,14 @@
       "greekSurface": "χρηστότης",
       "lbfSurface": "bondad",
       "lbfWordIndex": 5
+    },
+    {
+      "chapter": 3,
+      "verse": 4,
+      "token": 5,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 3,
@@ -3545,14 +3857,6 @@
     {
       "chapter": 3,
       "verse": 5,
-      "token": 5,
-      "greekSurface": "ἐν",
-      "lbfSurface": "de",
-      "lbfWordIndex": 17
-    },
-    {
-      "chapter": 3,
-      "verse": 5,
       "token": 6,
       "greekSurface": "δικαιοσύνῃ",
       "lbfSurface": "justicia",
@@ -3585,6 +3889,14 @@
     {
       "chapter": 3,
       "verse": 5,
+      "token": 10,
+      "greekSurface": "ἀλλὰ",
+      "lbfSurface": "sino",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
       "token": 11,
       "greekSurface": "κατὰ",
       "lbfSurface": "según",
@@ -3593,18 +3905,10 @@
     {
       "chapter": 3,
       "verse": 5,
-      "token": 12,
-      "greekSurface": "⸂τὸ",
-      "lbfSurface": "la",
-      "lbfWordIndex": 18
-    },
-    {
-      "chapter": 3,
-      "verse": 5,
       "token": 13,
       "greekSurface": "αὐτοῦ",
-      "lbfSurface": "el",
-      "lbfWordIndex": 15
+      "lbfSurface": "su",
+      "lbfWordIndex": 10
     },
     {
       "chapter": 3,
@@ -3629,6 +3933,14 @@
       "greekSurface": "ἡμᾶς",
       "lbfSurface": "nos",
       "lbfWordIndex": 12
+    },
+    {
+      "chapter": 3,
+      "verse": 5,
+      "token": 17,
+      "greekSurface": "διὰ",
+      "lbfSurface": "mediante",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 3,
@@ -3683,7 +3995,7 @@
       "verse": 6,
       "token": 1,
       "greekSurface": "οὗ",
-      "lbfSurface": "cual",
+      "lbfSurface": "el cual",
       "lbfWordIndex": 1
     },
     {
@@ -3731,8 +4043,8 @@
       "verse": 6,
       "token": 7,
       "greekSurface": "Ἰησοῦ",
-      "lbfSurface": "de",
-      "lbfWordIndex": 8
+      "lbfSurface": "Jesús",
+      "lbfWordIndex": 9
     },
     {
       "chapter": 3,
@@ -3811,8 +4123,8 @@
       "verse": 7,
       "token": 7,
       "greekSurface": "⸀γενηθῶμεν",
-      "lbfSurface": "a",
-      "lbfWordIndex": 9
+      "lbfSurface": "llegáramos a ser",
+      "lbfWordIndex": 8
     },
     {
       "chapter": 3,
@@ -3907,8 +4219,16 @@
       "verse": 8,
       "token": 8,
       "greekSurface": "σε",
-      "lbfSurface": "que",
-      "lbfWordIndex": 10
+      "lbfSurface": "te",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
+      "token": 9,
+      "greekSurface": "διαβεβαιοῦσθαι,",
+      "lbfSurface": "afirmes firmemente",
+      "lbfWordIndex": 12
     },
     {
       "chapter": 3,
@@ -3948,7 +4268,7 @@
       "token": 15,
       "greekSurface": "οἱ",
       "lbfSurface": "los",
-      "lbfWordIndex": 34
+      "lbfWordIndex": 16
     },
     {
       "chapter": 3,
@@ -3969,10 +4289,18 @@
     {
       "chapter": 3,
       "verse": 8,
+      "token": 18,
+      "greekSurface": "ταῦτά",
+      "lbfSurface": "Estas cosas",
+      "lbfWordIndex": 27
+    },
+    {
+      "chapter": 3,
+      "verse": 8,
       "token": 19,
       "greekSurface": "⸀ἐστιν",
-      "lbfSurface": "cosas",
-      "lbfWordIndex": 28
+      "lbfSurface": "son",
+      "lbfWordIndex": 29
     },
     {
       "chapter": 3,
@@ -4003,8 +4331,8 @@
       "verse": 8,
       "token": 23,
       "greekSurface": "τοῖς",
-      "lbfSurface": "a",
-      "lbfWordIndex": 24
+      "lbfSurface": "para",
+      "lbfWordIndex": 33
     },
     {
       "chapter": 3,
@@ -4027,16 +4355,16 @@
       "verse": 9,
       "token": 2,
       "greekSurface": "δὲ",
-      "lbfSurface": "y",
-      "lbfWordIndex": 7
+      "lbfSurface": "Pero",
+      "lbfWordIndex": 0
     },
     {
       "chapter": 3,
       "verse": 9,
-      "token": 4,
-      "greekSurface": "καὶ",
-      "lbfSurface": "y",
-      "lbfWordIndex": 16
+      "token": 3,
+      "greekSurface": "ζητήσεις",
+      "lbfSurface": "controversias",
+      "lbfWordIndex": 4
     },
     {
       "chapter": 3,
@@ -4067,8 +4395,8 @@
       "verse": 9,
       "token": 10,
       "greekSurface": "νομικὰς",
-      "lbfSurface": "de",
-      "lbfWordIndex": 10
+      "lbfSurface": "acerca de la ley",
+      "lbfWordIndex": 9
     },
     {
       "chapter": 3,
@@ -4109,6 +4437,14 @@
       "greekSurface": "μάταιοι.",
       "lbfSurface": "vanas",
       "lbfWordIndex": 17
+    },
+    {
+      "chapter": 3,
+      "verse": 10,
+      "token": 1,
+      "greekSurface": "αἱρετικὸν",
+      "lbfSurface": "sectario",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 3,
@@ -4165,6 +4501,14 @@
       "greekSurface": "παραιτοῦ,",
       "lbfSurface": "recházalo",
       "lbfWordIndex": 9
+    },
+    {
+      "chapter": 3,
+      "verse": 11,
+      "token": 1,
+      "greekSurface": "εἰδὼς",
+      "lbfSurface": "sabiendo",
+      "lbfWordIndex": 0
     },
     {
       "chapter": 3,
@@ -4275,8 +4619,8 @@
       "verse": 12,
       "token": 7,
       "greekSurface": "Τυχικόν,",
-      "lbfSurface": "a",
-      "lbfWordIndex": 7
+      "lbfSurface": "Tíquico",
+      "lbfWordIndex": 8
     },
     {
       "chapter": 3,
@@ -4377,6 +4721,14 @@
     {
       "chapter": 3,
       "verse": 13,
+      "token": 3,
+      "greekSurface": "νομικὸν",
+      "lbfSurface": "jurista",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 3,
+      "verse": 13,
       "token": 4,
       "greekSurface": "καὶ",
       "lbfSurface": "y",
@@ -4457,6 +4809,14 @@
     {
       "chapter": 3,
       "verse": 14,
+      "token": 3,
+      "greekSurface": "καὶ",
+      "lbfSurface": "también",
+      "lbfWordIndex": 2
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
       "token": 4,
       "greekSurface": "οἱ",
       "lbfSurface": "los",
@@ -4491,16 +4851,24 @@
       "verse": 14,
       "token": 8,
       "greekSurface": "προΐστασθαι",
-      "lbfSurface": "a",
-      "lbfWordIndex": 7
+      "lbfSurface": "dedicarse",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 3,
       "verse": 14,
       "token": 9,
       "greekSurface": "εἰς",
-      "lbfSurface": "a",
-      "lbfWordIndex": 5
+      "lbfSurface": "para",
+      "lbfWordIndex": 10
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "token": 11,
+      "greekSurface": "ἀναγκαίας",
+      "lbfSurface": "urgentes",
+      "lbfWordIndex": 13
     },
     {
       "chapter": 3,
@@ -4516,7 +4884,7 @@
       "token": 13,
       "greekSurface": "ἵνα",
       "lbfSurface": "para",
-      "lbfWordIndex": 10
+      "lbfWordIndex": 14
     },
     {
       "chapter": 3,
@@ -4533,6 +4901,14 @@
       "greekSurface": "ὦσιν",
       "lbfSurface": "sean",
       "lbfWordIndex": 17
+    },
+    {
+      "chapter": 3,
+      "verse": 14,
+      "token": 16,
+      "greekSurface": "ἄκαρποι.",
+      "lbfSurface": "infructuosos",
+      "lbfWordIndex": 18
     },
     {
       "chapter": 3,

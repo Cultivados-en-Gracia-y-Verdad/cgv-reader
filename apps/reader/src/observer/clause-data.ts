@@ -3,7 +3,7 @@ import type { FrameType } from "./clause-signals";
 import titusMorph from "@cgv-data/morphology/MorphGNT/77-Tit-morphgnt.txt?raw";
 import titusAlignment from "@cgv-data/interlinears/NT/tito.tokens.jsonl?raw";
 import titusLbf from "@cgv-lbf/nt/tito.md?raw";
-import { loadLbfTokenWordMap } from "./lbf-alignment";
+import { loadLbfTokenSurfaces, loadLbfTokenWordMap } from "./lbf-alignment";
 
 // The Clause Builder / Observer workshop reads LBF (La Biblia Fiel) as its
 // Spanish surface — reverse-interlinear / settled reading. Greek workstation
@@ -77,6 +77,10 @@ export interface SpanishWord {
   participleGender?: string;
   /** Only meaningful when participleCase is "G" — is the preceding Greek token a preposition? */
   participlePrecededByPreposition?: boolean;
+  /** Greek alignment id when this word carries an infinitive (mood N) — mechanical morph lookup. */
+  infinitiveId?: string;
+  infinitiveSurface?: string;
+  infinitiveLemma?: string;
 }
 
 export interface SpanishClauseVerse {
@@ -365,6 +369,11 @@ function isParticipleMorph(morph: string): boolean {
   return morph.startsWith("V-") && morph[5] === "P";
 }
 
+/** MorphGNT mood slot N — infinitive (e.g. V--PAN---- εἶναι). */
+export function isInfinitiveMorph(morph: string): boolean {
+  return morph.startsWith("V-") && morph[5] === "N";
+}
+
 /**
  * Verses whose Greek text has no finite verb at all (e.g. Titus 1:1's long
  * verbless run of appositions) — computed from the Greek morphology directly,
@@ -432,7 +441,11 @@ export function loadTitusClauseVerses(): SpanishClauseVerse[] {
   // view with no trace. Loud rather than silent: log it so a real collision
   // gets fixed, instead of one candidate just vanishing (see
   // participle-data-fixes-spec.md item 1).
-  function warnOnIdCollision(word: SpanishWord, field: "finiteVerbId" | "dependentIntroducerId" | "participleId", nextId: string): void {
+  function warnOnIdCollision(
+    word: SpanishWord,
+    field: "finiteVerbId" | "dependentIntroducerId" | "participleId" | "infinitiveId",
+    nextId: string
+  ): void {
     const currentId = word[field];
     if (currentId && currentId !== nextId) {
       console.warn(`[clause-data] ${field} collision on word ${word.id}: had "${currentId}", now overwritten by "${nextId}"`);
@@ -512,6 +525,27 @@ export function loadTitusClauseVerses(): SpanishClauseVerse[] {
       );
       word.participlePrecededByPreposition = precedingToken?.greekMorph.startsWith("P") ?? false;
     }
+  }
+
+  // Infinitives: same mechanical morph certainty as participles. Compiler lists
+  // them under the host finite clause for now; a future O observation layer can
+  // ask students to find them before they appear in the manual.
+  for (const alignment of allTokenAlignments) {
+    if (!isInfinitiveMorph(alignment.greekMorph)) continue;
+
+    const key = `${alignment.chapter}:${alignment.verse}`;
+    const verse = verseByKey.get(key);
+    if (!verse) continue;
+
+    const wordIndex = getTokenWordMap(alignment.chapter, alignment.verse, verse.words).get(alignment.token);
+    if (wordIndex === undefined) continue;
+    const word = verse.words[wordIndex];
+    if (!word) continue;
+
+    warnOnIdCollision(word, "infinitiveId", alignment.id);
+    word.infinitiveId = alignment.id;
+    word.infinitiveSurface = stripGreekPunctuation(alignment.greekSurface);
+    word.infinitiveLemma = alignment.greekLemma;
   }
 
   return verses;
@@ -626,6 +660,82 @@ export function deriveGreekClauseRange(
  * counterpart (a function word folded into an adjacent translation) still
  * produces one clean span rather than a hole in the middle.
  */
+const RELATIVE_HEAD = new Set(["cual", "cuales", "quien", "quienes", "quién", "quiénes", "que"]);
+const BEFORE_RELATIVE = new Set(["la", "el", "los", "las", "a", "lo"]);
+
+function normalizeSpanishWord(value: string): string {
+  return value
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+/**
+ * Greek relatives / idioms often map to multi-word LBF surfaces ("la cual",
+ * "a quienes", "tapar la boca"). Alignment anchors one index; expand the
+ * Spanish span to cover the whole phrase when the surface matches the verse.
+ */
+function expandAlignedPhrases(
+  low: number,
+  high: number,
+  verseWords: SpanishWord[],
+  chapter: number,
+  verse: number,
+  startToken: number,
+  endToken: number
+): { low: number; high: number } {
+  const surfaces = loadLbfTokenSurfaces(chapter, verse);
+  const tokenToWord = loadLbfTokenWordMap(chapter, verse);
+  let nextLow = low;
+  let nextHigh = high;
+
+  for (let token = startToken; token <= endToken; token += 1) {
+    const surface = surfaces.get(token);
+    const anchor = tokenToWord.get(token);
+    if (!surface || anchor === undefined) continue;
+    const parts = surface
+      .split(/\s+/)
+      .map(normalizeSpanishWord)
+      .filter(Boolean);
+    if (parts.length < 2) continue;
+
+    const anchorNorm = normalizeSpanishWord(verseWords[anchor]?.text ?? "");
+    const partAt = parts.indexOf(anchorNorm);
+    if (partAt < 0) continue;
+
+    const phraseStart = anchor - partAt;
+    const phraseEnd = phraseStart + parts.length - 1;
+    if (phraseStart < 0 || phraseEnd >= verseWords.length) continue;
+
+    let matches = true;
+    for (let i = 0; i < parts.length; i += 1) {
+      if (normalizeSpanishWord(verseWords[phraseStart + i]?.text ?? "") !== parts[i]) {
+        matches = false;
+        break;
+      }
+    }
+    if (!matches) continue;
+
+    nextLow = Math.min(nextLow, phraseStart);
+    nextHigh = Math.max(nextHigh, phraseEnd);
+  }
+
+  // Fallback when surface is still a bare relative head ("cual") with article before it.
+  const head = verseWords[nextLow];
+  const previous = nextLow > 0 ? verseWords[nextLow - 1] : null;
+  if (
+    head &&
+    previous &&
+    RELATIVE_HEAD.has(normalizeSpanishWord(head.text)) &&
+    BEFORE_RELATIVE.has(normalizeSpanishWord(previous.text))
+  ) {
+    nextLow -= 1;
+  }
+
+  return { low: nextLow, high: nextHigh };
+}
+
 export function deriveSpanishSpanFromGreekRange(
   chapter: number,
   verse: number,
@@ -641,8 +751,10 @@ export function deriveSpanishSpanFromGreekRange(
   }
   if (!wordIndexes.size) return [];
 
-  const low = Math.min(...wordIndexes);
-  const high = Math.max(...wordIndexes);
+  let low = Math.min(...wordIndexes);
+  let high = Math.max(...wordIndexes);
+  ({ low, high } = expandAlignedPhrases(low, high, verseWords, chapter, verse, startToken, endToken));
+
   const ids: string[] = [];
   for (let index = low; index <= high; index += 1) {
     ids.push(wordId(chapter, verse, index));
@@ -654,20 +766,34 @@ export interface GreekSpanAuditEntry {
   finiteVerbId: string;
   chapter: number;
   verse: number;
+  /** Authoritative Greek boundary, if present. */
   storedRange: GreekClauseRange | null;
-  derivedRange: GreekClauseRange | null;
+  /**
+   * Spanish word ids implied by the stored Greek range (Greek → Spanish).
+   * Compared to assignment.selectedSpan — not the old Spanish → Greek
+   * re-derivation, which is lossy under LBF and made Save look like a no-op.
+   */
+  expectedSpanishSpan: string[];
+  actualSpanishSpan: string[];
   mismatch: boolean;
 }
 
+function sameWordIdSpan(a: string[], b: string[]): boolean {
+  if (a.length !== b.length) return false;
+  const left = [...a].sort();
+  const right = [...b].sort();
+  return left.every((id, index) => id === right[index]);
+}
+
 /**
- * Per clause-selection-greek-spec.md: once greekStartTokenId/greekEndTokenId
- * are first written onto an assignment, they're never recomputed even if the
- * student later edits selectedSpan (see the write-once guard in
- * loadTitusClauseVerses' caller) — so a clause's stored Greek range can
- * silently drift out of sync with its current Spanish span. This re-derives
- * the range fresh from each clause's current selectedSpan and flags any
- * clause where that differs from what's actually stored, rather than
- * assuming existing data is fine. Read-only — does not touch storage.
+ * Greek is authoritative (clause-selection-greek-spec.md). Flag a clause when
+ * its stored Spanish selectedSpan no longer matches what the stored Greek
+ * range maps to via LBF — e.g. after an alignment fix, or a pre-migration
+ * Spanish span that never agreed with the Greek boundary. Read-only.
+ *
+ * Does **not** re-derive Greek from Spanish: that path uses punctuation /
+ * finite-verb heuristics and cannot round-trip a student-chosen Greek range,
+ * so Save would never clear the audit.
  */
 export function auditGreekSpanConsistency(
   verses: SpanishClauseVerse[],
@@ -683,24 +809,39 @@ export function auditGreekSpanConsistency(
     if (!parsed) continue;
 
     const verseWords = wordsByVerse.get(`${parsed.chapter}:${parsed.verse}`) ?? [];
-    const derivedRange = deriveGreekClauseRange(assignment.selectedSpan, verseWords, finiteVerbId);
     const storedRange =
       assignment.greekStartTokenId && assignment.greekEndTokenId
         ? { greekStartTokenId: assignment.greekStartTokenId, greekEndTokenId: assignment.greekEndTokenId }
         : null;
 
+    let expectedSpanishSpan: string[] = [];
+    if (storedRange) {
+      const start = parseAlignmentId(storedRange.greekStartTokenId);
+      const end = parseAlignmentId(storedRange.greekEndTokenId);
+      if (start && end && start.chapter === end.chapter && start.verse === end.verse) {
+        expectedSpanishSpan = deriveSpanishSpanFromGreekRange(
+          start.chapter,
+          start.verse,
+          Math.min(start.token, end.token),
+          Math.max(start.token, end.token),
+          verseWords
+        );
+      }
+    }
+
+    const actualSpanishSpan = assignment.selectedSpan.slice();
     const mismatch =
       !storedRange ||
-      !derivedRange ||
-      storedRange.greekStartTokenId !== derivedRange.greekStartTokenId ||
-      storedRange.greekEndTokenId !== derivedRange.greekEndTokenId;
+      !expectedSpanishSpan.length ||
+      !sameWordIdSpan(actualSpanishSpan, expectedSpanishSpan);
 
     entries.push({
       finiteVerbId,
       chapter: parsed.chapter,
       verse: parsed.verse,
       storedRange,
-      derivedRange,
+      expectedSpanishSpan,
+      actualSpanishSpan,
       mismatch
     });
   }
@@ -748,6 +889,7 @@ function parseStoredClauseAssignments(stored: string | null): ClauseAssignments 
         selectedSpan?: unknown;
         greekStartTokenId?: unknown;
         greekEndTokenId?: unknown;
+        greekConfirmedAt?: unknown;
       };
       if (Array.isArray(record.selectedSpan)) {
         const selectedSpan = record.selectedSpan.filter((id): id is string => typeof id === "string");
@@ -756,7 +898,10 @@ function parseStoredClauseAssignments(stored: string | null): ClauseAssignments 
             finiteVerbId: typeof record.finiteVerbId === "string" ? record.finiteVerbId : finiteVerbId,
             selectedSpan,
             ...(typeof record.greekStartTokenId === "string" ? { greekStartTokenId: record.greekStartTokenId } : {}),
-            ...(typeof record.greekEndTokenId === "string" ? { greekEndTokenId: record.greekEndTokenId } : {})
+            ...(typeof record.greekEndTokenId === "string" ? { greekEndTokenId: record.greekEndTokenId } : {}),
+            // Must round-trip: dropping this on read made every refresh look like
+            // "0 of N confirmed" even after a full Greek re-save pass.
+            ...(typeof record.greekConfirmedAt === "string" ? { greekConfirmedAt: record.greekConfirmedAt } : {})
           };
         }
         continue;

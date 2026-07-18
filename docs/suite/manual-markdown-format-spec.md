@@ -15,16 +15,14 @@ Writer output should follow, and the norm to teach writers directly.
   nominal sentence), and the whole 1:1–2 stretch belongs grammatically to the one main verb
   that doesn't appear until 1:3 (ἐφανέρωσεν). **`### Tito 1:1` should not exist as its own
   heading with an empty root line.** Instead, the heading spans however far the actual
-  grammatical unit runs (e.g. `### Tito 1:1–3`), and verbless material like 1:1's opening
-  surfaces later as a bullet under that root clause once the detailed pass places it — same
-  treatment as any other dependent material, just verbless dependent material instead of a
-  clause. Plain heading text either way, not the clause itself — the clause's own quoted text
-  lives as body text directly underneath.
-- **H4–H6** — reserved for whatever anchor-text/comment structure your existing manuals
-  already use (anchor phrase, comment level 1, comment level 2) — unaffected by this spec.
-  Anchors are human-chosen and not required to align with clause boundaries at all (see
-  `cgv-product-suite-spec.md` discussion — a writer can anchor on a single connective word
-  like "porque" if that's what needs explaining).
+  grammatical unit runs (e.g. `### Tito 1:1–3`). The H3 **heading line** is
+  `### {reference} — “{independent clause}”` — unit claim on the same line as the reference
+  (auto from O), not a separate slide. Under that heading on the same slide: the full-verse
+  **reading block**. Dissection (`####` / `+` / `-` / `*`) follows on later slides.
+  Verbless material like 1:1 surfaces as **`+` phrase** items (not `-` clause bullets).
+- **H4 (`####`)** — root clause's own quoted Scripture (finite-verb independent clause), own
+  outline slide; may repeat the H3 claim text. Writer phrase slices and comments use list
+  markers below — not further heading levels for dependency depth.
 
 **Explicitly rejected:** one heading level per dependency depth (H1=root, H2=dependent-1,
 H3=dependent-2...). Markdown has six heading levels; dependency chains in Titus alone already
@@ -35,34 +33,52 @@ has no such ceiling — see below.
 
 ---
 
-## Root clause and its dependents
+## Root, dependents, and phrases (locked with Compiler)
 
-**Root clause:** plain paragraph text directly under the H3, quoted and italicized like any
-Scripture text. Its own connector (if it opens with one) stays inline, underlined in place —
-never stripped out and never bulleted. Immediately below it, the marker line: the connector
-word repeated in quotes, an em-dash, then its type (see below) — also plain text, no bullet,
-no extra indent. Root and its marker are never bulleted; giving them a bullet or a heading of
-their own would visually rank the root as more important than what depends on it, which it
-isn't — it's the trunk, not the point.
+See also `docs/compiler/compiler-manual-generation-spec.md` — same markers.
 
-**Every dependent clause is a list item**, nested to its actual dependency depth. Its quoted
-text is the item; its marker line sits as a second line inside that same item, not merged
-onto one line with the clause text (tested and rejected — cramming both onto one line reads
-fine in isolation but becomes hard to scan once clauses run longer than a single verse).
-Deeper dependents (a purpose clause nested under a content clause, for instance) just nest
-the list further — indentation, not new heading levels.
+**Presentation rule: every blank line = a new slide.** This file is the slide source.
+
+| Marker | Meaning | Outline? |
+|---|---|---|
+| H1 / H2 | Context / unit labels only | No |
+| H3 line | `### ref — *root…*` (own slide; blank after) | Unit claim |
+| Reading quotes | Full verses on the next slide | Reading |
+| `####` | Root clause (outline slide; may repeat H3 claim) | Yes |
+| `-` | Dependent clause (finite) | Yes |
+| `+` | Phrase / verbless Scripture | Yes |
+| `*` | Mechanical grammar note (own slide) | Yes |
+
+**Outline = skeleton.** Indentation left→right shows structural depth. H1/H2 are not part of it.
+
+**Blank after H3** — unit claim is its own slide; reading quotes follow on the next slide.
+Each `####` / `-` / `+` / `*` gets its own slide. Keep slides short: clause slide = marker
+(+ optional antecedent only); each Nota/Def/XRef and each grammar `*` is its own slide.
+Grammar labels name **Spanish then Greek**: `"enseñando" (διδάσκοντες)`.
 
 ```markdown
-### Tito 1:5
+# TODO: contexto
+## TODO: unidad
 
-"Porque de tal manera te dejé en Creta,"
-"Porque" — conector relacional · razón/fundamento
+### Tito 1:1–3 — *y a su propio tiempo manifestó su palabra…*
 
-- "para que pusieras en orden lo que queda,"
-  "para que" — marcador subordinante · propósito
-- "y designaras ancianos en cada ciudad"
-  *(mismo ἵνα — hereda de la cláusula anterior)*
+*Pablo, siervo de Dios…*
+*para la esperanza…*
+
++ *Pablo, siervo de Dios…*
+
+- *la cual prometió el Dios que es sin mentira,*
+*la vida eterna*
+
+* "la cual" abre una frase que habla más de *la vida eterna*.
+
+#### *y a su propio tiempo manifestó su palabra…*
+
+* "y" une esta frase a la anterior. Solo suma; no cambia el sentido ni da una razón.
 ```
+
+**Scripture typography (locked):** Scripture = markdown italics `*…*` only. Nothing else is
+italic. Grammar-note lines open with `* ` (marker + space) and stay roman; tokens `"así"`.
 
 ---
 

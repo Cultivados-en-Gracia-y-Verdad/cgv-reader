@@ -6,7 +6,8 @@
 
 export type Capability = "observer" | "compiler";
 
-const CAPABILITIES_KEY = "cgv-suite:capabilities";
+const CAPABILITIES_KEY = "cgv-reader:capabilities";
+const LEGACY_CAPABILITIES_KEY = "cgv-suite:capabilities";
 
 export interface CapabilityState {
   observer: boolean;
@@ -25,7 +26,9 @@ function isBrowser(): boolean {
 export function readCapabilities(): CapabilityState {
   if (!isBrowser()) return { ...DEFAULT_CAPABILITIES };
   try {
-    const raw = window.localStorage.getItem(CAPABILITIES_KEY);
+    const raw =
+      window.localStorage.getItem(CAPABILITIES_KEY) ??
+      window.localStorage.getItem(LEGACY_CAPABILITIES_KEY);
     if (!raw) return { ...DEFAULT_CAPABILITIES };
     const parsed = JSON.parse(raw) as Partial<CapabilityState>;
     return {

@@ -24,9 +24,12 @@ interface RawAlignmentFile {
 
 let cachedByVerse: Map<string, Map<number, number>> | null = null;
 let cachedSurfacesByVerse: Map<string, Map<number, string>> | null = null;
+let cachedRaw: string | null = null;
 
 function ensureCaches(): void {
-  if (cachedByVerse && cachedSurfacesByVerse) return;
+  // Reparse when Vite HMR swaps the raw JSON string (alignment edits in-session).
+  if (cachedByVerse && cachedSurfacesByVerse && cachedRaw === titusLbfAlignment) return;
+  cachedRaw = titusLbfAlignment;
 
   const data = JSON.parse(titusLbfAlignment) as RawAlignmentFile;
   const byVerse = new Map<string, Map<number, number>>();

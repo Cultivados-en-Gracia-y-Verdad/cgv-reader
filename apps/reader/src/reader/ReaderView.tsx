@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { BibleVerse } from "cgv-bible";
+import { NOTES_KEY, readBibleVersion, subscribeBibleVersion, type BibleVersionId } from "@cgv/core";
+import { useUiLanguage } from "../core/UiLanguageContext";
 import { loadTitus } from "./reader-data";
 
 interface ReaderNote {
@@ -13,49 +15,6 @@ interface ReaderNote {
 interface NoteTarget {
   key: string;
   label: string;
-}
-
-const NOTES_KEY = "the-reader:titus:notes";
-const LANGUAGE_KEY = "the-reader:titus:language";
-
-// Interface language — independent of Bible version/text (per
-// cgv-product-suite-spec.md's Reader preferences: Bible version, Language,
-// and Font are separate knobs). This only ever changes Reader's own chrome
-// (labels, button text, placeholders) — never the loaded Bible text itself.
-type Language = "en" | "es";
-
-const STRINGS: Record<Language, {
-  kicker: string;
-  notePlaceholder: string;
-  close: string;
-  delete: string;
-  save: string;
-  noteFor: (label: string) => string;
-  notesFor: (label: string) => string;
-}> = {
-  en: {
-    kicker: "The Reader",
-    notePlaceholder: "Write a short note...",
-    close: "Close",
-    delete: "Delete",
-    save: "Save",
-    noteFor: label => `Note for ${label}`,
-    notesFor: label => `Notes for ${label}`
-  },
-  es: {
-    kicker: "El Lector",
-    notePlaceholder: "Escriba una nota breve...",
-    close: "Cerrar",
-    delete: "Borrar",
-    save: "Guardar",
-    noteFor: label => `Nota para ${label}`,
-    notesFor: label => `Notas de ${label}`
-  }
-};
-
-function readLanguage(): Language {
-  const stored = window.localStorage.getItem(LANGUAGE_KEY);
-  return stored === "es" ? "es" : "en";
 }
 
 function verseKey(verse: BibleVerse): string {
@@ -94,21 +53,19 @@ function makeNoteId(): string {
 // to Observer's structural tools lives here; that seam is the R/O toggle one
 // level up (see ../ReaderApp.tsx), not a jump-button inside the page itself.
 export default function ReaderView() {
-  const book = useMemo(() => loadTitus(), []);
+  const { t } = useUiLanguage();
+  const [bibleVersion, setBibleVersion] = useState<BibleVersionId>(() => readBibleVersion());
+  const book = useMemo(() => loadTitus(bibleVersion), [bibleVersion]);
   const [notes, setNotes] = useState<ReaderNote[]>(readNotes);
-  const [language, setLanguage] = useState<Language>(readLanguage);
-  const t = STRINGS[language];
   const [activeTarget, setActiveTarget] = useState<NoteTarget | null>(null);
   const [draft, setDraft] = useState("");
   const noteInputRef = useRef<HTMLTextAreaElement | null>(null);
 
+  useEffect(() => subscribeBibleVersion(setBibleVersion), []);
+
   useEffect(() => {
     window.localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
   }, [notes]);
-
-  useEffect(() => {
-    window.localStorage.setItem(LANGUAGE_KEY, language);
-  }, [language]);
 
   useEffect(() => {
     if (!activeTarget) return;
@@ -174,31 +131,11 @@ export default function ReaderView() {
 
   return (
     <main className="reader-shell">
-      <div className="language-toggle" role="tablist" aria-label="Interface language">
-        <button
-          type="button"
-          className={`language-toggle-option${language === "en" ? " language-toggle-option--active" : ""}`}
-          onClick={() => setLanguage("en")}
-          role="tab"
-          aria-selected={language === "en"}
-        >
-          EN
-        </button>
-        <button
-          type="button"
-          className={`language-toggle-option${language === "es" ? " language-toggle-option--active" : ""}`}
-          onClick={() => setLanguage("es")}
-          role="tab"
-          aria-selected={language === "es"}
-        >
-          ES
-        </button>
-      </div>
-      <article className="reader-page" aria-label={t.kicker}>
+      <article className="reader-page" aria-label={t.readerKicker}>
         <header className="reader-header">
-          <p className="reader-kicker">{t.kicker}</p>
+          <p className="reader-kicker">{t.readerKicker}</p>
           <h1>{book.title}</h1>
-          <p className="reader-version">{book.version}</p>
+          <p className="reader-version">{book.versionLabel}</p>
         </header>
 
         <div className="reader-book">

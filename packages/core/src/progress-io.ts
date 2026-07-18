@@ -28,11 +28,11 @@ export function buildProgressBundle(): ProgressBundle {
     book: "titus",
     exportedAt: new Date().toISOString(),
     data,
-    source: "cgv-suite"
+    source: "cgv-reader"
   };
 }
 
-const EXPORT_SUBFOLDER = "cgv-suite";
+const EXPORT_SUBFOLDER = "cgv-reader";
 
 export function downloadProgressFile(): void {
   const bundle = buildProgressBundle();
@@ -67,7 +67,7 @@ export function applyProgressBundle(bundle: unknown): ImportSummary {
     throw new Error("That file doesn't look like a Titus progress export.");
   }
 
-  // Accept schema 1 bundles from cgv-reader and cgv-suite alike.
+  // Accept schema 1 bundles from this app and the former cgv-suite / lab export.
   if (record.schema !== undefined && record.schema !== 1) {
     throw new Error(`Unsupported progress schema: ${String(record.schema)}`);
   }

@@ -1,9 +1,32 @@
-import { useRef, useState, type ChangeEvent } from "react";
-import { applyProgressBundle, downloadProgressFile, readProgressFile } from "@cgv/core";
+import { useEffect, useRef, useState, type ChangeEvent } from "react";
+import {
+  applyProgressBundle,
+  downloadProgressFile,
+  flushAutosave,
+  linkAutosaveFile,
+  readProgressFile,
+  subscribeAutosaveStatus,
+  type AutosaveStatus
+} from "@cgv/core";
+import { useUiLanguage } from "./UiLanguageContext";
 
 export default function ProgressControls() {
+  const { t, language } = useUiLanguage();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
+  const [status, setStatus] = useState<AutosaveStatus | null>(null);
+
+  useEffect(() => subscribeAutosaveStatus(setStatus), []);
+
+  function formatSavedAt(iso: string | null): string {
+    if (!iso) return t.notYet;
+    const date = new Date(iso);
+    if (Number.isNaN(date.getTime())) return t.notYet;
+    return date.toLocaleTimeString(language === "es" ? "es" : "en", {
+      hour: "numeric",
+      minute: "2-digit"
+    });
+  }
 
   const handleLoadClick = () => {
     fileInputRef.current?.click();
@@ -17,30 +40,68 @@ export default function ProgressControls() {
     setBusy(true);
     try {
       const bundle = await readProgressFile(file);
-      const confirmed = window.confirm(
-        "This replaces your current Titus progress (marked verbs, clauses, moods, observations, notes) with what's in this file. Your current state isn't kept — this can't be undone. Continue?"
-      );
+      const confirmed = window.confirm(t.loadConfirm);
       if (!confirmed) return;
 
       const summary = applyProgressBundle(bundle);
-      window.alert(`Loaded ${summary.restoredCount} saved item(s). Reloading to pick up the change…`);
+      window.alert(t.loadDone(summary.restoredCount));
       window.location.reload();
     } catch (error) {
-      window.alert(error instanceof Error ? error.message : "Couldn't read that file.");
+      window.alert(error instanceof Error ? error.message : t.loadFailed);
     } finally {
       setBusy(false);
     }
   };
 
+  const handleManualSave = async () => {
+    setBusy(true);
+    try {
+      await flushAutosave();
+      downloadProgressFile();
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const handleLinkFile = async () => {
+    setBusy(true);
+    try {
+      await linkAutosaveFile();
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") return;
+      window.alert(error instanceof Error ? error.message : t.linkFailed);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const statusLabel = (() => {
+    if (!status) return t.autosaveStarting;
+    if (status.lastError) return t.autosaveError(status.lastError);
+    if (status.mode === "file") {
+      const name = status.fileName ?? "file";
+      return status.dirty ? t.savingToFile(name) : t.savedToFile(name, formatSavedAt(status.lastSavedAt));
+    }
+    return status.dirty ? t.savingInBrowser : t.savedInBrowser(formatSavedAt(status.lastSavedAt));
+  })();
+
   return (
-    <div className="progress-controls" aria-label="Save or load Titus progress">
+    <div className="progress-controls" aria-label={t.progressAria}>
+      <p className="progress-autosave-status" role="status" title={status?.lastError ?? statusLabel}>
+        {statusLabel}
+        {status && status.mode !== "file" && status.supportsFile ? (
+          <button type="button" className="progress-autosave-link" onClick={handleLinkFile} disabled={busy}>
+            {t.linkFile}
+          </button>
+        ) : null}
+      </p>
       <button
         type="button"
         className="progress-btn"
-        onClick={downloadProgressFile}
+        onClick={handleManualSave}
         disabled={busy}
-        aria-label="Save progress"
-        title="Save progress"
+        aria-label={t.saveProgress}
+        title={t.saveProgress}
       >
         <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true">
           <path
@@ -57,8 +118,8 @@ export default function ProgressControls() {
         className="progress-btn"
         onClick={handleLoadClick}
         disabled={busy}
-        aria-label="Load progress"
-        title="Load progress"
+        aria-label={t.loadProgress}
+        title={t.loadProgress}
       >
         <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true">
           <path

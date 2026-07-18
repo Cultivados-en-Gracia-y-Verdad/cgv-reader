@@ -1,105 +1,274 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState, type ChangeEvent } from "react";
+import { useUiLanguage } from "../core/UiLanguageContext";
+import {
+  applyLineAttachments,
+  readCompilerAttachments,
+  remapAttachmentsToMarkdown,
+  writeCompilerAttachments,
+  type CompilerAttachment
+} from "./compiler-gathering";
+import {
+  applyMetaToMarkdown,
+  createDefaultManualMeta,
+  readManualMeta,
+  writeManualMeta,
+  type ManualMeta
+} from "./compiler-meta";
 import { generateManualSkeleton } from "./compiler-skeleton";
+import MarkdownLinePreview from "./MarkdownLinePreview";
+import ReaderNotesPanel from "./ReaderNotesPanel";
+import TextSearchTool from "./TextSearchTool";
 import WordOccurrencesTool from "./WordOccurrencesTool";
 
-// C's screen, per cgv-product-suite-spec.md: the skeleton generator (trigger
-// against O's live data, preview, export) plus a left-side tools panel — the
-// home for gathering tools going forward. Word Occurrences (reusing
-// cgv-translator's occurrence logic, doubling as the "cross-reference
-// finder" the spec also asks for) is the first tool; more join it here
-// later rather than becoming new destinations.
+type ToolTab = "search" | "occurrences" | "notes" | "yaml";
+
 export default function CompilerShell() {
-  const [markdown, setMarkdown] = useState<string | null>(null);
-  const [summary, setSummary] = useState<{ clauseCount: number; verblessCount: number; pendingCount: number; warnings: string[] } | null>(null);
+  const { t } = useUiLanguage();
+  const [baseMarkdown, setBaseMarkdown] = useState<string | null>(null);
+  const [attachments, setAttachments] = useState<CompilerAttachment[]>(() => readCompilerAttachments());
+  const [summary, setSummary] = useState<{
+    clauseCount: number;
+    verblessCount: number;
+    pendingCount: number;
+    warnings: string[];
+  } | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [warningsDismissed, setWarningsDismissed] = useState(false);
+  const [meta, setMeta] = useState<ManualMeta>(() => readManualMeta());
+  const [selectedLine, setSelectedLine] = useState<number | null>(null);
+  const [toolTab, setToolTab] = useState<ToolTab>("search");
+
+  useEffect(() => {
+    writeManualMeta(meta);
+  }, [meta]);
+
+  useEffect(() => {
+    if (!baseMarkdown) return;
+    setBaseMarkdown(current => (current ? applyMetaToMarkdown(current, meta) : current));
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- meta-driven rewrite of base only
+  }, [meta]);
+
+  const exportMarkdown = useMemo(() => {
+    if (!baseMarkdown) return null;
+    return applyLineAttachments(baseMarkdown, attachments);
+  }, [baseMarkdown, attachments]);
+
+  const pinnedAfterLines = useMemo(
+    () => new Set(attachments.map(item => item.lineNumber)),
+    [attachments]
+  );
+
+  function updateMetaField<K extends keyof ManualMeta>(key: K, value: ManualMeta[K]) {
+    setMeta(current => ({ ...current, [key]: value }));
+  }
+
+  function handleMetaInput(key: keyof ManualMeta) {
+    return (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      updateMetaField(key, event.currentTarget.value);
+    };
+  }
 
   function handleGenerate() {
     try {
-      const result = generateManualSkeleton();
-      setMarkdown(result.markdown);
+      const result = generateManualSkeleton(meta);
+      setBaseMarkdown(result.markdown);
+      // Rematch durable pins by anchor line text (do not wipe gathering work).
+      const remapped = remapAttachmentsToMarkdown(result.markdown, readCompilerAttachments());
+      writeCompilerAttachments(remapped);
+      setAttachments(remapped);
+      setSelectedLine(null);
+      const orphanCount = remapped.filter(item => item.lineNumber < 1).length;
+      const warnings = [...result.warnings];
+      if (orphanCount) {
+        warnings.push(
+          `${orphanCount} pin${orphanCount === 1 ? "" : "s"} could not rematch after regenerate — reattach in Occurrences.`
+        );
+      }
       setSummary({
         clauseCount: result.clauseCount,
         verblessCount: result.verblessCount,
         pendingCount: result.pendingCount,
-        warnings: result.warnings
+        warnings
       });
+      setWarningsDismissed(false);
       setError(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Couldn't generate the skeleton.");
-      setMarkdown(null);
+      setBaseMarkdown(null);
       setSummary(null);
+      setWarningsDismissed(false);
     }
   }
 
   function handleExport() {
-    if (!markdown) return;
-    const blob = new Blob([markdown], { type: "text/markdown" });
+    if (!exportMarkdown) return;
+    const blob = new Blob([exportMarkdown], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "titus-manual-skeleton.md";
+    const slug = (meta.title || meta.book || "titus")
+      .trim()
+      .toLowerCase()
+      .replace(/[^\p{L}\p{N}]+/gu, "-")
+      .replace(/^-|-$/g, "");
+    link.download = `${slug || "titus"}-manual-skeleton.md`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
   }
 
+  function handleResetMeta() {
+    setMeta(createDefaultManualMeta());
+  }
+
+  function handleAttachmentsChange(next: CompilerAttachment[]) {
+    setAttachments(next);
+  }
+
   return (
-    <main className="compiler-shell">
+    <main className="compiler-shell compiler-shell--docked">
       <header className="compiler-header">
-        <p className="reader-kicker">Compiler</p>
-        <h1>Manual skeleton — Tito</h1>
-        <p className="compiler-scope">
-          Mechanically generated from O's current clause data: structure, Scripture text, and grammatical
-          explanations only — no theological or interpretive content. Ready for a writer to add commentary to.
-        </p>
+        <p className="reader-kicker">{t.compilerKicker}</p>
+        <h1>{t.compilerTitle}</h1>
+        <p className="compiler-scope">{t.compilerScope}</p>
       </header>
 
-      <div className="compiler-layout">
-        <aside className="compiler-tools-panel" aria-label="Compiler tools">
-          <h2 className="compiler-tools-heading">Tools</h2>
-          <WordOccurrencesTool />
-        </aside>
+      <div className="compiler-actions">
+        <button type="button" className="compiler-generate-btn" onClick={handleGenerate}>
+          {t.generate}
+        </button>
+        <button type="button" className="compiler-export-btn" onClick={handleExport} disabled={!exportMarkdown}>
+          {t.exportMd}
+        </button>
+        {selectedLine ? <span className="compiler-selected-line">{t.lineSelected(selectedLine)}</span> : null}
+      </div>
 
-        <div className="compiler-main">
-          <div className="compiler-actions">
-            <button type="button" className="compiler-generate-btn" onClick={handleGenerate}>
-              Generate from O's current data
-            </button>
-            <button type="button" className="compiler-export-btn" onClick={handleExport} disabled={!markdown}>
-              Export as .md
-            </button>
+      {error ? <p className="compiler-error">{error}</p> : null}
+
+      {summary ? (
+        <div className="compiler-summary" aria-label="Generation summary">
+          <div className="compiler-summary-header">
+            <p>
+              {t.summaryClauses(summary.clauseCount)}
+              {summary.verblessCount ? ` · ${t.summaryPhrases(summary.verblessCount)}` : ""}
+              {summary.pendingCount ? ` · ${t.summaryParked(summary.pendingCount)}` : ""}
+              {attachments.length ? ` · ${t.summaryPins(attachments.length)}` : ""}
+              {summary.warnings.length && warningsDismissed
+                ? ` · ${t.summaryFlagsHidden(summary.warnings.length)}`
+                : ""}
+            </p>
+            {summary.warnings.length && !warningsDismissed ? (
+              <button
+                type="button"
+                className="clause-audit-dismiss"
+                onClick={() => setWarningsDismissed(true)}
+                aria-label={t.closeFlags}
+              >
+                {t.closeFlags}
+              </button>
+            ) : null}
           </div>
-
-          {error ? <p className="compiler-error">{error}</p> : null}
-
-          {summary ? (
-            <div className="compiler-summary" aria-label="Generation summary">
-              <p>
-                {summary.clauseCount} clause{summary.clauseCount === 1 ? "" : "s"} placed · {summary.verblessCount}{" "}
-                verbless verse{summary.verblessCount === 1 ? "" : "s"} folded in · {summary.pendingCount} clause
-                {summary.pendingCount === 1 ? "" : "s"} still pending placement in O
-              </p>
-              {summary.warnings.length ? (
-                <div className="compiler-warnings">
-                  <h3>Flagged during generation — check manually</h3>
-                  <ul>
-                    {summary.warnings.map((warning, index) => (
-                      <li key={index}>{warning}</li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
+          {summary.warnings.length && !warningsDismissed ? (
+            <div className="compiler-warnings">
+              <h3>{t.flagsHeading}</h3>
+              <ul>
+                {summary.warnings.map((warning, index) => (
+                  <li key={index}>{warning}</li>
+                ))}
+              </ul>
             </div>
           ) : null}
+        </div>
+      ) : null}
 
-          {markdown ? (
-            <pre className="compiler-markdown-preview" aria-label="Generated markdown">
-              <code>{markdown}</code>
-            </pre>
-          ) : (
-            <p className="compiler-empty">Nothing generated yet — click "Generate from O's current data" above.</p>
-          )}
+      <div className="compiler-workspace">
+        {baseMarkdown ? (
+          <MarkdownLinePreview
+            markdown={baseMarkdown}
+            selectedLine={selectedLine}
+            pinnedAfterLines={pinnedAfterLines}
+            onSelectLine={setSelectedLine}
+          />
+        ) : (
+          <p className="compiler-empty">{t.emptyGenerate}</p>
+        )}
+      </div>
+
+      <div className="compiler-bottom-dock" aria-label={t.toolsAria}>
+        <div className="compiler-dock-tabs" role="tablist">
+          {(
+            [
+              ["search", t.search],
+              ["occurrences", t.occurrences],
+              ["notes", t.readerNotes],
+              ["yaml", t.yaml]
+            ] as const
+          ).map(([id, label]) => (
+            <button
+              key={id}
+              type="button"
+              role="tab"
+              aria-selected={toolTab === id}
+              className={toolTab === id ? "compiler-dock-tab compiler-dock-tab--active" : "compiler-dock-tab"}
+              onClick={() => setToolTab(id)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        <div className="compiler-dock-body" role="tabpanel">
+          {toolTab === "search" ? (
+            <TextSearchTool
+              markdown={baseMarkdown}
+              selectedLine={selectedLine}
+              onSelectLine={setSelectedLine}
+              onAttachmentsChange={handleAttachmentsChange}
+            />
+          ) : null}
+          {toolTab === "occurrences" ? (
+            <WordOccurrencesTool
+              markdown={baseMarkdown}
+              selectedLine={selectedLine}
+              onSelectLine={setSelectedLine}
+              attachments={attachments}
+              onAttachmentsChange={handleAttachmentsChange}
+              lineCount={baseMarkdown ? baseMarkdown.split("\n").length : 0}
+            />
+          ) : null}
+          {toolTab === "notes" ? <ReaderNotesPanel /> : null}
+          {toolTab === "yaml" ? (
+            <section className="compiler-tool" aria-label={t.yaml}>
+              <h2>{t.yaml}</h2>
+              <p className="compiler-tool-note">{t.yamlNote}</p>
+              <div className="compiler-yaml-grid">
+                {(
+                  [
+                    ["book", "book"],
+                    ["title", "title"],
+                    ["subtitle", "subtitle"],
+                    ["author", "author"],
+                    ["cover", "cover"],
+                    ["date", "date"],
+                    ["version", "version"]
+                  ] as const
+                ).map(([key, label]) => (
+                  <label key={key} className="compiler-tool-field">
+                    <span>{label}</span>
+                    <input
+                      type={key === "date" ? "date" : "text"}
+                      value={meta[key]}
+                      onChange={handleMetaInput(key)}
+                      autoComplete="off"
+                    />
+                  </label>
+                ))}
+              </div>
+              <button type="button" className="compiler-meta-reset" onClick={handleResetMeta}>
+                {t.resetDefaults}
+              </button>
+            </section>
+          ) : null}
         </div>
       </div>
     </main>
