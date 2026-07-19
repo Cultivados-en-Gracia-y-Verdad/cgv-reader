@@ -4462,14 +4462,16 @@ div.compiler-search-hit {
 }
 
 .prefs-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
   border: 1px solid var(--reader-border);
   border-radius: 999px;
-  padding: 0.32rem 0.75rem;
+  padding: 0;
   background: rgba(255, 253, 250, 0.82);
   color: var(--reader-soft);
-  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  font-size: 0.82rem;
-  font-weight: 700;
   cursor: pointer;
 }
 
@@ -4478,6 +4480,12 @@ div.compiler-search-hit {
 .prefs-toggle--open {
   color: var(--reader-text);
   outline: none;
+}
+
+.prefs-toggle--open {
+  background: var(--reader-accent);
+  color: #fff;
+  border-color: var(--reader-accent);
 }
 
 .prefs-panel {
@@ -4568,11 +4576,9 @@ div.compiler-search-hit {
     margin-top: 0.1rem;
   }
 
-  .language-toggle-option,
   .prefs-toggle {
-    min-width: 2rem;
-    padding: 0.3rem 0.55rem;
-    font-size: 0.76rem;
+    width: 2.2rem;
+    height: 2.2rem;
   }
 
   .prefs-panel {

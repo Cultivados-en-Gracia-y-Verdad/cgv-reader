@@ -11,7 +11,7 @@ import {
 import CompilerShell from "./compiler/CompilerShell";
 import PreferencesPanel from "./core/PreferencesPanel";
 import ProgressControls from "./core/ProgressControls";
-import { LanguageToggle, UiLanguageProvider, useUiLanguage } from "./core/UiLanguageContext";
+import { UiLanguageProvider, useUiLanguage } from "./core/UiLanguageContext";
 import ObserverShell from "./observer/ObserverShell";
 import ReaderView from "./reader/ReaderView";
 
@@ -102,7 +102,6 @@ function ReaderAppInner() {
     <>
       <div className="app-chrome" aria-label={t.chromeAria}>
         <div className="app-chrome-left">
-          <LanguageToggle />
           <PreferencesPanel />
         </div>
         <div className="zone-toggle" role="tablist" aria-label={t.zonesAria}>

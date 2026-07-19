@@ -49,9 +49,19 @@ export default function PreferencesPanel() {
         className={`prefs-toggle${open ? " prefs-toggle--open" : ""}`}
         aria-expanded={open}
         aria-controls={panelId}
+        aria-label={t.preferences}
+        title={t.preferences}
         onClick={() => setOpen(current => !current)}
       >
-        {t.preferences}
+        <svg viewBox="0 0 20 20" width="18" height="18" fill="none" aria-hidden="true">
+          <path
+            d="M8.2 2.4h3.6l.35 1.7a5.8 5.8 0 0 1 1.35.78l1.65-.7 1.8 3.1-1.3 1.25c.1.45.15.9.15 1.37s-.05.92-.15 1.37l1.3 1.25-1.8 3.1-1.65-.7a5.8 5.8 0 0 1-1.35.78l-.35 1.7H8.2l-.35-1.7a5.8 5.8 0 0 1-1.35-.78l-1.65.7-1.8-3.1 1.3-1.25A6.2 6.2 0 0 1 4.2 10c0-.47.05-.92.15-1.37L3.05 7.38l1.8-3.1 1.65.7c.4-.32.86-.58 1.35-.78L8.2 2.4Z"
+            stroke="currentColor"
+            strokeWidth="1.35"
+            strokeLinejoin="round"
+          />
+          <circle cx="10" cy="10" r="2.35" stroke="currentColor" strokeWidth="1.35" />
+        </svg>
       </button>
       {open ? (
         <div className="prefs-panel" id={panelId} role="dialog" aria-label={t.preferences}>

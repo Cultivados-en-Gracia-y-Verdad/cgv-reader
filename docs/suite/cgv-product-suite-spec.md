@@ -55,7 +55,7 @@ toward output.
   Shared across Reader, Observer, and Compiler chrome via `the-reader:titus:language`.
   Does not change Bible text or generated manual Spanish grammar notes.
 - **Font** — typeface and size.
-- UI: chrome **Prefs** panel holds language + Bible version; EN/ES quick toggle stays available.
+- UI: chrome preferences control (icon) holds language + Bible version.
 
 **Quality bar ("pristine"):** concrete levers, not vague polish —
 - Typographic measure (line length) capped for reading comfort regardless of screen width.

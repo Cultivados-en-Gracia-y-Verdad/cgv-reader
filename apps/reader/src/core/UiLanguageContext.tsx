@@ -49,29 +49,3 @@ export function useUiLanguage(): UiLanguageContextValue {
   }
   return ctx;
 }
-
-export function LanguageToggle() {
-  const { language, setLanguage, t } = useUiLanguage();
-  return (
-    <div className="language-toggle" role="tablist" aria-label={t.languageAria}>
-      <button
-        type="button"
-        className={`language-toggle-option${language === "en" ? " language-toggle-option--active" : ""}`}
-        onClick={() => setLanguage("en")}
-        role="tab"
-        aria-selected={language === "en"}
-      >
-        EN
-      </button>
-      <button
-        type="button"
-        className={`language-toggle-option${language === "es" ? " language-toggle-option--active" : ""}`}
-        onClick={() => setLanguage("es")}
-        role="tab"
-        aria-selected={language === "es"}
-      >
-        ES
-      </button>
-    </div>
-  );
-}

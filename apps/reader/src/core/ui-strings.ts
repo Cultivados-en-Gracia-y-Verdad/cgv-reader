@@ -78,7 +78,7 @@ const EN: UiStrings = {
   observer: "Observer",
   compiler: "Compiler",
   languageAria: "Interface language",
-  preferences: "Prefs",
+  preferences: "Preferences",
   prefLanguage: "Interface language",
   prefBible: "Bible text (Reader)",
   prefBibleNote: "Changes reading text only. Observer keeps LBF + Greek. Notes stay on the same verse.",
@@ -152,7 +152,7 @@ const ES: UiStrings = {
   observer: "Observador",
   compiler: "Compilador",
   languageAria: "Idioma de la interfaz",
-  preferences: "Prefs",
+  preferences: "Preferencias",
   prefLanguage: "Idioma de la interfaz",
   prefBible: "Texto bíblico (Lector)",
   prefBibleNote:
