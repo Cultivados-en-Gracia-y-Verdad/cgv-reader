@@ -25,6 +25,14 @@ npm run dev
 
 Dev server: [http://localhost:1423](http://localhost:1423)
 
+## Public test site
+
+GitHub Pages (deploys from `main`):
+
+**https://cultivados-en-gracia-y-verdad.github.io/cgv-reader/**
+
+Push to `main` rebuilds automatically. Manual redeploy: Actions → “Deploy Reader to GitHub Pages”.
+
 ## Observer Spanish surface
 
 Observer uses **LBF (La Biblia Fiel)** for reverse/settled Spanish reading. Greek workstation ids stay on MorphGNT so lab progress migrates. See `docs/observer/lbf-reverse-interlinear.md`.
