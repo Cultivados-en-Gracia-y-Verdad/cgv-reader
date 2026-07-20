@@ -19,9 +19,22 @@ and nothing silently omitted.
 Locked 2026-07-18. This markdown is the **presentation source**: **every blank line = a new
 slide.**
 
-Two axes: **grammar structure** (outline from the skeleton) and **commentary grain**
-(phrases). H1/H2 are context only — **not** part of the outline. The outline is
-`####` / `-` / `+` / `*`, with **indentation left→right** showing structural depth.
+Two axes: **grammar structure** (outline) and **Writer commentary**. H1/H2 are context
+only — **not** part of the outline.
+
+**Outline markers (locked):**
+
+| Marker | Meaning |
+|---|---|
+| `####` | Independent clause |
+| `-` | Dependent clause |
+| `+` | Phrase — all other Scripture |
+| `*` | Observer mechanical insert only |
+| `>` | Writer entry (Reader notes, Def/XRef, human commentary) |
+
+Indentation left→right = structural depth. **Every scriptural word** appears once as
+`####` / `-` / `+`. The reading block after H3 is for reading; it does not replace that
+accounting.
 
 ```markdown
 # TODO: contexto
@@ -44,47 +57,38 @@ Two axes: **grammar structure** (outline from the skeleton) and **commentary gra
 
 * "y" une esta frase a la anterior. Solo suma; no cambia el sentido ni da una razón.
 
-- *la cual me fue confiada según el mandato de Dios nuestro Salvador.*
-
-* "la cual" abre una frase que habla más de *su palabra*.
+> Comentario del escritor.
 ```
 
 **Slide / blank-line rules:**
 - **Blank line = new slide.** No exceptions.
 - **H3 unit claim = its own slide** — `### {reference} — *{independent clause}*`, then a
-  blank line.
+  blank line. **Reference = grammatical unit** (independent clause’s own verse plus
+  dependents / `+` / parked in that unit) — always includes the root verse. Never derive
+  the ref only from the reading cursor (a prior unit must not steal the next root’s verse).
 - **Reading quotes = the next slide** — no blanks between verse quotes; one trailing blank
   ends that slide.
-- **Each `####` / `-` / `+` / `*` line is its own slide.** One trailing blank ends the slide.
-- **Keep slides short.** A clause slide may include at most its Scripture marker plus one
-  antecedent Scripture line. Reader notes, Def/XRef pins, and every `*` grammar note each
-  get **their own slide** (blank between). Do not stack many comment lines onto one slide —
-  that forces Writer cleanup later.
-- **Grammar labels:** Spanish first, then Greek in parentheses when known —
-  `"enseñando" (διδάσκοντες)`, `"para que" (ἵνα)`.
+- **Each `####` / `-` / `+` / `*` / `>` line is its own slide.**
+- **Keep slides short.** Clause slide = marker (+ optional antecedent only). Every `*` and
+  every `>` gets its own slide.
+- **Grammar labels:** Spanish first, then Greek — `"enseñando" (διδάσκοντες)`.
 
 **Structural rules:**
-- **H1** = context (TODO — human-assigned). Not outline.
-- **H2** = unit (TODO — human-assigned). Not outline. Same slide as H1 (no blank between).
-- **H3** = `### {reference} — *{root clause}*` — span reference plus independent clause on
-  **one heading line** (auto from O). Own slide; blank after.
-- **Reading block** = every LBF verse for the unit, quoted in document order on the slide
-  after H3. No label line.
-- **Outline** (skeleton — this is the visible structure of the passage):
-  - **`####`** = root clause (finite, independent) — own outline slide; may repeat the H3 claim text
-  - **`-`** = dependent clause only (finite verb)
-  - **`+`** = phrase / verbless non-clause Scripture
-  - **`*`** = mechanical grammar note (its own slide, after the unit it explains)
-  - **Indentation** = dependency depth (left→right). Nested dependents indent further.
-- **`+` phrases:** every Spanish word not inside any finite-clause `selectedSpan` must
-  appear as `+` — whole verbless verses and intra-verse gaps alike. Finer splits inside a
-  `+` chunk = writer (or later O).
+- **H1 / H2** = context / unit (TODO). Not outline.
+- **H3** = reference span + independent clause claim.
+- **Reading block** = LBF verses for that span (after H3).
+- **Outline:** `####` independent · `-` dependent · `+` phrase · `*` Observer · `>` Writer.
+- **`+` phrases:** every Spanish word not inside any finite-clause `selectedSpan`. Emitted
+  in the **same unit** as the reading span (through the next independent clause), including
+  gaps after the root in the same verse. **Indent** matches the nearest preceding `####` /
+  `-` in document order (not column 0 after a nested clause).
+- **Writer `>`:** Reader notes → `> {text}`; Def/XRef pins → `> Def. …` / `> XRef …`.
+  Never `*`.
 
-**Typography (locked — Scripture-only style):**
-- **Scripture** (H3 claim, reading quotes, `####`, `-`, `+`, antecedents, and Scripture
-  named inside a note): markdown italics only → `*…*`. Nothing else is italicized.
-- **Grammar-note lines** open with `* ` (outline marker + space) and stay roman.
-  Metalinguistic tokens use straight `"…"`.
+**Typography:**
+- **Scripture** → markdown italics `*…*` only.
+- **`*` grammar lines** stay roman; tokens `"…"`.
+- **`>` Writer lines** stay roman.
 
 ---
 
@@ -116,11 +120,11 @@ For each finite-verb clause already reviewed in O:
 - **`*` notes:** one explanation per fact; never emit the same `*` text twice in a row;
   never park a bare Scripture line after a `*` (antecedents for relatives sit under `-`;
   participle antecedents are named only inside the `*` prose).
-- **Reader notes:** plain `Nota (Lector):` lines under the matching verse’s parent (own slide).
+- **Reader notes:** Writer entries `> {text}` under the matching verse’s parent (own slide).
 - **Compiler pins (definitions / cross-refs):** targeted by a line in the generated markdown
   (UI: click a line or search). Stored with the **exact text of that line** as a durable
   anchor, plus the current line number. Inserted after that line on Export as
-  `Def. (lemma):` / `XRef (lemma):` — each its own slide. **Never** as `*` grammar slides.
+  `> Def. (lemma):` / `> XRef (lemma):` — each its own slide. **Never** as `*` grammar slides.
   Regenerate **rematches** pins by anchor text (does not wipe them). If the target line
   wording changed, the pin becomes an orphan until reattached in Occurrences.
 
@@ -130,25 +134,19 @@ For each finite-verb clause already reviewed in O:
 
 Walk root clauses in document order. For each:
 
-1. Emit `### {reference} — *{root clause}*` on one heading line, then a blank (H3 slide).
-   Then emit the reading-block quotes as the next slide.
-2. Before emitting the dissected root, emit any dependents / `+` / parked items that appear
-   *earlier* in the text than the root — nested, in document order (bullets may sit above
-   the `####` they depend on).
-3. Emit `#### "{root clause quoted text}"` as its own outline slide (same text as the H3 claim).
-4. If the root clause opens with a relational connector, emit its `*` explanation
-   (template below). If asyndeton (no connector), state that plainly too — asyndeton is a
-   real finding, not a gap (per `root-clause-connectives-spec.md`).
-5. Walk every remaining dependent attached to this root, **in document order, one at a time —
-   emit the `-`/`+` text, then immediately its `*` explanation, before moving to the next.**
-6. For a coordinate-inherited clause (shares a parent's `frameType` via plain connector),
-   use the inheritance template, not the normal marker template — it should name what it
-   shares and with which sibling.
-7. If any clause in this span has infinitives, emit each as its own `*` (completes the host
-   finite). Then emit attached participle explanations the same way.
-8. If any verbless material logically belongs in this span and wasn't already handled, fold
-   it in as its own **`+` phrase** (no mechanical `*` line). Never emit verbless material as
-   `-`. Parked finite clauses fold in as `-` and are flagged, not narrated in the body.
+1. Emit `### {reference} — *{independent clause}*` (H3 slide). **Reference = reading span**
+   of the unit (verses from the unread cursor up to the next independent clause), not only
+   the root verb’s verse. Then emit the reading-block quotes as the next slide.
+2. Before the dissected root, emit dependents / `+` / parked items that appear *earlier*
+   than the root — document order (bullets may sit above the `####`).
+3. Emit `#### *{independent clause}*` (same claim text as H3).
+4. Root connector / asyndeton → `*` (Observer). Writer seeds → `>`.
+5. Walk remaining dependents and `+` phrases **through the next independent clause**, in
+   document order — including gaps *after* the root in the same verse. Each `-`/`+`, then
+   its `*` / `>` slides, before the next item.
+6. Coordinate-inherited clauses use the inheritance `*` template.
+7. Infinitives / participles → each its own Observer `*`.
+8. Verbless material → `+` only (never `-`). Parked finite clauses → `-`, flagged.
 
 **Before generating, verify the root clause itself is actually correctly classified —
 Compiler should not silently trust a clause tagged root without basis.** Concretely: if a
@@ -198,8 +196,9 @@ Do **not** add theology, application, or “what this means for us.”
 **Infinitives (Compiler lists them; O find-step later):**
 - With host finite: `"{infinitive}" completa a "{host}": dice *qué* se debe hacer o qué acción sigue.`
 - No host clause yet: `"{infinitive}" nombra una acción que depende de un verbo cercano (como «debe» o «pide»).`
-- One `*` slide per infinitive. Attachment = clause span containing the word, else nearest
-  same-verse clause (same rule as participles).
+- One `*` slide per infinitive. Emit under the clause only when the word is in that
+  clause’s span; if the word is in a `+` gap, emit the `*` right after that `+` (still
+  naming the nearest finite as host). Never before the Scripture line that carries it.
 
 **Verbless / phrase material (`+`):** no mechanical template — the `+` marker and unit
 placement carry the meaning. Writer comments (if any) go under the `+` with no bullet.

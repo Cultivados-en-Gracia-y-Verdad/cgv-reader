@@ -1,5 +1,13 @@
 import { useEffect, useMemo, useState, type ChangeEvent } from "react";
+import {
+  COMPILER_BIBLE_VERSIONS,
+  readCompilerBibleVersion,
+  subscribeCompilerBibleVersion,
+  writeCompilerBibleVersion,
+  type BibleVersionId
+} from "@cgv/core";
 import { useUiLanguage } from "../core/UiLanguageContext";
+import { loadReaderBook } from "../reader/reader-data";
 import {
   applyLineAttachments,
   readCompilerAttachments,
@@ -37,10 +45,14 @@ export default function CompilerShell() {
   const [meta, setMeta] = useState<ManualMeta>(() => readManualMeta());
   const [selectedLine, setSelectedLine] = useState<number | null>(null);
   const [toolTab, setToolTab] = useState<ToolTab>("search");
+  const [bibleVersion, setBibleVersion] = useState<BibleVersionId>(() => readCompilerBibleVersion());
+  const [generating, setGenerating] = useState(false);
 
   useEffect(() => {
     writeManualMeta(meta);
   }, [meta]);
+
+  useEffect(() => subscribeCompilerBibleVersion(setBibleVersion), []);
 
   useEffect(() => {
     if (!baseMarkdown) return;
@@ -68,9 +80,27 @@ export default function CompilerShell() {
     };
   }
 
-  function handleGenerate() {
+  function handleBibleChange(next: BibleVersionId) {
+    writeCompilerBibleVersion(next);
+    setBibleVersion(next);
+  }
+
+  async function handleGenerate() {
+    setGenerating(true);
+    setError(null);
     try {
-      const result = generateManualSkeleton(meta);
+      const readingTextsByVerse = new Map<string, string>();
+      if (bibleVersion !== "LBF") {
+        const book = await loadReaderBook("tito", bibleVersion);
+        for (const verse of book.verses) {
+          readingTextsByVerse.set(`${verse.chapter}:${verse.verse}`, verse.text);
+        }
+      }
+
+      const result = generateManualSkeleton({
+        meta,
+        readingTextsByVerse: bibleVersion === "LBF" ? undefined : readingTextsByVerse
+      });
       setBaseMarkdown(result.markdown);
       // Rematch durable pins by anchor line text (do not wipe gathering work).
       const remapped = remapAttachmentsToMarkdown(result.markdown, readCompilerAttachments());
@@ -91,12 +121,13 @@ export default function CompilerShell() {
         warnings
       });
       setWarningsDismissed(false);
-      setError(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Couldn't generate the skeleton.");
       setBaseMarkdown(null);
       setSummary(null);
       setWarningsDismissed(false);
+    } finally {
+      setGenerating(false);
     }
   }
 
@@ -135,14 +166,36 @@ export default function CompilerShell() {
       </header>
 
       <div className="compiler-actions">
-        <button type="button" className="compiler-generate-btn" onClick={handleGenerate}>
-          {t.generate}
+        <label className="compiler-bible-field">
+          <span>{t.compilerBible}</span>
+          <select
+            value={bibleVersion}
+            onChange={event => handleBibleChange(event.target.value as BibleVersionId)}
+            aria-describedby="compiler-bible-note"
+          >
+            {COMPILER_BIBLE_VERSIONS.map(entry => (
+              <option key={entry.id} value={entry.id}>
+                {entry.label} — {entry.description}
+              </option>
+            ))}
+          </select>
+        </label>
+        <button
+          type="button"
+          className="compiler-generate-btn"
+          onClick={() => void handleGenerate()}
+          disabled={generating}
+        >
+          {generating ? t.loadingBook : t.generate}
         </button>
         <button type="button" className="compiler-export-btn" onClick={handleExport} disabled={!exportMarkdown}>
           {t.exportMd}
         </button>
         {selectedLine ? <span className="compiler-selected-line">{t.lineSelected(selectedLine)}</span> : null}
       </div>
+      <p className="compiler-bible-note" id="compiler-bible-note">
+        {t.compilerBibleNote}
+      </p>
 
       {error ? <p className="compiler-error">{error}</p> : null}
 

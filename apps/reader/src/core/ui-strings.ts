@@ -10,8 +10,10 @@ export interface UiStrings {
   languageAria: string;
   preferences: string;
   prefLanguage: string;
+  prefBook: string;
   prefBible: string;
   prefBibleNote: string;
+  loadingBook: string;
   progressHint: (count: number) => string;
   dismiss: string;
   lockCompiler: string;
@@ -27,6 +29,8 @@ export interface UiStrings {
   compilerKicker: string;
   compilerTitle: string;
   compilerScope: string;
+  compilerBible: string;
+  compilerBibleNote: string;
   generate: string;
   exportMd: string;
   lineSelected: (n: number) => string;
@@ -80,8 +84,11 @@ const EN: UiStrings = {
   languageAria: "Interface language",
   preferences: "Preferences",
   prefLanguage: "Interface language",
+  prefBook: "Book (Reader)",
   prefBible: "Bible text (Reader)",
-  prefBibleNote: "Changes reading text only. Observer keeps LBF + Greek. Notes stay on the same verse.",
+  prefBibleNote:
+    "Book and version change reading text only. Observer / Compiler stay on Titus until more LBF is ready. Notes stay keyed to each verse.",
+  loadingBook: "Loading…",
   progressHint: count =>
     `Titus progress found in this browser (${count} saved item${count === 1 ? "" : "s"}) — auto-save is on. Link a file in Observer for a disk backup.`,
   dismiss: "Dismiss",
@@ -100,6 +107,9 @@ const EN: UiStrings = {
   compilerTitle: "Manual skeleton — Titus",
   compilerScope:
     "Generate from Observer, then pin definitions and cross-refs. Pins survive regenerate when their target line text still exists. Tools stay along the bottom. Reader notes and pins never mix into Observer * grammar slides.",
+  compilerBible: "Reading text (Compiler)",
+  compilerBibleNote:
+    "Version for the reading quotes after each H3. Outline #### / - / + stays LBF from Observer.",
   generate: "Generate from O's current data",
   exportMd: "Export as .md",
   lineSelected: n => `Line ${n} selected`,
@@ -154,9 +164,11 @@ const ES: UiStrings = {
   languageAria: "Idioma de la interfaz",
   preferences: "Preferencias",
   prefLanguage: "Idioma de la interfaz",
+  prefBook: "Libro (Lector)",
   prefBible: "Texto bíblico (Lector)",
   prefBibleNote:
-    "Solo cambia el texto de lectura. Observador conserva LBF + griego. Las notas siguen en el mismo versículo.",
+    "Libro y versión cambian solo el texto de lectura. Observador / Compilador siguen en Tito hasta que haya más LBF. Las notas quedan ligadas a cada versículo.",
+  loadingBook: "Cargando…",
   progressHint: count =>
     `Progreso de Tito encontrado en este navegador (${count} elemento${count === 1 ? "" : "s"} guardado${count === 1 ? "" : "s"}) — el guardado automático está activo. Vincule un archivo en Observador para una copia en disco.`,
   dismiss: "Cerrar",
@@ -175,6 +187,9 @@ const ES: UiStrings = {
   compilerTitle: "Esqueleto del manual — Tito",
   compilerScope:
     "Genere desde Observador; luego fije definiciones y referencias. Los pines sobreviven al regenerar si el texto de la línea sigue existiendo. Las herramientas están abajo. Las notas del Lector y los pines no se mezclan con las diapositivas gramaticales * de Observador.",
+  compilerBible: "Texto de lectura (Compilador)",
+  compilerBibleNote:
+    "Versión para las citas de lectura después de cada H3. El esquema #### / - / + sigue en LBF desde Observador.",
   generate: "Generar desde los datos actuales de O",
   exportMd: "Exportar como .md",
   lineSelected: n => `Línea ${n} seleccionada`,

@@ -55,3 +55,30 @@ export {
   type BibleVersionId,
   type BibleVersionInfo
 } from "./bible-version";
+
+export {
+  COMPILER_BIBLE_VERSION_KEY,
+  COMPILER_BIBLE_VERSIONS,
+  DEFAULT_COMPILER_BIBLE_VERSION,
+  readCompilerBibleVersion,
+  writeCompilerBibleVersion,
+  subscribeCompilerBibleVersion
+} from "./compiler-bible-version";
+
+export {
+  READER_BOOK_KEY,
+  READER_BOOKS,
+  DEFAULT_READER_BOOK,
+  isReaderBookId,
+  getReaderBookInfo,
+  readReaderBook,
+  writeReaderBook,
+  subscribeReaderBook,
+  readerBookHasLbf,
+  workshopStorageSlug,
+  workshopProgressKeys,
+  MORPHGNT_STEM_BY_BOOK,
+  type ReaderBookId,
+  type ReaderBookInfo,
+  type WorkshopProgressKeys
+} from "./reader-book";

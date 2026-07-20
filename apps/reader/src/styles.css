@@ -269,6 +269,46 @@ textarea {
   letter-spacing: 0;
 }
 
+.reader-book-select {
+  display: block;
+  margin: 0.55rem 0 0;
+}
+
+.reader-book-select select {
+  max-width: 100%;
+  border: 1px solid color-mix(in srgb, var(--reader-soft) 35%, transparent);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--reader-bg, #f7f4ef) 88%, white);
+  color: inherit;
+  font: inherit;
+  font-size: 1rem;
+  padding: 0.35rem 0.55rem;
+}
+
+.reader-loading,
+.reader-load-error {
+  width: min(720px, 100%);
+  margin: 0 0 2rem clamp(0px, 15vw, 156px);
+  color: var(--reader-soft);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+
+.reader-load-error {
+  color: #8a2f2f;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .reader-header h1 {
   margin: 0.08em 0;
   font-size: clamp(4rem, 11vw, 8rem);
@@ -4160,8 +4200,38 @@ div.compiler-search-hit {
 .compiler-actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-end;
   gap: 0.75rem;
   margin-top: 1.75rem;
+}
+
+.compiler-bible-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: min(100%, 16rem);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  color: #756e64;
+}
+
+.compiler-bible-field select {
+  border: 1px solid #ded5c7;
+  border-radius: 8px;
+  padding: 0.45rem 0.65rem;
+  background: #fffdf8;
+  color: #23201b;
+  font: inherit;
+  font-size: 0.88rem;
+}
+
+.compiler-bible-note {
+  margin: 0.55rem 0 0;
+  max-width: 42rem;
+  color: #8a8071;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.4;
 }
 
 .compiler-generate-btn,

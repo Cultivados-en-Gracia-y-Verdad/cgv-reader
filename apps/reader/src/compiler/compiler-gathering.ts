@@ -269,27 +269,32 @@ export function verseKeysFromNoteTarget(target: string): string[] {
   return keys;
 }
 
-/** Plain Reader-note lines for a Tito verse — never `*` grammar markers. */
+/**
+ * Writer-entry lines for a verse (`>` — never `*` Observer grammar, never Scripture).
+ * Reader notes are seeds for Writer commentary, not mechanical inserts.
+ */
 export function readerNoteCommentLines(chapter: number, verse: number, notes: ReaderNote[]): string[] {
   const verseKey = `${chapter}:${verse}`;
   const lines: string[] = [];
   for (const note of notes) {
     if (!note.text.trim()) continue;
     if (!verseKeysFromNoteTarget(note.target).includes(verseKey)) continue;
-    lines.push(`Nota (Lector): ${note.text.trim()}`);
+    lines.push(`> ${note.text.trim()}`);
   }
   return lines;
 }
 
+/** Writer-entry pin lines (`>`). Distinct from Observer `*` grammar slides. */
 export function formatAttachmentLine(item: CompilerAttachment): string {
   if (item.kind === "definition") {
     const body = item.text.trim() || item.spanishGloss?.trim() || "";
-    return `Def. (${item.lemma}): ${body}`;
+    return `> Def. (${item.lemma}): ${body}`;
   }
   const ref = item.reference?.trim() || "";
   const gloss = item.spanishGloss?.trim() || item.text.trim();
   const surface = item.surfaceForm?.trim() || "";
-  return [`XRef (${item.lemma}):`, ref, surface, gloss].filter(Boolean).join(" — ").replace(" — — ", " — ");
+  const body = [`XRef (${item.lemma}):`, ref, surface, gloss].filter(Boolean).join(" — ").replace(" — — ", " — ");
+  return `> ${body}`;
 }
 
 /**

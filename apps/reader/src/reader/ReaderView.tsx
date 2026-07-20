@@ -1,8 +1,18 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { BibleVerse } from "cgv-bible";
-import { NOTES_KEY, readBibleVersion, subscribeBibleVersion, type BibleVersionId } from "@cgv/core";
+import {
+  NOTES_KEY,
+  READER_BOOKS,
+  readBibleVersion,
+  readReaderBook,
+  subscribeBibleVersion,
+  subscribeReaderBook,
+  writeReaderBook,
+  type BibleVersionId,
+  type ReaderBookId
+} from "@cgv/core";
 import { useUiLanguage } from "../core/UiLanguageContext";
-import { loadTitus } from "./reader-data";
+import { loadReaderBook, type ReaderBook } from "./reader-data";
 
 interface ReaderNote {
   id: string;
@@ -55,13 +65,37 @@ function makeNoteId(): string {
 export default function ReaderView() {
   const { t } = useUiLanguage();
   const [bibleVersion, setBibleVersion] = useState<BibleVersionId>(() => readBibleVersion());
-  const book = useMemo(() => loadTitus(bibleVersion), [bibleVersion]);
+  const [bookId, setBookId] = useState<ReaderBookId>(() => readReaderBook());
+  const [book, setBook] = useState<ReaderBook | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [notes, setNotes] = useState<ReaderNote[]>(readNotes);
   const [activeTarget, setActiveTarget] = useState<NoteTarget | null>(null);
   const [draft, setDraft] = useState("");
   const noteInputRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => subscribeBibleVersion(setBibleVersion), []);
+  useEffect(() => subscribeReaderBook(setBookId), []);
+
+  useEffect(() => {
+    let cancelled = false;
+    setBook(null);
+    setLoadError(null);
+    setActiveTarget(null);
+
+    void loadReaderBook(bookId, bibleVersion)
+      .then(next => {
+        if (!cancelled) setBook(next);
+      })
+      .catch((error: unknown) => {
+        if (!cancelled) {
+          setLoadError(error instanceof Error ? error.message : String(error));
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [bookId, bibleVersion]);
 
   useEffect(() => {
     window.localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
@@ -75,6 +109,7 @@ export default function ReaderView() {
   }, [activeTarget, notes]);
 
   const chapters = useMemo(() => {
+    if (!book) return [] as Array<[number, BibleVerse[]]>;
     const grouped = new Map<number, BibleVerse[]>();
     for (const verse of book.verses) {
       const chapter = grouped.get(verse.chapter) ?? [];
@@ -82,10 +117,11 @@ export default function ReaderView() {
       grouped.set(verse.chapter, chapter);
     }
     return Array.from(grouped.entries());
-  }, [book.verses]);
+  }, [book]);
 
   const notesByVerse = useMemo(() => {
     const grouped = new Map<string, ReaderNote[]>();
+    if (!book) return grouped;
     for (const verse of book.verses) {
       const key = verseKey(verse);
       grouped.set(
@@ -94,7 +130,7 @@ export default function ReaderView() {
       );
     }
     return grouped;
-  }, [book.verses, notes]);
+  }, [book, notes]);
 
   function openVerseNote(verse: BibleVerse) {
     setActiveTarget({ key: verseKey(verse), label: verseLabel(verse) });
@@ -134,53 +170,72 @@ export default function ReaderView() {
       <article className="reader-page" aria-label={t.readerKicker}>
         <header className="reader-header">
           <p className="reader-kicker">{t.readerKicker}</p>
-          <h1>{book.title}</h1>
-          <p className="reader-version">{book.versionLabel}</p>
+          <label className="reader-book-select">
+            <span className="visually-hidden">{t.prefBook}</span>
+            <select
+              value={bookId}
+              onChange={event => writeReaderBook(event.target.value as ReaderBookId)}
+              aria-label={t.prefBook}
+            >
+              {READER_BOOKS.map(entry => (
+                <option key={entry.id} value={entry.id}>
+                  {entry.displayName}
+                </option>
+              ))}
+            </select>
+          </label>
+          <h1>{book?.title ?? "…"}</h1>
+          <p className="reader-version">{book?.versionLabel ?? ""}</p>
         </header>
 
-        <div className="reader-book">
-          {chapters.map(([chapter, verses]) => (
-            <section className="reader-chapter" key={chapter} aria-labelledby={`chapter-${chapter}`}>
-              <h2 id={`chapter-${chapter}`}>{chapter}</h2>
-              {verses.map(verse => {
-                const key = verseKey(verse);
-                const verseNotes = notesByVerse.get(key) ?? [];
+        {loadError ? <p className="reader-load-error">{loadError}</p> : null}
+        {!book && !loadError ? <p className="reader-loading">{t.loadingBook}</p> : null}
 
-                return (
-                  <div
-                    className={`reader-line${activeTarget?.key === key ? " reader-line--active" : ""}`}
-                    key={key}
-                  >
-                    <button
-                      type="button"
-                      className={`reader-note-mark${verseNotes.length ? " reader-note-mark--has-note" : ""}`}
-                      onClick={() => openVerseNote(verse)}
-                      aria-label={t.noteFor(verseLabel(verse))}
+        {book ? (
+          <div className="reader-book">
+            {chapters.map(([chapter, verses]) => (
+              <section className="reader-chapter" key={chapter} aria-labelledby={`chapter-${chapter}`}>
+                <h2 id={`chapter-${chapter}`}>{chapter}</h2>
+                {verses.map(verse => {
+                  const key = verseKey(verse);
+                  const verseNotes = notesByVerse.get(key) ?? [];
+
+                  return (
+                    <div
+                      className={`reader-line${activeTarget?.key === key ? " reader-line--active" : ""}`}
+                      key={key}
                     >
-                      {verseNotes.length ? "*" : "+"}
-                    </button>
-                    <p className="reader-verse" onClick={() => openVerseNote(verse)}>
-                      <sup>{verse.verse}</sup>
-                      {verse.text}
-                    </p>
-                    <aside className="reader-margin-notes" aria-label={t.notesFor(verseLabel(verse))}>
-                      {verseNotes.map(note => (
-                        <button
-                          type="button"
-                          className="reader-note"
-                          key={note.id}
-                          onClick={() => setActiveTarget({ key: note.target, label: note.label })}
-                        >
-                          {note.text}
-                        </button>
-                      ))}
-                    </aside>
-                  </div>
-                );
-              })}
-            </section>
-          ))}
-        </div>
+                      <button
+                        type="button"
+                        className={`reader-note-mark${verseNotes.length ? " reader-note-mark--has-note" : ""}`}
+                        onClick={() => openVerseNote(verse)}
+                        aria-label={t.noteFor(verseLabel(verse))}
+                      >
+                        {verseNotes.length ? "*" : "+"}
+                      </button>
+                      <p className="reader-verse" onClick={() => openVerseNote(verse)}>
+                        <sup>{verse.verse}</sup>
+                        {verse.text}
+                      </p>
+                      <aside className="reader-margin-notes" aria-label={t.notesFor(verseLabel(verse))}>
+                        {verseNotes.map(note => (
+                          <button
+                            type="button"
+                            className="reader-note"
+                            key={note.id}
+                            onClick={() => setActiveTarget({ key: note.target, label: note.label })}
+                          >
+                            {note.text}
+                          </button>
+                        ))}
+                      </aside>
+                    </div>
+                  );
+                })}
+              </section>
+            ))}
+          </div>
+        ) : null}
       </article>
 
       {activeTarget && (

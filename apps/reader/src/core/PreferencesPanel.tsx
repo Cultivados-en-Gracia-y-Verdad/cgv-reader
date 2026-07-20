@@ -1,25 +1,38 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import {
   BIBLE_VERSIONS,
+  READER_BOOKS,
   readBibleVersion,
+  readReaderBook,
+  readerBookHasLbf,
   subscribeBibleVersion,
+  subscribeReaderBook,
   writeBibleVersion,
-  type BibleVersionId
+  writeReaderBook,
+  type BibleVersionId,
+  type ReaderBookId
 } from "@cgv/core";
 import { useUiLanguage } from "./UiLanguageContext";
 
 /**
- * Preferences: interface language + Reader Bible version.
- * Bible version only changes Reader text — never Observer's LBF/MorphGNT stack.
+ * Preferences: interface language + Reader book + Bible version.
+ * Bible version / book only change Reader text — never Observer's LBF/MorphGNT stack.
  */
 export default function PreferencesPanel() {
   const { t, language, setLanguage } = useUiLanguage();
   const [open, setOpen] = useState(false);
   const [bibleVersion, setBibleVersion] = useState<BibleVersionId>(() => readBibleVersion());
+  const [bookId, setBookId] = useState<ReaderBookId>(() => readReaderBook());
   const panelId = useId();
   const rootRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => subscribeBibleVersion(setBibleVersion), []);
+  useEffect(() => subscribeReaderBook(setBookId), []);
+
+  const versionOptions = useMemo(() => {
+    if (readerBookHasLbf(bookId)) return BIBLE_VERSIONS;
+    return BIBLE_VERSIONS.filter(entry => entry.id !== "LBF");
+  }, [bookId]);
 
   useEffect(() => {
     if (!open) return;
@@ -36,6 +49,15 @@ export default function PreferencesPanel() {
       window.removeEventListener("keydown", onKey);
     };
   }, [open]);
+
+  function handleBookChange(next: ReaderBookId) {
+    writeReaderBook(next);
+    setBookId(next);
+    if (bibleVersion === "LBF" && !readerBookHasLbf(next)) {
+      writeBibleVersion("NBLA");
+      setBibleVersion("NBLA");
+    }
+  }
 
   function handleBibleChange(next: BibleVersionId) {
     writeBibleVersion(next);
@@ -76,12 +98,25 @@ export default function PreferencesPanel() {
             </select>
           </label>
           <label className="prefs-field">
+            <span>{t.prefBook}</span>
+            <select
+              value={bookId}
+              onChange={event => handleBookChange(event.target.value as ReaderBookId)}
+            >
+              {READER_BOOKS.map(entry => (
+                <option key={entry.id} value={entry.id}>
+                  {entry.displayName}
+                </option>
+              ))}
+            </select>
+          </label>
+          <label className="prefs-field">
             <span>{t.prefBible}</span>
             <select
-              value={bibleVersion}
+              value={bibleVersion === "LBF" && !readerBookHasLbf(bookId) ? "NBLA" : bibleVersion}
               onChange={event => handleBibleChange(event.target.value as BibleVersionId)}
             >
-              {BIBLE_VERSIONS.map(entry => (
+              {versionOptions.map(entry => (
                 <option key={entry.id} value={entry.id}>
                   {entry.label} — {entry.description}
                 </option>

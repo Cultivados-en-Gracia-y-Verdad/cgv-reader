@@ -3,7 +3,7 @@
 
 export const BIBLE_VERSION_KEY = "the-reader:titus:bible-version";
 
-/** Versions with a Titus text ready for Reader. */
+/** Versions with Reader text for the NT (LBF is Titus-only until more LBF ships). */
 export type BibleVersionId = "NBLA" | "BLE" | "SPNBES" | "RV1909" | "LBF";
 
 export const DEFAULT_BIBLE_VERSION: BibleVersionId = "NBLA";
@@ -21,7 +21,7 @@ export const BIBLE_VERSIONS: BibleVersionInfo[] = [
   { id: "BLE", label: "BLE", description: "Biblia Literal en Español (working gloss)" },
   { id: "SPNBES", label: "SPNBES", description: "Biblia en Español Sencillo" },
   { id: "RV1909", label: "RV1909", description: "Reina Valera 1909" },
-  { id: "LBF", label: "LBF", description: "La Biblia Fiel (same Spanish Observer uses)" }
+  { id: "LBF", label: "LBF", description: "La Biblia Fiel — Titus only (Observer Spanish)" }
 ];
 
 const VALID = new Set<string>(BIBLE_VERSIONS.map(entry => entry.id));

@@ -6,12 +6,15 @@
 // interpretive content — only what's already been observed in O.
 //
 // Per the confirmed spec: YAML frontmatter is separate metadata (form on the
-// right). H1/H2 are context only (not the outline). The outline is the
-// skeleton: "####" / "-" / "+" / "*" — indentation (left→right) shows
-// structural depth. Presentation rule: every blank line starts a new slide.
-// H3 line carries the unit claim (reference — root clause) on its own slide
-// (blank after H3). Reading quotes follow as the next slide. Each ####/-/+/ *
-// is its own slide; gathering comments each get their own slide too.
+// right). H1/H2 are context only (not the outline). Scripture outline:
+//   #### independent (root) clauses
+//   -  dependent clauses
+//   +  phrases (every other scriptural word)
+//   *  Observer mechanical inserts only
+//   >  Writer entries (Reader notes, Def/XRef, human commentary)
+// Indentation (left→right) shows structural depth. Blank line = new slide.
+// H3 = unit claim (reference — independent clause). Reading quotes are the
+// next slide; the outline must still account for every word as #### / - / +.
 
 import {
   formatClauseSpan,
@@ -266,11 +269,38 @@ interface GeneratedDoc {
   warnings: string[];
 }
 
+export interface GenerateManualOptions {
+  meta?: ManualMeta;
+  /**
+   * Optional reading-block texts keyed `chapter:verse`. When omitted, reading
+   * quotes use LBF verse text from Observer (same as outline). Outline
+   * `####` / `-` / `+` always stay on O's LBF spans.
+   */
+  readingTextsByVerse?: Map<string, string> | Record<string, string>;
+}
+
+function readingTextLookup(
+  readingTextsByVerse: GenerateManualOptions["readingTextsByVerse"] | undefined,
+  chapter: number,
+  verse: number,
+  fallback: string
+): string {
+  if (!readingTextsByVerse) return fallback;
+  const key = `${chapter}:${verse}`;
+  if (readingTextsByVerse instanceof Map) return readingTextsByVerse.get(key) ?? fallback;
+  return readingTextsByVerse[key] ?? fallback;
+}
+
 /**
  * Reads O's current live data (Titus) and produces the markdown skeleton.
  * Pure, synchronous, read-only — never writes back to O's storage.
  */
-export function generateManualSkeleton(meta?: ManualMeta): GeneratedDoc {
+export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManualOptions): GeneratedDoc {
+  const options: GenerateManualOptions =
+    metaOrOptions && ("meta" in metaOrOptions || "readingTextsByVerse" in metaOrOptions)
+      ? metaOrOptions
+      : { meta: metaOrOptions as ManualMeta | undefined };
+  const meta = options.meta;
   const warnings: string[] = [];
   const verses = loadTitusClauseVerses();
   const assignments = readClauseAssignments();
@@ -405,10 +435,9 @@ export function generateManualSkeleton(meta?: ManualMeta): GeneratedDoc {
   const augmentedObservations = applyCoordinateInheritance(clauseSpanInfos, observationLikeById, coordinateContinuationIds);
   const skeleton = deriveSkeleton(clauseSpanInfos, augmentedObservations);
 
-  // Participle attachment: exact clause if the participle's own word sits
-  // inside a clause's selected span, else the positionally-nearest clause row
-  // in the same verse, else null (a verbless verse has no clause to attach
-  // to) — identical rule to SpanishClauseBuilder.tsx's participleClauseAssignment.
+  // Participle emission bucket: exact clause span only (same as infinitives).
+  // Gap participles emit after their `+` via verse-key. Circumstantial with an
+  // explicit ridingClauseId still targets that clause for emission.
   const wordIdToClauseId = new Map<string, string>();
   for (const clause of clauses) {
     for (const id of assignments[clause.finiteVerbId]?.selectedSpan ?? []) {
@@ -426,26 +455,7 @@ export function generateManualSkeleton(meta?: ManualMeta): GeneratedDoc {
   for (const participleId of participleMarkedAlignmentIds) {
     const word = wordByParticipleId.get(participleId);
     if (!word) continue;
-    const exactClauseId = wordIdToClauseId.get(word.id);
-    if (exactClauseId) {
-      participleClauseAssignment.set(participleId, exactClauseId);
-      continue;
-    }
-    const candidates = rowsByVerseKey.get(`${word.chapter}:${word.verse}`) ?? [];
-    let nearestId: string | null = null;
-    let nearestDistance = Infinity;
-    for (const candidate of candidates) {
-      for (const id of assignments[candidate.finiteVerbId]?.selectedSpan ?? []) {
-        const selected = wordById.get(id);
-        if (!selected || selected.chapter !== word.chapter || selected.verse !== word.verse) continue;
-        const distance = Math.abs(selected.index - word.index);
-        if (distance < nearestDistance) {
-          nearestDistance = distance;
-          nearestId = candidate.finiteVerbId;
-        }
-      }
-    }
-    participleClauseAssignment.set(participleId, nearestId);
+    participleClauseAssignment.set(participleId, wordIdToClauseId.get(word.id) ?? null);
   }
 
   // Every participle attached to a given clause — atributivo/sustantivado use
@@ -520,17 +530,7 @@ export function generateManualSkeleton(meta?: ManualMeta): GeneratedDoc {
     return starSlides(indent, participleExplanationsFor(finiteVerbId, verseKey, onlyWordIds));
   }
 
-  // Infinitives attach like participles: prefer the clause whose span contains
-  // the infinitive word; else nearest same-verse clause; else verse-key for `+`.
-  const infinitiveClauseAssignment = new Map<string, string | null>();
-  for (const word of infinitiveWords) {
-    const infinitiveId = word.infinitiveId;
-    if (!infinitiveId) continue;
-    const exactClauseId = wordIdToClauseId.get(word.id);
-    if (exactClauseId) {
-      infinitiveClauseAssignment.set(infinitiveId, exactClauseId);
-      continue;
-    }
+  function nearestClauseIdInVerse(word: SpanishWord): string | null {
     const candidates = rowsByVerseKey.get(`${word.chapter}:${word.verse}`) ?? [];
     let nearestId: string | null = null;
     let nearestDistance = Infinity;
@@ -545,7 +545,24 @@ export function generateManualSkeleton(meta?: ManualMeta): GeneratedDoc {
         }
       }
     }
-    infinitiveClauseAssignment.set(infinitiveId, nearestId);
+    return nearestId;
+  }
+
+  // Infinitives: emit under the clause only when the Spanish word sits in that
+  // clause's span. If the word is in a `+` gap, emit the `*` after that `+`
+  // (document order) — still name the nearest finite as host in the template.
+  // (Previously "nearest clause" pulled gap-infinitives onto the host clause,
+  // so `*` appeared before `+ *a ser prudentes*`.)
+  const infinitiveClauseAssignment = new Map<string, string | null>();
+  const infinitiveHostById = new Map<string, string | null>();
+  for (const word of infinitiveWords) {
+    const infinitiveId = word.infinitiveId;
+    if (!infinitiveId) continue;
+    const exactClauseId = wordIdToClauseId.get(word.id) ?? null;
+    const hostId = exactClauseId ?? nearestClauseIdInVerse(word);
+    infinitiveHostById.set(infinitiveId, hostId);
+    // Only bucket onto a clause for emission when the word is inside its span.
+    infinitiveClauseAssignment.set(infinitiveId, exactClauseId);
   }
 
   const infinitivesByClauseId = new Map<string, SpanishWord[]>();
@@ -576,17 +593,21 @@ export function generateManualSkeleton(meta?: ManualMeta): GeneratedDoc {
       : verseKey
         ? (infinitivesByVerseKey.get(verseKey) ?? [])
         : [];
-    const hostWord = finiteVerbId ? finiteVerbWordById.get(finiteVerbId) ?? null : null;
-    const hostSpanish = hostWord?.text ?? null;
-    const hostGreek = hostWord?.greekSurface ?? null;
     const explanations: string[] = [];
     const seen = new Set<string>();
     for (const word of words) {
       if (!word.infinitiveId || seen.has(word.infinitiveId)) continue;
       seen.add(word.infinitiveId);
       if (onlyWordIds && !onlyWordIds.has(word.id)) continue;
+      const hostId = finiteVerbId ?? infinitiveHostById.get(word.infinitiveId) ?? null;
+      const hostWord = hostId ? finiteVerbWordById.get(hostId) ?? null : null;
       explanations.push(
-        infinitiveLine(word.text, word.infinitiveSurface ?? word.greekSurface ?? null, hostSpanish, hostGreek)
+        infinitiveLine(
+          word.text,
+          word.infinitiveSurface ?? word.greekSurface ?? null,
+          hostWord?.text ?? null,
+          hostWord?.greekSurface ?? null
+        )
       );
     }
     return explanations;
@@ -724,10 +745,10 @@ export function generateManualSkeleton(meta?: ManualMeta): GeneratedDoc {
     return [ASYNDETON_LINE];
   }
 
-  function renderNode(node: SkeletonNode, depth: number): string[] {
+  /** One dependent `-` plus its notes — children are emitted by the unit timeline. */
+  function renderDependentOnly(node: SkeletonNode, depth: number): string[] {
     const clause = clauseById.get(node.finiteVerbId);
     const lines: string[] = [];
-    // Indent = structural depth (left→right outline). Children sit further right.
     const indent = "  ".repeat(depth);
 
     if (!clause) {
@@ -738,14 +759,18 @@ export function generateManualSkeleton(meta?: ManualMeta): GeneratedDoc {
     }
 
     const dependent = dependentRender(node, clause);
-    // Clause slide: Scripture marker + at most the antecedent. Gathering notes
-    // and `*` each get their own slide so one slide stays presentable.
     const antecedent = dependent.antecedentText ? [`${indent}${scripture(dependent.antecedentText)}`] : [];
     lines.push(...slide(`${indent}- ${scripture(node.spanText || clause.finiteVerbText)}`, antecedent));
     lines.push(...commentSlides(takeReaderNoteComments(clause.chapter, clause.verse, indent)));
     lines.push(...starSlides(indent, dependent.explanations));
     lines.push(...emitInfinitiveSlides(indent, node.finiteVerbId, null));
     lines.push(...emitParticipleSlides(indent, node.finiteVerbId, null));
+    return lines;
+  }
+
+  /** Recursive helper for parked subtrees / leftover section only. */
+  function renderNode(node: SkeletonNode, depth: number): string[] {
+    const lines = renderDependentOnly(node, depth);
     for (const child of node.children) {
       lines.push(...renderNode(child, depth + 1));
     }
@@ -826,19 +851,41 @@ export function generateManualSkeleton(meta?: ManualMeta): GeneratedDoc {
     return collected;
   }
 
-  function renderOrphanBullet(orphan: Orphan, _governingText: string): string[] {
+  function formatUnitReference(
+    startChapter: number,
+    startVerse: number,
+    endChapter: number,
+    endVerse: number
+  ): string {
+    if (startChapter === endChapter && startVerse === endVerse) {
+      return `Tito ${startChapter}:${startVerse}`;
+    }
+    if (startChapter === endChapter) {
+      return `Tito ${startChapter}:${startVerse}–${endVerse}`;
+    }
+    return `Tito ${startChapter}:${startVerse}–${endChapter}:${endVerse}`;
+  }
+
+  /** Verse floor order (token 0) — used so reading bounds don't steal the next root's verse. */
+  function verseStartOrder(chapter: number, verse: number): number {
+    return chapter * 100000 + verse * 1000;
+  }
+
+  /**
+   * Phrase / parked orphan at `depth` (Fix A: same indent as nearest preceding
+   * #### / - so `+` does not jump to column 0 after a nested clause).
+   */
+  function renderOrphanBullet(orphan: Orphan, _governingText: string, depth = 0): string[] {
+    const indent = "  ".repeat(depth);
     if (orphan.kind === "phrase") {
-      // "+" = Scripture not inside any finite-clause span (verbless verse or gap).
-      const lines = slide(`+ ${scripture(orphan.text)}`);
-      lines.push(...commentSlides(takeReaderNoteComments(orphan.chapter, orphan.verse)));
+      const lines = slide(`${indent}+ ${scripture(orphan.text)}`);
+      lines.push(...commentSlides(takeReaderNoteComments(orphan.chapter, orphan.verse, indent)));
       const phraseWords = new Set(orphan.wordIds);
-      lines.push(...emitInfinitiveSlides("", null, `${orphan.chapter}:${orphan.verse}`, phraseWords));
-      lines.push(...emitParticipleSlides("", null, `${orphan.chapter}:${orphan.verse}`, phraseWords));
+      lines.push(...emitInfinitiveSlides(indent, null, `${orphan.chapter}:${orphan.verse}`, phraseWords));
+      lines.push(...emitParticipleSlides(indent, null, `${orphan.chapter}:${orphan.verse}`, phraseWords));
       return lines;
     }
-    // Parked finite clause (Q1 noun not inside any clause row yet): still emit as "-"
-    // in document order under this unit. Flagged in warnings — not restated in the body.
-    // Always emit the relative-description `*` so the antecedent line is not left bare.
+    // Parked finite clause — still `-`; children keep relative depth under it.
     const parkedClause = clauseById.get(orphan.node.finiteVerbId);
     const lines: string[] = [];
     const dependent = parkedClause ? dependentRender(orphan.node, parkedClause) : null;
@@ -847,10 +894,10 @@ export function generateManualSkeleton(meta?: ManualMeta): GeneratedDoc {
     const clauseText = antecedentText
       ? stripLeadingAntecedent(orphan.node.spanText, antecedentText)
       : orphan.node.spanText;
-    const antecedent = antecedentText ? [scripture(antecedentText)] : [];
-    lines.push(...slide(`- ${scripture(clauseText)}`, antecedent));
+    const antecedent = antecedentText ? [`${indent}${scripture(antecedentText)}`] : [];
+    lines.push(...slide(`${indent}- ${scripture(clauseText)}`, antecedent));
     if (parkedClause) {
-      lines.push(...commentSlides(takeReaderNoteComments(parkedClause.chapter, parkedClause.verse)));
+      lines.push(...commentSlides(takeReaderNoteComments(parkedClause.chapter, parkedClause.verse, indent)));
     }
 
     let explanations = dependent?.explanations ?? [];
@@ -866,10 +913,10 @@ export function generateManualSkeleton(meta?: ManualMeta): GeneratedDoc {
         explanations = [`Esta frase habla más de ${noun}.`, ...explanations];
       }
     }
-    lines.push(...starSlides("", explanations));
-    lines.push(...emitInfinitiveSlides("", orphan.node.finiteVerbId, null));
-    lines.push(...emitParticipleSlides("", orphan.node.finiteVerbId, null));
-    for (const child of orphan.node.children) lines.push(...renderNode(child, 1));
+    lines.push(...starSlides(indent, explanations));
+    lines.push(...emitInfinitiveSlides(indent, orphan.node.finiteVerbId, null));
+    lines.push(...emitParticipleSlides(indent, orphan.node.finiteVerbId, null));
+    for (const child of orphan.node.children) lines.push(...renderNode(child, depth + 1));
     return lines;
   }
 
@@ -878,22 +925,22 @@ export function generateManualSkeleton(meta?: ManualMeta): GeneratedDoc {
   }
 
   // Full-book verse list in document order — the reading spine walks this so
-  // every LBF verse is quoted exactly once under whichever unit first needs it.
+  // every verse is quoted exactly once under whichever unit first needs it.
+  // Text may come from the Compiler Bible-version choice; outline stays LBF.
   const allBookVerses = verses
     .map(verse => ({
       chapter: verse.chapter,
       verse: verse.verse,
       order: verse.chapter * 100000 + verse.verse * 1000,
-      text: verse.text
+      text: readingTextLookup(
+        options.readingTextsByVerse,
+        verse.chapter,
+        verse.verse,
+        verse.text
+      )
     }))
     .sort(byOrder);
   let readingCursor = 0;
-
-  function collectTreeVerseOrders(node: SkeletonNode, into: number[]): void {
-    const treeClause = clauseById.get(node.finiteVerbId);
-    if (treeClause) into.push(treeClause.order);
-    for (const child of node.children) collectTreeVerseOrders(child, into);
-  }
 
   function flushReadingBlockThrough(maxOrder: number): string[] {
     const quotes: string[] = [];
@@ -917,85 +964,117 @@ export function generateManualSkeleton(meta?: ManualMeta): GeneratedDoc {
     return findLeadingMarkerToken(clause.beginningTokens).kind === "relative";
   }
 
-  for (const root of roots) {
+  for (let rootIndex = 0; rootIndex < roots.length; rootIndex += 1) {
+    const root = roots[rootIndex];
     const clause = clauseById.get(root.finiteVerbId);
     if (!clause) {
       warnings.push(`${root.reference} (${root.finiteVerbId}): root clause missing beginning-token data — skipped.`);
       continue;
     }
-    pendingOrphans = flushOrphansBefore(clause.order);
 
-    // Orphans always precede this root by construction. Direct children may
-    // too (e.g. a relative riding a noun earlier in the sentence). Outline
-    // bullets stay in document order; the unit claim is on the H3 heading
-    // line itself (reference — root clause), not a #### on that slide.
-    const beforeChildren = root.children.filter(child => childOrder(child) < clause.order);
-    const afterChildren = root.children.filter(child => childOrder(child) >= clause.order);
+    // Unit owns every orphan until the next independent clause begins — so a
+    // `+` after the root in the same verse stays in this unit's outline.
+    const nextRoot = roots[rootIndex + 1];
+    const nextRootOrder = nextRoot
+      ? clauseById.get(nextRoot.finiteVerbId)?.order ?? Number.POSITIVE_INFINITY
+      : Number.POSITIVE_INFINITY;
+    pendingOrphans = flushOrphansBefore(nextRootOrder);
 
-    const beforeItems = [
-      ...pendingOrphans.map(orphan => ({
-        order: orphan.order,
-        render: () => renderOrphanBullet(orphan, root.spanText || clause.finiteVerbText)
-      })),
-      ...beforeChildren.map(child => ({ order: childOrder(child), render: () => renderNode(child, 0) }))
-    ].sort((a, b) => a.order - b.order);
-
-    if (opensWithRelativePronoun(clause) && pendingOrphans.length) {
+    const beforeOrphans = pendingOrphans.filter(orphan => orphan.order < clause.order);
+    if (opensWithRelativePronoun(clause) && beforeOrphans.length) {
       warnings.push(
         `${root.reference} (${root.finiteVerbId}): opens with a relative pronoun and sits next to unplaced material — verify this is really root, not a Q1 description of something in that material (the Tito 1:2:6 pattern).`
       );
     }
 
-    const earliestVerse = beforeItems.length
-      ? Math.min(
-          clause.verse,
-          ...pendingOrphans.map(orphan =>
-            orphan.kind === "phrase"
-              ? orphan.verse
-              : clauseById.get(orphan.node.finiteVerbId)?.verse ?? clause.verse
-          ),
-          ...beforeChildren.map(child => clauseById.get(child.finiteVerbId)?.verse ?? clause.verse)
-        )
-      : clause.verse;
+    // Flat document-order timeline so `+` can inherit the nearest preceding
+    // clause depth (nested `-` / ####), instead of always printing at column 0.
+    type UnitEvent =
+      | { kind: "root"; order: number }
+      | { kind: "dependent"; order: number; node: SkeletonNode; depth: number }
+      | { kind: "orphan"; order: number; orphan: Orphan };
 
-    const sectionOrders: number[] = [clause.order];
-    for (const orphan of pendingOrphans) {
-      sectionOrders.push(orphan.order);
-      if (orphan.kind === "parked") collectTreeVerseOrders(orphan.node, sectionOrders);
+    const unitEvents: UnitEvent[] = [];
+
+    function appendDependentTree(node: SkeletonNode, depth: number): void {
+      unitEvents.push({ kind: "dependent", order: childOrder(node), node, depth });
+      for (const child of node.children) appendDependentTree(child, depth + 1);
     }
-    collectTreeVerseOrders(root, sectionOrders);
-    const sectionMaxOrder = Math.max(...sectionOrders);
-    // sectionMaxOrder encodes chapter*100000+verse*1000 (+ token); recover chapter/verse for the heading end.
-    const latestChapter = Math.floor(sectionMaxOrder / 100000) || clause.chapter;
-    const latestVerseNumber = Math.floor((sectionMaxOrder % 100000) / 1000) || clause.verse;
 
-    const reference =
-      earliestVerse === latestVerseNumber && clause.chapter === latestChapter
-        ? `Tito ${clause.chapter}:${clause.verse}`
-        : earliestVerse === latestVerseNumber
-          ? `Tito ${clause.chapter}:${earliestVerse}`
-          : latestChapter === clause.chapter
-            ? `Tito ${clause.chapter}:${earliestVerse}–${latestVerseNumber}`
-            : `Tito ${clause.chapter}:${earliestVerse}–${latestChapter}:${latestVerseNumber}`;
+    for (const orphan of pendingOrphans) {
+      unitEvents.push({ kind: "orphan", order: orphan.order, orphan });
+    }
+    for (const child of root.children) appendDependentTree(child, 0);
+    unitEvents.push({ kind: "root", order: clause.order });
+    unitEvents.sort((a, b) => a.order - b.order);
+
+    // Reading ends at the verse *before* the next root's verse — never
+    // `nextRootOrder - 1`, which still sits inside the next root's verse
+    // (verse order ignores token index) and steals that verse from the next H3.
+    const nextRootClause = nextRoot ? clauseById.get(nextRoot.finiteVerbId) : null;
+    const readingEndOrder = nextRootClause
+      ? verseStartOrder(nextRootClause.chapter, nextRootClause.verse) - 1
+      : Number.POSITIVE_INFINITY;
+
+    // H3 reference = grammatical unit (root + dependents + orphans), always
+    // including the independent clause's own verse — not the raw reading window
+    // alone (which can omit the root verse if a prior unit over-read).
+    type VersePin = { chapter: number; verse: number };
+    const unitVerses: VersePin[] = [{ chapter: clause.chapter, verse: clause.verse }];
+    function addVersePin(chapter: number, verse: number): void {
+      if (!unitVerses.some(pin => pin.chapter === chapter && pin.verse === verse)) {
+        unitVerses.push({ chapter, verse });
+      }
+    }
+    for (const event of unitEvents) {
+      if (event.kind === "dependent") {
+        const dep = clauseById.get(event.node.finiteVerbId);
+        if (dep) addVersePin(dep.chapter, dep.verse);
+      } else if (event.kind === "orphan") {
+        if (event.orphan.kind === "phrase") {
+          addVersePin(event.orphan.chapter, event.orphan.verse);
+        } else {
+          const parked = clauseById.get(event.orphan.node.finiteVerbId);
+          if (parked) addVersePin(parked.chapter, parked.verse);
+        }
+      }
+    }
+    unitVerses.sort((a, b) => a.chapter - b.chapter || a.verse - b.verse);
+    const startChapter = unitVerses[0].chapter;
+    const startVerse = unitVerses[0].verse;
+    const endChapter = unitVerses[unitVerses.length - 1].chapter;
+    const endVerse = unitVerses[unitVerses.length - 1].verse;
+    const reference = formatUnitReference(startChapter, startVerse, endChapter, endVerse);
 
     const rootQuote = scripture(root.spanText || clause.finiteVerbText);
     const block: string[] = [];
     // H3 unit claim on its own slide; reading quotes on the next slide.
+    // Reading still runs through the verse before the next root so no LBF
+    // verse is skipped; H3 ref stays grammatical (includes the root verse).
     block.push(`### ${reference} — ${rootQuote}`);
     block.push("");
-    block.push(...flushReadingBlockThrough(sectionMaxOrder));
+    block.push(...flushReadingBlockThrough(readingEndOrder));
 
-    // Outline: dependents that precede the root in the text, then #### root,
-    // then the rest — document order around the dissected root.
-    for (const item of beforeItems) block.push(...item.render());
-
-    block.push(...slide(`#### ${rootQuote}`));
-    block.push(...commentSlides(takeReaderNoteComments(clause.chapter, clause.verse)));
-    block.push(...starSlides("", rootExplanationLines(clause)));
-    block.push(...emitInfinitiveSlides("", root.finiteVerbId, null));
-    block.push(...emitParticipleSlides("", root.finiteVerbId, null));
-
-    for (const child of afterChildren) block.push(...renderNode(child, 0));
+    // Walk timeline: #### / - update currentDepth; + uses that indent (Fix A).
+    let currentDepth = 0;
+    const governing = root.spanText || clause.finiteVerbText;
+    for (const event of unitEvents) {
+      if (event.kind === "root") {
+        block.push(...slide(`#### ${rootQuote}`));
+        block.push(...commentSlides(takeReaderNoteComments(clause.chapter, clause.verse)));
+        block.push(...starSlides("", rootExplanationLines(clause)));
+        block.push(...emitInfinitiveSlides("", root.finiteVerbId, null));
+        block.push(...emitParticipleSlides("", root.finiteVerbId, null));
+        currentDepth = 0;
+        continue;
+      }
+      if (event.kind === "dependent") {
+        block.push(...renderDependentOnly(event.node, event.depth));
+        currentDepth = event.depth;
+        continue;
+      }
+      block.push(...renderOrphanBullet(event.orphan, governing, currentDepth));
+    }
 
     sections.push(block.join("\n"));
   }
