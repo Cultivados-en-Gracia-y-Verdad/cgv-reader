@@ -36,6 +36,16 @@ not required to read LBF Spanish over the current Greek spans.
 - Coverage ~95% of MorphGNT tokens; remaining misses are mostly absorbed
   pronouns/articles or LBF expansions with no 1:1 Greek counterpart
 
+`data/lbf/nt/1pedro.alignment.json` is **compiled** from translator reverse
+links (`1peter-reverse-links.json`) via TR spine `morphIndex`:
+
+```bash
+python3 scripts/compile-lbf-alignment-1pedro.py
+```
+
+Do not hand-patch that JSON for verses already linked in the translator.
+Fix the reverse link, then recompile.
+
 ## Display rule (Structure passage)
 
 - Under each Greek token: **aligned LBF surface** (from this file), not the BLE gloss.

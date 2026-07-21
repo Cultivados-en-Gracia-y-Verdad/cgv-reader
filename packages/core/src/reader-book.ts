@@ -110,9 +110,20 @@ export function subscribeReaderBook(listener: (bookId: ReaderBookId) => void): (
   };
 }
 
-/** LBF markdown currently ships for Titus only. */
+/** Books with LBF reading text under `data/lbf/nt/{id}.md`. */
+const LBF_TEXT_BOOKS = new Set<ReaderBookId>(["tito", "1pedro"]);
+
+/** LBF available as a Reader bible version. */
 export function readerBookHasLbf(bookId: ReaderBookId): boolean {
-  return bookId === "tito";
+  return LBF_TEXT_BOOKS.has(bookId);
+}
+
+/**
+ * Observer Structure / Compiler need reverse-interlinear alignment, not just
+ * reading text. Titus only until each book gets `*.alignment.json` + wiring.
+ */
+export function readerBookHasLbfStructure(bookId: ReaderBookId): boolean {
+  return bookId === "tito" || bookId === "1pedro";
 }
 
 /**

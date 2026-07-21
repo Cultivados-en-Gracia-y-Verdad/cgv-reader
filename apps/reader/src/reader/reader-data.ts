@@ -5,7 +5,7 @@ import {
   type BibleVersionId,
   type ReaderBookId
 } from "@cgv/core";
-import titusLbf from "@cgv-lbf/nt/tito.md?raw";
+import { loadLbfRaw } from "../observer/book-assets";
 
 export interface ReaderBook {
   id: ReaderBookId;
@@ -169,9 +169,9 @@ async function loadRaw(bookId: ReaderBookId, version: BibleVersionId): Promise<s
 
   if (version === "LBF") {
     if (!readerBookHasLbf(bookId)) {
-      throw new Error(`LBF is only available for Tito (requested ${info.displayName}).`);
+      throw new Error(`LBF is not available for ${info.displayName} yet.`);
     }
-    return titusLbf;
+    return loadLbfRaw(bookId);
   }
 
   const loader =
@@ -296,7 +296,7 @@ function parseLbfContent(displayName: string, content: string): BibleVerse[] {
   return normalizeVerses(displayName, verses);
 }
 
-/** Effective Reader version — LBF only exists for Tito. */
+/** Effective Reader version — LBF only where `readerBookHasLbf` is true. */
 export function resolveReaderVersion(
   bookId: ReaderBookId,
   version: BibleVersionId

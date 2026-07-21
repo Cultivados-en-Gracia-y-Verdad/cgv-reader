@@ -1,11 +1,8 @@
+import { getReaderBookInfo, type ReaderBookId } from "@cgv/core";
 import { parseNblaContent } from "cgv-bible";
 import type { BibleVerse } from "cgv-bible";
-import titusNbla from "@cgv-data/bibles/NBLA/tito.nbla.md?raw";
-import titusMorph from "@cgv-data/morphology/MorphGNT/77-Tit-morphgnt.txt?raw";
-import titusAlignment from "@cgv-data/interlinears/NT/tito.tokens.jsonl?raw";
-import titusInterlinearCh1 from "@cgv-data/interlinears/NT/tito-01.interlinear.txt?raw";
-import titusInterlinearCh2 from "@cgv-data/interlinears/NT/tito-02.interlinear.txt?raw";
-import titusInterlinearCh3 from "@cgv-data/interlinears/NT/tito-03.interlinear.txt?raw";
+import { loadInterlinearRaw, loadMorphRaw, loadNblaRaw, loadTokensRaw } from "./book-assets";
+import { getWorkshopBookId } from "./workshop-book";
 
 export interface GreekToken {
   id: string;
@@ -36,11 +33,14 @@ export interface AlignmentToken {
   es: string;
 }
 
-export interface TitusData {
+export interface BookMorphData {
   alignment: AlignmentToken[];
   greek: Array<[number, GreekVerse[]]>;
   spanish: BibleVerse[];
 }
+
+/** @deprecated Prefer BookMorphData — kept for call sites during migration. */
+export type TitusData = BookMorphData;
 
 function parseMorphLine(line: string, index: number): GreekToken | null {
   const match = line.match(/^(\d{6})\s+(\S+)\s+(\S+)\s+(\S+)\s+\S+\s+\S+\s+(.+)$/);
@@ -63,10 +63,10 @@ function parseMorphLine(line: string, index: number): GreekToken | null {
   };
 }
 
-function parseAlignmentLine(line: string): AlignmentToken | null {
+function parseAlignmentLine(line: string, bookId: ReaderBookId): AlignmentToken | null {
   try {
     const parsed = JSON.parse(line);
-    if (!parsed || parsed.book !== "tito") return null;
+    if (!parsed || parsed.book !== bookId) return null;
     if (
       typeof parsed.ch !== "number" ||
       typeof parsed.vs !== "number" ||
@@ -102,18 +102,21 @@ export interface VerseInterlinearToken {
   gloss: string;
 }
 
-// One line per verse: "tito {chapter}:{verse}\t{Surface<Lemma|Strongs|Morph|Gloss>}...".
+// One line per verse: "{book} {chapter}:{verse}\t{Surface<Lemma|Strongs|Morph|Gloss>}...".
 // Read-only, whole-verse context — solves what the token-by-token alignment
 // can't: judging who an imperative is addressed to needs the words around
 // it, not just the isolated verb and its person/number.
 const INTERLINEAR_TOKEN_PATTERN = /(\S+?)<([^|<>]+)\|([^|<>]+)\|([^|<>]+)\|([^<>]+)>/g;
 
-function parseInterlinearVerseLine(line: string): { chapter: number; verse: number; tokens: VerseInterlinearToken[] } | null {
+function parseInterlinearVerseLine(
+  line: string,
+  bookId: ReaderBookId
+): { chapter: number; verse: number; tokens: VerseInterlinearToken[] } | null {
   const tabIndex = line.indexOf("\t");
   if (tabIndex === -1) return null;
 
   const reference = line.slice(0, tabIndex).trim();
-  const match = reference.match(/^tito\s+(\d+):(\d+)$/i);
+  const match = reference.match(new RegExp(`^${bookId}\\s+(\\d+):(\\d+)$`, "i"));
   if (!match) return null;
 
   const tokens: VerseInterlinearToken[] = [];
@@ -125,20 +128,47 @@ function parseInterlinearVerseLine(line: string): { chapter: number; verse: numb
   return { chapter: Number(match[1]), verse: Number(match[2]), tokens };
 }
 
-const titusVerseInterlinear: Map<string, VerseInterlinearToken[]> = (() => {
-  const map = new Map<string, VerseInterlinearToken[]>();
-  for (const chapterText of [titusInterlinearCh1, titusInterlinearCh2, titusInterlinearCh3]) {
-    for (const line of chapterText.replace(/\r\n/g, "\n").split("\n")) {
+const interlinearCache = new Map<ReaderBookId, Map<string, VerseInterlinearToken[]>>();
+const bookDataCache = new Map<ReaderBookId, BookMorphData>();
+const interlinearPending = new Map<ReaderBookId, Promise<Map<string, VerseInterlinearToken[]>>>();
+const bookDataPending = new Map<ReaderBookId, Promise<BookMorphData>>();
+
+async function loadVerseInterlinearMap(
+  bookId: ReaderBookId
+): Promise<Map<string, VerseInterlinearToken[]>> {
+  const cached = interlinearCache.get(bookId);
+  if (cached) return cached;
+
+  const pending = interlinearPending.get(bookId);
+  if (pending) return pending;
+
+  const promise = (async () => {
+    const map = new Map<string, VerseInterlinearToken[]>();
+    const raw = await loadInterlinearRaw(bookId);
+    for (const line of raw.replace(/\r\n/g, "\n").split("\n")) {
       if (!line.trim()) continue;
-      const parsed = parseInterlinearVerseLine(line);
+      const parsed = parseInterlinearVerseLine(line, bookId);
       if (parsed) map.set(`${parsed.chapter}:${parsed.verse}`, parsed.tokens);
     }
-  }
-  return map;
-})();
+    interlinearCache.set(bookId, map);
+    interlinearPending.delete(bookId);
+    return map;
+  })();
+  interlinearPending.set(bookId, promise);
+  return promise;
+}
 
-export function getVerseInterlinear(chapter: number, verse: number): VerseInterlinearToken[] {
-  return titusVerseInterlinear.get(`${chapter}:${verse}`) ?? [];
+/** Prime interlinear cache for a book (call before sync getVerseInterlinear). */
+export async function ensureVerseInterlinear(bookId: ReaderBookId): Promise<void> {
+  await loadVerseInterlinearMap(bookId);
+}
+
+export function getVerseInterlinear(
+  chapter: number,
+  verse: number,
+  bookId: ReaderBookId = getWorkshopBookId()
+): VerseInterlinearToken[] {
+  return interlinearCache.get(bookId)?.get(`${chapter}:${verse}`) ?? [];
 }
 
 function ch(value: string, index: number): string {
@@ -321,45 +351,69 @@ export function describeRmac(rmac: string): string {
   return rmac;
 }
 
-export function loadTitusData(): TitusData {
-  const verses = new Map<string, GreekVerse>();
+export async function loadBookData(bookId: ReaderBookId): Promise<BookMorphData> {
+  const cached = bookDataCache.get(bookId);
+  if (cached) return cached;
 
-  titusMorph
-    .replace(/\r\n/g, "\n")
-    .split("\n")
-    .forEach((line, index) => {
-      const token = parseMorphLine(line.trim(), index);
-      if (!token) return;
+  const pending = bookDataPending.get(bookId);
+  if (pending) return pending;
 
-      const key = `${token.chapter}:${token.verse}`;
-      const verse =
-        verses.get(key) ??
-        {
-          chapter: token.chapter,
-          verse: token.verse,
-          label: `Tito ${token.chapter}:${token.verse}`,
-          tokens: []
-        };
+  const promise = (async () => {
+    const displayName = getReaderBookInfo(bookId).displayName;
+    const verses = new Map<string, GreekVerse>();
+    const [morphRaw, tokensRaw, nblaRaw] = await Promise.all([
+      loadMorphRaw(bookId),
+      loadTokensRaw(bookId),
+      loadNblaRaw(bookId),
+      loadVerseInterlinearMap(bookId)
+    ]);
 
-      token.token = verse.tokens.length + 1;
-      verse.tokens.push(token);
-      verses.set(key, verse);
-    });
-
-  const byChapter = new Map<number, GreekVerse[]>();
-  for (const verse of verses.values()) {
-    const chapter = byChapter.get(verse.chapter) ?? [];
-    chapter.push(verse);
-    byChapter.set(verse.chapter, chapter);
-  }
-
-  return {
-    alignment: titusAlignment
+    morphRaw
       .replace(/\r\n/g, "\n")
       .split("\n")
-      .map(line => parseAlignmentLine(line.trim()))
-      .filter((token): token is AlignmentToken => Boolean(token)),
-    greek: Array.from(byChapter.entries()),
-    spanish: parseNblaContent(titusNbla)
-  };
+      .forEach((line, index) => {
+        const token = parseMorphLine(line.trim(), index);
+        if (!token) return;
+
+        const key = `${token.chapter}:${token.verse}`;
+        const verse =
+          verses.get(key) ??
+          {
+            chapter: token.chapter,
+            verse: token.verse,
+            label: `${displayName} ${token.chapter}:${token.verse}`,
+            tokens: []
+          };
+
+        token.token = verse.tokens.length + 1;
+        verse.tokens.push(token);
+        verses.set(key, verse);
+      });
+
+    const byChapter = new Map<number, GreekVerse[]>();
+    for (const verse of verses.values()) {
+      const chapter = byChapter.get(verse.chapter) ?? [];
+      chapter.push(verse);
+      byChapter.set(verse.chapter, chapter);
+    }
+
+    const data: BookMorphData = {
+      alignment: tokensRaw
+        .replace(/\r\n/g, "\n")
+        .split("\n")
+        .map(line => parseAlignmentLine(line.trim(), bookId))
+        .filter((token): token is AlignmentToken => Boolean(token)),
+      greek: Array.from(byChapter.entries()),
+      spanish: parseNblaContent(nblaRaw)
+    };
+    bookDataCache.set(bookId, data);
+    bookDataPending.delete(bookId);
+    return data;
+  })();
+  bookDataPending.set(bookId, promise);
+  return promise;
+}
+
+export async function loadTitusData(): Promise<BookMorphData> {
+  return loadBookData("tito");
 }

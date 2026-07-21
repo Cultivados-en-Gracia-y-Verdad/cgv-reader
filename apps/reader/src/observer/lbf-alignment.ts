@@ -1,12 +1,11 @@
-import titusLbfAlignment from "@cgv-lbf/nt/tito.alignment.json?raw";
+import { getWorkshopBookId } from "./workshop-book";
+import { loadLbfAlignmentRaw } from "./book-assets";
 
 /**
- * Greek (MorphGNT/BLE token number) → LBF Spanish word index for Titus.
+ * Greek (MorphGNT/BLE token number) → LBF Spanish word index.
  *
  * LBF is the Spanish surface for Observer's reverse/outcome reading.
- * The Greek workstation spine stays MorphGNT so existing Titus progress
- * (brick marks, clause greek* ids) keeps working. A later TR1894 spine
- * switch can replace this file once LBF↔TR alignment is complete.
+ * The Greek workstation spine stays MorphGNT so brick marks / clause ids keep working.
  */
 
 export interface LbfAlignmentRecord {
@@ -22,20 +21,25 @@ interface RawAlignmentFile {
   records: LbfAlignmentRecord[];
 }
 
-let cachedByVerse: Map<string, Map<number, number>> | null = null;
-let cachedSurfacesByVerse: Map<string, Map<number, string>> | null = null;
-let cachedRaw: string | null = null;
+const cacheByBook = new Map<
+  string,
+  {
+    raw: string;
+    byVerse: Map<string, Map<number, number>>;
+    surfacesByVerse: Map<string, Map<number, string>>;
+  }
+>();
 
-function ensureCaches(): void {
-  // Reparse when Vite HMR swaps the raw JSON string (alignment edits in-session).
-  if (cachedByVerse && cachedSurfacesByVerse && cachedRaw === titusLbfAlignment) return;
-  cachedRaw = titusLbfAlignment;
+function ensureCaches(bookId = getWorkshopBookId()): void {
+  const raw = loadLbfAlignmentRaw(bookId);
+  const cached = cacheByBook.get(bookId);
+  if (cached && cached.raw === raw) return;
 
-  const data = JSON.parse(titusLbfAlignment) as RawAlignmentFile;
+  const data = JSON.parse(raw) as RawAlignmentFile;
   const byVerse = new Map<string, Map<number, number>>();
   const surfaces = new Map<string, Map<number, string>>();
 
-  for (const record of data.records) {
+  for (const record of data.records ?? []) {
     const key = `${record.chapter}:${record.verse}`;
     const indexMap = byVerse.get(key) ?? new Map<number, number>();
     const surfaceMap = surfaces.get(key) ?? new Map<number, string>();
@@ -45,20 +49,21 @@ function ensureCaches(): void {
     surfaces.set(key, surfaceMap);
   }
 
-  cachedByVerse = byVerse;
-  cachedSurfacesByVerse = surfaces;
+  cacheByBook.set(bookId, { raw, byVerse, surfacesByVerse: surfaces });
 }
 
 /** token number → LBF word index for one verse */
 export function loadLbfTokenWordMap(chapter: number, verse: number): Map<number, number> {
-  ensureCaches();
-  return cachedByVerse!.get(`${chapter}:${verse}`) ?? new Map();
+  const bookId = getWorkshopBookId();
+  ensureCaches(bookId);
+  return cacheByBook.get(bookId)!.byVerse.get(`${chapter}:${verse}`) ?? new Map();
 }
 
 /** token number → LBF surface string for one verse */
 export function loadLbfTokenSurfaces(chapter: number, verse: number): Map<number, string> {
-  ensureCaches();
-  return cachedSurfacesByVerse!.get(`${chapter}:${verse}`) ?? new Map();
+  const bookId = getWorkshopBookId();
+  ensureCaches(bookId);
+  return cacheByBook.get(bookId)!.surfacesByVerse.get(`${chapter}:${verse}`) ?? new Map();
 }
 
 export function findWordIndexBySurface(

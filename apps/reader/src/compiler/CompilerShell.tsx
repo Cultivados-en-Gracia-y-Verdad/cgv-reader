@@ -1,12 +1,18 @@
 import { useEffect, useMemo, useState, type ChangeEvent } from "react";
 import {
   COMPILER_BIBLE_VERSIONS,
+  getReaderBookInfo,
   readCompilerBibleVersion,
+  readReaderBook,
+  readerBookHasLbfStructure,
   subscribeCompilerBibleVersion,
+  subscribeReaderBook,
   writeCompilerBibleVersion,
-  type BibleVersionId
+  type BibleVersionId,
+  type ReaderBookId
 } from "@cgv/core";
 import { useUiLanguage } from "../core/UiLanguageContext";
+import { setWorkshopBookId } from "../observer/workshop-book";
 import { loadReaderBook } from "../reader/reader-data";
 import {
   applyLineAttachments,
@@ -32,6 +38,9 @@ type ToolTab = "search" | "occurrences" | "notes" | "yaml";
 
 export default function CompilerShell() {
   const { t } = useUiLanguage();
+  const [bookId, setBookId] = useState<ReaderBookId>(() => readReaderBook());
+  const bookInfo = getReaderBookInfo(bookId);
+  const hasLbf = readerBookHasLbfStructure(bookId);
   const [baseMarkdown, setBaseMarkdown] = useState<string | null>(null);
   const [attachments, setAttachments] = useState<CompilerAttachment[]>(() => readCompilerAttachments());
   const [summary, setSummary] = useState<{
@@ -47,6 +56,17 @@ export default function CompilerShell() {
   const [toolTab, setToolTab] = useState<ToolTab>("search");
   const [bibleVersion, setBibleVersion] = useState<BibleVersionId>(() => readCompilerBibleVersion());
   const [generating, setGenerating] = useState(false);
+
+  useEffect(() => {
+    setWorkshopBookId(bookId);
+  }, [bookId]);
+
+  useEffect(() => {
+    return subscribeReaderBook(next => {
+      setBookId(next);
+      setWorkshopBookId(next);
+    });
+  }, []);
 
   useEffect(() => {
     writeManualMeta(meta);
@@ -86,12 +106,16 @@ export default function CompilerShell() {
   }
 
   async function handleGenerate() {
+    if (!hasLbf) {
+      setError(t.compilerNeedsLbf(bookInfo.displayName));
+      return;
+    }
     setGenerating(true);
     setError(null);
     try {
       const readingTextsByVerse = new Map<string, string>();
       if (bibleVersion !== "LBF") {
-        const book = await loadReaderBook("tito", bibleVersion);
+        const book = await loadReaderBook(bookId, bibleVersion);
         for (const verse of book.verses) {
           readingTextsByVerse.set(`${verse.chapter}:${verse.verse}`, verse.text);
         }
@@ -137,12 +161,12 @@ export default function CompilerShell() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    const slug = (meta.title || meta.book || "titus")
+    const slug = (meta.title || meta.book || bookId)
       .trim()
       .toLowerCase()
       .replace(/[^\p{L}\p{N}]+/gu, "-")
       .replace(/^-|-$/g, "");
-    link.download = `${slug || "titus"}-manual-skeleton.md`;
+    link.download = `${slug || bookId}-manual-skeleton.md`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -161,9 +185,15 @@ export default function CompilerShell() {
     <main className="compiler-shell compiler-shell--docked">
       <header className="compiler-header">
         <p className="reader-kicker">{t.compilerKicker}</p>
-        <h1>{t.compilerTitle}</h1>
+        <h1>{t.compilerTitle(bookInfo.displayName)}</h1>
         <p className="compiler-scope">{t.compilerScope}</p>
       </header>
+
+      {!hasLbf ? (
+        <p className="compiler-error" role="status">
+          {t.compilerNeedsLbf(bookInfo.displayName)}
+        </p>
+      ) : null}
 
       <div className="compiler-actions">
         <label className="compiler-bible-field">
@@ -172,6 +202,7 @@ export default function CompilerShell() {
             value={bibleVersion}
             onChange={event => handleBibleChange(event.target.value as BibleVersionId)}
             aria-describedby="compiler-bible-note"
+            disabled={!hasLbf}
           >
             {COMPILER_BIBLE_VERSIONS.map(entry => (
               <option key={entry.id} value={entry.id}>
@@ -184,7 +215,7 @@ export default function CompilerShell() {
           type="button"
           className="compiler-generate-btn"
           onClick={() => void handleGenerate()}
-          disabled={generating}
+          disabled={generating || !hasLbf}
         >
           {generating ? t.loadingBook : t.generate}
         </button>

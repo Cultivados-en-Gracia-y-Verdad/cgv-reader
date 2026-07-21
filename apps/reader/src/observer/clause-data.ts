@@ -1,15 +1,19 @@
 import type { BibleVerse } from "cgv-bible";
+import {
+  getReaderBookInfo,
+  workshopProgressKeys,
+  type ReaderBookId
+} from "@cgv/core";
 import type { FrameType } from "./clause-signals";
-import titusMorph from "@cgv-data/morphology/MorphGNT/77-Tit-morphgnt.txt?raw";
-import titusAlignment from "@cgv-data/interlinears/NT/tito.tokens.jsonl?raw";
-import titusLbf from "@cgv-lbf/nt/tito.md?raw";
+import { loadLbfRaw, loadMorphRawSync, loadTokensRawSync } from "./book-assets";
 import { loadLbfTokenSurfaces, loadLbfTokenWordMap } from "./lbf-alignment";
+import { getWorkshopBookId } from "./workshop-book";
 
 // The Clause Builder / Observer workshop reads LBF (La Biblia Fiel) as its
 // Spanish surface — reverse-interlinear / settled reading. Greek workstation
-// ids stay on MorphGNT/BLE so Titus progress migrates from cgv-reader.
-// NBLA remains the main Reader text (see reader-data.ts).
-function parseLbfContent(content: string): BibleVerse[] {
+// ids stay on MorphGNT/BLE so brick progress migrates. NBLA remains the main
+// Reader text (see reader-data.ts).
+function parseLbfContent(content: string, displayName: string): BibleVerse[] {
   const verses: BibleVerse[] = [];
   const lines = content.replace(/\r\n/g, "\n").split("\n");
   let chapter: number | null = null;
@@ -23,7 +27,7 @@ function parseLbfContent(content: string): BibleVerse[] {
     }
     const text = buffer.join(" ").trim();
     if (text) {
-      verses.push({ book: "Tito", chapter, verse, text });
+      verses.push({ book: displayName, chapter, verse, text });
     }
     buffer.length = 0;
   }
@@ -135,10 +139,6 @@ export interface GreekClauseRange {
 }
 
 const WORD_PATTERN = /[\wáéíóúüñÁÉÍÓÚÜÑ]+|[^\s\wáéíóúüñÁÉÍÓÚÜÑ]+/gu;
-const FINITE_MARKS_KEY = "o-prototype:titus:finite-verb-marks";
-const DEPENDENT_INTRODUCER_MARKS_KEY = "roots:titus:brick3:dependentThoughtIntroducers";
-export const CLAUSE_STORAGE_KEY = "the-reader:spanish-clause-builder:titus:v3";
-const LEGACY_CLAUSE_STORAGE_KEY = "the-reader:clause-builder:titus:1:1-4:v2";
 const DEPENDENT_INTRODUCER_SURFACES = new Set([
   "ἵνα",
   "ὅτι",
@@ -151,6 +151,13 @@ const DEPENDENT_INTRODUCER_SURFACES = new Set([
   "ὡς",
   "πρίν"
 ]);
+
+function progressKeys(bookId: ReaderBookId = getWorkshopBookId()) {
+  return workshopProgressKeys(bookId);
+}
+
+/** @deprecated Prefer workshopProgressKeys(bookId).clauseAssignments — kept for older imports. */
+export const CLAUSE_STORAGE_KEY = "the-reader:spanish-clause-builder:titus:v3";
 
 function wordId(chapter: number, verse: number, index: number): string {
   return `${chapter}:${verse}:${index}`;
@@ -174,11 +181,12 @@ function stripGreekPunctuation(value: string): string {
 // "chapter:verse:token" alignment id — the same conversion every brick's
 // marks go through, factored out so recipient groups (which carry Greek ids
 // grouped by recipient, not a flat marked set) can reuse it too.
-function buildGreekIdToAlignmentIdMap(): Map<string, string> {
+function buildGreekIdToAlignmentIdMap(bookId: ReaderBookId = getWorkshopBookId()): Map<string, string> {
   const map = new Map<string, string>();
   const verseTokenCounts = new Map<string, number>();
+  const morphRaw = loadMorphRawSync(bookId);
 
-  titusMorph
+  morphRaw
     .replace(/\r\n/g, "\n")
     .split("\n")
     .forEach((line, index) => {
@@ -222,17 +230,16 @@ export function readMarkedAlignmentIds(storageKey: string): Set<string> {
   return alignmentIds;
 }
 
-const COMMAND_RECIPIENTS_KEY = "roots:titus:brick2b:commandRecipients";
-
 // Brick 2B keeps its original purpose — who an imperative is addressed to —
 // stored as { id, recipient, tokenIds: Greek MorphGNT-line ids }[]. Read-only
 // here: this converts to alignment ids and flattens to one label per clause,
 // for the Sequence view to display; it never writes to this key.
 export function readCommandRecipientAssignments(): Map<string, string> {
   const assignments = new Map<string, string>();
+  const storageKey = progressKeys().commandRecipients;
 
   try {
-    const stored = window.localStorage.getItem(COMMAND_RECIPIENTS_KEY);
+    const stored = window.localStorage.getItem(storageKey);
     if (!stored) return assignments;
     const parsed = JSON.parse(stored);
     if (!Array.isArray(parsed)) return assignments;
@@ -256,11 +263,11 @@ export function readCommandRecipientAssignments(): Map<string, string> {
 }
 
 function readFiniteMarkedAlignmentIds(): Set<string> {
-  return readMarkedAlignmentIds(FINITE_MARKS_KEY);
+  return readMarkedAlignmentIds(progressKeys().finiteMarks);
 }
 
 function readDependentIntroducerMarkedAlignmentIds(): Set<string> {
-  return readMarkedAlignmentIds(DEPENDENT_INTRODUCER_MARKS_KEY);
+  return readMarkedAlignmentIds(progressKeys().dependentIntroducers);
 }
 
 function tokenizeVerse(verse: BibleVerse): SpanishWord[] {
@@ -288,8 +295,9 @@ function tokenizeVerse(verse: BibleVerse): SpanishWord[] {
   return words;
 }
 
-function parseFiniteAlignments(): FiniteAlignment[] {
-  return titusAlignment
+function parseFiniteAlignments(bookId: ReaderBookId = getWorkshopBookId()): FiniteAlignment[] {
+  const tokensRaw = loadTokensRawSync(bookId);
+  return tokensRaw
     .replace(/\r\n/g, "\n")
     .split("\n")
     .map(line => {
@@ -302,7 +310,7 @@ function parseFiniteAlignments(): FiniteAlignment[] {
     .filter((row): row is Record<string, unknown> => Boolean(row))
     .filter(row => {
       return (
-        row.book === "tito" &&
+        row.book === bookId &&
         typeof row.ch === "number" &&
         typeof row.vs === "number" &&
         typeof row.tok === "number" &&
@@ -324,8 +332,9 @@ function parseFiniteAlignments(): FiniteAlignment[] {
     }));
 }
 
-function parseTokenAlignments(): FiniteAlignment[] {
-  return titusAlignment
+function parseTokenAlignments(bookId: ReaderBookId = getWorkshopBookId()): FiniteAlignment[] {
+  const tokensRaw = loadTokensRawSync(bookId);
+  return tokensRaw
     .replace(/\r\n/g, "\n")
     .split("\n")
     .map(line => {
@@ -338,7 +347,7 @@ function parseTokenAlignments(): FiniteAlignment[] {
     .filter((row): row is Record<string, unknown> => Boolean(row))
     .filter(row => {
       return (
-        row.book === "tito" &&
+        row.book === bookId &&
         typeof row.ch === "number" &&
         typeof row.vs === "number" &&
         typeof row.tok === "number" &&
@@ -411,11 +420,12 @@ export function buildVerseTokenWordMap(
   return new Map(loadLbfTokenWordMap(chapter, verse));
 }
 
-export function loadTitusClauseVerses(): SpanishClauseVerse[] {
-  const verses = parseLbfContent(titusLbf).map(verse => ({
+export function loadClauseVerses(bookId: ReaderBookId = getWorkshopBookId()): SpanishClauseVerse[] {
+  const displayName = getReaderBookInfo(bookId).displayName;
+  const verses = parseLbfContent(loadLbfRaw(bookId), displayName).map(verse => ({
     chapter: verse.chapter,
     verse: verse.verse,
-    label: `Tito ${verse.chapter}:${verse.verse}`,
+    label: `${displayName} ${verse.chapter}:${verse.verse}`,
     text: verse.text,
     words: tokenizeVerse(verse)
   }));
@@ -452,7 +462,7 @@ export function loadTitusClauseVerses(): SpanishClauseVerse[] {
     }
   }
 
-  for (const alignment of parseFiniteAlignments()) {
+  for (const alignment of parseFiniteAlignments(bookId)) {
     if (!markedFiniteAlignmentIds.has(alignment.id)) continue;
 
     const key = `${alignment.chapter}:${alignment.verse}`;
@@ -468,7 +478,7 @@ export function loadTitusClauseVerses(): SpanishClauseVerse[] {
     anchor.greekLemma = alignment.greekLemma;
   }
 
-  for (const alignment of parseTokenAlignments()) {
+  for (const alignment of parseTokenAlignments(bookId)) {
     if (!markedDependentIntroducerAlignmentIds.has(alignment.id)) continue;
     if (!DEPENDENT_INTRODUCER_SURFACES.has(stripGreekPunctuation(alignment.greekSurface))) continue;
 
@@ -489,7 +499,7 @@ export function loadTitusClauseVerses(): SpanishClauseVerse[] {
   // Morphology already gives certainty about which tokens are participles;
   // the observation exercise is sorting them (attributive/substantival/
   // circumstantial), not finding them.
-  const allTokenAlignments = parseTokenAlignments();
+  const allTokenAlignments = parseTokenAlignments(bookId);
   for (const alignment of allTokenAlignments) {
     if (!isParticipleMorph(alignment.greekMorph)) continue;
 
@@ -549,6 +559,11 @@ export function loadTitusClauseVerses(): SpanishClauseVerse[] {
   }
 
   return verses;
+}
+
+/** @deprecated Prefer loadClauseVerses(bookId). */
+export function loadTitusClauseVerses(): SpanishClauseVerse[] {
+  return loadClauseVerses("tito");
 }
 
 export function wordInSpan(word: SpanishWord, selectedSpan: string[] | null): boolean {
@@ -917,16 +932,22 @@ function parseStoredClauseAssignments(stored: string | null): ClauseAssignments 
 }
 
 export function readClauseAssignments(): ClauseAssignments {
-  const current = parseStoredClauseAssignments(window.localStorage.getItem(CLAUSE_STORAGE_KEY));
+  const keys = progressKeys();
+  const current = parseStoredClauseAssignments(window.localStorage.getItem(keys.clauseAssignments));
   if (Object.keys(current).length) return current;
 
-  const legacy = parseStoredClauseAssignments(window.localStorage.getItem(LEGACY_CLAUSE_STORAGE_KEY));
-  if (Object.keys(legacy).length) writeClauseAssignments(legacy);
-  return legacy;
+  if (keys.clauseAssignmentsLegacy) {
+    const legacy = parseStoredClauseAssignments(window.localStorage.getItem(keys.clauseAssignmentsLegacy));
+    if (Object.keys(legacy).length) {
+      writeClauseAssignments(legacy);
+      return legacy;
+    }
+  }
+  return {};
 }
 
 export function writeClauseAssignments(assignments: ClauseAssignments): void {
-  window.localStorage.setItem(CLAUSE_STORAGE_KEY, JSON.stringify(assignments));
+  window.localStorage.setItem(progressKeys().clauseAssignments, JSON.stringify(assignments));
 }
 
 // --- Q1/Q2/Q3 observations and participle sort — moved here (from
@@ -950,11 +971,12 @@ export interface ClauseObservation {
 
 export type ClauseObservations = Record<string, ClauseObservation>;
 
+/** @deprecated Prefer workshopProgressKeys(bookId).clauseObservations */
 export const CLAUSE_OBSERVATIONS_KEY = "the-reader:spanish-clause-builder:titus:statement-command-review:v1";
 
 export function readClauseObservations(): ClauseObservations {
   try {
-    const stored = window.localStorage.getItem(CLAUSE_OBSERVATIONS_KEY);
+    const stored = window.localStorage.getItem(progressKeys().clauseObservations);
     const parsed = stored ? JSON.parse(stored) : {};
     if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
 
@@ -1002,7 +1024,7 @@ export function readClauseObservations(): ClauseObservations {
 }
 
 export function writeClauseObservations(observations: ClauseObservations): void {
-  window.localStorage.setItem(CLAUSE_OBSERVATIONS_KEY, JSON.stringify(observations));
+  window.localStorage.setItem(progressKeys().clauseObservations, JSON.stringify(observations));
 }
 
 // A separate observation layer on top of the skeleton — participles never
@@ -1021,6 +1043,7 @@ export interface ParticipleObservation {
 export type ParticipleObservations = Record<string, ParticipleObservation>;
 export type ParticipleClassification = "attributive" | "substantival" | "circumstantial" | null;
 
+/** @deprecated Prefer workshopProgressKeys(bookId).participleObservations */
 export const PARTICIPLE_OBSERVATIONS_KEY = "the-reader:spanish-clause-builder:titus:participles:v1";
 
 export function resolveParticipleClassification(observation: ParticipleObservation | undefined): ParticipleClassification {
@@ -1033,7 +1056,7 @@ export function resolveParticipleClassification(observation: ParticipleObservati
 
 export function readParticipleObservations(): ParticipleObservations {
   try {
-    const stored = window.localStorage.getItem(PARTICIPLE_OBSERVATIONS_KEY);
+    const stored = window.localStorage.getItem(progressKeys().participleObservations);
     const parsed = stored ? JSON.parse(stored) : {};
     if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
 
@@ -1065,5 +1088,5 @@ export function readParticipleObservations(): ParticipleObservations {
 }
 
 export function writeParticipleObservations(observations: ParticipleObservations): void {
-  window.localStorage.setItem(PARTICIPLE_OBSERVATIONS_KEY, JSON.stringify(observations));
+  window.localStorage.setItem(progressKeys().participleObservations, JSON.stringify(observations));
 }

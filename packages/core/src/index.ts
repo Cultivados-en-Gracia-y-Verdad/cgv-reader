@@ -75,6 +75,7 @@ export {
   writeReaderBook,
   subscribeReaderBook,
   readerBookHasLbf,
+  readerBookHasLbfStructure,
   workshopStorageSlug,
   workshopProgressKeys,
   MORPHGNT_STEM_BY_BOOK,

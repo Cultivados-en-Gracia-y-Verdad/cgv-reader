@@ -1,5 +1,15 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { describeRmac, getVerseInterlinear, loadTitusData, type GreekToken, type GreekVerse, type VerseInterlinearToken } from "./o-data";
+import { getReaderBookInfo, workshopProgressKeys, type ReaderBookId } from "@cgv/core";
+import {
+  describeRmac,
+  getVerseInterlinear,
+  loadBookData,
+  type BookMorphData,
+  type GreekToken,
+  type GreekVerse,
+  type VerseInterlinearToken
+} from "./o-data";
+import { getWorkshopBookId } from "./workshop-book";
 
 type ParticipationMode =
   | "finite"
@@ -17,25 +27,111 @@ interface CommandRecipientGroup {
   tokenIds: string[];
 }
 
-const MARKS_KEY = "o-prototype:titus:finite-verb-marks";
-const COMMAND_MARKS_KEY = "roots:titus:brick2:mood:imperativeCandidates";
-const STATEMENT_MARKS_KEY = "roots:titus:brick2c:mood:statementCandidates";
-const SUBJUNCTIVE_MARKS_KEY = "roots:titus:brick3:mood:subjunctiveCandidates";
-const OPTATIVE_MARKS_KEY = "roots:titus:brick3c:mood:optativeCandidates";
-const PARTICIPLE_MARKS_KEY = "roots:titus:brick4:participleCandidates";
-const COMMAND_RECIPIENTS_KEY = "roots:titus:brick2b:commandRecipients";
 const STATEMENT_LENSES: StatementLens[] = ["All finite verbs", "Statements only", "Commands only"];
-const RECIPIENTS = [
-  "Titus",
-  "Elders",
-  "Older Men",
-  "Older Women",
-  "Younger Women",
-  "Younger Men",
-  "Bondservants",
-  "Everyone",
-  "Other"
-];
+
+/** How many verses before a command may still name its addressee. */
+const RECIPIENT_PRIOR_VERSE_COUNT = 8;
+/** One verse after — topic nouns often sit in the next verse (e.g. Tito 2:1 → 2:2). */
+const RECIPIENT_FOLLOW_VERSE_COUNT = 1;
+
+/** Split reading text into clickable words for recipient labels. */
+function splitSpanishWords(text: string): string[] {
+  return text
+    .split(/\s+/)
+    .map(word => word.replace(/^[«“"'(¡¿]+|[»”"'.,;:!?…)·]+$/g, ""))
+    .filter(word => word.length > 0);
+}
+
+function glossParts(gloss: string): string[] {
+  return splitSpanishWords(gloss.replace(/·/g, " "));
+}
+
+interface DraftRecipientPick {
+  verseKey: string;
+  wordIndex: number;
+  word: string;
+}
+
+function pickKey(pick: DraftRecipientPick): string {
+  return `${pick.verseKey}#${pick.wordIndex}`;
+}
+
+function toggleRecipientPick(
+  current: DraftRecipientPick[],
+  pick: DraftRecipientPick
+): DraftRecipientPick[] {
+  const key = pickKey(pick);
+  if (current.some(item => pickKey(item) === key)) {
+    return current.filter(item => pickKey(item) !== key);
+  }
+  return [...current, pick];
+}
+
+function recipientLabelFromPicks(picks: DraftRecipientPick[]): string {
+  return [...picks]
+    .sort((a, b) => a.verseKey.localeCompare(b.verseKey) || a.wordIndex - b.wordIndex)
+    .map(pick => pick.word)
+    .join(" ")
+    .trim();
+}
+
+/**
+ * Map Greek-ordered glosses onto NBLA reading words.
+ * Alignment/interlinear Spanish often differs from the reading text (e.g. "poned"
+ * vs "Estén"), so unmatched command glosses fall at the current cursor — usually
+ * the reading verb that stands where the Greek command stands.
+ */
+function mapGlossesToReading(
+  spanishWords: string[],
+  orderedGlosses: Array<{ gloss: string; tokenNum: number; isCommand: boolean }>
+): { commandIndexes: Set<number>; readingIndexesByToken: Map<number, number[]> } {
+  const commandIndexes = new Set<number>();
+  const readingIndexesByToken = new Map<number, number[]>();
+  if (!spanishWords.length) return { commandIndexes, readingIndexesByToken };
+
+  let cursor = 0;
+  for (const item of orderedGlosses) {
+    const parts = glossParts(item.gloss);
+    if (!parts.length) continue;
+
+    let found = -1;
+    for (let start = cursor; start <= spanishWords.length - parts.length; start += 1) {
+      const matches = parts.every(
+        (part, offset) => spanishWords[start + offset].toLowerCase() === part.toLowerCase()
+      );
+      if (matches) {
+        found = start;
+        break;
+      }
+    }
+
+    if (found >= 0) {
+      const indexes = Array.from({ length: parts.length }, (_, offset) => found + offset);
+      readingIndexesByToken.set(item.tokenNum, indexes);
+      if (item.isCommand) indexes.forEach(index => commandIndexes.add(index));
+      cursor = found + parts.length;
+      continue;
+    }
+
+    if (!item.isCommand) continue;
+
+    // Command gloss not in the reading (translation choice). Place it on the
+    // next unread reading word so a gloss tap still hits the right Spanish.
+    const at = Math.min(cursor, spanishWords.length - 1);
+    const indexes = [at];
+    if (at + 1 < spanishWords.length && parts.length === 1) {
+      const next = spanishWords[at + 1];
+      if (!/^(en|de|a|el|la|los|las|un|una|y|o|que|su|sus)$/i.test(next)) {
+        indexes.push(at + 1);
+      }
+    }
+    readingIndexesByToken.set(item.tokenNum, indexes);
+    indexes.forEach(index => commandIndexes.add(index));
+    cursor = Math.min(at + 1, spanishWords.length);
+  }
+
+  return { commandIndexes, readingIndexesByToken };
+}
 
 function readMarks(storageKey: string): string[] {
   try {
@@ -48,9 +144,9 @@ function readMarks(storageKey: string): string[] {
   }
 }
 
-function readCommandRecipientGroups(): CommandRecipientGroup[] {
+function readCommandRecipientGroups(storageKey: string): CommandRecipientGroup[] {
   try {
-    const stored = window.localStorage.getItem(COMMAND_RECIPIENTS_KEY);
+    const stored = window.localStorage.getItem(storageKey);
     if (!stored) return [];
     const parsed = JSON.parse(stored);
     if (!Array.isArray(parsed)) return [];
@@ -221,34 +317,94 @@ const GreekTokenButton = memo(function GreekTokenButton({
   );
 });
 
-export default function OPrototype() {
-  const data = useMemo(() => loadTitusData(), []);
+export default function OPrototype({ bookId = getWorkshopBookId() }: { bookId?: ReaderBookId }) {
+  const bookName = getReaderBookInfo(bookId).displayName;
+  const keys = useMemo(() => workshopProgressKeys(bookId), [bookId]);
+  const [data, setData] = useState<BookMorphData | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    setData(null);
+    setLoadError(null);
+    void loadBookData(bookId)
+      .then(next => {
+        if (!cancelled) setData(next);
+      })
+      .catch(err => {
+        if (!cancelled) {
+          setLoadError(err instanceof Error ? err.message : "Couldn't load book data.");
+        }
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [bookId]);
+
+  if (loadError) {
+    return (
+      <p className="workshop-lbf-gate" role="alert">
+        {loadError}
+      </p>
+    );
+  }
+
+  if (!data) {
+    return (
+      <p className="workshop-lbf-gate" role="status">
+        Loading…
+      </p>
+    );
+  }
+
+  return <OPrototypeLoaded bookId={bookId} bookName={bookName} keys={keys} data={data} />;
+}
+
+function OPrototypeLoaded({
+  bookId,
+  bookName,
+  keys,
+  data
+}: {
+  bookId: ReaderBookId;
+  bookName: string;
+  keys: ReturnType<typeof workshopProgressKeys>;
+  data: BookMorphData;
+}) {
   const [participation, setParticipation] = useState<ParticipationMode>("finite");
   const [finiteMarkedIds, setFiniteMarkedIds] = useState<Set<string>>(
-    () => new Set(readMarks(MARKS_KEY))
+    () => new Set(readMarks(keys.finiteMarks))
   );
   const [commandMarkedIds, setCommandMarkedIds] = useState<Set<string>>(
-    () => new Set(readMarks(COMMAND_MARKS_KEY))
+    () => new Set(readMarks(keys.commandMarks))
   );
   const [statementMarkedIds, setStatementMarkedIds] = useState<Set<string>>(
-    () => new Set(readMarks(STATEMENT_MARKS_KEY))
+    () => new Set(readMarks(keys.statementMarks))
   );
   const [subjunctiveMarkedIds, setSubjunctiveMarkedIds] = useState<Set<string>>(
-    () => new Set(readMarks(SUBJUNCTIVE_MARKS_KEY))
+    () => new Set(readMarks(keys.subjunctiveMarks))
   );
   const [optativeMarkedIds, setOptativeMarkedIds] = useState<Set<string>>(
-    () => new Set(readMarks(OPTATIVE_MARKS_KEY))
+    () => new Set(readMarks(keys.optativeMarks))
   );
   const [participleMarkedIds, setParticipleMarkedIds] = useState<Set<string>>(
-    () => new Set(readMarks(PARTICIPLE_MARKS_KEY))
+    () => new Set(readMarks(keys.participleMarks))
   );
   const [commandRecipientGroups, setCommandRecipientGroups] = useState<CommandRecipientGroup[]>(
-    readCommandRecipientGroups
+    () => readCommandRecipientGroups(keys.commandRecipients)
   );
   const [statementLens, setStatementLens] = useState<StatementLens>("All finite verbs");
   const [recipientLens, setRecipientLens] = useState("All Commands");
   const [draftGroupTokenIds, setDraftGroupTokenIds] = useState<string[]>([]);
-  const [draftRecipient, setDraftRecipient] = useState(RECIPIENTS[0]);
+  const [draftRecipientPicks, setDraftRecipientPicks] = useState<DraftRecipientPick[]>([]);
+  const draftRecipient = useMemo(
+    () => recipientLabelFromPicks(draftRecipientPicks),
+    [draftRecipientPicks]
+  );
+  const draftRecipientPickKeys = useMemo(
+    () => new Set(draftRecipientPicks.map(pickKey)),
+    [draftRecipientPicks]
+  );
   const tokenById = useMemo(() => {
     const index = new Map<string, GreekToken>();
     for (const [, verses] of data.greek) {
@@ -299,6 +455,16 @@ export default function OPrototype() {
   const brick3cConfirmed = brickConfirmed(optativeMarkedIds, groundTruth.byMood.optative);
   const brick4Confirmed = brickConfirmed(participleMarkedIds, groundTruth.participleIds);
 
+  // Marks that are not participles in the Greek — these alone will block the ✓
+  // even when every real participle is already found (infinitives are the usual mix-up).
+  const participleExtraIds = useMemo(() => {
+    const extras: string[] = [];
+    for (const id of participleMarkedIds) {
+      if (!groundTruth.participleIds.has(id)) extras.push(id);
+    }
+    return extras;
+  }, [groundTruth.participleIds, participleMarkedIds]);
+
   // Mood is mutually exclusive — toggleToken below already prevents a NEW
   // conflict (assigning a mood clears the other three), but that guard only
   // runs on click. Saved progress from before that fix existed (or a hand-
@@ -318,32 +484,32 @@ export default function OPrototype() {
   }, [commandMarkedIds, optativeMarkedIds, statementMarkedIds, subjunctiveMarkedIds]);
 
   useEffect(() => {
-    window.localStorage.setItem(MARKS_KEY, JSON.stringify(Array.from(finiteMarkedIds)));
-  }, [finiteMarkedIds]);
+    window.localStorage.setItem(keys.finiteMarks, JSON.stringify(Array.from(finiteMarkedIds)));
+  }, [finiteMarkedIds, keys.finiteMarks]);
 
   useEffect(() => {
-    window.localStorage.setItem(COMMAND_MARKS_KEY, JSON.stringify(Array.from(commandMarkedIds)));
-  }, [commandMarkedIds]);
+    window.localStorage.setItem(keys.commandMarks, JSON.stringify(Array.from(commandMarkedIds)));
+  }, [commandMarkedIds, keys.commandMarks]);
 
   useEffect(() => {
-    window.localStorage.setItem(STATEMENT_MARKS_KEY, JSON.stringify(Array.from(statementMarkedIds)));
-  }, [statementMarkedIds]);
+    window.localStorage.setItem(keys.statementMarks, JSON.stringify(Array.from(statementMarkedIds)));
+  }, [keys.statementMarks, statementMarkedIds]);
 
   useEffect(() => {
-    window.localStorage.setItem(SUBJUNCTIVE_MARKS_KEY, JSON.stringify(Array.from(subjunctiveMarkedIds)));
-  }, [subjunctiveMarkedIds]);
+    window.localStorage.setItem(keys.subjunctiveMarks, JSON.stringify(Array.from(subjunctiveMarkedIds)));
+  }, [keys.subjunctiveMarks, subjunctiveMarkedIds]);
 
   useEffect(() => {
-    window.localStorage.setItem(OPTATIVE_MARKS_KEY, JSON.stringify(Array.from(optativeMarkedIds)));
-  }, [optativeMarkedIds]);
+    window.localStorage.setItem(keys.optativeMarks, JSON.stringify(Array.from(optativeMarkedIds)));
+  }, [keys.optativeMarks, optativeMarkedIds]);
 
   useEffect(() => {
-    window.localStorage.setItem(PARTICIPLE_MARKS_KEY, JSON.stringify(Array.from(participleMarkedIds)));
-  }, [participleMarkedIds]);
+    window.localStorage.setItem(keys.participleMarks, JSON.stringify(Array.from(participleMarkedIds)));
+  }, [keys.participleMarks, participleMarkedIds]);
 
   useEffect(() => {
-    window.localStorage.setItem(COMMAND_RECIPIENTS_KEY, JSON.stringify(commandRecipientGroups));
-  }, [commandRecipientGroups]);
+    window.localStorage.setItem(keys.commandRecipients, JSON.stringify(commandRecipientGroups));
+  }, [commandRecipientGroups, keys.commandRecipients]);
 
   const spanishVerse = useMemo(() => {
     if (!activeVerse) return null;
@@ -405,10 +571,26 @@ export default function OPrototype() {
     return assigned;
   }, [commandRecipientGroups]);
 
+  /** Recipients already named from the text in this book — for reuse / lens. */
+  const knownRecipients = useMemo(() => {
+    const seen = new Set<string>();
+    const list: string[] = [];
+    for (const group of commandRecipientGroups) {
+      const label = group.recipient.trim();
+      if (!label || seen.has(label)) continue;
+      seen.add(label);
+      list.push(label);
+    }
+    return list;
+  }, [commandRecipientGroups]);
+
   // No source-text ground truth for recipients (it's a judgment call, not a
   // fact to check against) — "confirmed" here just means every marked
-  // command has been assigned to some recipient group.
-  const brick2bConfirmed = brickConfirmed(allAssignedCommandTokenIds, commandMarkedIds);
+  // command has been assigned to some recipient group. Empty marks must not
+  // count as done (unlike optative, where zero finds is a real answer).
+  const brick2bConfirmed =
+    commandMarkedIds.size > 0 &&
+    brickConfirmed(allAssignedCommandTokenIds, commandMarkedIds);
 
   const displayedCommandTokens = useMemo(() => {
     if (recipientLens === "All Commands") return commandTokens;
@@ -442,6 +624,106 @@ export default function OPrototype() {
       .filter((token): token is GreekToken => Boolean(token));
   }, [draftGroupTokenIds, tokenById]);
 
+  const alignmentByRef = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const token of data.alignment) {
+      map.set(`${token.chapter}:${token.verse}:${token.token}`, token.es);
+    }
+    return map;
+  }, [data.alignment]);
+
+  const draftSpanishVerses = useMemo(() => {
+    const seen = new Set<string>();
+    const verses: Array<{
+      key: string;
+      label: string;
+      text: string;
+      words: string[];
+      commandWordIndexes: Set<number>;
+      readingIndexesByToken: Map<number, number[]>;
+      commandLabels: Array<{ greek: string; gloss: string }>;
+      isCommandVerse: boolean;
+    }> = [];
+
+    const addVerse = (chapter: number, verseNum: number, isCommandVerse: boolean) => {
+      const key = `${chapter}:${verseNum}`;
+      if (seen.has(key)) {
+        if (isCommandVerse) {
+          const existing = verses.find(verse => verse.key === key);
+          if (existing) existing.isCommandVerse = true;
+        }
+        return;
+      }
+      seen.add(key);
+      const spanish = data.spanish.find(
+        verse => verse.chapter === chapter && verse.verse === verseNum
+      );
+      if (!spanish?.text) return;
+
+      const words = splitSpanishWords(spanish.text);
+      const verseGreek =
+        data.greek.find(([ch]) => ch === chapter)?.[1].find(verse => verse.verse === verseNum)
+          ?.tokens ?? [];
+      const interlinear = getVerseInterlinear(chapter, verseNum, bookId);
+      const commandIds = new Set(
+        draftGroupTokens
+          .filter(command => command.chapter === chapter && command.verse === verseNum)
+          .map(command => command.id)
+      );
+
+      const orderedGlosses: Array<{ gloss: string; tokenNum: number; isCommand: boolean }> = [];
+      const commandLabels: Array<{ greek: string; gloss: string }> = [];
+
+      for (const greek of verseGreek) {
+        const fromAlignment = alignmentByRef.get(`${greek.chapter}:${greek.verse}:${greek.token}`);
+        const fromInterlinear = interlinear[greek.token - 1]?.gloss;
+        const gloss = (fromAlignment || fromInterlinear || "").trim();
+        const isCommand = commandIds.has(greek.id);
+        if (gloss) orderedGlosses.push({ gloss, tokenNum: greek.token, isCommand });
+        if (isCommand) {
+          commandLabels.push({
+            greek: stripCriticalMarks(greek.surface),
+            gloss: gloss || stripCriticalMarks(greek.surface)
+          });
+        }
+      }
+
+      const alignment = mapGlossesToReading(words, orderedGlosses);
+      verses.push({
+        key,
+        label: `${bookName} ${chapter}:${verseNum}`,
+        text: spanish.text,
+        words,
+        commandWordIndexes: alignment.commandIndexes,
+        readingIndexesByToken: alignment.readingIndexesByToken,
+        commandLabels,
+        isCommandVerse
+      });
+    };
+
+    const spanishOrder = data.spanish;
+    for (const token of draftGroupTokens) {
+      const index = spanishOrder.findIndex(
+        verse => verse.chapter === token.chapter && verse.verse === token.verse
+      );
+      if (index < 0) {
+        addVerse(token.chapter, token.verse, true);
+        continue;
+      }
+      const start = Math.max(0, index - RECIPIENT_PRIOR_VERSE_COUNT);
+      const end = Math.min(spanishOrder.length - 1, index + RECIPIENT_FOLLOW_VERSE_COUNT);
+      for (let i = start; i <= end; i += 1) {
+        const verse = spanishOrder[i];
+        addVerse(verse.chapter, verse.verse, i === index);
+      }
+    }
+    return verses;
+  }, [alignmentByRef, bookId, bookName, data.greek, data.spanish, draftGroupTokens]);
+
+  const draftSpanishByKey = useMemo(() => {
+    return new Map(draftSpanishVerses.map(verse => [verse.key, verse]));
+  }, [draftSpanishVerses]);
+
   const draftPersonNumberNotes = useMemo(() => {
     const notes = new Map<string, string>();
     for (const token of draftGroupTokens) {
@@ -451,11 +733,9 @@ export default function OPrototype() {
     return Array.from(notes.entries()).map(([rmac, meaning]) => ({ rmac, meaning }));
   }, [draftGroupTokens]);
 
-  // The isolated verb + its person/number ("2S means you singular") can't
-  // say who "you" actually is — that needs the words around it. Pulls in
-  // the whole verse, per token, from the new interlinear.txt chapter files.
-  // The verse just before is included too (unhighlighted, read-only context)
-  // since who's being addressed often carries over from what came before.
+  // Person/number says "you singular" — not who "you" is. Pull nearby
+  // interlinear verses (same window as Spanish) so an addressee named a few
+  // verses earlier is still tappable.
   const draftVerseContexts = useMemo(() => {
     interface VerseContext {
       key: string;
@@ -466,53 +746,53 @@ export default function OPrototype() {
     }
     const contexts: VerseContext[] = [];
     const contextByKey = new Map<string, VerseContext>();
+    const commandKeys = new Set(
+      draftGroupTokens.map(token => `${token.chapter}:${token.verse}`)
+    );
+
+    for (const verse of draftSpanishVerses) {
+      const [chapterText, verseText] = verse.key.split(":");
+      const chapter = Number(chapterText);
+      const verseNum = Number(verseText);
+      const tokens = getVerseInterlinear(chapter, verseNum, bookId);
+      if (!tokens.length) continue;
+      const context: VerseContext = {
+        key: verse.key,
+        reference: `${bookName} ${chapter}:${verseNum}`,
+        tokens,
+        selectedIndexes: new Set(),
+        isPriorContext: !commandKeys.has(verse.key)
+      };
+      contexts.push(context);
+      contextByKey.set(verse.key, context);
+    }
 
     for (const token of draftGroupTokens) {
-      const key = `${token.chapter}:${token.verse}`;
-      let context = contextByKey.get(key);
-      if (!context) {
-        if (token.verse > 1) {
-          const priorKey = `${token.chapter}:${token.verse - 1}`;
-          if (!contextByKey.has(priorKey)) {
-            const priorTokens = getVerseInterlinear(token.chapter, token.verse - 1);
-            if (priorTokens.length) {
-              const priorContext: VerseContext = {
-                key: priorKey,
-                reference: `Tito ${token.chapter}:${token.verse - 1}`,
-                tokens: priorTokens,
-                selectedIndexes: new Set(),
-                isPriorContext: true
-              };
-              contexts.push(priorContext);
-              contextByKey.set(priorKey, priorContext);
-            }
-          }
-        }
-        context = {
-          key,
-          reference: `Tito ${token.chapter}:${token.verse}`,
-          tokens: getVerseInterlinear(token.chapter, token.verse),
-          selectedIndexes: new Set(),
-          isPriorContext: false
-        };
-        contexts.push(context);
-        contextByKey.set(key, context);
-      }
-      context.selectedIndexes.add(token.token - 1);
+      const context = contextByKey.get(`${token.chapter}:${token.verse}`);
+      if (context) context.selectedIndexes.add(token.token - 1);
     }
     return contexts;
-  }, [draftGroupTokens]);
+  }, [bookId, bookName, draftGroupTokens, draftSpanishVerses]);
 
-  const focusCommandToken = useCallback((token: GreekToken) => {
+  const focusCommandToken = useCallback((token: GreekToken, scroll = true) => {
     const verse = data.greek
       .flatMap(([, verses]) => verses)
       .find(candidate => candidate.chapter === token.chapter && candidate.verse === token.verse);
     if (verse) setActiveVerse(verse);
 
+    if (!scroll) return;
+
     window.setTimeout(() => {
+      const panel = document.querySelector<HTMLElement>(".greek-panel-body");
       const target = document.querySelector<HTMLElement>(`[data-token-id="${token.id}"]`);
-      target?.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
-      target?.focus({ preventScroll: true });
+      if (!panel || !target) return;
+      // Scroll only the Greek column — never the page or brick menu.
+      const panelRect = panel.getBoundingClientRect();
+      const targetRect = target.getBoundingClientRect();
+      const nextTop =
+        panel.scrollTop + (targetRect.top - panelRect.top) - panel.clientHeight / 2 + targetRect.height / 2;
+      panel.scrollTo({ top: Math.max(0, nextTop), behavior: "auto" });
+      target.focus({ preventScroll: true });
     }, 40);
   }, [data.greek]);
 
@@ -522,7 +802,9 @@ export default function OPrototype() {
     // No fallback to commandTokens[0]: once every command has a recipient,
     // there's nothing left to steer the student toward, so saving the last
     // assignment shouldn't yank them back to the first command in the book.
-    if (firstUnassigned) focusCommandToken(firstUnassigned);
+    // Don't auto-scroll the Greek column — that made the left pane feel jumpy;
+    // only update the active verse / right-rail context.
+    if (firstUnassigned) focusCommandToken(firstUnassigned, false);
   }, [allAssignedCommandTokenIds, commandTokens, focusCommandToken, participation]);
 
   // The Recipient card lives in a long sidebar — starting a new draft group
@@ -532,19 +814,79 @@ export default function OPrototype() {
   const previousDraftLengthRef = useRef(0);
   useEffect(() => {
     if (draftGroupTokenIds.length > 0 && previousDraftLengthRef.current === 0) {
-      // The whole page is one long, unpaginated document (the full Greek
-      // text of Titus renders in one flow), so the card can be tens of
-      // thousands of pixels down. Double-rAF waits for the browser to
-      // actually finish laying out this render before measuring/scrolling —
-      // a fixed setTimeout delay wasn't reliably long enough for that.
+      setDraftRecipientPicks([]);
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          document.querySelector(".recipient-card")?.scrollIntoView({ behavior: "auto", block: "start" });
+          const panel = document.querySelector<HTMLElement>(".result-panel");
+          const card = document.querySelector<HTMLElement>(".recipient-card");
+          if (!panel || !card) return;
+          // Scroll only the sidebar panel — window scrollIntoView used to
+          // bury the Spanish reading text and make it hard to reach.
+          panel.scrollTop = Math.max(0, card.offsetTop - panel.offsetTop - 8);
         });
       });
     }
     previousDraftLengthRef.current = draftGroupTokenIds.length;
   }, [draftGroupTokenIds.length]);
+
+  const toggleDraftRecipientPick = useCallback((pick: DraftRecipientPick) => {
+    setDraftRecipientPicks(current => toggleRecipientPick(current, pick));
+  }, []);
+
+  const toggleDraftRecipientFromGloss = useCallback(
+    (verseKey: string, tokenNum: number) => {
+      const verse = draftSpanishByKey.get(verseKey);
+      if (!verse) return;
+      const indexes = verse.readingIndexesByToken.get(tokenNum);
+      if (!indexes?.length) return;
+      setDraftRecipientPicks(current => {
+        let next = current;
+        for (const wordIndex of indexes) {
+          const word = verse.words[wordIndex];
+          if (!word) continue;
+          next = toggleRecipientPick(next, { verseKey, wordIndex, word });
+        }
+        return next;
+      });
+    },
+    [draftSpanishByKey]
+  );
+
+  const applyKnownRecipient = useCallback(
+    (label: string) => {
+      const words = splitSpanishWords(label);
+      if (!words.length) {
+        setDraftRecipientPicks([]);
+        return;
+      }
+      // Prefer the command verse(s), not prior-context rows.
+      const commandKeys = new Set(
+        draftGroupTokens.map(token => `${token.chapter}:${token.verse}`)
+      );
+      const searchVerses = [
+        ...draftSpanishVerses.filter(verse => commandKeys.has(verse.key)),
+        ...draftSpanishVerses.filter(verse => !commandKeys.has(verse.key))
+      ];
+      const picks: DraftRecipientPick[] = [];
+      let wordCursor = 0;
+      for (const verse of searchVerses) {
+        let indexCursor = 0;
+        while (wordCursor < words.length) {
+          const wanted = words[wordCursor].toLowerCase();
+          const found = verse.words.findIndex(
+            (candidate, index) => index >= indexCursor && candidate.toLowerCase() === wanted
+          );
+          if (found < 0) break;
+          picks.push({ verseKey: verse.key, wordIndex: found, word: verse.words[found] });
+          indexCursor = found + 1;
+          wordCursor += 1;
+        }
+        if (wordCursor >= words.length) break;
+      }
+      setDraftRecipientPicks(picks);
+    },
+    [draftGroupTokens, draftSpanishVerses]
+  );
 
   const toggleToken = useCallback((token: GreekToken, verse: GreekVerse) => {
     setActiveVerse(verse);
@@ -625,6 +967,8 @@ export default function OPrototype() {
       setSubjunctiveMarkedIds(new Set());
     } else if (participation === "mood-optative") {
       setOptativeMarkedIds(new Set());
+    } else if (participation === "participles") {
+      setParticipleMarkedIds(new Set());
     } else {
       if (draftGroupTokenIds.length) {
         setDraftGroupTokenIds([]);
@@ -636,7 +980,7 @@ export default function OPrototype() {
   }, [draftGroupTokenIds.length, participation]);
 
   const saveCommandRecipientGroup = useCallback(() => {
-    if (!draftGroupTokenIds.length) return;
+    if (!draftGroupTokenIds.length || !draftRecipient) return;
     const selectedIds = new Set(draftGroupTokenIds);
     setCommandRecipientGroups(current => {
       const withoutSelected = current
@@ -657,16 +1001,14 @@ export default function OPrototype() {
     });
     setDraftGroupTokenIds([]);
     setRecipientLens(draftRecipient);
-    // Otherwise the radio stays on whatever was last picked, so the next
-    // command silently opens pre-selected to that same recipient instead of
-    // defaulting back to Titus — an easy way to mass-mislabel commands
-    // without noticing.
-    setDraftRecipient(RECIPIENTS[0]);
+    // Clear so the next command is named from the text again — not silently
+    // pre-filled with the previous addressee.
+    setDraftRecipientPicks([]);
   }, [draftGroupTokenIds, draftRecipient]);
 
   const cancelCommandRecipientGroup = useCallback(() => {
     setDraftGroupTokenIds([]);
-    setDraftRecipient(RECIPIENTS[0]);
+    setDraftRecipientPicks([]);
   }, []);
 
   const getTokenMarkClassName = useCallback(
@@ -768,7 +1110,7 @@ export default function OPrototype() {
       <section className="o-layout">
         <article
           className="greek-panel"
-          aria-label="Greek text of Titus"
+          aria-label="Greek text"
         >
           <div className="participation-switch" aria-label="Participation">
             <button
@@ -854,6 +1196,7 @@ export default function OPrototype() {
             </button>
           </div>
 
+          <div className="greek-panel-body">
           {data.greek.map(([chapter, verses]) => (
               <section className="greek-chapter" key={chapter} aria-labelledby={`o-chapter-${chapter}`}>
                 <h2 id={`o-chapter-${chapter}`}>{chapter}</h2>
@@ -876,7 +1219,7 @@ export default function OPrototype() {
                     </button>
                     <div className="token-flow">
                       {(() => {
-                        const interlinear = getVerseInterlinear(verse.chapter, verse.verse);
+                        const interlinear = getVerseInterlinear(verse.chapter, verse.verse, bookId);
                         return verse.tokens.map(token => (
                           <GreekTokenButton
                             disabled={
@@ -899,6 +1242,7 @@ export default function OPrototype() {
                 ))}
               </section>
           ))}
+          </div>
         </article>
 
         <aside className="result-panel" aria-label="Participation result">
@@ -943,8 +1287,11 @@ export default function OPrototype() {
             <section className="result-card participation-card">
               <p className="result-label">Current Participation</p>
               <h2>Brick 2B — Who receives these commands?</h2>
+              <p className="participation-note">
+                Name the addressee from the Spanish (or glosses) in the verse — not from a fixed list.
+              </p>
               <div className="lens-control" aria-label="Command recipient view">
-                {["All Commands", ...RECIPIENTS].map(option => (
+                {["All Commands", ...knownRecipients].map(option => (
                   <button
                     type="button"
                     className={recipientLens === option ? "lens-option lens-option--active" : "lens-option"}
@@ -1009,6 +1356,22 @@ export default function OPrototype() {
               {participleMarkedIds.size > 0 && (
                 <p className="terminology-note">Sorting each one (attributive, substantival, circumstantial) happens later, in the Clause Workspace.</p>
               )}
+              {brick4Confirmed ? (
+                <p className="terminology-note" role="status">
+                  ✓ Every participle in {bookName} is marked — matches the Greek morphology.
+                </p>
+              ) : participleExtraIds.length > 0 ? (
+                <p className="terminology-note" role="status">
+                  {participleExtraIds.length === 1
+                    ? "1 marked word is not a participle"
+                    : `${participleExtraIds.length} marked words are not participles`}{" "}
+                  (often an infinitive — mood N, not P). Unmark {participleExtraIds.length === 1 ? "it" : "them"} or the ✓ stays off.
+                </p>
+              ) : participleMarkedIds.size > 0 ? (
+                <p className="terminology-note" role="status">
+                  Still incomplete for {bookName} — keep looking (infinitives are not participles).
+                </p>
+              ) : null}
             </section>
           )}
 
@@ -1033,51 +1396,165 @@ export default function OPrototype() {
                   ))}
                 </div>
               )}
-              {draftVerseContexts.length > 0 && (
-                <div className="recipient-verse-context" aria-label="Verse context">
-                  <p className="result-label">Verse context</p>
-                  {draftVerseContexts.map(context => (
-                    <p
-                      className={context.isPriorContext ? "interlinear-verse-line interlinear-verse-line--prior" : "interlinear-verse-line"}
-                      key={context.key}
-                    >
-                      <span className="interlinear-verse-ref">{context.reference}</span>
-                      {context.tokens.map((token, index) => (
-                        <span
-                          className={
-                            context.selectedIndexes.has(index)
-                              ? "interlinear-token interlinear-token--selected"
-                              : "interlinear-token"
-                          }
-                          key={index}
-                        >
-                          <span className="interlinear-token-gloss">{token.gloss}</span>
-                          <span className="interlinear-token-greek">{stripCriticalMarks(token.surface)}</span>
-                        </span>
-                      ))}
-                    </p>
-                  ))}
+              <div className="recipient-draft-label" aria-live="polite">
+                <p className="result-label">From the text</p>
+                <p className={draftRecipient ? "recipient-draft-value" : "recipient-draft-value recipient-draft-value--empty"}>
+                  {draftRecipient || "Tap Spanish words (or glosses) below to name who receives this command."}
+                </p>
+                {draftRecipientPicks.length > 0 ? (
+                  <button type="button" className="recipient-clear-words" onClick={() => setDraftRecipientPicks([])}>
+                    Clear name
+                  </button>
+                ) : null}
+              </div>
+              {knownRecipients.length > 0 && (
+                <div className="recipient-known" aria-label="Addressees already named">
+                  <p className="result-label">Already named</p>
+                  <div className="recipient-known-list">
+                    {knownRecipients.map(label => (
+                      <button
+                        type="button"
+                        key={label}
+                        className={
+                          draftRecipient === label
+                            ? "recipient-known-chip recipient-known-chip--active"
+                            : "recipient-known-chip"
+                        }
+                        onClick={() => applyKnownRecipient(label)}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
-              <fieldset className="recipient-options">
-                {RECIPIENTS.map(recipient => (
-                  <label key={recipient}>
-                    <input
-                      type="radio"
-                      name="command-recipient"
-                      value={recipient}
-                      checked={draftRecipient === recipient}
-                      onChange={() => setDraftRecipient(recipient)}
-                    />
-                    {recipient}
-                  </label>
-                ))}
-              </fieldset>
+              {draftSpanishVerses.length > 0 && (
+                <div className="recipient-spanish" aria-label="Spanish reading">
+                  <p className="result-label">Spanish — tap to name the recipient</p>
+                  <p className="recipient-command-legend">
+                    <span className="recipient-text-word recipient-text-word--command recipient-text-word--legend">
+                      command
+                    </span>
+                    = the verb you marked · scroll for earlier verses
+                  </p>
+                  <div className="recipient-spanish-scroll">
+                    {draftSpanishVerses.map(verse => (
+                      <div
+                        className={
+                          verse.isCommandVerse
+                            ? "recipient-spanish-verse"
+                            : "recipient-spanish-verse recipient-spanish-verse--context"
+                        }
+                        key={verse.key}
+                      >
+                        <p className="recipient-spanish-ref">{verse.label}</p>
+                        {verse.commandLabels.length > 0 && (
+                          <p className="recipient-command-glosses" aria-label="Marked command">
+                            {verse.commandLabels.map(label => (
+                              <span className="recipient-command-gloss" key={`${label.greek}-${label.gloss}`}>
+                                <span className="recipient-command-gloss-greek">{label.greek}</span>
+                                <span className="recipient-command-gloss-arrow">→</span>
+                                <span className="recipient-text-word recipient-text-word--command recipient-text-word--legend">
+                                  {label.gloss.replace(/·/g, " ")}
+                                </span>
+                              </span>
+                            ))}
+                          </p>
+                        )}
+                        <p className="spanish-result recipient-spanish-words">
+                          {verse.words.map((word, index) => {
+                            const selected = draftRecipientPickKeys.has(pickKey({ verseKey: verse.key, wordIndex: index, word }));
+                            const isCommand = verse.commandWordIndexes.has(index);
+                            return (
+                              <button
+                                type="button"
+                                key={`${verse.key}-${index}-${word}`}
+                                className={[
+                                  "recipient-text-word",
+                                  isCommand ? "recipient-text-word--command" : "",
+                                  selected ? "recipient-text-word--selected" : ""
+                                ]
+                                  .filter(Boolean)
+                                  .join(" ")}
+                                title={isCommand ? "This is the command in the reading" : undefined}
+                                onClick={() =>
+                                  toggleDraftRecipientPick({
+                                    verseKey: verse.key,
+                                    wordIndex: index,
+                                    word
+                                  })
+                                }
+                              >
+                                {word}
+                              </button>
+                            );
+                          })}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {draftVerseContexts.length > 0 && (
+                <div className="recipient-verse-context" aria-label="Verse context">
+                  <p className="result-label">Verse context — tap a gloss (scroll for earlier)</p>
+                  <div className="recipient-verse-context-scroll">
+                    {draftVerseContexts.map(context => (
+                      <p
+                        className={context.isPriorContext ? "interlinear-verse-line interlinear-verse-line--prior" : "interlinear-verse-line"}
+                        key={context.key}
+                      >
+                        <span className="interlinear-verse-ref">{context.reference}</span>
+                        {context.tokens.map((token, index) => {
+                          const tokenNum = index + 1;
+                          const spanishVerse = draftSpanishByKey.get(context.key);
+                          const readingIndexes =
+                            spanishVerse?.readingIndexesByToken.get(tokenNum) ?? [];
+                          const glossSelected = readingIndexes.some(wordIndex =>
+                            draftRecipientPickKeys.has(
+                              pickKey({
+                                verseKey: context.key,
+                                wordIndex,
+                                word: spanishVerse?.words[wordIndex] ?? ""
+                              })
+                            )
+                          );
+                          return (
+                            <button
+                              type="button"
+                              className={
+                                [
+                                  "interlinear-token",
+                                  "interlinear-token--pickable",
+                                  context.selectedIndexes.has(index) ? "interlinear-token--selected" : "",
+                                  glossSelected ? "interlinear-token--recipient-picked" : ""
+                                ]
+                                  .filter(Boolean)
+                                  .join(" ")
+                              }
+                              key={index}
+                              onClick={() => toggleDraftRecipientFromGloss(context.key, tokenNum)}
+                            >
+                              <span className="interlinear-token-gloss">{token.gloss}</span>
+                              <span className="interlinear-token-greek">{stripCriticalMarks(token.surface)}</span>
+                            </button>
+                          );
+                        })}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div className="recipient-actions">
                 <button type="button" onClick={cancelCommandRecipientGroup}>
                   Cancel
                 </button>
-                <button type="button" className="recipient-save" onClick={saveCommandRecipientGroup}>
+                <button
+                  type="button"
+                  className="recipient-save"
+                  onClick={saveCommandRecipientGroup}
+                  disabled={!draftRecipient}
+                >
                   Save
                 </button>
               </div>
@@ -1086,7 +1563,7 @@ export default function OPrototype() {
 
           <section className="result-card">
             <p className="result-label">Current passage</p>
-            <h2>{activeVerse?.label ?? "Tito"}</h2>
+            <h2>{activeVerse?.label ?? bookName}</h2>
             <p className="spanish-result">
               {spanishVerse ? spanishVerse.text : "Select a Greek verse to see the Spanish result."}
             </p>
@@ -1146,6 +1623,25 @@ export default function OPrototype() {
                     {tokenText(token)}
                   </span>
                 ))
+              ) : participation === "participles" && selectedTokens.length ? (
+                selectedTokens.map(token => (
+                  <span
+                    className={
+                      participleExtraIds.includes(token.id)
+                        ? "marked-token marked-token--extra"
+                        : "marked-token"
+                    }
+                    key={token.id}
+                    title={
+                      participleExtraIds.includes(token.id)
+                        ? `${token.rmac} — not a participle`
+                        : token.rmac
+                    }
+                  >
+                    {tokenText(token)}
+                    {participleExtraIds.includes(token.id) ? " ✕" : ""}
+                  </span>
+                ))
               ) : participation === "command-recipients" && commandRecipientGroups.length ? (
                 commandRecipientGroups
                   .filter(group => recipientLens === "All Commands" || group.recipient === recipientLens)
@@ -1166,6 +1662,8 @@ export default function OPrototype() {
                         ? "No subjunctives marked yet."
                       : participation === "mood-optative"
                         ? "No optatives marked yet."
+                        : participation === "participles"
+                          ? "No participles marked yet."
                         : "No recipients assigned yet."}
                 </p>
               )}

@@ -17,9 +17,14 @@
 // next slide; the outline must still account for every word as #### / - / +.
 
 import {
+  getReaderBookInfo,
+  workshopProgressKeys,
+  type ReaderBookId
+} from "@cgv/core";
+import {
   formatClauseSpan,
   getClauseBeginningTokens,
-  loadTitusClauseVerses,
+  loadClauseVerses,
   readClauseAssignments,
   readClauseObservations,
   readMarkedAlignmentIds,
@@ -45,14 +50,9 @@ import {
   type ParkedClause,
   type SkeletonNode
 } from "../observer/clause-tree";
+import { getWorkshopBookId } from "../observer/workshop-book";
 import { createDefaultManualMeta, formatYamlFrontmatter, type ManualMeta } from "./compiler-meta";
 import { readReaderNotes, readerNoteCommentLines, verseKeysFromNoteTarget } from "./compiler-gathering";
-
-const COMMAND_MARKS_KEY = "roots:titus:brick2:mood:imperativeCandidates";
-const STATEMENT_MARKS_KEY = "roots:titus:brick2c:mood:statementCandidates";
-const SUBJUNCTIVE_MARKS_KEY = "roots:titus:brick3:mood:subjunctiveCandidates";
-const OPTATIVE_MARKS_KEY = "roots:titus:brick3c:mood:optativeCandidates";
-const PARTICIPLE_MARKS_KEY = "roots:titus:brick4:participleCandidates";
 
 interface GenderInfo {
   indefiniteArticle: string;
@@ -271,6 +271,7 @@ interface GeneratedDoc {
 
 export interface GenerateManualOptions {
   meta?: ManualMeta;
+  bookId?: ReaderBookId;
   /**
    * Optional reading-block texts keyed `chapter:verse`. When omitted, reading
    * quotes use LBF verse text from Observer (same as outline). Outline
@@ -292,17 +293,20 @@ function readingTextLookup(
 }
 
 /**
- * Reads O's current live data (Titus) and produces the markdown skeleton.
+ * Reads O's current live data and produces the markdown skeleton.
  * Pure, synchronous, read-only — never writes back to O's storage.
  */
 export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManualOptions): GeneratedDoc {
   const options: GenerateManualOptions =
-    metaOrOptions && ("meta" in metaOrOptions || "readingTextsByVerse" in metaOrOptions)
+    metaOrOptions && ("meta" in metaOrOptions || "readingTextsByVerse" in metaOrOptions || "bookId" in metaOrOptions)
       ? metaOrOptions
       : { meta: metaOrOptions as ManualMeta | undefined };
   const meta = options.meta;
+  const bookId = options.bookId ?? getWorkshopBookId();
+  const progressKeys = workshopProgressKeys(bookId);
+  const bookDisplayName = getReaderBookInfo(bookId).displayName;
   const warnings: string[] = [];
-  const verses = loadTitusClauseVerses();
+  const verses = loadClauseVerses(bookId);
   const assignments = readClauseAssignments();
   const observations = readClauseObservations();
   const participleObservations = readParticipleObservations();
@@ -350,11 +354,11 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   }
 
   const moodReviewedVerbIds = new Set<string>();
-  readMarkedAlignmentIds(COMMAND_MARKS_KEY).forEach(id => moodReviewedVerbIds.add(id));
-  readMarkedAlignmentIds(STATEMENT_MARKS_KEY).forEach(id => moodReviewedVerbIds.add(id));
-  readMarkedAlignmentIds(SUBJUNCTIVE_MARKS_KEY).forEach(id => moodReviewedVerbIds.add(id));
-  readMarkedAlignmentIds(OPTATIVE_MARKS_KEY).forEach(id => moodReviewedVerbIds.add(id));
-  const participleMarkedAlignmentIds = readMarkedAlignmentIds(PARTICIPLE_MARKS_KEY);
+  readMarkedAlignmentIds(progressKeys.commandMarks).forEach(id => moodReviewedVerbIds.add(id));
+  readMarkedAlignmentIds(progressKeys.statementMarks).forEach(id => moodReviewedVerbIds.add(id));
+  readMarkedAlignmentIds(progressKeys.subjunctiveMarks).forEach(id => moodReviewedVerbIds.add(id));
+  readMarkedAlignmentIds(progressKeys.optativeMarks).forEach(id => moodReviewedVerbIds.add(id));
+  const participleMarkedAlignmentIds = readMarkedAlignmentIds(progressKeys.participleMarks);
 
   const clauses: CompilerClause[] = [];
   for (const finiteVerb of finiteVerbs) {
@@ -420,7 +424,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
 
   const clauseSpanInfos: ClauseSpanInfo[] = clauses.map(clause => ({
     finiteVerbId: clause.finiteVerbId,
-    reference: `Tito ${clause.chapter}:${clause.verse}`,
+    reference: `${bookDisplayName} ${clause.chapter}:${clause.verse}`,
     spanText: spanTextFor(clause.finiteVerbId),
     wordIds: (assignments[clause.finiteVerbId]?.selectedSpan ?? []).slice(),
     order: clause.order
@@ -858,12 +862,12 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     endVerse: number
   ): string {
     if (startChapter === endChapter && startVerse === endVerse) {
-      return `Tito ${startChapter}:${startVerse}`;
+      return `${bookDisplayName} ${startChapter}:${startVerse}`;
     }
     if (startChapter === endChapter) {
-      return `Tito ${startChapter}:${startVerse}–${endVerse}`;
+      return `${bookDisplayName} ${startChapter}:${startVerse}–${endVerse}`;
     }
-    return `Tito ${startChapter}:${startVerse}–${endChapter}:${endVerse}`;
+    return `${bookDisplayName} ${startChapter}:${startVerse}–${endChapter}:${endVerse}`;
   }
 
   /** Verse floor order (token 0) — used so reading bounds don't steal the next root's verse. */

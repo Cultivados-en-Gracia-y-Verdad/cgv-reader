@@ -5,6 +5,7 @@ import {
   type ProgressBundle
 } from "./progress-io";
 import { PROGRESS_KEYS } from "./progress-keys";
+import { readReaderBook, workshopStorageSlug } from "./reader-book";
 
 // Keep the IndexedDB name so existing browser autosave backups still open.
 const DB_NAME = "cgv-suite-progress";
@@ -192,10 +193,10 @@ export async function linkAutosaveFile(): Promise<boolean> {
   }
 
   const handle = await picker({
-    suggestedName: `titus-progress-autosave.json`,
+    suggestedName: `${workshopStorageSlug(readReaderBook())}-progress-autosave.json`,
     types: [
       {
-        description: "Titus progress JSON",
+        description: "Reader progress JSON",
         accept: { "application/json": [".json"] }
       }
     ]
@@ -230,7 +231,7 @@ export async function maybeRestoreFromAutosave(): Promise<boolean> {
   if (Object.keys(backup.data).length === 0) return false;
 
   const confirmed = window.confirm(
-    "Browser storage looks empty, but an auto-save backup was found. Restore your Titus progress from that backup?"
+    "Browser storage looks empty, but an auto-save backup was found. Restore your progress from that backup?"
   );
   if (!confirmed) return false;
 
@@ -283,12 +284,22 @@ export async function recoverGreekConfirmationsFromAutosave(): Promise<number> {
   return merged;
 }
 
+function isProgressStorageKey(key: string): boolean {
+  if (PROGRESS_KEY_SET.has(key)) return true;
+  return (
+    key.startsWith("o-prototype:") ||
+    key.startsWith("roots:") ||
+    key.startsWith("the-reader:spanish-clause-builder:") ||
+    key === "the-reader:titus:notes"
+  );
+}
+
 function patchLocalStorage(): void {
   if (originalSetItem) return;
   originalSetItem = window.localStorage.setItem.bind(window.localStorage);
   window.localStorage.setItem = (key: string, value: string) => {
     originalSetItem!(key, value);
-    if (PROGRESS_KEY_SET.has(key)) scheduleAutosave();
+    if (isProgressStorageKey(key)) scheduleAutosave();
   };
 }
 

@@ -7,7 +7,7 @@ import {
   formatClauseSpan,
   getClauseBeginningTokens,
   getVersesWithoutFiniteVerb,
-  loadTitusClauseVerses,
+  loadClauseVerses,
   readClauseAssignments,
   readClauseObservations,
   readCommandRecipientAssignments,
@@ -41,7 +41,9 @@ import {
   type FrameType
 } from "./clause-signals";
 import { loadLbfTokenSurfaces } from "./lbf-alignment";
-import { describeRmac, getVerseInterlinear } from "./o-data";
+import { describeRmac, ensureVerseInterlinear, getVerseInterlinear } from "./o-data";
+import { getWorkshopBookId } from "./workshop-book";
+import { getReaderBookInfo, workshopProgressKeys } from "@cgv/core";
 import {
   applyCoordinateInheritance,
   deriveOutline,
@@ -68,12 +70,6 @@ interface ClauseOutputRow {
   beginningTokens: ClauseBeginningToken[];
   hasDependentIntroducer: boolean;
 }
-
-const COMMAND_MARKS_KEY = "roots:titus:brick2:mood:imperativeCandidates";
-const STATEMENT_MARKS_KEY = "roots:titus:brick2c:mood:statementCandidates";
-const SUBJUNCTIVE_MARKS_KEY = "roots:titus:brick3:mood:subjunctiveCandidates";
-const OPTATIVE_MARKS_KEY = "roots:titus:brick3c:mood:optativeCandidates";
-const PARTICIPLE_MARKS_KEY = "roots:titus:brick4:participleCandidates";
 
 function capitalize(value: string): string {
   return value.charAt(0).toUpperCase() + value.slice(1);
@@ -246,7 +242,22 @@ function ParticipleCheck({ confirmed }: { confirmed: boolean }) {
 }
 
 export default function SpanishClauseBuilder() {
-  const verses = useMemo(() => loadTitusClauseVerses(), []);
+  const bookId = getWorkshopBookId();
+  const bookInfo = getReaderBookInfo(bookId);
+  const progressKeys = useMemo(() => workshopProgressKeys(bookId), [bookId]);
+  const [interlinearReady, setInterlinearReady] = useState(false);
+  const verses = useMemo(() => loadClauseVerses(bookId), [bookId]);
+
+  useEffect(() => {
+    let cancelled = false;
+    setInterlinearReady(false);
+    void ensureVerseInterlinear(bookId).then(() => {
+      if (!cancelled) setInterlinearReady(true);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [bookId]);
 
   const wordById = useMemo(() => {
     const index = new Map<string, SpanishWord>();
@@ -278,12 +289,12 @@ export default function SpanishClauseBuilder() {
   // unreachable if subjunctive clauses never enter the review workspace.
   const moodReviewedVerbIds = useMemo(() => {
     const ids = new Set<string>();
-    readMarkedAlignmentIds(COMMAND_MARKS_KEY).forEach(id => ids.add(id));
-    readMarkedAlignmentIds(STATEMENT_MARKS_KEY).forEach(id => ids.add(id));
-    readMarkedAlignmentIds(SUBJUNCTIVE_MARKS_KEY).forEach(id => ids.add(id));
-    readMarkedAlignmentIds(OPTATIVE_MARKS_KEY).forEach(id => ids.add(id));
+    readMarkedAlignmentIds(progressKeys.commandMarks).forEach(id => ids.add(id));
+    readMarkedAlignmentIds(progressKeys.statementMarks).forEach(id => ids.add(id));
+    readMarkedAlignmentIds(progressKeys.subjunctiveMarks).forEach(id => ids.add(id));
+    readMarkedAlignmentIds(progressKeys.optativeMarks).forEach(id => ids.add(id));
     return ids;
-  }, []);
+  }, [progressKeys]);
 
   const wordsByVerse = useMemo(() => {
     const index = new Map<string, SpanishWord[]>();
@@ -387,11 +398,23 @@ export default function SpanishClauseBuilder() {
   const [openParticiplePopoverId, setOpenParticiplePopoverId] = useState<string | null>(null);
   // Clear audit banners can be dismissed; they reappear if problems return.
 
+  useEffect(() => {
+    setAssignments(readClauseAssignments());
+    setObservations(readClauseObservations());
+    setParticipleObservations(readParticipleObservations());
+    setActiveVerbId(null);
+    setDraftGreekRange(null);
+    setGreekRangeAnchorToken(null);
+  }, [bookId]);
+
   // Brick 4's own marks (Greek O-Prototype), converted from MorphGNT-line-id
   // format to "chapter:verse:token" alignment format — same conversion
   // moodReviewedVerbIds already relies on. Read-only here: this view sorts
   // participles, it doesn't find them.
-  const participleMarkedAlignmentIds = useMemo(() => readMarkedAlignmentIds(PARTICIPLE_MARKS_KEY), []);
+  const participleMarkedAlignmentIds = useMemo(
+    () => readMarkedAlignmentIds(progressKeys.participleMarks),
+    [progressKeys]
+  );
 
   const activeVerb = useMemo(
     () => finiteVerbs.find(verb => verb.finiteVerbId === activeVerbId) ?? null,
@@ -1344,8 +1367,14 @@ export default function SpanishClauseBuilder() {
   // clause, book order. Everything here is computed from data already
   // collected elsewhere (frameType, mood brick marks, participle
   // classifications); nothing new is detected or tagged.
-  const statementMarkedIds = useMemo(() => readMarkedAlignmentIds(STATEMENT_MARKS_KEY), []);
-  const imperativeMarkedIds = useMemo(() => readMarkedAlignmentIds(COMMAND_MARKS_KEY), []);
+  const statementMarkedIds = useMemo(
+    () => readMarkedAlignmentIds(progressKeys.statementMarks),
+    [progressKeys]
+  );
+  const imperativeMarkedIds = useMemo(
+    () => readMarkedAlignmentIds(progressKeys.commandMarks),
+    [progressKeys]
+  );
 
   // A reason clause can sit several levels under the root it justifies, not
   // just directly attached to it — same reasoning as Flow's circumstantial-
@@ -2057,11 +2086,19 @@ export default function SpanishClauseBuilder() {
     ]
   );
 
+  if (!interlinearReady) {
+    return (
+      <p className="workshop-lbf-gate" role="status">
+        Loading…
+      </p>
+    );
+  }
+
   return (
     <main className="clause-builder">
       <header className="clause-builder-header">
         <p className="reader-kicker">Observer · Structure</p>
-        <h1>Tito</h1>
+        <h1>{bookInfo.displayName}</h1>
         <p className="clause-builder-scope">
           Greek in token order with aligned LBF under each word. The verse line below is LBF in Spanish reading
           order (word order will differ). Open Skeleton anytime to read the settled tree.

@@ -20,15 +20,17 @@ export interface UiStrings {
   unlockCompiler: string;
 
   observerKicker: string;
-  observerTitle: string;
+  observerTitle: (book: string) => string;
   observerLede: string;
   workshopLayersAria: string;
   mark: string;
   structure: string;
+  structureNeedsLbf: (book: string) => string;
 
   compilerKicker: string;
-  compilerTitle: string;
+  compilerTitle: (book: string) => string;
   compilerScope: string;
+  compilerNeedsLbf: (book: string) => string;
   compilerBible: string;
   compilerBibleNote: string;
   generate: string;
@@ -84,29 +86,33 @@ const EN: UiStrings = {
   languageAria: "Interface language",
   preferences: "Preferences",
   prefLanguage: "Interface language",
-  prefBook: "Book (Reader)",
+  prefBook: "Book",
   prefBible: "Bible text (Reader)",
   prefBibleNote:
-    "Book and version change reading text only. Observer / Compiler stay on Titus until more LBF is ready. Notes stay keyed to each verse.",
+    "Book is shared across Reader, Observer Mark, and Compiler when LBF text exists (Titus, 1 Peter). Structure / Generate still need reverse-interlinear alignment (Titus for now). Notes stay keyed to each verse.",
   loadingBook: "Loading…",
   progressHint: count =>
-    `Titus progress found in this browser (${count} saved item${count === 1 ? "" : "s"}) — auto-save is on. Link a file in Observer for a disk backup.`,
+    `Saved progress found in this browser (${count} item${count === 1 ? "" : "s"}) — auto-save is on. Link a file in Observer for a disk backup.`,
   dismiss: "Dismiss",
   lockCompiler: "Lock Compiler",
   unlockCompiler: "Unlock Compiler (teachers)",
 
   observerKicker: "Observer",
-  observerTitle: "Workshop — Titus",
+  observerTitle: book => `Workshop — ${book}`,
   observerLede:
     "The text sits at the center. Mark what the Greek shows, then let structure settle in place — never by drag-and-drop.",
   workshopLayersAria: "Workshop layers",
   mark: "Mark",
   structure: "Structure",
+  structureNeedsLbf: book =>
+    `Structure needs LBF reverse-interlinear alignment. ${book} has LBF reading text (and Mark); switch to Titus for Structure until alignment ships.`,
 
   compilerKicker: "Compiler",
-  compilerTitle: "Manual skeleton — Titus",
+  compilerTitle: book => `Manual skeleton — ${book}`,
   compilerScope:
     "Generate from Observer, then pin definitions and cross-refs. Pins survive regenerate when their target line text still exists. Tools stay along the bottom. Reader notes and pins never mix into Observer * grammar slides.",
+  compilerNeedsLbf: book =>
+    `Compiler needs LBF from Observer Structure. ${book} can be read in LBF, but Structure/alignment is Titus-only for now — switch to Titus to generate.`,
   compilerBible: "Reading text (Compiler)",
   compilerBibleNote:
     "Version for the reading quotes after each H3. Outline #### / - / + stays LBF from Observer.",
@@ -137,7 +143,7 @@ const EN: UiStrings = {
   noteFor: label => `Note for ${label}`,
   notesFor: label => `Notes for ${label}`,
 
-  progressAria: "Save or load Titus progress",
+  progressAria: "Save or load progress",
   autosaveStarting: "Auto-save starting…",
   autosaveError: msg => `Auto-save error: ${msg}`,
   savingToFile: name => `Saving to ${name}…`,
@@ -149,7 +155,7 @@ const EN: UiStrings = {
   saveProgress: "Download a progress backup",
   loadProgress: "Load progress",
   loadConfirm:
-    "This replaces your current Titus progress (marked verbs, clauses, moods, observations, notes) with what's in this file. Your current state isn't kept — this can't be undone. Continue?",
+    "This replaces your current progress (marked verbs, clauses, moods, observations, notes) with what's in this file. Your current state isn't kept — this can't be undone. Continue?",
   loadDone: n => `Loaded ${n} saved item(s). Reloading to pick up the change…`,
   loadFailed: "Couldn't read that file.",
   linkFailed: "Couldn't link an auto-save file."
@@ -164,29 +170,33 @@ const ES: UiStrings = {
   languageAria: "Idioma de la interfaz",
   preferences: "Preferencias",
   prefLanguage: "Idioma de la interfaz",
-  prefBook: "Libro (Lector)",
+  prefBook: "Libro",
   prefBible: "Texto bíblico (Lector)",
   prefBibleNote:
-    "Libro y versión cambian solo el texto de lectura. Observador / Compilador siguen en Tito hasta que haya más LBF. Las notas quedan ligadas a cada versículo.",
+    "El libro se comparte entre Lector, Observador (Marcar) y Compilador cuando hay texto LBF (Tito, 1 Pedro). Estructura / Generar aún necesitan alineación inversa (Tito por ahora). Las notas quedan ligadas a cada versículo.",
   loadingBook: "Cargando…",
   progressHint: count =>
-    `Progreso de Tito encontrado en este navegador (${count} elemento${count === 1 ? "" : "s"} guardado${count === 1 ? "" : "s"}) — el guardado automático está activo. Vincule un archivo en Observador para una copia en disco.`,
+    `Progreso encontrado en este navegador (${count} elemento${count === 1 ? "" : "s"} guardado${count === 1 ? "" : "s"}) — el guardado automático está activo. Vincule un archivo en Observador para una copia en disco.`,
   dismiss: "Cerrar",
   lockCompiler: "Bloquear Compilador",
   unlockCompiler: "Desbloquear Compilador (maestros)",
 
   observerKicker: "Observador",
-  observerTitle: "Taller — Tito",
+  observerTitle: book => `Taller — ${book}`,
   observerLede:
     "El texto está en el centro. Marque lo que muestra el griego; luego deje que la estructura se asiente en su lugar — nunca por arrastrar y soltar.",
   workshopLayersAria: "Capas del taller",
   mark: "Marcar",
   structure: "Estructura",
+  structureNeedsLbf: book =>
+    `Estructura necesita alineación inversa LBF. ${book} ya tiene texto LBF (y Marcar); cambie a Tito para Estructura hasta que exista la alineación.`,
 
   compilerKicker: "Compilador",
-  compilerTitle: "Esqueleto del manual — Tito",
+  compilerTitle: book => `Esqueleto del manual — ${book}`,
   compilerScope:
     "Genere desde Observador; luego fije definiciones y referencias. Los pines sobreviven al regenerar si el texto de la línea sigue existiendo. Las herramientas están abajo. Las notas del Lector y los pines no se mezclan con las diapositivas gramaticales * de Observador.",
+  compilerNeedsLbf: book =>
+    `El Compilador necesita LBF desde Estructura en Observador. ${book} se puede leer en LBF, pero Estructura/alineación es solo Tito por ahora — cambie a Tito para generar.`,
   compilerBible: "Texto de lectura (Compilador)",
   compilerBibleNote:
     "Versión para las citas de lectura después de cada H3. El esquema #### / - / + sigue en LBF desde Observador.",
@@ -217,7 +227,7 @@ const ES: UiStrings = {
   noteFor: label => `Nota para ${label}`,
   notesFor: label => `Notas de ${label}`,
 
-  progressAria: "Guardar o cargar el progreso de Tito",
+  progressAria: "Guardar o cargar el progreso",
   autosaveStarting: "Iniciando guardado automático…",
   autosaveError: msg => `Error de guardado automático: ${msg}`,
   savingToFile: name => `Guardando en ${name}…`,
@@ -229,7 +239,7 @@ const ES: UiStrings = {
   saveProgress: "Descargar copia del progreso",
   loadProgress: "Cargar progreso",
   loadConfirm:
-    "Esto reemplaza su progreso actual de Tito (verbos marcados, cláusulas, modos, observaciones, notas) con lo que hay en este archivo. El estado actual no se conserva — no se puede deshacer. ¿Continuar?",
+    "Esto reemplaza su progreso actual (verbos marcados, cláusulas, modos, observaciones, notas) con lo que hay en este archivo. El estado actual no se conserva — no se puede deshacer. ¿Continuar?",
   loadDone: n => `Se cargaron ${n} elemento(s). Recargando para aplicar el cambio…`,
   loadFailed: "No se pudo leer ese archivo.",
   linkFailed: "No se pudo vincular un archivo de guardado automático."

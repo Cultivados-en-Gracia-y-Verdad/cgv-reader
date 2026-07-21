@@ -1,19 +1,57 @@
-import { PROGRESS_KEYS } from "./progress-keys";
+import {
+  getReaderBookInfo,
+  readReaderBook,
+  workshopProgressKeys,
+  workshopStorageSlug,
+  type ReaderBookId
+} from "./reader-book";
+import { NOTES_KEY, PROGRESS_KEYS, type ProgressKeyInfo } from "./progress-keys";
 
 const KNOWN_KEYS = new Set(PROGRESS_KEYS.map(entry => entry.key));
 
 export interface ProgressBundle {
   schema: 1;
-  book: "titus";
+  /** Workshop storage slug (`titus`, `mateo`, …). Legacy exports always used `titus`. */
+  book: string;
   exportedAt: string;
   data: Record<string, unknown>;
   source?: "cgv-reader" | "cgv-suite";
 }
 
-export function buildProgressBundle(): ProgressBundle {
+/** Progress keys for one workshop book (Mark + Structure), plus shared Reader notes. */
+export function progressKeysForBook(bookId: ReaderBookId): ProgressKeyInfo[] {
+  const keys = workshopProgressKeys(bookId);
+  const entries: ProgressKeyInfo[] = [
+    { key: NOTES_KEY, label: "Notes" },
+    { key: keys.finiteMarks, label: "Finite verb marks (Brick 1)" },
+    { key: keys.commandMarks, label: "Command mood marks" },
+    { key: keys.statementMarks, label: "Statement mood marks" },
+    { key: keys.subjunctiveMarks, label: "Subjunctive mood marks" },
+    { key: keys.optativeMarks, label: "Optative mood marks" },
+    { key: keys.commandRecipients, label: "Command recipients" },
+    { key: keys.dependentIntroducers, label: "Dependent introducer marks" },
+    { key: keys.participleMarks, label: "Participle marks (Brick 4)" },
+    { key: keys.clauseAssignments, label: "Clause spans" },
+    { key: keys.clauseObservations, label: "Clause observations" },
+    { key: keys.participleObservations, label: "Participle classifications" }
+  ];
+  if (keys.clauseAssignmentsLegacy) {
+    entries.push({ key: keys.clauseAssignmentsLegacy, label: "Clause spans (legacy)" });
+  }
+  return entries;
+}
+
+function collectKeySet(bookId: ReaderBookId): ProgressKeyInfo[] {
+  const byKey = new Map<string, ProgressKeyInfo>();
+  for (const entry of PROGRESS_KEYS) byKey.set(entry.key, entry);
+  for (const entry of progressKeysForBook(bookId)) byKey.set(entry.key, entry);
+  return Array.from(byKey.values());
+}
+
+export function buildProgressBundle(bookId: ReaderBookId = readReaderBook()): ProgressBundle {
   const data: Record<string, unknown> = {};
 
-  for (const { key } of PROGRESS_KEYS) {
+  for (const { key } of collectKeySet(bookId)) {
     const raw = window.localStorage.getItem(key);
     if (raw === null) continue;
     try {
@@ -25,23 +63,25 @@ export function buildProgressBundle(): ProgressBundle {
 
   return {
     schema: 1,
-    book: "titus",
+    book: workshopStorageSlug(bookId),
     exportedAt: new Date().toISOString(),
     data,
     source: "cgv-reader"
   };
 }
 
-const EXPORT_SUBFOLDER = "cgv-reader";
-
-export function downloadProgressFile(): void {
-  const bundle = buildProgressBundle();
+export function downloadProgressFile(bookId: ReaderBookId = readReaderBook()): void {
+  const bundle = buildProgressBundle(bookId);
+  const slug = workshopStorageSlug(bookId);
+  const date = bundle.exportedAt.slice(0, 10);
+  // No path separators — browsers turn `cgv-reader/…` into `cgv-reader_…`.
+  const filename = `cgv-reader-${slug}-progress-${date}.json`;
   const json = JSON.stringify(bundle, null, 2);
   const blob = new Blob([json], { type: "application/json" });
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement("a");
   anchor.href = url;
-  anchor.download = `${EXPORT_SUBFOLDER}/titus-progress-${bundle.exportedAt.slice(0, 10)}.json`;
+  anchor.download = filename;
   document.body.appendChild(anchor);
   anchor.click();
   document.body.removeChild(anchor);
@@ -59,12 +99,12 @@ export interface ImportSummary {
 
 export function applyProgressBundle(bundle: unknown): ImportSummary {
   if (!bundle || typeof bundle !== "object") {
-    throw new Error("That file doesn't look like a Titus progress export.");
+    throw new Error("That file doesn't look like a Reader progress export.");
   }
 
   const record = bundle as Record<string, unknown>;
-  if (record.book !== "titus" || !record.data || typeof record.data !== "object") {
-    throw new Error("That file doesn't look like a Titus progress export.");
+  if (typeof record.book !== "string" || !record.data || typeof record.data !== "object") {
+    throw new Error("That file doesn't look like a Reader progress export.");
   }
 
   // Accept schema 1 bundles from this app and the former cgv-suite / lab export.
@@ -85,11 +125,27 @@ export function applyProgressBundle(bundle: unknown): ImportSummary {
   return { restoredCount, unrecognizedKeys };
 }
 
-/** Count how many lab/suite Titus keys already have data in this browser. */
+/** Count how many known progress keys already have data in this browser. */
 export function countExistingProgressKeys(): number {
   let count = 0;
+  const seen = new Set<string>();
   for (const { key } of PROGRESS_KEYS) {
+    if (seen.has(key)) continue;
+    seen.add(key);
     if (window.localStorage.getItem(key) !== null) count += 1;
   }
+  try {
+    for (const { key } of progressKeysForBook(readReaderBook())) {
+      if (seen.has(key)) continue;
+      seen.add(key);
+      if (window.localStorage.getItem(key) !== null) count += 1;
+    }
+  } catch {
+    /* non-browser */
+  }
   return count;
+}
+
+export function progressExportLabel(bookId: ReaderBookId = readReaderBook()): string {
+  return getReaderBookInfo(bookId).displayName;
 }
