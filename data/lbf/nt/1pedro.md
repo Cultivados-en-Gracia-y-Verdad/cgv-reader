@@ -98,7 +98,7 @@ habiendo nacido de nuevo, no de semilla corruptible sino incorruptible, por medi
 
 ### 1:24
 
-Porque toda carne es como hierba, y toda la gloria del hombre como flor de hierba La hierba se seca y su flor se cae
+Porque toda carne es como hierba, y toda la gloria del hombre como flor de hierba. La hierba se seca y su flor se cae
 
 ### 1:25
 
@@ -180,11 +180,11 @@ Los criados, sométanse con todo temor a sus amos, no solo a los buenos y consid
 
 ### 2:19
 
-Porque esto es digno de gracia: si alguien, por causa de la conciencia ante Dios, soporta penas padeciendo injustamente
+Porque esto es gracia: si alguien, por causa de la conciencia ante Dios, soporta penas padeciendo injustamente
 
 ### 2:20
 
-Pues, ¿qué mérito hay si, pecando y siendo golpeados, lo soportan? Pero si haciendo el bien y padeciendo lo soportan, esto es digno de gracia delante de Dios
+Pues, ¿qué mérito hay si, pecando y siendo golpeados, lo soportan? Pero si haciendo el bien y padeciendo lo soportan, esto es gracia delante de Dios
 
 ### 2:21
 
@@ -204,7 +204,7 @@ quien él mismo llevó nuestros pecados en su cuerpo sobre el madero para que, m
 
 ### 2:25
 
-Porque ustedes eran como ovejas extraviadas, pero ahora han vuelto al Pastor y Supervisor de sus almas
+Porque ustedes eran como ovejas extraviadas, pero ahora han vuelto al Pastor y Obispo de sus almas
 
 ## Capítulo 3
 
@@ -218,7 +218,7 @@ al observar su conducta pura con temor
 
 ### 3:3
 
-Que el adorno de ustedes no sea el exterior: trenzado de cabello, uso de joyas de oro o vestidos
+Que el adorno de ustedes no sea el exterior: trenzado de cabello y uso de joyas de oro o uso de vestidos
 
 ### 3:4
 
@@ -246,11 +246,11 @@ no devolviendo mal por mal ni insulto por insulto, sino al contrario, bendiciend
 
 ### 3:10
 
-Porque quien quiere amar la vida y ver días buenos, aparte su lengua del mal y sus labios de hablar engaño
+Porque el que quiere amar la vida y ver días buenos, refrene su lengua del mal y sus labios de hablar engaño
 
 ### 3:11
 
-Apártese del mal y haga el bien; busque la paz y sígala
+Apártese del mal y haga bien; busque la paz y persígala
 
 ### 3:12
 
@@ -286,7 +286,7 @@ en el cual también fue y proclamó a los espíritus encarcelados
 
 ### 3:20
 
-vez la paciencia de Dios esperaba en los días de Noé, mientras se construía el arca, en la cual pocos es decir, ocho personas, fueron salvadas por medio del agua
+que antes desobedecieron, cuando una vez la paciencia de Dios esperaba en los días de Noé, mientras se construía el arca, en la cual pocos es decir, ocho personas, fueron salvadas por medio del agua
 
 ### 3:21
 

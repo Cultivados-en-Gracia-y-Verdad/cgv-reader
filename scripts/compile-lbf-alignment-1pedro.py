@@ -118,23 +118,67 @@ def find_phrase_offset(verse_text: str, phrase_spanish: str, from_index: int) ->
     raise ValueError(f"Could not place phrase in verse: {phrase_spanish!r}")
 
 
+# Prefer first-word anchors for verbal periphrases so finiteVerbId lands on the
+# finite Spanish word ("fueron" in "fueron rescatados", "está" in "está escrito"),
+# not the participle. Noun phrases still anchor on the last word.
+_VERBAL_FIRST = {
+    "esta",
+    "estan",
+    "estoy",
+    "estamos",
+    "esteis",
+    "es",
+    "son",
+    "soy",
+    "somos",
+    "sois",
+    "sea",
+    "sean",
+    "ser",
+    "sera",
+    "seran",
+    "fue",
+    "fueron",
+    "fui",
+    "era",
+    "eran",
+    "hay",
+    "habra",
+    "llevo",
+    "lleva",
+    "llevan",
+    "llevamos",
+    "viva",
+    "vivas",
+    "vivamos",
+    "vive",
+    "viven",
+    "vivo",
+}
+
+
 def unit_word_index(verse_words: list[str], surface: str, cursor: int) -> tuple[int, int]:
     """Return (anchor_index, next_cursor) for a Spanish unit surface."""
     parts = tokenize(surface)
     if not parts:
         return cursor, cursor
     want = [norm(p) for p in parts]
+    prefer_first = want[0] in _VERBAL_FIRST
+
+    def anchor_at(start: int) -> int:
+        if prefer_first:
+            return start
+        return start + len(parts) - 1
+
     for start in range(cursor, len(verse_words) - len(parts) + 1):
         window = [norm(w) for w in verse_words[start : start + len(parts)]]
         if window == want:
-            # Anchor on last content-ish part when possible (matches expandAlignedPhrases).
-            anchor = start + len(parts) - 1
-            return anchor, start + len(parts)
+            return anchor_at(start), start + len(parts)
     # Retry from 0 if phrase order drifted.
     for start in range(0, len(verse_words) - len(parts) + 1):
         window = [norm(w) for w in verse_words[start : start + len(parts)]]
         if window == want:
-            return start + len(parts) - 1, max(cursor, start + len(parts))
+            return anchor_at(start), max(cursor, start + len(parts))
     raise ValueError(f"Could not find unit {surface!r} in verse words from {cursor}")
 
 

@@ -1,5 +1,19 @@
 # LBF as reverse-interlinear Spanish surface
 
+## Freeze / publish (read first)
+
+Ownership, Tito baseline, staging rules, and the 1 Pedro → cgv-data promote
+checklist live in sibling repo:
+
+`herramientas/Biblia-LBF/docs/ADR-0001-lbf-freeze-and-publish.md`
+
+(absolute under this machine’s layout:
+`/Users/johnwry/Nextcloud/Documents/GitHub/herramientas/Biblia-LBF/docs/ADR-0001-lbf-freeze-and-publish.md`)
+
+**Summary:** Biblia-LBF is the working canon; `data/lbf` is a staging mirror only;
+cgv-data receives Tito + 1 Pedro together when both meet the bar. Do not author
+LBF text or alignment in Reader.
+
 ## Decision
 
 Observer’s settled / reverse-interlinear Spanish surface is **La Biblia Fiel (LBF)**,
@@ -55,14 +69,18 @@ Fix the reverse link, then recompile.
 
 ## Maintaining the map
 
-`scripts/rebuild-lbf-alignment.py` starts from the committed bootstrap, reapplies
-hand-verified overrides, then high-confidence BLE→LBF content remaps. Prefer
-adding overrides to that script over one-off JSON edits.
+**Tito (baseline):** frozen for Reader-side rebuilds. Do not run
+`scripts/rebuild-lbf-alignment.py` as ongoing maintenance. Further Tito work goes
+through cgv-translator → Biblia-LBF; sync staging copies intentionally.
 
-Unaligned tokens (~11%) show the BLE gloss in italics as a fallback cue.
+**1 Pedro:** source of truth is translator reverse-links. Recompile with
+`scripts/compile-lbf-alignment-1pedro.py`. Do not hand-patch the JSON for verses
+already linked; do not use the deprecated bootstrap script for maintenance.
+
+Unaligned tokens show the BLE gloss in italics as a fallback cue.
 
 ## Open follow-ups
 
-1. Continue hand overrides where BLE gloss and LBF wording diverge (esp. paraphrases).
-2. Publish LBF + alignment into `cgv-data` once stable.
+1. Finish 1 Pedro to Tito’s bar (see ADR-0001 checklist).
+2. Promote Tito + 1 Pedro together into `cgv-data`; cut Reader over from staging.
 3. Plan TR1894 Greek spine switch when multi-book LBF work demands it.
