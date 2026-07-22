@@ -1,0 +1,13 @@
+const e=`2juan 1:1 Yo , un anciano en la iglesia, a la hermana que es escogida de Dios, y a sus hijos , por quienes tengo amor verdadero; y no solo yo , sino todos los que conocen la verdad;
+2juan 1:2 Debido a este conocimiento verdadero que está en nosotros , y estará con nosotros para siempre:
+2juan 1:3 Que la gracia , la misericordia y la paz sean con ustedes de parte de Dios Padre , y de Jesucristo, el Hijo del Padre , en todo amor y verdad.
+2juan 1:4 Me alegró mucho ver a algunos de sus hijos viviendo conforme a la verdad , tal como nos ordenó el Padre .
+2juan 1:5 Y ahora , señora , esto que les escribo no es un nuevo mandamiento , Sino el que hemos tenido desde el principio, que nos amemos unos a otros .
+2juan 1:6 Y este es el amor, que andemos según sus mandamientos . Este es el mandamiento : que oyeron desde el principio, que ustedes anden en amor.
+2juan 1:7 Porque una cantidad de falsos maestros han salido al mundo , que no dan testimonio de que Jesucristo vino en la carne . Tal es un falso maestro y Anticristo.
+2juan 1:8 Tengan ustedes cuidado, para no perder el fruto de nuestro trabajo, sino que puedan obtener su recompensa completa.
+2juan 1:9 Cualquiera que continúe más allá de lo que Cristo enseñó y no obedezca las enseñanzas de Cristo , no tiene a Dios ; el que obedece las enseñanzas, tiene al Padre y al Hijo .
+2juan 1:10 Si alguno viene a ti sin tener esta enseñanza, no lo lleves a tu casa ni le den la “bienvenida”
+2juan 1:11 porque el que le da la “bienvenida” tiene parte en sus malas obras .
+2juan 1:12 Teniendo mucho que decirte, no es mi propósito dejarlo todo con papel y tinta : pero espero ir a ti y conversar contigo cara a cara, para que tu alegría sea completa.
+2juan 1:13 Los hijos de tu hermana elegida de Dios, te envían saludos.`;export{e as default};

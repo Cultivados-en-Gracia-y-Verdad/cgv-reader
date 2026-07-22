@@ -1,0 +1,138 @@
+const n=`# Reina Valera 1909
+
+## License Information
+
+**Reina Valera 1909** is based on and adapted from: _Reina Valera 1909_, [Public Domain](https://creativecommons.org/public-domain/cc0/), 1909, which is licensed under a [Public Domain CC0](https://creativecommons.org/public-domain/cc0/).
+
+This markdown version is provided under the same license.
+
+
+
+--------------------------------
+
+
+## Filemón 1:1 (id: 10057001001)
+
+1PABLO, prisionero de Jesucristo, y el hermano Timoteo, á Filemón amado, y coadjutor nuestro;
+
+
+## Filemón 1:2 (id: 10057001002)
+
+2Y á la amada Apphia, y á Archîpo, compañero de nuestra milicia, y á la iglesia que está en tu casa:
+
+
+## Filemón 1:3 (id: 10057001003)
+
+3Gracia á vosotros y paz de Dios nuestro Padre, y del Señor Jesucristo.
+
+
+## Filemón 1:4 (id: 10057001004)
+
+4Doy gracias á mi Dios, haciendo siempre memoria de ti en mis oraciones.
+
+
+## Filemón 1:5 (id: 10057001005)
+
+5Oyendo tu caridad, y la fe que tienes en el Señor Jesús, y para con todos los santos;
+
+
+## Filemón 1:6 (id: 10057001006)
+
+6Para que la comunicación de tu fe sea eficaz, en el conocimiento de todo el bien que está en vosotros, por Cristo Jesús.
+
+
+## Filemón 1:7 (id: 10057001007)
+
+7Porque tenemos gran gozo y consolación de tu caridad, de que por ti, oh hermano, han sido recreadas las entrañas de los santos.
+
+
+## Filemón 1:8 (id: 10057001008)
+
+8Por lo cual, aunque tengo mucha resolución en Cristo para mandarte lo que conviene,
+
+
+## Filemón 1:9 (id: 10057001009)
+
+9Ruégote más bien por amor, siendo tal cual soy, Pablo viejo, y aun ahora prisionero de Jesucristo:
+
+
+## Filemón 1:10 (id: 10057001010)
+
+10Ruégote por mi hijo Onésimo, que he engendrado en mis prisiones,
+
+
+## Filemón 1:11 (id: 10057001011)
+
+11El cual en otro tiempo te fué inútil, mas ahora á ti y á mí es útil;
+
+
+## Filemón 1:12 (id: 10057001012)
+
+12El cual te vuelvo á enviar; tú pues, recíbele como á mis entrañas.
+
+
+## Filemón 1:13 (id: 10057001013)
+
+13Yo quisiera detenerle conmigo, para que en lugar de ti me sirviese en las prisiones del evangelio;
+
+
+## Filemón 1:14 (id: 10057001014)
+
+14Mas nada quise hacer sin tu consejo, porque tu beneficio no fuese como de necesidad, sino voluntario.
+
+
+## Filemón 1:15 (id: 10057001015)
+
+15Porque acaso por esto se ha apartado de ti por algún tiempo, para que le recibieses para siempre;
+
+
+## Filemón 1:16 (id: 10057001016)
+
+16No ya como siervo, antes más que siervo, como hermano amado, mayormente de mí, pero cuánto más de ti, en la carne y en el Señor.
+
+
+## Filemón 1:17 (id: 10057001017)
+
+17Así que, si me tienes por compañero, recíbele como á mí.
+
+
+## Filemón 1:18 (id: 10057001018)
+
+18Y si en algo te dañó, ó te debe, ponlo á mi cuenta.
+
+
+## Filemón 1:19 (id: 10057001019)
+
+19Yo Pablo lo escribí de mi mano, yo lo pagaré: por no decirte que aun á ti mismo te me debes demás.
+
+
+## Filemón 1:20 (id: 10057001020)
+
+20Sí, hermano, góceme yo de ti en el Señor; recrea mis entrañas en el Señor.
+
+
+## Filemón 1:21 (id: 10057001021)
+
+21Te he escrito confiando en tu obediencia, sabiendo que aun harás más de lo que digo.
+
+
+## Filemón 1:22 (id: 10057001022)
+
+22Y asimismo prepárame también alojamiento; porque espero que por vuestras oraciones os tengo de ser concedido.
+
+
+## Filemón 1:23 (id: 10057001023)
+
+23Te saludan Epafras, mi compañero en la prisión por Cristo Jesús,
+
+
+## Filemón 1:24 (id: 10057001024)
+
+24Marcos, Aristarco, Demas y Lucas, mis cooperadores.
+
+
+## Filemón 1:25 (id: 10057001025)
+
+25La gracia de nuestro Señor Jesucristo sea con vuestro espíritu. Amén. A Filemón fué enviada de Roma por Onésimo, siervo.
+
+`;export{n as default};

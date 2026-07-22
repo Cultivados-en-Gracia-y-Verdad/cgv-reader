@@ -1,0 +1,758 @@
+const e=`# Reina Valera 1909
+
+## License Information
+
+**Reina Valera 1909** is based on and adapted from: _Reina Valera 1909_, [Public Domain](https://creativecommons.org/public-domain/cc0/), 1909, which is licensed under a [Public Domain CC0](https://creativecommons.org/public-domain/cc0/).
+
+This markdown version is provided under the same license.
+
+
+
+--------------------------------
+
+
+## Gálatas 1:1 (id: 10048001001)
+
+1PABLO, apóstol, (no de los hombres, ni por hombre, mas por Jesucristo y por Dios el Padre, que lo resucitó de los muertos),
+
+
+## Gálatas 1:2 (id: 10048001002)
+
+2Y todos los hermanos que están conmigo, á las iglesias de Galacia:
+
+
+## Gálatas 1:3 (id: 10048001003)
+
+3Gracia sea á vosotros, y paz de Dios el Padre, y de nuestro Señor Jesucristo,
+
+
+## Gálatas 1:4 (id: 10048001004)
+
+4El cual se dió á sí mismo por nuestros pecados para librarnos de este presente siglo malo, conforme á la voluntad de Dios y Padre nuestro;
+
+
+## Gálatas 1:5 (id: 10048001005)
+
+5Al cual sea la gloria por siglos de siglos. Amén.
+
+
+## Gálatas 1:6 (id: 10048001006)
+
+6Estoy maravillado de que tan pronto os hayáis traspasado del que os llamó á la gracia de Cristo, á otro evangelio:
+
+
+## Gálatas 1:7 (id: 10048001007)
+
+7No que hay otro, sino que hay algunos que os inquietan, y quieren pervertir el evangelio de Cristo.
+
+
+## Gálatas 1:8 (id: 10048001008)
+
+8Mas aun si nosotros ó un ángel del cielo os anunciare otro evangelio del que os hemos anunciado, sea anatema.
+
+
+## Gálatas 1:9 (id: 10048001009)
+
+9Como antes hemos dicho, también ahora decimos otra vez: Si alguno os anunciare otro evangelio del que habéis recibido, sea anatema.
+
+
+## Gálatas 1:10 (id: 10048001010)
+
+10Porque, ¿persuado yo ahora á hombres ó á Dios? ¿ó busco de agradar á hombres? Cierto, que si todavía agradara á los hombres, no sería siervo de Cristo.
+
+
+## Gálatas 1:11 (id: 10048001011)
+
+11Mas os hago saber, hermanos, que el evangelio que ha sido anunciado por mí, no es según hombre;
+
+
+## Gálatas 1:12 (id: 10048001012)
+
+12Pues ni yo lo recibí, ni lo aprendí de hombre, sino por revelación de Jesucristo.
+
+
+## Gálatas 1:13 (id: 10048001013)
+
+13Porque ya habéis oído acerca de mi conducta otro tiempo en el Judaismo, que perseguía sobremanera la iglesia de Dios, y la destruía;
+
+
+## Gálatas 1:14 (id: 10048001014)
+
+14Y aprovechaba en el Judaismo sobre muchos de mis iguales en mi nación, siendo muy más celador que todos de las tradiciones de mis padres.
+
+
+## Gálatas 1:15 (id: 10048001015)
+
+15Mas cuando plugo á Dios, que me apartó desde el vientre de mi madre, y me llamó por su gracia,
+
+
+## Gálatas 1:16 (id: 10048001016)
+
+16Revelar á su Hijo en mí, para que le predicase entre los Gentiles, luego no conferí con carne y sangre;
+
+
+## Gálatas 1:17 (id: 10048001017)
+
+17Ni fuí á Jerusalem á los que eran apóstoles antes que yo; sino que me fuí á la Arabia, y volví de nuevo á Damasco.
+
+
+## Gálatas 1:18 (id: 10048001018)
+
+18Después, pasados tres años, fuí á Jerusalem á ver á Pedro, y estuve con él quince días.
+
+
+## Gálatas 1:19 (id: 10048001019)
+
+19Mas á ningún otro de los apóstoles vi, sino á Jacobo el hermano del Señor.
+
+
+## Gálatas 1:20 (id: 10048001020)
+
+20Y en esto que os escribo, he aquí, delante de Dios, no miento.
+
+
+## Gálatas 1:21 (id: 10048001021)
+
+21Después fuí á las partes de Siria y de Cilicia;
+
+
+## Gálatas 1:22 (id: 10048001022)
+
+22Y no era conocido de vista á las iglesias de Judea, que eran en Cristo;
+
+
+## Gálatas 1:23 (id: 10048001023)
+
+23Solamente habían oído decir: Aquel que en otro tiempo nos perseguía, ahora anuncia la fe que en otro tiempo destruía.
+
+
+## Gálatas 1:24 (id: 10048001024)
+
+24Y glorificaban á Dios en mí.
+
+
+## Gálatas 2:1 (id: 10048002001)
+
+1DESPUÉS, pasados catorce años, fuí otra vez á Jerusalem juntamente con Bernabé, tomando también conmigo á Tito.
+
+
+## Gálatas 2:2 (id: 10048002002)
+
+2Empero fuí por revelación, y comuniquéles el evangelio que predico entre los Gentiles; mas particularmente á los que parecían ser algo, por no correr en vano, ó haber corrido.
+
+
+## Gálatas 2:3 (id: 10048002003)
+
+3Mas ni aun Tito, que estaba conmigo, siendo Griego, fué compelido á circuncidarse.
+
+
+## Gálatas 2:4 (id: 10048002004)
+
+4Y eso por causa de los falsos hermanos, que se entraban secretamente para espiar nuestra libertad que tenemos en Cristo Jesús, para ponernos en servidumbre;
+
+
+## Gálatas 2:5 (id: 10048002005)
+
+5A los cuales ni aun por una hora cedimos sujetándonos, para que la verdad del evangelio permaneciese con vosotros.
+
+
+## Gálatas 2:6 (id: 10048002006)
+
+6Empero de aquellos que parecían ser algo (cuáles hayan sido algún tiempo, no tengo que ver; Dios no acepta apariencia de hombre), á mí ciertamente los que parecían ser algo, nada me dieron.
+
+
+## Gálatas 2:7 (id: 10048002007)
+
+7Antes por el contrario, como vieron que el evangelio de la incircuncisión me era encargado, como á Pedro el de la circuncisión,
+
+
+## Gálatas 2:8 (id: 10048002008)
+
+8(Porque el que hizo por Pedro para el apostolado de la circuncisión, hizo también por mí para con los Gentiles;)
+
+
+## Gálatas 2:9 (id: 10048002009)
+
+9Y como vieron la gracia que me era dada, Jacobo y Cefas y Juan, que parecían ser las columnas, nos dieron las diestras de compañía á mí y á Bernabé, para que nosotros fuésemos á los Gentiles, y ellos á la circuncisión.
+
+
+## Gálatas 2:10 (id: 10048002010)
+
+10Solamente nos pidieron que nos acordásemos de los pobres; lo mismo que fuí también solícito en hacer.
+
+
+## Gálatas 2:11 (id: 10048002011)
+
+11Empero viniendo Pedro á Antioquía, le resistí en la cara, porque era de condenar.
+
+
+## Gálatas 2:12 (id: 10048002012)
+
+12Porque antes que viniesen unos de parte de Jacobo, comía con los Gentiles; mas después que vinieron, se retraía y apartaba, teniendo miedo de los que eran de la circuncisión.
+
+
+## Gálatas 2:13 (id: 10048002013)
+
+13Y á su disimulación consentían también los otros Judíos; de tal manera que aun Bernabé fué también llevado de ellos en su simulación.
+
+
+## Gálatas 2:14 (id: 10048002014)
+
+14Mas cuando vi que no andaban derechamente conforme á la verdad del evangelio, dije á Pedro delante de todos: Si tú, siendo Judío, vives como los Gentiles y no como Judío, ¿por qué constriñes á los Gentiles á judaizar?
+
+
+## Gálatas 2:15 (id: 10048002015)
+
+15Nosotros Judíos naturales, y no pecadores de los Gentiles,
+
+
+## Gálatas 2:16 (id: 10048002016)
+
+16Sabiendo que el hombre no es justificado por las obras de la ley, sino por la fe de Jesucristo, nosotros también hemos creído en Jesucristo, para que fuésemos justificados por la fe de Cristo, y no por las obras de la ley; por cuanto por las obras de la ley ninguna carne será justificada.
+
+
+## Gálatas 2:17 (id: 10048002017)
+
+17Y si buscando nosotros ser justificados en Cristo, también nosotros somos hallados pecadores, ¿es por eso Cristo ministro de pecado? En ninguna manera.
+
+
+## Gálatas 2:18 (id: 10048002018)
+
+18Porque si las cosas que destruí, las mismas vuelvo á edificar, transgresor me hago.
+
+
+## Gálatas 2:19 (id: 10048002019)
+
+19Porque yo por la ley soy muerto á la ley, para vivir á Dios.
+
+
+## Gálatas 2:20 (id: 10048002020)
+
+20Con Cristo estoy juntamente crucificado, y vivo, no ya yo, mas vive Cristo en mí: y lo que ahora vivo en la carne, lo vivo en la fe del Hijo de Dios, el cual me amó, y se entregó á sí mismo por mí.
+
+
+## Gálatas 2:21 (id: 10048002021)
+
+21No desecho la gracia de Dios: porque si por la ley fuese la justicia, entonces por demás murió Cristo.
+
+
+## Gálatas 3:1 (id: 10048003001)
+
+1¡OH Gálatas insensatos! ¿quién os fascinó, para no obedecer á la verdad, ante cuyos ojos Jesucristo fué ya descrito como crucificado entre vosotros?
+
+
+## Gálatas 3:2 (id: 10048003002)
+
+2Esto solo quiero saber de vosotros: ¿Recibisteis el Espíritu por las obras de la ley, ó por el oir de la fe?
+
+
+## Gálatas 3:3 (id: 10048003003)
+
+3¿Tan necios sois? ¿habiendo comenzado por el Espíritu, ahora os perfeccionáis por la carne?
+
+
+## Gálatas 3:4 (id: 10048003004)
+
+4¿Tantas cosas habéis padecido en vano? si empero en vano.
+
+
+## Gálatas 3:5 (id: 10048003005)
+
+5Aquel, pues, que os daba el Espíritu, y obraba maravillas entre vosotros ¿hacíalo por las obras de la ley, ó por el oir de la fe?
+
+
+## Gálatas 3:6 (id: 10048003006)
+
+6Como Abraham creyó á Dios, y le fué imputado á justicia.
+
+
+## Gálatas 3:7 (id: 10048003007)
+
+7Sabéis por tanto, que los que son de fe, los tales son hijos de Abraham.
+
+
+## Gálatas 3:8 (id: 10048003008)
+
+8Y viendo antes la Escritura que Dios por la fe había de justificar á los Gentiles, evangelizó antes á Abraham, diciendo: En ti serán benditas todas las naciones.
+
+
+## Gálatas 3:9 (id: 10048003009)
+
+9Luego los de la fe son benditos con el creyente Abraham.
+
+
+## Gálatas 3:10 (id: 10048003010)
+
+10Porque todos los que son de las obras de la ley, están bajo de maldición. Porque escrito está: Maldito todo aquel que no permaneciere en todas las cosas que están escritas en el libro de la ley, para hacerlas.
+
+
+## Gálatas 3:11 (id: 10048003011)
+
+11Mas por cuanto por la ley ninguno se justifica para con Dios, queda manifiesto: Que el justo por la fe vivirá.
+
+
+## Gálatas 3:12 (id: 10048003012)
+
+12La ley también no es de la fe; sino, El hombre que los hiciere, vivirá en ellos.
+
+
+## Gálatas 3:13 (id: 10048003013)
+
+13Cristo nos redimió de la maldición de la ley, hecho por nosotros maldición; (porque está escrito: Maldito cualquiera que es colgado en madero:)
+
+
+## Gálatas 3:14 (id: 10048003014)
+
+14Para que la bendición de Abraham fuese sobre los Gentiles en Cristo Jesús; para que por la fe recibamos la promesa del Espíritu.
+
+
+## Gálatas 3:15 (id: 10048003015)
+
+15Hermanos, hablo como hombre: Aunque un pacto sea de hombre, con todo, siendo confirmado, nadie lo cancela, ó le añade.
+
+
+## Gálatas 3:16 (id: 10048003016)
+
+16A Abraham fueron hechas las promesas, y á su simiente. No dice: Y á las simientes, como de muchos; sino como de uno: Y á tu simiente, la cual es Cristo.
+
+
+## Gálatas 3:17 (id: 10048003017)
+
+17Esto pues digo: Que el contrato confirmado de Dios para con Cristo, la ley que fué hecha cuatrocientos treinta años después, no lo abroga, para invalidar la promesa.
+
+
+## Gálatas 3:18 (id: 10048003018)
+
+18Porque si la herencia es por la ley, ya no es por la promesa: empero Dios por la promesa hizo la donación á Abraham.
+
+
+## Gálatas 3:19 (id: 10048003019)
+
+19¿Pues de qué sirve la ley? Fué puesta por causa de las rebeliones, hasta que viniese la simiente á quien fué hecha la promesa, ordenada aquélla por los ángeles en la mano de un mediador.
+
+
+## Gálatas 3:20 (id: 10048003020)
+
+20Y el mediador no es de uno, pero Dios es uno.
+
+
+## Gálatas 3:21 (id: 10048003021)
+
+21¿Luego la ley es contra las promesas de Dios? En ninguna manera: porque si la ley dada pudiera vivificar, la justicia fuera verdaderamente por la ley.
+
+
+## Gálatas 3:22 (id: 10048003022)
+
+22Mas encerró la Escritura todo bajo pecado, para que la promesa fuese dada á los creyentes por la fe de Jesucristo.
+
+
+## Gálatas 3:23 (id: 10048003023)
+
+23Empero antes que viniese la fe, estábamos guardados bajo la ley, encerrados para aquella fe que había de ser descubierta.
+
+
+## Gálatas 3:24 (id: 10048003024)
+
+24De manera que la ley nuestro ayo fué para llevarnos á Cristo, para que fuésemos justificados por la fe.
+
+
+## Gálatas 3:25 (id: 10048003025)
+
+25Mas venida la fe, ya no estamos bajo ayo;
+
+
+## Gálatas 3:26 (id: 10048003026)
+
+26Porque todos sois hijos de Dios por la fe en Cristo Jesús.
+
+
+## Gálatas 3:27 (id: 10048003027)
+
+27Porque todos los que habéis sido bautizados en Cristo, de Cristo estáis vestidos.
+
+
+## Gálatas 3:28 (id: 10048003028)
+
+28No hay Judío, ni Griego; no hay siervo, ni libre; no hay varón, ni hembra: porque todos vosotros sois uno en Cristo Jesús.
+
+
+## Gálatas 3:29 (id: 10048003029)
+
+29Y si vosotros sois de Cristo, ciertamente la simiente de Abraham sois, y conforme á la promesa los herederos.
+
+
+## Gálatas 4:1 (id: 10048004001)
+
+1TAMBIÉN digo: Entre tanto que el heredero es niño, en nada difiere del siervo, aunque es señor de todo;
+
+
+## Gálatas 4:2 (id: 10048004002)
+
+2Mas está debajo de tutores y curadores hasta el tiempo señalado por el padre.
+
+
+## Gálatas 4:3 (id: 10048004003)
+
+3Así también nosotros, cuando éramos niños, éramos siervos bajo los rudimentos del mundo.
+
+
+## Gálatas 4:4 (id: 10048004004)
+
+4Mas venido el cumplimiento del tiempo, Dios envió su Hijo, hecho de mujer, hecho súbdito á la ley,
+
+
+## Gálatas 4:5 (id: 10048004005)
+
+5Para que redimiese á los que estaban debajo de la ley, á fin de que recibiésemos la adopción de hijos.
+
+
+## Gálatas 4:6 (id: 10048004006)
+
+6Y por cuanto sois hijos, Dios envió el Espíritu de su Hijo en vuestros corazones, el cual clama: Abba, Padre.
+
+
+## Gálatas 4:7 (id: 10048004007)
+
+7Así que ya no eres más siervo, sino hijo; y si hijo, también heredero de Dios por Cristo.
+
+
+## Gálatas 4:8 (id: 10048004008)
+
+8Antes, en otro tiempo, no conociendo á Dios, servíais á los que por naturaleza no son dioses:
+
+
+## Gálatas 4:9 (id: 10048004009)
+
+9Mas ahora, habiendo conocido á Dios, ó más bien, siendo conocidos de Dios, ¿cómo os volvéis de nuevo á los flacos y pobres rudimentos, en los cuales queréis volver á servir?
+
+
+## Gálatas 4:10 (id: 10048004010)
+
+10Guardáis los días, y los meses, y los tiempos, y los años.
+
+
+## Gálatas 4:11 (id: 10048004011)
+
+11Temo de vosotros, que no haya trabajado en vano en vosotros.
+
+
+## Gálatas 4:12 (id: 10048004012)
+
+12Hermanos, os ruego, sed como yo, porque yo soy como vosotros: ningún agravio me habéis hecho.
+
+
+## Gálatas 4:13 (id: 10048004013)
+
+13Que vosotros sabéis que por flaqueza de carne os anuncié el evangelio al principio:
+
+
+## Gálatas 4:14 (id: 10048004014)
+
+14Y no desechasteis ni menospreciasteis mi tentación que estaba en mi carne: antes me recibisteis como á un ángel de Dios, como á Cristo Jesús.
+
+
+## Gálatas 4:15 (id: 10048004015)
+
+15¿Dónde está pues vuestra bienaventuranza? porque yo os doy testimonio que si se pudiera hacer, os hubierais sacado vuestros ojos para dármelos.
+
+
+## Gálatas 4:16 (id: 10048004016)
+
+16¿Heme pues hecho vuestro enemigo, diciéndoos la verdad?
+
+
+## Gálatas 4:17 (id: 10048004017)
+
+17Tienen celos de vosotros, pero no bien: antes os quieren echar fuera para que vosotros los celéis á ellos.
+
+
+## Gálatas 4:18 (id: 10048004018)
+
+18Bueno es ser celosos en bien siempre; y no solamente cuando estoy presente con vosotros.
+
+
+## Gálatas 4:19 (id: 10048004019)
+
+19Hijitos míos, que vuelvo otra vez á estar de parto de vosotros, hasta que Cristo sea formado en vosotros;
+
+
+## Gálatas 4:20 (id: 10048004020)
+
+20Querría cierto estar ahora con vosotros, y mudar mi voz; porque estoy perplejo en cuanto á vosotros.
+
+
+## Gálatas 4:21 (id: 10048004021)
+
+21Decidme, los que queréis estar debajo de la ley, ¿no habéis oído la ley?
+
+
+## Gálatas 4:22 (id: 10048004022)
+
+22Porque escrito está que Abraham tuvo dos hijos; uno de la sierva, el otro de la libre.
+
+
+## Gálatas 4:23 (id: 10048004023)
+
+23Mas el de la sierva nació según la carne; pero el de la libre nació por la promesa.
+
+
+## Gálatas 4:24 (id: 10048004024)
+
+24Las cuales cosas son dichas por alegoría: porque estas mujeres son los dos pactos; el uno ciertamente del monte Sinaí, el cual engendró para servidumbre, que es Agar.
+
+
+## Gálatas 4:25 (id: 10048004025)
+
+25Porque Agar ó Sinaí es un monte de Arabia, el cual es conjunto á la que ahora es Jerusalem, la cual sirve con sus hijos.
+
+
+## Gálatas 4:26 (id: 10048004026)
+
+26Mas la Jerusalem de arriba libre es; la cual es la madre de todos nosotros.
+
+
+## Gálatas 4:27 (id: 10048004027)
+
+27Porque está escrito: Alégrate, estéril, que no pares: prorrumpe y clama, la que no estás de parto; porque más son los hijos de la dejada, que de la que tiene marido.
+
+
+## Gálatas 4:28 (id: 10048004028)
+
+28Así que, hermanos, nosotros como Isaac somos hijos de la promesa.
+
+
+## Gálatas 4:29 (id: 10048004029)
+
+29Empero como entonces el que era engendrado según la carne, perseguía al que había nacido según el Espíritu, así también ahora.
+
+
+## Gálatas 4:30 (id: 10048004030)
+
+30Mas ¿qué dice la Escritura? Echa fuera á la sierva y á su hijo; porque no será heredero el hijo de la sierva con el hijo de la libre.
+
+
+## Gálatas 4:31 (id: 10048004031)
+
+31De manera, hermanos, que no somos hijos de la sierva, mas de la libre.
+
+
+## Gálatas 5:1 (id: 10048005001)
+
+1ESTAD, pues, firmes en la libertad con que Cristo nos hizo libres, y no volváis otra vez á ser presos en el yugo de servidumbre.
+
+
+## Gálatas 5:2 (id: 10048005002)
+
+2He aquí yo Pablo os digo, que si os circuncidareis, Cristo no os aprovechará nada.
+
+
+## Gálatas 5:3 (id: 10048005003)
+
+3Y otra vez vuelvo á protestar á todo hombre que se circuncidare, que está obligado á hacer toda la ley.
+
+
+## Gálatas 5:4 (id: 10048005004)
+
+4Vacíos sois de Cristo los que por la ley os justificáis; de la gracia habéis caído.
+
+
+## Gálatas 5:5 (id: 10048005005)
+
+5Porque nosotros por el Espíritu esperamos la esperanza de la justicia por la fe.
+
+
+## Gálatas 5:6 (id: 10048005006)
+
+6Porque en Cristo Jesús ni la circuncisión vale algo, ni la incircuncisión; sino la fe que obra por la caridad.
+
+
+## Gálatas 5:7 (id: 10048005007)
+
+7Vosotros corríais bien: ¿quién os embarazó para no obedecer á la verdad?
+
+
+## Gálatas 5:8 (id: 10048005008)
+
+8Esta persuasión no es de aquel que os llama.
+
+
+## Gálatas 5:9 (id: 10048005009)
+
+9Un poco de levadura leuda toda la masa.
+
+
+## Gálatas 5:10 (id: 10048005010)
+
+10Yo confío de vosotros en el Señor, que ninguna otra cosa sentiréis: mas el que os inquieta, llevará el juicio, quienquiera que él sea.
+
+
+## Gálatas 5:11 (id: 10048005011)
+
+11Y yo, hermanos, si aun predico la circuncisión, ¿por qué padezco persecución todavía? pues que quitado es el escándalo de la cruz.
+
+
+## Gálatas 5:12 (id: 10048005012)
+
+12Ojalá fuesen también cortados los que os inquietan.
+
+
+## Gálatas 5:13 (id: 10048005013)
+
+13Porque vosotros, hermanos, á libertad habéis sido llamados; solamente que no uséis la libertad como ocasión á la carne, sino servíos por amor los unos á los otros.
+
+
+## Gálatas 5:14 (id: 10048005014)
+
+14Porque toda la ley en aquesta sola palabra se cumple: Amarás á tu prójimo como á ti mismo.
+
+
+## Gálatas 5:15 (id: 10048005015)
+
+15Y si os mordéis y os coméis los unos á los otros, mirad que también no os consumáis los unos á los otros.
+
+
+## Gálatas 5:16 (id: 10048005016)
+
+16Digo pues: Andad en el Espíritu, y no satisfagáis la concupiscencia de la carne.
+
+
+## Gálatas 5:17 (id: 10048005017)
+
+17Porque la carne codicia contra el Espíritu, y el Espíritu contra la carne: y estas cosas se oponen la una á la otra, para que no hagáis lo que quisiereis.
+
+
+## Gálatas 5:18 (id: 10048005018)
+
+18Mas si sois guiados del Espíritu, no estáis bajo la ley.
+
+
+## Gálatas 5:19 (id: 10048005019)
+
+19Y manifiestas son las obras de la carne, que son: adulterio, fornicación, inmundicia, disolución,
+
+
+## Gálatas 5:20 (id: 10048005020)
+
+20Idolatría, hechicerías, enemistades, pleitos, celos, iras, contiendas, disensiones, herejías,
+
+
+## Gálatas 5:21 (id: 10048005021)
+
+21Envidias, homicidios, borracheras, banqueteos, y cosas semejantes á éstas: de las cuales os denuncio, como ya os he anunciado, que los que hacen tales cosas no heredarán el reino de Dios.
+
+
+## Gálatas 5:22 (id: 10048005022)
+
+22Mas el fruto del Espíritu es: caridad, gozo, paz, tolerancia, benignidad, bondad, fe,
+
+
+## Gálatas 5:23 (id: 10048005023)
+
+23Mansedumbre, templanza: contra tales cosas no hay ley.
+
+
+## Gálatas 5:24 (id: 10048005024)
+
+24Porque los que son de Cristo, han crucificado la carne con los afectos y concupiscencias.
+
+
+## Gálatas 5:25 (id: 10048005025)
+
+25Si vivimos en el Espíritu, andemos también en el Espíritu.
+
+
+## Gálatas 5:26 (id: 10048005026)
+
+26No seamos codiciosos de vana gloria, irritando los unos á los otros, envidiándose los unos á los otros.
+
+
+## Gálatas 6:1 (id: 10048006001)
+
+1HERMANOS, si alguno fuere tomado en alguna falta, vosotros que sois espirituales, restaurad al tal con el espíritu de mansedumbre; considerándote á ti mismo, porque tú no seas también tentado.
+
+
+## Gálatas 6:2 (id: 10048006002)
+
+2Sobrellevad los unos las cargas de los otros; y cumplid así la ley de Cristo.
+
+
+## Gálatas 6:3 (id: 10048006003)
+
+3Porque el que estima de sí que es algo, no siendo nada, á sí mismo se engaña.
+
+
+## Gálatas 6:4 (id: 10048006004)
+
+4Así que cada uno examine su obra, y entonces tendrá gloria sólo respecto de sí mismo, y no en otro.
+
+
+## Gálatas 6:5 (id: 10048006005)
+
+5Porque cada cual llevará su carga.
+
+
+## Gálatas 6:6 (id: 10048006006)
+
+6Y el que es enseñado en la palabra, comunique en todos los bienes al que lo instruye.
+
+
+## Gálatas 6:7 (id: 10048006007)
+
+7No os engañéis: Dios no puede ser burlado: que todo lo que el hombre sembrare, eso también segará.
+
+
+## Gálatas 6:8 (id: 10048006008)
+
+8Porque el que siembra para su carne, de la carne segará corrupción; mas el que siembra para el Espíritu, del Espíritu segará vida eterna.
+
+
+## Gálatas 6:9 (id: 10048006009)
+
+9No nos cansemos, pues, de hacer bien; que á su tiempo segaremos, si no hubiéremos desmayado.
+
+
+## Gálatas 6:10 (id: 10048006010)
+
+10Así que, entre tanto que tenemos tiempo, hagamos bien á todos, y mayormente á los domésticos de la fe.
+
+
+## Gálatas 6:11 (id: 10048006011)
+
+11Mirad en cuán grandes letras os he escrito de mi mano.
+
+
+## Gálatas 6:12 (id: 10048006012)
+
+12Todos los que quieren agradar en la carne, éstos os constriñen á que os circuncidéis, solamente por no padecer persecución por la cruz de Cristo.
+
+
+## Gálatas 6:13 (id: 10048006013)
+
+13Porque ni aun los mismos que se circuncidan guardan la ley; sino que quieren que vosotros seáis circuncidados, para gloriarse en vuestra carne.
+
+
+## Gálatas 6:14 (id: 10048006014)
+
+14Mas lejos esté de mí gloriarme, sino en la cruz de nuestro Señor Jesucristo, por el cual el mundo me es crucificado á mí, y yo al mundo.
+
+
+## Gálatas 6:15 (id: 10048006015)
+
+15Porque en Cristo Jesús, ni la circuncisión vale nada, ni la incircuncisión, sino la nueva criatura.
+
+
+## Gálatas 6:16 (id: 10048006016)
+
+16Y todos los que anduvieren conforme á esta regla, paz sobre ellos, y misericordia, y sobre el Israel de Dios.
+
+
+## Gálatas 6:17 (id: 10048006017)
+
+17De aquí adelante nadie me sea molesto; porque yo traigo en mi cuerpo las marcas del Señor Jesús.
+
+
+## Gálatas 6:18 (id: 10048006018)
+
+18Hermanos, la gracia de nuestro Señor Jesucristo sea con vuestro espíritu. Amén. Enviada de Roma á los Gálatas.
+
+`;export{e as default};

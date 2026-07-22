@@ -1,0 +1,3403 @@
+const e=`# Reina Valera 1909
+
+## License Information
+
+**Reina Valera 1909** is based on and adapted from: _Reina Valera 1909_, [Public Domain](https://creativecommons.org/public-domain/cc0/), 1909, which is licensed under a [Public Domain CC0](https://creativecommons.org/public-domain/cc0/).
+
+This markdown version is provided under the same license.
+
+
+
+--------------------------------
+
+
+## Marcos 1:1 (id: 10041001001)
+
+1PRINCIPIO del evangelio de Jesucristo, Hijo de Dios.
+
+
+## Marcos 1:2 (id: 10041001002)
+
+2Como está escrito en Isaías el profeta: He aquí yo envío á mi mensajero delante de tu faz, que apareje tu camino delante de ti.
+
+
+## Marcos 1:3 (id: 10041001003)
+
+3Voz del que clama en el desierto: Aparejad el camino del Señor; enderezad sus veredas.
+
+
+## Marcos 1:4 (id: 10041001004)
+
+4Bautizaba Juan en el desierto, y predicaba el bautismo del arrepentimiento para remisión de pecados.
+
+
+## Marcos 1:5 (id: 10041001005)
+
+5Y salía á él toda la provincia de Judea, y los de Jerusalem; y eran todos bautizados por él en el río de Jordán, confesando sus pecados.
+
+
+## Marcos 1:6 (id: 10041001006)
+
+6Y Juan andaba vestido de pelos de camello, y con un cinto de cuero alrededor de sus lomos; y comía langostas y miel silvestre.
+
+
+## Marcos 1:7 (id: 10041001007)
+
+7Y predicaba, diciendo: Viene tras mí el que es más poderoso que yo, al cual no soy digno de desatar encorvado la correa de sus zapatos.
+
+
+## Marcos 1:8 (id: 10041001008)
+
+8Yo á la verdad os he bautizado con agua; mas él os bautizará con Espíritu Santo.
+
+
+## Marcos 1:9 (id: 10041001009)
+
+9Y aconteció en aquellos días, que Jesús vino de Nazaret de Galilea, y fué bautizado por Juan en el Jordán.
+
+
+## Marcos 1:10 (id: 10041001010)
+
+10Y luego, subiendo del agua, vió abrirse los cielos, y al Espíritu como paloma, que descendía sobre él.
+
+
+## Marcos 1:11 (id: 10041001011)
+
+11Y hubo una voz de los cielos que decía: Tú eres mi Hijo amado; en ti tomo contentamiento.
+
+
+## Marcos 1:12 (id: 10041001012)
+
+12Y luego el Espíritu le impele al desierto.
+
+
+## Marcos 1:13 (id: 10041001013)
+
+13Y estuvo allí en el desierto cuarenta días, y era tentado de Satanás; y estaba con las fieras; y los ángeles le servían.
+
+
+## Marcos 1:14 (id: 10041001014)
+
+14Mas después que Juan fué encarcelado, Jesús vino á Galilea predicando el evangelio del reino de Dios,
+
+
+## Marcos 1:15 (id: 10041001015)
+
+15Y diciendo: El tiempo es cumplido, y el reino de Dios está cerca: arrepentíos, y creed al evangelio.
+
+
+## Marcos 1:16 (id: 10041001016)
+
+16Y pasando junto á la mar de Galilea, vió á Simón, y á Andrés su hermano, que echaban la red en la mar; porque eran pescadores.
+
+
+## Marcos 1:17 (id: 10041001017)
+
+17Y les dijo Jesús: Venid en pos de mí, y haré que seáis pescadores de hombres.
+
+
+## Marcos 1:18 (id: 10041001018)
+
+18Y luego, dejadas sus redes, le siguieron.
+
+
+## Marcos 1:19 (id: 10041001019)
+
+19Y pasando de allí un poco más adelante, vió á Jacobo, hijo de Zebedeo, y á Juan su hermano, también ellos en el navío, que aderezaban las redes.
+
+
+## Marcos 1:20 (id: 10041001020)
+
+20Y luego los llamó: y dejando á su padre Zebedeo en el barco con los jornaleros, fueron en pos de él.
+
+
+## Marcos 1:21 (id: 10041001021)
+
+21Y entraron en Capernaum; y luego los sábados, entrando en la sinagoga, enseñaba.
+
+
+## Marcos 1:22 (id: 10041001022)
+
+22Y se admiraban de su doctrina; porque les enseñaba como quien tiene potestad, y no como los escribas.
+
+
+## Marcos 1:23 (id: 10041001023)
+
+23Y había en la sinagoga de ellos un hombre con espíritu inmundo, el cual dió voces,
+
+
+## Marcos 1:24 (id: 10041001024)
+
+24Diciendo: ¡Ah! ¿qué tienes con nosotros, Jesús Nazareno? ¿Has venido á destruirnos? Sé quién eres, el Santo de Dios.
+
+
+## Marcos 1:25 (id: 10041001025)
+
+25Y Jesús le riñó, diciendo: Enmudece, y sal de él.
+
+
+## Marcos 1:26 (id: 10041001026)
+
+26Y el espíritu inmundo, haciéndole pedazos, y clamando á gran voz, salió de él.
+
+
+## Marcos 1:27 (id: 10041001027)
+
+27Y todos se maravillaron, de tal manera que inquirían entre sí, diciendo: ¿Qué es esto? ¿Qué nueva doctrina es ésta, que con potestad aun á los espíritus inmundos manda, y le obedecen?
+
+
+## Marcos 1:28 (id: 10041001028)
+
+28Y vino luego su fama por toda la provincia alrededor de Galilea.
+
+
+## Marcos 1:29 (id: 10041001029)
+
+29Y luego saliendo de la sinagoga, vinieron á casa de Simón y de Andrés, con Jacobo y Juan.
+
+
+## Marcos 1:30 (id: 10041001030)
+
+30Y la suegra de Simón estaba acostada con calentura; y le hablaron luego de ella.
+
+
+## Marcos 1:31 (id: 10041001031)
+
+31Entonces llegando él, la tomó de su mano y la levantó; y luego la dejó la calentura, y les servía.
+
+
+## Marcos 1:32 (id: 10041001032)
+
+32Y cuando fué la tarde, luego que el sol se puso, traían á él todos los que tenían mal, y endemoniados;
+
+
+## Marcos 1:33 (id: 10041001033)
+
+33Y toda la ciudad se juntó á la puerta.
+
+
+## Marcos 1:34 (id: 10041001034)
+
+34Y sanó á muchos que estaban enfermos de diversas enfermedades, y echó fuera muchos demonios; y no dejaba decir á los demonios que le conocían.
+
+
+## Marcos 1:35 (id: 10041001035)
+
+35Y levantándose muy de mañana, aun muy de noche, salió y se fué á un lugar desierto, y allí oraba.
+
+
+## Marcos 1:36 (id: 10041001036)
+
+36Y le siguió Simón, y los que estaban con él;
+
+
+## Marcos 1:37 (id: 10041001037)
+
+37Y hallándole, le dicen: Todos te buscan.
+
+
+## Marcos 1:38 (id: 10041001038)
+
+38Y les dice: Vamos á los lugares vecinos, para que predique también allí; porque para esto he venido.
+
+
+## Marcos 1:39 (id: 10041001039)
+
+39Y predicaba en las sinagogas de ellos en toda Galilea, y echaba fuera los demonios.
+
+
+## Marcos 1:40 (id: 10041001040)
+
+40Y un leproso vino á él, rogándole; é hincada la rodilla, le dice: Si quieres, puedes limpiarme.
+
+
+## Marcos 1:41 (id: 10041001041)
+
+41Y Jesús, teniendo misericordia de él, extendió su mano, y le tocó, y le dice: Quiero, sé limpio.
+
+
+## Marcos 1:42 (id: 10041001042)
+
+42Y así que hubo él hablado, la lepra se fué luego de aquél, y fué limpio.
+
+
+## Marcos 1:43 (id: 10041001043)
+
+43Entonces le apercibió, y despidióle luego,
+
+
+## Marcos 1:44 (id: 10041001044)
+
+44Y le dice: Mira, no digas á nadie nada; sino ve, muéstrate al sacerdote, y ofrece por tu limpieza lo que Moisés mandó, para testimonio á ellos.
+
+
+## Marcos 1:45 (id: 10041001045)
+
+45Mas él salido, comenzó á publicarlo mucho, y á divulgar el hecho, de manera que ya Jesús no podía entrar manifiestamente en la ciudad, sino que estaba fuera en los lugares desiertos; y venían á él de todas partes.
+
+
+## Marcos 2:1 (id: 10041002001)
+
+1Y ENTRÓ otra vez en Capernaum después de algunos días, y se oyó que estaba en casa.
+
+
+## Marcos 2:2 (id: 10041002002)
+
+2Y luego se juntaron á él muchos, que ya no cabían ni aun á la puerta; y les predicaba la palabra.
+
+
+## Marcos 2:3 (id: 10041002003)
+
+3Entonces vinieron á él unos trayendo un paralítico, que era traído por cuatro.
+
+
+## Marcos 2:4 (id: 10041002004)
+
+4Y como no podían llegar á él á causa del gentío, descubrieron el techo de donde estaba, y haciendo abertura, bajaron el lecho en que yacía el paralítico.
+
+
+## Marcos 2:5 (id: 10041002005)
+
+5Y viendo Jesús la fe de ellos, dice al paralítico: Hijo, tus pecados te son perdonados.
+
+
+## Marcos 2:6 (id: 10041002006)
+
+6Y estaban allí sentados algunos de los escribas, los cuales pensando en sus corazones,
+
+
+## Marcos 2:7 (id: 10041002007)
+
+7Decían: ¿Por qué habla éste así? Blasfemias dice. ¿Quién puede perdonar pecados, sino solo Dios?
+
+
+## Marcos 2:8 (id: 10041002008)
+
+8Y conociendo luego Jesús en su espíritu que pensaban así dentro de sí mismos, les dijo: ¿Por qué pensáis estas cosas en vuestros corazones?
+
+
+## Marcos 2:9 (id: 10041002009)
+
+9¿Qué es más fácil, decir al paralítico: Tus pecados te son perdonados, ó decirle: Levántate, y toma tu lecho y anda?
+
+
+## Marcos 2:10 (id: 10041002010)
+
+10Pues para que sepáis que el Hijo del hombre tiene potestad en la tierra de perdonar los pecados, (dice al paralítico):
+
+
+## Marcos 2:11 (id: 10041002011)
+
+11A ti te digo: Levántate, y toma tu lecho, y vete á tu casa.
+
+
+## Marcos 2:12 (id: 10041002012)
+
+12Entonces él se levantó luego, y tomando su lecho, se salió delante de todos, de manera que todos se asombraron, y glorificaron á Dios, diciendo: Nunca tal hemos visto.
+
+
+## Marcos 2:13 (id: 10041002013)
+
+13Y volvió á salir á la mar, y toda la gente venía á él, y los enseñaba.
+
+
+## Marcos 2:14 (id: 10041002014)
+
+14Y pasando, vió á Leví, hijo de Alfeo, sentado al banco de los públicos tributos, y le dice: Sígueme. Y levantándose le siguió.
+
+
+## Marcos 2:15 (id: 10041002015)
+
+15Y aconteció que estando Jesús á la mesa en casa de él, muchos publicanos y pecadores estaban también á la mesa juntamente con Jesús y con sus discípulos: porque había muchos, y le habían seguido.
+
+
+## Marcos 2:16 (id: 10041002016)
+
+16Y los escribas y los Fariseos, viéndole comer con los publicanos y con los pecadores, dijeron á sus discípulos: ¿Qué es esto, que él come y bebe con los publicanos y con los pecadores?
+
+
+## Marcos 2:17 (id: 10041002017)
+
+17Y oyéndolo Jesús, les dice: Los sanos no tienen necesidad de médico, mas los que tienen mal. No he venido á llamar á los justos, sino á los pecadores.
+
+
+## Marcos 2:18 (id: 10041002018)
+
+18Y los discípulos de Juan, y de los Fariseos ayunaban; y vienen, y le dicen: ¿Por qué los discípulos de Juan y los de los Fariseos ayunan, y tus discípulos no ayunan?
+
+
+## Marcos 2:19 (id: 10041002019)
+
+19Y Jesús les dice: ¿Pueden ayunar los que están de bodas, cuando el esposo está con ellos? Entre tanto que tienen consigo al esposo no pueden ayunar.
+
+
+## Marcos 2:20 (id: 10041002020)
+
+20Mas vendrán días, cuando el esposo les será quitado, y entonces en aquellos días ayunarán.
+
+
+## Marcos 2:21 (id: 10041002021)
+
+21Nadie echa remiendo de paño recio en vestido viejo; de otra manera el mismo remiendo nuevo tira del viejo, y la rotura se hace peor.
+
+
+## Marcos 2:22 (id: 10041002022)
+
+22Ni nadie echa vino nuevo en odres viejos; de otra manera, el vino nuevo rompe los odres, y se derrama el vino, y los odres se pierden; mas el vino nuevo en odres nuevos se ha de echar.
+
+
+## Marcos 2:23 (id: 10041002023)
+
+23Y aconteció que pasando él por los sembrados en sábado, sus discípulos andando comenzaron á arrancar espigas.
+
+
+## Marcos 2:24 (id: 10041002024)
+
+24Entonces los Fariseos le dijeron: He aquí, ¿por qué hacen en sábado lo que no es lícito?
+
+
+## Marcos 2:25 (id: 10041002025)
+
+25Y él les dijo: ¿Nunca leísteis qué hizo David cuando tuvo necesidad, y tuvo hambre, él y los que con él estaban:
+
+
+## Marcos 2:26 (id: 10041002026)
+
+26Cómo entró en la casa de Dios, siendo Abiathar sumo pontífice, y comió los panes de la proposición, de los cuales no es lícito comer sino á los sacerdotes, y aun dió á los que con él estaban?
+
+
+## Marcos 2:27 (id: 10041002027)
+
+27También les dijo: El sábado por causa del hombre es hecho; no el hombre por causa del sábado.
+
+
+## Marcos 2:28 (id: 10041002028)
+
+28Así que el Hijo del hombre es Señor aun del sábado.
+
+
+## Marcos 3:1 (id: 10041003001)
+
+1Y OTRA vez entró en la sinagoga; y había allí un hombre que tenía una mano seca.
+
+
+## Marcos 3:2 (id: 10041003002)
+
+2Y le acechaban si en sábado le sanaría, para acusarle.
+
+
+## Marcos 3:3 (id: 10041003003)
+
+3Entonces dijo al hombre que tenía la mano seca: Levántate en medio.
+
+
+## Marcos 3:4 (id: 10041003004)
+
+4Y les dice: ¿Es lícito hacer bien en sábado, ó hacer mal? ¿salvar la vida, ó quitarla? Mas ellos callaban.
+
+
+## Marcos 3:5 (id: 10041003005)
+
+5Y mirándolos alrededor con enojo, condoleciéndose de la ceguedad de su corazón, dice al hombre: Extiende tu mano. Y la extendió, y su mano fué restituída sana.
+
+
+## Marcos 3:6 (id: 10041003006)
+
+6Entonces saliendo los Fariseos, tomaron consejo con los Herodianos contra él, para matarle.
+
+
+## Marcos 3:7 (id: 10041003007)
+
+7Mas Jesús se apartó á la mar con sus discípulos: y le siguió gran multitud de Galilea, y de Judea,
+
+
+## Marcos 3:8 (id: 10041003008)
+
+8Y de Jerusalem, y de Idumea, y de la otra parte del Jordán. Y los de alrededor de Tiro y de Sidón, grande multitud, oyendo cuán grandes cosas hacía, vinieron á él.
+
+
+## Marcos 3:9 (id: 10041003009)
+
+9Y dijo á sus discípulos que le estuviese siempre apercibida la barquilla, por causa del gentío, para que no le oprimiesen.
+
+
+## Marcos 3:10 (id: 10041003010)
+
+10Porque había sanado á muchos; de manera que caían sobre él cuantos tenían plagas, por tocarle.
+
+
+## Marcos 3:11 (id: 10041003011)
+
+11Y los espíritus inmundos, al verle, se postraban delante de él, y daban voces, diciendo: Tú eres el Hijo de Dios.
+
+
+## Marcos 3:12 (id: 10041003012)
+
+12Mas él les reñía mucho que no le manifestasen.
+
+
+## Marcos 3:13 (id: 10041003013)
+
+13Y subió al monte, y llamó á sí á los que él quiso; y vinieron á él.
+
+
+## Marcos 3:14 (id: 10041003014)
+
+14Y estableció doce, para que estuviesen con él, y para enviarlos á predicar,
+
+
+## Marcos 3:15 (id: 10041003015)
+
+15Y que tuviesen potestad de sanar enfermedades, y de echar fuera demonios:
+
+
+## Marcos 3:16 (id: 10041003016)
+
+16A Simón, al cual puso por nombre Pedro;
+
+
+## Marcos 3:17 (id: 10041003017)
+
+17Y á Jacobo, hijo de Zebedeo, y á Juan hermano de Jacobo; y les apellidó Boanerges, que es, Hijos del trueno;
+
+
+## Marcos 3:18 (id: 10041003018)
+
+18Y á Andrés, y á Felipe, y á Bartolomé, y á Mateo, y á Tomás, y á Jacobo hijo de Alfeo, y á Tadeo, y á Simón el Cananita,
+
+
+## Marcos 3:19 (id: 10041003019)
+
+19Y á Judas Iscariote, el que le entregó. Y vinieron á casa.
+
+
+## Marcos 3:20 (id: 10041003020)
+
+20Y agolpóse de nuevo la gente, de modo que ellos ni aun podían comer pan.
+
+
+## Marcos 3:21 (id: 10041003021)
+
+21Y como lo oyeron los suyos, vinieron para prenderle: porque decían: Está fuera de sí.
+
+
+## Marcos 3:22 (id: 10041003022)
+
+22Y los escribas que habían venido de Jerusalem, decían que tenía á Beelzebub, y que por el príncipe de los demonios echaba fuera los demonios.
+
+
+## Marcos 3:23 (id: 10041003023)
+
+23Y habiéndolos llamado, les decía en parábolas: ¿Cómo puede Satanás echar fuera á Satanás?
+
+
+## Marcos 3:24 (id: 10041003024)
+
+24Y si algún reino contra sí mismo fuere dividido, no puede permanecer el tal reino.
+
+
+## Marcos 3:25 (id: 10041003025)
+
+25Y si alguna casa fuere dividida contra sí misma, no puede permanecer la tal casa.
+
+
+## Marcos 3:26 (id: 10041003026)
+
+26Y si Satanás se levantare contra sí mismo, y fuere dividido, no puede permanecer; antes tiene fin.
+
+
+## Marcos 3:27 (id: 10041003027)
+
+27Nadie puede saquear las alhajas del valiente entrando en su casa, si antes no atare al valiente y entonces saqueará su casa.
+
+
+## Marcos 3:28 (id: 10041003028)
+
+28De cierto os digo que todos los pecados serán perdonados á los hijos de los hombres, y las blasfemias cualesquiera con que blasfemaren;
+
+
+## Marcos 3:29 (id: 10041003029)
+
+29Mas cualquiera que blasfemare contra el Espíritu Santo, no tiene jamás perdón, mas está expuesto á eterno juicio.
+
+
+## Marcos 3:30 (id: 10041003030)
+
+30Porque decían: Tiene espíritu inmundo.
+
+
+## Marcos 3:31 (id: 10041003031)
+
+31Vienen después sus hermanos y su madre, y estando fuera, enviaron á él llamándole.
+
+
+## Marcos 3:32 (id: 10041003032)
+
+32Y la gente estaba sentada alrededor de él, y le dijeron: He aquí, tu madre y tus hermanos te buscan fuera.
+
+
+## Marcos 3:33 (id: 10041003033)
+
+33Y él les respondió, diciendo: ¿Quién es mi madre y mis hermanos?
+
+
+## Marcos 3:34 (id: 10041003034)
+
+34Y mirando á los que estaban sentados alrededor de él, dijo: He aquí mi madre y hermanos.
+
+
+## Marcos 3:35 (id: 10041003035)
+
+35Porque cualquiera que hiciere la voluntad de Dios, éste es mi hermano, y mi hermana, y mi madre.
+
+
+## Marcos 4:1 (id: 10041004001)
+
+1Y OTRA vez comenzó á enseñar junto á la mar, y se juntó á él mucha gente; tanto, que entrándose él en un barco, se sentó en la mar: y toda la gente estaba en tierra junto á la mar.
+
+
+## Marcos 4:2 (id: 10041004002)
+
+2Y les enseñaba por parábolas muchas cosas, y les decía en su doctrina:
+
+
+## Marcos 4:3 (id: 10041004003)
+
+3Oid: He aquí, el sembrador salió á sembrar.
+
+
+## Marcos 4:4 (id: 10041004004)
+
+4Y aconteció sembrando, que una parte cayó junto al camino; y vinieron las aves del cielo, y la tragaron.
+
+
+## Marcos 4:5 (id: 10041004005)
+
+5Y otra parte cayó en pedregales, donde no tenía mucha tierra; y luego salió, porque no tenía la tierra profunda:
+
+
+## Marcos 4:6 (id: 10041004006)
+
+6Mas salido el sol, se quemó; y por cuanto no tenía raíz, se secó.
+
+
+## Marcos 4:7 (id: 10041004007)
+
+7Y otra parte cayó en espinas; y subieron las espinas, y la ahogaron, y no dió fruto.
+
+
+## Marcos 4:8 (id: 10041004008)
+
+8Y otra parte cayó en buena tierra, y dió fruto, que subió y creció: y llevó uno á treinta, y otro á sesenta, y otro á ciento.
+
+
+## Marcos 4:9 (id: 10041004009)
+
+9Entonces les dijo: El que tiene oídos para oir, oiga.
+
+
+## Marcos 4:10 (id: 10041004010)
+
+10Y cuando estuvo solo, le preguntaron los que estaban cerca de él con los doce, sobre la parábola.
+
+
+## Marcos 4:11 (id: 10041004011)
+
+11Y les dijo: A vosotros es dado saber el misterio del reino de Dios; mas á los que están fuera, por parábolas todas las cosas;
+
+
+## Marcos 4:12 (id: 10041004012)
+
+12Para que viendo, vean y no echen de ver; y oyendo, oigan y no entiendan: porque no se conviertan, y les sean perdonados los pecados.
+
+
+## Marcos 4:13 (id: 10041004013)
+
+13Y les dijo: ¿No sabéis esta parábola? ¿Cómo, pues, entenderéis todas las parábolas?
+
+
+## Marcos 4:14 (id: 10041004014)
+
+14El que siembra es el que siembra la palabra.
+
+
+## Marcos 4:15 (id: 10041004015)
+
+15Y éstos son los de junto al camino: en los que la palabra es sembrada: mas después que la oyeron, luego viene Satanás, y quita la palabra que fué sembrada en sus corazones.
+
+
+## Marcos 4:16 (id: 10041004016)
+
+16Y asimismo éstos son los que son sembrados en pedregales: los que cuando han oído la palabra, luego la toman con gozo;
+
+
+## Marcos 4:17 (id: 10041004017)
+
+17Mas no tienen raíz en sí, antes son temporales, que en levantándose la tribulación ó la persecución por causa de la palabra, luego se escandalizan.
+
+
+## Marcos 4:18 (id: 10041004018)
+
+18Y éstos son los que son sembrados entre espinas: los que oyen la palabra;
+
+
+## Marcos 4:19 (id: 10041004019)
+
+19Mas los cuidados de este siglo, y el engaño de las riquezas, y las codicias que hay en las otras cosas, entrando, ahogan la palabra, y se hace infructuosa.
+
+
+## Marcos 4:20 (id: 10041004020)
+
+20Y éstos son los que fueron sembrados en buena tierra: los que oyen la palabra, y la reciben, y hacen fruto, uno á treinta, otro á sesenta, y otro á ciento.
+
+
+## Marcos 4:21 (id: 10041004021)
+
+21También les dijo: ¿Tráese la antorcha para ser puesta debajo del almud, ó debajo de la cama? ¿No es para ser puesta en el candelero?
+
+
+## Marcos 4:22 (id: 10041004022)
+
+22Porque no hay nada oculto que no haya de ser manifestado, ni secreto que no haya de descubrirse.
+
+
+## Marcos 4:23 (id: 10041004023)
+
+23Si alguno tiene oídos para oir, oiga.
+
+
+## Marcos 4:24 (id: 10041004024)
+
+24Les dijo también: Mirad lo que oís: con la medida que medís, os medirán otros, y será añadido á vosotros los que oís.
+
+
+## Marcos 4:25 (id: 10041004025)
+
+25Porque al que tiene, le será dado; y al que no tiene, aun lo que tiene le será quitado.
+
+
+## Marcos 4:26 (id: 10041004026)
+
+26Decía más: Así es el reino de Dios, como si un hombre echa simiente en la tierra;
+
+
+## Marcos 4:27 (id: 10041004027)
+
+27Y duerme, y se levanta de noche y de día, y la simiente brota y crece como él no sabe.
+
+
+## Marcos 4:28 (id: 10041004028)
+
+28Porque de suyo fructifica la tierra, primero hierba, luego espiga, después grano lleno en la espiga;
+
+
+## Marcos 4:29 (id: 10041004029)
+
+29Y cuando el fruto fuere producido, luego se mete la hoz, porque la siega es llegada.
+
+
+## Marcos 4:30 (id: 10041004030)
+
+30Y decía: ¿A qué haremos semejante el reino de Dios? ¿ó con qué parábola le compararemos?
+
+
+## Marcos 4:31 (id: 10041004031)
+
+31Es como el grano de mostaza, que, cuando se siembra en tierra, es la más pequeña de todas las simientes que hay en la tierra;
+
+
+## Marcos 4:32 (id: 10041004032)
+
+32Mas después de sembrado, sube, y se hace la mayor de todas las legumbres, y echa grandes ramas, de tal manera que las aves del cielo puedan morar bajo su sombra.
+
+
+## Marcos 4:33 (id: 10041004033)
+
+33Y con muchas tales parábolas les hablaba la palabra, conforme á lo que podían oir.
+
+
+## Marcos 4:34 (id: 10041004034)
+
+34Y sin parábola no les hablaba; mas á sus discípulos en particular declaraba todo.
+
+
+## Marcos 4:35 (id: 10041004035)
+
+35Y les dijo aquel día cuando fué tarde: Pasemos de la otra parte.
+
+
+## Marcos 4:36 (id: 10041004036)
+
+36Y despachando la multitud, le tomaron como estaba, en el barco; y había también con él otros barquitos.
+
+
+## Marcos 4:37 (id: 10041004037)
+
+37Y se levantó una grande tempestad de viento, y echaba las olas en el barco, de tal manera que ya se henchía.
+
+
+## Marcos 4:38 (id: 10041004038)
+
+38Y él estaba en la popa, durmiendo sobre un cabezal, y le despertaron, y le dicen: ¿Maestro, no tienes cuidado que perecemos?
+
+
+## Marcos 4:39 (id: 10041004039)
+
+39Y levantándose, increpó al viento, y dijo á la mar: Calla, enmudece. Y cesó el viento, y fué hecha grande bonanza.
+
+
+## Marcos 4:40 (id: 10041004040)
+
+40Y á ellos dijo: ¿Por qué estáis así amedrentados? ¿Cómo no tenéis fe?
+
+
+## Marcos 4:41 (id: 10041004041)
+
+41Y temieron con gran temor, y decían el uno al otro. ¿Quién es éste, que aun el viento y la mar le obedecen?
+
+
+## Marcos 5:1 (id: 10041005001)
+
+1Y VINIERON de la otra parte de la mar á la provincia de los Gadarenos.
+
+
+## Marcos 5:2 (id: 10041005002)
+
+2Y salido él del barco, luego le salió al encuentro, de los sepulcros, un hombre con un espíritu inmundo,
+
+
+## Marcos 5:3 (id: 10041005003)
+
+3Que tenía domicilio en los sepulcros, y ni aun con cadenas le podía alguien atar;
+
+
+## Marcos 5:4 (id: 10041005004)
+
+4Porque muchas veces había sido atado con grillos y cadenas, mas las cadenas habían sido hechas pedazos por él, y los grillos desmenuzados; y nadie le podía domar.
+
+
+## Marcos 5:5 (id: 10041005005)
+
+5Y siempre, de día y de noche, andaba dando voces en los montes y en los sepulcros, é hiriéndose con las piedras.
+
+
+## Marcos 5:6 (id: 10041005006)
+
+6Y como vió á Jesús de lejos, corrió, y le adoró.
+
+
+## Marcos 5:7 (id: 10041005007)
+
+7Y clamando á gran voz, dijo: ¿Qué tienes conmigo, Jesús, Hijo del Dios Altísimo? Te conjuro por Dios que no me atormentes.
+
+
+## Marcos 5:8 (id: 10041005008)
+
+8Porque le decía: Sal de este hombre, espíritu inmundo.
+
+
+## Marcos 5:9 (id: 10041005009)
+
+9Y le preguntó: ¿Cómo te llamas? Y respondió diciendo: Legión me llamo; porque somos muchos.
+
+
+## Marcos 5:10 (id: 10041005010)
+
+10Y le rogaba mucho que no le enviase fuera de aquella provincia.
+
+
+## Marcos 5:11 (id: 10041005011)
+
+11Y estaba allí cerca del monte una grande manada de puercos paciendo.
+
+
+## Marcos 5:12 (id: 10041005012)
+
+12Y le rogaron todos los demonios, diciendo: Envíanos á los puercos para que entremos en ellos.
+
+
+## Marcos 5:13 (id: 10041005013)
+
+13Y luego Jesús se lo permitió. Y saliendo aquellos espíritus inmundos, entraron en los puercos, y la manada cayó por un despeñadero en la mar; los cuales eran como dos mil; y en la mar se ahogaron.
+
+
+## Marcos 5:14 (id: 10041005014)
+
+14Y los que apacentaban los puercos huyeron, y dieron aviso en la ciudad y en los campos. Y salieron para ver qué era aquello que había acontecido.
+
+
+## Marcos 5:15 (id: 10041005015)
+
+15Y vienen á Jesús, y ven al que había sido atormentado del demonio, y que había tenido la legión, sentado y vestido, y en su juicio cabal; y tuvieron miedo.
+
+
+## Marcos 5:16 (id: 10041005016)
+
+16Y les contaron los que lo habían visto, cómo había acontecido al que había tenido el demonio, y lo de los puercos.
+
+
+## Marcos 5:17 (id: 10041005017)
+
+17Y comenzaron á rogarle que se fuese de los términos de ellos.
+
+
+## Marcos 5:18 (id: 10041005018)
+
+18Y entrando él en el barco, le rogaba el que había sido fatigado del demonio, para estar con él.
+
+
+## Marcos 5:19 (id: 10041005019)
+
+19Mas Jesús no le permitió, sino le dijo: Vete á tu casa, á los tuyos, y cuéntales cuán grandes cosas el Señor ha hecho contigo, y cómo ha tenido misericordia de ti.
+
+
+## Marcos 5:20 (id: 10041005020)
+
+20Y se fué, y comenzó á publicar en Decápolis cuán grandes cosas Jesús había hecho con él: y todos se maravillaban.
+
+
+## Marcos 5:21 (id: 10041005021)
+
+21Y pasando otra vez Jesús en un barco á la otra parte, se juntó á él gran compañía; y estaba junto á la mar.
+
+
+## Marcos 5:22 (id: 10041005022)
+
+22Y vino uno de los príncipes de la sinagoga, llamado Jairo; y luego que le vió, se postró á sus pies,
+
+
+## Marcos 5:23 (id: 10041005023)
+
+23Y le rogaba mucho, diciendo: Mi hija está á la muerte: ven y pondrás las manos sobre ella para que sea salva, y vivirá.
+
+
+## Marcos 5:24 (id: 10041005024)
+
+24Y fué con él, y le seguía gran compañía, y le apretaban.
+
+
+## Marcos 5:25 (id: 10041005025)
+
+25Y una mujer que estaba con flujo de sangre doce años hacía,
+
+
+## Marcos 5:26 (id: 10041005026)
+
+26Y había sufrido mucho de muchos médicos, y había gastado todo lo que tenía, y nada había aprovechado, antes le iba peor,
+
+
+## Marcos 5:27 (id: 10041005027)
+
+27Como oyó hablar de Jesús, llegó por detrás entre la compañía, y tocó su vestido.
+
+
+## Marcos 5:28 (id: 10041005028)
+
+28Porque decía: Si tocare tan solamente su vestido, seré salva.
+
+
+## Marcos 5:29 (id: 10041005029)
+
+29Y luego la fuente de su sangre se secó; y sintió en el cuerpo que estaba sana de aquel azote.
+
+
+## Marcos 5:30 (id: 10041005030)
+
+30Y luego Jesús, conociendo en sí mismo la virtud que había salido de él, volviéndose á la compañía, dijo: ¿Quién ha tocado mis vestidos?
+
+
+## Marcos 5:31 (id: 10041005031)
+
+31Y le dijeron sus discípulos: Ves que la multitud te aprieta, y dices: ¿Quién me ha tocado?
+
+
+## Marcos 5:32 (id: 10041005032)
+
+32Y él miraba alrededor para ver á la que había hecho esto.
+
+
+## Marcos 5:33 (id: 10041005033)
+
+33Entonces la mujer, temiendo y temblando, sabiendo lo que en sí había sido hecho, vino y se postró delante de él, y le dijo toda la verdad.
+
+
+## Marcos 5:34 (id: 10041005034)
+
+34Y él le dijo: Hija, tu fe te ha hecho salva: ve en paz, y queda sana de tu azote.
+
+
+## Marcos 5:35 (id: 10041005035)
+
+35Hablando aún él, vinieron de casa del príncipe de la sinagoga, diciendo: Tu hija es muerta; ¿para qué fatigas más al Maestro?
+
+
+## Marcos 5:36 (id: 10041005036)
+
+36Mas luego Jesús, oyendo esta razón que se decía, dijo al príncipe de la sinagoga: No temas, cree solamente.
+
+
+## Marcos 5:37 (id: 10041005037)
+
+37Y no permitió que alguno viniese tras él sino Pedro, y Jacobo, y Juan hermano de Jacobo.
+
+
+## Marcos 5:38 (id: 10041005038)
+
+38Y vino á casa del príncipe de la sinagoga, y vió el alboroto, los que lloraban y gemían mucho.
+
+
+## Marcos 5:39 (id: 10041005039)
+
+39Y entrando, les dice: ¿Por qué alborotáis y lloráis? La muchacha no es muerta, mas duerme.
+
+
+## Marcos 5:40 (id: 10041005040)
+
+40Y hacían burla de él: mas él, echados fuera todos, toma al padre y á la madre de la muchacha, y á los que estaban con él, y entra donde la muchacha estaba.
+
+
+## Marcos 5:41 (id: 10041005041)
+
+41Y tomando la mano de la muchacha, le dice: Talitha cumi; que es, si lo interpretares: Muchacha, á ti digo, levántate.
+
+
+## Marcos 5:42 (id: 10041005042)
+
+42Y luego la muchacha se levantó, y andaba; porque tenía doce años. Y se espantaron de grande espanto.
+
+
+## Marcos 5:43 (id: 10041005043)
+
+43Mas él les mandó mucho que nadie lo supiese, y dijo que le diesen de comer.
+
+
+## Marcos 6:1 (id: 10041006001)
+
+1Y SALIÓ de allí, y vino á su tierra, y le siguieron sus discípulos.
+
+
+## Marcos 6:2 (id: 10041006002)
+
+2Y llegado el sábado, comenzó á enseñar en la sinagoga; y muchos oyéndole, estaban atónitos, diciendo: ¿De dónde tiene éste estas cosas? ¿Y qué sabiduría es ésta que le es dada, y tales maravillas que por sus manos son hechas?
+
+
+## Marcos 6:3 (id: 10041006003)
+
+3¿No es éste el carpintero, hijo de María, hermano de Jacobo, y de José, y de Judas, y de Simón? ¿No están también aquí con nosotros, sus hermanas? Y se escandalizaban en él.
+
+
+## Marcos 6:4 (id: 10041006004)
+
+4Mas Jesús les decía: No hay profeta deshonrado sino en su tierra, y entre sus parientes, y en su casa.
+
+
+## Marcos 6:5 (id: 10041006005)
+
+5Y no pudo hacer allí alguna maravilla; solamente sanó unos pocos enfermos, poniendo sobre ellos las manos.
+
+
+## Marcos 6:6 (id: 10041006006)
+
+6Y estaba maravillado de la incredulidad de ellos. Y rodeaba las aldeas de alrededor, enseñando.
+
+
+## Marcos 6:7 (id: 10041006007)
+
+7Y llamó á los doce, y comenzó á enviarlos de dos en dos: y les dió potestad sobre los espíritus inmundos.
+
+
+## Marcos 6:8 (id: 10041006008)
+
+8Y les mandó que no llevasen nada para el camino, sino solamente báculo; no alforja, ni pan, ni dinero en la bolsa;
+
+
+## Marcos 6:9 (id: 10041006009)
+
+9Mas que calzasen sandalias, y no vistiesen dos túnicas.
+
+
+## Marcos 6:10 (id: 10041006010)
+
+10Y les decía: Donde quiera que entréis en una casa, posad en ella hasta que salgáis de allí.
+
+
+## Marcos 6:11 (id: 10041006011)
+
+11Y todos aquellos que no os recibieren ni os oyeren, saliendo de allí, sacudid el polvo que está debajo de vuestros pies, en testimonio á ellos. De cierto os digo que más tolerable será el castigo de los de Sodoma y Gomorra el día del juicio, que el de aquella ciudad.
+
+
+## Marcos 6:12 (id: 10041006012)
+
+12Y saliendo, predicaban que los hombres se arrepintiesen.
+
+
+## Marcos 6:13 (id: 10041006013)
+
+13Y echaban fuera muchos demonios, y ungían con aceite á muchos enfermos, y sanaban.
+
+
+## Marcos 6:14 (id: 10041006014)
+
+14Y oyó el rey Herodes la fama de Jesús, porque su nombre se había hecho notorio; y dijo: Juan el que bautizaba, ha resucitado de los muertos, y por tanto, virtudes obran en él.
+
+
+## Marcos 6:15 (id: 10041006015)
+
+15Otros decían: Elías es. Y otros decían: Profeta es, ó alguno de los profetas.
+
+
+## Marcos 6:16 (id: 10041006016)
+
+16Y oyéndolo Herodes, dijo: Este es Juan el que yo degollé: él ha resucitado de los muertos.
+
+
+## Marcos 6:17 (id: 10041006017)
+
+17Porque el mismo Herodes había enviado, y prendido á Juan, y le había aprisionado en la cárcel á causa de Herodías, mujer de Felipe su hermano; pues la había tomado por mujer.
+
+
+## Marcos 6:18 (id: 10041006018)
+
+18Porque Juan decía á Herodes: No te es lícito tener la mujer de tu hermano.
+
+
+## Marcos 6:19 (id: 10041006019)
+
+19Mas Herodías le acechaba, y deseaba matarle, y no podía:
+
+
+## Marcos 6:20 (id: 10041006020)
+
+20Porque Herodes temía á Juan, sabiendo que era varón justo y santo, y le tenía respeto: y oyéndole, hacía muchas cosas; y le oía de buena gana.
+
+
+## Marcos 6:21 (id: 10041006021)
+
+21Y venido un día oportuno, en que Herodes, en la fiesta de su nacimiento, daba una cena á sus príncipes y tribunos, y á los principales de Galilea;
+
+
+## Marcos 6:22 (id: 10041006022)
+
+22Y entrando la hija de Herodías, y danzando, y agradando á Herodes y á los que estaban con él á la mesa, el rey dijo á la muchacha: Pídeme lo que quisieres, que yo te lo daré.
+
+
+## Marcos 6:23 (id: 10041006023)
+
+23Y le juró: Todo lo que me pidieres te daré, hasta la mitad de mi reino.
+
+
+## Marcos 6:24 (id: 10041006024)
+
+24Y saliendo ella, dijo á su madre: ¿Qué pediré? Y ella dijo: La cabeza de Juan Bautista.
+
+
+## Marcos 6:25 (id: 10041006025)
+
+25Entonces ella entró prestamente al rey, y pidió, diciendo: Quiero que ahora mismo me des en un plato la cabeza de Juan Bautista.
+
+
+## Marcos 6:26 (id: 10041006026)
+
+26Y el rey se entristeció mucho; mas á causa del juramento, y de los que estaban con él á la mesa, no quiso desecharla.
+
+
+## Marcos 6:27 (id: 10041006027)
+
+27Y luego el rey, enviando uno de la guardia, mandó que fuese traída su cabeza;
+
+
+## Marcos 6:28 (id: 10041006028)
+
+28El cual fué, y le degolló en la cárcel, y trajo su cabeza en un plato, y la dió á la muchacha, y la muchacha la dió á su madre.
+
+
+## Marcos 6:29 (id: 10041006029)
+
+29Y oyéndolo sus discípulos, vinieron y tomaron su cuerpo, y le pusieron en un sepulcro.
+
+
+## Marcos 6:30 (id: 10041006030)
+
+30Y los apóstoles se juntaron con Jesús, y le contaron todo lo que habían hecho, y lo que habían enseñado.
+
+
+## Marcos 6:31 (id: 10041006031)
+
+31Y él les dijo: Venid vosotros aparte al lugar desierto, y reposad un poco. Porque eran muchos los que iban y venían, que ni aun tenían lugar de comer.
+
+
+## Marcos 6:32 (id: 10041006032)
+
+32Y se fueron en un barco al lugar desierto aparte.
+
+
+## Marcos 6:33 (id: 10041006033)
+
+33Y los vieron ir muchos, y le conocieron; y concurrieron allá muchos á pie de las ciudades, y llegaron antes que ellos, y se juntaron á él.
+
+
+## Marcos 6:34 (id: 10041006034)
+
+34Y saliendo Jesús vió grande multitud, y tuvo compasión de ellos, porque eran como ovejas que no tenían pastor; y les comenzó á enseñar muchas cosas.
+
+
+## Marcos 6:35 (id: 10041006035)
+
+35Y como ya fuese el día muy entrado, sus discípulos llegaron á él, diciendo: El lugar es desierto, y el día ya muy entrado;
+
+
+## Marcos 6:36 (id: 10041006036)
+
+36Envíalos para que vayan á los cortijos y aldeas de alrededor, y compren para sí pan; porque no tienen qué comer.
+
+
+## Marcos 6:37 (id: 10041006037)
+
+37Y respondiendo él, les dijo: Dadles de comer vosotros. Y le dijeron: ¿Que vayamos y compremos pan por doscientos denarios, y les demos de comer?
+
+
+## Marcos 6:38 (id: 10041006038)
+
+38Y él les dice: ¿Cuántos panes tenéis? Id, y vedlo. Y sabiéndolo, dijeron: Cinco, y dos peces.
+
+
+## Marcos 6:39 (id: 10041006039)
+
+39Y les mandó que hiciesen recostar á todos por partidas sobre la hierba verde.
+
+
+## Marcos 6:40 (id: 10041006040)
+
+40Y se recostaron por partidas, de ciento en ciento, y de cincuenta en cincuenta.
+
+
+## Marcos 6:41 (id: 10041006041)
+
+41Y tomados los cinco panes y los dos peces, mirando al cielo, bendijo, y partió los panes, y dió á sus discípulos para que los pusiesen delante: y repartió á todos los dos peces.
+
+
+## Marcos 6:42 (id: 10041006042)
+
+42Y comieron todos, y se hartaron.
+
+
+## Marcos 6:43 (id: 10041006043)
+
+43Y alzaron de los pedazos doce cofines llenos, y de los peces.
+
+
+## Marcos 6:44 (id: 10041006044)
+
+44Y los que comieron eran cinco mil hombres.
+
+
+## Marcos 6:45 (id: 10041006045)
+
+45Y luego dió priesa á sus discípulos á subir en el barco, é ir delante de él á Bethsaida de la otra parte, entre tanto que él despedía la multitud.
+
+
+## Marcos 6:46 (id: 10041006046)
+
+46Y después que los hubo despedido, se fué al monte á orar.
+
+
+## Marcos 6:47 (id: 10041006047)
+
+47Y como fué la tarde, el barco estaba en medio de la mar, y él solo en tierra.
+
+
+## Marcos 6:48 (id: 10041006048)
+
+48Y los vió fatigados bogando, porque el viento les era contrario: y cerca de la cuarta vigilia de la noche, vino á ellos andando sobre la mar, y quería precederlos.
+
+
+## Marcos 6:49 (id: 10041006049)
+
+49Y viéndole ellos, que andaba sobre la mar, pensaron que era fantasma, y dieron voces;
+
+
+## Marcos 6:50 (id: 10041006050)
+
+50Porque todos le veían, y se turbaron. Mas luego habló con ellos, y les dijo: Alentaos; yo soy, no temáis.
+
+
+## Marcos 6:51 (id: 10041006051)
+
+51Y subió á ellos en el barco, y calmó el viento: y ellos en gran manera estaban fuera de sí, y se maravillaban:
+
+
+## Marcos 6:52 (id: 10041006052)
+
+52Porque aun no habían considerado lo de los panes, por cuanto estaban ofuscados sus corazones.
+
+
+## Marcos 6:53 (id: 10041006053)
+
+53Y cuando estuvieron de la otra parte, vinieron á tierra de Genezaret, y tomaron puerto.
+
+
+## Marcos 6:54 (id: 10041006054)
+
+54Y saliendo ellos del barco, luego le conocieron.
+
+
+## Marcos 6:55 (id: 10041006055)
+
+55Y recorriendo toda la tierra de alrededor, comenzaron á traer de todas partes enfermos en lechos, á donde oían que estaba.
+
+
+## Marcos 6:56 (id: 10041006056)
+
+56Y donde quiera que entraba, en aldeas, ó ciudades, ó heredades, ponían en las calles á los que estaban enfermos, y le rogaban que tocasen siquiera el borde de su vestido; y todos los que le tocaban quedaban sanos.
+
+
+## Marcos 7:1 (id: 10041007001)
+
+1Y SE juntaron á él los Fariseos, y algunos de los escribas, que habían venido de Jerusalem;
+
+
+## Marcos 7:2 (id: 10041007002)
+
+2Los cuales, viendo á algunos de sus discípulos comer pan con manos comunes, es á saber, no lavadas, los condenaban.
+
+
+## Marcos 7:3 (id: 10041007003)
+
+3(Porque los Fariseos y todos los Judíos, teniendo la tradición de los ancianos, si muchas veces no se lavan las manos, no comen.
+
+
+## Marcos 7:4 (id: 10041007004)
+
+4Y volviendo de la plaza, si no se lavaren, no comen. Y otras muchas cosas hay, que tomaron para guardar, como las lavaduras de los vasos de beber, y de los jarros, y de los vasos de metal, y de los lechos.)
+
+
+## Marcos 7:5 (id: 10041007005)
+
+5Y le preguntaron los Fariseos y los escribas: ¿Por qué tus discípulos no andan conforme á la tradición de los ancianos, sino que comen pan con manos comunes?
+
+
+## Marcos 7:6 (id: 10041007006)
+
+6Y respondiendo él, les dijo: Hipócritas, bien profetizó de vosotros Isaías, como está escrito: Este pueblo con los labios me honra, mas su corazón lejos está de mí.
+
+
+## Marcos 7:7 (id: 10041007007)
+
+7Y en vano me honran, enseñando como doctrinas mandamientos de hombres.
+
+
+## Marcos 7:8 (id: 10041007008)
+
+8Porque dejando el mandamiento de Dios, tenéis la tradición de los hombres; las lavaduras de los jarros y de los vasos de beber: y hacéis otras muchas cosas semejantes.
+
+
+## Marcos 7:9 (id: 10041007009)
+
+9Les decía también: Bien invalidáis el mandamiento de Dios para guardar vuestra tradición.
+
+
+## Marcos 7:10 (id: 10041007010)
+
+10Porque Moisés dijo: Honra á tu padre y á tu madre, y: El que maldijere al padre ó á la madre, morirá de muerte.
+
+
+## Marcos 7:11 (id: 10041007011)
+
+11Y vosotros decís: Basta si dijere un hombre al padre ó la madre: Es Corbán (quiere decir, don mío á Dios) todo aquello con que pudiera valerte;
+
+
+## Marcos 7:12 (id: 10041007012)
+
+12Y no le dejáis hacer más por su padre ó por su madre,
+
+
+## Marcos 7:13 (id: 10041007013)
+
+13Invalidando la palabra de Dios con vuestra tradición que disteis: y muchas cosas hacéis semejantes á éstas.
+
+
+## Marcos 7:14 (id: 10041007014)
+
+14Y llamando á toda la multitud, les dijo: Oidme todos, y entended:
+
+
+## Marcos 7:15 (id: 10041007015)
+
+15Nada hay fuera del hombre que entre en él, que le pueda contaminar: mas lo que sale de él, aquello es lo que contamina al hombre.
+
+
+## Marcos 7:16 (id: 10041007016)
+
+16Si alguno tiene oídos para oir, oiga.
+
+
+## Marcos 7:17 (id: 10041007017)
+
+17Y apartado de la multitud, habiendo entrado en casa, le preguntaron sus discípulos sobre la parábola.
+
+
+## Marcos 7:18 (id: 10041007018)
+
+18Y díjoles: ¿También vosotros estáis así sin entendimiento? ¿No entendéis que todo lo de fuera que entra en el hombre, no le puede contaminar;
+
+
+## Marcos 7:19 (id: 10041007019)
+
+19Porque no entra en su corazón, sino en el vientre, y sale á la secreta? Esto decía, haciendo limpias todas las viandas.
+
+
+## Marcos 7:20 (id: 10041007020)
+
+20Mas decía, que lo que del hombre sale, aquello contamina al hombre.
+
+
+## Marcos 7:21 (id: 10041007021)
+
+21Porque de dentro, del corazón de los hombres, salen los malos pensamientos, los adulterios, las fornicaciones, los homicidios,
+
+
+## Marcos 7:22 (id: 10041007022)
+
+22Los hurtos, las avaricias, las maldades, el engaño, las desvergüenzas, el ojo maligno, las injurias, la soberbia, la insensatez.
+
+
+## Marcos 7:23 (id: 10041007023)
+
+23Todas estas maldades de dentro salen, y contaminan al hombre.
+
+
+## Marcos 7:24 (id: 10041007024)
+
+24Y levantándose de allí, se fué á los términos de Tiro y de Sidón; y entrando en casa, quiso que nadie lo supiese; mas no pudo esconderse.
+
+
+## Marcos 7:25 (id: 10041007025)
+
+25Porque una mujer, cuya hija tenía un espíritu inmundo, luego que oyó de él, vino y se echó á sus pies.
+
+
+## Marcos 7:26 (id: 10041007026)
+
+26Y la mujer era Griega, Sirofenisa de nación; y le rogaba que echase fuera de su hija al demonio.
+
+
+## Marcos 7:27 (id: 10041007027)
+
+27Mas Jesús le dijo: Deja primero hartarse los hijos, porque no es bien tomar el pan de los hijos y echarlo á los perrillos.
+
+
+## Marcos 7:28 (id: 10041007028)
+
+28Y respondió ella, y le dijo: Sí, Señor; pero aun los perrillos debajo de la mesa, comen de las migajas de los hijos.
+
+
+## Marcos 7:29 (id: 10041007029)
+
+29Entonces le dice: Por esta palabra, ve; el demonio ha salido de tu hija.
+
+
+## Marcos 7:30 (id: 10041007030)
+
+30Y como fué á su casa, halló que el demonio había salido, y á la hija echada sobre la cama.
+
+
+## Marcos 7:31 (id: 10041007031)
+
+31Y volviendo á salir de los términos de Tiro, vino por Sidón á la mar de Galilea, por mitad de los términos de Decápolis.
+
+
+## Marcos 7:32 (id: 10041007032)
+
+32Y le traen un sordo y tartamudo, y le ruegan que le ponga la mano encima.
+
+
+## Marcos 7:33 (id: 10041007033)
+
+33Y tomándole aparte de la gente, metió sus dedos en las orejas de él, y escupiendo, tocó su lengua;
+
+
+## Marcos 7:34 (id: 10041007034)
+
+34Y mirando al cielo, gimió, y le dijo: Ephphatha: que es decir: Sé abierto.
+
+
+## Marcos 7:35 (id: 10041007035)
+
+35Y luego fueron abiertos sus oídos, y fué desatada la ligadura de su lengua, y hablaba bien.
+
+
+## Marcos 7:36 (id: 10041007036)
+
+36Y les mandó que no lo dijesen á nadie; pero cuanto más les mandaba, tanto más y más lo divulgaban.
+
+
+## Marcos 7:37 (id: 10041007037)
+
+37Y en gran manera se maravillaban, diciendo: Bien lo ha hecho todo: hace á los sordos oir, y á los mudos hablar.
+
+
+## Marcos 8:1 (id: 10041008001)
+
+1EN aquellos días, como hubo gran gentío, y no tenían qué comer, Jesús llamó á sus discípulos, y les dijo:
+
+
+## Marcos 8:2 (id: 10041008002)
+
+2Tengo compasión de la multitud, porque ya hace tres días que están conmigo, y no tienen qué comer:
+
+
+## Marcos 8:3 (id: 10041008003)
+
+3Y si los enviare en ayunas á sus casas, desmayarán en el camino; porque algunos de ellos han venido de lejos.
+
+
+## Marcos 8:4 (id: 10041008004)
+
+4Y sus discípulos le respondieron: ¿De dónde podrá alguien hartar á estos de pan aquí en el desierto?
+
+
+## Marcos 8:5 (id: 10041008005)
+
+5Y les preguntó: ¿Cuántos panes tenéis? Y ellos dijeron: Siete.
+
+
+## Marcos 8:6 (id: 10041008006)
+
+6Entonces mandó á la multitud que se recostase en tierra; y tomando los siete panes, habiendo dado gracias, partió, y dió á sus discípulos que los pusiesen delante: y los pusieron delante á la multitud.
+
+
+## Marcos 8:7 (id: 10041008007)
+
+7Tenían también unos pocos pececillos: y los bendijo, y mandó que también los pusiesen delante.
+
+
+## Marcos 8:8 (id: 10041008008)
+
+8Y comieron, y se hartaron: y levantaron de los pedazos que habían sobrado, siete espuertas.
+
+
+## Marcos 8:9 (id: 10041008009)
+
+9Y eran los que comieron, como cuatro mil: y los despidió.
+
+
+## Marcos 8:10 (id: 10041008010)
+
+10Y luego entrando en el barco con sus discípulos, vino á las partes de Dalmanutha.
+
+
+## Marcos 8:11 (id: 10041008011)
+
+11Y vinieron los Fariseos, y comenzaron á altercar con él, pidiéndole señal del cielo, tentándole.
+
+
+## Marcos 8:12 (id: 10041008012)
+
+12Y gimiendo en su espíritu, dice: ¿Por qué pide señal esta generación? De cierto os digo que no se dará señal á esta generación.
+
+
+## Marcos 8:13 (id: 10041008013)
+
+13Y dejándolos, volvió á entrar en el barco, y se fué de la otra parte.
+
+
+## Marcos 8:14 (id: 10041008014)
+
+14Y se habían olvidado de tomar pan, y no tenían sino un pan consigo en el barco.
+
+
+## Marcos 8:15 (id: 10041008015)
+
+15Y les mandó, diciendo: Mirad, guardaos de la levadura de los Fariseos, y de la levadura de Herodes.
+
+
+## Marcos 8:16 (id: 10041008016)
+
+16Y altercaban los unos con los otros diciendo: Pan no tenemos.
+
+
+## Marcos 8:17 (id: 10041008017)
+
+17Y como Jesús lo entendió, les dice: ¿Qué altercáis, porque no tenéis pan? ¿no consideráis ni entendéis? ¿aun tenéis endurecido vuestro corazón?
+
+
+## Marcos 8:18 (id: 10041008018)
+
+18¿Teniendo ojos no veis, y teniendo oídos no oís? ¿y no os acordáis?
+
+
+## Marcos 8:19 (id: 10041008019)
+
+19Cuando partí los cinco panes entre cinco mil, ¿cuántas espuertas llenas de los pedazos alzasteis? Y ellos dijeron: Doce.
+
+
+## Marcos 8:20 (id: 10041008020)
+
+20Y cuando los siete panes entre cuatro mil, ¿cuántas espuertas llenas de los pedazos alzasteis? Y ellos dijeron: Siete.
+
+
+## Marcos 8:21 (id: 10041008021)
+
+21Y les dijo: ¿Cómo aun no entendéis?
+
+
+## Marcos 8:22 (id: 10041008022)
+
+22Y vino á Bethsaida; y le traen un ciego, y le ruegan que le tocase.
+
+
+## Marcos 8:23 (id: 10041008023)
+
+23Entonces, tomando la mano del ciego, le sacó fuera de la aldea; y escupiendo en sus ojos, y poniéndole las manos encima, le preguntó si veía algo.
+
+
+## Marcos 8:24 (id: 10041008024)
+
+24Y él mirando, dijo: Veo los hombres, pues veo que andan como árboles.
+
+
+## Marcos 8:25 (id: 10041008025)
+
+25Luego le puso otra vez las manos sobre sus ojos, y le hizo que mirase; y fué restablecido, y vió de lejos y claramente á todos.
+
+
+## Marcos 8:26 (id: 10041008026)
+
+26Y envióle á su casa, diciendo: No entres en la aldea, ni lo digas á nadie en la aldea.
+
+
+## Marcos 8:27 (id: 10041008027)
+
+27Y salió Jesús y sus discípulos por las aldeas de Cesarea de Filipo. Y en el camino preguntó á sus discípulos, diciéndoles: ¿Quién dicen los hombres que soy yo?
+
+
+## Marcos 8:28 (id: 10041008028)
+
+28Y ellos respondieron: Juan Bautista; y otros, Elías; y otros, Alguno de los profetas.
+
+
+## Marcos 8:29 (id: 10041008029)
+
+29Entonces él les dice: Y vosotros, ¿quién decís que soy yo? Y respondiendo Pedro, le dice: Tú eres el Cristo.
+
+
+## Marcos 8:30 (id: 10041008030)
+
+30Y les apercibió que no hablasen de él á ninguno.
+
+
+## Marcos 8:31 (id: 10041008031)
+
+31Y comenzó á enseñarles, que convenía que el Hijo del hombre padeciese mucho, y ser reprobado de los ancianos, y de los príncipes de los sacerdotes, y de los escribas, y ser muerto, y resucitar después de tres días.
+
+
+## Marcos 8:32 (id: 10041008032)
+
+32Y claramente decía esta palabra. Entonces Pedro le tomó, y le comenzó á reprender.
+
+
+## Marcos 8:33 (id: 10041008033)
+
+33Y él, volviéndose y mirando á sus discípulos, riñó á Pedro, diciendo: Apártate de mí, Satanás; porque no sabes las cosas que son de Dios, sino las que son de los hombres.
+
+
+## Marcos 8:34 (id: 10041008034)
+
+34Y llamando á la gente con sus discípulos, les dijo: Cualquiera que quisiere venir en pos de mí, niéguese á sí mismo, y tome su cruz, y sígame.
+
+
+## Marcos 8:35 (id: 10041008035)
+
+35Porque el que quisiere salvar su vida, la perderá; y el que perdiere su vida por causa de mí y del evangelio, la salvará.
+
+
+## Marcos 8:36 (id: 10041008036)
+
+36Porque ¿qué aprovechará al hombre, si granjeare todo el mundo, y pierde su alma?
+
+
+## Marcos 8:37 (id: 10041008037)
+
+37¿O qué recompensa dará el hombre por su alma?
+
+
+## Marcos 8:38 (id: 10041008038)
+
+38Porque el que se avergonzare de mí y de mis palabras en esta generación adulterina y pecadora, el Hijo del hombre se avergonzará también de él, cuando vendrá en la gloria de su Padre con los santos ángeles.
+
+
+## Marcos 9:1 (id: 10041009001)
+
+1TAMBIÉN les dijo: De cierto os digo que hay algunos de los que están aquí, que no gustarán la muerte hasta que hayan visto el reino de Dios que viene con potencia.
+
+
+## Marcos 9:2 (id: 10041009002)
+
+2Y seis días después tomó Jesús á Pedro, y á Jacobo, y á Juan, y los sacó aparte solos á un monte alto; y fué transfigurado delante de ellos.
+
+
+## Marcos 9:3 (id: 10041009003)
+
+3Y sus vestidos se volvieron resplandecientes, muy blancos, como la nieve; tanto que ningún lavador en la tierra los puede hacer tan blancos.
+
+
+## Marcos 9:4 (id: 10041009004)
+
+4Y les apareció Elías con Moisés, que hablaban con Jesús.
+
+
+## Marcos 9:5 (id: 10041009005)
+
+5Entonces respondiendo Pedro, dice á Jesús: Maestro, bien será que nos quedemos aquí, y hagamos tres pabellones: para ti uno, y para Moisés otro, y para Elías otro;
+
+
+## Marcos 9:6 (id: 10041009006)
+
+6Porque no sabía lo que hablaba; que estaban espantados.
+
+
+## Marcos 9:7 (id: 10041009007)
+
+7Y vino una nube que les hizo sombra, y una voz de la nube, que decía: Este es mi Hijo amado: á él oid.
+
+
+## Marcos 9:8 (id: 10041009008)
+
+8Y luego, como miraron, no vieron más á nadie consigo, sino á Jesús solo.
+
+
+## Marcos 9:9 (id: 10041009009)
+
+9Y descendiendo ellos del monte, les mandó que á nadie dijesen lo que habían visto, sino cuando el Hijo del hombre hubiese resucitado de los muertos.
+
+
+## Marcos 9:10 (id: 10041009010)
+
+10Y retuvieron la palabra en sí, altercando qué sería aquéllo: Resucitar de los muertos.
+
+
+## Marcos 9:11 (id: 10041009011)
+
+11Y le preguntaron, diciendo: ¿Qué es lo que los escribas dicen, que es necesario que Elías venga antes?
+
+
+## Marcos 9:12 (id: 10041009012)
+
+12Y respondiendo él, les dijo: Elías á la verdad, viniendo antes, restituirá todas las cosas: y como está escrito del Hijo del hombre, que padezca mucho y sea tenido en nada.
+
+
+## Marcos 9:13 (id: 10041009013)
+
+13Empero os digo que Elías ya vino, y le hicieron todo lo que quisieron, como está escrito de él.
+
+
+## Marcos 9:14 (id: 10041009014)
+
+14Y como vino á los discípulos, vió grande compañía alrededor de ellos, y escribas que disputaban con ellos.
+
+
+## Marcos 9:15 (id: 10041009015)
+
+15Y luego toda la gente, viéndole, se espantó, y corriendo á él, le saludaron.
+
+
+## Marcos 9:16 (id: 10041009016)
+
+16Y preguntóles: ¿Qué disputáis con ellos?
+
+
+## Marcos 9:17 (id: 10041009017)
+
+17Y respondiendo uno de la compañía, dijo: Maestro, traje á ti mi hijo, que tiene un espíritu mudo,
+
+
+## Marcos 9:18 (id: 10041009018)
+
+18El cual, donde quiera que le toma, le despedaza; y echa espumarajos, y cruje los dientes, y se va secando: y dije á tus discípulos que le echasen fuera, y no pudieron.
+
+
+## Marcos 9:19 (id: 10041009019)
+
+19Y respondiendo él, les dijo: ¡Oh generación infiel! ¿hasta cuándo estaré con vosotros? ¿hasta cuándo os tengo de sufrir? Traédmele.
+
+
+## Marcos 9:20 (id: 10041009020)
+
+20Y se le trajeron: y como le vió, luego el espíritu le desgarraba; y cayendo en tierra, se revolcaba, echando espumarajos.
+
+
+## Marcos 9:21 (id: 10041009021)
+
+21Y Jesús preguntó á su padre: ¿Cuánto tiempo há que le aconteció esto? Y él dijo: Desde niño:
+
+
+## Marcos 9:22 (id: 10041009022)
+
+22Y muchas veces le echa en el fuego y en aguas, para matarle; mas, si puedes algo, ayúdanos, teniendo misericordia de nosotros.
+
+
+## Marcos 9:23 (id: 10041009023)
+
+23Y Jesús le dijo: Si puedes creer, al que cree todo es posible.
+
+
+## Marcos 9:24 (id: 10041009024)
+
+24Y luego el padre del muchacho dijo clamando: Creo, ayuda mi incredulidad.
+
+
+## Marcos 9:25 (id: 10041009025)
+
+25Y como Jesús vió que la multitud se agolpaba, reprendió al espíritu inmundo, diciéndole: Espíritu mudo y sordo, yo te mando, sal de él, y no entres más en él.
+
+
+## Marcos 9:26 (id: 10041009026)
+
+26Entonces el espíritu clamando y desgarrándole mucho, salió; y él quedó como muerto, de modo que muchos decían: Está muerto.
+
+
+## Marcos 9:27 (id: 10041009027)
+
+27Mas Jesús tomándole de la mano, enderezóle; y se levantó.
+
+
+## Marcos 9:28 (id: 10041009028)
+
+28Y como él entró en casa, sus discípulos le preguntaron aparte: ¿Por qué nosotros no pudimos echarle fuera?
+
+
+## Marcos 9:29 (id: 10041009029)
+
+29Y les dijo: Este género con nada puede salir, sino con oración y ayuno.
+
+
+## Marcos 9:30 (id: 10041009030)
+
+30Y habiendo salido de allí, caminaron por Galilea; y no quería que nadie lo supiese.
+
+
+## Marcos 9:31 (id: 10041009031)
+
+31Porque enseñaba á sus discípulos, y les decía: El Hijo del hombre será entregado en manos de hombres, y le matarán; mas muerto él, resucitará al tercer día.
+
+
+## Marcos 9:32 (id: 10041009032)
+
+32Pero ellos no entendían esta palabra, y tenían miedo de preguntarle.
+
+
+## Marcos 9:33 (id: 10041009033)
+
+33Y llegó á Capernaum; y así que estuvo en casa, les preguntó: ¿Qué disputabais entre vosotros en el camino?
+
+
+## Marcos 9:34 (id: 10041009034)
+
+34Mas ellos callaron; porque los unos con los otros habían disputado en el camino quién había de ser el mayor.
+
+
+## Marcos 9:35 (id: 10041009035)
+
+35Entonces sentándose, llamó á los doce, y les dice: Si alguno quiere ser el primero, será el postrero de todos, y el servidor de todos.
+
+
+## Marcos 9:36 (id: 10041009036)
+
+36Y tomando un niño, púsolo en medio de ellos; y tomándole en sus brazos, les dice:
+
+
+## Marcos 9:37 (id: 10041009037)
+
+37El que recibiere en mi nombre uno de los tales niños, á mí recibe; y el que á mí recibe, no recibe á mí, mas al que me envió.
+
+
+## Marcos 9:38 (id: 10041009038)
+
+38Y respondióle Juan, diciendo: Maestro, hemos visto á uno que en tu nombre echaba fuera los demonios, el cual no nos sigue; y se lo prohibimos, porque no nos sigue.
+
+
+## Marcos 9:39 (id: 10041009039)
+
+39Y Jesús dijo: No se lo prohibáis; porque ninguno hay que haga milagro en mi nombre que luego pueda decir mal de mí.
+
+
+## Marcos 9:40 (id: 10041009040)
+
+40Porque el que no es contra nosotros, por nosotros es.
+
+
+## Marcos 9:41 (id: 10041009041)
+
+41Y cualquiera que os diere un vaso de agua en mi nombre, porque sois de Cristo, de cierto os digo que no perderá su recompensa.
+
+
+## Marcos 9:42 (id: 10041009042)
+
+42Y cualquiera que escandalizare á uno de estos pequeñitos que creen en mí, mejor le fuera si se le atase una piedra de molino al cuello, y fuera echado en la mar.
+
+
+## Marcos 9:43 (id: 10041009043)
+
+43Y si tu mano te escandalizare, córtala: mejor te es entrar á la vida manco, que teniendo dos manos ir á la Gehenna, al fuego que no puede ser apagado;
+
+
+## Marcos 9:44 (id: 10041009044)
+
+44Donde su gusano no muere, y el fuego nunca se apaga.
+
+
+## Marcos 9:45 (id: 10041009045)
+
+45Y si tu pie te fuere ocasión de caer, córtalo: mejor te es entrar á la vida cojo, que teniendo dos pies ser echado en la Gehenna, al fuego que no puede ser apagado;
+
+
+## Marcos 9:46 (id: 10041009046)
+
+46Donde el gusano de ellos no muere, y el fuego nunca se apaga.
+
+
+## Marcos 9:47 (id: 10041009047)
+
+47Y si tu ojo te fuere ocasión de caer, sácalo: mejor te es entrar al reino de Dios con un ojo, que teniendo dos ojos ser echado á la Gehenna;
+
+
+## Marcos 9:48 (id: 10041009048)
+
+48Donde el gusano de ellos no muere, y el fuego nunca se apaga.
+
+
+## Marcos 9:49 (id: 10041009049)
+
+49Porque todos serán salados con fuego, y todo sacrificio será salado con sal.
+
+
+## Marcos 9:50 (id: 10041009050)
+
+50Buena es la sal; mas si la sal fuere desabrida, ¿con qué la adobaréis? Tened en vosotros mismos sal; y tened paz los unos con los otros.
+
+
+## Marcos 10:1 (id: 10041010001)
+
+1Y PARTIÉNDOSE de allí, vino á los términos de Judea y tras el Jordán: y volvió el pueblo á juntarse á él; y de nuevo les enseñaba como solía.
+
+
+## Marcos 10:2 (id: 10041010002)
+
+2Y llegándose los Fariseos, le preguntaron, para tentarle, si era lícito al marido repudiar á su mujer.
+
+
+## Marcos 10:3 (id: 10041010003)
+
+3Mas él respondiendo, les dijo: ¿Qué os mandó Moisés?
+
+
+## Marcos 10:4 (id: 10041010004)
+
+4Y ellos dijeron: Moisés permitió escribir carta de divorcio, y repudiar.
+
+
+## Marcos 10:5 (id: 10041010005)
+
+5Y respondiendo Jesús, les dijo: Por la dureza de vuestro corazón os escribió este mandamiento;
+
+
+## Marcos 10:6 (id: 10041010006)
+
+6Pero al principio de la creación, varón y hembra los hizo Dios.
+
+
+## Marcos 10:7 (id: 10041010007)
+
+7Por esto dejará el hombre á su padre y á su madre, y se juntará á su mujer.
+
+
+## Marcos 10:8 (id: 10041010008)
+
+8Y los que eran dos, serán hechos una carne: así que no son más dos, sino una carne.
+
+
+## Marcos 10:9 (id: 10041010009)
+
+9Pues lo que Dios juntó, no lo aparte el hombre.
+
+
+## Marcos 10:10 (id: 10041010010)
+
+10Y en casa volvieron los discípulos á preguntarle de lo mismo.
+
+
+## Marcos 10:11 (id: 10041010011)
+
+11Y les dice: Cualquiera que repudiare á su mujer, y se casare con otra, comete adulterio contra ella:
+
+
+## Marcos 10:12 (id: 10041010012)
+
+12Y si la mujer repudiare á su marido y se casare con otro, comete adulterio.
+
+
+## Marcos 10:13 (id: 10041010013)
+
+13Y le presentaban niños para que los tocase; y los discípulos reñían á los que los presentaban.
+
+
+## Marcos 10:14 (id: 10041010014)
+
+14Y viéndolo Jesús, se enojó, y les dijo: Dejad los niños venir, y no se lo estorbéis; porque de los tales es el reino de Dios.
+
+
+## Marcos 10:15 (id: 10041010015)
+
+15De cierto os digo, que el que no recibiere el reino de Dios como un niño, no entrará en él.
+
+
+## Marcos 10:16 (id: 10041010016)
+
+16Y tomándolos en los brazos, poniendo las manos sobre ellos, los bendecía.
+
+
+## Marcos 10:17 (id: 10041010017)
+
+17Y saliendo él para ir su camino, vino uno corriendo, é hincando la rodilla delante de él, le preguntó: Maestro bueno, ¿qué haré para poseer la vida eterna?
+
+
+## Marcos 10:18 (id: 10041010018)
+
+18Y Jesús le dijo: ¿Por qué me dices bueno? Ninguno hay bueno, sino sólo uno, Dios.
+
+
+## Marcos 10:19 (id: 10041010019)
+
+19Los mandamientos sabes: No adulteres: No mates: No hurtes: No digas falso testimonio: No defraudes: Honra á tu padre y á tu madre.
+
+
+## Marcos 10:20 (id: 10041010020)
+
+20El entonces respondiendo, le dijo: Maestro, todo esto he guardado desde mi mocedad.
+
+
+## Marcos 10:21 (id: 10041010021)
+
+21Entonces Jesús mirándole, amóle, y díjole: Una cosa te falta: ve, vende todo lo que tienes, y da á los pobres, y tendrás tesoro en el cielo; y ven, sígueme, tomando tu cruz.
+
+
+## Marcos 10:22 (id: 10041010022)
+
+22Mas él, entristecido por esta palabra, se fué triste, porque tenía muchas posesiones.
+
+
+## Marcos 10:23 (id: 10041010023)
+
+23Entonces Jesús, mirando alrededor, dice á sus discípulos: ¡Cuán difícilmente entrarán en el reino de Dios los que tienen riquezas!
+
+
+## Marcos 10:24 (id: 10041010024)
+
+24Y los discípulos se espantaron de sus palabras; mas Jesús respondiendo, les volvió á decir: ¡Hijos, cuán difícil es entrar en el reino de Dios, los que confían en las riquezas!
+
+
+## Marcos 10:25 (id: 10041010025)
+
+25Más fácil es pasar un camello por el ojo de una aguja, que el rico entrar en el reino de Dios.
+
+
+## Marcos 10:26 (id: 10041010026)
+
+26Y ellos se espantaban más, diciendo dentro de sí: ¿Y quién podrá salvarse?
+
+
+## Marcos 10:27 (id: 10041010027)
+
+27Entonces Jesús mirándolos, dice: Para los hombres es imposible; mas para Dios, no; porque todas las cosas son posibles para Dios.
+
+
+## Marcos 10:28 (id: 10041010028)
+
+28Entonces Pedro comenzó á decirle: He aquí, nosotros hemos dejado todas las cosas, y te hemos seguido.
+
+
+## Marcos 10:29 (id: 10041010029)
+
+29Y respondiendo Jesús, dijo: De cierto os digo, que no hay ninguno que haya dejado casa, ó hermanos, ó hermanas, ó padre, ó madre, ó mujer, ó hijos, ó heredades, por causa de mí y del evangelio,
+
+
+## Marcos 10:30 (id: 10041010030)
+
+30Que no reciba cien tantos ahora en este tiempo, casas, y hermanos, y hermanas, y madres, é hijos, y heredades, con persecuciones; y en el siglo venidero la vida eterna.
+
+
+## Marcos 10:31 (id: 10041010031)
+
+31Empero muchos primeros serán postreros, y postreros primeros.
+
+
+## Marcos 10:32 (id: 10041010032)
+
+32Y estaban en el camino subiendo á Jerusalem; y Jesús iba delante de ellos, y se espantaban, y le seguían con miedo: entonces volviendo á tomar á los doce aparte, les comenzó á decir las cosas que le habían de acontecer:
+
+
+## Marcos 10:33 (id: 10041010033)
+
+33He aquí subimos á Jerusalem, y el Hijo del hombre será entregado á los príncipes de los sacerdotes, y á los escribas, y le condenarán á muerte, y le entregarán á los Gentiles:
+
+
+## Marcos 10:34 (id: 10041010034)
+
+34Y le escarnecerán, y le azotarán, y escupirán en él, y le matarán; mas al tercer día resucitará.
+
+
+## Marcos 10:35 (id: 10041010035)
+
+35Entonces Jacobo y Juan, hijos de Zebedeo, se llegaron á él, diciendo: Maestro, querríamos que nos hagas lo que pidiéremos.
+
+
+## Marcos 10:36 (id: 10041010036)
+
+36Y él les dijo: ¿Qué queréis que os haga?
+
+
+## Marcos 10:37 (id: 10041010037)
+
+37Y ellos le dijeron: Danos que en tu gloria nos sentemos el uno á tu diestra, y el otro á tu siniestra.
+
+
+## Marcos 10:38 (id: 10041010038)
+
+38Entonces Jesús les dijo: No sabéis lo que pedís. ¿Podéis beber del vaso que yo bebo, ó ser bautizados del bautismo de que yo soy bautizado?
+
+
+## Marcos 10:39 (id: 10041010039)
+
+39Y ellos dijeron: Podemos. Y Jesús les dijo: A la verdad, del vaso que yo bebo, beberéis; y del bautismo de que yo soy bautizado, seréis bautizados.
+
+
+## Marcos 10:40 (id: 10041010040)
+
+40Mas que os sentéis á mi diestra y á mi siniestra, no es mío darlo, sino á quienes está aparejado.
+
+
+## Marcos 10:41 (id: 10041010041)
+
+41Y como lo oyeron los diez, comenzaron á enojarse de Jacobo y de Juan.
+
+
+## Marcos 10:42 (id: 10041010042)
+
+42Mas Jesús, llamándolos, les dice: Sabéis que los que se ven ser príncipes entre las gentes, se enseñorean de ellas, y los que entre ellas son grandes, tienen sobre ellas potestad.
+
+
+## Marcos 10:43 (id: 10041010043)
+
+43Mas no será así entre vosotros: antes cualquiera que quisiere hacerse grande entre vosotros, será vuestro servidor;
+
+
+## Marcos 10:44 (id: 10041010044)
+
+44Y cualquiera de vosotros que quisiere hacerse el primero, será siervo de todos.
+
+
+## Marcos 10:45 (id: 10041010045)
+
+45Porque el Hijo del hombre tampoco vino para ser servido, mas para servir, y dar su vida en rescate por muchos.
+
+
+## Marcos 10:46 (id: 10041010046)
+
+46Entonces vienen á Jericó: y saliendo él de Jericó y sus discípulos y una gran compañía, Bartimeo el ciego, hijo de Timeo, estaba sentado junto al camino mendigando.
+
+
+## Marcos 10:47 (id: 10041010047)
+
+47Y oyendo que era Jesús el Nazareno, comenzó á dar voces y decir: Jesús, Hijo de David, ten misericordia de mí.
+
+
+## Marcos 10:48 (id: 10041010048)
+
+48Y muchos le reñían, que callase: mas él daba mayores voces: Hijo de David, ten misericordia de mí.
+
+
+## Marcos 10:49 (id: 10041010049)
+
+49Entonces Jesús parándose, mandó llamarle: y llaman al ciego, diciéndole: Ten confianza: levántate, te llama.
+
+
+## Marcos 10:50 (id: 10041010050)
+
+50El entonces, echando su capa, se levantó, y vino á Jesús.
+
+
+## Marcos 10:51 (id: 10041010051)
+
+51Y respondiendo Jesús, le dice: ¿Qué quieres que te haga? Y el ciego le dice: Maestro, que cobre la vista.
+
+
+## Marcos 10:52 (id: 10041010052)
+
+52Y Jesús le dijo: Ve, tu fe te ha salvado. Y luego cobró la vista, y seguía á Jesús en el camino.
+
+
+## Marcos 11:1 (id: 10041011001)
+
+1Y COMO fueron cerca de Jerusalem, de Bethphagé, y de Bethania, al monte de las Olivas, envía dos de sus discípulos,
+
+
+## Marcos 11:2 (id: 10041011002)
+
+2Y les dice: Id al lugar que está delante de vosotros, y luego entrados en él, hallaréis un pollino atado, sobre el cual ningún hombre ha subido; desatadlo y traedlo.
+
+
+## Marcos 11:3 (id: 10041011003)
+
+3Y si alguien os dijere: ¿Por qué hacéis eso? decid que el Señor lo ha menester: y luego lo enviará acá.
+
+
+## Marcos 11:4 (id: 10041011004)
+
+4Y fueron, y hallaron el pollino atado á la puerta fuera, entre dos caminos; y le desataron.
+
+
+## Marcos 11:5 (id: 10041011005)
+
+5Y unos de los que estaban allí, les dijeron: ¿Qué hacéis desatando el pollino?
+
+
+## Marcos 11:6 (id: 10041011006)
+
+6Ellos entonces les dijeron como Jesús había mandado: y los dejaron.
+
+
+## Marcos 11:7 (id: 10041011007)
+
+7Y trajeron el pollino á Jesús, y echaron sobre él sus vestidos, y se sentó sobre él.
+
+
+## Marcos 11:8 (id: 10041011008)
+
+8Y muchos tendían sus vestidos por el camino, y otros cortaban hojas de los árboles, y las tendían por el camino.
+
+
+## Marcos 11:9 (id: 10041011009)
+
+9Y los que iban delante, y los que iban detrás, daban voces diciendo: ¡Hosanna! Bendito el que viene en el nombre del Señor.
+
+
+## Marcos 11:10 (id: 10041011010)
+
+10Bendito el reino de nuestro padre David que viene: ¡Hosanna en las alturas!
+
+
+## Marcos 11:11 (id: 10041011011)
+
+11Y entró Jesús en Jerusalem, y en el templo: y habiendo mirado alrededor todas las cosas, y siendo ya tarde, salióse á Bethania con los doce.
+
+
+## Marcos 11:12 (id: 10041011012)
+
+12Y el día siguiente, como salieron de Bethania, tuvo hambre.
+
+
+## Marcos 11:13 (id: 10041011013)
+
+13Y viendo de lejos una higuera que tenía hojas, se acercó, si quizá hallaría en ella algo: y como vino á ella, nada halló sino hojas; porque no era tiempo de higos.
+
+
+## Marcos 11:14 (id: 10041011014)
+
+14Entonces Jesús respondiendo, dijo á la higuera: Nunca más coma nadie fruto de ti para siempre. Y lo oyeron sus discípulos.
+
+
+## Marcos 11:15 (id: 10041011015)
+
+15Vienen, pues, á Jerusalem; y entrando Jesús en el templo, comenzó á echar fuera á los que vendían y compraban en el templo; y trastornó las mesas de los cambistas, y las sillas de los que vendían palomas;
+
+
+## Marcos 11:16 (id: 10041011016)
+
+16Y no consentía que alguien llevase vaso por el templo.
+
+
+## Marcos 11:17 (id: 10041011017)
+
+17Y les enseñaba diciendo: ¿No está escrito que mi casa, casa de oración será llamada por todas las gentes? Mas vosotros la habéis hecho cueva de ladrones.
+
+
+## Marcos 11:18 (id: 10041011018)
+
+18Y lo oyeron los escribas y los príncipes de los sacerdotes, y procuraban cómo le matarían; porque le tenían miedo, por cuanto todo el pueblo estaba maravillado de su doctrina.
+
+
+## Marcos 11:19 (id: 10041011019)
+
+19Mas como fué tarde, Jesús salió de la ciudad.
+
+
+## Marcos 11:20 (id: 10041011020)
+
+20Y pasando por la mañana, vieron que la higuera se había secado desde las raíces.
+
+
+## Marcos 11:21 (id: 10041011021)
+
+21Entonces Pedro acordándose, le dice: Maestro, he aquí la higuera que maldijiste, se ha secado.
+
+
+## Marcos 11:22 (id: 10041011022)
+
+22Y respondiendo Jesús, les dice: Tened fe en Dios.
+
+
+## Marcos 11:23 (id: 10041011023)
+
+23Porque de cierto os digo que cualquiera que dijere á este monte: Quítate, y échate en la mar, y no dudare en su corazón, mas creyere que será hecho lo que dice, lo que dijere le será hecho.
+
+
+## Marcos 11:24 (id: 10041011024)
+
+24Por tanto, os digo que todo lo que orando pidiereis, creed que lo recibiréis, y os vendrá.
+
+
+## Marcos 11:25 (id: 10041011025)
+
+25Y cuando estuviereis orando, perdonad, si tenéis algo contra alguno, para que vuestro Padre que está en los cielos os perdone también á vosotros vuestras ofensas.
+
+
+## Marcos 11:26 (id: 10041011026)
+
+26Porque si vosotros no perdonareis, tampoco vuestro Padre que está en los cielos os perdonará vuestras ofensas.
+
+
+## Marcos 11:27 (id: 10041011027)
+
+27Y volvieron á Jerusalem; y andando él por el templo, vienen á él los príncipes de los sacerdotes, y los escribas, y los ancianos;
+
+
+## Marcos 11:28 (id: 10041011028)
+
+28Y le dicen: ¿Con qué facultad haces estas cosas? ¿y quién te ha dado esta facultad para hacer estas cosas?
+
+
+## Marcos 11:29 (id: 10041011029)
+
+29Y Jesús respondiendo entonces, les dice: Os preguntaré también yo una palabra; y respondedme, y os diré con qué facultad hago estas cosas:
+
+
+## Marcos 11:30 (id: 10041011030)
+
+30El bautismo de Juan, ¿era del cielo, ó de los hombres? Respondedme.
+
+
+## Marcos 11:31 (id: 10041011031)
+
+31Entonces ellos pensaron dentro de sí, diciendo: Si dijéremos, del cielo, dirá: ¿Por qué, pues, no le creísteis?
+
+
+## Marcos 11:32 (id: 10041011032)
+
+32Y si dijéremos, de los hombres, tememos al pueblo: porque todos juzgaban de Juan, que verdaderamente era profeta.
+
+
+## Marcos 11:33 (id: 10041011033)
+
+33Y respondiendo, dicen á Jesús: No sabemos. Entonces respondiendo Jesús, les dice: Tampoco yo os diré con qué facultad hago estas cosas.
+
+
+## Marcos 12:1 (id: 10041012001)
+
+1Y COMENZÓ á hablarles por parábolas: Plantó un hombre una viña, y la cercó con seto, y cavó un lagar, y edificó una torre, y la arrendó á labradores, y se partió lejos.
+
+
+## Marcos 12:2 (id: 10041012002)
+
+2Y envió un siervo á los labradores, al tiempo, para que tomase de los labradores del fruto de la viña.
+
+
+## Marcos 12:3 (id: 10041012003)
+
+3Mas ellos, tomándole, le hirieron, y le enviaron vacío.
+
+
+## Marcos 12:4 (id: 10041012004)
+
+4Y volvió á enviarles otro siervo; mas apedreándole, le hirieron en la cabeza, y volvieron á enviarle afrentado.
+
+
+## Marcos 12:5 (id: 10041012005)
+
+5Y volvió á enviar otro, y á aquél mataron; y á otros muchos, hiriendo á unos y matando á otros.
+
+
+## Marcos 12:6 (id: 10041012006)
+
+6Teniendo pues aún un hijo suyo amado, enviólo también á ellos el postrero, diciendo: Tendrán en reverencia á mi hijo.
+
+
+## Marcos 12:7 (id: 10041012007)
+
+7Mas aquellos labradores dijeron entre sí: Este es el heredero; venid, matémosle, y la heredad será nuestra.
+
+
+## Marcos 12:8 (id: 10041012008)
+
+8Y prendiéndole, le mataron, y echaron fuera de la viña.
+
+
+## Marcos 12:9 (id: 10041012009)
+
+9¿Qué, pues, hará el señor de la viña? Vendrá, y destruirá á estos labradores, y dará su viña á otros.
+
+
+## Marcos 12:10 (id: 10041012010)
+
+10¿Ni aun esta Escritura habéis leído: La piedra que desecharon los que edificaban, ésta es puesta por cabeza de esquina;
+
+
+## Marcos 12:11 (id: 10041012011)
+
+11Por el Señor es hecho esto, y es cosa maravillosa en nuestros ojos?
+
+
+## Marcos 12:12 (id: 10041012012)
+
+12Y procuraban prenderle, porque entendían que decía á ellos aquella parábola; mas temían á la multitud; y dejándole, se fueron.
+
+
+## Marcos 12:13 (id: 10041012013)
+
+13Y envían á él algunos de los Fariseos y de los Herodianos, para que le sorprendiesen en alguna palabra.
+
+
+## Marcos 12:14 (id: 10041012014)
+
+14Y viniendo ellos, le dicen: Maestro, sabemos que eres hombre de verdad, y que no te cuidas de nadie; porque no miras á la apariencia de hombres, antes con verdad enseñas el camino de Dios: ¿Es lícito dar tributo á César, ó no? ¿Daremos, ó no daremos?
+
+
+## Marcos 12:15 (id: 10041012015)
+
+15Entonces él, como entendía la hipocresía de ellos, les dijo: ¿Por qué me tentáis? Traedme la moneda para que la vea.
+
+
+## Marcos 12:16 (id: 10041012016)
+
+16Y ellos se la trajeron y les dice: ¿Cúya es esta imagen y esta inscripción? Y ellos le dijeron: De César.
+
+
+## Marcos 12:17 (id: 10041012017)
+
+17Y respondiendo Jesús, les dijo: Dad lo que es de César á César; y lo que es de Dios, á Dios. Y se maravillaron de ello.
+
+
+## Marcos 12:18 (id: 10041012018)
+
+18Entonces vienen á él los Saduceos, que dicen que no hay resurrección, y le preguntaron, diciendo:
+
+
+## Marcos 12:19 (id: 10041012019)
+
+19Maestro, Moisés nos escribió, que si el hermano de alguno muriese, y dejase mujer, y no dejase hijos, que su hermano tome su mujer, y levante linaje á su hermano.
+
+
+## Marcos 12:20 (id: 10041012020)
+
+20Fueron siete hermanos: y el primero tomó mujer, y muriendo, no dejó simiente;
+
+
+## Marcos 12:21 (id: 10041012021)
+
+21Y la tomó el segundo, y murió, y ni aquél tampoco dejó simiente; y el tercero, de la misma manera.
+
+
+## Marcos 12:22 (id: 10041012022)
+
+22Y la tomaron los siete, y tampoco dejaron simiente: á la postre murió también la mujer.
+
+
+## Marcos 12:23 (id: 10041012023)
+
+23En la resurrección, pues, cuando resucitaren, ¿de cuál de ellos será mujer? porque los siete la tuvieron por mujer.
+
+
+## Marcos 12:24 (id: 10041012024)
+
+24Entonces respondiendo Jesús, les dice: ¿No erráis por eso, porque no sabéis las Escrituras, ni la potencia de Dios?
+
+
+## Marcos 12:25 (id: 10041012025)
+
+25Porque cuando resucitarán de los muertos, ni se casarán, ni serán dados en casamiento, mas son como los ángeles que están en los cielos.
+
+
+## Marcos 12:26 (id: 10041012026)
+
+26Y de que los muertos hayan de resucitar, ¿no habéis leído en el libro de Moisés cómo le habló Dios en la zarza, diciendo: Yo soy el Dios de Abraham, y el Dios de Isaac, y el Dios de Jacob?
+
+
+## Marcos 12:27 (id: 10041012027)
+
+27No es Dios de muertos, mas Dios de vivos; así que vosotros mucho erráis.
+
+
+## Marcos 12:28 (id: 10041012028)
+
+28Y llegándose uno de los escribas, que los había oído disputar, y sabía que les había respondido bien, le preguntó: ¿Cuál es el primer mandamiento de todos?
+
+
+## Marcos 12:29 (id: 10041012029)
+
+29Y Jesús le respondió: El primer mandamiento de todos es: Oye, Israel, el Señor nuestro Dios, el Señor uno es.
+
+
+## Marcos 12:30 (id: 10041012030)
+
+30Amarás pues al Señor tu Dios de todo tu corazón, y de toda tu alma, y de toda tu mente, y de todas tus fuerzas; este es el principal mandamiento.
+
+
+## Marcos 12:31 (id: 10041012031)
+
+31Y el segundo es semejante á él: Amarás á tu prójimo como á ti mismo. No hay otro mandamiento mayor que éstos.
+
+
+## Marcos 12:32 (id: 10041012032)
+
+32Entonces el escriba le dijo: Bien, Maestro, verdad has dicho, que uno es Dios, y no hay otro fuera de él;
+
+
+## Marcos 12:33 (id: 10041012033)
+
+33Y que amarle de todo corazón, y de todo entendimiento, y de toda el alma, y de todas las fuerzas, y amar al prójimo como á sí mismo, más es que todos los holocaustos y sacrificios.
+
+
+## Marcos 12:34 (id: 10041012034)
+
+34Jesús entonces, viendo que había respondido sabiamente, le dice: No estás lejos del reino de Dios. Y ya ninguno osaba preguntarle.
+
+
+## Marcos 12:35 (id: 10041012035)
+
+35Y respondiendo Jesús decía, enseñando en el templo: ¿Cómo dicen los escribas que el Cristo es hijo de David?
+
+
+## Marcos 12:36 (id: 10041012036)
+
+36Porque el mismo David dijo por el Espíritu Santo: Dijo el Señor á mi Señor: Siéntate á mi diestra, hasta que ponga tus enemigos por estrado de tus pies.
+
+
+## Marcos 12:37 (id: 10041012037)
+
+37Luego llamándole el mismo David Señor, ¿de dónde, pues, es su hijo? Y los que eran del común del pueblo le oían de buena gana.
+
+
+## Marcos 12:38 (id: 10041012038)
+
+38Y les decía en su doctrina: Guardaos de los escribas, que quieren andar con ropas largas, y aman las salutaciones en las plazas,
+
+
+## Marcos 12:39 (id: 10041012039)
+
+39Y las primeras sillas en las sinagogas, y los primeros asientos en las cenas;
+
+
+## Marcos 12:40 (id: 10041012040)
+
+40Que devoran las casas de las viudas, y por pretexto hacen largas oraciones. Estos recibirán mayor juicio.
+
+
+## Marcos 12:41 (id: 10041012041)
+
+41Y estando sentado Jesús delante del arca de la ofrenda, miraba cómo el pueblo echaba dinero en el arca: y muchos ricos echaban mucho.
+
+
+## Marcos 12:42 (id: 10041012042)
+
+42Y como vino una viuda pobre, echó dos blancas, que son un maravedí.
+
+
+## Marcos 12:43 (id: 10041012043)
+
+43Entonces llamando á sus discípulos, les dice: De cierto os digo que esta viuda pobre echó más que todos los que han echado en el arca:
+
+
+## Marcos 12:44 (id: 10041012044)
+
+44Porque todos han echado de lo que les sobra; mas ésta, de su pobreza echó todo lo que tenía, todo su alimento.
+
+
+## Marcos 13:1 (id: 10041013001)
+
+1Y SALIENDO del templo, le dice uno de sus discípulos: Maestro, mira qué piedras, y qué edificios.
+
+
+## Marcos 13:2 (id: 10041013002)
+
+2Y Jesús respondiendo, le dijo: ¿Ves estos grandes edificios? no quedará piedra sobre piedra que no sea derribada.
+
+
+## Marcos 13:3 (id: 10041013003)
+
+3Y sentándose en el monte de las Olivas delante del templo, le preguntaron aparte Pedro y Jacobo y Juan y Andrés:
+
+
+## Marcos 13:4 (id: 10041013004)
+
+4Dinos, ¿cuándo serán estas cosas? ¿y qué señal habrá cuando todas estas cosas han de cumplirse?
+
+
+## Marcos 13:5 (id: 10041013005)
+
+5Y Jesús respondiéndoles, comenzó á decir: Mirad, que nadie os engañe;
+
+
+## Marcos 13:6 (id: 10041013006)
+
+6Porque vendrán muchos en mi nombre, diciendo: Yo soy el Cristo; y engañarán á muchos.
+
+
+## Marcos 13:7 (id: 10041013007)
+
+7Mas cuando oyereis de guerras y de rumores de guerras no os turbéis, porque conviene hacerse así; mas aun no será el fin.
+
+
+## Marcos 13:8 (id: 10041013008)
+
+8Porque se levantará nación contra nación, y reino contra reino; y habrá terremotos en muchos lugares, y habrá hambres y alborotos; principios de dolores serán estos.
+
+
+## Marcos 13:9 (id: 10041013009)
+
+9Mas vosotros mirad por vosotros: porque os entregarán en los concilios, y en sinagogas seréis azotados: y delante de presidentes y de reyes seréis llamados por causa de mí, en testimonio á ellos.
+
+
+## Marcos 13:10 (id: 10041013010)
+
+10Y á todas las gentes conviene que el evangelio sea predicado antes.
+
+
+## Marcos 13:11 (id: 10041013011)
+
+11Y cuando os trajeren para entregaros, no premeditéis qué habéis de decir, ni lo penséis: mas lo que os fuere dado en aquella hora, eso hablad; porque no sois vosotros los que habláis, sino el Espíritu Santo.
+
+
+## Marcos 13:12 (id: 10041013012)
+
+12Y entregará á la muerte el hermano al hermano, y el padre al hijo: y se levantarán los hijos contra los padres, y los matarán.
+
+
+## Marcos 13:13 (id: 10041013013)
+
+13Y seréis aborrecidos de todos por mi nombre: mas el que perseverare hasta el fin, éste será salvo.
+
+
+## Marcos 13:14 (id: 10041013014)
+
+14Empero cuando viereis la abominación de asolamiento, que fué dicha por el profeta Daniel, que estará donde no debe (el que lee, entienda), entonces los que estén en Judea huyan á los montes;
+
+
+## Marcos 13:15 (id: 10041013015)
+
+15Y el que esté sobre el terrado, no descienda á la casa, ni entre para tomar algo de su casa;
+
+
+## Marcos 13:16 (id: 10041013016)
+
+16Y el que estuviere en el campo, no vuelva atrás á tomar su capa.
+
+
+## Marcos 13:17 (id: 10041013017)
+
+17Mas ¡ay de las preñadas, y de las que criaren en aquellos días!
+
+
+## Marcos 13:18 (id: 10041013018)
+
+18Orad pues, que no acontezca vuestra huída en invierno.
+
+
+## Marcos 13:19 (id: 10041013019)
+
+19Porque aquellos días serán de aflicción, cual nunca fué desde el principio de la creación que crió Dios, hasta este tiempo, ni será.
+
+
+## Marcos 13:20 (id: 10041013020)
+
+20Y si el Señor no hubiese abreviado aquellos días, ninguna carne se salvaría; mas por causa de los escogidos que él escogió, abrevió aquellos días.
+
+
+## Marcos 13:21 (id: 10041013021)
+
+21Y entonces si alguno os dijere: He aquí, aquí está el Cristo; ó, He aquí, allí está, no le creáis.
+
+
+## Marcos 13:22 (id: 10041013022)
+
+22Porque se levantarán falsos Cristos y falsos profetas, y darán señales y prodigios, para engañar, si se pudiese hacer, aun á los escogidos.
+
+
+## Marcos 13:23 (id: 10041013023)
+
+23Mas vosotros mirad; os lo he dicho antes todo.
+
+
+## Marcos 13:24 (id: 10041013024)
+
+24Empero en aquellos días, después de aquella aflicción, el sol se obscurecerá, y la luna no dará su resplandor;
+
+
+## Marcos 13:25 (id: 10041013025)
+
+25Y las estrellas caerán del cielo, y las virtudes que están en los cielos serán conmovidas;
+
+
+## Marcos 13:26 (id: 10041013026)
+
+26Y entonces verán al Hijo del hombre, que vendrá en las nubes con mucha potestad y gloria.
+
+
+## Marcos 13:27 (id: 10041013027)
+
+27Y entonces enviará sus ángeles, y juntará sus escogidos de los cuatro vientos, desde el cabo de la tierra hasta el cabo del cielo.
+
+
+## Marcos 13:28 (id: 10041013028)
+
+28De la higuera aprended la semejanza: Cuando su rama ya se enternece, y brota hojas, conocéis que el verano está cerca:
+
+
+## Marcos 13:29 (id: 10041013029)
+
+29Así también vosotros, cuando viereis hacerse estas cosas, conoced que está cerca, á las puertas.
+
+
+## Marcos 13:30 (id: 10041013030)
+
+30De cierto os digo que no pasará esta generación, que todas estas cosas no sean hechas.
+
+
+## Marcos 13:31 (id: 10041013031)
+
+31El cielo y la tierra pasarán, mas mis palabras no pasarán.
+
+
+## Marcos 13:32 (id: 10041013032)
+
+32Empero de aquel día y de la hora, nadie sabe; ni aun los ángeles que están en el cielo, ni el Hijo, sino el Padre.
+
+
+## Marcos 13:33 (id: 10041013033)
+
+33Mirad, velad y orad: porque no sabéis cuándo será el tiempo.
+
+
+## Marcos 13:34 (id: 10041013034)
+
+34Como el hombre que partiéndose lejos, dejó su casa, y dió facultad á sus siervos, y á cada uno su obra, y al portero mandó que velase:
+
+
+## Marcos 13:35 (id: 10041013035)
+
+35Velad pues, porque no sabéis cuándo el señor de la casa vendrá; si á la tarde, ó á la media noche, ó al canto del gallo, ó á la mañana;
+
+
+## Marcos 13:36 (id: 10041013036)
+
+36Porque cuando viniere de repente, no os halle durmiendo.
+
+
+## Marcos 13:37 (id: 10041013037)
+
+37Y las cosas que á vosotros digo, á todos las digo: Velad.
+
+
+## Marcos 14:1 (id: 10041014001)
+
+1Y DOS días después era la Pascua y los días de los panes sin levadura: y procuraban los príncipes de los sacerdotes y los escribas cómo le prenderían por engaño, y le matarían.
+
+
+## Marcos 14:2 (id: 10041014002)
+
+2Y decían: No en el día de la fiesta, porque no se haga alboroto del pueblo.
+
+
+## Marcos 14:3 (id: 10041014003)
+
+3Y estando él en Bethania en casa de Simón el leproso, y sentado á la mesa, vino una mujer teniendo un alabastro de ungüento de nardo espique de mucho precio; y quebrando el alabastro, derramóselo sobre su cabeza.
+
+
+## Marcos 14:4 (id: 10041014004)
+
+4Y hubo algunos que se enojaron dentro de sí, y dijeron: ¿Para qué se ha hecho este desperdicio de ungüento?
+
+
+## Marcos 14:5 (id: 10041014005)
+
+5Porque podía esto ser vendido por más de trescientos denarios, y darse á los pobres. Y murmuraban contra ella.
+
+
+## Marcos 14:6 (id: 10041014006)
+
+6Mas Jesús dijo: Dejadla; ¿por qué la fatigáis? buena obra me ha hecho;
+
+
+## Marcos 14:7 (id: 10041014007)
+
+7Que siempre tendréis los pobres con vosotros, y cuando quisiereis les podréis hacer bien; mas á mí no siempre me tendréis.
+
+
+## Marcos 14:8 (id: 10041014008)
+
+8Esta ha hecho lo que podía; porque se ha anticipado á ungir mi cuerpo para la sepultura.
+
+
+## Marcos 14:9 (id: 10041014009)
+
+9De cierto os digo que donde quiera que fuere predicado este evangelio en todo el mundo, también esto que ha hecho ésta, será dicho para memoria de ella.
+
+
+## Marcos 14:10 (id: 10041014010)
+
+10Entonces Judas Iscariote, uno de los doce, vino á los príncipes de los sacerdotes, para entregársele.
+
+
+## Marcos 14:11 (id: 10041014011)
+
+11Y ellos oyéndolo se holgaron, y prometieron que le darían dineros. Y buscaba oportunidad cómo le entregaría.
+
+
+## Marcos 14:12 (id: 10041014012)
+
+12Y el primer día de los panes sin levadura, cuando sacrificaban la pascua, sus discípulos le dicen: ¿Dónde quieres que vayamos á disponer para que comas la pascua?
+
+
+## Marcos 14:13 (id: 10041014013)
+
+13Y envía dos de sus discípulos, y les dice: Id á la ciudad, y os encontrará un hombre que lleva un cántaro de agua; seguidle;
+
+
+## Marcos 14:14 (id: 10041014014)
+
+14Y donde entrare, decid al señor de la casa: El Maestro dice: ¿Dónde está el aposento donde he de comer la pascua con mis discípulos?
+
+
+## Marcos 14:15 (id: 10041014015)
+
+15Y él os mostrará un gran cenáculo ya preparado: aderezad para nosotros allí.
+
+
+## Marcos 14:16 (id: 10041014016)
+
+16Y fueron sus discípulos, y vinieron á la ciudad, y hallaron como les había dicho; y aderezaron la pascua.
+
+
+## Marcos 14:17 (id: 10041014017)
+
+17Y llegada la tarde, fué con los doce.
+
+
+## Marcos 14:18 (id: 10041014018)
+
+18Y como se sentaron á la mesa y comiesen, dice Jesús: De cierto os digo que uno de vosotros, que come conmigo, me ha de entregar.
+
+
+## Marcos 14:19 (id: 10041014019)
+
+19Entonces ellos comenzaron á entristecerse, y á decirle cada uno por sí: ¿Seré yo? Y el otro: ¿Seré yo?
+
+
+## Marcos 14:20 (id: 10041014020)
+
+20Y él respondiendo les dijo: Es uno de los doce que moja conmigo en el plato.
+
+
+## Marcos 14:21 (id: 10041014021)
+
+21A la verdad el Hijo del hombre va, como está de él escrito; mas ¡ay de aquel hombre por quien el Hijo del hombre es entregado! bueno le fuera á aquel hombre si nunca hubiera nacido.
+
+
+## Marcos 14:22 (id: 10041014022)
+
+22Y estando ellos comiendo, tomó Jesús pan, y bendiciendo, partió y les dió, y dijo: Tomad, esto es mi cuerpo.
+
+
+## Marcos 14:23 (id: 10041014023)
+
+23Y tomando el vaso, habiendo hecho gracias, les dió: y bebieron de él todos.
+
+
+## Marcos 14:24 (id: 10041014024)
+
+24Y les dice: Esto es mi sangre del nuevo pacto, que por muchos es derramada.
+
+
+## Marcos 14:25 (id: 10041014025)
+
+25De cierto os digo que no beberé más del fruto de la vid, hasta aquel día cuando lo beberé nuevo en el reino de Dios.
+
+
+## Marcos 14:26 (id: 10041014026)
+
+26Y como hubieron cantado el himno, se salieron al monte de las Olivas.
+
+
+## Marcos 14:27 (id: 10041014027)
+
+27Jesús entonces les dice: Todos seréis escandalizados en mí esta noche; porque escrito está: Heriré al pastor, y serán derramadas las ovejas.
+
+
+## Marcos 14:28 (id: 10041014028)
+
+28Mas después que haya resucitado, iré delante de vosotros á Galilea.
+
+
+## Marcos 14:29 (id: 10041014029)
+
+29Entonces Pedro le dijo: Aunque todos sean escandalizados, mas no yo.
+
+
+## Marcos 14:30 (id: 10041014030)
+
+30Y le dice Jesús: De cierto te digo que tú, hoy, en esta noche, antes que el gallo haya cantado dos veces, me negarás tres veces.
+
+
+## Marcos 14:31 (id: 10041014031)
+
+31Mas él con mayor porfía decía: Si me fuere menester morir contigo, no te negaré. También todos decían lo mismo.
+
+
+## Marcos 14:32 (id: 10041014032)
+
+32Y vienen al lugar que se llama Gethsemaní, y dice á sus discípulos: Sentaos aquí, entre tanto que yo oro.
+
+
+## Marcos 14:33 (id: 10041014033)
+
+33Y toma consigo á Pedro y á Jacobo y á Juan, y comenzó á atemorizarse, y á angustiarse.
+
+
+## Marcos 14:34 (id: 10041014034)
+
+34Y les dice: Está muy triste mi alma, hasta la muerte: esperad aquí y velad.
+
+
+## Marcos 14:35 (id: 10041014035)
+
+35Y yéndose un poco adelante, se postró en tierra, y oró que si fuese posible, pasase de él aquella hora.
+
+
+## Marcos 14:36 (id: 10041014036)
+
+36Y decía: Abba, Padre, todas las cosas son á ti posibles; traspasa de mí este vaso; empero no lo que yo quiero, sino lo que tú.
+
+
+## Marcos 14:37 (id: 10041014037)
+
+37Y vino y los halló durmiendo; y dice á Pedro: ¿Simón, duermes? ¿No has podido velar una hora?
+
+
+## Marcos 14:38 (id: 10041014038)
+
+38Velad y orad, para que no entréis en tentación: el espíritu á la verdad es presto, mas la carne enferma.
+
+
+## Marcos 14:39 (id: 10041014039)
+
+39Y volviéndose á ir, oró, y dijo las mismas palabras.
+
+
+## Marcos 14:40 (id: 10041014040)
+
+40Y vuelto, los halló otra vez durmiendo, porque los ojos de ellos estaban cargados; y no sabían qué responderle.
+
+
+## Marcos 14:41 (id: 10041014041)
+
+41Y vino la tercera vez, y les dice: Dormid ya y descansad: basta, la hora es venida; he aquí, el Hijo del hombre es entregado en manos de los pecadores.
+
+
+## Marcos 14:42 (id: 10041014042)
+
+42Levantaos, vamos: he aquí, el que me entrega está cerca.
+
+
+## Marcos 14:43 (id: 10041014043)
+
+43Y luego, aun hablando él, vino Judas, que era uno de los doce, y con él una compañía con espadas y palos, de parte de los príncipes de los sacerdotes, y de los escribas y de los ancianos.
+
+
+## Marcos 14:44 (id: 10041014044)
+
+44Y el que le entregaba les había dado señal común, diciendo: Al que yo besare, aquél es: prendedle, y llevadle con seguridad.
+
+
+## Marcos 14:45 (id: 10041014045)
+
+45Y como vino, se acercó luego á él, y le dice: Maestro, Maestro. Y le besó.
+
+
+## Marcos 14:46 (id: 10041014046)
+
+46Entonces ellos echaron en él sus manos, y le prendieron.
+
+
+## Marcos 14:47 (id: 10041014047)
+
+47Y uno de los que estaban allí, sacando la espada, hirió al siervo del sumo sacerdote, y le cortó la oreja.
+
+
+## Marcos 14:48 (id: 10041014048)
+
+48Y respondiendo Jesús, les dijo: ¿Como á ladrón habéis salido con espadas y con palos á tomarme?
+
+
+## Marcos 14:49 (id: 10041014049)
+
+49Cada día estaba con vosotros enseñando en el templo, y no me tomasteis; pero es así, para que se cumplan las Escrituras.
+
+
+## Marcos 14:50 (id: 10041014050)
+
+50Entonces dejándole todos sus discípulos, huyeron.
+
+
+## Marcos 14:51 (id: 10041014051)
+
+51Empero un mancebillo le seguía cubierto de una sábana sobre el cuerpo desnudo; y los mancebos le prendieron:
+
+
+## Marcos 14:52 (id: 10041014052)
+
+52Mas él, dejando la sábana, se huyó de ellos desnudo.
+
+
+## Marcos 14:53 (id: 10041014053)
+
+53Y trajeron á Jesús al sumo sacerdote; y se juntaron á él todos los príncipes de los sacerdotes y los ancianos y los escribas.
+
+
+## Marcos 14:54 (id: 10041014054)
+
+54Empero Pedro le siguió de lejos hasta dentro del patio del sumo sacerdote; y estaba sentado con los servidores, y calentándose al fuego.
+
+
+## Marcos 14:55 (id: 10041014055)
+
+55Y los príncipes de los sacerdotes y todo el concilio buscaban testimonio contra Jesús, para entregarle á la muerte; mas no lo hallaban.
+
+
+## Marcos 14:56 (id: 10041014056)
+
+56Porque muchos decían falso testimonio contra él; mas sus testimonios no concertaban.
+
+
+## Marcos 14:57 (id: 10041014057)
+
+57Entonces levantándose unos, dieron falso testimonio contra él, diciendo:
+
+
+## Marcos 14:58 (id: 10041014058)
+
+58Nosotros le hemos oído decir: Yo derribaré este templo que es hecho de mano, y en tres días edificaré otro echo sin mano.
+
+
+## Marcos 14:59 (id: 10041014059)
+
+59Mas ni aun así se concertaba el testimonio de ellos.
+
+
+## Marcos 14:60 (id: 10041014060)
+
+60Entonces el sumo sacerdote, levantándose en medio, preguntó á Jesús, diciendo: ¿No respondes algo? ¿Qué atestiguan éstos contra ti?
+
+
+## Marcos 14:61 (id: 10041014061)
+
+61Mas él callaba, y nada respondía. El sumo sacerdote le volvió á preguntar, y le dice: ¿Eres tú el Cristo, el Hijo del Bendito?
+
+
+## Marcos 14:62 (id: 10041014062)
+
+62Y Jesús le dijo: Yo soy; y veréis al Hijo del hombre sentado á la diestra de la potencia de Dios, y viniendo en las nubes del cielo.
+
+
+## Marcos 14:63 (id: 10041014063)
+
+63Entonces el sumo sacerdote, rasgando sus vestidos, dijo: ¿Qué más tenemos necesidad de testigos?
+
+
+## Marcos 14:64 (id: 10041014064)
+
+64Oído habéis la blasfemia: ¿qué os parece? Y ellos todos le condenaron ser culpado de muerte.
+
+
+## Marcos 14:65 (id: 10041014065)
+
+65Y algunos comenzaron á escupir en él, y cubrir su rostro, y á darle bofetadas, y decirle: Profetiza. Y los servidores le herían de bofetadas.
+
+
+## Marcos 14:66 (id: 10041014066)
+
+66Y estando Pedro abajo en el atrio, vino una de las criadas del sumo sacerdote;
+
+
+## Marcos 14:67 (id: 10041014067)
+
+67Y como vió á Pedro que se calentaba, mirándole, dice: Y tú con Jesús el Nazareno estabas.
+
+
+## Marcos 14:68 (id: 10041014068)
+
+68Mas él negó, diciendo: No conozco, ni sé lo que dices. Y se salió fuera á la entrada; y cantó el gallo.
+
+
+## Marcos 14:69 (id: 10041014069)
+
+69Y la criada viéndole otra vez, comenzó á decir á los que estaban allí: Este es de ellos.
+
+
+## Marcos 14:70 (id: 10041014070)
+
+70Mas él negó otra vez. Y poco después, los que estaban allí dijeron otra vez á Pedro: Verdaderamente tú eres de ellos; porque eres Galileo, y tu habla es semejante.
+
+
+## Marcos 14:71 (id: 10041014071)
+
+71Y él comenzó á maldecir y á jurar: No conozco á este hombre de quien habláis.
+
+
+## Marcos 14:72 (id: 10041014072)
+
+72Y el gallo cantó la segunda vez: y Pedro se acordó de las palabras que Jesús le había dicho: Antes que el gallo cante dos veces, me negarás tres veces. Y pensando en esto, lloraba.
+
+
+## Marcos 15:1 (id: 10041015001)
+
+1Y LUEGO por la mañana, habiendo tenido consejo los príncipes de los sacerdotes con los ancianos, y con los escribas, y con todo el concilio, llevaron á Jesús atado, y le entregaron á Pilato.
+
+
+## Marcos 15:2 (id: 10041015002)
+
+2Y Pilato le preguntó: ¿Eres tú el Rey de los Judíos? Y respondiendo él, le dijo: Tú lo dices.
+
+
+## Marcos 15:3 (id: 10041015003)
+
+3Y los príncipes de los sacerdotes le acusaban mucho.
+
+
+## Marcos 15:4 (id: 10041015004)
+
+4Y le preguntó otra vez Pilato, diciendo: ¿No respondes algo? Mira de cuántas cosas te acusan.
+
+
+## Marcos 15:5 (id: 10041015005)
+
+5Mas Jesús ni aun con eso respondió; de modo que Pilato se maravillaba.
+
+
+## Marcos 15:6 (id: 10041015006)
+
+6Empero en el día de la fiesta les soltaba un preso, cualquiera que pidiesen.
+
+
+## Marcos 15:7 (id: 10041015007)
+
+7Y había uno, que se llamaba Barrabás, preso con sus compañeros de motín que habían hecho muerte en una revuelta.
+
+
+## Marcos 15:8 (id: 10041015008)
+
+8Y viniendo la multitud, comenzó á pedir hiciese como siempre les había hecho.
+
+
+## Marcos 15:9 (id: 10041015009)
+
+9Y Pilato les respondió, diciendo: ¿Queréis que os suelte al Rey de los Judíos?
+
+
+## Marcos 15:10 (id: 10041015010)
+
+10Porque conocía que por envidia le habían entregado los príncipes de los sacerdotes.
+
+
+## Marcos 15:11 (id: 10041015011)
+
+11Mas los príncipes de los sacerdotes incitaron á la multitud, que les soltase antes á Barrabás.
+
+
+## Marcos 15:12 (id: 10041015012)
+
+12Y respondiendo Pilato, les dice otra vez: ¿Qué pues queréis que haga del que llamáis Rey de los Judíos?
+
+
+## Marcos 15:13 (id: 10041015013)
+
+13Y ellos volvieron á dar voces: Crucifícale.
+
+
+## Marcos 15:14 (id: 10041015014)
+
+14Mas Pilato les decía: ¿Pues qué mal ha hecho? Y ellos daban más voces: Crucifícale.
+
+
+## Marcos 15:15 (id: 10041015015)
+
+15Y Pilato, queriendo satisfacer al pueblo, les soltó á Barrabás, y entregó á Jesús, después de azotarle, para que fuese crucificado.
+
+
+## Marcos 15:16 (id: 10041015016)
+
+16Entonces los soldados le llevaron dentro de la sala, es á saber, al Pretorio; y convocan toda la cohorte.
+
+
+## Marcos 15:17 (id: 10041015017)
+
+17Y le visten de púrpura; y poniéndole una corona tejida de espinas,
+
+
+## Marcos 15:18 (id: 10041015018)
+
+18Comenzaron luego á saludarle: ¡Salve, Rey de los Judíos!
+
+
+## Marcos 15:19 (id: 10041015019)
+
+19Y le herían en la cabeza con una caña, y escupían en él, y le adoraban hincadas las rodillas.
+
+
+## Marcos 15:20 (id: 10041015020)
+
+20Y cuando le hubieron escarnecido, le desnudaron la púrpura, y le vistieron sus propios vestidos, y le sacaron para crucificarle.
+
+
+## Marcos 15:21 (id: 10041015021)
+
+21Y cargaron á uno que pasaba, Simón Cireneo, padre de Alejandro y de Rufo, que venía del campo, para que llevase su cruz.
+
+
+## Marcos 15:22 (id: 10041015022)
+
+22Y le llevan al lugar de Gólgotha, que declarado quiere decir: Lugar de la Calavera.
+
+
+## Marcos 15:23 (id: 10041015023)
+
+23Y le dieron á beber vino mezclado con mirra; mas él no lo tomó.
+
+
+## Marcos 15:24 (id: 10041015024)
+
+24Y cuando le hubieron crucificado, repartieron sus vestidos, echando suertes sobre ellos, qué llevaría cada uno.
+
+
+## Marcos 15:25 (id: 10041015025)
+
+25Y era la hora de las tres cuando le crucificaron.
+
+
+## Marcos 15:26 (id: 10041015026)
+
+26Y el título escrito de su causa era: EL REY DE LOS JUDIOS.
+
+
+## Marcos 15:27 (id: 10041015027)
+
+27Y crucificaron con él dos ladrones, uno á su derecha, y el otro á su izquierda.
+
+
+## Marcos 15:28 (id: 10041015028)
+
+28Y se cumplió la Escritura, que dice: Y con los inicuos fué contado.
+
+
+## Marcos 15:29 (id: 10041015029)
+
+29Y los que pasaban le denostaban, meneando sus cabezas, y diciendo: ¡Ah! tú que derribas el templo de Dios, y en tres días lo edificas,
+
+
+## Marcos 15:30 (id: 10041015030)
+
+30Sálvate á ti mismo, y desciende de la cruz.
+
+
+## Marcos 15:31 (id: 10041015031)
+
+31Y de esta manera también los príncipes de los sacerdotes escarneciendo, decían unos á otros, con los escribas: A otros salvó, á sí mismo no se puede salvar.
+
+
+## Marcos 15:32 (id: 10041015032)
+
+32El Cristo, Rey de Israel, descienda ahora de la cruz, para que veamos y creamos. También los que estaban crucificados con él le denostaban.
+
+
+## Marcos 15:33 (id: 10041015033)
+
+33Y cuando vino la hora de sexta, fueron hechas tinieblas sobre toda la tierra hasta la hora de nona.
+
+
+## Marcos 15:34 (id: 10041015034)
+
+34Y á la hora de nona, exclamó Jesús á gran voz, diciendo: Eloi, Eloi, ¿lama sabachthani? que declarado, quiere decir: Dios mío, Dios mío, ¿por qué me has desamparado?
+
+
+## Marcos 15:35 (id: 10041015035)
+
+35Y oyéndole unos de los que estaban allí, decían: He aquí, llama á Elías.
+
+
+## Marcos 15:36 (id: 10041015036)
+
+36Y corrió uno, y empapando una esponja en vinagre, y poniéndola en una caña, le dió á beber, diciendo: Dejad, veamos si vendrá Elías á quitarle.
+
+
+## Marcos 15:37 (id: 10041015037)
+
+37Mas Jesús, dando una grande voz, espiró.
+
+
+## Marcos 15:38 (id: 10041015038)
+
+38Entonces el velo del templo se rasgó en dos, de alto á bajo.
+
+
+## Marcos 15:39 (id: 10041015039)
+
+39Y el centurión que estaba delante de él, viendo que había espirado así clamando, dijo: Verdaderamente este hombre era el Hijo de Dios.
+
+
+## Marcos 15:40 (id: 10041015040)
+
+40Y también estaban algunas mujeres mirando de lejos; entre las cuales estaba María Magdalena, y María la madre de Jacobo el menor y de José, y Salomé;
+
+
+## Marcos 15:41 (id: 10041015041)
+
+41Las cuales, estando aún él en Galilea, le habían seguido, y le servían; y otras muchas que juntamente con él habían subido á Jerusalem.
+
+
+## Marcos 15:42 (id: 10041015042)
+
+42Y cuando fué la tarde, porque era la preparación, es decir, la víspera del sábado,
+
+
+## Marcos 15:43 (id: 10041015043)
+
+43José de Arimatea, senador noble, que también esperaba el reino de Dios, vino, y osadamente entró á Pilato, y pidió el cuerpo de Jesús.
+
+
+## Marcos 15:44 (id: 10041015044)
+
+44Y Pilato se maravilló que ya fuese muerto; y haciendo venir al centurión, preguntóle si era ya muerto.
+
+
+## Marcos 15:45 (id: 10041015045)
+
+45Y enterado del centurión, dió el cuerpo á José:
+
+
+## Marcos 15:46 (id: 10041015046)
+
+46El cual compró una sábana, y quitándole, le envolvió en la sábana: y le puso en un sepulcro que estaba cavado en una peña; y revolvió una piedra á la puerta del sepulcro.
+
+
+## Marcos 15:47 (id: 10041015047)
+
+47Y María Magdalena, y María madre de José, miraban donde era puesto.
+
+
+## Marcos 16:1 (id: 10041016001)
+
+1Y COMO pasó el sábado, María Magdalena, y María madre de Jacobo, y Salomé, compraron drogas aromáticas, para venir á ungirle.
+
+
+## Marcos 16:2 (id: 10041016002)
+
+2Y muy de mañana, el primer día de la semana, vienen al sepulcro, ya salido el sol.
+
+
+## Marcos 16:3 (id: 10041016003)
+
+3Y decían entre sí: ¿Quién nos revolverá la piedra de la puerta del sepulcro?
+
+
+## Marcos 16:4 (id: 10041016004)
+
+4Y como miraron, ven la piedra revuelta; que era muy grande.
+
+
+## Marcos 16:5 (id: 10041016005)
+
+5Y entradas en el sepulcro, vieron un mancebo sentado al lado derecho, cubierto de una larga ropa blanca; y se espantaron.
+
+
+## Marcos 16:6 (id: 10041016006)
+
+6Mas él les dice: No os asustéis: buscáis á Jesús Nazareno, el que fué crucificado; resucitado há, no está aquí; he aquí el lugar en donde le pusieron.
+
+
+## Marcos 16:7 (id: 10041016007)
+
+7Mas id, decid á sus discípulos y á Pedro, que él va antes que vosotros á Galilea: allí le veréis, como os dijo.
+
+
+## Marcos 16:8 (id: 10041016008)
+
+8Y ellas se fueron huyendo del sepulcro; porque las había tomado temblor y espanto; ni decían nada á nadie, porque tenían miedo.
+
+
+## Marcos 16:9 (id: 10041016009)
+
+9Mas como Jesús resucitó por la mañana, el primer día de la semana, apareció primeramente á María Magdalena, de la cual había echado siete demonios.
+
+
+## Marcos 16:10 (id: 10041016010)
+
+10Yendo ella, lo hizo saber á los que habían estado con él, que estaban tristes y llorando.
+
+
+## Marcos 16:11 (id: 10041016011)
+
+11Y ellos como oyeron que vivía, y que había sido visto de ella, no lo creyeron.
+
+
+## Marcos 16:12 (id: 10041016012)
+
+12Mas después apareció en otra forma á dos de ellos que iban caminando, yendo al campo.
+
+
+## Marcos 16:13 (id: 10041016013)
+
+13Y ellos fueron, y lo hicieron saber á los otros; y ni aun á ellos creyeron.
+
+
+## Marcos 16:14 (id: 10041016014)
+
+14Finalmente se apareció á los once mismos, estando sentados á la mesa, y censuróles su incredulidad y dureza de corazón, que no hubiesen creído á los que le habían visto resucitado.
+
+
+## Marcos 16:15 (id: 10041016015)
+
+15Y les dijo: Id por todo el mundo; predicad el evangelio á toda criatura.
+
+
+## Marcos 16:16 (id: 10041016016)
+
+16El que creyere y fuere bautizado, será salvo; mas el que no creyere, será condenado.
+
+
+## Marcos 16:17 (id: 10041016017)
+
+17Y estas señales seguirán á los que creyeren: En mi nombre echarán fuera demonios; hablarán nuevas lenguas;
+
+
+## Marcos 16:18 (id: 10041016018)
+
+18Quitarán serpientes, y si bebieren cosa mortífera, no les dañará; sobre los enfermos pondrán sus manos, y sanarán.
+
+
+## Marcos 16:19 (id: 10041016019)
+
+19Y el Señor, después que les habló, fué recibido arriba en el cielo, y sentóse á la diestra de Dios.
+
+
+## Marcos 16:20 (id: 10041016020)
+
+20Y ellos, saliendo, predicaron en todas partes, obrando con ellos el Señor, y confirmando la palabra con las señales que se seguían. Amén.
+
+`;export{e as default};

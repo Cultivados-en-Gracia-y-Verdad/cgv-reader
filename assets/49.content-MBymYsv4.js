@@ -1,0 +1,788 @@
+const e=`# Reina Valera 1909
+
+## License Information
+
+**Reina Valera 1909** is based on and adapted from: _Reina Valera 1909_, [Public Domain](https://creativecommons.org/public-domain/cc0/), 1909, which is licensed under a [Public Domain CC0](https://creativecommons.org/public-domain/cc0/).
+
+This markdown version is provided under the same license.
+
+
+
+--------------------------------
+
+
+## Efesios 1:1 (id: 10049001001)
+
+1PABLO, apóstol de Jesucristo por la voluntad de Dios, á los santos y fieles en Cristo Jesús que están en Efeso:
+
+
+## Efesios 1:2 (id: 10049001002)
+
+2Gracia sea á vosotros, y paz de Dios Padre nuestro, y del Señor Jesucristo.
+
+
+## Efesios 1:3 (id: 10049001003)
+
+3Bendito el Dios y Padre del Señor nuestro Jesucristo, el cual nos bendijo con toda bendición espiritual en lugares celestiales en Cristo:
+
+
+## Efesios 1:4 (id: 10049001004)
+
+4Según nos escogió en él antes de la fundación del mundo, para que fuésemos santos y sin mancha delante de él en amor;
+
+
+## Efesios 1:5 (id: 10049001005)
+
+5Habiéndonos predestinado para ser adoptados hijos por Jesucristo á sí mismo, según el puro afecto de su voluntad,
+
+
+## Efesios 1:6 (id: 10049001006)
+
+6Para alabanza de la gloria de su gracia, con la cual nos hizo aceptos en el Amado:
+
+
+## Efesios 1:7 (id: 10049001007)
+
+7En el cual tenemos redención por su sangre, la remisión de pecados por las riquezas de su gracia,
+
+
+## Efesios 1:8 (id: 10049001008)
+
+8Que sobreabundó en nosotros en toda sabiduría é inteligencia;
+
+
+## Efesios 1:9 (id: 10049001009)
+
+9Descubriéndonos el misterio de su voluntad, según su beneplácito, que se había propuesto en sí mismo,
+
+
+## Efesios 1:10 (id: 10049001010)
+
+10De reunir todas las cosas en Cristo, en la dispensación del cumplimiento de los tiempos, así las que están en los cielos, como las que están en la tierra:
+
+
+## Efesios 1:11 (id: 10049001011)
+
+11En él digo, en quien asimismo tuvimos suerte, habiendo sido predestinados conforme al propósito del que hace todas las cosas según el consejo de su voluntad,
+
+
+## Efesios 1:12 (id: 10049001012)
+
+12Para que seamos para alabanza de su gloria, nosotros que antes esperamos en Cristo.
+
+
+## Efesios 1:13 (id: 10049001013)
+
+13En el cual esperasteis también vosotros en oyendo la palabra de verdad, el evangelio de vuestra salud: en el cual también desde que creísteis, fuisteis sellados con el Espíritu Santo de la promesa,
+
+
+## Efesios 1:14 (id: 10049001014)
+
+14Que es las arras de nuestra herencia, para la redención de la posesión adquirida para alabanza de su gloria.
+
+
+## Efesios 1:15 (id: 10049001015)
+
+15Por lo cual también yo, habiendo oído de vuestra fe en el Señor Jesús, y amor para con todos los santos,
+
+
+## Efesios 1:16 (id: 10049001016)
+
+16No ceso de dar gracias por vosotros, haciendo memoria de vosotros en mis oraciones;
+
+
+## Efesios 1:17 (id: 10049001017)
+
+17Que el Dios del Señor nuestro Jesucristo, el Padre de gloria, os dé espíritu de sabiduría y de revelación para su conocimiento;
+
+
+## Efesios 1:18 (id: 10049001018)
+
+18Alumbrando los ojos de vuestro entendimiento, para que sepáis cuál sea la esperanza de su vocación, y cuáles las riquezas de la gloria de su herencia en los santos,
+
+
+## Efesios 1:19 (id: 10049001019)
+
+19Y cuál aquella supereminente grandeza de su poder para con nosotros los que creemos, por la operación de la potencia de su fortaleza,
+
+
+## Efesios 1:20 (id: 10049001020)
+
+20La cual obró en Cristo, resucitándole de los muertos, y colocándole á su diestra en los cielos,
+
+
+## Efesios 1:21 (id: 10049001021)
+
+21Sobre todo principado, y potestad, y potencia, y señorío, y todo nombre que se nombra, no sólo en este siglo, mas aun en el venidero:
+
+
+## Efesios 1:22 (id: 10049001022)
+
+22Y sometió todas las cosas debajo de sus pies, y diólo por cabeza sobre todas las cosas á la iglesia,
+
+
+## Efesios 1:23 (id: 10049001023)
+
+23La cual es su cuerpo, la plenitud de Aquel que hinche todas las cosas en todos.
+
+
+## Efesios 2:1 (id: 10049002001)
+
+1Y DE ella recibisteis vosotros, que estabais muertos en vuestros delitos y pecados,
+
+
+## Efesios 2:2 (id: 10049002002)
+
+2En que en otro tiempo anduvisteis conforme á la condición de este mundo, conforme al príncipe de la potestad del aire, el espíritu que ahora obra en los hijos de desobediencia:
+
+
+## Efesios 2:3 (id: 10049002003)
+
+3Entre los cuales todos nosotros también vivimos en otro tiempo en los deseos de nuestra carne, haciendo la voluntad de la carne y de los pensamientos; y éramos por naturaleza hijos de ira, también como los demás.
+
+
+## Efesios 2:4 (id: 10049002004)
+
+4Empero Dios, que es rico en misericordia, por su mucho amor con que nos amó,
+
+
+## Efesios 2:5 (id: 10049002005)
+
+5Aun estando nosotros muertos en pecados, nos dió vida juntamente con Cristo; por gracia sois salvos;
+
+
+## Efesios 2:6 (id: 10049002006)
+
+6Y juntamente nos resucitó, y asimismo nos hizo sentar en los cielos con Cristo Jesús,
+
+
+## Efesios 2:7 (id: 10049002007)
+
+7Para mostrar en los siglos venideros las abundantes riquezas de su gracia en su bondad para con nosotros en Cristo Jesús.
+
+
+## Efesios 2:8 (id: 10049002008)
+
+8Porque por gracia sois salvos por la fe; y esto no de vosotros, pues es don de Dios:
+
+
+## Efesios 2:9 (id: 10049002009)
+
+9No por obras, para que nadie se gloríe.
+
+
+## Efesios 2:10 (id: 10049002010)
+
+10Porque somos hechura suya, criados en Cristo Jesús para buenas obras, las cuales Dios preparó para que anduviésemos en ellas.
+
+
+## Efesios 2:11 (id: 10049002011)
+
+11Por tanto, acordaos que en otro tiempo vosotros los Gentiles en la carne, que erais llamados incircuncisión por la que se llama circuncisión, hecha con mano en la carne;
+
+
+## Efesios 2:12 (id: 10049002012)
+
+12Que en aquel tiempo estabais sin Cristo, alejados de la república de Israel, y extranjeros á los pactos de la promesa, sin esperanza y sin Dios en el mundo.
+
+
+## Efesios 2:13 (id: 10049002013)
+
+13Mas ahora en Cristo Jesús, vosotros que en otro tiempo estabais lejos, habéis sido hechos cercanos por la sangre de Cristo.
+
+
+## Efesios 2:14 (id: 10049002014)
+
+14Porque él es nuestra paz, que de ambos hizo uno, derribando la pared intermedia de separación;
+
+
+## Efesios 2:15 (id: 10049002015)
+
+15Dirimiendo en su carne las enemistades, la ley de los mandamientos en orden á ritos, para edificar en sí mismo los dos en un nuevo hombre, haciendo la paz,
+
+
+## Efesios 2:16 (id: 10049002016)
+
+16Y reconciliar por la cruz con Dios á ambos en un mismo cuerpo, matando en ella las enemistades.
+
+
+## Efesios 2:17 (id: 10049002017)
+
+17Y vino, y anunció la paz á vosotros que estabais lejos, y á los que estaban cerca:
+
+
+## Efesios 2:18 (id: 10049002018)
+
+18Que por él los unos y los otros tenemos entrada por un mismo Espíritu al Padre.
+
+
+## Efesios 2:19 (id: 10049002019)
+
+19Así que ya no sois extranjeros ni advenedizos, sino juntamente ciudadanos con los santos, y domésticos de Dios;
+
+
+## Efesios 2:20 (id: 10049002020)
+
+20Edificados sobre el fundamento de los apóstoles y profetas, siendo la principal piedra del ángulo Jesucristo mismo;
+
+
+## Efesios 2:21 (id: 10049002021)
+
+21En el cual, compaginado todo el edificio, va creciendo para ser un templo santo en el Señor:
+
+
+## Efesios 2:22 (id: 10049002022)
+
+22En el cual vosotros también sois juntamente edificados, para morada de Dios en Espíritu.
+
+
+## Efesios 3:1 (id: 10049003001)
+
+1POR esta causa yo Pablo, prisionero de Cristo Jesús por vosotros los Gentiles,
+
+
+## Efesios 3:2 (id: 10049003002)
+
+2Si es que habéis oído la dispensación de la gracia de Dios que me ha sido dada para con vosotros,
+
+
+## Efesios 3:3 (id: 10049003003)
+
+3A saber, que por revelación me fué declarado el misterio, como antes he escrito en breve;
+
+
+## Efesios 3:4 (id: 10049003004)
+
+4Leyendo lo cual podéis entender cuál sea mi inteligencia en el misterio de Cristo:
+
+
+## Efesios 3:5 (id: 10049003005)
+
+5El cual misterio en los otros siglos no se dió á conocer á los hijos de los hombres como ahora es revelado á sus santos apóstoles y profetas en el Espíritu:
+
+
+## Efesios 3:6 (id: 10049003006)
+
+6Que los Gentiles sean juntamente herederos, é incorporados, y consortes de su promesa en Cristo por el evangelio:
+
+
+## Efesios 3:7 (id: 10049003007)
+
+7Del cual yo soy hecho ministro por el don de la gracia de Dios que me ha sido dado según la operación de su potencia.
+
+
+## Efesios 3:8 (id: 10049003008)
+
+8A mí, que soy menos que el más pequeño de todos los santos, es dada esta gracia de anunciar entre los Gentiles el evangelio de las inescrutables riquezas de Cristo,
+
+
+## Efesios 3:9 (id: 10049003009)
+
+9Y de aclarar á todos cuál sea la dispensación del misterio escondido desde los siglos en Dios, que crió todas las cosas.
+
+
+## Efesios 3:10 (id: 10049003010)
+
+10Para que la multiforme sabiduría de Dios sea ahora notificada por la iglesia á los principados y potestades en los cielos,
+
+
+## Efesios 3:11 (id: 10049003011)
+
+11Conforme á la determinación eterna, que hizo en Cristo Jesús nuestro Señor:
+
+
+## Efesios 3:12 (id: 10049003012)
+
+12En el cual tenemos seguridad y entrada con confianza por la fe de él.
+
+
+## Efesios 3:13 (id: 10049003013)
+
+13Por tanto, pido que no desmayéis á causa de mis tribulaciones por vosotros, las cuales son vuestra gloria.
+
+
+## Efesios 3:14 (id: 10049003014)
+
+14Por esta causa doblo mis rodillas al Padre de nuestro Señor Jesucristo,
+
+
+## Efesios 3:15 (id: 10049003015)
+
+15Del cual es nombrada toda la parentela en los cielos y en la tierra,
+
+
+## Efesios 3:16 (id: 10049003016)
+
+16Que os dé, conforme á las riquezas de su gloria, el ser corroborados con potencia en el hombre interior por su Espíritu.
+
+
+## Efesios 3:17 (id: 10049003017)
+
+17Que habite Cristo por la fe en vuestros corazones; para que, arraigados y fundados en amor,
+
+
+## Efesios 3:18 (id: 10049003018)
+
+18Podáis bien comprender con todos los santos cuál sea la anchura y la longura y la profundidad y la altura,
+
+
+## Efesios 3:19 (id: 10049003019)
+
+19Y conocer el amor de Cristo, que excede á todo conocimiento, para que seáis llenos de toda la plenitud de Dios.
+
+
+## Efesios 3:20 (id: 10049003020)
+
+20Y á Aquel que es poderoso para hacer todas las cosas mucho más abundantemente de lo que pedimos ó entendemos, por la potencia que obra en nosotros,
+
+
+## Efesios 3:21 (id: 10049003021)
+
+21A él sea gloria en la iglesia por Cristo Jesús, por todas edades del siglo de los siglos. Amén.
+
+
+## Efesios 4:1 (id: 10049004001)
+
+1YO pues, preso en el Señor, os ruego que andéis como es digno de la vocación con que sois llamados;
+
+
+## Efesios 4:2 (id: 10049004002)
+
+2Con toda humildad y mansedumbre, con paciencia soportando los unos á los otros en amor;
+
+
+## Efesios 4:3 (id: 10049004003)
+
+3Solícitos á guardar la unidad del Espíritu en el vínculo de la paz.
+
+
+## Efesios 4:4 (id: 10049004004)
+
+4Un cuerpo, y un Espíritu; como sois también llamados á una misma esperanza de vuestra vocación:
+
+
+## Efesios 4:5 (id: 10049004005)
+
+5Un Señor, una fe, un bautismo,
+
+
+## Efesios 4:6 (id: 10049004006)
+
+6Un Dios y Padre de todos, el cual es sobre todas las cosas, y por todas las cosas, y en todos vosotros.
+
+
+## Efesios 4:7 (id: 10049004007)
+
+7Empero á cada uno de nosotros es dada la gracia conforme á la medida del don de Cristo.
+
+
+## Efesios 4:8 (id: 10049004008)
+
+8Por lo cual dice: Subiendo á lo alto, llevó cautiva la cautividad, y dió dones á los hombres.
+
+
+## Efesios 4:9 (id: 10049004009)
+
+9(Y que subió, ¿qué es, sino que también había descendido primero á las partes más bajas de la tierra?
+
+
+## Efesios 4:10 (id: 10049004010)
+
+10El que descendió, él mismo es el que también subió sobre todos los cielos para cumplir todas las cosas.)
+
+
+## Efesios 4:11 (id: 10049004011)
+
+11Y él mismo dió unos, ciertamente apóstoles; y otros, profetas; y otros, evangelistas; y otros, pastores y doctores;
+
+
+## Efesios 4:12 (id: 10049004012)
+
+12Para perfección de los santos, para la obra del ministerio, para edificación del cuerpo de Cristo;
+
+
+## Efesios 4:13 (id: 10049004013)
+
+13Hasta que todos lleguemos á la unidad de la fe y del conocimiento del Hijo de Dios, á un varón perfecto, á la medida de la edad de la plenitud de Cristo:
+
+
+## Efesios 4:14 (id: 10049004014)
+
+14Que ya no seamos niños fluctuantes, y llevados por doquiera de todo viento de doctrina, por estratagema de hombres que, para engañar, emplean con astucia los artificios del error:
+
+
+## Efesios 4:15 (id: 10049004015)
+
+15Antes siguiendo la verdad en amor, crezcamos en todas cosas en aquel que es la cabeza, á saber, Cristo;
+
+
+## Efesios 4:16 (id: 10049004016)
+
+16Del cual, todo el cuerpo compuesto y bien ligado entre sí por todas las junturas de su alimento, que recibe según la operación, cada miembro conforme á su medida toma aumento de cuerpo edificándose en amor.
+
+
+## Efesios 4:17 (id: 10049004017)
+
+17Esto pues digo, y requiero en el Señor, que no andéis más como los otros Gentiles, que andan en la vanidad de su sentido,
+
+
+## Efesios 4:18 (id: 10049004018)
+
+18Teniendo el entendimiento entenebrecido, ajenos de la vida de Dios por la ignorancia que en ellos hay, por la dureza de su corazón:
+
+
+## Efesios 4:19 (id: 10049004019)
+
+19Los cuales después que perdieron el sentido de la conciencia, se entregaron á la desvergüenza para cometer con avidez toda suerte de impureza.
+
+
+## Efesios 4:20 (id: 10049004020)
+
+20Mas vosotros no habéis aprendido así á Cristo:
+
+
+## Efesios 4:21 (id: 10049004021)
+
+21Si empero lo habéis oído, y habéis sido por él enseñados, como la verdad está en Jesús,
+
+
+## Efesios 4:22 (id: 10049004022)
+
+22A que dejéis, cuanto á la pasada manera de vivir, el viejo hombre que está viciado conforme á los deseos de error;
+
+
+## Efesios 4:23 (id: 10049004023)
+
+23Y á renovaros en el espíritu de vuestra mente,
+
+
+## Efesios 4:24 (id: 10049004024)
+
+24Y vestir el nuevo hombre que es criado conforme á Dios en justicia y en santidad de verdad.
+
+
+## Efesios 4:25 (id: 10049004025)
+
+25Por lo cual, dejada la mentira, hablad verdad cada uno con su prójimo; porque somos miembros los unos de los otros.
+
+
+## Efesios 4:26 (id: 10049004026)
+
+26Airaos, y no pequéis; no se ponga el sol sobre vuestro enojo;
+
+
+## Efesios 4:27 (id: 10049004027)
+
+27Ni deis lugar al diablo.
+
+
+## Efesios 4:28 (id: 10049004028)
+
+28El que hurtaba, no hurte más; antes trabaje, obrando con sus manos lo que es bueno, para que tenga de qué dar al que padeciere necesidad.
+
+
+## Efesios 4:29 (id: 10049004029)
+
+29Ninguna palabra torpe salga de vuestra boca, sino la que sea buena para edificación, para que dé gracia á los oyentes.
+
+
+## Efesios 4:30 (id: 10049004030)
+
+30Y no contristéis al Espíritu Santo de Dios, con el cual estáis sellados para el día de la redención.
+
+
+## Efesios 4:31 (id: 10049004031)
+
+31Toda amargura, y enojo, é ira, y voces, y maledicencia sea quitada de vosotros, y toda malicia:
+
+
+## Efesios 4:32 (id: 10049004032)
+
+32Antes sed los unos con los otros benignos, misericordiosos, perdonándoos los unos á los otros, como también Dios os perdonó en Cristo.
+
+
+## Efesios 5:1 (id: 10049005001)
+
+1SED, pues, imitadores de Dios como hijos amados:
+
+
+## Efesios 5:2 (id: 10049005002)
+
+2Y andad en amor, como también Cristo nos amó, y se entregó á sí mismo por nosotros, ofrenda y sacrificio á Dios en olor suave.
+
+
+## Efesios 5:3 (id: 10049005003)
+
+3Pero fornicación y toda inmundicia, ó avaricia, ni aun se nombre entre vosotros, como conviene á santos;
+
+
+## Efesios 5:4 (id: 10049005004)
+
+4Ni palabras torpes, ni necedades, ni truhanerías, que no convienen; sino antes bien acciones de gracias.
+
+
+## Efesios 5:5 (id: 10049005005)
+
+5Porque sabéis esto, que ningún fornicario, ó inmundo, ó avaro, que es servidor de ídolos, tiene herencia en el reino de Cristo y de Dios.
+
+
+## Efesios 5:6 (id: 10049005006)
+
+6Nadie os engañe con palabras vanas; porque por estas cosas viene la ira de Dios sobre los hijos de desobediencia.
+
+
+## Efesios 5:7 (id: 10049005007)
+
+7No seáis pues aparceros con ellos;
+
+
+## Efesios 5:8 (id: 10049005008)
+
+8Porque en otro tiempo erais tinieblas; mas ahora sois luz en el Señor: andad como hijos de luz,
+
+
+## Efesios 5:9 (id: 10049005009)
+
+9(Porque el fruto del Espíritu es en toda bondad, y justicia, y verdad;)
+
+
+## Efesios 5:10 (id: 10049005010)
+
+10Aprobando lo que es agradable al Señor.
+
+
+## Efesios 5:11 (id: 10049005011)
+
+11Y no comuniquéis con las obras infructuosas de las tinieblas; sino antes bien redargüidlas.
+
+
+## Efesios 5:12 (id: 10049005012)
+
+12Porque torpe cosa es aun hablar de lo que ellos hacen en oculto.
+
+
+## Efesios 5:13 (id: 10049005013)
+
+13Mas todas las cosas cuando son redargüidas, son manifestadas por la luz; porque lo que manifiesta todo, la luz es.
+
+
+## Efesios 5:14 (id: 10049005014)
+
+14Por lo cual dice: Despiértate, tú que duermes, y levántate de los muertos, y te alumbrará Cristo.
+
+
+## Efesios 5:15 (id: 10049005015)
+
+15Mirad, pues, cómo andéis avisadamente; no como necios, mas como sabios;
+
+
+## Efesios 5:16 (id: 10049005016)
+
+16Redimiendo el tiempo, porque los días son malos.
+
+
+## Efesios 5:17 (id: 10049005017)
+
+17Por tanto, no seáis imprudentes, sino entendidos de cuál sea la voluntad del Señor.
+
+
+## Efesios 5:18 (id: 10049005018)
+
+18Y no os embriaguéis de vino, en lo cual hay disolución; mas sed llenos de Espíritu;
+
+
+## Efesios 5:19 (id: 10049005019)
+
+19Hablando entre vosotros con salmos, y con himnos, y canciones espirituales, cantando y alabando al Señor en vuestros corazones;
+
+
+## Efesios 5:20 (id: 10049005020)
+
+20Dando gracias siempre de todo al Dios y Padre en el nombre de nuestro Señor Jesucristo:
+
+
+## Efesios 5:21 (id: 10049005021)
+
+21Sujetados los unos á los otros en el temor de Dios.
+
+
+## Efesios 5:22 (id: 10049005022)
+
+22Las casadas estén sujetas á sus propios maridos, como al Señor.
+
+
+## Efesios 5:23 (id: 10049005023)
+
+23Porque el marido es cabeza de la mujer, así como Cristo es cabeza de la iglesia; y él es el que da la salud al cuerpo.
+
+
+## Efesios 5:24 (id: 10049005024)
+
+24Así que, como la iglesia está sujeta á Cristo, así también las casadas lo estén á sus maridos en todo.
+
+
+## Efesios 5:25 (id: 10049005025)
+
+25Maridos, amad á vuestras mujeres, así como Cristo amó á la iglesia, y se entregó á sí mismo por ella,
+
+
+## Efesios 5:26 (id: 10049005026)
+
+26Para santificarla limpiándola en el lavacro del agua por la palabra,
+
+
+## Efesios 5:27 (id: 10049005027)
+
+27Para presentársela gloriosa para sí, una iglesia que no tuviese mancha ni arruga, ni cosa semejante; sino que fuese santa y sin mancha.
+
+
+## Efesios 5:28 (id: 10049005028)
+
+28Así también los maridos deben amar á sus mujeres como á sus mismos cuerpos. El que ama á su mujer, á sí mismo se ama.
+
+
+## Efesios 5:29 (id: 10049005029)
+
+29Porque ninguno aborreció jamás á su propia carne, antes la sustenta y regala, como también Cristo á la iglesia;
+
+
+## Efesios 5:30 (id: 10049005030)
+
+30Porque somos miembros de su cuerpo, de su carne y de sus huesos.
+
+
+## Efesios 5:31 (id: 10049005031)
+
+31Por esto dejará el hombre á su padre y á su madre, y se allegará á su mujer, y serán dos en una carne.
+
+
+## Efesios 5:32 (id: 10049005032)
+
+32Este misterio grande es: mas yo digo esto con respecto á Cristo y á la iglesia.
+
+
+## Efesios 5:33 (id: 10049005033)
+
+33Cada uno empero de vosotros de por sí, ame también á su mujer como á sí mismo; y la mujer reverencie á su marido.
+
+
+## Efesios 6:1 (id: 10049006001)
+
+1HIJOS, obedeced en el Señor á vuestros padres; porque esto es justo.
+
+
+## Efesios 6:2 (id: 10049006002)
+
+2Honra á tu padre y á tu madre, que es el primer mandamiento con promesa,
+
+
+## Efesios 6:3 (id: 10049006003)
+
+3Para que te vaya bien, y seas de larga vida sobre la tierra.
+
+
+## Efesios 6:4 (id: 10049006004)
+
+4Y vosotros, padres, no provoquéis á ira á vuestros hijos; sino criadlos en disciplina y amonestación del Señor.
+
+
+## Efesios 6:5 (id: 10049006005)
+
+5Siervos, obedeced á vuestros amos según la carne con temor y temblor, con sencillez de vuestro corazón, como á Cristo;
+
+
+## Efesios 6:6 (id: 10049006006)
+
+6No sirviendo al ojo, como los que agradan á los hombres; sino como siervos de Cristo, haciendo de ánimo la voluntad de Dios;
+
+
+## Efesios 6:7 (id: 10049006007)
+
+7Sirviendo con buena voluntad, como al Señor, y no á los hombres;
+
+
+## Efesios 6:8 (id: 10049006008)
+
+8Sabiendo que el bien que cada uno hiciere, esto recibirá del Señor, sea siervo ó sea libre.
+
+
+## Efesios 6:9 (id: 10049006009)
+
+9Y vosotros, amos, haced á ellos lo mismo, dejando las amenazas: sabiendo que el Señor de ellos y vuestro está en los cielos, y que no hay acepción de personas con él.
+
+
+## Efesios 6:10 (id: 10049006010)
+
+10Por lo demás, hermanos míos, confortaos en el Señor, y en la potencia de su fortaleza.
+
+
+## Efesios 6:11 (id: 10049006011)
+
+11Vestíos de toda la armadura de Dios, para que podáis estar firmes contra las asechanzas del diablo.
+
+
+## Efesios 6:12 (id: 10049006012)
+
+12Porque no tenemos lucha contra sangre y carne; sino contra principados, contra potestades, contra señores del mundo, gobernadores de estas tinieblas, contra malicias espirituales en los aires.
+
+
+## Efesios 6:13 (id: 10049006013)
+
+13Por tanto, tomad toda la armadura de Dios, para que podáis resistir en el día malo, y estar firmes, habiendo acabado todo.
+
+
+## Efesios 6:14 (id: 10049006014)
+
+14Estad pues firmes, ceñidos vuestros lomos de verdad, y vestidos de la cota de justicia,
+
+
+## Efesios 6:15 (id: 10049006015)
+
+15Y calzados los pies con el apresto del evangelio de paz;
+
+
+## Efesios 6:16 (id: 10049006016)
+
+16Sobre todo, tomando el escudo de la fe, con que podáis apagar todos los dardos de fuego del maligno.
+
+
+## Efesios 6:17 (id: 10049006017)
+
+17Y tomad el yelmo de salud, y la espada del Espíritu; que es la palabra de Dios;
+
+
+## Efesios 6:18 (id: 10049006018)
+
+18Orando en todo tiempo con toda deprecación y súplica en el Espíritu, y velando en ello con toda instancia y suplicación por todos los santos,
+
+
+## Efesios 6:19 (id: 10049006019)
+
+19Y por mí, para que me sea dada palabra en el abrir de mi boca con confianza, para hacer notorio el misterio del evangelio,
+
+
+## Efesios 6:20 (id: 10049006020)
+
+20Por el cual soy embajador en cadenas; que resueltamente hable de él, como debo hablar.
+
+
+## Efesios 6:21 (id: 10049006021)
+
+21Mas para que también vosotros sepáis mis negocios, y cómo lo paso, todo os lo hará saber Tichîco, hermano amado y fiel ministro en el Señor:
+
+
+## Efesios 6:22 (id: 10049006022)
+
+22Al cual os he enviado para esto mismo, para que entendáis lo tocante á nosotros, y que consuele vuestros corazones.
+
+
+## Efesios 6:23 (id: 10049006023)
+
+23Paz sea á los hermanos y amor con fe, de Dios Padre y del Señor Jesucristo.
+
+
+## Efesios 6:24 (id: 10049006024)
+
+24Gracia sea con todos los que aman á nuestro Señor Jesucristo en sinceridad. Amén. Escrita de Roma á los Efesios por Tichîco.
+
+`;export{e as default};

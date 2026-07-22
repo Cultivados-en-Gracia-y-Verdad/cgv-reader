@@ -1,0 +1,2178 @@
+const n=`# Reina Valera 1909
+
+## License Information
+
+**Reina Valera 1909** is based on and adapted from: _Reina Valera 1909_, [Public Domain](https://creativecommons.org/public-domain/cc0/), 1909, which is licensed under a [Public Domain CC0](https://creativecommons.org/public-domain/cc0/).
+
+This markdown version is provided under the same license.
+
+
+
+--------------------------------
+
+
+## Romanos 1:1 (id: 10045001001)
+
+1PABLO, siervo de Jesucristo, llamado á ser apóstol, apartado para el evangelio de Dios,
+
+
+## Romanos 1:2 (id: 10045001002)
+
+2Que él había antes prometido por sus profetas en las santas Escrituras,
+
+
+## Romanos 1:3 (id: 10045001003)
+
+3Acerca de su Hijo, (que fué hecho de la simiente de David según la carne;
+
+
+## Romanos 1:4 (id: 10045001004)
+
+4El cual fué declarado Hijo de Dios con potencia, según el espíritu de santidad, por la resurrección de los muertos), de Jesucristo Señor nuestro,
+
+
+## Romanos 1:5 (id: 10045001005)
+
+5Por el cual recibimos la gracia y el apostolado, para la obediencia de la fe en todas las naciones en su nombre,
+
+
+## Romanos 1:6 (id: 10045001006)
+
+6Entre las cuales sois también vosotros, llamados de Jesucristo:
+
+
+## Romanos 1:7 (id: 10045001007)
+
+7A todos los que estáis en Roma, amados de Dios, llamados santos: Gracia y paz tengáis de Dios nuestro Padre, y del Señor Jesucristo.
+
+
+## Romanos 1:8 (id: 10045001008)
+
+8Primeramente, doy gracias á mi Dios por Jesucristo acerca de todos vosotros, de que vuestra fe es predicada en todo el mundo.
+
+
+## Romanos 1:9 (id: 10045001009)
+
+9Porque testigo me es Dios, al cual sirvo en mi espíritu en el evangelio de su Hijo, que sin cesar me acuerdo de vosotros siempre en mis oraciones,
+
+
+## Romanos 1:10 (id: 10045001010)
+
+10Rogando, si al fin algún tiempo haya de tener, por la voluntad de Dios, próspero viaje para ir á vosotros.
+
+
+## Romanos 1:11 (id: 10045001011)
+
+11Porque os deseo ver, para repartir con vosotros algún don espiritual, para confirmaros;
+
+
+## Romanos 1:12 (id: 10045001012)
+
+12Es á saber, para ser juntamente consolado con vosotros por la común fe vuestra y juntamente mía.
+
+
+## Romanos 1:13 (id: 10045001013)
+
+13Mas no quiero, hermanos, que ignoréis que muchas veces me he propuesto ir á vosotros (empero hasta ahora he sido estorbado), para tener también entre vosotros algún fruto, como entre los demás Gentiles.
+
+
+## Romanos 1:14 (id: 10045001014)
+
+14A Griegos y á bárbaros, á sabios y á no sabios soy deudor.
+
+
+## Romanos 1:15 (id: 10045001015)
+
+15Así que, cuanto á mí, presto estoy á anunciar el evangelio también á vosotros que estáis en Roma.
+
+
+## Romanos 1:16 (id: 10045001016)
+
+16Porque no me avergüenzo del evangelio: porque es potencia de Dios para salud á todo aquel que cree; al Judío primeramente y también al Griego.
+
+
+## Romanos 1:17 (id: 10045001017)
+
+17Porque en él la justicia de Dios se descubre de fe en fe; como está escrito: Mas el justo vivirá por la fe.
+
+
+## Romanos 1:18 (id: 10045001018)
+
+18Porque manifiesta es la ira de Dios del cielo contra toda impiedad é injusticia de los hombres, que detienen la verdad con injusticia:
+
+
+## Romanos 1:19 (id: 10045001019)
+
+19Porque lo que de Dios se conoce, á ellos es manifiesto; porque Dios se lo manifestó.
+
+
+## Romanos 1:20 (id: 10045001020)
+
+20Porque las cosas invisibles de él, su eterna potencia y divinidad, se echan de ver desde la creación del mundo, siendo entendidas por las cosas que son hechas; de modo que son inexcusables:
+
+
+## Romanos 1:21 (id: 10045001021)
+
+21Porque habiendo conocido á Dios, no le glorificaron como á Dios, ni dieron gracias; antes se desvanecieron en sus discursos, y el necio corazón de ellos fué entenebrecido.
+
+
+## Romanos 1:22 (id: 10045001022)
+
+22Diciéndose ser sabios, se hicieron fatuos,
+
+
+## Romanos 1:23 (id: 10045001023)
+
+23Y trocaron la gloria del Dios incorruptible en semejanza de imagen de hombre corruptible, y de aves, y de animales de cuatro pies, y de serpientes.
+
+
+## Romanos 1:24 (id: 10045001024)
+
+24Por lo cual también Dios los entregó á inmundicia, en las concupiscencias de sus corazones, de suerte que contaminaron sus cuerpos entre sí mismos:
+
+
+## Romanos 1:25 (id: 10045001025)
+
+25Los cuales mudaron la verdad de Dios en mentira, honrando y sirviendo á las criaturas antes que al Criador, el cual es bendito por los siglos. Amén.
+
+
+## Romanos 1:26 (id: 10045001026)
+
+26Por esto Dios los entregó á afectos vergonzosos; pues aun sus mujeres mudaron el natural uso en el uso que es contra naturaleza:
+
+
+## Romanos 1:27 (id: 10045001027)
+
+27Y del mismo modo también los hombres, dejando el uso natural de las mujeres, se encendieron en sus concupiscencias los unos con los otros, cometiendo cosas nefandas hombres con hombres, y recibiendo en sí mismos la recompensa que convino á su extravío.
+
+
+## Romanos 1:28 (id: 10045001028)
+
+28Y como á ellos no les pareció tener á Dios en su noticia, Dios los entregó á una mente depravada, para hacer lo que no conviene,
+
+
+## Romanos 1:29 (id: 10045001029)
+
+29Estando atestados de toda iniquidad, de fornicación, de malicia, de avaricia, de maldad; llenos de envidia, de homicidios, de contiendas, de engaños, de malignidades;
+
+
+## Romanos 1:30 (id: 10045001030)
+
+30Murmuradores, detractores, aborrecedores de Dios, injuriosos, soberbios, altivos, inventores de males, desobedientes á los padres,
+
+
+## Romanos 1:31 (id: 10045001031)
+
+31Necios, desleales, sin afecto natural, implacables, sin misericordia:
+
+
+## Romanos 1:32 (id: 10045001032)
+
+32Que, habiendo entendido el juicio de Dios que los que hacen tales cosas son dignos de muerte, no sólo las hacen, mas aun consienten á los que las hacen.
+
+
+## Romanos 2:1 (id: 10045002001)
+
+1POR lo cual eres inexcusable, oh hombre, cualquiera que juzgas: porque en lo que juzgas á otro, te condenas á ti mismo; porque lo mismo haces, tú que juzgas.
+
+
+## Romanos 2:2 (id: 10045002002)
+
+2Mas sabemos que el juicio de Dios es según verdad contra los que hacen tales cosas.
+
+
+## Romanos 2:3 (id: 10045002003)
+
+3¿Y piensas esto, oh hombre, que juzgas á los que hacen tales cosas, y haces las mismas, que tú escaparás del juicio de Dios?
+
+
+## Romanos 2:4 (id: 10045002004)
+
+4¿O menosprecias las riquezas de su benignidad, y paciencia, y longanimidad, ignorando que su benignidad te guía á arrepentimiento?
+
+
+## Romanos 2:5 (id: 10045002005)
+
+5Mas por tu dureza, y por tu corazón no arrepentido, atesoras para ti mismo ira para el día de la ira y de la manifestación del justo juicio de Dios;
+
+
+## Romanos 2:6 (id: 10045002006)
+
+6El cual pagará á cada uno conforme á sus obras:
+
+
+## Romanos 2:7 (id: 10045002007)
+
+7A los que perseverando en bien hacer, buscan gloria y honra é inmortalidad, la vida eterna.
+
+
+## Romanos 2:8 (id: 10045002008)
+
+8Mas á los que son contenciosos, y no obedecen á la verdad, antes obedecen á la injusticia, enojo é ira;
+
+
+## Romanos 2:9 (id: 10045002009)
+
+9Tribulación y angustia sobre toda persona humana que obra lo malo, el Judío primeramente, y también el Griego:
+
+
+## Romanos 2:10 (id: 10045002010)
+
+10Mas gloria y honra y paz á cualquiera que obra el bien, al Judío primeramente, y también al Griego.
+
+
+## Romanos 2:11 (id: 10045002011)
+
+11Porque no hay acepción de personas para con Dios.
+
+
+## Romanos 2:12 (id: 10045002012)
+
+12Porque todos los que sin ley pecaron, sin ley también perecerán; y todos los que en la ley pecaron, por la ley serán juzgados:
+
+
+## Romanos 2:13 (id: 10045002013)
+
+13Porque no los oidores de la ley son justos para con Dios, mas los hacedores de la ley serán justificados.
+
+
+## Romanos 2:14 (id: 10045002014)
+
+14Porque los Gentiles que no tienen ley, naturalmente haciendo lo que es de la ley, los tales, aunque no tengan ley, ellos son ley á sí mismos:
+
+
+## Romanos 2:15 (id: 10045002015)
+
+15Mostrando la obra de la ley escrita en sus corazones, dando testimonio juntamente sus conciencias, y acusándose y también excusándose sus pensamientos unos con otros;
+
+
+## Romanos 2:16 (id: 10045002016)
+
+16En el día que juzgará el Señor lo encubierto de los hombres, conforme á mi evangelio, por Jesucristo.
+
+
+## Romanos 2:17 (id: 10045002017)
+
+17He aquí, tú tienes el sobrenombre de Judío, y estás reposado en la ley, y te glorías en Dios,
+
+
+## Romanos 2:18 (id: 10045002018)
+
+18Y sabes su voluntad, y apruebas lo mejor, instruído por la ley;
+
+
+## Romanos 2:19 (id: 10045002019)
+
+19Y confías que eres guía de los ciegos, luz de los que están en tinieblas,
+
+
+## Romanos 2:20 (id: 10045002020)
+
+20Enseñador de los que no saben, maestro de niños, que tienes la forma de la ciencia y de la verdad en la ley:
+
+
+## Romanos 2:21 (id: 10045002021)
+
+21Tú pues, que enseñas á otro, ¿no te enseñas á ti mismo? ¿Tú, que predicas que no se ha de hurtar, hurtas?
+
+
+## Romanos 2:22 (id: 10045002022)
+
+22¿Tú, que dices que no se ha de adulterar, adulteras? ¿Tú, que abominas los ídolos, cometes sacrilegio?
+
+
+## Romanos 2:23 (id: 10045002023)
+
+23¿Tú, que te jactas de la ley, con infracción de la ley deshonras á Dios?
+
+
+## Romanos 2:24 (id: 10045002024)
+
+24Porque el nombre de Dios es blasfemado por causa de vosotros entre los Gentiles, como está escrito.
+
+
+## Romanos 2:25 (id: 10045002025)
+
+25Porque la circuncisión en verdad aprovecha, si guardares la ley; mas si eres rebelde á la ley, tu circuncisión es hecha incircuncisión.
+
+
+## Romanos 2:26 (id: 10045002026)
+
+26De manera que, si el incircunciso guardare las justicias de la ley, ¿no será tenida su incircuncisión por circuncisión?
+
+
+## Romanos 2:27 (id: 10045002027)
+
+27Y lo que de su natural es incircunciso, guardando perfectamente la ley, te juzgará á ti, que con la letra y con la circuncisión eres rebelde á la ley.
+
+
+## Romanos 2:28 (id: 10045002028)
+
+28Porque no es Judío el que lo es en manifiesto; ni la circuncisión es la que es en manifiesto en la carne:
+
+
+## Romanos 2:29 (id: 10045002029)
+
+29Mas es Judío el que lo es en lo interior; y la circuncisión es la del corazón, en espíritu, no en letra; la alabanza del cual no es de los hombres, sino de Dios.
+
+
+## Romanos 3:1 (id: 10045003001)
+
+1¿QUÉ, pues, tiene más el Judío? ¿ó qué aprovecha la circuncisión?
+
+
+## Romanos 3:2 (id: 10045003002)
+
+2Mucho en todas maneras. Lo primero ciertamente, que la palabra de Dios les ha sido confiada.
+
+
+## Romanos 3:3 (id: 10045003003)
+
+3¿Pues qué si algunos de ellos han sido incrédulos? ¿la incredulidad de ellos habrá hecho vana la verdad de Dios?
+
+
+## Romanos 3:4 (id: 10045003004)
+
+4En ninguna manera; antes bien sea Dios verdadero, mas todo hombre mentiroso; como está escrito: Para que seas justificado en tus dichos, y venzas cuando de ti se juzgare.
+
+
+## Romanos 3:5 (id: 10045003005)
+
+5Y si nuestra iniquidad encarece la justicia de Dios, ¿qué diremos? ¿Será injusto Dios que da castigo? (hablo como hombre.)
+
+
+## Romanos 3:6 (id: 10045003006)
+
+6En ninguna manera: de otra suerte ¿cómo juzgaría Dios el mundo?
+
+
+## Romanos 3:7 (id: 10045003007)
+
+7Empero si la verdad de Dios por mi mentira creció á gloria suya, ¿por qué aun así yo soy juzgado como pecador?
+
+
+## Romanos 3:8 (id: 10045003008)
+
+8¿Y por qué no decir (como somos blasfemados, y como algunos dicen que nosotros decimos): Hagamos males para que vengan bienes? la condenación de los cuales es justa.
+
+
+## Romanos 3:9 (id: 10045003009)
+
+9¿Qué pues? ¿Somos mejores que ellos? En ninguna manera: porque ya hemos acusado á Judíos y á Gentiles, que todos están debajo de pecado.
+
+
+## Romanos 3:10 (id: 10045003010)
+
+10Como está escrito: No hay justo, ni aun uno;
+
+
+## Romanos 3:11 (id: 10045003011)
+
+11No hay quien entienda, no hay quien busque á Dios;
+
+
+## Romanos 3:12 (id: 10045003012)
+
+12Todos se apartaron, á una fueron hechos inútiles; no hay quien haga lo bueno, no hay ni aun uno:
+
+
+## Romanos 3:13 (id: 10045003013)
+
+13Sepulcro abierto es su garganta; con sus lenguas tratan engañosamente; veneno de áspides está debajo de sus labios;
+
+
+## Romanos 3:14 (id: 10045003014)
+
+14Cuya boca está llena de maledicencia y de amargura;
+
+
+## Romanos 3:15 (id: 10045003015)
+
+15Sus pies son ligeros á derramar sangre;
+
+
+## Romanos 3:16 (id: 10045003016)
+
+16Quebrantamiento y desventura hay en sus caminos;
+
+
+## Romanos 3:17 (id: 10045003017)
+
+17Y camino de paz no conocieron:
+
+
+## Romanos 3:18 (id: 10045003018)
+
+18No hay temor de Dios delante de sus ojos.
+
+
+## Romanos 3:19 (id: 10045003019)
+
+19Empero sabemos que todo lo que la ley dice, á los que están en la ley lo dice, para que toda boca se tape, y que todo el mundo se sujete á Dios:
+
+
+## Romanos 3:20 (id: 10045003020)
+
+20Porque por las obras de la ley ninguna carne se justificará delante de él; porque por la ley es el conocimiento del pecado.
+
+
+## Romanos 3:21 (id: 10045003021)
+
+21Mas ahora, sin la ley, la justicia de Dios se ha manifestado, testificada por la ley y por los profetas:
+
+
+## Romanos 3:22 (id: 10045003022)
+
+22La justicia de Dios por la fe de Jesucristo, para todos los que creen en él; porque no hay diferencia;
+
+
+## Romanos 3:23 (id: 10045003023)
+
+23Por cuanto todos pecaron, y están destituídos de la gloria de Dios;
+
+
+## Romanos 3:24 (id: 10045003024)
+
+24Siendo justificados gratuitamente por su gracia, por la redención que es en Cristo Jesús;
+
+
+## Romanos 3:25 (id: 10045003025)
+
+25Al cual Dios ha propuesto en propiciación por la fe en su sangre, para manifestación de su justicia, atento á haber pasado por alto, en su paciencia, los pecados pasados,
+
+
+## Romanos 3:26 (id: 10045003026)
+
+26Con la mira de manifestar su justicia en este tiempo: para que él sea el justo, y el que justifica al que es de la fe de Jesús.
+
+
+## Romanos 3:27 (id: 10045003027)
+
+27¿Dónde pues está la jactancia? Es excluída. ¿Por cuál ley? ¿de las obras? No; mas por la ley de la fe.
+
+
+## Romanos 3:28 (id: 10045003028)
+
+28Así que, concluímos ser el hombre justificado por fe sin las obras de la ley.
+
+
+## Romanos 3:29 (id: 10045003029)
+
+29¿Es Dios solamente Dios de los Judíos? ¿No es también Dios de los Gentiles? Cierto, también de los Gentiles.
+
+
+## Romanos 3:30 (id: 10045003030)
+
+30Porque uno es Dios, el cual justificará por la fe la circuncisión, y por medio de la fe la incircuncisión.
+
+
+## Romanos 3:31 (id: 10045003031)
+
+31¿Luego deshacemos la ley por la fe? En ninguna manera; antes establecemos la ley.
+
+
+## Romanos 4:1 (id: 10045004001)
+
+1¿QUÉ, pues, diremos que halló Abraham nuestro padre según la carne?
+
+
+## Romanos 4:2 (id: 10045004002)
+
+2Que si Abraham fué justificado por la obras, tiene de qué gloriarse; mas no para con Dios.
+
+
+## Romanos 4:3 (id: 10045004003)
+
+3Porque ¿qué dice la Escritura? Y creyó Abraham á Dios, y le fué atribuído á justicia.
+
+
+## Romanos 4:4 (id: 10045004004)
+
+4Empero al que obra, no se le cuenta el salario por merced, sino por deuda.
+
+
+## Romanos 4:5 (id: 10045004005)
+
+5Mas al que no obra, pero cree en aquél que justifica al impío, la fe le es contada por justicia.
+
+
+## Romanos 4:6 (id: 10045004006)
+
+6Como también David dice ser bienaventurado el hombre al cual Dios atribuye justicia sin obras,
+
+
+## Romanos 4:7 (id: 10045004007)
+
+7Diciendo: Bienaventurados aquellos cuyas iniquidades son perdonadas, y cuyos pecados son cubiertos.
+
+
+## Romanos 4:8 (id: 10045004008)
+
+8Bienaventurado el varón al cual el Señor no imputó pecado.
+
+
+## Romanos 4:9 (id: 10045004009)
+
+9¿Es pues esta bienaventuranza solamente en la circuncisión, ó también en la incircuncisión? porque decimos que á Abraham fué contada la fe por justicia.
+
+
+## Romanos 4:10 (id: 10045004010)
+
+10¿Cómo pues le fué contada? ¿en la circuncisión, ó en la incircuncisión? No en la circuncisión, sino en la incircuncisión.
+
+
+## Romanos 4:11 (id: 10045004011)
+
+11Y recibió la circuncisión por señal, por sello de la justicia de la fe que tuvo en la incircuncisión: para que fuese padre de todos los creyentes no circuncidados, para que también á ellos les sea contado por justicia;
+
+
+## Romanos 4:12 (id: 10045004012)
+
+12Y padre de la circuncisión, no solamente á los que son de la circuncisión, mas también á los que siguen las pisadas de la fe que fué en nuestro padre Abraham antes de ser circuncidado.
+
+
+## Romanos 4:13 (id: 10045004013)
+
+13Porque no por la ley fué dada la promesa á Abraham ó á su simiente, que sería heredero del mundo, sino por la justicia de la fe.
+
+
+## Romanos 4:14 (id: 10045004014)
+
+14Porque si los que son de la ley son los herederos, vana es la fe, y anulada es la promesa.
+
+
+## Romanos 4:15 (id: 10045004015)
+
+15Porque la ley obra ira; porque donde no hay ley, tampoco hay transgresión.
+
+
+## Romanos 4:16 (id: 10045004016)
+
+16Por tanto es por la fe, para que sea por gracia; para que la promesa sea firme á toda simiente, no solamente al que es de la ley, mas también al que es de la fe de Abraham, el cual es padre de todos nosotros,
+
+
+## Romanos 4:17 (id: 10045004017)
+
+17(Como está escrito: Que por padre de muchas gentes te he puesto) delante de Dios, al cual creyó; el cual da vida á los muertos, y llama las cosas que no son, como las que son.
+
+
+## Romanos 4:18 (id: 10045004018)
+
+18El creyó en esperanza contra esperanza, para venir á ser padre de muchas gentes, conforme á lo que le había sido dicho: Así será tu simiente.
+
+
+## Romanos 4:19 (id: 10045004019)
+
+19Y no se enflaqueció en la fe, ni consideró su cuerpo ya muerto (siendo ya de casi cien años), ni la matriz muerta de Sara;
+
+
+## Romanos 4:20 (id: 10045004020)
+
+20Tampoco en la promesa de Dios dudó con desconfianza: antes fué esforzado en fe, dando gloria á Dios,
+
+
+## Romanos 4:21 (id: 10045004021)
+
+21Plenamente convencido de que todo lo que había prometido, era también poderoso para hacerlo.
+
+
+## Romanos 4:22 (id: 10045004022)
+
+22Por lo cual también le fué atribuído á justicia.
+
+
+## Romanos 4:23 (id: 10045004023)
+
+23Y no solamente por él fué escrito que le haya sido imputado;
+
+
+## Romanos 4:24 (id: 10045004024)
+
+24Sino también por nosotros, á quienes será imputado, esto es, á los que creemos en el que levantó de los muertos á Jesús Señor nuestro,
+
+
+## Romanos 4:25 (id: 10045004025)
+
+25El cual fué entregado por nuestros delitos, y resucitado para nuestra justificación.
+
+
+## Romanos 5:1 (id: 10045005001)
+
+1JUSTIFICADOS pues por la fe, tenemos paz para con Dios por medio de nuestro Señor Jesucristo:
+
+
+## Romanos 5:2 (id: 10045005002)
+
+2Por el cual también tenemos entrada por la fe á esta gracia en la cual estamos firmes, y nos gloriamos en la esperanza de la gloria de Dios.
+
+
+## Romanos 5:3 (id: 10045005003)
+
+3Y no sólo esto, mas aun nos gloriamos en las tribulaciones, sabiendo que la tribulación produce paciencia;
+
+
+## Romanos 5:4 (id: 10045005004)
+
+4Y la paciencia, prueba; y la prueba, esperanza;
+
+
+## Romanos 5:5 (id: 10045005005)
+
+5Y la esperanza no avergüenza; porque el amor de Dios está derramado en nuestros corazones por el Espíritu Santo que nos es dado.
+
+
+## Romanos 5:6 (id: 10045005006)
+
+6Porque Cristo, cuando aun éramos flacos, á su tiempo murió por los impíos.
+
+
+## Romanos 5:7 (id: 10045005007)
+
+7Ciertamente apenas muere alguno por un justo: con todo podrá ser que alguno osara morir por el bueno.
+
+
+## Romanos 5:8 (id: 10045005008)
+
+8Mas Dios encarece su caridad para con nosotros, porque siendo aún pecadores, Cristo murió por nosotros.
+
+
+## Romanos 5:9 (id: 10045005009)
+
+9Luego mucho más ahora, justificados en su sangre, por él seremos salvos de la ira.
+
+
+## Romanos 5:10 (id: 10045005010)
+
+10Porque si siendo enemigos, fuimos reconciliados con Dios por la muerte de su Hijo, mucho más, estando reconciliados, seremos salvos por su vida.
+
+
+## Romanos 5:11 (id: 10045005011)
+
+11Y no sólo esto, mas aun nos gloriamos en Dios por el Señor nuestro Jesucristo, por el cual hemos ahora recibido la reconciliación.
+
+
+## Romanos 5:12 (id: 10045005012)
+
+12De consiguiente, vino la reconciliación por uno, así como el pecado entró en el mundo por un hombre, y por el pecado la muerte, y la muerte así pasó á todos los hombres, pues que todos pecaron.
+
+
+## Romanos 5:13 (id: 10045005013)
+
+13Porque hasta la ley, el pecado estaba en el mundo; pero no se imputa pecado no habiendo ley.
+
+
+## Romanos 5:14 (id: 10045005014)
+
+14No obstante, reinó la muerte desde Adam hasta Moisés, aun en los que no pecaron á la manera de la rebelión de Adam; el cual es figura del que había de venir.
+
+
+## Romanos 5:15 (id: 10045005015)
+
+15Mas no como el delito, tal fué el don: porque si por el delito de aquel uno murieron los muchos, mucho más abundó la gracia de Dios á los muchos, y el don por la gracia de un hombre, Jesucristo.
+
+
+## Romanos 5:16 (id: 10045005016)
+
+16Ni tampoco de la manera que por un pecado, así también el don: porque el juicio á la verdad vino de un pecado para condenación, mas la gracia vino de muchos delitos para justificación.
+
+
+## Romanos 5:17 (id: 10045005017)
+
+17Porque, si por un delito reinó la muerte por uno, mucho más reinarán en vida por un Jesucristo los que reciben la abundancia de la gracia, y del don de la justicia.
+
+
+## Romanos 5:18 (id: 10045005018)
+
+18Así que, de la manera que por un delito vino la culpa á todos los hombres para condenación, así por una justicia vino la gracia á todos los hombres para justificación de vida.
+
+
+## Romanos 5:19 (id: 10045005019)
+
+19Porque como por la desobediencia de un hombre los muchos fueron constituídos pecadores, así por la obediencia de uno los muchos serán constituídos justos.
+
+
+## Romanos 5:20 (id: 10045005020)
+
+20La ley empero entró para que el pecado creciese; mas cuando el pecado creció, sobrepujó la gracia;
+
+
+## Romanos 5:21 (id: 10045005021)
+
+21Para que, de la manera que el pecado reinó para muerte, así también la gracia reine por la justicia para vida eterna por Jesucristo Señor nuestro.
+
+
+## Romanos 6:1 (id: 10045006001)
+
+1¿PUES qué diremos? Perseveraremos en pecado para que la gracia crezca?
+
+
+## Romanos 6:2 (id: 10045006002)
+
+2En ninguna manera. Porque los que somos muertos al pecado, ¿cómo viviremos aún en él?
+
+
+## Romanos 6:3 (id: 10045006003)
+
+3¿O no sabéis que todos los que somos bautizados en Cristo Jesús, somos bautizados en su muerte?
+
+
+## Romanos 6:4 (id: 10045006004)
+
+4Porque somos sepultados juntamente con él á muerte por el bautismo; para que como Cristo resucitó de los muertos por la gloria del Padre, así también nosotros andemos en novedad de vida.
+
+
+## Romanos 6:5 (id: 10045006005)
+
+5Porque si fuimos plantados juntamente en él á la semejanza de su muerte, así también lo seremos á la de su resurrección:
+
+
+## Romanos 6:6 (id: 10045006006)
+
+6Sabiendo esto, que nuestro viejo hombre juntamente fué crucificado con él, para que el cuerpo del pecado sea deshecho, á fin de que no sirvamos más al pecado.
+
+
+## Romanos 6:7 (id: 10045006007)
+
+7Porque el que es muerto, justificado es del pecado.
+
+
+## Romanos 6:8 (id: 10045006008)
+
+8Y si morimos con Cristo, creemos que también viviremos con él;
+
+
+## Romanos 6:9 (id: 10045006009)
+
+9Sabiendo que Cristo, habiendo resucitado de entre los muertos, ya no muere: la muerte no se enseñoreará más de él.
+
+
+## Romanos 6:10 (id: 10045006010)
+
+10Porque el haber muerto, al pecado murió una vez; mas el vivir, á Dios vive.
+
+
+## Romanos 6:11 (id: 10045006011)
+
+11Así también vosotros, pensad que de cierto estáis muertos al pecado, mas vivos á Dios en Cristo Jesús Señor nuestro.
+
+
+## Romanos 6:12 (id: 10045006012)
+
+12No reine, pues, el pecado en vuestro cuerpo mortal, para que le obedezcáis en sus concupiscencias;
+
+
+## Romanos 6:13 (id: 10045006013)
+
+13Ni tampoco presentéis vuestros miembros al pecado por instrumentos de iniquidad; antes presentaos á Dios como vivos de los muertos, y vuestros miembros á Dios por instrumentos de justicia.
+
+
+## Romanos 6:14 (id: 10045006014)
+
+14Porque el pecado no se enseñoreará de vosotros; pues no estáis bajo la ley, sino bajo la gracia.
+
+
+## Romanos 6:15 (id: 10045006015)
+
+15¿Pues qué? ¿Pecaremos, porque no estamos bajo de la ley, sino bajo de la gracia? En ninguna manera.
+
+
+## Romanos 6:16 (id: 10045006016)
+
+16¿No sabéis que á quien os prestáis vosotros mismos por siervos para obedecerle, sois siervos de aquel á quien obedecéis, ó del pecado para muerte, ó de la obediencia para justicia?
+
+
+## Romanos 6:17 (id: 10045006017)
+
+17Empero gracias á Dios, que aunque fuisteis siervos del pecado, habéis obedecido de corazón á aquella forma de doctrina á la cual sois entregados;
+
+
+## Romanos 6:18 (id: 10045006018)
+
+18Y libertados del pecado, sois hechos siervos de la justicia.
+
+
+## Romanos 6:19 (id: 10045006019)
+
+19Humana cosa digo, por la flaqueza de vuestra carne: que como para iniquidad presentasteis vuestros miembros á servir á la inmundicia y á la iniquidad, así ahora para santidad presentéis vuestros miembros á servir á la justicia.
+
+
+## Romanos 6:20 (id: 10045006020)
+
+20Porque cuando fuisteis siervos del pecado, erais libres acerca de la justicia.
+
+
+## Romanos 6:21 (id: 10045006021)
+
+21¿Qué fruto, pues, teníais de aquellas cosas de las cuales ahora os avergonzáis? porque el fin de ellas es muerte.
+
+
+## Romanos 6:22 (id: 10045006022)
+
+22Mas ahora, librados del pecado, y hechos siervos á Dios, tenéis por vuestro fruto la santificación, y por fin la vida eterna.
+
+
+## Romanos 6:23 (id: 10045006023)
+
+23Porque la paga del pecado es muerte: mas la dádiva de Dios es vida eterna en Cristo Jesús Señor nuestro.
+
+
+## Romanos 7:1 (id: 10045007001)
+
+1¿IGNORÁIS, hermanos, (porque hablo con los que saben la ley) que la ley se enseñorea del hombre entre tanto que vive?
+
+
+## Romanos 7:2 (id: 10045007002)
+
+2Porque la mujer que está sujeta á marido, mientras el marido vive está obligada á la ley; mas muerto el marido, libre es de la ley del marido.
+
+
+## Romanos 7:3 (id: 10045007003)
+
+3Así que, viviendo el marido, se llamará adúltera si fuere de otro varón; mas si su marido muriere, es libre de la ley; de tal manera que no será adúltera si fuere de otro marido.
+
+
+## Romanos 7:4 (id: 10045007004)
+
+4Así también vosotros, hermanos míos, estáis muertos á la ley por el cuerpo de Cristo, para que seáis de otro, á saber, del que resucitó de los muertos, á fin de que fructifiquemos á Dios.
+
+
+## Romanos 7:5 (id: 10045007005)
+
+5Porque mientras estábamos en la carne, los afectos de los pecados que eran por la ley, obraban en nuestros miembros fructificando para muerte.
+
+
+## Romanos 7:6 (id: 10045007006)
+
+6Mas ahora estamos libres de la ley, habiendo muerto á aquella en la cual estábamos detenidos, para que sirvamos en novedad de espíritu, y no en vejez de letra.
+
+
+## Romanos 7:7 (id: 10045007007)
+
+7¿Qué pues diremos? ¿La ley es pecado? En ninguna manera. Empero yo no conocí el pecado sino por la ley: porque tampoco conociera la concupiscencia, si la ley no dijera: No codiciarás.
+
+
+## Romanos 7:8 (id: 10045007008)
+
+8Mas el pecado, tomando ocasión, obró en mí por el mandamiento toda concupiscencia: porque sin la ley el pecado está muerto.
+
+
+## Romanos 7:9 (id: 10045007009)
+
+9Así que, yo sin la ley vivía por algún tiempo: mas venido el mandamiento, el pecado revivió, y yo morí.
+
+
+## Romanos 7:10 (id: 10045007010)
+
+10Y hallé que el mandamiento, intimado para vida, para mí era mortal:
+
+
+## Romanos 7:11 (id: 10045007011)
+
+11Porque el pecado, tomando ocasión, me engañó por el mandamiento, y por él me mató.
+
+
+## Romanos 7:12 (id: 10045007012)
+
+12De manera que la ley á la verdad es santa, y el mandamiento santo, y justo, y bueno.
+
+
+## Romanos 7:13 (id: 10045007013)
+
+13¿Luego lo que es bueno, á mí me es hecho muerte? No; sino que el pecado, para mostrarse pecado, por lo bueno me obró la muerte, haciéndose pecado sobremanera pecante por el mandamiento.
+
+
+## Romanos 7:14 (id: 10045007014)
+
+14Porque sabemos que la ley es espiritual; mas yo soy carnal, vendido á sujeción del pecado.
+
+
+## Romanos 7:15 (id: 10045007015)
+
+15Porque lo que hago, no lo entiendo; ni lo que quiero, hago; antes lo que aborrezco, aquello hago.
+
+
+## Romanos 7:16 (id: 10045007016)
+
+16Y si lo que no quiero, esto hago, apruebo que la ley es buena.
+
+
+## Romanos 7:17 (id: 10045007017)
+
+17De manera que ya no obro aquello, sino el pecado que mora en mí.
+
+
+## Romanos 7:18 (id: 10045007018)
+
+18Y yo sé que en mí (es á saber, en mi carne) no mora el bien: porque tengo el querer, mas efectuar el bien no lo alcanzo.
+
+
+## Romanos 7:19 (id: 10045007019)
+
+19Porque no hago el bien que quiero; mas el mal que no quiero, éste hago.
+
+
+## Romanos 7:20 (id: 10045007020)
+
+20Y si hago lo que no quiero, ya no lo obro yo, sino el pecado que mora en mí.
+
+
+## Romanos 7:21 (id: 10045007021)
+
+21Así que, queriendo yo hacer el bien, hallo esta ley: Que el mal está en mí.
+
+
+## Romanos 7:22 (id: 10045007022)
+
+22Porque según el hombre interior, me deleito en la ley de Dios:
+
+
+## Romanos 7:23 (id: 10045007023)
+
+23Mas veo otra ley en mis miembros, que se rebela contra la ley de mi espíritu, y que me lleva cautivo á la ley del pecado que está en mis miembros.
+
+
+## Romanos 7:24 (id: 10045007024)
+
+24¡Miserable hombre de mí! ¿quién me librará del cuerpo de esta muerte?
+
+
+## Romanos 7:25 (id: 10045007025)
+
+25Gracias doy á Dios, por Jesucristo Señor nuestro. Así que, yo mismo con la mente sirvo á la ley de Dios, mas con la carne á la ley del pecado.
+
+
+## Romanos 8:1 (id: 10045008001)
+
+1AHORA pues, ninguna condenación hay para los que están en Cristo Jesús, los que no andan conforme á la carne, mas conforme al espíritu.
+
+
+## Romanos 8:2 (id: 10045008002)
+
+2Porque la ley del Espíritu de vida en Cristo Jesús me ha librado de la ley del pecado y de la muerte.
+
+
+## Romanos 8:3 (id: 10045008003)
+
+3Porque lo que era imposible á la ley, por cuanto era débil por la carne, Dios enviando á su Hijo en semejanza de carne de pecado, y á causa del pecado, condenó al pecado en la carne;
+
+
+## Romanos 8:4 (id: 10045008004)
+
+4Para que la justicia de la ley fuese cumplida en nosotros, que no andamos conforme á la carne, mas conforme al espíritu.
+
+
+## Romanos 8:5 (id: 10045008005)
+
+5Porque los que viven conforme á la carne, de las cosas que son de la carne se ocupan; mas los que conforme al espíritu, de las cosas del espíritu.
+
+
+## Romanos 8:6 (id: 10045008006)
+
+6Porque la intención de la carne es muerte; mas la intención del espíritu, vida y paz:
+
+
+## Romanos 8:7 (id: 10045008007)
+
+7Por cuanto la intención de la carne es enemistad contra Dios; porque no se sujeta á la ley de Dios, ni tampoco puede.
+
+
+## Romanos 8:8 (id: 10045008008)
+
+8Así que, los que están en la carne no pueden agradar á Dios.
+
+
+## Romanos 8:9 (id: 10045008009)
+
+9Mas vosotros no estáis en la carne, sino en el espíritu, si es que el Espíritu de Dios mora en vosotros. Y si alguno no tiene el Espíritu de Cristo, el tal no es de él.
+
+
+## Romanos 8:10 (id: 10045008010)
+
+10Empero si Cristo está en vosotros, el cuerpo á la verdad está muerto á causa del pecado; mas el espíritu vive á causa de la justicia.
+
+
+## Romanos 8:11 (id: 10045008011)
+
+11Y si el Espíritu de aquel que levantó de los muertos á Jesús mora en vosotros, el que levantó á Cristo Jesús de los muertos, vivificará también vuestros cuerpos mortales por su Espíritu que mora en vosotros.
+
+
+## Romanos 8:12 (id: 10045008012)
+
+12Así que, hermanos, deudores somos, no á la carne, para que vivamos conforme á la carne:
+
+
+## Romanos 8:13 (id: 10045008013)
+
+13Porque si viviereis conforme á la carne, moriréis; mas si por el espíritu mortificáis las obras de la carne, viviréis.
+
+
+## Romanos 8:14 (id: 10045008014)
+
+14Porque todos los que son guiados por el Espíritu de Dios, los tales son hijos de Dios.
+
+
+## Romanos 8:15 (id: 10045008015)
+
+15Porque no habéis recibido el espíritu de servidumbre para estar otra vez en temor; mas habéis recibido el espíritu de adopción, por el cual clamamos, Abba, Padre.
+
+
+## Romanos 8:16 (id: 10045008016)
+
+16Porque el mismo Espíritu da testimonio á nuestro espíritu que somos hijos de Dios.
+
+
+## Romanos 8:17 (id: 10045008017)
+
+17Y si hijos, también herederos; herederos de Dios, y coherederos de Cristo; si empero padecemos juntamente con él, para que juntamente con él seamos glorificados.
+
+
+## Romanos 8:18 (id: 10045008018)
+
+18Porque tengo por cierto que lo que en este tiempo se padece, no es de comparar con la gloria venidera que en nosotros ha de ser manifestada.
+
+
+## Romanos 8:19 (id: 10045008019)
+
+19Porque el continuo anhelar de las criaturas espera la manifestación de los hijos de Dios.
+
+
+## Romanos 8:20 (id: 10045008020)
+
+20Porque las criaturas sujetas fueron á vanidad, no de grado, mas por causa del que las sujetó con esperanza,
+
+
+## Romanos 8:21 (id: 10045008021)
+
+21Que también las mismas criaturas serán libradas de la servidumbre de corrupción en la libertad gloriosa de los hijos de Dios.
+
+
+## Romanos 8:22 (id: 10045008022)
+
+22Porque sabemos que todas las criaturas gimen á una, y á una están de parto hasta ahora.
+
+
+## Romanos 8:23 (id: 10045008023)
+
+23Y no sólo ellas, mas también nosotros mismos, que tenemos las primicias del Espíritu, nosotros también gemimos dentro de nosotros mismos, esperando la adopción, es á saber, la redención de nuestro cuerpo.
+
+
+## Romanos 8:24 (id: 10045008024)
+
+24Porque en esperanza somos salvos; mas la esperanza que se ve, no es esperanza; porque lo que alguno ve, ¿á qué esperarlo?
+
+
+## Romanos 8:25 (id: 10045008025)
+
+25Empero si lo que no vemos esperamos, por paciencia esperamos.
+
+
+## Romanos 8:26 (id: 10045008026)
+
+26Y asimismo también el Espíritu ayuda nuestra flaqueza: porque qué hemos de pedir como conviene, no lo sabemos; sino que el mismo Espíritu pide por nosotros con gemidos indecibles.
+
+
+## Romanos 8:27 (id: 10045008027)
+
+27Mas el que escudriña los corazones, sabe cuál es el intento del Espíritu, porque conforme á la voluntad de Dios, demanda por los santos.
+
+
+## Romanos 8:28 (id: 10045008028)
+
+28Y sabemos que á los que á Dios aman, todas las cosas les ayudan á bien, es á saber, á los que conforme al propósito son llamados.
+
+
+## Romanos 8:29 (id: 10045008029)
+
+29Porque á los que antes conoció, también predestinó para que fuesen hechos conformes á la imagen de su Hijo, para que él sea el primogénito entre muchos hermanos;
+
+
+## Romanos 8:30 (id: 10045008030)
+
+30Y á los que predestinó, á éstos también llamó; y á los que llamó, á éstos también justificó; y á los que justificó, á éstos también glorificó.
+
+
+## Romanos 8:31 (id: 10045008031)
+
+31¿Pues qué diremos á esto? Si Dios por nosotros, ¿quién contra nosotros?
+
+
+## Romanos 8:32 (id: 10045008032)
+
+32El que aun á su propio Hijo no perdonó, antes le entregó por todos nosotros, ¿cómo no nos dará también con él todas las cosas?
+
+
+## Romanos 8:33 (id: 10045008033)
+
+33¿Quién acusará á los escogidos de Dios? Dios es el que justifica.
+
+
+## Romanos 8:34 (id: 10045008034)
+
+34¿Quién es el que condenará? Cristo es el que murió; más aún, el que también resucitó, quien además está á la diestra de Dios, el que también intercede por nosotros.
+
+
+## Romanos 8:35 (id: 10045008035)
+
+35¿Quién nos apartará del amor de Cristo? tribulación? ó angustia? ó persecución? ó hambre? ó desnudez? ó peligro? ó cuchillo?
+
+
+## Romanos 8:36 (id: 10045008036)
+
+36Como está escrito: Por causa de ti somos muertos todo el tiempo: somos estimados como ovejas de matadero.
+
+
+## Romanos 8:37 (id: 10045008037)
+
+37Antes, en todas estas cosas hacemos más que vencer por medio de aquel que nos amó.
+
+
+## Romanos 8:38 (id: 10045008038)
+
+38Por lo cual estoy cierto que ni la muerte, ni la vida, ni ángeles, ni principados, ni potestades, ni lo presente, ni lo por venir,
+
+
+## Romanos 8:39 (id: 10045008039)
+
+39Ni lo alto, ni lo bajo, ni ninguna criatura nos podrá apartar del amor de Dios, que es en Cristo Jesús Señor nuestro.
+
+
+## Romanos 9:1 (id: 10045009001)
+
+1VERDAD digo en Cristo, no miento, dándome testimonio mi conciencia en el Espíritu Santo,
+
+
+## Romanos 9:2 (id: 10045009002)
+
+2Que tengo gran tristeza y continuo dolor en mi corazón.
+
+
+## Romanos 9:3 (id: 10045009003)
+
+3Porque deseara yo mismo ser apartado de Cristo por mis hermanos, los que son mis parientes según la carne;
+
+
+## Romanos 9:4 (id: 10045009004)
+
+4Que son israelitas, de los cuales es la adopción, y la gloria, y el pacto, y la data de la ley, y el culto, y las promesas;
+
+
+## Romanos 9:5 (id: 10045009005)
+
+5Cuyos son los padres, y de los cuales es Cristo según la carne, el cual es Dios sobre todas las cosas, bendito por los siglos. Amén.
+
+
+## Romanos 9:6 (id: 10045009006)
+
+6No empero que la palabra de Dios haya faltado: porque no todos los que son de Israel son Israelitas;
+
+
+## Romanos 9:7 (id: 10045009007)
+
+7Ni por ser simiente de Abraham, son todos hijos; mas: En Isaac te será llamada simiente.
+
+
+## Romanos 9:8 (id: 10045009008)
+
+8Quiere decir: No los que son hijos de la carne, éstos son los hijos de Dios; mas los que son hijos de la promesa, son contados en la generación.
+
+
+## Romanos 9:9 (id: 10045009009)
+
+9Porque la palabra de la promesa es esta: Como en este tiempo vendré, y tendrá Sara un hijo.
+
+
+## Romanos 9:10 (id: 10045009010)
+
+10Y no sólo esto; mas también Rebeca concibiendo de uno, de Isaac nuestro padre,
+
+
+## Romanos 9:11 (id: 10045009011)
+
+11(Porque no siendo aún nacidos, ni habiendo hecho aún ni bien ni mal, para que el propósito de Dios conforme á la elección, no por las obras sino por el que llama, permaneciese;)
+
+
+## Romanos 9:12 (id: 10045009012)
+
+12Le fué dicho que el mayor serviría al menor.
+
+
+## Romanos 9:13 (id: 10045009013)
+
+13Como está escrito: A Jacob amé, mas á Esaú aborrecí.
+
+
+## Romanos 9:14 (id: 10045009014)
+
+14¿Pues qué diremos? ¿Que hay injusticia en Dios? En ninguna manera.
+
+
+## Romanos 9:15 (id: 10045009015)
+
+15Mas á Moisés dice: Tendré misericordia del que tendré misericordia, y me compadeceré del que me compadeceré.
+
+
+## Romanos 9:16 (id: 10045009016)
+
+16Así que no es del que quiere, ni del que corre, sino de Dios que tiene misericordia.
+
+
+## Romanos 9:17 (id: 10045009017)
+
+17Porque la Escritura dice de Faraón: Que para esto mismo te he levantado, para mostrar en ti mi potencia, y que mi nombre sea anunciado por toda la tierra.
+
+
+## Romanos 9:18 (id: 10045009018)
+
+18De manera que del que quiere tiene misericordia; y al que quiere, endurece.
+
+
+## Romanos 9:19 (id: 10045009019)
+
+19Me dirás pues: ¿Por qué, pues, se enoja? porque ¿quién resistirá á su voluntad?
+
+
+## Romanos 9:20 (id: 10045009020)
+
+20Mas antes, oh hombre, ¿quién eres tú, para que alterques con Dios? Dirá el vaso de barro al que le labró: ¿Por qué me has hecho tal?
+
+
+## Romanos 9:21 (id: 10045009021)
+
+21¿O no tiene potestad el alfarero para hacer de la misma masa un vaso para honra, y otro para vergüenza?
+
+
+## Romanos 9:22 (id: 10045009022)
+
+22¿Y qué, si Dios, queriendo mostrar la ira y hacer notoria su potencia, soportó con mucha mansedumbre los vasos de ira preparados para muerte,
+
+
+## Romanos 9:23 (id: 10045009023)
+
+23Y para hacer notorias las riquezas de su gloria, mostrólas para con los vasos de misericordia que él ha preparado para gloria;
+
+
+## Romanos 9:24 (id: 10045009024)
+
+24Los cuales también ha llamado, es á saber, á nosotros, no sólo de los Judíos, mas también de los Gentiles?
+
+
+## Romanos 9:25 (id: 10045009025)
+
+25Como también en Oseas dice: Llamaré al que no era mi pueblo, pueblo mío; y á la no amada, amada.
+
+
+## Romanos 9:26 (id: 10045009026)
+
+26Y será, que en el lugar donde les fué dicho: Vosotros no sois pueblo mío: allí serán llamados hijos del Dios viviente.
+
+
+## Romanos 9:27 (id: 10045009027)
+
+27También Isaías clama tocante á Israel: Si fuere el número de los hijos de Israel como la arena de la mar, las reliquias serán salvas:
+
+
+## Romanos 9:28 (id: 10045009028)
+
+28Porque palabra consumadora y abreviadora en justicia, porque palabra abreviada, hará el Señor sobre la tierra.
+
+
+## Romanos 9:29 (id: 10045009029)
+
+29Y como antes dijo Isaías: Si el Señor de los ejércitos no nos hubiera dejado simiente, como Sodoma habríamos venido á ser, y á Gomorra fuéramos semejantes.
+
+
+## Romanos 9:30 (id: 10045009030)
+
+30¿Pues qué diremos? Que los Gentiles que no seguían justicia, han alcanzado la justicia, es á saber, la justicia que es por la fe;
+
+
+## Romanos 9:31 (id: 10045009031)
+
+31Mas Israel que seguía la ley de justicia, no ha llegado á la ley de justicia.
+
+
+## Romanos 9:32 (id: 10045009032)
+
+32¿Por qué? Porque la seguían no por fe, mas como por las obras de la ley: por lo cual tropezaron en la piedra de tropiezo,
+
+
+## Romanos 9:33 (id: 10045009033)
+
+33Como está escrito: He aquí pongo en Sión piedra de tropiezo, y piedra de caída; y aquel que creyere en ella, no será avergonzado.
+
+
+## Romanos 10:1 (id: 10045010001)
+
+1HERMANOS, ciertamente la voluntad de mi corazón y mi oración á Dios sobre Israel, es para salud.
+
+
+## Romanos 10:2 (id: 10045010002)
+
+2Porque yo les doy testimonio que tienen celo de Dios, mas no conforme á ciencia.
+
+
+## Romanos 10:3 (id: 10045010003)
+
+3Porque ignorando la justicia de Dios, y procurando establecer la suya propia, no se han sujetado á la justicia de Dios.
+
+
+## Romanos 10:4 (id: 10045010004)
+
+4Porque el fin de la ley es Cristo, para justicia á todo aquel que cree.
+
+
+## Romanos 10:5 (id: 10045010005)
+
+5Porque Moisés describe la justicia que es por la ley: Que el hombre que hiciere estas cosas, vivirá por ellas.
+
+
+## Romanos 10:6 (id: 10045010006)
+
+6Mas la justicia que es por la fe dice así: No digas en tu corazón: ¿Quién subirá al cielo? (esto es, para traer abajo á Cristo:)
+
+
+## Romanos 10:7 (id: 10045010007)
+
+7O, ¿quién descenderá al abismo? (esto es, para volver á traer á Cristo de los muertos.)
+
+
+## Romanos 10:8 (id: 10045010008)
+
+8Mas ¿qué dice? Cercana está la palabra, en tu boca y en tu corazón. Esta es la palabra de fe, la cual predicamos:
+
+
+## Romanos 10:9 (id: 10045010009)
+
+9Que si confesares con tu boca al Señor Jesús, y creyeres en tu corazón que Dios le levantó de los muertos, serás salvo.
+
+
+## Romanos 10:10 (id: 10045010010)
+
+10Porque con el corazón se cree para justicia; mas con la boca se hace confesión para salud.
+
+
+## Romanos 10:11 (id: 10045010011)
+
+11Porque la Escritura dice: Todo aquel que en él creyere, no será avergonzado.
+
+
+## Romanos 10:12 (id: 10045010012)
+
+12Porque no hay diferencia de Judío y de Griego: porque el mismo que es Señor de todos, rico es para con todos los que le invocan:
+
+
+## Romanos 10:13 (id: 10045010013)
+
+13Porque todo aquel que invocare el nombre del Señor, será salvo.
+
+
+## Romanos 10:14 (id: 10045010014)
+
+14¿Cómo, pues invocarán á aquel en el cual no han creído? ¿y cómo creerán á aquel de quien no han oído? ¿y cómo oirán sin haber quien les predique?
+
+
+## Romanos 10:15 (id: 10045010015)
+
+15¿Y cómo predicarán si no fueren enviados? Como está escrito: ¡Cuán hermosos son los pies de los que anuncian el evangelio de la paz, de los que anuncian el evangelio de los bienes!
+
+
+## Romanos 10:16 (id: 10045010016)
+
+16Mas no todos obedecen al evangelio; pues Isaías dice: Señor, ¿quién ha creído á nuestro anuncio?
+
+
+## Romanos 10:17 (id: 10045010017)
+
+17Luego la fe es por el oir; y el oir por la palabra de Dios.
+
+
+## Romanos 10:18 (id: 10045010018)
+
+18Mas digo: ¿No han oído? Antes bien, por toda la tierra ha salido la fama de ellos, y hasta los cabos de la redondez de la tierra las palabras de ellos.
+
+
+## Romanos 10:19 (id: 10045010019)
+
+19Mas digo: ¿No ha conocido esto Israel? Primeramente Moisés dice: Yo os provocaré á celos con gente que no es mía; con gente insensata os provocaré á ira.
+
+
+## Romanos 10:20 (id: 10045010020)
+
+20E Isaías determinadamente dice: Fuí hallado de los que no me buscaban; manifestéme á los que no preguntaban por mí.
+
+
+## Romanos 10:21 (id: 10045010021)
+
+21Mas acerca de Israel dice: Todo el día extendí mis manos á un pueblo rebelde y contradictor.
+
+
+## Romanos 11:1 (id: 10045011001)
+
+1DIGO pues: ¿Ha desechado Dios á su pueblo? En ninguna manera. Porque también yo soy Israelita, de la simiente de Abraham, de la tribu de Benjamín.
+
+
+## Romanos 11:2 (id: 10045011002)
+
+2No ha desechado Dios á su pueblo, al cual antes conoció. ¿O no sabéis qué dice de Elías la Escritura? cómo hablando con Dios contra Israel dice:
+
+
+## Romanos 11:3 (id: 10045011003)
+
+3Señor, á tus profetas han muerto, y tus altares han derruído; y yo he quedado solo, y procuran matarme.
+
+
+## Romanos 11:4 (id: 10045011004)
+
+4Mas ¿qué le dice la divina respuesta? He dejado para mí siete mil hombres, que no han doblado la rodilla delante de Baal.
+
+
+## Romanos 11:5 (id: 10045011005)
+
+5Así también, aun en este tiempo han quedado reliquias por la elección de gracia.
+
+
+## Romanos 11:6 (id: 10045011006)
+
+6Y si por gracia, luego no por las obras; de otra manera la gracia ya no es gracia. Y si por las obras, ya no es gracia; de otra manera la obra ya no es obra.
+
+
+## Romanos 11:7 (id: 10045011007)
+
+7¿Qué pues? Lo que buscaba Israel aquello no ha alcanzado; mas la elección lo ha alcanzado: y los demás fueron endurecidos;
+
+
+## Romanos 11:8 (id: 10045011008)
+
+8Como está escrito: Dióles Dios espíritu de remordimiento, ojos con que no vean, y oídos con que no oigan, hasta el día de hoy.
+
+
+## Romanos 11:9 (id: 10045011009)
+
+9Y David dice: Séales vuelta su mesa en lazo, y en red, y en tropezadero, y en paga:
+
+
+## Romanos 11:10 (id: 10045011010)
+
+10Sus ojos sean obscurecidos para que no vean, y agóbiales siempre el espinazo.
+
+
+## Romanos 11:11 (id: 10045011011)
+
+11Digo pues: ¿Han tropezado para que cayesen? En ninguna manera; mas por el tropiezo de ellos vino la salud á los Gentiles, para que fuesen provocados á celos.
+
+
+## Romanos 11:12 (id: 10045011012)
+
+12Y si la falta de ellos es la riqueza del mundo, y el menoscabo de ellos la riqueza de los Gentiles, ¿cuánto más el henchimiento de ellos?
+
+
+## Romanos 11:13 (id: 10045011013)
+
+13Porque á vosotros hablo, Gentiles. Por cuanto pues, yo soy apóstol de los Gentiles, mi ministerio honro,
+
+
+## Romanos 11:14 (id: 10045011014)
+
+14Por si en alguna manera provocase á celos á mi carne, é hiciese salvos á algunos de ellos.
+
+
+## Romanos 11:15 (id: 10045011015)
+
+15Porque si el extrañamiento de ellos es la reconciliación del mundo, ¿qué será el recibimiento de ellos, sino vida de los muertos?
+
+
+## Romanos 11:16 (id: 10045011016)
+
+16Y si el primer fruto es santo, también lo es el todo, y si la raíz es santa, también lo son las ramas.
+
+
+## Romanos 11:17 (id: 10045011017)
+
+17Que si algunas de las ramas fueron quebradas, y tú, siendo acebuche, has sido ingerido en lugar de ellas, y has sido hecho participante de la raíz y de la grosura de la oliva;
+
+
+## Romanos 11:18 (id: 10045011018)
+
+18No te jactes contra las ramas; y si te jactas, sabe que no sustentas tú á la raíz, sino la raíz á ti.
+
+
+## Romanos 11:19 (id: 10045011019)
+
+19Pues las ramas, dirás, fueron quebradas para que yo fuese ingerido.
+
+
+## Romanos 11:20 (id: 10045011020)
+
+20Bien: por su incredulidad fueron quebradas, mas tú por la fe estás en pie. No te ensoberbezcas, antes teme,
+
+
+## Romanos 11:21 (id: 10045011021)
+
+21Que si Dios no perdonó á las ramas naturales, á ti tampoco no perdone.
+
+
+## Romanos 11:22 (id: 10045011022)
+
+22Mira, pues, la bondad y la severidad de Dios: la severidad ciertamente en los que cayeron; mas la bondad para contigo, si permanecieres en la bondad; pues de otra manera tú también serás cortado.
+
+
+## Romanos 11:23 (id: 10045011023)
+
+23Y aun ellos, si no permanecieren en incredulidad, serán ingeridos; que poderoso es Dios para volverlos á ingerir.
+
+
+## Romanos 11:24 (id: 10045011024)
+
+24Porque si tú eres cortado del natural acebuche, y contra natura fuiste ingerido en la buena oliva, ¿cuánto más éstos, que son las ramas naturales, serán ingeridos en su oliva?
+
+
+## Romanos 11:25 (id: 10045011025)
+
+25Porque no quiero, hermanos, que ignoréis este misterio, para que no seáis acerca de vosotros mismos arrogantes: que el endurecimiento en parte ha acontecido en Israel, hasta que haya entrado la plenitud de los Gentiles;
+
+
+## Romanos 11:26 (id: 10045011026)
+
+26Y luego todo Israel será salvo; como está escrito: Vendrá de Sión el Libertador, que quitará de Jacob la impiedad;
+
+
+## Romanos 11:27 (id: 10045011027)
+
+27Y este es mi pacto con ellos, cuando quitare su pecados.
+
+
+## Romanos 11:28 (id: 10045011028)
+
+28Así que, cuanto al evangelio, son enemigos por causa de vosotros: mas cuanto á la elección, son muy amados por causa de los padres.
+
+
+## Romanos 11:29 (id: 10045011029)
+
+29Porque sin arrepentimiento son las mercedes y la vocación de Dios.
+
+
+## Romanos 11:30 (id: 10045011030)
+
+30Porque como también vosotros en algún tiempo no creísteis á Dios, mas ahora habéis alcanzado misericordia por la incredulidad de ellos;
+
+
+## Romanos 11:31 (id: 10045011031)
+
+31Así también éstos ahora no han creído, para que, por la misericordia para con vosotros, ellos también alcancen misericordia.
+
+
+## Romanos 11:32 (id: 10045011032)
+
+32Porque Dios encerró á todos en incredulidad, para tener misericordia de todos.
+
+
+## Romanos 11:33 (id: 10045011033)
+
+33¡Oh profundidad de las riquezas de la sabiduría y de la ciencia de Dios! ¡Cuán incomprensibles son sus juicios, é inescrutables sus caminos!
+
+
+## Romanos 11:34 (id: 10045011034)
+
+34Porque ¿quién entendió la mente del Señor? ¿ó quién fué su consejero?
+
+
+## Romanos 11:35 (id: 10045011035)
+
+35¿O quién le dió á él primero, para que le sea pagado?
+
+
+## Romanos 11:36 (id: 10045011036)
+
+36Porque de él, y por él, y en él, son todas las cosas. A él sea gloria por siglos. Amén.
+
+
+## Romanos 12:1 (id: 10045012001)
+
+1ASÍ que, hermanos, os ruego por las misericordias de Dios, que presentéis vuestros cuerpos en sacrificio vivo, santo, agradable á Dios, que es vuestro racional culto.
+
+
+## Romanos 12:2 (id: 10045012002)
+
+2Y no os conforméis á este siglo; mas reformaos por la renovación de vuestro entendimiento, para que experimentéis cuál sea la buena voluntad de Dios, agradable y perfecta.
+
+
+## Romanos 12:3 (id: 10045012003)
+
+3Digo pues por la gracia que me es dada, á cada cual que está entre vosotros, que no tenga más alto concepto de sí que el que debe tener, sino que piense de sí con templanza, conforme á la medida de fe que Dios repartió á cada uno.
+
+
+## Romanos 12:4 (id: 10045012004)
+
+4Porque de la manera que en un cuerpo tenemos muchos miembros, empero todos los miembros no tienen la misma operación;
+
+
+## Romanos 12:5 (id: 10045012005)
+
+5Así muchos somos un cuerpo en Cristo, mas todos miembros los unos de los otros.
+
+
+## Romanos 12:6 (id: 10045012006)
+
+6De manera que, teniendo diferentes dones según la gracia que nos es dada, si el de profecía, úsese conforme á la medida de la fe;
+
+
+## Romanos 12:7 (id: 10045012007)
+
+7O si ministerio, en servir; ó el que enseña, en doctrina;
+
+
+## Romanos 12:8 (id: 10045012008)
+
+8El que exhorta, en exhortar; el que reparte, hágalo en simplicidad; el que preside, con solicitud; el que hace misericordia, con alegría.
+
+
+## Romanos 12:9 (id: 10045012009)
+
+9El amor sea sin fingimiento: aborreciendo lo malo, llegándoos á lo bueno;
+
+
+## Romanos 12:10 (id: 10045012010)
+
+10Amándoos los unos á los otros con caridad fraternal; previniéndoos con honra los unos á los otros;
+
+
+## Romanos 12:11 (id: 10045012011)
+
+11En el cuidado no perezosos; ardientes en espíritu; sirviendo al Señor;
+
+
+## Romanos 12:12 (id: 10045012012)
+
+12Gozosos en la esperanza; sufridos en la tribulación; constantes en la oración;
+
+
+## Romanos 12:13 (id: 10045012013)
+
+13Comunicando á las necesidades de los santos; siguiendo la hospitalidad.
+
+
+## Romanos 12:14 (id: 10045012014)
+
+14Bendecid á los que os persiguen: bendecid, y no maldigáis.
+
+
+## Romanos 12:15 (id: 10045012015)
+
+15Gozaos con los que se gozan: llorad con los que lloran.
+
+
+## Romanos 12:16 (id: 10045012016)
+
+16Unánimes entre vosotros: no altivos, mas acomodándoos á los humildes. No seáis sabios en vuestra opinión.
+
+
+## Romanos 12:17 (id: 10045012017)
+
+17No paguéis á nadie mal por mal; procurad lo bueno delante de todos los hombres.
+
+
+## Romanos 12:18 (id: 10045012018)
+
+18Si se puede hacer, cuanto está en vosotros, tened paz con todos los hombres.
+
+
+## Romanos 12:19 (id: 10045012019)
+
+19No os venguéis vosotros mismos, amados míos; antes dad lugar á la ira; porque escrito está: Mía es la venganza: yo pagaré, dice el Señor.
+
+
+## Romanos 12:20 (id: 10045012020)
+
+20Así que, si tu enemigo tuviere hambre, dale de comer; si tuviere sed, dale de beber: que haciendo esto, ascuas de fuego amontonas sobre su cabeza.
+
+
+## Romanos 12:21 (id: 10045012021)
+
+21No seas vencido de lo malo; mas vence con el bien el mal.
+
+
+## Romanos 13:1 (id: 10045013001)
+
+1TODA alma se someta á las potestades superiores; porque no hay potestad sino de Dios; y las que son, de Dios son ordenadas.
+
+
+## Romanos 13:2 (id: 10045013002)
+
+2Así que, el que se opone á la potestad, á la ordenación de Dios resiste: y los que resisten, ellos mismos ganan condenación para sí.
+
+
+## Romanos 13:3 (id: 10045013003)
+
+3Porque los magistrados no son para temor al que bien hace, sino al malo. ¿Quieres pues no temer la potestad? haz lo bueno, y tendrás alabanza de ella;
+
+
+## Romanos 13:4 (id: 10045013004)
+
+4Porque es ministro de Dios para tu bien. Mas si hicieres lo malo, teme: porque no en vano lleva el cuchillo; porque es ministro de Dios, vengador para castigo al que hace lo malo.
+
+
+## Romanos 13:5 (id: 10045013005)
+
+5Por lo cual es necesario que le estéis sujetos, no solamente por la ira, mas aun por la conciencia.
+
+
+## Romanos 13:6 (id: 10045013006)
+
+6Porque por esto pagáis también los tributos; porque son ministros de Dios que sirven á esto mismo.
+
+
+## Romanos 13:7 (id: 10045013007)
+
+7Pagad á todos lo que debéis: al que tributo, tributo; al que pecho, pecho; al que temor, temor; al que honra, honra.
+
+
+## Romanos 13:8 (id: 10045013008)
+
+8No debáis á nadie nada, sino amaros unos á otros; porque el que ama al prójimo, cumplió la ley.
+
+
+## Romanos 13:9 (id: 10045013009)
+
+9Porque: No adulterarás; no matarás; no hurtarás; no dirás falso testimonio; no codiciarás; y si hay algún otro mandamiento, en esta sentencia se comprende sumariamente: Amarás á tu prójimo como á ti mismo.
+
+
+## Romanos 13:10 (id: 10045013010)
+
+10La caridad no hace mal al prójimo: así que, el cumplimento de la ley es la caridad.
+
+
+## Romanos 13:11 (id: 10045013011)
+
+11Y esto, conociendo el tiempo, que es ya hora de levantarnos del sueño; porque ahora nos está más cerca nuestra salud que cuando creímos.
+
+
+## Romanos 13:12 (id: 10045013012)
+
+12La noche ha pasado, y ha llegado el día: echemos, pues, las obras de las tinieblas, y vistámonos las armas de luz.
+
+
+## Romanos 13:13 (id: 10045013013)
+
+13Andemos como de día, honestamente: no en glotonerías y borracheras, no en lechos y disoluciones, no en pedencias y envidia:
+
+
+## Romanos 13:14 (id: 10045013014)
+
+14Mas vestíos del Señor Jesucristo, y no hagáis caso de la carne en sus deseos.
+
+
+## Romanos 14:1 (id: 10045014001)
+
+1RECIBID al flaco en la fe, pero no para contiendas de disputas.
+
+
+## Romanos 14:2 (id: 10045014002)
+
+2Porque uno cree que se ha de comer de todas cosas: otro que es débil, come legumbres.
+
+
+## Romanos 14:3 (id: 10045014003)
+
+3El que come, no menosprecie al que no come: y el que no come, no juzgue al que come; porque Dios le ha levantado.
+
+
+## Romanos 14:4 (id: 10045014004)
+
+4¿Tú quién eres que juzgas al siervo ajeno? para su señor está en pie, ó cae: mas se afirmará; que poderoso es el Señor para afirmarle.
+
+
+## Romanos 14:5 (id: 10045014005)
+
+5Uno hace diferencia entre día y día; otro juzga iguales todos los días. Cada uno esté asegurado en su ánimo.
+
+
+## Romanos 14:6 (id: 10045014006)
+
+6El que hace caso del día, hácelo para el Señor: y el que no hace caso del día, no lo hace para el Señor. El que come, come para el Señor, porque da gracias á Dios; y el que no come, no come para el Señor, y da gracias á Dios.
+
+
+## Romanos 14:7 (id: 10045014007)
+
+7Porque ninguno de nosotros vive para sí, y ninguno muere para sí.
+
+
+## Romanos 14:8 (id: 10045014008)
+
+8Que si vivimos, para el Señor vivimos; y si morimos, para el Señor morimos. Así que, ó que vivamos, ó que muramos, del Señor somos.
+
+
+## Romanos 14:9 (id: 10045014009)
+
+9Porque Cristo para esto murió, y resucitó, y volvió á vivir, para ser Señor así de los muertos como de los que viven.
+
+
+## Romanos 14:10 (id: 10045014010)
+
+10Mas tú ¿por qué juzgas á tu hermano? ó tú también, ¿por qué menosprecias á tu hermano? porque todos hemos de estar ante el tribunal de Cristo.
+
+
+## Romanos 14:11 (id: 10045014011)
+
+11Porque escrito está: Vivo yo, dice el Señor, que á mí se doblará toda rodilla, y toda lengua confesará á Dios.
+
+
+## Romanos 14:12 (id: 10045014012)
+
+12De manera que, cada uno de nosotros dará á Dios razón de sí.
+
+
+## Romanos 14:13 (id: 10045014013)
+
+13Así que, no juzguemos más los unos de los otros: antes bien juzgad de no poner tropiezo ó escándalo al hermano.
+
+
+## Romanos 14:14 (id: 10045014014)
+
+14Yo sé, y confío en el Señor Jesús, que de suyo nada hay inmundo: mas á aquel que piensa alguna cosa ser inmunda, para él es inmunda.
+
+
+## Romanos 14:15 (id: 10045014015)
+
+15Empero si por causa de la comida tu hermano es contristado, ya no andas conforme á la caridad. No arruines con tu comida á aquél por el cual Cristo murió.
+
+
+## Romanos 14:16 (id: 10045014016)
+
+16No sea pues blasfemado vuestro bien:
+
+
+## Romanos 14:17 (id: 10045014017)
+
+17Que el reino de Dios no es comida ni bebida, sino justicia y paz y gozo por el Espíritu Santo.
+
+
+## Romanos 14:18 (id: 10045014018)
+
+18Porque el que en esto sirve á Cristo, agrada á Dios, y es acepto á los hombres.
+
+
+## Romanos 14:19 (id: 10045014019)
+
+19Así que, sigamos lo que hace á la paz, y á la edificación de los unos á los otros.
+
+
+## Romanos 14:20 (id: 10045014020)
+
+20No destruyas la obra de Dios por causa de la comida. Todas las cosas á la verdad son limpias: mas malo es al hombre que come con escándalo.
+
+
+## Romanos 14:21 (id: 10045014021)
+
+21Bueno es no comer carne, ni beber vino, ni nada en que tu hermano tropiece, ó se ofenda, ó sea debilitado.
+
+
+## Romanos 14:22 (id: 10045014022)
+
+22¿Tienes tú fe? Tenla para contigo delante de Dios. Bienaventurado el que no se condena á sí mismo con lo que aprueba.
+
+
+## Romanos 14:23 (id: 10045014023)
+
+23Mas el que hace diferencia, si comiere, es condenado, porque no comió por fe: y todo lo que no es de fe, es pecado.
+
+
+## Romanos 15:1 (id: 10045015001)
+
+1ASÍ que, los que somos más firmes debemos sobrellevar las flaquezas de los flacos, y no agradarnos á nosotros mismos.
+
+
+## Romanos 15:2 (id: 10045015002)
+
+2Cada uno de nosotros agrade á su prójimo en bien, á edificación.
+
+
+## Romanos 15:3 (id: 10045015003)
+
+3Porque Cristo no se agradó á sí mismo; antes bien, como está escrito: Los vituperios de los que te vituperan, cayeron sobre mí.
+
+
+## Romanos 15:4 (id: 10045015004)
+
+4Porque las cosas que antes fueron escritas, para nuestra enseñanza fueron escritas; para que por la paciencia, y por la consolación de las Escrituras, tengamos esperanza.
+
+
+## Romanos 15:5 (id: 10045015005)
+
+5Mas el Dios de la paciencia y de la consolación os dé que entre vosotros seáis unánimes según Cristo Jesús;
+
+
+## Romanos 15:6 (id: 10045015006)
+
+6Para que concordes, á una boca glorifiquéis al Dios y Padre de nuestro Señor Jesucristo.
+
+
+## Romanos 15:7 (id: 10045015007)
+
+7Por tanto, sobrellevaos los unos á los otros, como también Cristo nos sobrellevó, para gloria de Dios.
+
+
+## Romanos 15:8 (id: 10045015008)
+
+8Digo, pues, que Cristo Jesús fué hecho ministro de la circuncisión por la verdad de Dios, para confirmar las promesas hechas á los padres,
+
+
+## Romanos 15:9 (id: 10045015009)
+
+9Y para que los Gentiles glorifiquen á Dios por la misericordia; como está escrito: Por tanto yo te confesaré entre los Gentiles, y cantaré á tu nombre.
+
+
+## Romanos 15:10 (id: 10045015010)
+
+10Y otra vez dice: Alegraos, Gentiles, con su pueblo.
+
+
+## Romanos 15:11 (id: 10045015011)
+
+11Y otra vez: Alabad al Señor todos los Gentiles, y magnificadle, todos los pueblos.
+
+
+## Romanos 15:12 (id: 10045015012)
+
+12Y otra vez, dice Isaías: Estará la raíz de Jessé, y el que se levantará á regir los Gentiles: los Gentiles esperarán en él.
+
+
+## Romanos 15:13 (id: 10045015013)
+
+13Y el Dios de esperanza os llene de todo gozo y paz creyendo, para que abundéis en esperanza por la virtud del Espíritu Santo.
+
+
+## Romanos 15:14 (id: 10045015014)
+
+14Empero cierto estoy yo de vosotros, hermanos míos, que aun vosotros mismos estáis llenos de bondad, llenos de todo conocimiento, de tal manera que podáis amonestaros los unos á los otros.
+
+
+## Romanos 15:15 (id: 10045015015)
+
+15Mas os he escrito, hermanos, en parte resueltamente, como amonestándoos por la gracia que de Dios me es dada,
+
+
+## Romanos 15:16 (id: 10045015016)
+
+16Para ser ministro de Jesucristo á los Gentiles, ministrando el evangelio de Dios, para que la ofrenda de los Gentiles sea agradable, santificada por el Espíritu Santo.
+
+
+## Romanos 15:17 (id: 10045015017)
+
+17Tengo, pues, de qué gloriarme en Cristo Jesús en lo que mira á Dios.
+
+
+## Romanos 15:18 (id: 10045015018)
+
+18Porque no osaría hablar alguna cosa que Cristo no haya hecho por mí para la obediencia de los Gentiles, con la palabra y con las obras,
+
+
+## Romanos 15:19 (id: 10045015019)
+
+19Con potencia de milagros y prodigios, en virtud del Espíritu de Dios: de manera que desde Jerusalem, y por los alrededores hasta Ilírico, he llenado todo del evangelio de Cristo.
+
+
+## Romanos 15:20 (id: 10045015020)
+
+20Y de esta manera me esforcé á predicar el evangelio, no donde antes Cristo fuese nombrado, por no edificar sobre ajeno fundamento:
+
+
+## Romanos 15:21 (id: 10045015021)
+
+21Sino, como está escrito: A los que no fué anunciado de él, verán: y los que no oyeron, entenderán.
+
+
+## Romanos 15:22 (id: 10045015022)
+
+22Por lo cual aun he sido impedido muchas veces de venir á vosotros.
+
+
+## Romanos 15:23 (id: 10045015023)
+
+23Mas ahora no teniendo más lugar en estas regiones, y deseando ir á vosotros muchos años há,
+
+
+## Romanos 15:24 (id: 10045015024)
+
+24Cuando partiere para España, iré á vosotros; porque espero que pasando os veré, y que seré llevado de vosotros allá, si empero antes hubiere gozado de vosotros.
+
+
+## Romanos 15:25 (id: 10045015025)
+
+25Mas ahora parto para Jerusalem á ministrar á los santos.
+
+
+## Romanos 15:26 (id: 10045015026)
+
+26Porque Macedonia y Acaya tuvieron por bien hacer una colecta para los pobres de los santos que están en Jerusalem.
+
+
+## Romanos 15:27 (id: 10045015027)
+
+27Porque les pareció bueno, y son deudores á ellos: porque si los Gentiles han sido hechos participantes de sus bienes espirituales, deben también ellos servirles en los carnales.
+
+
+## Romanos 15:28 (id: 10045015028)
+
+28Así que, cuando hubiere concluído esto, y les hubiere consignado este fruto, pasaré por vosotros á España.
+
+
+## Romanos 15:29 (id: 10045015029)
+
+29Y sé que cuando llegue á vosotros, llegaré con abundancia de la bendición del evangelio de Cristo.
+
+
+## Romanos 15:30 (id: 10045015030)
+
+30Ruégoos empero, hermanos, por el Señor nuestro Jesucristo, y por la caridad del Espíritu, que me ayudéis con oraciones por mí á Dios,
+
+
+## Romanos 15:31 (id: 10045015031)
+
+31Que sea librado de los rebeldes que están en Judea, y que la ofrenda de mi servicio á los santos en Jerusalem sea acepta;
+
+
+## Romanos 15:32 (id: 10045015032)
+
+32Para que con gozo llegue á vosotros por la voluntad de Dios, y que sea recreado juntamente con vosotros.
+
+
+## Romanos 15:33 (id: 10045015033)
+
+33Y el Dios de paz sea con todos vosotros. Amén.
+
+
+## Romanos 16:1 (id: 10045016001)
+
+1ENCOMIÉNDOOS empero á Febe nuestra hermana, la cual es diaconisa de la iglesia que está en Cencreas:
+
+
+## Romanos 16:2 (id: 10045016002)
+
+2Que la recibáis en el Señor, como es digno á los santos, y que la ayudéis en cualquiera cosa en que os hubiere menester: porque ella ha ayudado á muchos, y á mí mismo.
+
+
+## Romanos 16:3 (id: 10045016003)
+
+3Saludad á Priscila y á Aquila, mis coadjutores en Cristo Jesús;
+
+
+## Romanos 16:4 (id: 10045016004)
+
+4(Que pusieron sus cuellos por mi vida: á los cuales no doy gracias yo solo, mas aun todas las iglesias de los Gentiles;)
+
+
+## Romanos 16:5 (id: 10045016005)
+
+5Asimismo á la iglesia de su casa. Saludad á Epeneto, amado mío, que es las primicias de Acaya en Cristo.
+
+
+## Romanos 16:6 (id: 10045016006)
+
+6Saludad á María, la cual ha trabajado mucho con vosotros.
+
+
+## Romanos 16:7 (id: 10045016007)
+
+7Saludad á Andrónico y á Junia, mis parientes, y mis compañeros en la cautividad, los que son insignes entre los apóstoles; los cuales también fueron antes de mí en Cristo.
+
+
+## Romanos 16:8 (id: 10045016008)
+
+8Saludad á Amplias, amado mío en el Señor.
+
+
+## Romanos 16:9 (id: 10045016009)
+
+9Saludad á Urbano, nuestro ayudador en Cristo Jesús, y á Stachîs, amado mío.
+
+
+## Romanos 16:10 (id: 10045016010)
+
+10Saludad á Apeles, probado en Cristo. Saludad á los que son de Aristóbulo.
+
+
+## Romanos 16:11 (id: 10045016011)
+
+11Saludad á Herodión, mi pariente. Saludad á los que son de la casa de Narciso, los que están en el Señor.
+
+
+## Romanos 16:12 (id: 10045016012)
+
+12Saludad á Trifena y á Trifosa, las cuales trabajan en el Señor. Saludad á Pérsida amada, la cual ha trabajado mucho en el Señor.
+
+
+## Romanos 16:13 (id: 10045016013)
+
+13Saludad á Rufo, escogido en el Señor, y á su madre y mía.
+
+
+## Romanos 16:14 (id: 10045016014)
+
+14Saludad á Asíncrito, y á Flegonte, á Hermas, á Patrobas, á Hermes, y á los hermanos que están con ellos.
+
+
+## Romanos 16:15 (id: 10045016015)
+
+15Saludad á Filólogo y á Julia, á Nereo y á su hermana, y á Olimpas, y á todos los santos que están con ellos.
+
+
+## Romanos 16:16 (id: 10045016016)
+
+16Saludaos los unos á los otros con ósculo santo. Os saludan todas las iglesias de Cristo.
+
+
+## Romanos 16:17 (id: 10045016017)
+
+17Y os ruego hermanos, que miréis los que causan disensiones y escándalos contra la doctrina que vosotros habéis aprendido; y apartaos de ellos.
+
+
+## Romanos 16:18 (id: 10045016018)
+
+18Porque los tales no sirven al Señor nuestro Jesucristo, sino á sus vientres; y con suaves palabras y bendiciones engañan los corazones de los simples.
+
+
+## Romanos 16:19 (id: 10045016019)
+
+19Porque vuestra obediencia ha venido á ser notoria á todos; así que me gozo de vosotros; mas quiero que seáis sabios en el bien, y simples en el mal.
+
+
+## Romanos 16:20 (id: 10045016020)
+
+20Y el Dios de paz quebrantará presto á Satanás debajo de vuestros pies. La gracia del Señor nuestro Jesucristo sea con vosotros.
+
+
+## Romanos 16:21 (id: 10045016021)
+
+21Os saludan Timoteo, mi coadjutor, y Lucio y Jasón y Sosipater, mis parientes.
+
+
+## Romanos 16:22 (id: 10045016022)
+
+22Yo Tercio, que escribí la epístola, os saludo en el Señor.
+
+
+## Romanos 16:23 (id: 10045016023)
+
+23Salúdaos Gayo, mi huésped, y de toda la iglesia. Salúdaos Erasto, tesorero de la ciudad, y el hermano Cuarto.
+
+
+## Romanos 16:24 (id: 10045016024)
+
+24La gracia del Señor nuestro Jesucristo sea con todos vosotros. Amén.
+
+
+## Romanos 16:25 (id: 10045016025)
+
+25Y al que puede confirmaros según mi evangelio y la predicación de Jesucristo, según la revelación del misterio encubierto desde tiempos eternos,
+
+
+## Romanos 16:26 (id: 10045016026)
+
+26Mas manifestado ahora, y por las Escrituras de los profetas, según el mandamiento del Dios eterno, declarado á todas las gentes para que obedezcan á la fe;
+
+
+## Romanos 16:27 (id: 10045016027)
+
+27Al solo Dios sabio, sea gloria por Jesucristo para siempre. Amén. Fué escrita de Corinto á los Romanos, enviada por medio de Febe, diaconisa de la iglesia de Cencreas.
+
+`;export{n as default};

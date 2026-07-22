@@ -1,0 +1,318 @@
+const e=`# Reina Valera 1909
+
+## License Information
+
+**Reina Valera 1909** is based on and adapted from: _Reina Valera 1909_, [Public Domain](https://creativecommons.org/public-domain/cc0/), 1909, which is licensed under a [Public Domain CC0](https://creativecommons.org/public-domain/cc0/).
+
+This markdown version is provided under the same license.
+
+
+
+--------------------------------
+
+
+## 2 Pedro 1:1 (id: 10061001001)
+
+1SIMÓN Pedro, siervo y apóstol de Jesucristo, á los que habéis alcanzado fe igualmente preciosa con nosotros en la justicia de nuestro Dios y Salvador Jesucristo:
+
+
+## 2 Pedro 1:2 (id: 10061001002)
+
+2Gracia y paz os sea multiplicada en el conocimiento de Dios, y de nuestro Señor Jesús.
+
+
+## 2 Pedro 1:3 (id: 10061001003)
+
+3Como todas las cosas que pertenecen á la vida y á la piedad nos sean dadas de su divina potencia, por el conocimiento de aquel que nos ha llamado por su gloria y virtud:
+
+
+## 2 Pedro 1:4 (id: 10061001004)
+
+4Por las cuales nos son dadas preciosas y grandísimas promesas, para que por ellas fueseis hechos participantes de la naturaleza divina, habiendo huído de la corrupción que está en el mundo por concupiscencia.
+
+
+## 2 Pedro 1:5 (id: 10061001005)
+
+5Vosotros también, poniendo toda diligencia por esto mismo, mostrad en vuestra fe virtud, y en la virtud ciencia;
+
+
+## 2 Pedro 1:6 (id: 10061001006)
+
+6Y en la ciencia templanza, y en la templanza paciencia, y en la paciencia temor de Dios;
+
+
+## 2 Pedro 1:7 (id: 10061001007)
+
+7Y en el temor de Dios, amor fraternal, y en el amor fraternal caridad.
+
+
+## 2 Pedro 1:8 (id: 10061001008)
+
+8Porque si en vosotros hay estas cosas, y abundan, no os dejarán estar ociosos, ni estériles en el conocimiento de nuestro Señor Jesucristo.
+
+
+## 2 Pedro 1:9 (id: 10061001009)
+
+9Mas el que no tiene estas cosas, es ciego, y tiene la vista muy corta, habiendo olvidado la purificación de sus antiguos pecados.
+
+
+## 2 Pedro 1:10 (id: 10061001010)
+
+10Por lo cual, hermanos, procurad tanto más de hacer firme vuestra vocación y elección; porque haciendo estas cosas, no caeréis jamás.
+
+
+## 2 Pedro 1:11 (id: 10061001011)
+
+11Porque de esta manera os será abundantemente administrada la entrada en el reino eterno de nuestro Señor y Salvador Jesucristo.
+
+
+## 2 Pedro 1:12 (id: 10061001012)
+
+12Por esto, yo no dejaré de amonestaros siempre de estas cosas, aunque vosotros las sepáis, y estéis confirmados en la verdad presente.
+
+
+## 2 Pedro 1:13 (id: 10061001013)
+
+13Porque tengo por justo, en tanto que estoy en este tabernáculo, de incitaros con amonestación:
+
+
+## 2 Pedro 1:14 (id: 10061001014)
+
+14Sabiendo que brevemente tengo de dejar mi tabernáculo, como nuestro Señor Jesucristo me ha declarado.
+
+
+## 2 Pedro 1:15 (id: 10061001015)
+
+15También yo procuraré con diligencia, que después de mi fallecimiento, vosotros podáis siempre tener memoria de estas cosas.
+
+
+## 2 Pedro 1:16 (id: 10061001016)
+
+16Porque no os hemos dado á conocer la potencia y la venida de nuestro Señor Jesucristo, siguiendo fábulas por arte compuestas; sino como habiendo con nuestros propios ojos visto su majestad.
+
+
+## 2 Pedro 1:17 (id: 10061001017)
+
+17Porque él había recibido de Dios Padre honra y gloria, cuando una tal voz fué á él enviada de la magnífica gloria: Este es el amado Hijo mío, en el cual yo me he agradado.
+
+
+## 2 Pedro 1:18 (id: 10061001018)
+
+18Y nosotros oímos esta voz enviada del cielo, cuando estábamos juntamente con él en el monte santo.
+
+
+## 2 Pedro 1:19 (id: 10061001019)
+
+19Tenemos también la palabra profética más permanente, á la cual hacéis bien de estar atentos como á una antorcha que alumbra en lugar oscuro hasta que el día esclarezca, y el lucero de la mañana salga en vuestros corazones:
+
+
+## 2 Pedro 1:20 (id: 10061001020)
+
+20Entendiendo primero esto, que ninguna profecía de la Escritura es de particular interpretación;
+
+
+## 2 Pedro 1:21 (id: 10061001021)
+
+21Porque la profecía no fué en los tiempos pasados traída por voluntad humana, sino los santos hombres de Dios hablaron siendo inspirados del Espíritu Santo.
+
+
+## 2 Pedro 2:1 (id: 10061002001)
+
+1PERO hubo también falsos profetas en el pueblo, como habrá entre vosotros falsos doctores, que introducirán encubiertamente herejías de perdición, y negarán al Señor que los rescató, atrayendo sobre sí mismos perdición acelerada.
+
+
+## 2 Pedro 2:2 (id: 10061002002)
+
+2Y muchos seguirán sus disoluciones, por los cuales el camino de la verdad será blasfemado;
+
+
+## 2 Pedro 2:3 (id: 10061002003)
+
+3Y por avaricia harán mercadería de vosotros con palabras fingidas; sobre los cuales la condenación ya de largo tiempo no se tarda, y su perdición no se duerme.
+
+
+## 2 Pedro 2:4 (id: 10061002004)
+
+4Porque si Dios no perdonó á los ángeles que habían pecado, sino que habiéndolos despeñado en el infierno con cadenas de oscuridad, los entregó para ser reservados al juicio;
+
+
+## 2 Pedro 2:5 (id: 10061002005)
+
+5Y si no perdonó al mundo viejo, mas guardó á Noé, pregonero de justicia, con otras siete personas, trayendo el diluvio sobre el mundo de malvados;
+
+
+## 2 Pedro 2:6 (id: 10061002006)
+
+6Y si condenó por destrucción las ciudades de Sodoma y de Gomorra, tornándolas en ceniza, y poniéndolas por ejemplo á los que habían de vivir sin temor y reverencia de Dios;
+
+
+## 2 Pedro 2:7 (id: 10061002007)
+
+7Y libró al justo Lot, acosado por la nefanda conducta de los malvados;
+
+
+## 2 Pedro 2:8 (id: 10061002008)
+
+8(Porque este justo, con ver y oir, morando entre ellos, afligía cada día su alma justa con los hechos de aquellos injustos;)
+
+
+## 2 Pedro 2:9 (id: 10061002009)
+
+9Sabe el Señor librar de tentación á los píos, y reservar á los injustos para ser atormentados en el día del juicio;
+
+
+## 2 Pedro 2:10 (id: 10061002010)
+
+10Y principalmente á aquellos que, siguiendo la carne, andan en concupiscencia é inmundicia, y desprecian la potestad; atrevidos, contumaces, que no temen decir mal de las potestades superiores:
+
+
+## 2 Pedro 2:11 (id: 10061002011)
+
+11Como quiera que los mismos ángeles, que son mayores en fuerza y en potencia, no pronuncian juicio de maldición contra ellas delante del Señor.
+
+
+## 2 Pedro 2:12 (id: 10061002012)
+
+12Mas éstos, diciendo mal de las cosas que no entienden, como bestias brutas, que naturalmente son hechas para presa y destrucción, perecerán en su perdición,
+
+
+## 2 Pedro 2:13 (id: 10061002013)
+
+13Recibiendo el galardón de su injusticia, ya que reputan por delicia poder gozar de deleites cada día. Estos son suciedades y manchas, los cuales comiendo con vosotros, juntamente se recrean en sus errores;
+
+
+## 2 Pedro 2:14 (id: 10061002014)
+
+14Teniendo los ojos llenos de adulterio, y no saben cesar de pecar; cebando las almas inconstantes; teniendo el corazón ejercitado en codicias, siendo hijos de maldición;
+
+
+## 2 Pedro 2:15 (id: 10061002015)
+
+15Que han dejado el camino derecho, y se han extraviado, siguiendo el camino de Balaam, hijo de Bosor, el cual amó el premio de la maldad.
+
+
+## 2 Pedro 2:16 (id: 10061002016)
+
+16Y fué reprendido por su iniquidad: una muda bestia de carga, hablando en voz de hombre, refrenó la locura del profeta.
+
+
+## 2 Pedro 2:17 (id: 10061002017)
+
+17Estos son fuentes sin agua, y nubes traídas de torbellino de viento: para los cuales está guardada la oscuridad de las tinieblas para siempre.
+
+
+## 2 Pedro 2:18 (id: 10061002018)
+
+18Porque hablando arrogantes palabras de vanidad, ceban con las concupiscencias de la carne en disoluciones á los que verdaderamente habían huído de los que conversan en error;
+
+
+## 2 Pedro 2:19 (id: 10061002019)
+
+19Prometiéndoles libertad, siendo ellos mismos siervos de corrupción. Porque el que es de alguno vencido, es sujeto á la servidumbre del que lo venció.
+
+
+## 2 Pedro 2:20 (id: 10061002020)
+
+20Ciertamente, si habiéndose ellos apartado de las contaminaciones del mundo, por el conocimiento del Señor y Salvador Jesucristo, y otra vez envolviéndose en ellas, son vencidos, sus postrimerías les son hechas peores que los principios.
+
+
+## 2 Pedro 2:21 (id: 10061002021)
+
+21Porque mejor les hubiera sido no haber conocido el camino de la justicia, que después de haberlo conocido, tornarse atrás del santo mandamiento que les fué dado.
+
+
+## 2 Pedro 2:22 (id: 10061002022)
+
+22Pero les ha acontecido lo del verdadero proverbio: El perro se volvió á su vómito, y la puerca lavada á revolcarse en el cieno.
+
+
+## 2 Pedro 3:1 (id: 10061003001)
+
+1CARÍSIMOS, yo os escribo ahora esta segunda carta, por las cuales ambas despierto con exhortación vuestro limpio entendimiento;
+
+
+## 2 Pedro 3:2 (id: 10061003002)
+
+2Para que tengáis memoria de las palabras que antes han sido dichas por los santos profetas, y de nuestro mandamiento, que somos apóstoles del Señor y Salvador:
+
+
+## 2 Pedro 3:3 (id: 10061003003)
+
+3Sabiendo primero esto, que en los postrimeros días vendrán burladores, andando según sus propias concupiscencias,
+
+
+## 2 Pedro 3:4 (id: 10061003004)
+
+4Y diciendo: ¿Dónde está la promesa de su advenimiento? porque desde el día en que los padres durmieron, todas las cosas permanecen así como desde el principio de la creación.
+
+
+## 2 Pedro 3:5 (id: 10061003005)
+
+5Cierto ellos ignoran voluntariamente, que los cielos fueron en el tiempo antiguo, y la tierra que por agua y en agua está asentada, por la palabra de Dios;
+
+
+## 2 Pedro 3:6 (id: 10061003006)
+
+6Por lo cual el mundo de entonces pereció anegado en agua:
+
+
+## 2 Pedro 3:7 (id: 10061003007)
+
+7Mas los cielos que son ahora, y la tierra, son conservados por la misma palabra, guardados para el fuego en el día del juicio, y de la perdición de los hombres impíos.
+
+
+## 2 Pedro 3:8 (id: 10061003008)
+
+8Mas, oh amados, no ignoréis esta una cosa: que un día delante del Señor es como mil años y mil años como un día.
+
+
+## 2 Pedro 3:9 (id: 10061003009)
+
+9El Señor no tarda su promesa, como algunos la tienen por tardanza; sino que es paciente para con nosotros, no queriendo que ninguno perezca, sino que todos procedan al arrepentimiento.
+
+
+## 2 Pedro 3:10 (id: 10061003010)
+
+10Mas el día del Señor vendrá como ladrón en la noche; en el cual los cielos pasarán con grande estruendo, y los elementos ardiendo serán deshechos, y la tierra y las obras que en ella están serán quemadas.
+
+
+## 2 Pedro 3:11 (id: 10061003011)
+
+11Pues como todas estas cosas han de ser deshechas, ¿qué tales conviene que vosotros seáis en santas y pías conversaciones,
+
+
+## 2 Pedro 3:12 (id: 10061003012)
+
+12Esperando y apresurándoos para la venida del día de Dios, en el cual los cielos siendo encendidos serán deshechos, y los elementos siendo abrasados, se fundirán?
+
+
+## 2 Pedro 3:13 (id: 10061003013)
+
+13Bien que esperamos cielos nuevos y tierra nueva, según sus promesas, en los cuales mora la justicia.
+
+
+## 2 Pedro 3:14 (id: 10061003014)
+
+14Por lo cual, oh amados, estando en esperanza de estas cosas, procurad con diligencia que seáis hallados de él sin mácula, y sin reprensión, en paz.
+
+
+## 2 Pedro 3:15 (id: 10061003015)
+
+15Y tened por salud la paciencia de nuestro Señor; como también nuestro amado hermano Pablo, según la sabiduría que le ha sido dada, os ha escrito también;
+
+
+## 2 Pedro 3:16 (id: 10061003016)
+
+16Casi en todas sus epístolas, hablando en ellas de estas cosas; entre las cuales hay algunas difíciles de entender, las cuales los indoctos é inconstantes tuercen, como también las otras Escrituras, para perdición de sí mismos.
+
+
+## 2 Pedro 3:17 (id: 10061003017)
+
+17Así que vosotros, oh amados, pues estáis amonestados, guardaos que por el error de los abominables no seáis juntamente extraviados, y caigáis de vuestra firmeza.
+
+
+## 2 Pedro 3:18 (id: 10061003018)
+
+18Mas creced en la gracia y conocimiento de nuestro Señor y Salvador Jesucristo. A él sea gloria ahora y hasta el día de la eternidad. Amén.
+
+`;export{e as default};
