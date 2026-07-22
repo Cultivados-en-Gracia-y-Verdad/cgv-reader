@@ -255,6 +255,178 @@ export function isLikelyContentParent(candidate: { finiteVerbLemma?: string }): 
   return Boolean(candidate.finiteVerbLemma && CONTENT_VERB_LEMMAS.has(stripAccentless(candidate.finiteVerbLemma)));
 }
 
+// --- Ranked choice guidance (suggestion, not decision) ---
+//
+// When detectClauseSignal can't (or shouldn't) auto-accept a shape, the four
+// choice cards still need this-clause evidence: what leans which way, and why
+// the others are less likely. Suggested ≠ locked — the student always picks.
+
+export type ClauseChoiceKind = "describes" | "content" | "frame" | "root";
+
+export type ClauseChoiceLean = "suggested" | "available";
+
+export interface ClauseChoiceOption {
+  kind: ClauseChoiceKind;
+  term: string;
+  blurb: string;
+  evidence: string;
+  lean: ClauseChoiceLean;
+}
+
+export interface ClauseChoiceGuidance {
+  /** Short paragraph above the grid: positive evidence + what that usually means. */
+  summary: string;
+  suggested: ClauseChoiceKind | null;
+  options: ClauseChoiceOption[];
+}
+
+function nounCaseLetter(morph: string): string | null {
+  if (!morph.startsWith("N")) return null;
+  // Robinson-style short tags: N-ASF / N-GSM
+  if (/^N-[A-Z]/.test(morph)) return morph.charAt(2);
+  // MorphGNT-style: N-----ASF-
+  if (morph.length > 6) return morph.charAt(6);
+  return null;
+}
+
+/**
+ * εἰς + nearby accusative noun = purpose/goal *phrase*, not an ἵνα-purpose
+ * clause. Surfaced under the adverbial card so Spanish "para…" / Greek εἰς
+ * doesn't pull students into "purpose clause" by habit.
+ */
+function detectEisGoalPhrase(
+  tokens: ClauseBeginningToken[]
+): { eis: ClauseBeginningToken; noun: ClauseBeginningToken } | null {
+  for (let i = 0; i < tokens.length; i++) {
+    if (stripAccentless(tokens[i].lemma) !== "εἰς") continue;
+    const noun = tokens.slice(i + 1, i + 4).find(token => nounCaseLetter(token.morph) === "A");
+    if (noun) return { eis: tokens[i], noun };
+  }
+  return null;
+}
+
+function choiceKindFromConfident(signal: Extract<ClauseSignal, { kind: "confident" }>): ClauseChoiceKind {
+  if (signal.choice === "describes") return "describes";
+  if (signal.choice === "content") return "content";
+  return "frame";
+}
+
+/**
+ * Builds ranked, this-clause hints for the four shape cards. Does not decide
+ * the classification — only marks a lean when the Greek signal supports one
+ * (`none` → independent; `confident` → that shape; `uncertain` → no badge).
+ */
+export function buildClauseChoiceGuidance(
+  clause: ClauseSignalInput,
+  signal: ClauseSignal,
+  allClauses: ClauseSignalInput[]
+): ClauseChoiceGuidance {
+  const tokens = clause.beginningTokens;
+  const relative = findLeadingToken(tokens, token => token.morph.startsWith(RELATIVE_PRONOUN_PREFIX));
+  const frameToken = findLeadingToken(tokens, token => Boolean(FRAME_PARTICLES[stripAccentless(token.lemma)]));
+  const ambiguousToken = findLeadingToken(tokens, token => Boolean(AMBIGUOUS_PARTICLES[stripAccentless(token.lemma)]));
+  const otiToken = findLeadingToken(tokens, token => stripAccentless(token.lemma) === "ὅτι");
+  const eisPhrase = detectEisGoalPhrase(tokens);
+  const openSurface = tokens
+    .slice(0, 3)
+    .map(token => token.greek)
+    .filter(Boolean)
+    .join(" ");
+
+  const prevId = nearestPrecedingClauseId(clause, allClauses);
+  const prev = prevId ? allClauses.find(candidate => candidate.finiteVerbId === prevId) : undefined;
+  const prevIsContentVerb = Boolean(prev && isLikelyContentParent(prev));
+
+  let suggested: ClauseChoiceKind | null = null;
+  if (signal.kind === "confident") suggested = choiceKindFromConfident(signal);
+  else if (signal.kind === "none") suggested = "root";
+
+  let summary: string;
+  if (signal.kind === "none") {
+    const parts: string[] = [];
+    if (clause.finiteVerbLemma) parts.push(`Finite verb: ${clause.finiteVerbLemma}.`);
+    if (openSurface) parts.push(`Opens with “${openSurface}”.`);
+    parts.push(
+      "No relative pronoun and no subordinating particle in the opening window — that usually means an independent clause. You still decide."
+    );
+    summary = parts.join(" ");
+  } else {
+    summary = signal.reason;
+  }
+
+  const describesEvidence = relative
+    ? `Opens with “${relative.greek}” (${relative.lemma}) — a relative pronoun.`
+    : "No relative pronoun (ὅς / ἥ / ὅ…) in the opening window.";
+
+  let contentEvidence: string;
+  if (otiToken || (ambiguousToken && stripAccentless(ambiguousToken.lemma) === "ὅτι")) {
+    const token = otiToken ?? ambiguousToken!;
+    contentEvidence =
+      `Opens with “${token.greek}” (ὅτι) — can mark content (“that…”); also used for reason (“because…”).`;
+  } else if (prevIsContentVerb) {
+    contentEvidence =
+      "No ὅτι up front; a nearby saying/thinking verb makes content possible only if something else marks it.";
+  } else {
+    contentEvidence = "No ὅτι up front, and no nearby saying/thinking verb standing out.";
+  }
+
+  let frameEvidence: string;
+  if (frameToken) {
+    const frameLemma = stripAccentless(frameToken.lemma);
+    const frameType = FRAME_PARTICLES[frameLemma];
+    frameEvidence = `Opens with “${frameToken.greek}” (${frameLemma}) → ${frameType}.`;
+  } else if (ambiguousToken && stripAccentless(ambiguousToken.lemma) === "ὅτι") {
+    frameEvidence = `“${ambiguousToken.greek}” can mean “because…” (reason) — only if it isn’t content.`;
+  } else if (eisPhrase) {
+    frameEvidence =
+      `No ἵνα / ὅπως / γάρ / εἰ… opener. Note: “${eisPhrase.eis.greek}” + “${eisPhrase.noun.greek}” is a purpose/goal ` +
+      `phrase (εἰς + noun), not a purpose clause (those need ἵνα / ὅπως + a verb).`;
+  } else {
+    frameEvidence = "No ἵνα / ὅπως / γάρ / εἰ / ὅτε… in the opening window.";
+  }
+
+  const hasSubordinatingOpener = Boolean(relative || frameToken || otiToken || ambiguousToken);
+  const rootEvidence =
+    suggested === "root"
+      ? "Suggested: nothing in the opening window subordinates this clause."
+      : hasSubordinatingOpener
+        ? "Less likely while a subordinating opener is present — unless that word is only a discourse connective."
+        : "Default when subordinating openers are absent.";
+
+  const options: ClauseChoiceOption[] = [
+    {
+      kind: "describes",
+      term: "Relative clause",
+      blurb: "Describes something nearby",
+      evidence: describesEvidence,
+      lean: suggested === "describes" ? "suggested" : "available"
+    },
+    {
+      kind: "content",
+      term: "Content clause",
+      blurb: "Reports what was said or thought",
+      evidence: contentEvidence,
+      lean: suggested === "content" ? "suggested" : "available"
+    },
+    {
+      kind: "frame",
+      term: "Adverbial clause",
+      blurb: "Gives a when, why, if, or so-that",
+      evidence: frameEvidence,
+      lean: suggested === "frame" ? "suggested" : "available"
+    },
+    {
+      kind: "root",
+      term: "Independent clause",
+      blurb: "Stands on its own",
+      evidence: rootEvidence,
+      lean: suggested === "root" ? "suggested" : "available"
+    }
+  ];
+
+  return { summary, suggested, options };
+}
+
 // --- Grammatical-marker anchor lines (cgv-product-suite-spec.md,
 // "Auto-suggested anchor points"; format in manual-markdown-format-spec.md) ---
 //

@@ -29,21 +29,54 @@ import {
   type SpanishWord
 } from "./clause-data";
 import {
+  buildClauseChoiceGuidance,
   detectClauseMarker,
   detectClauseSignal,
   detectLeadingCoordinator,
   detectLeadingFrameType,
   detectRelativeOfConnection,
   isLikelyContentParent,
+  type ClauseChoiceKind,
+  type ClauseChoiceOption,
   type ClauseMarker,
   type ClauseSignal,
   type ClauseSignalInput,
   type FrameType
 } from "./clause-signals";
+
+const FALLBACK_CLAUSE_CHOICES: ClauseChoiceOption[] = [
+  {
+    kind: "describes",
+    term: "Relative clause",
+    blurb: "Describes something nearby",
+    evidence: "",
+    lean: "available"
+  },
+  {
+    kind: "content",
+    term: "Content clause",
+    blurb: "Reports what was said or thought",
+    evidence: "",
+    lean: "available"
+  },
+  {
+    kind: "frame",
+    term: "Adverbial clause",
+    blurb: "Gives a when, why, if, or so-that",
+    evidence: "",
+    lean: "available"
+  },
+  {
+    kind: "root",
+    term: "Independent clause",
+    blurb: "Stands on its own",
+    evidence: "",
+    lean: "available"
+  }
+];
 import { loadLbfTokenSurfaces } from "./lbf-alignment";
 import { describeRmac, ensureVerseInterlinear, getVerseInterlinear } from "./o-data";
-import { getWorkshopBookId } from "./workshop-book";
-import { getReaderBookInfo, workshopProgressKeys } from "@cgv/core";
+import { getReaderBookInfo, workshopProgressKeys, type ReaderBookId } from "@cgv/core";
 import {
   applyCoordinateInheritance,
   deriveOutline,
@@ -241,8 +274,7 @@ function ParticipleCheck({ confirmed }: { confirmed: boolean }) {
   );
 }
 
-export default function SpanishClauseBuilder() {
-  const bookId = getWorkshopBookId();
+export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId }) {
   const bookInfo = getReaderBookInfo(bookId);
   const progressKeys = useMemo(() => workshopProgressKeys(bookId), [bookId]);
   const [interlinearReady, setInterlinearReady] = useState(false);
@@ -289,12 +321,12 @@ export default function SpanishClauseBuilder() {
   // unreachable if subjunctive clauses never enter the review workspace.
   const moodReviewedVerbIds = useMemo(() => {
     const ids = new Set<string>();
-    readMarkedAlignmentIds(progressKeys.commandMarks).forEach(id => ids.add(id));
-    readMarkedAlignmentIds(progressKeys.statementMarks).forEach(id => ids.add(id));
-    readMarkedAlignmentIds(progressKeys.subjunctiveMarks).forEach(id => ids.add(id));
-    readMarkedAlignmentIds(progressKeys.optativeMarks).forEach(id => ids.add(id));
+    readMarkedAlignmentIds(progressKeys.commandMarks, bookId).forEach(id => ids.add(id));
+    readMarkedAlignmentIds(progressKeys.statementMarks, bookId).forEach(id => ids.add(id));
+    readMarkedAlignmentIds(progressKeys.subjunctiveMarks, bookId).forEach(id => ids.add(id));
+    readMarkedAlignmentIds(progressKeys.optativeMarks, bookId).forEach(id => ids.add(id));
     return ids;
-  }, [progressKeys]);
+  }, [bookId, progressKeys]);
 
   const wordsByVerse = useMemo(() => {
     const index = new Map<string, SpanishWord[]>();
@@ -312,13 +344,16 @@ export default function SpanishClauseBuilder() {
     return index;
   }, [verses]);
 
-  const [assignments, setAssignments] = useState<ClauseAssignments>(readClauseAssignments);
+  const [assignments, setAssignments] = useState<ClauseAssignments>(() => readClauseAssignments(bookId));
 
   // Read-only audit (clause-selection-greek-spec.md): before Greek becomes
   // the authoritative span, surface every existing clause whose stored
   // Greek range no longer matches what deriving it fresh from the current
   // Spanish span would produce, rather than assuming old data is fine.
-  const greekSpanAudit = useMemo(() => auditGreekSpanConsistency(verses, assignments), [verses, assignments]);
+  const greekSpanAudit = useMemo(
+    () => auditGreekSpanConsistency(verses, assignments, bookId),
+    [assignments, bookId, verses]
+  );
   const greekSpanMismatches = useMemo(() => greekSpanAudit.filter(entry => entry.mismatch), [greekSpanAudit]);
 
   const [activeVerbId, setActiveVerbId] = useState<string | null>(null);
@@ -341,7 +376,7 @@ export default function SpanishClauseBuilder() {
   const [skeletonMaximized, setSkeletonMaximized] = useState(false);
   const [hostFixHint, setHostFixHint] = useState<HostFixHint | null>(null);
   const [activeBeginningVerbId, setActiveBeginningVerbId] = useState<string | null>(null);
-  const [observations, setObservations] = useState<ClauseObservations>(readClauseObservations);
+  const [observations, setObservations] = useState<ClauseObservations>(() => readClauseObservations(bookId));
   const [nounAnchorId, setNounAnchorId] = useState<string | null>(null);
   const [forceChoices, setForceChoices] = useState(false);
   // Set only when the active clause changed via moveToNextClause (confirming
@@ -390,7 +425,9 @@ export default function SpanishClauseBuilder() {
   }, []);
 
   const [showGreekBeginning, setShowGreekBeginning] = useState(false);
-  const [participleObservations, setParticipleObservations] = useState<ParticipleObservations>(readParticipleObservations);
+  const [participleObservations, setParticipleObservations] = useState<ParticipleObservations>(
+    () => readParticipleObservations(bookId)
+  );
   const [activeParticipleId, setActiveParticipleId] = useState<string | null>(null);
   const [activeStandaloneParticipleId, setActiveStandaloneParticipleId] = useState<string | null>(null);
   const [participleNounAnchorId, setParticipleNounAnchorId] = useState<string | null>(null);
@@ -399,9 +436,9 @@ export default function SpanishClauseBuilder() {
   // Clear audit banners can be dismissed; they reappear if problems return.
 
   useEffect(() => {
-    setAssignments(readClauseAssignments());
-    setObservations(readClauseObservations());
-    setParticipleObservations(readParticipleObservations());
+    setAssignments(readClauseAssignments(bookId));
+    setObservations(readClauseObservations(bookId));
+    setParticipleObservations(readParticipleObservations(bookId));
     setActiveVerbId(null);
     setDraftGreekRange(null);
     setGreekRangeAnchorToken(null);
@@ -412,8 +449,8 @@ export default function SpanishClauseBuilder() {
   // moodReviewedVerbIds already relies on. Read-only here: this view sorts
   // participles, it doesn't find them.
   const participleMarkedAlignmentIds = useMemo(
-    () => readMarkedAlignmentIds(progressKeys.participleMarks),
-    [progressKeys]
+    () => readMarkedAlignmentIds(progressKeys.participleMarks, bookId),
+    [bookId, progressKeys]
   );
 
   const activeVerb = useMemo(
@@ -440,9 +477,10 @@ export default function SpanishClauseBuilder() {
       activeVerb.verse,
       draftGreekRange.start,
       draftGreekRange.end,
-      activeVerseWords
+      activeVerseWords,
+      bookId
     );
-  }, [activeVerb, activeVerseWords, draftGreekRange]);
+  }, [activeVerb, activeVerseWords, bookId, draftGreekRange]);
 
   const overlapWordIds = useMemo(() => {
     const counts = new Map<string, number>();
@@ -454,15 +492,7 @@ export default function SpanishClauseBuilder() {
     return new Set(Array.from(counts.entries()).filter(([, count]) => count > 1).map(([id]) => id));
   }, [assignments]);
 
-  const savedWordIds = useMemo(() => {
-    const ids = new Set<string>();
-    for (const assignment of Object.values(assignments)) {
-      assignment.selectedSpan.forEach(id => ids.add(id));
-    }
-    return ids;
-  }, [assignments]);
-
-  // word id → finite-verb clause ids that claim it (for Spanish-only phrase washes).
+  // word id → finite-verb clause ids that claim it (for Spanish phrase washes).
   const clauseOwnersByWordId = useMemo(() => {
     const owners = new Map<string, string[]>();
     for (const [finiteVerbId, assignment] of Object.entries(assignments)) {
@@ -526,7 +556,7 @@ export default function SpanishClauseBuilder() {
 
       return {
         finiteVerb,
-        reference: `Tito ${finiteVerb.chapter}:${finiteVerb.verse}`,
+        reference: `${bookInfo.displayName} ${finiteVerb.chapter}:${finiteVerb.verse}`,
         spanText: assignment ? formatClauseSpan(assignment.selectedSpan, verseWords, verseText) : "",
         selectedWords,
         greekRange,
@@ -534,7 +564,7 @@ export default function SpanishClauseBuilder() {
         hasDependentIntroducer: selectedWords.some(word => word.dependentIntroducerId)
       };
     });
-  }, [assignments, finiteVerbs, verseTextByKey, wordById, wordsByVerse]);
+  }, [assignments, bookInfo.displayName, finiteVerbs, verseTextByKey, wordById, wordsByVerse]);
 
   // Separate from the span-consistency audit above: a clause can be
   // internally consistent (stored range matches what re-deriving it
@@ -617,8 +647,8 @@ export default function SpanishClauseBuilder() {
 
     if (!changed) return;
     setAssignments(next);
-    writeClauseAssignments(next);
-  }, [assignments, clauseRows]);
+    writeClauseAssignments(next, bookId);
+  }, [assignments, bookId, clauseRows]);
 
   const activeBeginningRow = useMemo(
     () => reviewClauseRows.find(row => row.finiteVerb.finiteVerbId === activeBeginningVerbId) ?? null,
@@ -743,8 +773,11 @@ export default function SpanishClauseBuilder() {
     const verbless = getVersesWithoutFiniteVerb();
     return verses
       .filter(verse => verbless.has(`${verse.chapter}:${verse.verse}`))
-      .map(verse => ({ reference: `Tito ${verse.chapter}:${verse.verse}`, text: verse.text }));
-  }, [verses]);
+      .map(verse => ({
+        reference: `${bookInfo.displayName} ${verse.chapter}:${verse.verse}`,
+        text: verse.text
+      }));
+  }, [bookInfo.displayName, verses]);
 
   const activeSignal = useMemo<ClauseSignal | null>(() => {
     const finiteVerbId = activeBeginningRow?.finiteVerb.finiteVerbId;
@@ -753,6 +786,14 @@ export default function SpanishClauseBuilder() {
     if (!input) return null;
     return detectClauseSignal(input, clauseSignalInputs);
   }, [activeBeginningRow, clauseSignalInputs]);
+
+  const activeChoiceGuidance = useMemo(() => {
+    const finiteVerbId = activeBeginningRow?.finiteVerb.finiteVerbId;
+    if (!finiteVerbId || !activeSignal) return null;
+    const input = clauseSignalInputs.find(candidate => candidate.finiteVerbId === finiteVerbId);
+    if (!input) return null;
+    return buildClauseChoiceGuidance(input, activeSignal, clauseSignalInputs);
+  }, [activeBeginningRow, activeSignal, clauseSignalInputs]);
 
   const activeFrameType = useMemo<FrameType | undefined>(() => {
     if (!activeBeginningRow) return undefined;
@@ -943,8 +984,10 @@ export default function SpanishClauseBuilder() {
       const entry = {
         participleId,
         participleSurface: participleWord?.participleSurface ?? participleWord?.text ?? "",
-        reference: participleWord ? `Tito ${participleWord.chapter}:${participleWord.verse}` : "",
-        nounReference: `Tito ${firstWord.chapter}:${firstWord.verse}`
+        reference: participleWord
+          ? `${bookInfo.displayName} ${participleWord.chapter}:${participleWord.verse}`
+          : "",
+        nounReference: `${bookInfo.displayName} ${firstWord.chapter}:${firstWord.verse}`
       };
 
       const existing = groups.get(key);
@@ -972,7 +1015,15 @@ export default function SpanishClauseBuilder() {
       ...group,
       sharesGlossWithOther: (textCounts.get(group.nounText.trim().toLowerCase()) ?? 0) > 1
     }));
-  }, [participleObservations, resolveNounLemma, verseTextByKey, wordById, wordByParticipleId, wordsByVerse]);
+  }, [
+    bookInfo.displayName,
+    participleObservations,
+    resolveNounLemma,
+    verseTextByKey,
+    wordById,
+    wordByParticipleId,
+    wordsByVerse
+  ]);
 
   // Cast: substantival participles grouped by lemma (available — every
   // participle carries its own Greek lemma from morphology), split by
@@ -989,7 +1040,11 @@ export default function SpanishClauseBuilder() {
       if (!word) continue;
       const lemma = word.participleLemma || word.participleSurface || participleId;
       const text = word.participleSurface ?? word.text;
-      const entry = { participleId, text, reference: `Tito ${word.chapter}:${word.verse}` };
+      const entry = {
+        participleId,
+        text,
+        reference: `${bookInfo.displayName} ${word.chapter}:${word.verse}`
+      };
 
       const existing = groups.get(lemma);
       if (existing) {
@@ -1005,7 +1060,7 @@ export default function SpanishClauseBuilder() {
       recurring: all.filter(group => group.count > 1).sort((a, b) => b.count - a.count),
       single: all.filter(group => group.count === 1)
     };
-  }, [participleObservations, wordByParticipleId]);
+  }, [bookInfo.displayName, participleObservations, wordByParticipleId]);
 
   // Flow: circumstantial participles tallied against the root clause whose
   // stretch of text they fall within — walking up from wherever they ride,
@@ -1026,7 +1081,7 @@ export default function SpanishClauseBuilder() {
       const entry = {
         participleId,
         text: word?.participleSurface ?? word?.text ?? "",
-        reference: word ? `Tito ${word.chapter}:${word.verse}` : "",
+        reference: word ? `${bookInfo.displayName} ${word.chapter}:${word.verse}` : "",
         ridingClauseId: obs.ridingClauseId
       };
 
@@ -1040,7 +1095,13 @@ export default function SpanishClauseBuilder() {
     }
 
     return tallies;
-  }, [augmentedObservations, clauseSpanInfos, participleObservations, wordByParticipleId]);
+  }, [
+    augmentedObservations,
+    bookInfo.displayName,
+    clauseSpanInfos,
+    participleObservations,
+    wordByParticipleId
+  ]);
 
   const maxFlowCount = useMemo(
     () => Math.max(1, ...Array.from(flowTallies.values()).map(tally => tally.count)),
@@ -1128,13 +1189,23 @@ export default function SpanishClauseBuilder() {
       if (existing) {
         existing.entries.push(word);
       } else {
-        groups.set(verseKey, { reference: `Tito ${word.chapter}:${word.verse}`, chapter: word.chapter, verse: word.verse, entries: [word] });
+        groups.set(verseKey, {
+          reference: `${bookInfo.displayName} ${word.chapter}:${word.verse}`,
+          chapter: word.chapter,
+          verse: word.verse,
+          entries: [word]
+        });
       }
     }
     return Array.from(groups.values())
       .sort((a, b) => a.chapter * 1000 + a.verse - (b.chapter * 1000 + b.verse))
       .map(group => ({ ...group, entries: group.entries.sort((a, b) => a.index - b.index) }));
-  }, [participleClauseAssignment, participleMarkedAlignmentIds, wordByParticipleId]);
+  }, [
+    bookInfo.displayName,
+    participleClauseAssignment,
+    participleMarkedAlignmentIds,
+    wordByParticipleId
+  ]);
 
   // Every marked participle still missing a classification, book order,
   // wherever it happens to live — clause-attached participles only ever
@@ -1213,19 +1284,22 @@ export default function SpanishClauseBuilder() {
   const activeParticipleWord = activeParticipleId ? wordByParticipleId.get(activeParticipleId) ?? null : null;
   const activeParticipleObservation = activeParticipleId ? participleObservations[activeParticipleId] ?? {} : {};
 
-  const updateParticipleObservation = useCallback((participleId: string, patch: ParticipleObservation) => {
-    setParticipleObservations(current => {
-      const next = {
-        ...current,
-        [participleId]: {
-          ...(current[participleId] ?? {}),
-          ...patch
-        }
-      };
-      writeParticipleObservations(next);
-      return next;
-    });
-  }, []);
+  const updateParticipleObservation = useCallback(
+    (participleId: string, patch: ParticipleObservation) => {
+      setParticipleObservations(current => {
+        const next = {
+          ...current,
+          [participleId]: {
+            ...(current[participleId] ?? {}),
+            ...patch
+          }
+        };
+        writeParticipleObservations(next, bookId);
+        return next;
+      });
+    },
+    [bookId]
+  );
 
   const updateActiveParticipleObservation = useCallback(
     (patch: ParticipleObservation) => {
@@ -1368,12 +1442,12 @@ export default function SpanishClauseBuilder() {
   // collected elsewhere (frameType, mood brick marks, participle
   // classifications); nothing new is detected or tagged.
   const statementMarkedIds = useMemo(
-    () => readMarkedAlignmentIds(progressKeys.statementMarks),
-    [progressKeys]
+    () => readMarkedAlignmentIds(progressKeys.statementMarks, bookId),
+    [bookId, progressKeys]
   );
   const imperativeMarkedIds = useMemo(
-    () => readMarkedAlignmentIds(progressKeys.commandMarks),
-    [progressKeys]
+    () => readMarkedAlignmentIds(progressKeys.commandMarks, bookId),
+    [bookId, progressKeys]
   );
 
   // A reason clause can sit several levels under the root it justifies, not
@@ -1443,13 +1517,24 @@ export default function SpanishClauseBuilder() {
       if (!clauseId) continue;
       const rootId = findRootAncestor(clauseId, clauseSpanInfos, augmentedObservations);
       if (!rootId) continue;
-      const entry = { participleId, label: participleChipLabel(word), reference: `Tito ${word.chapter}:${word.verse}` };
+      const entry = {
+        participleId,
+        label: participleChipLabel(word),
+        reference: `${bookInfo.displayName} ${word.chapter}:${word.verse}`
+      };
       const list = map.get(rootId) ?? [];
       list.push(entry);
       map.set(rootId, list);
     }
     return map;
-  }, [augmentedObservations, clauseSpanInfos, participleClauseAssignment, participleMarkedAlignmentIds, wordByParticipleId]);
+  }, [
+    augmentedObservations,
+    bookInfo.displayName,
+    clauseSpanInfos,
+    participleClauseAssignment,
+    participleMarkedAlignmentIds,
+    wordByParticipleId
+  ]);
 
   // Subject-agreement note: a nominative circumstantial participle riding a
   // clause typically agrees with that clause's own subject — reuses
@@ -1465,7 +1550,7 @@ export default function SpanishClauseBuilder() {
 
   // Brick 2B keeps its original purpose — who an imperative is addressed to —
   // read-only here, same as every other Sequence category.
-  const recipientAssignments = useMemo(() => readCommandRecipientAssignments(), []);
+  const recipientAssignments = useMemo(() => readCommandRecipientAssignments(bookId), [bookId]);
 
   const sequenceEntries = useMemo(() => {
     const base = outline.map(clause => ({
@@ -1621,10 +1706,10 @@ export default function SpanishClauseBuilder() {
       if (!current[activeVerbId]) return current;
       const next = { ...current };
       delete next[activeVerbId];
-      writeClauseAssignments(next);
+      writeClauseAssignments(next, bookId);
       return next;
     });
-  }, [activeVerbId]);
+  }, [activeVerbId, bookId]);
 
   // One-click fix for span-audit rows: keep the stored Greek range, rewrite
   // selectedSpan from it (Greek → LBF). Save used to look like a no-op because
@@ -1642,7 +1727,8 @@ export default function SpanishClauseBuilder() {
         start.verse,
         Math.min(start.token, end.token),
         Math.max(start.token, end.token),
-        verseWords
+        verseWords,
+        bookId
       );
       if (!selectedSpan.length) return;
       setAssignments(current => {
@@ -1656,11 +1742,11 @@ export default function SpanishClauseBuilder() {
             greekConfirmedAt: existing.greekConfirmedAt ?? new Date().toISOString()
           }
         };
-        writeClauseAssignments(next);
+        writeClauseAssignments(next, bookId);
         return next;
       });
     },
-    [assignments, wordsByVerse]
+    [assignments, bookId, wordsByVerse]
   );
 
   const saveActive = useCallback(() => {
@@ -1682,13 +1768,13 @@ export default function SpanishClauseBuilder() {
           greekConfirmedAt: new Date().toISOString()
         }
       };
-      writeClauseAssignments(next);
+      writeClauseAssignments(next, bookId);
       return next;
     });
     setActiveVerbId(null);
     setDraftGreekRange(null);
     setGreekRangeAnchorToken(null);
-  }, [activeVerb, activeVerbId, draftGreekRange, draftSpan]);
+  }, [activeVerb, activeVerbId, bookId, draftGreekRange, draftSpan]);
 
   // Reload draft from storage when the active verb changes — not on every
   // assignments write. Otherwise deleting a span (Clear) or saving would
@@ -1759,11 +1845,11 @@ export default function SpanishClauseBuilder() {
             ...patch
           }
         };
-        writeClauseObservations(next);
+        writeClauseObservations(next, bookId);
         return next;
       });
     },
-    [activeBeginningVerbId]
+    [activeBeginningVerbId, bookId]
   );
 
   // Confirming a clause moves focus to the next one automatically — a real
@@ -1827,6 +1913,16 @@ export default function SpanishClauseBuilder() {
     setForceChoices(false);
     updateActiveObservation({ tellsWhenOrIf: "yes" });
   }, [updateActiveObservation]);
+
+  const chooseByKind = useCallback(
+    (kind: ClauseChoiceKind) => {
+      if (kind === "describes") chooseDescribes();
+      else if (kind === "content") chooseContent();
+      else if (kind === "frame") chooseFrame();
+      else chooseRoot();
+    },
+    [chooseContent, chooseDescribes, chooseFrame, chooseRoot]
+  );
 
   const acceptSignal = useCallback(
     (signal: ClauseSignal) => {
@@ -2212,7 +2308,7 @@ export default function SpanishClauseBuilder() {
                           if (row) selectVerb(row.finiteVerb, { scrollTo: "observation" });
                         }}
                       >
-                        Tito {entry.chapter}:{entry.verse} ({entry.finiteVerbId})
+                        {bookInfo.displayName} {entry.chapter}:{entry.verse} ({entry.finiteVerbId})
                       </button>
                       <span className="clause-audit-range">
                         Greek{" "}
@@ -2342,7 +2438,7 @@ export default function SpanishClauseBuilder() {
                     onClick={() => jumpToUnsortedParticiple(entry)}
                   >
                     <span className="clause-unsorted-reference">
-                      Tito {entry.word.chapter}:{entry.word.verse}
+                      {bookInfo.displayName} {entry.word.chapter}:{entry.word.verse}
                     </span>
                     {participleChipLabel(entry.word)}
                   </button>
@@ -2359,18 +2455,20 @@ export default function SpanishClauseBuilder() {
             .join(" ")}
           aria-label={
             showSpanishOnly
-              ? "LBF Spanish text of Titus (settled reading)"
-              : "Greek text of Titus, Spanish alongside"
+              ? `LBF Spanish text of ${bookInfo.displayName} (settled reading)`
+              : `Greek text of ${bookInfo.displayName}, Spanish alongside`
           }
         >
           {verses.map(verse => {
-            const verseTokens = getVerseInterlinear(verse.chapter, verse.verse);
-            const lbfSurfaces = loadLbfTokenSurfaces(verse.chapter, verse.verse);
+            const verseTokens = getVerseInterlinear(verse.chapter, verse.verse, bookId);
+            const lbfSurfaces = loadLbfTokenSurfaces(verse.chapter, verse.verse, bookId);
             const isActiveVerse = Boolean(activeVerb && activeVerb.chapter === verse.chapter && activeVerb.verse === verse.verse);
 
             return (
               <article className="clause-verse" key={`${verse.chapter}:${verse.verse}`}>
-                <p className="clause-verse-label">{verse.verse}</p>
+                <p className="clause-verse-label">
+                  {verse.chapter}:{verse.verse}
+                </p>
 
                 {/* Greek workstation — omit entirely in Spanish-only mode.
                     (Do not use the HTML hidden attribute: .clause-greek-row's
@@ -2446,76 +2544,48 @@ export default function SpanishClauseBuilder() {
                   className={[
                     "clause-verse-text",
                     "clause-verse-text--reference",
+                    "clause-verse-text--with-saved-phrases",
                     showSpanishOnly ? "clause-verse-text--spanish-primary" : ""
                   ]
                     .filter(Boolean)
                     .join(" ")}
                   aria-label="LBF verse in Spanish reading order"
                 >
-                  {showSpanishOnly
-                    ? groupSpanishPhrases(
-                        verse.words,
-                        clauseOwnersByWordId,
-                        isActiveVerse ? draftSpan : null,
-                        activeBeginningVerbId
-                      ).map((phrase, phraseIndex) => {
-                        const phraseClass = [
-                          "clause-phrase",
-                          `clause-phrase--${phrase.kind}`,
-                          phrase.alt ? "clause-phrase--alt" : ""
-                        ]
-                          .filter(Boolean)
-                          .join(" ");
-                        return (
-                          <span className={phraseClass} key={`${phrase.key}:${phraseIndex}`}>
-                            {phraseIndex > 0 ? " " : null}
-                            {phrase.words.map((word, wordIndex) => {
-                              const isActiveVerb = Boolean(activeVerbId && word.finiteVerbId === activeVerbId);
-                              const isSavedVerb = Boolean(
-                                word.finiteVerbId && assignments[word.finiteVerbId]?.selectedSpan.length
-                              );
-                              let wordClass = "clause-word clause-word--reference";
-                              if (word.finiteVerbId) wordClass += " clause-word--verb";
-                              if (isSavedVerb) wordClass += " clause-word--verb-saved";
-                              if (isActiveVerb) wordClass += " clause-word--active-verb";
-                              return (
-                                <span className={wordClass} key={word.id}>
-                                  {wordIndex > 0 ? " " : null}
-                                  {word.text}
-                                </span>
-                              );
-                            })}
-                          </span>
-                        );
-                      })
-                    : verse.words.map((word, position) => {
-                        const isActiveVerb = Boolean(activeVerbId && word.finiteVerbId === activeVerbId);
-                        const inDraft = wordInSpan(word, draftSpan);
-                        const isSavedVerb = Boolean(
-                          word.finiteVerbId && assignments[word.finiteVerbId]?.selectedSpan.length
-                        );
-                        const inSaved = savedWordIds.has(word.id);
-                        const overlaps = overlapWordIds.has(word.id);
-                        const reviewing =
-                          Boolean(activeBeginningVerbId) &&
-                          Boolean(assignments[activeBeginningVerbId!]?.selectedSpan.includes(word.id));
-
-                        let className = "clause-word clause-word--reference";
-                        if (word.finiteVerbId) className += " clause-word--verb";
-                        if (isSavedVerb) className += " clause-word--verb-saved";
-                        if (isActiveVerb) className += " clause-word--active-verb";
-                        if (inDraft) className += " clause-word--belonging";
-                        if (inSaved && !inDraft && !isActiveVerb) className += " clause-word--saved";
-                        if (overlaps) className += " clause-word--overlap";
-                        if (reviewing) className += " clause-word--reviewing";
-
-                        return (
-                          <span className={className} key={word.id}>
-                            {position > 0 ? " " : null}
-                            {word.text}
-                          </span>
-                        );
-                      })}
+                  {groupSpanishPhrases(
+                    verse.words,
+                    clauseOwnersByWordId,
+                    isActiveVerse ? draftSpan : null,
+                    activeBeginningVerbId
+                  ).map((phrase, phraseIndex) => {
+                    const phraseClass = [
+                      "clause-phrase",
+                      `clause-phrase--${phrase.kind}`,
+                      phrase.alt ? "clause-phrase--alt" : ""
+                    ]
+                      .filter(Boolean)
+                      .join(" ");
+                    return (
+                      <span className={phraseClass} key={`${phrase.key}:${phraseIndex}`}>
+                        {phraseIndex > 0 ? " " : null}
+                        {phrase.words.map((word, wordIndex) => {
+                          const isActiveVerb = Boolean(activeVerbId && word.finiteVerbId === activeVerbId);
+                          const isSavedVerb = Boolean(
+                            word.finiteVerbId && assignments[word.finiteVerbId]?.selectedSpan.length
+                          );
+                          let wordClass = "clause-word clause-word--reference";
+                          if (word.finiteVerbId) wordClass += " clause-word--verb";
+                          if (isSavedVerb) wordClass += " clause-word--verb-saved";
+                          if (isActiveVerb) wordClass += " clause-word--active-verb";
+                          return (
+                            <span className={wordClass} key={word.id}>
+                              {wordIndex > 0 ? " " : null}
+                              {word.text}
+                            </span>
+                          );
+                        })}
+                      </span>
+                    );
+                  })}
                 </p>
               </article>
             );
@@ -2673,7 +2743,9 @@ export default function SpanishClauseBuilder() {
                             <div className="clause-context-panel clause-context-panel--compact" aria-label="Select the described noun">
                               {activeObservationContextVerses.map(verse => (
                                 <p className="clause-noun-verse" key={`p-${verse.chapter}:${verse.verse}`}>
-                                  <span className="clause-noun-verse-label">{verse.verse}</span>
+                                  <span className="clause-noun-verse-label">
+                                    {verse.chapter}:{verse.verse}
+                                  </span>
                                   <span>
                                     {verse.words.map((word, position) => {
                                       const isSelected = Boolean(activeParticipleObservation.describedNounSpan?.includes(word.id));
@@ -2748,7 +2820,9 @@ export default function SpanishClauseBuilder() {
                 <div className="clause-context-panel" aria-label="Surrounding Spanish context">
                   {activeObservationContextVerses.map(verse => (
                     <p className="clause-noun-verse" key={`${verse.chapter}:${verse.verse}`}>
-                      <span className="clause-noun-verse-label">{verse.verse}</span>
+                      <span className="clause-noun-verse-label">
+                        {verse.chapter}:{verse.verse}
+                      </span>
                       <span>
                         {verse.words.map((word, position) => {
                           const canSelectNoun = activeObservation.describesNoun === "yes";
@@ -3014,30 +3088,46 @@ export default function SpanishClauseBuilder() {
                           {!forceChoices && !isActiveClauseRoot && activeSignal?.kind === "uncertain" ? (
                             <p className="clause-uncertain-note">{activeSignal.reason}</p>
                           ) : null}
-                          {!forceChoices && !isActiveClauseRoot && activeSignal?.kind === "none" ? (
-                            <p className="clause-tutor-note">{activeSignal.reason}</p>
-                          ) : null}
-                          {forceChoices ? (
+                          {activeChoiceGuidance &&
+                          activeSignal?.kind !== "uncertain" &&
+                          (activeSignal?.kind === "none" || forceChoices) ? (
+                            <p className="clause-tutor-note">
+                              {activeChoiceGuidance.summary}
+                              {forceChoices && activeChoiceGuidance.suggested
+                                ? " The highlighted card is only a lean — pick the shape that actually fits."
+                                : forceChoices
+                                  ? " Pick the shape that actually fits."
+                                  : ""}
+                            </p>
+                          ) : forceChoices ? (
                             <p className="clause-tutor-note">No problem — pick the shape that actually fits.</p>
                           ) : null}
 
                           <div className="clause-choice-grid">
-                            <button type="button" className="clause-choice-btn" onClick={chooseDescribes}>
-                              <span className="clause-choice-term">Relative clause</span>
-                              Describes something nearby
-                            </button>
-                            <button type="button" className="clause-choice-btn" onClick={chooseContent}>
-                              <span className="clause-choice-term">Content clause</span>
-                              Reports what was said or thought
-                            </button>
-                            <button type="button" className="clause-choice-btn" onClick={chooseFrame}>
-                              <span className="clause-choice-term">Adverbial clause</span>
-                              Gives a when, why, if, or so-that
-                            </button>
-                            <button type="button" className="clause-choice-btn" onClick={chooseRoot}>
-                              <span className="clause-choice-term">Independent clause</span>
-                              Stands on its own
-                            </button>
+                            {(activeChoiceGuidance?.options ?? FALLBACK_CLAUSE_CHOICES).map(option => (
+                              <button
+                                key={option.kind}
+                                type="button"
+                                className={[
+                                  "clause-choice-btn",
+                                  option.lean === "suggested" ? "clause-choice-btn--suggested" : ""
+                                ]
+                                  .filter(Boolean)
+                                  .join(" ")}
+                                onClick={() => chooseByKind(option.kind)}
+                              >
+                                <span className="clause-choice-term-row">
+                                  <span className="clause-choice-term">{option.term}</span>
+                                  {option.lean === "suggested" ? (
+                                    <span className="clause-choice-lean">Suggested</span>
+                                  ) : null}
+                                </span>
+                                <span className="clause-choice-blurb">{option.blurb}</span>
+                                {option.evidence ? (
+                                  <span className="clause-choice-evidence">{option.evidence}</span>
+                                ) : null}
+                              </button>
+                            ))}
                           </div>
                         </>
                       )}
@@ -3311,7 +3401,9 @@ export default function SpanishClauseBuilder() {
                             <div className="clause-context-panel clause-context-panel--compact" aria-label="Select the described noun">
                               {standaloneContextVerses.map(verse => (
                                 <p className="clause-noun-verse" key={`sp-${verse.chapter}:${verse.verse}`}>
-                                  <span className="clause-noun-verse-label">{verse.verse}</span>
+                                  <span className="clause-noun-verse-label">
+                                    {verse.chapter}:{verse.verse}
+                                  </span>
                                   <span>
                                     {verse.words.map((word, position) => {
                                       const isSelected = Boolean(activeStandaloneObservation.describedNounSpan?.includes(word.id));
@@ -3555,7 +3647,9 @@ export default function SpanishClauseBuilder() {
                       >
                         <span className="participle-flow-bar" style={{ height: `${count > 0 ? Math.max(heightPct, 6) : 2}%` }} />
                         <span className="participle-flow-count">{count}</span>
-                        <span className="participle-flow-ref">{clause.reference.replace("Tito ", "")}</span>
+                        <span className="participle-flow-ref">
+                          {clause.reference.replace(`${bookInfo.displayName} `, "")}
+                        </span>
                       </button>
                     );
                   })}
@@ -3605,7 +3699,9 @@ export default function SpanishClauseBuilder() {
       {view === "structure" && activeVerb ? (
         <aside className="clause-selection-panel" aria-live="polite">
           <p className="clause-active-verb">
-            <span>Tito {activeVerb.chapter}:{activeVerb.verse}</span>
+            <span>
+              {bookInfo.displayName} {activeVerb.chapter}:{activeVerb.verse}
+            </span>
             <strong>{activeVerb.text}</strong>
           </p>
           {draftText ? (

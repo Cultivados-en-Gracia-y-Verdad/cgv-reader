@@ -1,3 +1,4 @@
+import type { ReaderBookId } from "@cgv/core";
 import { getWorkshopBookId } from "./workshop-book";
 import { loadLbfAlignmentRaw } from "./book-assets";
 
@@ -30,7 +31,7 @@ const cacheByBook = new Map<
   }
 >();
 
-function ensureCaches(bookId = getWorkshopBookId()): void {
+function ensureCaches(bookId: ReaderBookId = getWorkshopBookId()): void {
   const raw = loadLbfAlignmentRaw(bookId);
   const cached = cacheByBook.get(bookId);
   if (cached && cached.raw === raw) return;
@@ -53,15 +54,21 @@ function ensureCaches(bookId = getWorkshopBookId()): void {
 }
 
 /** token number → LBF word index for one verse */
-export function loadLbfTokenWordMap(chapter: number, verse: number): Map<number, number> {
-  const bookId = getWorkshopBookId();
+export function loadLbfTokenWordMap(
+  chapter: number,
+  verse: number,
+  bookId: ReaderBookId = getWorkshopBookId()
+): Map<number, number> {
   ensureCaches(bookId);
   return cacheByBook.get(bookId)!.byVerse.get(`${chapter}:${verse}`) ?? new Map();
 }
 
 /** token number → LBF surface string for one verse */
-export function loadLbfTokenSurfaces(chapter: number, verse: number): Map<number, string> {
-  const bookId = getWorkshopBookId();
+export function loadLbfTokenSurfaces(
+  chapter: number,
+  verse: number,
+  bookId: ReaderBookId = getWorkshopBookId()
+): Map<number, string> {
   ensureCaches(bookId);
   return cacheByBook.get(bookId)!.surfacesByVerse.get(`${chapter}:${verse}`) ?? new Map();
 }

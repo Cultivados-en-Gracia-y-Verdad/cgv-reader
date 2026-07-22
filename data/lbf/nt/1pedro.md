@@ -270,7 +270,7 @@ sino santifiquen al Señor Dios en sus corazones estando siempre preparados para
 
 ### 3:16
 
-teniendo buena conciencia para que, en aquello en que hablan mal de ustedes como de malhechores, queden avergonzados los que insultan su buena conducta en Cristo
+teniendo buena conciencia para que, en lo que hablan mal de ustedes como de malhechores, queden avergonzados los que insultan su buena conducta en Cristo
 
 ### 3:17
 
@@ -348,7 +348,7 @@ Amados, no se extrañen del fuego de prueba que está entre ustedes para probarl
 
 ### 4:13
 
-Al contrario, en la medida en que participan de los padecimientos de Cristo, alégrense, para que también en la revelación de su gloria se alegren con júbilo
+Antes bien, en la medida en que participan de los padecimientos de Cristo, alégrense, para que también en la revelación de su gloria se alegren con gran alegría
 
 ### 4:14
 
@@ -414,7 +414,7 @@ Resístanle firmes en la fe, sabiendo que los mismos padecimientos se cumplen en
 
 ### 5:10
 
-Y el Dios de toda gracia, que nos llamó a su gloria eterna en Cristo Jesús después de que hayan padecido un poco, él mismo los perfeccionará, afirmará, fortalecerá y cimentará
+Mas el Dios de toda gracia, que nos llamó a su gloria eterna en Cristo Jesús, después de que hayan padecido un poco, él mismo los perfeccionará, afirmará, fortalecerá, cimentará
 
 ### 5:11
 
@@ -422,7 +422,7 @@ A él sea la gloria y el dominio por los siglos de los siglos. Amén
 
 ### 5:12
 
-Por medio de Silvano, a quien considero hermano fiel, les he escrito brevemente, exhortando y dando testimonio de que esta es la verdadera gracia de Dios, en la cual están firmes
+Por medio de Silvano, el hermano fiel, como lo considero, les he escrito brevemente, exhortando y testificando que esta es la verdadera gracia de Dios, en la cual están firmes
 
 ### 5:13
 

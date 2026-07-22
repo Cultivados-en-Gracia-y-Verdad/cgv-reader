@@ -307,9 +307,9 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   const bookDisplayName = getReaderBookInfo(bookId).displayName;
   const warnings: string[] = [];
   const verses = loadClauseVerses(bookId);
-  const assignments = readClauseAssignments();
-  const observations = readClauseObservations();
-  const participleObservations = readParticipleObservations();
+  const assignments = readClauseAssignments(bookId);
+  const observations = readClauseObservations(bookId);
+  const participleObservations = readParticipleObservations(bookId);
   const readerNotes = readReaderNotes();
   // Reader notes emit once under the first parent that claims their verse.
   // Def/XRef pins attach after Generate; rematched by line text on regenerate
@@ -354,11 +354,11 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   }
 
   const moodReviewedVerbIds = new Set<string>();
-  readMarkedAlignmentIds(progressKeys.commandMarks).forEach(id => moodReviewedVerbIds.add(id));
-  readMarkedAlignmentIds(progressKeys.statementMarks).forEach(id => moodReviewedVerbIds.add(id));
-  readMarkedAlignmentIds(progressKeys.subjunctiveMarks).forEach(id => moodReviewedVerbIds.add(id));
-  readMarkedAlignmentIds(progressKeys.optativeMarks).forEach(id => moodReviewedVerbIds.add(id));
-  const participleMarkedAlignmentIds = readMarkedAlignmentIds(progressKeys.participleMarks);
+  readMarkedAlignmentIds(progressKeys.commandMarks, bookId).forEach(id => moodReviewedVerbIds.add(id));
+  readMarkedAlignmentIds(progressKeys.statementMarks, bookId).forEach(id => moodReviewedVerbIds.add(id));
+  readMarkedAlignmentIds(progressKeys.subjunctiveMarks, bookId).forEach(id => moodReviewedVerbIds.add(id));
+  readMarkedAlignmentIds(progressKeys.optativeMarks, bookId).forEach(id => moodReviewedVerbIds.add(id));
+  const participleMarkedAlignmentIds = readMarkedAlignmentIds(progressKeys.participleMarks, bookId);
 
   const clauses: CompilerClause[] = [];
   for (const finiteVerb of finiteVerbs) {

@@ -1692,7 +1692,7 @@ button.interlinear-token--pickable:focus-visible {
 
 .clause-verse {
   display: grid;
-  grid-template-columns: 2.8rem minmax(0, 1fr);
+  grid-template-columns: 3.6rem minmax(0, 1fr);
   gap: 0.8rem;
 }
 
@@ -1739,59 +1739,56 @@ button.interlinear-token--pickable:focus-visible {
   line-height: 1.65;
 }
 
-/* Spanish-only: continuous reading, not per-word workstation chips.
-   Clause membership is a soft phrase wash (alternating cool/warm) so
-   boundaries stay visible without boxing every token. */
-.structure-passage--spanish-only .clause-phrase {
+/* Spanish clause washes — saved spans get a slight tint so unfinished text
+   stays plain and progress is scannable in both dual and Spanish-only modes. */
+.structure-passage .clause-verse-text--with-saved-phrases .clause-phrase {
   border-radius: 0.28em;
   padding: 0.04em 0.1em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
 
-.structure-passage--spanish-only .clause-phrase--plain {
+.structure-passage .clause-verse-text--with-saved-phrases .clause-phrase--plain {
   padding: 0;
   border-radius: 0;
   background: transparent;
 }
 
-.structure-passage--spanish-only .clause-phrase--clause {
-  background: rgba(120, 152, 148, 0.12);
+.structure-passage .clause-verse-text--with-saved-phrases .clause-phrase--clause {
+  background: rgba(120, 152, 148, 0.22);
 }
 
-.structure-passage--spanish-only .clause-phrase--clause.clause-phrase--alt {
-  background: rgba(176, 148, 108, 0.12);
+.structure-passage .clause-verse-text--with-saved-phrases .clause-phrase--clause.clause-phrase--alt {
+  background: rgba(176, 148, 108, 0.2);
 }
 
-.structure-passage--spanish-only .clause-phrase--reviewing {
-  background: rgba(90, 140, 145, 0.2);
+.structure-passage .clause-verse-text--with-saved-phrases .clause-phrase--reviewing {
+  background: rgba(90, 140, 145, 0.28);
 }
 
-.structure-passage--spanish-only .clause-phrase--draft {
-  background: rgba(133, 184, 190, 0.32);
+.structure-passage .clause-verse-text--with-saved-phrases .clause-phrase--draft {
+  background: rgba(133, 184, 190, 0.36);
 }
 
-.structure-passage--spanish-only .clause-phrase--overlap {
-  background: rgba(180, 140, 90, 0.14);
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
+.structure-passage .clause-verse-text--with-saved-phrases .clause-phrase--overlap {
+  background: rgba(180, 140, 90, 0.18);
   text-decoration: underline dotted rgba(154, 119, 80, 0.7) 1.5px;
   text-underline-offset: 0.18em;
 }
 
-.structure-passage--spanish-only .clause-word {
+.structure-passage .clause-verse-text--with-saved-phrases .clause-word {
   background: transparent !important;
   box-shadow: none !important;
   border-radius: 0;
   padding: 0;
 }
 
-.structure-passage--spanish-only .clause-word--verb,
-.structure-passage--spanish-only .clause-word--verb-saved {
+.structure-passage .clause-verse-text--with-saved-phrases .clause-word--verb,
+.structure-passage .clause-verse-text--with-saved-phrases .clause-word--verb-saved {
   border-bottom: 1.5px solid rgba(107, 146, 157, 0.5);
 }
 
-.structure-passage--spanish-only .clause-word--active-verb {
+.structure-passage .clause-verse-text--with-saved-phrases .clause-word--active-verb {
   border-bottom: 2px solid #c9a227;
   background: transparent !important;
   box-shadow: none !important;
@@ -2739,6 +2736,11 @@ button.interlinear-token--pickable:focus-visible {
   cursor: pointer;
 }
 
+.clause-choice-btn--suggested {
+  border-color: rgba(181, 137, 29, 0.72);
+  background: rgba(243, 212, 140, 0.22);
+}
+
 .clause-choice-btn:hover,
 .clause-choice-btn:focus-visible {
   border-color: #9fb7b9;
@@ -2746,14 +2748,48 @@ button.interlinear-token--pickable:focus-visible {
   outline: none;
 }
 
+.clause-choice-btn--suggested:hover,
+.clause-choice-btn--suggested:focus-visible {
+  border-color: rgba(181, 137, 29, 0.9);
+  background: rgba(243, 212, 140, 0.34);
+}
+
+.clause-choice-term-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+
 .clause-choice-term {
   display: block;
-  margin-bottom: 0.15rem;
   color: #6b929d;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+}
+
+.clause-choice-lean {
+  flex-shrink: 0;
+  color: #8a621c;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.clause-choice-blurb {
+  display: block;
+}
+
+.clause-choice-evidence {
+  display: block;
+  margin-top: 0.4rem;
+  color: #756e64;
+  font-size: 0.8rem;
+  line-height: 1.35;
 }
 
 /* Unresolved-participle data warning — distinct from the plum participle

@@ -57,9 +57,8 @@ export default function CompilerShell() {
   const [bibleVersion, setBibleVersion] = useState<BibleVersionId>(() => readCompilerBibleVersion());
   const [generating, setGenerating] = useState(false);
 
-  useEffect(() => {
-    setWorkshopBookId(bookId);
-  }, [bookId]);
+  // Sync before children/generate read getWorkshopBookId() (same as Observer).
+  setWorkshopBookId(bookId);
 
   useEffect(() => {
     return subscribeReaderBook(next => {

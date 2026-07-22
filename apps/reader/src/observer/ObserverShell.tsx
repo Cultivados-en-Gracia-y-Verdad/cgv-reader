@@ -35,9 +35,11 @@ export default function ObserverShell() {
   const bookInfo = getReaderBookInfo(bookId);
   const hasLbfStructure = readerBookHasLbfStructure(bookId);
 
-  useEffect(() => {
-    setWorkshopBookId(bookId);
-  }, [bookId]);
+  // Keep the module workshop book aligned before children render. Structure
+  // helpers still read getWorkshopBookId() in places; a useEffect sync would
+  // leave the first paint on the previous book (Tito marks/participles on a
+  // 1 Pedro header).
+  setWorkshopBookId(bookId);
 
   useEffect(() => {
     return subscribeReaderBook(next => {
@@ -88,7 +90,7 @@ export default function ObserverShell() {
       <div className="workshop-stage">
         {layer === "structure" ? (
           hasLbfStructure ? (
-            <SpanishClauseBuilder key={bookId} />
+            <SpanishClauseBuilder key={bookId} bookId={bookId} />
           ) : (
             <p className="workshop-lbf-gate" role="status">
               {t.structureNeedsLbf(bookInfo.displayName)}

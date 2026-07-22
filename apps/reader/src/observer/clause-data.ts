@@ -206,7 +206,10 @@ function buildGreekIdToAlignmentIdMap(bookId: ReaderBookId = getWorkshopBookId()
   return map;
 }
 
-export function readMarkedAlignmentIds(storageKey: string): Set<string> {
+export function readMarkedAlignmentIds(
+  storageKey: string,
+  bookId: ReaderBookId = getWorkshopBookId()
+): Set<string> {
   let markedGreekIds: string[];
 
   try {
@@ -220,7 +223,7 @@ export function readMarkedAlignmentIds(storageKey: string): Set<string> {
 
   if (!markedGreekIds.length) return new Set();
 
-  const greekIdToAlignmentId = buildGreekIdToAlignmentIdMap();
+  const greekIdToAlignmentId = buildGreekIdToAlignmentIdMap(bookId);
   const alignmentIds = new Set<string>();
   for (const greekId of markedGreekIds) {
     const alignmentId = greekIdToAlignmentId.get(greekId);
@@ -234,9 +237,11 @@ export function readMarkedAlignmentIds(storageKey: string): Set<string> {
 // stored as { id, recipient, tokenIds: Greek MorphGNT-line ids }[]. Read-only
 // here: this converts to alignment ids and flattens to one label per clause,
 // for the Sequence view to display; it never writes to this key.
-export function readCommandRecipientAssignments(): Map<string, string> {
+export function readCommandRecipientAssignments(
+  bookId: ReaderBookId = getWorkshopBookId()
+): Map<string, string> {
   const assignments = new Map<string, string>();
-  const storageKey = progressKeys().commandRecipients;
+  const storageKey = progressKeys(bookId).commandRecipients;
 
   try {
     const stored = window.localStorage.getItem(storageKey);
@@ -244,7 +249,7 @@ export function readCommandRecipientAssignments(): Map<string, string> {
     const parsed = JSON.parse(stored);
     if (!Array.isArray(parsed)) return assignments;
 
-    const greekIdToAlignmentId = buildGreekIdToAlignmentIdMap();
+    const greekIdToAlignmentId = buildGreekIdToAlignmentIdMap(bookId);
     for (const group of parsed) {
       if (!group || typeof group !== "object") continue;
       const record = group as { recipient?: unknown; tokenIds?: unknown };
@@ -262,12 +267,12 @@ export function readCommandRecipientAssignments(): Map<string, string> {
   return assignments;
 }
 
-function readFiniteMarkedAlignmentIds(): Set<string> {
-  return readMarkedAlignmentIds(progressKeys().finiteMarks);
+function readFiniteMarkedAlignmentIds(bookId: ReaderBookId): Set<string> {
+  return readMarkedAlignmentIds(progressKeys(bookId).finiteMarks, bookId);
 }
 
-function readDependentIntroducerMarkedAlignmentIds(): Set<string> {
-  return readMarkedAlignmentIds(progressKeys().dependentIntroducers);
+function readDependentIntroducerMarkedAlignmentIds(bookId: ReaderBookId): Set<string> {
+  return readMarkedAlignmentIds(progressKeys(bookId).dependentIntroducers, bookId);
 }
 
 function tokenizeVerse(verse: BibleVerse): SpanishWord[] {
@@ -415,9 +420,10 @@ export function getVersesWithoutFiniteVerb(): Set<string> {
 export function buildVerseTokenWordMap(
   chapter: number,
   verse: number,
-  _words: SpanishWord[]
+  _words: SpanishWord[],
+  bookId: ReaderBookId = getWorkshopBookId()
 ): Map<number, number> {
-  return new Map(loadLbfTokenWordMap(chapter, verse));
+  return new Map(loadLbfTokenWordMap(chapter, verse, bookId));
 }
 
 export function loadClauseVerses(bookId: ReaderBookId = getWorkshopBookId()): SpanishClauseVerse[] {
@@ -431,15 +437,15 @@ export function loadClauseVerses(bookId: ReaderBookId = getWorkshopBookId()): Sp
   }));
 
   const verseByKey = new Map(verses.map(verse => [`${verse.chapter}:${verse.verse}`, verse]));
-  const markedFiniteAlignmentIds = readFiniteMarkedAlignmentIds();
-  const markedDependentIntroducerAlignmentIds = readDependentIntroducerMarkedAlignmentIds();
+  const markedFiniteAlignmentIds = readFiniteMarkedAlignmentIds(bookId);
+  const markedDependentIntroducerAlignmentIds = readDependentIntroducerMarkedAlignmentIds(bookId);
   const tokenWordMapCache = new Map<string, Map<number, number>>();
 
   function getTokenWordMap(chapter: number, verse: number, words: SpanishWord[]): Map<number, number> {
     const key = `${chapter}:${verse}`;
     const cached = tokenWordMapCache.get(key);
     if (cached) return cached;
-    const map = buildVerseTokenWordMap(chapter, verse, words);
+    const map = buildVerseTokenWordMap(chapter, verse, words, bookId);
     tokenWordMapCache.set(key, map);
     return map;
   }
@@ -698,10 +704,11 @@ function expandAlignedPhrases(
   chapter: number,
   verse: number,
   startToken: number,
-  endToken: number
+  endToken: number,
+  bookId: ReaderBookId
 ): { low: number; high: number } {
-  const surfaces = loadLbfTokenSurfaces(chapter, verse);
-  const tokenToWord = loadLbfTokenWordMap(chapter, verse);
+  const surfaces = loadLbfTokenSurfaces(chapter, verse, bookId);
+  const tokenToWord = loadLbfTokenWordMap(chapter, verse, bookId);
   let nextLow = low;
   let nextHigh = high;
 
@@ -756,9 +763,10 @@ export function deriveSpanishSpanFromGreekRange(
   verse: number,
   startToken: number,
   endToken: number,
-  verseWords: SpanishWord[]
+  verseWords: SpanishWord[],
+  bookId: ReaderBookId = getWorkshopBookId()
 ): string[] {
-  const tokenToWord = buildVerseTokenWordMap(chapter, verse, verseWords);
+  const tokenToWord = buildVerseTokenWordMap(chapter, verse, verseWords, bookId);
   const wordIndexes = new Set<number>();
   for (let token = startToken; token <= endToken; token += 1) {
     const wordIndex = tokenToWord.get(token);
@@ -768,7 +776,7 @@ export function deriveSpanishSpanFromGreekRange(
 
   let low = Math.min(...wordIndexes);
   let high = Math.max(...wordIndexes);
-  ({ low, high } = expandAlignedPhrases(low, high, verseWords, chapter, verse, startToken, endToken));
+  ({ low, high } = expandAlignedPhrases(low, high, verseWords, chapter, verse, startToken, endToken, bookId));
 
   const ids: string[] = [];
   for (let index = low; index <= high; index += 1) {
@@ -812,7 +820,8 @@ function sameWordIdSpan(a: string[], b: string[]): boolean {
  */
 export function auditGreekSpanConsistency(
   verses: SpanishClauseVerse[],
-  assignments: ClauseAssignments
+  assignments: ClauseAssignments,
+  bookId: ReaderBookId = getWorkshopBookId()
 ): GreekSpanAuditEntry[] {
   const wordsByVerse = new Map<string, SpanishWord[]>();
   for (const verse of verses) wordsByVerse.set(`${verse.chapter}:${verse.verse}`, verse.words);
@@ -839,7 +848,8 @@ export function auditGreekSpanConsistency(
           start.verse,
           Math.min(start.token, end.token),
           Math.max(start.token, end.token),
-          verseWords
+          verseWords,
+          bookId
         );
       }
     }
@@ -931,23 +941,26 @@ function parseStoredClauseAssignments(stored: string | null): ClauseAssignments 
   }
 }
 
-export function readClauseAssignments(): ClauseAssignments {
-  const keys = progressKeys();
+export function readClauseAssignments(bookId: ReaderBookId = getWorkshopBookId()): ClauseAssignments {
+  const keys = progressKeys(bookId);
   const current = parseStoredClauseAssignments(window.localStorage.getItem(keys.clauseAssignments));
   if (Object.keys(current).length) return current;
 
   if (keys.clauseAssignmentsLegacy) {
     const legacy = parseStoredClauseAssignments(window.localStorage.getItem(keys.clauseAssignmentsLegacy));
     if (Object.keys(legacy).length) {
-      writeClauseAssignments(legacy);
+      writeClauseAssignments(legacy, bookId);
       return legacy;
     }
   }
   return {};
 }
 
-export function writeClauseAssignments(assignments: ClauseAssignments): void {
-  window.localStorage.setItem(progressKeys().clauseAssignments, JSON.stringify(assignments));
+export function writeClauseAssignments(
+  assignments: ClauseAssignments,
+  bookId: ReaderBookId = getWorkshopBookId()
+): void {
+  window.localStorage.setItem(progressKeys(bookId).clauseAssignments, JSON.stringify(assignments));
 }
 
 // --- Q1/Q2/Q3 observations and participle sort — moved here (from
@@ -974,9 +987,9 @@ export type ClauseObservations = Record<string, ClauseObservation>;
 /** @deprecated Prefer workshopProgressKeys(bookId).clauseObservations */
 export const CLAUSE_OBSERVATIONS_KEY = "the-reader:spanish-clause-builder:titus:statement-command-review:v1";
 
-export function readClauseObservations(): ClauseObservations {
+export function readClauseObservations(bookId: ReaderBookId = getWorkshopBookId()): ClauseObservations {
   try {
-    const stored = window.localStorage.getItem(progressKeys().clauseObservations);
+    const stored = window.localStorage.getItem(progressKeys(bookId).clauseObservations);
     const parsed = stored ? JSON.parse(stored) : {};
     if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
 
@@ -1023,8 +1036,11 @@ export function readClauseObservations(): ClauseObservations {
   }
 }
 
-export function writeClauseObservations(observations: ClauseObservations): void {
-  window.localStorage.setItem(progressKeys().clauseObservations, JSON.stringify(observations));
+export function writeClauseObservations(
+  observations: ClauseObservations,
+  bookId: ReaderBookId = getWorkshopBookId()
+): void {
+  window.localStorage.setItem(progressKeys(bookId).clauseObservations, JSON.stringify(observations));
 }
 
 // A separate observation layer on top of the skeleton — participles never
@@ -1054,9 +1070,11 @@ export function resolveParticipleClassification(observation: ParticipleObservati
   return null;
 }
 
-export function readParticipleObservations(): ParticipleObservations {
+export function readParticipleObservations(
+  bookId: ReaderBookId = getWorkshopBookId()
+): ParticipleObservations {
   try {
-    const stored = window.localStorage.getItem(progressKeys().participleObservations);
+    const stored = window.localStorage.getItem(progressKeys(bookId).participleObservations);
     const parsed = stored ? JSON.parse(stored) : {};
     if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
 
@@ -1087,6 +1105,9 @@ export function readParticipleObservations(): ParticipleObservations {
   }
 }
 
-export function writeParticipleObservations(observations: ParticipleObservations): void {
-  window.localStorage.setItem(progressKeys().participleObservations, JSON.stringify(observations));
+export function writeParticipleObservations(
+  observations: ParticipleObservations,
+  bookId: ReaderBookId = getWorkshopBookId()
+): void {
+  window.localStorage.setItem(progressKeys(bookId).participleObservations, JSON.stringify(observations));
 }

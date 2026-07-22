@@ -10,7 +10,7 @@
     "repairs": {
       "unitsApplied": 1243,
       "trOnlySkipped": 56,
-      "warnings": 5
+      "warnings": 4
     }
   },
   "records": [
@@ -8291,32 +8291,32 @@
       "verse": 16,
       "token": 10,
       "greekSurface": "ἐν",
-      "lbfSurface": "en aquello en que",
-      "lbfWordIndex": 8
+      "lbfSurface": "en lo que",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 3,
       "verse": 16,
       "token": 11,
       "greekSurface": "ᾧ",
-      "lbfSurface": "en aquello en que",
-      "lbfWordIndex": 8
+      "lbfSurface": "en lo que",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 3,
       "verse": 16,
       "token": 12,
       "greekSurface": "⸀καταλαλεῖσθε",
-      "lbfSurface": "hablan mal",
-      "lbfWordIndex": 10
+      "lbfSurface": "hablan mal de ustedes como de malhechores",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 3,
       "verse": 16,
       "token": 13,
       "greekSurface": "καταισχυνθῶσιν",
-      "lbfSurface": "de ustedes como de malhechores queden avergonzados",
-      "lbfWordIndex": 17
+      "lbfSurface": "queden avergonzados",
+      "lbfWordIndex": 16
     },
     {
       "chapter": 3,
@@ -8324,7 +8324,7 @@
       "token": 14,
       "greekSurface": "οἱ",
       "lbfSurface": "los que insultan",
-      "lbfWordIndex": 20
+      "lbfWordIndex": 19
     },
     {
       "chapter": 3,
@@ -8332,7 +8332,7 @@
       "token": 15,
       "greekSurface": "ἐπηρεάζοντες",
       "lbfSurface": "los que insultan",
-      "lbfWordIndex": 20
+      "lbfWordIndex": 19
     },
     {
       "chapter": 3,
@@ -8340,7 +8340,7 @@
       "token": 16,
       "greekSurface": "ὑμῶν",
       "lbfSurface": "su buena conducta",
-      "lbfWordIndex": 23
+      "lbfWordIndex": 22
     },
     {
       "chapter": 3,
@@ -8348,7 +8348,7 @@
       "token": 17,
       "greekSurface": "τὴν",
       "lbfSurface": "su buena conducta",
-      "lbfWordIndex": 23
+      "lbfWordIndex": 22
     },
     {
       "chapter": 3,
@@ -8356,7 +8356,7 @@
       "token": 18,
       "greekSurface": "ἀγαθὴν",
       "lbfSurface": "su buena conducta",
-      "lbfWordIndex": 23
+      "lbfWordIndex": 22
     },
     {
       "chapter": 3,
@@ -8364,7 +8364,7 @@
       "token": 19,
       "greekSurface": "ἐν",
       "lbfSurface": "en Cristo",
-      "lbfWordIndex": 25
+      "lbfWordIndex": 24
     },
     {
       "chapter": 3,
@@ -8372,7 +8372,7 @@
       "token": 20,
       "greekSurface": "Χριστῷ",
       "lbfSurface": "en Cristo",
-      "lbfWordIndex": 25
+      "lbfWordIndex": 24
     },
     {
       "chapter": 3,
@@ -8380,7 +8380,7 @@
       "token": 21,
       "greekSurface": "ἀναστροφήν.",
       "lbfSurface": "su buena conducta",
-      "lbfWordIndex": 23
+      "lbfWordIndex": 22
     },
     {
       "chapter": 3,
@@ -10659,7 +10659,7 @@
       "verse": 13,
       "token": 1,
       "greekSurface": "ἀλλὰ",
-      "lbfSurface": "Al contrario",
+      "lbfSurface": "Antes bien",
       "lbfWordIndex": 1
     },
     {
@@ -10795,8 +10795,8 @@
       "verse": 13,
       "token": 18,
       "greekSurface": "ἀγαλλιώμενοι.",
-      "lbfSurface": "con júbilo",
-      "lbfWordIndex": 26
+      "lbfSurface": "con gran alegría",
+      "lbfWordIndex": 27
     },
     {
       "chapter": 4,
@@ -12627,7 +12627,7 @@
       "verse": 10,
       "token": 2,
       "greekSurface": "δὲ",
-      "lbfSurface": "Y",
+      "lbfSurface": "Mas",
       "lbfWordIndex": 0
     },
     {
@@ -12763,7 +12763,7 @@
       "verse": 10,
       "token": 19,
       "greekSurface": "⸀καταρτίσει,",
-      "lbfSurface": "perfeccionará",
+      "lbfSurface": "los perfeccionará",
       "lbfWordIndex": 26
     },
     {
@@ -12771,24 +12771,24 @@
       "verse": 10,
       "token": 20,
       "greekSurface": "στηρίξει,",
-      "lbfSurface": "los",
-      "lbfWordIndex": 25
-    },
-    {
-      "chapter": 5,
-      "verse": 10,
-      "token": 21,
-      "greekSurface": "σθενώσει,",
       "lbfSurface": "afirmará",
       "lbfWordIndex": 27
     },
     {
       "chapter": 5,
       "verse": 10,
-      "token": 22,
-      "greekSurface": "⸀θεμελιώσει.",
+      "token": 21,
+      "greekSurface": "σθενώσει,",
       "lbfSurface": "fortalecerá",
       "lbfWordIndex": 28
+    },
+    {
+      "chapter": 5,
+      "verse": 10,
+      "token": 22,
+      "greekSurface": "⸀θεμελιώσει.",
+      "lbfSurface": "cimentará",
+      "lbfWordIndex": 29
     },
     {
       "chapter": 5,
@@ -12884,47 +12884,47 @@
       "token": 3,
       "greekSurface": "ὑμῖν",
       "lbfSurface": "les",
-      "lbfWordIndex": 9
+      "lbfWordIndex": 10
     },
     {
       "chapter": 5,
       "verse": 12,
       "token": 4,
       "greekSurface": "τοῦ",
-      "lbfSurface": "hermano fiel",
-      "lbfWordIndex": 8
+      "lbfSurface": "el hermano fiel",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 5,
       "verse": 12,
       "token": 5,
       "greekSurface": "πιστοῦ",
-      "lbfSurface": "hermano fiel",
-      "lbfWordIndex": 8
+      "lbfSurface": "el hermano fiel",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 5,
       "verse": 12,
       "token": 6,
       "greekSurface": "ἀδελφοῦ,",
-      "lbfSurface": "hermano fiel",
-      "lbfWordIndex": 8
+      "lbfSurface": "el hermano fiel",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 5,
       "verse": 12,
       "token": 7,
       "greekSurface": "ὡς",
-      "lbfSurface": "a quien considero",
-      "lbfWordIndex": 6
+      "lbfSurface": "como lo considero",
+      "lbfWordIndex": 9
     },
     {
       "chapter": 5,
       "verse": 12,
       "token": 8,
       "greekSurface": "λογίζομαι,",
-      "lbfSurface": "a quien considero",
-      "lbfWordIndex": 6
+      "lbfSurface": "como lo considero",
+      "lbfWordIndex": 9
     },
     {
       "chapter": 5,
@@ -12932,7 +12932,7 @@
       "token": 9,
       "greekSurface": "δι’",
       "lbfSurface": "brevemente",
-      "lbfWordIndex": 12
+      "lbfWordIndex": 13
     },
     {
       "chapter": 5,
@@ -12940,7 +12940,7 @@
       "token": 10,
       "greekSurface": "ὀλίγων",
       "lbfSurface": "brevemente",
-      "lbfWordIndex": 12
+      "lbfWordIndex": 13
     },
     {
       "chapter": 5,
@@ -12948,7 +12948,7 @@
       "token": 11,
       "greekSurface": "ἔγραψα,",
       "lbfSurface": "he escrito",
-      "lbfWordIndex": 11
+      "lbfWordIndex": 12
     },
     {
       "chapter": 5,
@@ -12956,7 +12956,7 @@
       "token": 12,
       "greekSurface": "παρακαλῶν",
       "lbfSurface": "exhortando",
-      "lbfWordIndex": 13
+      "lbfWordIndex": 14
     },
     {
       "chapter": 5,
@@ -12964,14 +12964,14 @@
       "token": 13,
       "greekSurface": "καὶ",
       "lbfSurface": "y",
-      "lbfWordIndex": 14
+      "lbfWordIndex": 15
     },
     {
       "chapter": 5,
       "verse": 12,
       "token": 14,
       "greekSurface": "ἐπιμαρτυρῶν",
-      "lbfSurface": "dando testimonio",
+      "lbfSurface": "testificando",
       "lbfWordIndex": 16
     },
     {
@@ -12979,16 +12979,16 @@
       "verse": 12,
       "token": 15,
       "greekSurface": "ταύτην",
-      "lbfSurface": "de que esta es",
-      "lbfWordIndex": 20
+      "lbfSurface": "que esta es",
+      "lbfWordIndex": 19
     },
     {
       "chapter": 5,
       "verse": 12,
       "token": 16,
       "greekSurface": "εἶναι",
-      "lbfSurface": "de que esta es",
-      "lbfWordIndex": 20
+      "lbfSurface": "que esta es",
+      "lbfWordIndex": 19
     },
     {
       "chapter": 5,
@@ -12996,7 +12996,7 @@
       "token": 17,
       "greekSurface": "ἀληθῆ",
       "lbfSurface": "la verdadera gracia",
-      "lbfWordIndex": 23
+      "lbfWordIndex": 22
     },
     {
       "chapter": 5,
@@ -13004,7 +13004,7 @@
       "token": 18,
       "greekSurface": "χάριν",
       "lbfSurface": "la verdadera gracia",
-      "lbfWordIndex": 23
+      "lbfWordIndex": 22
     },
     {
       "chapter": 5,
@@ -13012,7 +13012,7 @@
       "token": 19,
       "greekSurface": "τοῦ",
       "lbfSurface": "de Dios",
-      "lbfWordIndex": 25
+      "lbfWordIndex": 24
     },
     {
       "chapter": 5,
@@ -13020,7 +13020,7 @@
       "token": 20,
       "greekSurface": "θεοῦ·",
       "lbfSurface": "de Dios",
-      "lbfWordIndex": 25
+      "lbfWordIndex": 24
     },
     {
       "chapter": 5,
@@ -13028,7 +13028,7 @@
       "token": 21,
       "greekSurface": "εἰς",
       "lbfSurface": "en la cual",
-      "lbfWordIndex": 28
+      "lbfWordIndex": 27
     },
     {
       "chapter": 5,
@@ -13036,7 +13036,7 @@
       "token": 22,
       "greekSurface": "ἣν",
       "lbfSurface": "en la cual",
-      "lbfWordIndex": 28
+      "lbfWordIndex": 27
     },
     {
       "chapter": 5,
@@ -13044,7 +13044,7 @@
       "token": 23,
       "greekSurface": "⸀στῆτε.",
       "lbfSurface": "están firmes",
-      "lbfWordIndex": 29
+      "lbfWordIndex": 28
     },
     {
       "chapter": 5,
