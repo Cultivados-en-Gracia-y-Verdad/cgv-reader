@@ -16,10 +16,11 @@
 // section: this locates occurrences and presents them. It never argues for
 // which ones matter — that's Writer's job, downstream of this.
 
+/** Lazy per-book chunks — keep the main Worker asset under Cloudflare's 25 MiB limit. */
 const occurrenceFiles = import.meta.glob("@cgv-data/interlinears/NT/*.tokens.jsonl", {
-  as: "raw",
-  eager: true
-}) as Record<string, string>;
+  query: "?raw",
+  import: "default"
+}) as Record<string, () => Promise<string>>;
 
 // Spanish display names for the NT book slugs used in *.tokens.jsonl's own
 // "book" field (matches the filename stem) — the same 27 NT books this
@@ -100,18 +101,25 @@ export interface WordOccurrence {
 }
 
 let cachedRows: TokenRow[] | null = null;
+let rowsPromise: Promise<TokenRow[]> | null = null;
 
-function allRows(): TokenRow[] {
+async function allRows(): Promise<TokenRow[]> {
   if (cachedRows) return cachedRows;
-  const rows: TokenRow[] = [];
-  for (const content of Object.values(occurrenceFiles)) {
-    for (const line of content.replace(/\r\n/g, "\n").split("\n")) {
-      const row = parseTokenLine(line);
-      if (row) rows.push(row);
-    }
+  if (!rowsPromise) {
+    rowsPromise = (async () => {
+      const contents = await Promise.all(Object.values(occurrenceFiles).map(load => load()));
+      const rows: TokenRow[] = [];
+      for (const content of contents) {
+        for (const line of content.replace(/\r\n/g, "\n").split("\n")) {
+          const row = parseTokenLine(line);
+          if (row) rows.push(row);
+        }
+      }
+      cachedRows = rows;
+      return rows;
+    })();
   }
-  cachedRows = rows;
-  return rows;
+  return rowsPromise;
 }
 
 // Book order follows the NT's own canonical order (Matthew → Revelation),
@@ -129,11 +137,11 @@ function bookOrderIndex(book: string): number {
  * order then chapter:verse:token order. Read-only, presents what's found —
  * never ranks or selects which occurrences matter.
  */
-export function findOccurrencesByLemma(lemma: string): WordOccurrence[] {
+export async function findOccurrencesByLemma(lemma: string): Promise<WordOccurrence[]> {
   const target = lemma.trim();
   if (!target) return [];
 
-  return allRows()
+  return (await allRows())
     .filter(row => row.lemma === target)
     .map(row => ({
       reference: `${BOOK_DISPLAY_NAMES[row.book] ?? row.book} ${row.ch}:${row.vs}`,
@@ -160,9 +168,9 @@ export function findOccurrencesByLemma(lemma: string): WordOccurrence[] {
  * each occurs (most common first) purely as a browsing convenience, not a
  * judgment about importance.
  */
-export function listAvailableLemmas(): { lemma: string; count: number }[] {
+export async function listAvailableLemmas(): Promise<{ lemma: string; count: number }[]> {
   const counts = new Map<string, number>();
-  for (const row of allRows()) {
+  for (const row of await allRows()) {
     counts.set(row.lemma, (counts.get(row.lemma) ?? 0) + 1);
   }
   return Array.from(counts.entries())
@@ -194,10 +202,10 @@ interface VerseBundle {
 
 let cachedVerses: VerseBundle[] | null = null;
 
-function allVerses(): VerseBundle[] {
+async function allVerses(): Promise<VerseBundle[]> {
   if (cachedVerses) return cachedVerses;
   const map = new Map<string, VerseBundle>();
-  for (const row of allRows()) {
+  for (const row of await allRows()) {
     const key = `${row.book}:${row.ch}:${row.vs}`;
     let bundle = map.get(key);
     if (!bundle) {
@@ -228,10 +236,10 @@ function allVerses(): VerseBundle[] {
  * Phrase/word search across NT verse text (Spanish glosses + Greek surfaces).
  * Returns verse hits with neighboring-verse context — Scripture only, no ranking.
  */
-export function searchBibleText(query: string, limit = 40): BibleVerseHit[] {
+export async function searchBibleText(query: string, limit = 40): Promise<BibleVerseHit[]> {
   const needle = query.trim().toLowerCase();
   if (!needle) return [];
-  const verses = allVerses();
+  const verses = await allVerses();
   const hits: BibleVerseHit[] = [];
   for (let index = 0; index < verses.length; index += 1) {
     const verse = verses[index];

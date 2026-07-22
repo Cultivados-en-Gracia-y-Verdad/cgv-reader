@@ -25,23 +25,35 @@ const morphFiles = import.meta.glob("@cgv-data/morphology/MorphGNT/*-morphgnt.tx
   import: "default"
 }) as Record<string, () => Promise<string>>;
 
-/** Sync morph for Observer Structure (clause-data). */
-const morphFilesEager = import.meta.glob("@cgv-data/morphology/MorphGNT/*-morphgnt.txt", {
-  query: "?raw",
-  import: "default",
-  eager: true
-}) as Record<string, string>;
+/**
+ * Sync morph/tokens only for LBF Structure books (Tito, 1 Pedro).
+ * Eager-loading the whole NT overflows Cloudflare Workers' 25 MiB asset limit.
+ */
+const morphFilesEager = import.meta.glob(
+  [
+    "@cgv-data/morphology/MorphGNT/77-Tit-morphgnt.txt",
+    "@cgv-data/morphology/MorphGNT/81-1Pe-morphgnt.txt"
+  ],
+  {
+    query: "?raw",
+    import: "default",
+    eager: true
+  }
+) as Record<string, string>;
 
 const tokenFiles = import.meta.glob("@cgv-data/interlinears/NT/*.tokens.jsonl", {
   query: "?raw",
   import: "default"
 }) as Record<string, () => Promise<string>>;
 
-const tokenFilesEager = import.meta.glob("@cgv-data/interlinears/NT/*.tokens.jsonl", {
-  query: "?raw",
-  import: "default",
-  eager: true
-}) as Record<string, string>;
+const tokenFilesEager = import.meta.glob(
+  ["@cgv-data/interlinears/NT/tito.tokens.jsonl", "@cgv-data/interlinears/NT/1pedro.tokens.jsonl"],
+  {
+    query: "?raw",
+    import: "default",
+    eager: true
+  }
+) as Record<string, string>;
 
 const interlinearFiles = import.meta.glob("@cgv-data/interlinears/NT/*.interlinear.txt", {
   query: "?raw",
@@ -99,7 +111,11 @@ export function loadMorphRawSync(bookId: ReaderBookId): string {
   const stem = MORPHGNT_STEM_BY_BOOK[bookId];
   const endsWith = `/${stem}-morphgnt.txt`;
   const key = Object.keys(morphFilesEager).find(path => path.endsWith(endsWith));
-  if (!key) throw new Error(`Missing MorphGNT for ${getReaderBookInfo(bookId).displayName}`);
+  if (!key) {
+    throw new Error(
+      `Sync MorphGNT is only bundled for LBF Structure books; missing ${getReaderBookInfo(bookId).displayName}`
+    );
+  }
   return morphFilesEager[key];
 }
 
@@ -110,7 +126,11 @@ export async function loadTokensRaw(bookId: ReaderBookId): Promise<string> {
 export function loadTokensRawSync(bookId: ReaderBookId): string {
   const endsWith = `/${bookId}.tokens.jsonl`;
   const key = Object.keys(tokenFilesEager).find(path => path.endsWith(endsWith));
-  if (!key) throw new Error(`Missing tokens for ${getReaderBookInfo(bookId).displayName}`);
+  if (!key) {
+    throw new Error(
+      `Sync tokens are only bundled for LBF Structure books; missing ${getReaderBookInfo(bookId).displayName}`
+    );
+  }
   return tokenFilesEager[key];
 }
 

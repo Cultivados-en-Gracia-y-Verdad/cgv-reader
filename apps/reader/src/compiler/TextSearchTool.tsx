@@ -1,11 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   addCompilerAttachment,
   lineTextAt,
   searchMarkdownLines,
   type CompilerAttachment
 } from "./compiler-gathering";
-import { searchBibleText } from "./occurrences";
+import { searchBibleText, type BibleVerseHit } from "./occurrences";
 
 type SearchScope = "generated" | "bible";
 
@@ -24,16 +24,26 @@ export default function TextSearchTool({
 }: TextSearchToolProps) {
   const [query, setQuery] = useState("");
   const [scope, setScope] = useState<SearchScope>("generated");
+  const [bibleHits, setBibleHits] = useState<BibleVerseHit[]>([]);
 
   const generatedHits = useMemo(
     () => (scope === "generated" && markdown && query.trim() ? searchMarkdownLines(markdown, query) : []),
     [scope, markdown, query]
   );
 
-  const bibleHits = useMemo(
-    () => (scope === "bible" && query.trim() ? searchBibleText(query) : []),
-    [scope, query]
-  );
+  useEffect(() => {
+    if (scope !== "bible" || !query.trim()) {
+      setBibleHits([]);
+      return;
+    }
+    let cancelled = false;
+    void searchBibleText(query).then(hits => {
+      if (!cancelled) setBibleHits(hits);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [scope, query]);
 
   function handlePinGenerated(lineNumber: number, snippet: string) {
     if (!markdown) return;

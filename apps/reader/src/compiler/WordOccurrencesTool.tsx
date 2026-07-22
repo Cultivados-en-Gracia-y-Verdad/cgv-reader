@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   addCompilerAttachment,
   lineTextAt,
@@ -25,11 +25,21 @@ export default function WordOccurrencesTool({
   onAttachmentsChange,
   lineCount
 }: WordOccurrencesToolProps) {
-  const lemmas = useMemo(() => listAvailableLemmas(), []);
+  const [lemmas, setLemmas] = useState<{ lemma: string; count: number }[]>([]);
   const [selectedLemma, setSelectedLemma] = useState("");
   const [results, setResults] = useState<WordOccurrence[] | null>(null);
   const [definitionText, setDefinitionText] = useState("");
   const [lineInput, setLineInput] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    void listAvailableLemmas().then(next => {
+      if (!cancelled) setLemmas(next);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const targetLine = (() => {
     const typed = Number(lineInput);
@@ -39,7 +49,11 @@ export default function WordOccurrencesTool({
 
   function handleFind(lemma: string) {
     setSelectedLemma(lemma);
-    setResults(lemma.trim() ? findOccurrencesByLemma(lemma) : null);
+    if (!lemma.trim()) {
+      setResults(null);
+      return;
+    }
+    void findOccurrencesByLemma(lemma).then(setResults);
   }
 
   function syncAttachments(next: CompilerAttachment[]) {
