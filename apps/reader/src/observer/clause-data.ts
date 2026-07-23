@@ -6,7 +6,7 @@ import {
 } from "@cgv/core";
 import type { FrameType } from "./clause-signals";
 import { loadLbfRaw, loadMorphRawSync, loadTokensRawSync } from "./book-assets";
-import { loadLbfTokenSurfaces, loadLbfTokenWordMap } from "./lbf-alignment";
+import { loadLbfTokenSurfaces, loadLbfTokenWordMap, resolveLbfPhraseWordIndex } from "./lbf-alignment";
 import { getWorkshopBookId } from "./workshop-book";
 
 // The Clause Builder / Observer workshop reads LBF (La Biblia Fiel) as its
@@ -388,6 +388,259 @@ export function isInfinitiveMorph(morph: string): boolean {
   return morph.startsWith("V-") && morph[5] === "N";
 }
 
+const PARTICIPLE_ASPECT: Record<string, string> = {
+  P: "ongoing",
+  I: "ongoing (past)",
+  F: "future",
+  A: "simple",
+  R: "completed / state",
+  L: "completed / state",
+  X: "completed / state"
+};
+
+const PARTICIPLE_VOICE: Record<string, string> = {
+  A: "active",
+  M: "middle",
+  P: "passive",
+  E: "middle/passive",
+  D: "middle",
+  O: "passive"
+};
+
+const PARTICIPLE_CASE: Record<string, string> = {
+  N: "nominative",
+  G: "genitive",
+  D: "dative",
+  A: "accusative",
+  V: "vocative"
+};
+
+const PARTICIPLE_NUMBER: Record<string, string> = {
+  S: "singular",
+  P: "plural"
+};
+
+const PARTICIPLE_GENDER: Record<string, string> = {
+  M: "masculine",
+  F: "feminine",
+  N: "neuter"
+};
+
+export interface ParticipleReading {
+  /** Spanish surface first — what you already see in the clause line. */
+  spanish: string;
+  greek: string | null;
+  /** Aspect · voice · case number gender — the form's own meaning. */
+  formLine: string;
+  /** How the form hangs on the clause, from case / agreement only. */
+  hangLine: string;
+  /** Noun/pronoun this participle agrees with, when morphology finds one. */
+  hangNoun: SpanishWord | null;
+}
+
+export interface ParticipleNounGroup {
+  noun: SpanishWord | null;
+  /** Noun text, or a case-role / pick prompt when there is no agreeing noun. */
+  hostLabel: string;
+  /** True when nominative participles still need a manual subject host. */
+  needsHostPick?: boolean;
+  /** True when hostLabel came from a saved manual subject pick. */
+  isManualHost?: boolean;
+  items: { word: SpanishWord; reading: ParticipleReading }[];
+}
+
+function participleCngKey(word: SpanishWord): string | null {
+  const { participleCase, participleNumber, participleGender } = word;
+  if (!participleCase || participleCase === "-" || !participleNumber || participleNumber === "-") return null;
+  if (!participleGender || participleGender === "-") return `${participleCase}${participleNumber}`;
+  return `${participleCase}${participleNumber}${participleGender}`;
+}
+
+/** Nouns and pronouns that can host a participle by CNG agreement. */
+function hostCngKey(morph: string): string | null {
+  const pos = morph[0];
+  if (pos !== "N" && pos !== "P" && pos !== "R" && pos !== "D" && pos !== "A") return null;
+  const grammaticalCase = morph[6];
+  const number = morph[7];
+  const gender = morph[8];
+  if (!grammaticalCase || grammaticalCase === "-" || !number || number === "-") return null;
+  if (!gender || gender === "-") return `${grammaticalCase}${number}`;
+  return `${grammaticalCase}${number}${gender}`;
+}
+
+/**
+ * Mechanical reading for a Brick-4 participle: what the form means, and what
+ * it hangs on in nearby words — no student sort, no semantic-relation guess.
+ */
+export function describeParticipleReading(
+  word: SpanishWord,
+  nearbyWords: SpanishWord[] = []
+): ParticipleReading {
+  const aspect = (word.participleTense && PARTICIPLE_ASPECT[word.participleTense]) || null;
+  const voice = (word.participleVoice && PARTICIPLE_VOICE[word.participleVoice]) || null;
+  const grammaticalCase =
+    (word.participleCase && PARTICIPLE_CASE[word.participleCase]) || null;
+  const number = (word.participleNumber && PARTICIPLE_NUMBER[word.participleNumber]) || null;
+  const gender = (word.participleGender && PARTICIPLE_GENDER[word.participleGender]) || null;
+
+  const formParts = [
+    aspect,
+    voice,
+    [grammaticalCase, number, gender].filter(Boolean).join(" ")
+  ].filter(Boolean);
+  const formLine = formParts.length ? formParts.join(" · ") : "participle form";
+
+  const key = participleCngKey(word);
+  let hangNoun: SpanishWord | null = null;
+  if (key) {
+    hangNoun =
+      nearbyWords.find(candidate => {
+        if (candidate.id === word.id) return false;
+        if (candidate.participleId) return false;
+        if (!candidate.greekMorph) return false;
+        return hostCngKey(candidate.greekMorph) === key;
+      }) ?? null;
+  }
+
+  let hangLine: string;
+  if (hangNoun) {
+    hangLine = hangNoun.text;
+  } else if (word.participleCase === "N") {
+    hangLine = "subject case — pick who they ride with";
+  } else if (word.participleCase === "A") {
+    hangLine = "object case";
+  } else if (word.participleCase === "G" && word.participlePrecededByPreposition) {
+    hangLine = "genitive after a preposition";
+  } else if (word.participleCase === "G") {
+    hangLine = "genitive — of-phrase or absolute";
+  } else if (word.participleCase === "D") {
+    hangLine = "dative case";
+  } else if (grammaticalCase) {
+    hangLine = `${grammaticalCase} case`;
+  } else {
+    hangLine = "case unclear from morphology";
+  }
+
+  return {
+    spanish: word.text,
+    greek: word.participleSurface ?? word.greekSurface ?? null,
+    formLine,
+    hangLine,
+    hangNoun
+  };
+}
+
+/**
+ * Host first, participles under it (oro → perece, probado).
+ *
+ * Nominative subject hosts are **never** auto-filled from CNG agreement —
+ * that falsely locks onto distant chapter nouns (e.g. 1:8 visto → 1:10
+ * «profetas»). Nominatives use the manual pick / "Who do they ride with?" path.
+ */
+export function groupParticiplesByNounHost(
+  participles: SpanishWord[],
+  nearbyWords: SpanishWord[],
+  manualSubjectHost: SpanishWord[] = []
+): ParticipleNounGroup[] {
+  const byNounId = new Map<string, ParticipleNounGroup>();
+  const byRoleLabel = new Map<string, ParticipleNounGroup>();
+  const manualNominatives: { word: SpanishWord; reading: ParticipleReading }[] = [];
+  const needsPickNominatives: { word: SpanishWord; reading: ParticipleReading }[] = [];
+  const manualLabel = manualSubjectHost.map(w => w.text).join(" ").trim();
+
+  for (const word of participles) {
+    const reading = describeParticipleReading(word, nearbyWords);
+
+    // Nominative: subject host is a judgment call, not morphology.
+    if (word.participleCase === "N") {
+      if (manualSubjectHost.length) manualNominatives.push({ word, reading });
+      else needsPickNominatives.push({ word, reading });
+      continue;
+    }
+
+    if (reading.hangNoun) {
+      const id = reading.hangNoun.id;
+      let group = byNounId.get(id);
+      if (!group) {
+        group = {
+          noun: reading.hangNoun,
+          hostLabel: reading.hangNoun.text,
+          items: []
+        };
+        byNounId.set(id, group);
+      }
+      group.items.push({ word, reading });
+      continue;
+    }
+
+    let group = byRoleLabel.get(reading.hangLine);
+    if (!group) {
+      group = { noun: null, hostLabel: reading.hangLine, items: [] };
+      byRoleLabel.set(reading.hangLine, group);
+    }
+    group.items.push({ word, reading });
+  }
+
+  const nounGroups = Array.from(byNounId.values()).sort(
+    (a, b) => (a.noun?.index ?? 0) - (b.noun?.index ?? 0)
+  );
+  for (const group of nounGroups) {
+    group.items.sort((a, b) => a.word.index - b.word.index);
+  }
+
+  const extras: ParticipleNounGroup[] = [];
+  if (manualNominatives.length) {
+    extras.push({
+      noun: manualSubjectHost[0] ?? null,
+      hostLabel: manualLabel || "subject",
+      isManualHost: true,
+      items: manualNominatives.sort((a, b) => a.word.index - b.word.index)
+    });
+  }
+  if (needsPickNominatives.length) {
+    extras.push({
+      noun: null,
+      hostLabel: "Who do they ride with?",
+      needsHostPick: true,
+      items: needsPickNominatives.sort((a, b) => a.word.index - b.word.index)
+    });
+  }
+
+  const roleGroups = Array.from(byRoleLabel.values());
+  for (const group of roleGroups) {
+    group.items.sort((a, b) => a.word.index - b.word.index);
+  }
+  return [...nounGroups, ...extras, ...roleGroups];
+}
+
+export type ParticipleSubjectHosts = Record<string, string[]>;
+
+export function readParticipleSubjectHosts(
+  bookId: ReaderBookId = getWorkshopBookId()
+): ParticipleSubjectHosts {
+  try {
+    const stored = window.localStorage.getItem(progressKeys(bookId).participleSubjectHosts);
+    const parsed = stored ? JSON.parse(stored) : {};
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+    const hosts: ParticipleSubjectHosts = {};
+    for (const [key, value] of Object.entries(parsed)) {
+      if (!Array.isArray(value)) continue;
+      const ids = value.filter((id): id is string => typeof id === "string");
+      if (ids.length) hosts[key] = ids;
+    }
+    return hosts;
+  } catch {
+    return {};
+  }
+}
+
+export function writeParticipleSubjectHosts(
+  hosts: ParticipleSubjectHosts,
+  bookId: ReaderBookId = getWorkshopBookId()
+): void {
+  window.localStorage.setItem(progressKeys(bookId).participleSubjectHosts, JSON.stringify(hosts));
+}
+
 /**
  * Verses whose Greek text has no finite verb at all (e.g. Titus 1:1's long
  * verbless run of appositions) — computed from the Greek morphology directly,
@@ -468,6 +721,28 @@ export function loadClauseVerses(bookId: ReaderBookId = getWorkshopBookId()): Sp
     }
   }
 
+  // Stamp Greek morph onto every Spanish word that LBF maps a token onto.
+  // Without this, agreement checks (attributive participle ↔ noun) have no
+  // morph on ordinary nouns like θεός/Dios — only finite-verb anchors used
+  // to carry greekMorph.
+  const allTokenAlignments = parseTokenAlignments(bookId);
+  for (const alignment of allTokenAlignments) {
+    const key = `${alignment.chapter}:${alignment.verse}`;
+    const verse = verseByKey.get(key);
+    if (!verse) continue;
+    const wordIndex = getTokenWordMap(alignment.chapter, alignment.verse, verse.words).get(alignment.token);
+    if (wordIndex === undefined) continue;
+    const word = verse.words[wordIndex];
+    if (!word) continue;
+    const next = alignment.greekMorph;
+    const current = word.greekMorph;
+    // When several Greek tokens collapse onto one Spanish word, keep a noun
+    // tag if one is available — that's what case/number/gender agreement needs.
+    if (!current || (next.startsWith("N") && !current.startsWith("N"))) {
+      word.greekMorph = next;
+    }
+  }
+
   for (const alignment of parseFiniteAlignments(bookId)) {
     if (!markedFiniteAlignmentIds.has(alignment.id)) continue;
 
@@ -505,7 +780,7 @@ export function loadClauseVerses(bookId: ReaderBookId = getWorkshopBookId()): Sp
   // Morphology already gives certainty about which tokens are participles;
   // the observation exercise is sorting them (attributive/substantival/
   // circumstantial), not finding them.
-  const allTokenAlignments = parseTokenAlignments(bookId);
+  const participleSurfacesByVerse = new Map<string, Map<number, string>>();
   for (const alignment of allTokenAlignments) {
     if (!isParticipleMorph(alignment.greekMorph)) continue;
 
@@ -513,7 +788,15 @@ export function loadClauseVerses(bookId: ReaderBookId = getWorkshopBookId()): Sp
     const verse = verseByKey.get(key);
     if (!verse) continue;
 
-    const wordIndex = getTokenWordMap(alignment.chapter, alignment.verse, verse.words).get(alignment.token);
+    const recordedIndex = getTokenWordMap(alignment.chapter, alignment.verse, verse.words).get(alignment.token);
+    if (!participleSurfacesByVerse.has(key)) {
+      participleSurfacesByVerse.set(key, loadLbfTokenSurfaces(alignment.chapter, alignment.verse, bookId));
+    }
+    const wordIndex = resolveLbfPhraseWordIndex(
+      verse.words,
+      recordedIndex,
+      participleSurfacesByVerse.get(key)?.get(alignment.token)
+    );
     if (wordIndex === undefined) continue;
     const word = verse.words[wordIndex];
     if (!word) continue;
@@ -527,6 +810,9 @@ export function loadClauseVerses(bookId: ReaderBookId = getWorkshopBookId()): Sp
     word.participleCase = alignment.greekMorph[6];
     word.participleNumber = alignment.greekMorph[7];
     word.participleGender = alignment.greekMorph[8];
+    // Keep the participle morph on the Spanish word so agreementKey can also
+    // fall back to greekMorph when case slots are missing.
+    word.greekMorph = alignment.greekMorph;
 
     // Genitive-absolute check needs Greek word order (Spanish word order
     // doesn't preserve it) — look at the immediately preceding Greek token
@@ -1043,17 +1329,26 @@ export function writeClauseObservations(
   window.localStorage.setItem(progressKeys(bookId).clauseObservations, JSON.stringify(observations));
 }
 
-// A separate observation layer on top of the skeleton — participles never
-// become skeleton rows or add indent depth. Same "first yes wins" pattern as
-// ClauseObservation's three questions, sorting each participle into exactly
-// one of three shapes rather than naming what kind of circumstance it adds
-// (Greek doesn't mark that morphologically, so naming it would be a guess).
+// Legacy participle-sort records may still sit in localStorage under
+// workshopProgressKeys(...).participleObservations. The Structure UI no longer
+// reads or writes them — participles are mechanical clause satellites only.
+export type ParticipleSemanticRelation =
+  | "time"
+  | "reason"
+  | "means"
+  | "condition"
+  | "concession"
+  | "purpose-result"
+  | "accompanying"
+  | "unsure";
+
 export interface ParticipleObservation {
   agreesWithNoun?: ObservationAnswer;
   describedNounSpan?: string[];
   standsAlone?: ObservationAnswer;
   ridesFiniteVerb?: ObservationAnswer;
   ridingClauseId?: string;
+  semanticRelation?: ParticipleSemanticRelation;
 }
 
 export type ParticipleObservations = Record<string, ParticipleObservation>;
@@ -1087,8 +1382,18 @@ export function readParticipleObservations(
         standsAlone?: unknown;
         ridesFiniteVerb?: unknown;
         ridingClauseId?: unknown;
+        semanticRelation?: unknown;
       };
       const isAnswer = (v: unknown): v is ObservationAnswer => v === "yes" || v === "no" || v === "unsure";
+      const isSemanticRelation = (v: unknown): v is ParticipleSemanticRelation =>
+        v === "time" ||
+        v === "reason" ||
+        v === "means" ||
+        v === "condition" ||
+        v === "concession" ||
+        v === "purpose-result" ||
+        v === "accompanying" ||
+        v === "unsure";
       observations[participleId] = {
         ...(isAnswer(record.agreesWithNoun) ? { agreesWithNoun: record.agreesWithNoun } : {}),
         ...(Array.isArray(record.describedNounSpan)
@@ -1096,7 +1401,8 @@ export function readParticipleObservations(
           : {}),
         ...(isAnswer(record.standsAlone) ? { standsAlone: record.standsAlone } : {}),
         ...(isAnswer(record.ridesFiniteVerb) ? { ridesFiniteVerb: record.ridesFiniteVerb } : {}),
-        ...(typeof record.ridingClauseId === "string" ? { ridingClauseId: record.ridingClauseId } : {})
+        ...(typeof record.ridingClauseId === "string" ? { ridingClauseId: record.ridingClauseId } : {}),
+        ...(isSemanticRelation(record.semanticRelation) ? { semanticRelation: record.semanticRelation } : {})
       };
     }
     return observations;

@@ -1,8 +1,7 @@
 // Compiler — manual skeleton generator. Reads O's live data (same localStorage
-// O itself reads/writes — see clause-data.ts's ClauseObservations/
-// ParticipleObservations exports) and mechanically produces a markdown
-// skeleton: structure, Scripture text, and grammatical explanations, ready
-// for a human writer to add commentary to. Never writes theological or
+// O itself reads/writes — see clause-data.ts) and mechanically produces a
+// markdown skeleton: structure, Scripture text, and grammatical explanations,
+// ready for a human writer to add commentary to. Never writes theological or
 // interpretive content — only what's already been observed in O.
 //
 // Per the confirmed spec: YAML frontmatter is separate metadata (form on the
@@ -22,14 +21,13 @@ import {
   type ReaderBookId
 } from "@cgv/core";
 import {
+  describeParticipleReading,
   formatClauseSpan,
   getClauseBeginningTokens,
   loadClauseVerses,
   readClauseAssignments,
   readClauseObservations,
   readMarkedAlignmentIds,
-  readParticipleObservations,
-  resolveParticipleClassification,
   type ClauseBeginningToken,
   type SpanishWord
 } from "../observer/clause-data";
@@ -215,26 +213,15 @@ function inheritanceLine(sharedParticleGreek: string, connectorSpanish: string, 
   );
 }
 
-function participleLine(
-  classification: "attributive" | "substantival" | "circumstantial",
-  spanish: string,
-  greek: string | null,
-  describedNounText: string | null,
-  finiteVerbText: string | null
-): string {
-  const word = labeledWord(spanish, greek);
-  if (classification === "attributive") {
-    const noun = describedNounText ? scripture(describedNounText) : "alguien o algo cercano";
-    return `${word} describe a ${noun}. No es el verbo principal; añade detalle sobre esa persona o cosa.`;
-  }
-  if (classification === "substantival") {
-    return `${word} funciona como un nombre: señala a una persona o cosa (quién / qué), no solo describe a otra.`;
-  }
-  const host = finiteVerbText?.trim() || "el verbo principal cercano";
-  return (
-    `${word} va junto a «${host}». No es el verbo principal; muestra algo que ocurre ` +
-    `al mismo tiempo o en relación con esa acción.`
-  );
+function participleLine(word: SpanishWord, nearbyWords: SpanishWord[], hostSpanish: string | null): string {
+  const reading = describeParticipleReading(word, nearbyWords);
+  const label = reading.greek
+    ? `«${reading.spanish}» (${reading.greek})`
+    : `«${reading.spanish}»`;
+  const host = hostSpanish?.trim()
+    ? ` junto a la cláusula de «${hostSpanish}»`
+    : " en este versículo";
+  return `${label}${host}: ${reading.formLine}; ${reading.hangLine}.`;
 }
 
 /** Complement infinitive under its host finite — names the chain in plain language. */
@@ -309,7 +296,6 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   const verses = loadClauseVerses(bookId);
   const assignments = readClauseAssignments(bookId);
   const observations = readClauseObservations(bookId);
-  const participleObservations = readParticipleObservations(bookId);
   const readerNotes = readReaderNotes();
   // Reader notes emit once under the first parent that claims their verse.
   // Def/XRef pins attach after Generate; rematched by line text on regenerate
@@ -439,9 +425,8 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   const augmentedObservations = applyCoordinateInheritance(clauseSpanInfos, observationLikeById, coordinateContinuationIds);
   const skeleton = deriveSkeleton(clauseSpanInfos, augmentedObservations);
 
-  // Participle emission bucket: exact clause span only (same as infinitives).
-  // Gap participles emit after their `+` via verse-key. Circumstantial with an
-  // explicit ridingClauseId still targets that clause for emission.
+  // Participle emission: same-verse clause attachment only (mechanical).
+  // No student classification — every Brick-4-marked participle is emitted.
   const wordIdToClauseId = new Map<string, string>();
   for (const clause of clauses) {
     for (const id of assignments[clause.finiteVerbId]?.selectedSpan ?? []) {
@@ -459,29 +444,30 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   for (const participleId of participleMarkedAlignmentIds) {
     const word = wordByParticipleId.get(participleId);
     if (!word) continue;
-    participleClauseAssignment.set(participleId, wordIdToClauseId.get(word.id) ?? null);
+    const exactClauseId = wordIdToClauseId.get(word.id) ?? null;
+    // Same-verse span membership only — never nearest-neighbor scoop from
+    // elsewhere in the verse (1 Pet 1:7 oro-participles ≠ sea-hallada span).
+    if (
+      exactClauseId &&
+      exactClauseId.startsWith(`${word.chapter}:${word.verse}:`)
+    ) {
+      participleClauseAssignment.set(participleId, exactClauseId);
+    } else {
+      participleClauseAssignment.set(participleId, null);
+    }
   }
 
-  // Every participle attached to a given clause — atributivo/sustantivado use
-  // participleClauseAssignment (nearest containing clause); circunstancial
-  // uses its own explicit ridingClauseId when set (the clause its action
-  // accompanies can be a different one than whichever clause it sits inside).
   const participlesByClauseId = new Map<string, string[]>();
   const participlesByVerseKey = new Map<string, string[]>();
   for (const participleId of participleMarkedAlignmentIds) {
-    const classification = resolveParticipleClassification(participleObservations[participleId]);
-    if (!classification) continue;
-    const observation = participleObservations[participleId];
     const word = wordByParticipleId.get(participleId);
-    const targetClauseId =
-      classification === "circumstantial" && observation?.ridingClauseId
-        ? observation.ridingClauseId
-        : participleClauseAssignment.get(participleId) ?? null;
+    if (!word) continue;
+    const targetClauseId = participleClauseAssignment.get(participleId) ?? null;
     if (targetClauseId) {
       const list = participlesByClauseId.get(targetClauseId) ?? [];
       list.push(participleId);
       participlesByClauseId.set(targetClauseId, list);
-    } else if (word) {
+    } else {
       const key = `${word.chapter}:${word.verse}`;
       const list = participlesByVerseKey.get(key) ?? [];
       list.push(participleId);
@@ -494,8 +480,6 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     verseKey: string | null,
     onlyWordIds?: Set<string> | null
   ): string[] {
-    // Prefer clause attachment; verse-key is only for material with no clause row.
-    // Never concatenate both lists — that duplicated the same participle note.
     const ids = finiteVerbId
       ? (participlesByClauseId.get(finiteVerbId) ?? [])
       : verseKey
@@ -506,19 +490,13 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     for (const participleId of ids) {
       if (seen.has(participleId)) continue;
       seen.add(participleId);
-      const classification = resolveParticipleClassification(participleObservations[participleId]);
-      if (!classification) continue;
       const word = wordByParticipleId.get(participleId);
       if (!word) continue;
       if (onlyWordIds && !onlyWordIds.has(word.id)) continue;
-      const observation = participleObservations[participleId];
-      const describedNounText = spanTextAtItsOwnVerse(observation?.describedNounSpan);
-      const ridingVerb =
-        classification === "circumstantial" && observation?.ridingClauseId
-          ? finiteVerbWordById.get(observation.ridingClauseId)?.text ?? null
-          : null;
-      const greek = word.participleSurface ?? word.greekSurface ?? null;
-      explanations.push(participleLine(classification, word.text, greek, describedNounText, ridingVerb));
+      const hostId = participleClauseAssignment.get(participleId);
+      const hostSpanish = hostId ? finiteVerbWordById.get(hostId)?.text ?? null : null;
+      const nearby = wordsByVerse.get(`${word.chapter}:${word.verse}`) ?? [];
+      explanations.push(participleLine(word, nearby, hostSpanish));
     }
     return explanations;
   }

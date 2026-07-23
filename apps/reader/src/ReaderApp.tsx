@@ -11,6 +11,7 @@ import {
 import CompilerShell from "./compiler/CompilerShell";
 import PreferencesPanel from "./core/PreferencesPanel";
 import ProgressControls from "./core/ProgressControls";
+import { ThemeProvider } from "./core/ThemeContext";
 import { UiLanguageProvider, useUiLanguage } from "./core/UiLanguageContext";
 import ObserverShell from "./observer/ObserverShell";
 import ReaderView from "./reader/ReaderView";
@@ -176,8 +177,10 @@ function ReaderAppInner() {
  */
 export default function ReaderApp() {
   return (
-    <UiLanguageProvider>
-      <ReaderAppInner />
-    </UiLanguageProvider>
+    <ThemeProvider>
+      <UiLanguageProvider>
+        <ReaderAppInner />
+      </UiLanguageProvider>
+    </ThemeProvider>
   );
 }

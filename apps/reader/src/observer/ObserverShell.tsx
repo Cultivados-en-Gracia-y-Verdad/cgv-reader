@@ -22,8 +22,8 @@ function readLayerFromHash(): WorkshopLayer {
 /**
  * Observer is a Reader-styled workshop: the text stays at the center.
  * Mark = Brick 1–4 on the Greek interlinear. Structure = one continuous
- * Passage + skeleton/review canvas (START-HERE Step 4). Participle Views
- * remain a deliberate pull-back from that canvas.
+ * Passage + skeleton/review canvas (START-HERE Step 4). Participles appear
+ * as read-only satellites beside their host clause — no separate views page.
  *
  * Book follows the shared Reader preference so Mark loads the selected NT
  * book. Structure still needs LBF reverse-interlinear alignment (Tito, 1 Pedro).

@@ -33,7 +33,8 @@ export function progressKeysForBook(bookId: ReaderBookId): ProgressKeyInfo[] {
     { key: keys.participleMarks, label: "Participle marks (Brick 4)" },
     { key: keys.clauseAssignments, label: "Clause spans" },
     { key: keys.clauseObservations, label: "Clause observations" },
-    { key: keys.participleObservations, label: "Participle classifications" }
+    { key: keys.participleObservations, label: "Participle classifications" },
+    { key: keys.participleSubjectHosts, label: "Participle subject hosts" }
   ];
   if (keys.clauseAssignmentsLegacy) {
     entries.push({ key: keys.clauseAssignmentsLegacy, label: "Clause spans (legacy)" });

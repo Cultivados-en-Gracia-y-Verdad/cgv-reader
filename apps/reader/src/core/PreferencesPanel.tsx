@@ -12,6 +12,7 @@ import {
   type BibleVersionId,
   type ReaderBookId
 } from "@cgv/core";
+import { useTheme, type ThemePreference } from "./ThemeContext";
 import { useUiLanguage } from "./UiLanguageContext";
 
 /**
@@ -20,6 +21,7 @@ import { useUiLanguage } from "./UiLanguageContext";
  */
 export default function PreferencesPanel() {
   const { t, language, setLanguage } = useUiLanguage();
+  const { preference: theme, setPreference: setTheme } = useTheme();
   const [open, setOpen] = useState(false);
   const [bibleVersion, setBibleVersion] = useState<BibleVersionId>(() => readBibleVersion());
   const [bookId, setBookId] = useState<ReaderBookId>(() => readReaderBook());
@@ -95,6 +97,17 @@ export default function PreferencesPanel() {
             >
               <option value="en">English</option>
               <option value="es">Español</option>
+            </select>
+          </label>
+          <label className="prefs-field">
+            <span>{t.prefTheme}</span>
+            <select
+              value={theme}
+              onChange={event => setTheme(event.target.value as ThemePreference)}
+            >
+              <option value="system">{t.themeSystem}</option>
+              <option value="light">{t.themeLight}</option>
+              <option value="dark">{t.themeDark}</option>
             </select>
           </label>
           <label className="prefs-field">

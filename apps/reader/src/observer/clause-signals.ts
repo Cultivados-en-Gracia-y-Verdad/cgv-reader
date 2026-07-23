@@ -85,13 +85,11 @@ export const AMBIGUOUS_PARTICLES: Record<string, string> = {
     "can introduce either the content of what was said/thought (“that…”) or the reason for it (“because…”), and the word alone never settles which"
 };
 
-// Verbs of saying, thinking, wanting, teaching, or reminding — genuinely present
-// in Titus (λέγω, λαλέω, διδάσκω, πιστεύω, βούλομαι, ὁμολογέω, παρακαλέω,
-// ἐπαγγέλλομαι, ὑπομιμνῄσκω, οἶδα all occur in the book). Used to rank which
-// nearby clause is the likelier parent for a content clause, not to declare a
-// yes/no on its own — Greek content clauses are marked by ὅτι, which is
-// deliberately ambiguous above, so this list only strengthens candidate
-// selection once the student (or the ὅτι flag) has already decided "yes."
+// Verbs of saying, thinking, knowing, perceiving, teaching, or reminding.
+// Used to (1) rank likelier parents for a content clause and (2) soft-lean
+// ὅτι toward content vs reason when such a verb sits in the leading window
+// or immediately preceding clause — never to auto-decide; ὅτι stays a
+// judgment call (see AMBIGUOUS_PARTICLES).
 export const CONTENT_VERB_LEMMAS = new Set([
   "λέγω",
   "λαλέω",
@@ -104,7 +102,19 @@ export const CONTENT_VERB_LEMMAS = new Set([
   "ἐπαγγέλλομαι",
   "ὑπομιμνῄσκω",
   "οἶδα",
-  "ἀρνέομαι"
+  "ἀρνέομαι",
+  "ἀποκαλύπτω",
+  "γινώσκω",
+  "ἐπιγινώσκω",
+  "ἀκούω",
+  "βλέπω",
+  "θεωρέω",
+  "γεύομαι",
+  "γράφω",
+  "μιμνῄσκομαι",
+  "μνημονεύω",
+  "νοέω",
+  "ἐπίσταμαι"
 ]);
 
 function stripAccentless(lemma: string): string {
@@ -203,13 +213,23 @@ export function detectClauseSignal(
   const ambiguousToken = findLeadingToken(clause.beginningTokens, token => Boolean(AMBIGUOUS_PARTICLES[stripAccentless(token.lemma)]));
   if (ambiguousToken) {
     const ambiguousLemma = stripAccentless(ambiguousToken.lemma);
-    return {
-      kind: "uncertain",
-      reason:
-        `Opens with “${ambiguousToken.greek}” (${ambiguousLemma}) — ${AMBIGUOUS_PARTICLES[ambiguousLemma]}. ` +
-        `That's a genuine judgment call, not something to guess at; it turns on which verb governs it, ` +
-        `which is exactly what this question is asking you to work out.`
-    };
+    const otiHint = ambiguousLemma === "ὅτι" ? findOtiGoverningHint(clause, allClauses) : null;
+    let reason =
+      `Opens with “${ambiguousToken.greek}” (${ambiguousLemma}) — ${AMBIGUOUS_PARTICLES[ambiguousLemma]}. `;
+    if (otiHint) {
+      const place =
+        otiHint.where === "leading-window"
+          ? `right here before it (“${otiHint.greek}”, ${otiHint.lemma})`
+          : `in the previous clause (${otiHint.lemma})`;
+      reason +=
+        `A saying/knowing/perceiving verb sits ${place}, which often means content (“that…”) — ` +
+        `but check whether “because…” still fits better. You decide.`;
+    } else {
+      reason +=
+        `No saying/knowing verb is sitting nearby, which often means reason (“because…” / Adverbial) — ` +
+        `but check whether a content sense still fits. You decide.`;
+    }
+    return { kind: "uncertain", reason };
   }
 
   return {
@@ -238,12 +258,20 @@ export function detectLeadingCoordinator(beginningTokens: ClauseBeginningToken[]
  * (picking a parent directly) rather than detectClauseSignal's full proposal
  * chain. Same tolerant window as everywhere else in this file — γάρ/δέ/οὖν are
  * postpositive, so checking only beginningTokens[0] would miss most of them.
- * Returns undefined, never a guessed default, when no recognized particle is
- * present — callers must not substitute a fallback type for "not yet known."
+ *
+ * ὅτι is intentionally absent from FRAME_PARTICLES (it also marks content), so
+ * detectClauseSignal never auto-chooses Adverbial from ὅτι alone. Once the
+ * student has already chosen the frame/Adverbial path, though, ὅτι's only
+ * frame subtype is reason — return that here so parent-picking can store it.
+ * Returns undefined when no recognized frame particle (or frame-reading ὅτι)
+ * is present.
  */
 export function detectLeadingFrameType(beginningTokens: ClauseBeginningToken[]): FrameType | undefined {
   const frameToken = findLeadingToken(beginningTokens, token => Boolean(FRAME_PARTICLES[stripAccentless(token.lemma)]));
-  return frameToken ? FRAME_PARTICLES[stripAccentless(frameToken.lemma)] : undefined;
+  if (frameToken) return FRAME_PARTICLES[stripAccentless(frameToken.lemma)];
+  const otiToken = findLeadingToken(beginningTokens, token => stripAccentless(token.lemma) === "ὅτι");
+  if (otiToken) return "reason";
+  return undefined;
 }
 
 /**
@@ -253,6 +281,46 @@ export function detectLeadingFrameType(beginningTokens: ClauseBeginningToken[]):
  */
 export function isLikelyContentParent(candidate: { finiteVerbLemma?: string }): boolean {
   return Boolean(candidate.finiteVerbLemma && CONTENT_VERB_LEMMAS.has(stripAccentless(candidate.finiteVerbLemma)));
+}
+
+export type OtiGoverningHint = {
+  lemma: string;
+  greek: string;
+  /** Same leading window (e.g. εἰδότες ὅτι) vs previous finite clause. */
+  where: "leading-window" | "preceding-clause";
+};
+
+/**
+ * Soft evidence for ὅτι as content (“that…”) vs reason (“because…”): a
+ * saying/knowing/perceiving verb in the opening window or the immediately
+ * preceding clause. Absence is itself informative (leans causal), but never
+ * decisive on its own.
+ */
+export function findOtiGoverningHint(
+  clause: ClauseSignalInput,
+  allClauses: ClauseSignalInput[]
+): OtiGoverningHint | null {
+  const contentToken = findLeadingToken(clause.beginningTokens, token =>
+    CONTENT_VERB_LEMMAS.has(stripAccentless(token.lemma))
+  );
+  if (contentToken) {
+    return {
+      lemma: stripAccentless(contentToken.lemma),
+      greek: contentToken.greek,
+      where: "leading-window"
+    };
+  }
+
+  const prevId = nearestPrecedingClauseId(clause, allClauses);
+  const prev = prevId ? allClauses.find(candidate => candidate.finiteVerbId === prevId) : undefined;
+  if (prev?.finiteVerbLemma && CONTENT_VERB_LEMMAS.has(stripAccentless(prev.finiteVerbLemma))) {
+    return {
+      lemma: stripAccentless(prev.finiteVerbLemma),
+      greek: prev.finiteVerbLemma,
+      where: "preceding-clause"
+    };
+  }
+  return null;
 }
 
 // --- Ranked choice guidance (suggestion, not decision) ---
@@ -314,7 +382,9 @@ function choiceKindFromConfident(signal: Extract<ClauseSignal, { kind: "confiden
 /**
  * Builds ranked, this-clause hints for the four shape cards. Does not decide
  * the classification — only marks a lean when the Greek signal supports one
- * (`none` → independent; `confident` → that shape; `uncertain` → no badge).
+ * (`none` → independent; `confident` → that shape; relative-of-connection
+ * uncertain → soft lean independent; ὅτι uncertain → soft lean content or
+ * reason from nearby governing-verb evidence; other uncertain → no badge).
  */
 export function buildClauseChoiceGuidance(
   clause: ClauseSignalInput,
@@ -323,9 +393,13 @@ export function buildClauseChoiceGuidance(
 ): ClauseChoiceGuidance {
   const tokens = clause.beginningTokens;
   const relative = findLeadingToken(tokens, token => token.morph.startsWith(RELATIVE_PRONOUN_PREFIX));
+  const connection = detectRelativeOfConnection(tokens);
   const frameToken = findLeadingToken(tokens, token => Boolean(FRAME_PARTICLES[stripAccentless(token.lemma)]));
   const ambiguousToken = findLeadingToken(tokens, token => Boolean(AMBIGUOUS_PARTICLES[stripAccentless(token.lemma)]));
   const otiToken = findLeadingToken(tokens, token => stripAccentless(token.lemma) === "ὅτι");
+  const otiHint = otiToken || (ambiguousToken && stripAccentless(ambiguousToken.lemma) === "ὅτι")
+    ? findOtiGoverningHint(clause, allClauses)
+    : null;
   const eisPhrase = detectEisGoalPhrase(tokens);
   const openSurface = tokens
     .slice(0, 3)
@@ -340,6 +414,10 @@ export function buildClauseChoiceGuidance(
   let suggested: ClauseChoiceKind | null = null;
   if (signal.kind === "confident") suggested = choiceKindFromConfident(signal);
   else if (signal.kind === "none") suggested = "root";
+  // 1 Pet 1:10 περὶ ἧς σωτηρίας / Titus 1:13 δι' ἣν αἰτίαν: the relative is a
+  // connective idiom, so Independent is the usual lean — still the student's call.
+  else if (signal.kind === "uncertain" && connection) suggested = "root";
+  else if (signal.kind === "uncertain" && otiToken) suggested = otiHint ? "content" : "frame";
 
   let summary: string;
   if (signal.kind === "none") {
@@ -354,15 +432,33 @@ export function buildClauseChoiceGuidance(
     summary = signal.reason;
   }
 
-  const describesEvidence = relative
-    ? `Opens with “${relative.greek}” (${relative.lemma}) — a relative pronoun.`
-    : "No relative pronoun (ὅς / ἥ / ὅ…) in the opening window.";
+  let describesEvidence: string;
+  if (connection) {
+    describesEvidence =
+      `Usually avoid: “${connection.relative.greek}” agrees with “${connection.antecedent.greek}” inside this same clause ` +
+      `(relative of connection — e.g. περὶ ἧς σωτηρίας, “concerning this salvation”), not a relative describing some earlier noun.`;
+  } else if (otiToken) {
+    describesEvidence = "Usually avoid: ὅτι is not a relative pronoun.";
+  } else if (relative) {
+    describesEvidence = `Opens with “${relative.greek}” (${relative.lemma}) — a relative pronoun.`;
+  } else {
+    describesEvidence = "No relative pronoun (ὅς / ἥ / ὅ…) in the opening window.";
+  }
 
   let contentEvidence: string;
   if (otiToken || (ambiguousToken && stripAccentless(ambiguousToken.lemma) === "ὅτι")) {
     const token = otiToken ?? ambiguousToken!;
-    contentEvidence =
-      `Opens with “${token.greek}” (ὅτι) — can mark content (“that…”); also used for reason (“because…”).`;
+    if (otiHint) {
+      const place =
+        otiHint.where === "leading-window"
+          ? `“${otiHint.greek}” (${otiHint.lemma}) in the opening window`
+          : `${otiHint.lemma} in the previous clause`;
+      contentEvidence =
+        `Suggested lean: “${token.greek}” often means “that…” here — ${place} is a saying/knowing/perceiving verb that commonly governs content.`;
+    } else {
+      contentEvidence =
+        `“${token.greek}” can mean “that…” (content), but no saying/knowing verb is nearby — reason (“because…”) may fit better. Still check.`;
+    }
   } else if (prevIsContentVerb) {
     contentEvidence =
       "No ὅτι up front; a nearby saying/thinking verb makes content possible only if something else marks it.";
@@ -375,8 +471,19 @@ export function buildClauseChoiceGuidance(
     const frameLemma = stripAccentless(frameToken.lemma);
     const frameType = FRAME_PARTICLES[frameLemma];
     frameEvidence = `Opens with “${frameToken.greek}” (${frameLemma}) → ${frameType}.`;
-  } else if (ambiguousToken && stripAccentless(ambiguousToken.lemma) === "ὅτι") {
-    frameEvidence = `“${ambiguousToken.greek}” can mean “because…” (reason) — only if it isn’t content.`;
+  } else if (otiToken || (ambiguousToken && stripAccentless(ambiguousToken.lemma) === "ὅτι")) {
+    const token = otiToken ?? ambiguousToken!;
+    if (otiHint) {
+      frameEvidence =
+        `“${token.greek}” can still mean “because…” (reason / Adverbial) — only if it isn’t the content of that nearby saying/knowing verb.`;
+    } else {
+      frameEvidence =
+        `Suggested lean: “${token.greek}” often means “because…” (reason) when no saying/knowing verb governs it — pick Adverbial, then reason.`;
+    }
+  } else if (connection) {
+    frameEvidence =
+      "No ἵνα / ὅπως / γάρ / εἰ… opener. The relative up front is connective, not an adverbial subordinating particle — " +
+      "only pick Adverbial if something else in the clause clearly supplies when / why / if / so-that.";
   } else if (eisPhrase) {
     frameEvidence =
       `No ἵνα / ὅπως / γάρ / εἰ… opener. Note: “${eisPhrase.eis.greek}” + “${eisPhrase.noun.greek}” is a purpose/goal ` +
@@ -385,13 +492,24 @@ export function buildClauseChoiceGuidance(
     frameEvidence = "No ἵνα / ὅπως / γάρ / εἰ / ὅτε… in the opening window.";
   }
 
-  const hasSubordinatingOpener = Boolean(relative || frameToken || otiToken || ambiguousToken);
-  const rootEvidence =
-    suggested === "root"
-      ? "Suggested: nothing in the opening window subordinates this clause."
-      : hasSubordinatingOpener
-        ? "Less likely while a subordinating opener is present — unless that word is only a discourse connective."
-        : "Default when subordinating openers are absent.";
+  const hasRealSubordinatingOpener = Boolean(
+    (!connection && relative) || frameToken || otiToken || ambiguousToken
+  );
+  let rootEvidence: string;
+  if (connection) {
+    rootEvidence =
+      `Suggested lean: “${connection.relative.greek} … ${connection.antecedent.greek}” is doing connective work ` +
+      `(like “concerning this salvation” / “therefore”), so the finite clause usually stands on its own. You still decide.`;
+  } else if (otiToken) {
+    rootEvidence = "Usually avoid: ὅτι typically subordinates (content or reason), rather than standing alone.";
+  } else if (suggested === "root") {
+    rootEvidence = "Suggested: nothing in the opening window subordinates this clause.";
+  } else if (hasRealSubordinatingOpener) {
+    rootEvidence =
+      "Less likely while a subordinating opener is present — unless that word is only a discourse connective.";
+  } else {
+    rootEvidence = "Default when subordinating openers are absent.";
+  }
 
   const options: ClauseChoiceOption[] = [
     {

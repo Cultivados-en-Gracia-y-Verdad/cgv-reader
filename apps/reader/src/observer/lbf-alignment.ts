@@ -82,6 +82,33 @@ export function findWordIndexBySurface(
   return match ? match.index : null;
 }
 
+/**
+ * LBF often stores a multi-word Spanish phrase for one Greek token
+ * ("son guardados" for φρουρουμένους). Whitespace tokenization splits that
+ * phrase, and the recorded index may land on an auxiliary ("son"). Prefer the
+ * last content word of the phrase when it appears at/after the recorded index.
+ */
+export function resolveLbfPhraseWordIndex(
+  words: { index: number; text: string }[],
+  recordedIndex: number | undefined,
+  lbfSurface: string | undefined
+): number | undefined {
+  if (recordedIndex === undefined) return undefined;
+  if (!lbfSurface) return recordedIndex;
+  const parts = lbfSurface
+    .trim()
+    .split(/\s+/)
+    .map(part => part.trim())
+    .filter(Boolean);
+  if (parts.length <= 1) return recordedIndex;
+  const wanted = normalizeSpanish(parts[parts.length - 1] ?? "");
+  if (!wanted) return recordedIndex;
+  const match = words.find(
+    word => word.index >= recordedIndex && normalizeSpanish(word.text) === wanted
+  );
+  return match ? match.index : recordedIndex;
+}
+
 function normalizeSpanish(value: string): string {
   return value
     .trim()

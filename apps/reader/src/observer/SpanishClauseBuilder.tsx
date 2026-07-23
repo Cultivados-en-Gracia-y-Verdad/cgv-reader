@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import {
   auditGreekSpanConsistency,
-  buildVerseTokenWordMap,
   deriveGreekClauseRange,
   deriveSpanishSpanFromGreekRange,
   formatClauseSpan,
@@ -12,20 +11,19 @@ import {
   readClauseObservations,
   readCommandRecipientAssignments,
   readMarkedAlignmentIds,
-  readParticipleObservations,
-  resolveParticipleClassification,
   spanFromRange,
   wordInSpan,
   writeClauseAssignments,
   writeClauseObservations,
-  writeParticipleObservations,
+  groupParticiplesByNounHost,
+  readParticipleSubjectHosts,
+  writeParticipleSubjectHosts,
   type ClauseAssignments,
   type ClauseBeginningToken,
   type ClauseObservation,
   type ClauseObservations,
   type GreekClauseRange,
-  type ParticipleObservation,
-  type ParticipleObservations,
+  type ParticipleSubjectHosts,
   type SpanishWord
 } from "./clause-data";
 import {
@@ -43,6 +41,19 @@ import {
   type ClauseSignalInput,
   type FrameType
 } from "./clause-signals";
+import { loadLbfTokenSurfaces } from "./lbf-alignment";
+import { describeRmac, ensureVerseInterlinear, getVerseInterlinear } from "./o-data";
+import { getReaderBookInfo, workshopProgressKeys, type ReaderBookId } from "@cgv/core";
+import {
+  applyCoordinateInheritance,
+  deriveOutline,
+  deriveSkeleton,
+  deriveTelos,
+  findRootAncestor,
+  resolveClause,
+  type ClauseSpanInfo,
+  type SkeletonNode
+} from "./clause-tree";
 
 const FALLBACK_CLAUSE_CHOICES: ClauseChoiceOption[] = [
   {
@@ -74,24 +85,8 @@ const FALLBACK_CLAUSE_CHOICES: ClauseChoiceOption[] = [
     lean: "available"
   }
 ];
-import { loadLbfTokenSurfaces } from "./lbf-alignment";
-import { describeRmac, ensureVerseInterlinear, getVerseInterlinear } from "./o-data";
-import { getReaderBookInfo, workshopProgressKeys, type ReaderBookId } from "@cgv/core";
-import {
-  applyCoordinateInheritance,
-  deriveOutline,
-  deriveSkeleton,
-  deriveTelos,
-  findRootAncestor,
-  resolveClause,
-  type ClauseSpanInfo,
-  type SkeletonNode
-} from "./clause-tree";
 
 // Structure = Passage + Clause Workspace as one continuous view (START-HERE Step 4).
-// Participle Views stay a deliberate pull-back aggregate screen.
-type ClauseView = "structure" | "participle-views";
-type ParticipleViewTab = "flow" | "emphasis" | "cast";
 type ClauseReviewState = "Unreviewed" | "Reviewed" | "Attached" | "Not sure";
 
 interface ClauseOutputRow {
@@ -224,56 +219,7 @@ function parseGreekTokenId(id: string): { chapter: number; verse: number; token:
 }
 
 
-const CASE_NAMES: Record<string, string> = { N: "nominative", G: "genitive", D: "dative", A: "accusative" };
-const NUMBER_NAMES: Record<string, string> = { S: "singular", P: "plural" };
-const GENDER_NAMES: Record<string, string> = { M: "masculine", F: "feminine", N: "neuter" };
-
-function describeParticipleMorph(word: SpanishWord): string {
-  const parts = [
-    word.participleCase ? CASE_NAMES[word.participleCase] : null,
-    word.participleGender ? GENDER_NAMES[word.participleGender] : null,
-    word.participleNumber ? NUMBER_NAMES[word.participleNumber] : null
-  ].filter(Boolean);
-  return parts.join(" ");
-}
-
-// Chips need to be readable without knowing Greek by sight — pair the Greek
-// surface (what Brick 4 actually marked) with its Spanish word for an anchor,
-// falling back to whichever one is available.
-function participleChipLabel(word: SpanishWord): string {
-  if (word.participleSurface && word.text && word.participleSurface !== word.text) {
-    return `${word.participleSurface} (${word.text})`;
-  }
-  return word.participleSurface ?? word.text;
-}
-
-// Finding participles now happens in the Greek O-Prototype view (Brick 4) —
-// morphology is visible there (RMAC tag under every token), unlike here
-// where only a Spanish gloss is shown. This view reads Brick 4's marks
-// read-only, via readMarkedAlignmentIds (same conversion moodReviewedVerbIds
-// already uses), and is only responsible for sorting what's already found.
-function setsMatch(a: Set<string>, b: Set<string>): boolean {
-  if (a.size !== b.size) return false;
-  for (const id of a) if (!b.has(id)) return false;
-  return true;
-}
-
-// Same rule as Brick 1's brickConfirmed (see ReaderApp.tsx): setsMatch
-// already does the right thing when groundTruth is empty — nothing marked
-// against nothing to find is the correct, confirmed state, not an unearned one.
-function marksConfirmed(marked: Set<string>, groundTruth: Set<string>): boolean {
-  return setsMatch(marked, groundTruth);
-}
-
-function ParticipleCheck({ confirmed }: { confirmed: boolean }) {
-  if (!confirmed) return null;
-  return (
-    <span className="brick-check" aria-label="Confirmed against the source text">
-      ✓
-    </span>
-  );
-}
-
+// Spanish surface is primary; Greek is secondary confirmation of Brick 4.
 export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId }) {
   const bookInfo = getReaderBookInfo(bookId);
   const progressKeys = useMemo(() => workshopProgressKeys(bookId), [bookId]);
@@ -365,9 +311,6 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   // longer itself something a click sets.
   const [draftGreekRange, setDraftGreekRange] = useState<{ start: number; end: number } | null>(null);
   const [greekRangeAnchorToken, setGreekRangeAnchorToken] = useState<number | null>(null);
-  const [view, setView] = useState<ClauseView>("structure");
-  const [participleViewTab, setParticipleViewTab] = useState<ParticipleViewTab>("emphasis");
-  const [expandedFlowRootId, setExpandedFlowRootId] = useState<string | null>(null);
   // Settled reading: LBF Spanish as the primary passage surface. Greek
   // workstation stays one toggle away for span editing (connector order).
   const [showSpanishOnly, setShowSpanishOnly] = useState(false);
@@ -377,7 +320,13 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   const [hostFixHint, setHostFixHint] = useState<HostFixHint | null>(null);
   const [activeBeginningVerbId, setActiveBeginningVerbId] = useState<string | null>(null);
   const [observations, setObservations] = useState<ClauseObservations>(() => readClauseObservations(bookId));
+  const [participleSubjectHosts, setParticipleSubjectHosts] = useState<ParticipleSubjectHosts>(() =>
+    readParticipleSubjectHosts(bookId)
+  );
   const [nounAnchorId, setNounAnchorId] = useState<string | null>(null);
+  const [subjectHostAnchorId, setSubjectHostAnchorId] = useState<string | null>(null);
+  /** clauseId or verseKey currently picking a nominative subject host for. */
+  const [pickingSubjectHostKey, setPickingSubjectHostKey] = useState<string | null>(null);
   const [forceChoices, setForceChoices] = useState(false);
   // Set only when the active clause changed via moveToNextClause (confirming
   // a clause auto-advances to the next one) rather than a direct click on a
@@ -398,8 +347,18 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
 
   useEffect(() => {
     if (!activeBeginningVerbId) return;
-    const node = document.querySelector(`[data-clause-nav-id="${CSS.escape(activeBeginningVerbId)}"]`);
-    if (node instanceof HTMLElement) node.scrollIntoView({ block: "nearest" });
+    const node = document.querySelector<HTMLElement>(
+      `[data-clause-nav-id="${CSS.escape(activeBeginningVerbId)}"]`
+    );
+    const panel = node?.closest<HTMLElement>(".clause-side-menu, .clause-only-list");
+    if (!node || !panel) return;
+    const nodeTop = node.offsetTop - panel.offsetTop;
+    const nodeBottom = nodeTop + node.offsetHeight;
+    if (nodeTop < panel.scrollTop) {
+      panel.scrollTop = nodeTop;
+    } else if (nodeBottom > panel.scrollTop + panel.clientHeight) {
+      panel.scrollTop = nodeBottom - panel.clientHeight;
+    }
   }, [activeBeginningVerbId]);
 
   useEffect(() => {
@@ -425,20 +384,14 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   }, []);
 
   const [showGreekBeginning, setShowGreekBeginning] = useState(false);
-  const [participleObservations, setParticipleObservations] = useState<ParticipleObservations>(
-    () => readParticipleObservations(bookId)
-  );
-  const [activeParticipleId, setActiveParticipleId] = useState<string | null>(null);
-  const [activeStandaloneParticipleId, setActiveStandaloneParticipleId] = useState<string | null>(null);
-  const [participleNounAnchorId, setParticipleNounAnchorId] = useState<string | null>(null);
-  const [showParticiples, setShowParticiples] = useState(false);
-  const [openParticiplePopoverId, setOpenParticiplePopoverId] = useState<string | null>(null);
   // Clear audit banners can be dismissed; they reappear if problems return.
 
   useEffect(() => {
     setAssignments(readClauseAssignments(bookId));
     setObservations(readClauseObservations(bookId));
-    setParticipleObservations(readParticipleObservations(bookId));
+    setParticipleSubjectHosts(readParticipleSubjectHosts(bookId));
+    setPickingSubjectHostKey(null);
+    setSubjectHostAnchorId(null);
     setActiveVerbId(null);
     setDraftGreekRange(null);
     setGreekRangeAnchorToken(null);
@@ -446,8 +399,8 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
 
   // Brick 4's own marks (Greek O-Prototype), converted from MorphGNT-line-id
   // format to "chapter:verse:token" alignment format — same conversion
-  // moodReviewedVerbIds already relies on. Read-only here: this view sorts
-  // participles, it doesn't find them.
+  // moodReviewedVerbIds already relies on. Read-only here: this view shows
+  // participles relationally beside their host clause; it doesn't find or sort them.
   const participleMarkedAlignmentIds = useMemo(
     () => readMarkedAlignmentIds(progressKeys.participleMarks, bookId),
     [bookId, progressKeys]
@@ -689,6 +642,16 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     [getClauseReviewState, reviewClauseRows]
   );
 
+  const unreviewedClauseRows = useMemo(
+    () => reviewClauseRows.filter(row => getClauseReviewState(row) === "Unreviewed"),
+    [getClauseReviewState, reviewClauseRows]
+  );
+
+  const categorizedClauseRows = useMemo(
+    () => reviewClauseRows.filter(row => getClauseReviewState(row) !== "Unreviewed"),
+    [getClauseReviewState, reviewClauseRows]
+  );
+
   // Tokens belonging to the clause currently open in the review panel —
   // highlighted in the (always-Greek) passage so the workstation and the
   // panel stay visually linked without flipping language mid-verse.
@@ -764,21 +727,6 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     return map;
   }, [augmentedObservations, clauseSignalInputs, clauseSpanInfos]);
 
-  // A different layer entirely from the skeleton: verses with no finite verb
-  // at all (Titus 1:1's long verbless run) never enter Brick 1, so they'd
-  // otherwise be silently absent everywhere. Shown, not solved — per spec,
-  // deciding their grammatical role now would force the structure to fit a
-  // premature decision.
-  const verblessVerses = useMemo(() => {
-    const verbless = getVersesWithoutFiniteVerb();
-    return verses
-      .filter(verse => verbless.has(`${verse.chapter}:${verse.verse}`))
-      .map(verse => ({
-        reference: `${bookInfo.displayName} ${verse.chapter}:${verse.verse}`,
-        text: verse.text
-      }));
-  }, [bookInfo.displayName, verses]);
-
   const activeSignal = useMemo<ClauseSignal | null>(() => {
     const finiteVerbId = activeBeginningRow?.finiteVerb.finiteVerbId;
     if (!finiteVerbId) return null;
@@ -830,13 +778,61 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
 
   const isActiveClauseRoot = activeResolved?.relation === "root";
 
+  const describeClauseCategory = useCallback(
+    (row: ClauseOutputRow): string => {
+      const finiteVerbId = row.finiteVerb.finiteVerbId;
+      if (!finiteVerbId) return "Unreviewed";
+      const reviewState = getClauseReviewState(row);
+      if (reviewState === "Unreviewed") return "Unreviewed";
+      if (reviewState === "Not sure") return "Not sure";
+      const info = clauseSpanInfos.find(clause => clause.finiteVerbId === finiteVerbId);
+      if (!info) return reviewState;
+      const resolved = resolveClause(info, augmentedObservations[finiteVerbId], clauseSpanInfos);
+      if (resolved.parked) return "Relative (needs a home)";
+      if (resolved.relation === "root") return "Independent";
+      if (resolved.relation === "describes") return "Relative clause";
+      if (resolved.relation === "content") return "Content clause";
+      if (resolved.relation === "frame") {
+        return resolved.frameType ? `${capitalize(resolved.frameType)} clause` : "Adverbial clause";
+      }
+      if (coordinateContinuationIds.has(finiteVerbId)) return "Continues previous";
+      return reviewState;
+    },
+    [augmentedObservations, clauseSpanInfos, coordinateContinuationIds, getClauseReviewState]
+  );
+
+  // Noun pickers (relative clauses / attributive participles) need the host
+  // noun even when it sits several verses away (e.g. 1 Pet 1:12 looking back
+  // into earlier ch. 1). Same-chapter is the practical window — ±1 verse was
+  // too tight.
   const activeObservationContextVerses = useMemo(() => {
     if (!activeBeginningRow) return [];
-    return verses.filter(verse => {
-      if (verse.chapter !== activeBeginningRow.finiteVerb.chapter) return false;
-      return Math.abs(verse.verse - activeBeginningRow.finiteVerb.verse) <= 1;
-    });
+    return verses.filter(verse => verse.chapter === activeBeginningRow.finiteVerb.chapter);
   }, [activeBeginningRow, verses]);
+
+  // Keep the active verse visible inside the chapter-length context panel —
+  // never scroll the window. scrollIntoView on a nested node also scrolls
+  // every ancestor (including the page), which yanked the viewport to the
+  // bottom after Save when the row object identity changed.
+  useEffect(() => {
+    if (!activeBeginningRow) return;
+    const key = `${activeBeginningRow.finiteVerb.chapter}:${activeBeginningRow.finiteVerb.verse}`;
+    const node = document.querySelector<HTMLElement>(`[data-context-verse="${CSS.escape(key)}"]`);
+    const panel = node?.closest<HTMLElement>(".clause-context-panel");
+    if (!node || !panel) return;
+    const nodeTop = node.offsetTop - panel.offsetTop;
+    const nodeBottom = nodeTop + node.offsetHeight;
+    if (nodeTop < panel.scrollTop) {
+      panel.scrollTop = nodeTop;
+    } else if (nodeBottom > panel.scrollTop + panel.clientHeight) {
+      panel.scrollTop = nodeBottom - panel.clientHeight;
+    }
+  }, [
+    activeBeginningVerbId,
+    activeBeginningRow?.finiteVerb.chapter,
+    activeBeginningRow?.finiteVerb.verse,
+    activeObservation.describesNoun
+  ]);
 
   const describedNounText = useMemo(() => {
     const span = activeObservation.describedNounSpan ?? [];
@@ -857,6 +853,31 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     }
     return index;
   }, [verses]);
+
+  // A different layer entirely from the skeleton: verses with no finite verb
+  // at all (Titus 1:1's long verbless run) never enter Brick 1, so they'd
+  // otherwise be silently absent everywhere. Shown, not solved — per spec,
+  // deciding their grammatical role now would force the structure to fit a
+  // premature decision. Brick-4-marked participles in those verses are listed
+  // read-only so they aren't silently missing either.
+  const verblessVerses = useMemo(() => {
+    const verbless = getVersesWithoutFiniteVerb();
+    return verses
+      .filter(verse => verbless.has(`${verse.chapter}:${verse.verse}`))
+      .map(verse => {
+        const verseKey = `${verse.chapter}:${verse.verse}`;
+        const participles = Array.from(participleMarkedAlignmentIds)
+          .map(id => wordByParticipleId.get(id))
+          .filter((word): word is SpanishWord => Boolean(word && `${word.chapter}:${word.verse}` === verseKey))
+          .sort((a, b) => a.index - b.index);
+        return {
+          reference: `${bookInfo.displayName} ${verse.chapter}:${verse.verse}`,
+          text: verse.text,
+          words: verse.words,
+          participles
+        };
+      });
+  }, [bookInfo.displayName, participleMarkedAlignmentIds, verses, wordByParticipleId]);
 
   const finiteVerbIdToRow = useMemo(() => {
     const index = new Map<string, ClauseOutputRow>();
@@ -892,222 +913,6 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     return flags;
   }, [augmentedObservations, clauseSignalInputs, finiteVerbIdToRow]);
 
-  // This view's own checkmark tracks a different completion than Brick 4's:
-  // not "found every participle" (that's Brick 4's job, in Greek) but "sorted
-  // every participle Brick 4 found" — every marked id has a resolved
-  // attributive/substantival/circumstantial classification.
-  const sortedParticipleIds = useMemo(() => {
-    const ids = new Set<string>();
-    for (const [participleId, observation] of Object.entries(participleObservations)) {
-      if (resolveParticipleClassification(observation)) ids.add(participleId);
-    }
-    return ids;
-  }, [participleObservations]);
-
-  const participlesConfirmed = marksConfirmed(sortedParticipleIds, participleMarkedAlignmentIds);
-
-  // Participle Mega-Views — book-level aggregates over what's already been
-  // classified. Counts and locations only; no view here ever names a
-  // "theme" or a "main point" — that reading stays the student's call.
-
-  // Emphasis: attributive participles grouped by the noun they were resolved
-  // to describe, keyed by that noun's Greek LEMMA — not its Spanish gloss,
-  // and not the raw word-span either. The Interlinear view (see
-  // interlinear-view-spec.md) proved lemma data is available for every
-  // Greek token, not just participles/finite-verbs/dependent-introducers —
-  // this is the fix that unblocked, per participle-data-and-view-fixes.md.
-  // Falls back to the resolved word-span as the grouping key only if the
-  // lemma genuinely can't be resolved (an alignment gap), so a lookup
-  // failure still lands as its own row rather than silently merging into
-  // an unrelated one.
-  const verseTokenWordMapCache = useMemo(() => new Map<string, Map<number, number>>(), []);
-
-  const resolveNounLemma = useCallback(
-    (chapter: number, verse: number, describedNounSpan: string[]): string | null => {
-      const key = `${chapter}:${verse}`;
-      const verseWords = wordsByVerse.get(key) ?? [];
-      let tokenToWord = verseTokenWordMapCache.get(key);
-      if (!tokenToWord) {
-        tokenToWord = buildVerseTokenWordMap(chapter, verse, verseWords);
-        verseTokenWordMapCache.set(key, tokenToWord);
-      }
-
-      const spanWordIndexes = new Set(
-        describedNounSpan
-          .map(id => verseWords.find(word => word.id === id)?.index)
-          .filter((index): index is number => index !== undefined)
-      );
-      if (!spanWordIndexes.size) return null;
-
-      const interlinear = getVerseInterlinear(chapter, verse);
-      const candidates = Array.from(tokenToWord.entries())
-        .filter(([, wordIndex]) => spanWordIndexes.has(wordIndex))
-        .map(([tokenNumber]) => interlinear[tokenNumber - 1])
-        .filter((token): token is NonNullable<typeof token> => Boolean(token));
-
-      // Prefer the actual noun (morph "N-...") over an accompanying article
-      // or adjective also inside the span, so the grouping key is the head
-      // word, not whichever token happens to resolve first.
-      const noun = candidates.find(token => token.morph.startsWith("N-"));
-      return (noun ?? candidates[0])?.lemma ?? null;
-    },
-    [verseTokenWordMapCache, wordsByVerse]
-  );
-
-
-  const emphasisGroups = useMemo(() => {
-    const groups = new Map<
-      string,
-      {
-        nounText: string;
-        nounLemma: string | null;
-        count: number;
-        entries: { participleId: string; participleSurface: string; reference: string; nounReference: string }[];
-      }
-    >();
-
-    for (const [participleId, obs] of Object.entries(participleObservations)) {
-      if (obs.agreesWithNoun !== "yes" || !obs.describedNounSpan?.length) continue;
-      const firstWord = wordById.get(obs.describedNounSpan[0]);
-      if (!firstWord) continue;
-      const verseWords = wordsByVerse.get(`${firstWord.chapter}:${firstWord.verse}`) ?? [];
-      const verseText = verseTextByKey.get(`${firstWord.chapter}:${firstWord.verse}`) ?? "";
-      const nounText = formatClauseSpan(obs.describedNounSpan, verseWords, verseText);
-      if (!nounText) continue;
-
-      const nounLemma = resolveNounLemma(firstWord.chapter, firstWord.verse, obs.describedNounSpan);
-      // Fallback key (word-span) only fires on a genuine lemma-lookup gap —
-      // still exact/unambiguous, just not lemma-grouped for that one row.
-      const key = nounLemma ?? `span:${obs.describedNounSpan.join(",")}`;
-
-      const participleWord = wordByParticipleId.get(participleId);
-      const entry = {
-        participleId,
-        participleSurface: participleWord?.participleSurface ?? participleWord?.text ?? "",
-        reference: participleWord
-          ? `${bookInfo.displayName} ${participleWord.chapter}:${participleWord.verse}`
-          : "",
-        nounReference: `${bookInfo.displayName} ${firstWord.chapter}:${firstWord.verse}`
-      };
-
-      const existing = groups.get(key);
-      if (existing) {
-        existing.count += 1;
-        existing.entries.push(entry);
-      } else {
-        groups.set(key, { nounText, nounLemma, count: 1, entries: [entry] });
-      }
-    }
-
-    const results = Array.from(groups.values()).sort((a, b) => b.count - a.count);
-
-    // Flag rows whose Spanish gloss matches another row's exactly but whose
-    // Greek lemma doesn't — two different Greek words translating the same
-    // way, kept as separate rows on purpose (lemma is the grouping key now,
-    // gloss never is).
-    const textCounts = new Map<string, number>();
-    for (const group of results) {
-      const normalized = group.nounText.trim().toLowerCase();
-      textCounts.set(normalized, (textCounts.get(normalized) ?? 0) + 1);
-    }
-
-    return results.map(group => ({
-      ...group,
-      sharesGlossWithOther: (textCounts.get(group.nounText.trim().toLowerCase()) ?? 0) > 1
-    }));
-  }, [
-    bookInfo.displayName,
-    participleObservations,
-    resolveNounLemma,
-    verseTextByKey,
-    wordById,
-    wordByParticipleId,
-    wordsByVerse
-  ]);
-
-  // Cast: substantival participles grouped by lemma (available — every
-  // participle carries its own Greek lemma from morphology), split by
-  // whether the same category recurs or appears once.
-  const castGroups = useMemo(() => {
-    const groups = new Map<
-      string,
-      { lemma: string; textSample: string; count: number; entries: { participleId: string; text: string; reference: string }[] }
-    >();
-
-    for (const [participleId, obs] of Object.entries(participleObservations)) {
-      if (obs.standsAlone !== "yes") continue;
-      const word = wordByParticipleId.get(participleId);
-      if (!word) continue;
-      const lemma = word.participleLemma || word.participleSurface || participleId;
-      const text = word.participleSurface ?? word.text;
-      const entry = {
-        participleId,
-        text,
-        reference: `${bookInfo.displayName} ${word.chapter}:${word.verse}`
-      };
-
-      const existing = groups.get(lemma);
-      if (existing) {
-        existing.count += 1;
-        existing.entries.push(entry);
-      } else {
-        groups.set(lemma, { lemma, textSample: text, count: 1, entries: [entry] });
-      }
-    }
-
-    const all = Array.from(groups.values());
-    return {
-      recurring: all.filter(group => group.count > 1).sort((a, b) => b.count - a.count),
-      single: all.filter(group => group.count === 1)
-    };
-  }, [bookInfo.displayName, participleObservations, wordByParticipleId]);
-
-  // Flow: circumstantial participles tallied against the root clause whose
-  // stretch of text they fall within — walking up from wherever they ride,
-  // not just direct attachment, so a dependent clause several levels down
-  // still counts toward its root's total.
-  const flowTallies = useMemo(() => {
-    const tallies = new Map<
-      string,
-      { count: number; entries: { participleId: string; text: string; reference: string; ridingClauseId: string }[] }
-    >();
-
-    for (const [participleId, obs] of Object.entries(participleObservations)) {
-      if (obs.ridesFiniteVerb !== "yes" || !obs.ridingClauseId) continue;
-      const rootId = findRootAncestor(obs.ridingClauseId, clauseSpanInfos, augmentedObservations);
-      if (!rootId) continue;
-
-      const word = wordByParticipleId.get(participleId);
-      const entry = {
-        participleId,
-        text: word?.participleSurface ?? word?.text ?? "",
-        reference: word ? `${bookInfo.displayName} ${word.chapter}:${word.verse}` : "",
-        ridingClauseId: obs.ridingClauseId
-      };
-
-      const existing = tallies.get(rootId);
-      if (existing) {
-        existing.count += 1;
-        existing.entries.push(entry);
-      } else {
-        tallies.set(rootId, { count: 1, entries: [entry] });
-      }
-    }
-
-    return tallies;
-  }, [
-    augmentedObservations,
-    bookInfo.displayName,
-    clauseSpanInfos,
-    participleObservations,
-    wordByParticipleId
-  ]);
-
-  const maxFlowCount = useMemo(
-    () => Math.max(1, ...Array.from(flowTallies.values()).map(tally => tally.count)),
-    [flowTallies]
-  );
-
   const wordIdToClauseId = useMemo(() => {
     const index = new Map<string, string>();
     for (const row of reviewClauseRows) {
@@ -1119,109 +924,141 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     return index;
   }, [reviewClauseRows]);
 
-  // Not every marked participle's own word lands inside the clause span a
-  // student selected — spans mark what was judged core to the clause, and a
-  // participle riding alongside it (or describing a noun elsewhere in the
-  // verse) often sits just outside that boundary. Rather than losing those
-  // participles, attach each one to whichever clause row in its own verse is
-  // positionally closest. A verse with no finite verb at all has no clause to
-  // attach to (null) — those are sorted from their own standalone list.
+  // Only participles whose Spanish word sits inside a saved same-verse clause
+  // span belong with that clause. Nearest-neighbor fallback was stealing words
+  // from elsewhere in the verse (1 Pet 1:7: ἀπολλυμένου / δοκιμαζομένου ride
+  // with «oro», not with the later «sea hallada» span). Orphans stay verse-local
+  // and surface in the Skeleton list below — never on the wrong clause card.
   const participleClauseAssignment = useMemo(() => {
     const assignment = new Map<string, string | null>();
-    const rowsByVerse = new Map<string, ClauseOutputRow[]>();
-    for (const row of reviewClauseRows) {
-      if (!row.finiteVerb.finiteVerbId) continue;
-      const verseKey = `${row.finiteVerb.chapter}:${row.finiteVerb.verse}`;
-      const list = rowsByVerse.get(verseKey) ?? [];
-      list.push(row);
-      rowsByVerse.set(verseKey, list);
-    }
 
     for (const participleId of participleMarkedAlignmentIds) {
       const word = wordByParticipleId.get(participleId);
       if (!word) continue;
+      const participleVerse = `${word.chapter}:${word.verse}`;
 
+      // Span membership can cross verses (1 Pet 1:3–6). Never let a later
+      // finite-verb span claim a participle from an earlier verse.
       const exactClauseId = wordIdToClauseId.get(word.id);
-      if (exactClauseId) {
+      if (exactClauseId && verseKeyFromId(exactClauseId) === participleVerse) {
         assignment.set(participleId, exactClauseId);
-        continue;
+      } else {
+        assignment.set(participleId, null);
       }
-
-      const candidates = rowsByVerse.get(`${word.chapter}:${word.verse}`) ?? [];
-      let nearestId: string | null = null;
-      let nearestDistance = Infinity;
-      for (const row of candidates) {
-        for (const selected of row.selectedWords) {
-          if (selected.chapter !== word.chapter || selected.verse !== word.verse) continue;
-          const distance = Math.abs(selected.index - word.index);
-          if (distance < nearestDistance) {
-            nearestDistance = distance;
-            nearestId = row.finiteVerb.finiteVerbId ?? null;
-          }
-        }
-      }
-      assignment.set(participleId, nearestId);
     }
 
     return assignment;
-  }, [participleMarkedAlignmentIds, reviewClauseRows, wordByParticipleId, wordIdToClauseId]);
+  }, [participleMarkedAlignmentIds, wordByParticipleId, wordIdToClauseId]);
 
-  // A ground-truth Brick 4 mark that never resolves to any Spanish word is a
-  // data bug (an alignment gap), not an unsorted candidate — it would
-  // otherwise vanish silently everywhere, with the count just quietly one
-  // short and nothing to click on. Surfaced loudly instead.
-  const unresolvedParticipleIds = useMemo(() => {
-    const ids: string[] = [];
+  const orphanParticiplesByVerse = useMemo(() => {
+    const groups = new Map<string, SpanishWord[]>();
     for (const participleId of participleMarkedAlignmentIds) {
-      if (!wordByParticipleId.get(participleId)) ids.push(participleId);
-    }
-    return ids.sort();
-  }, [participleMarkedAlignmentIds, wordByParticipleId]);
-
-  const standaloneParticipleGroups = useMemo(() => {
-    const groups = new Map<string, { reference: string; chapter: number; verse: number; entries: SpanishWord[] }>();
-    for (const participleId of participleMarkedAlignmentIds) {
-      if (participleClauseAssignment.get(participleId) !== null) continue;
+      if (participleClauseAssignment.get(participleId)) continue;
       const word = wordByParticipleId.get(participleId);
       if (!word) continue;
-      const verseKey = `${word.chapter}:${word.verse}`;
-      const existing = groups.get(verseKey);
-      if (existing) {
-        existing.entries.push(word);
-      } else {
-        groups.set(verseKey, {
-          reference: `${bookInfo.displayName} ${word.chapter}:${word.verse}`,
-          chapter: word.chapter,
-          verse: word.verse,
-          entries: [word]
-        });
-      }
+      const key = `${word.chapter}:${word.verse}`;
+      const group = groups.get(key) ?? [];
+      group.push(word);
+      groups.set(key, group);
     }
-    return Array.from(groups.values())
-      .sort((a, b) => a.chapter * 1000 + a.verse - (b.chapter * 1000 + b.verse))
-      .map(group => ({ ...group, entries: group.entries.sort((a, b) => a.index - b.index) }));
+    for (const group of groups.values()) group.sort((a, b) => a.index - b.index);
+    return groups;
+  }, [participleClauseAssignment, participleMarkedAlignmentIds, wordByParticipleId]);
+
+  const participleWordsByClauseId = useMemo(() => {
+    const groups = new Map<string, SpanishWord[]>();
+    for (const participleId of participleMarkedAlignmentIds) {
+      const clauseId = participleClauseAssignment.get(participleId);
+      const word = wordByParticipleId.get(participleId);
+      if (!clauseId || !word) continue;
+      const group = groups.get(clauseId) ?? [];
+      group.push(word);
+      groups.set(clauseId, group);
+    }
+    for (const group of groups.values()) group.sort((a, b) => a.index - b.index);
+    return groups;
+  }, [participleClauseAssignment, participleMarkedAlignmentIds, wordByParticipleId]);
+
+  const activeParticiples = useMemo(() => {
+    const clauseId = activeBeginningRow?.finiteVerb.finiteVerbId;
+    if (!clauseId) return [];
+    return participleWordsByClauseId.get(clauseId) ?? [];
+  }, [activeBeginningRow, participleWordsByClauseId]);
+
+  const orphanParticipleVerses = useMemo(() => {
+    const verbless = getVersesWithoutFiniteVerb();
+    return Array.from(orphanParticiplesByVerse.entries())
+      .filter(([key]) => !verbless.has(key))
+      .map(([key, participles]) => {
+        const [chapter, verse] = key.split(":").map(Number);
+        const verseObj = verses.find(v => v.chapter === chapter && v.verse === verse);
+        return {
+          key,
+          reference: `${bookInfo.displayName} ${chapter}:${verse}`,
+          text: verseObj?.text ?? "",
+          words: verseObj?.words ?? [],
+          participles
+        };
+      })
+      .sort((a, b) => a.key.localeCompare(b.key, undefined, { numeric: true }));
+  }, [bookInfo.displayName, orphanParticiplesByVerse, verses]);
+
+  // Clause-attached nominatives that still need (or already have) a manual
+  // subject host — worked in the bottom Skeleton section, same workflow as
+  // phrase orphans, not in the tree or clause-review panel.
+  const clauseSubjectHostEntries = useMemo(() => {
+    const entries: {
+      key: string;
+      reference: string;
+      text: string;
+      words: SpanishWord[];
+      participles: SpanishWord[];
+      sourceChapter: number;
+      sourceVerse: number;
+    }[] = [];
+    for (const [clauseId, participles] of participleWordsByClauseId) {
+      if (!participles.length) continue;
+      const sourceChapter = participles[0].chapter;
+      const sourceVerse = participles[0].verse;
+      const nearby =
+        verses.find(v => v.chapter === sourceChapter && v.verse === sourceVerse)?.words ?? [];
+      const groups = groupParticiplesByNounHost(
+        participles,
+        nearby,
+        (participleSubjectHosts[clauseId] ?? [])
+          .map(id => wordById.get(id))
+          .filter((word): word is SpanishWord => Boolean(word))
+      );
+      const relevant =
+        pickingSubjectHostKey === clauseId ||
+        groups.some(group => group.needsHostPick || group.isManualHost);
+      if (!relevant) continue;
+      const row = finiteVerbIdToRow.get(clauseId);
+      entries.push({
+        key: clauseId,
+        reference: row?.reference ?? `${bookInfo.displayName} ${sourceChapter}:${sourceVerse}`,
+        text: row ? formatClauseSpan(
+          assignments[clauseId]?.selectedSpan ?? [],
+          nearby,
+          verses.find(v => v.chapter === sourceChapter && v.verse === sourceVerse)?.text ?? ""
+        ) : "",
+        words: nearby,
+        participles,
+        sourceChapter,
+        sourceVerse
+      });
+    }
+    return entries.sort((a, b) => a.reference.localeCompare(b.reference, undefined, { numeric: true }));
   }, [
+    assignments,
     bookInfo.displayName,
-    participleClauseAssignment,
-    participleMarkedAlignmentIds,
-    wordByParticipleId
+    finiteVerbIdToRow,
+    participleSubjectHosts,
+    participleWordsByClauseId,
+    pickingSubjectHostKey,
+    verses,
+    wordById
   ]);
-
-  // Every marked participle still missing a classification, book order,
-  // wherever it happens to live — clause-attached participles only ever
-  // surface inside that one clause's own panel otherwise, so with marks
-  // scattered across dozens of clauses there's no other way to see the
-  // whole to-do list at a glance.
-  const unsortedParticiples = useMemo(() => {
-    const entries: { participleId: string; word: SpanishWord; clauseId: string | null }[] = [];
-    for (const participleId of participleMarkedAlignmentIds) {
-      if (resolveParticipleClassification(participleObservations[participleId])) continue;
-      const word = wordByParticipleId.get(participleId);
-      if (!word) continue;
-      entries.push({ participleId, word, clauseId: participleClauseAssignment.get(participleId) ?? null });
-    }
-    return entries.sort((a, b) => a.word.chapter * 100000 + a.word.verse * 1000 + a.word.index - (b.word.chapter * 100000 + b.word.verse * 1000 + b.word.index));
-  }, [participleClauseAssignment, participleMarkedAlignmentIds, participleObservations, wordByParticipleId]);
 
   const pendingObservationScrollRef = useRef(false);
 
@@ -1229,13 +1066,17 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     window.setTimeout(() => {
       document
         .querySelector<HTMLElement>("[data-observation-center]")
-        ?.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+        ?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
     }, 40);
   }, []);
 
   const requestObservationScroll = useCallback(() => {
     pendingObservationScrollRef.current = true;
-  }, []);
+    // Also scroll immediately after the next paint. The active clause may
+    // already be selected, in which case the state-dependent effect below
+    // will not run.
+    scrollObservationCenterIntoView();
+  }, [scrollObservationCenterIntoView]);
 
   useEffect(() => {
     if (!pendingObservationScrollRef.current || !activeBeginningVerbId) return;
@@ -1243,201 +1084,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     scrollObservationCenterIntoView();
   }, [activeBeginningVerbId, scrollObservationCenterIntoView]);
 
-  const jumpToUnsortedParticiple = useCallback((entry: { participleId: string; clauseId: string | null }) => {
-    setView("structure");
-    if (entry.clauseId) {
-      requestObservationScroll();
-      setActiveBeginningVerbId(entry.clauseId);
-      setActiveParticipleId(entry.participleId);
-    } else {
-      setActiveStandaloneParticipleId(entry.participleId);
-    }
-  }, [requestObservationScroll]);
-
-  const jumpToParticipleClause = useCallback(
-    (participleId: string) => {
-      const clauseId = participleClauseAssignment.get(participleId);
-      if (!clauseId) return;
-      setView("structure");
-      requestObservationScroll();
-      setActiveBeginningVerbId(clauseId);
-    },
-    [participleClauseAssignment, requestObservationScroll]
-  );
-
-  // Only participles Brick 4 actually found (and confirmed via morphology)
-  // show up here to sort — this view trusts Brick 4's marks as given. Uses
-  // participleClauseAssignment rather than this clause's own selected span,
-  // since a marked participle's word often sits just outside that span.
-  const activeParticiples = useMemo(() => {
-    const clauseId = activeBeginningRow?.finiteVerb.finiteVerbId;
-    if (!clauseId) return [];
-    const words: SpanishWord[] = [];
-    for (const participleId of participleMarkedAlignmentIds) {
-      if (participleClauseAssignment.get(participleId) !== clauseId) continue;
-      const word = wordByParticipleId.get(participleId);
-      if (word) words.push(word);
-    }
-    return words.sort((a, b) => a.index - b.index);
-  }, [activeBeginningRow, participleClauseAssignment, participleMarkedAlignmentIds, wordByParticipleId]);
-
-  const activeParticipleWord = activeParticipleId ? wordByParticipleId.get(activeParticipleId) ?? null : null;
-  const activeParticipleObservation = activeParticipleId ? participleObservations[activeParticipleId] ?? {} : {};
-
-  const updateParticipleObservation = useCallback(
-    (participleId: string, patch: ParticipleObservation) => {
-      setParticipleObservations(current => {
-        const next = {
-          ...current,
-          [participleId]: {
-            ...(current[participleId] ?? {}),
-            ...patch
-          }
-        };
-        writeParticipleObservations(next, bookId);
-        return next;
-      });
-    },
-    [bookId]
-  );
-
-  const updateActiveParticipleObservation = useCallback(
-    (patch: ParticipleObservation) => {
-      if (!activeParticipleId) return;
-      updateParticipleObservation(activeParticipleId, patch);
-    },
-    [activeParticipleId, updateParticipleObservation]
-  );
-
-  const participleDescribedNounText = useMemo(() => {
-    const span = activeParticipleObservation.describedNounSpan ?? [];
-    if (!span.length) return "";
-    const firstWord = wordById.get(span[0]);
-    if (!firstWord) return "";
-    const verseWords = wordsByVerse.get(`${firstWord.chapter}:${firstWord.verse}`) ?? [];
-    const verseText = verseTextByKey.get(`${firstWord.chapter}:${firstWord.verse}`) ?? "";
-    return formatClauseSpan(span, verseWords, verseText);
-  }, [activeParticipleObservation.describedNounSpan, verseTextByKey, wordById, wordsByVerse]);
-
-  const selectParticipleNounWord = useCallback(
-    (word: SpanishWord, event: MouseEvent<HTMLButtonElement>) => {
-      if (event.shiftKey && participleNounAnchorId) {
-        const anchor = wordById.get(participleNounAnchorId);
-        if (anchor) {
-          const span = spanFromRange(anchor, word);
-          if (span) updateActiveParticipleObservation({ describedNounSpan: span });
-          return;
-        }
-      }
-      setParticipleNounAnchorId(word.id);
-      updateActiveParticipleObservation({ describedNounSpan: [word.id] });
-    },
-    [participleNounAnchorId, updateActiveParticipleObservation, wordById]
-  );
-
-  const chooseParticipleAttributive = useCallback(() => {
-    updateActiveParticipleObservation({ agreesWithNoun: "yes" });
-  }, [updateActiveParticipleObservation]);
-
-  const chooseParticipleSubstantival = useCallback(() => {
-    updateActiveParticipleObservation({ agreesWithNoun: "no", standsAlone: "yes" });
-  }, [updateActiveParticipleObservation]);
-
-  const chooseParticipleCircumstantial = useCallback(() => {
-    if (!activeBeginningRow?.finiteVerb.finiteVerbId) return;
-    updateActiveParticipleObservation({
-      agreesWithNoun: "no",
-      standsAlone: "no",
-      ridesFiniteVerb: "yes",
-      ridingClauseId: activeBeginningRow.finiteVerb.finiteVerbId
-    });
-  }, [activeBeginningRow, updateActiveParticipleObservation]);
-
-  const resetParticipleObservation = useCallback(() => {
-    updateActiveParticipleObservation({
-      agreesWithNoun: undefined,
-      describedNounSpan: [],
-      standsAlone: undefined,
-      ridesFiniteVerb: undefined,
-      ridingClauseId: undefined
-    });
-    setParticipleNounAnchorId(null);
-  }, [updateActiveParticipleObservation]);
-
-  // Standalone participles — those whose verse has no finite verb at all, so
-  // there's no clause context for a "rides this clause's finite verb" answer.
-  // Attributive/substantival still apply (a participle can describe a nearby
-  // noun, or stand alone naming someone, independent of any clause); only
-  // circumstantial is withheld here since there's no finite verb to ride.
-  const activeStandaloneWord = activeStandaloneParticipleId ? wordByParticipleId.get(activeStandaloneParticipleId) ?? null : null;
-  const activeStandaloneObservation = activeStandaloneParticipleId ? participleObservations[activeStandaloneParticipleId] ?? {} : {};
-
-  const standaloneDescribedNounText = useMemo(() => {
-    const span = activeStandaloneObservation.describedNounSpan ?? [];
-    if (!span.length) return "";
-    const firstWord = wordById.get(span[0]);
-    if (!firstWord) return "";
-    const verseWords = wordsByVerse.get(`${firstWord.chapter}:${firstWord.verse}`) ?? [];
-    const verseText = verseTextByKey.get(`${firstWord.chapter}:${firstWord.verse}`) ?? "";
-    return formatClauseSpan(span, verseWords, verseText);
-  }, [activeStandaloneObservation.describedNounSpan, verseTextByKey, wordById, wordsByVerse]);
-
-  const standaloneContextVerses = useMemo(() => {
-    if (!activeStandaloneWord) return [];
-    return verses.filter(verse => {
-      if (verse.chapter !== activeStandaloneWord.chapter) return false;
-      return Math.abs(verse.verse - activeStandaloneWord.verse) <= 1;
-    });
-  }, [activeStandaloneWord, verses]);
-
-  const selectStandaloneNounWord = useCallback(
-    (word: SpanishWord, event: MouseEvent<HTMLButtonElement>) => {
-      if (!activeStandaloneParticipleId) return;
-      if (event.shiftKey && participleNounAnchorId) {
-        const anchor = wordById.get(participleNounAnchorId);
-        if (anchor) {
-          const span = spanFromRange(anchor, word);
-          if (span) updateParticipleObservation(activeStandaloneParticipleId, { describedNounSpan: span });
-          return;
-        }
-      }
-      setParticipleNounAnchorId(word.id);
-      updateParticipleObservation(activeStandaloneParticipleId, { describedNounSpan: [word.id] });
-    },
-    [activeStandaloneParticipleId, participleNounAnchorId, updateParticipleObservation, wordById]
-  );
-
-  const chooseStandaloneAttributive = useCallback(() => {
-    if (!activeStandaloneParticipleId) return;
-    updateParticipleObservation(activeStandaloneParticipleId, { agreesWithNoun: "yes" });
-  }, [activeStandaloneParticipleId, updateParticipleObservation]);
-
-  const chooseStandaloneSubstantival = useCallback(() => {
-    if (!activeStandaloneParticipleId) return;
-    updateParticipleObservation(activeStandaloneParticipleId, { agreesWithNoun: "no", standsAlone: "yes" });
-  }, [activeStandaloneParticipleId, updateParticipleObservation]);
-
-  const resetStandaloneParticipleObservation = useCallback(() => {
-    if (!activeStandaloneParticipleId) return;
-    updateParticipleObservation(activeStandaloneParticipleId, {
-      agreesWithNoun: undefined,
-      describedNounSpan: [],
-      standsAlone: undefined,
-      ridesFiniteVerb: undefined,
-      ridingClauseId: undefined
-    });
-    setParticipleNounAnchorId(null);
-  }, [activeStandaloneParticipleId, updateParticipleObservation]);
-
-  // Genitive case + not the object of a preposition (checked in Greek word
-  // order at data-build time — see clause-data.ts, since Spanish word order
-  // doesn't preserve this) is the surface pattern for a genitive absolute —
-  // flagged for the student to evaluate, never auto-classified as one.
-  function isPossibleGenitiveAbsolute(word: SpanishWord): boolean {
-    return word.participleCase === "G" && !word.participlePrecededByPreposition;
-  }
-
-  // Sequence — Reason / Statement / Imperative / Purpose / Recipient, one entry per root
+    // Sequence — Reason / Statement / Imperative / Purpose / Recipient, one entry per root
   // clause, book order. Everything here is computed from data already
   // collected elsewhere (frameType, mood brick marks, participle
   // classifications); nothing new is detected or tagged.
@@ -1451,8 +1098,8 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   );
 
   // A reason clause can sit several levels under the root it justifies, not
-  // just directly attached to it — same reasoning as Flow's circumstantial-
-  // participle tallying, so it walks the full ancestor chain rather than
+  // just directly attached to it — same reasoning as same-verse participle
+  // satellites that ride a finite clause without becoming tree nodes.
   // stopping at one hop.
   const rootReasonIds = useMemo(() => {
     const ids = new Set<string>();
@@ -1504,50 +1151,6 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     return ids;
   }, [imperativeMarkedIds, outline]);
 
-  // A genitive absolute is a real transition marker — it introduces a
-  // subject different from its clause's own — surfaced here regardless of
-  // how the participle itself got sorted (attributive/substantival/
-  // circumstantial is the student's separate judgment call).
-  const rootGenitiveAbsoluteParticiples = useMemo(() => {
-    const map = new Map<string, { participleId: string; label: string; reference: string }[]>();
-    for (const participleId of participleMarkedAlignmentIds) {
-      const word = wordByParticipleId.get(participleId);
-      if (!word || !isPossibleGenitiveAbsolute(word)) continue;
-      const clauseId = participleClauseAssignment.get(participleId);
-      if (!clauseId) continue;
-      const rootId = findRootAncestor(clauseId, clauseSpanInfos, augmentedObservations);
-      if (!rootId) continue;
-      const entry = {
-        participleId,
-        label: participleChipLabel(word),
-        reference: `${bookInfo.displayName} ${word.chapter}:${word.verse}`
-      };
-      const list = map.get(rootId) ?? [];
-      list.push(entry);
-      map.set(rootId, list);
-    }
-    return map;
-  }, [
-    augmentedObservations,
-    bookInfo.displayName,
-    clauseSpanInfos,
-    participleClauseAssignment,
-    participleMarkedAlignmentIds,
-    wordByParticipleId
-  ]);
-
-  // Subject-agreement note: a nominative circumstantial participle riding a
-  // clause typically agrees with that clause's own subject — reuses
-  // flowTallies (already root-mapped) rather than recomputing the walk.
-  const rootSubjectAgreementNotes = useMemo(() => {
-    const map = new Map<string, { participleId: string; text: string; reference: string }[]>();
-    for (const [rootId, tally] of flowTallies) {
-      const nominativeEntries = tally.entries.filter(entry => wordByParticipleId.get(entry.participleId)?.participleCase === "N");
-      if (nominativeEntries.length) map.set(rootId, nominativeEntries);
-    }
-    return map;
-  }, [flowTallies, wordByParticipleId]);
-
   // Brick 2B keeps its original purpose — who an imperative is addressed to —
   // read-only here, same as every other Sequence category.
   const recipientAssignments = useMemo(() => readCommandRecipientAssignments(bookId), [bookId]);
@@ -1561,9 +1164,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       isStatement: statementRootIds.has(clause.finiteVerbId),
       isImperative: imperativeRootIds.has(clause.finiteVerbId),
       isPurpose: rootPurposeIds.has(clause.finiteVerbId),
-      recipient: recipientAssignments.get(clause.finiteVerbId) ?? null,
-      subjectAgreementNotes: rootSubjectAgreementNotes.get(clause.finiteVerbId) ?? [],
-      genitiveAbsoluteParticiples: rootGenitiveAbsoluteParticiples.get(clause.finiteVerbId) ?? []
+      recipient: recipientAssignments.get(clause.finiteVerbId) ?? null
     }));
 
     // A run of consecutive same-recipient imperatives (Titus 2's older
@@ -1587,10 +1188,8 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     imperativeRootIds,
     outline,
     recipientAssignments,
-    rootGenitiveAbsoluteParticiples,
     rootPurposeIds,
     rootReasonIds,
-    rootSubjectAgreementNotes,
     statementRootIds
   ]);
 
@@ -1605,11 +1204,11 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   );
 
   useEffect(() => {
-    if (view !== "structure" || activeBeginningVerbId || !reviewClauseRows.length) return;
+    if (activeBeginningVerbId || !reviewClauseRows.length) return;
     const firstOpenRow =
       reviewClauseRows.find(row => getClauseReviewState(row) === "Unreviewed") ?? reviewClauseRows[0];
     setActiveBeginningVerbId(firstOpenRow.finiteVerb.finiteVerbId ?? null);
-  }, [activeBeginningVerbId, getClauseReviewState, reviewClauseRows, view]);
+  }, [activeBeginningVerbId, getClauseReviewState, reviewClauseRows]);
 
   useEffect(() => {
     setForceChoices(false);
@@ -1673,6 +1272,9 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
 
   const handleGreekTokenClick = useCallback(
     (chapter: number, verse: number, token: number, event: MouseEvent<HTMLButtonElement>) => {
+      // Subject-host naming is observation-only — don't start/edit a clause span.
+      if (pickingSubjectHostKey) return;
+
       const isInActiveVerse = activeVerb && chapter === activeVerb.chapter && verse === activeVerb.verse;
 
       if (event.shiftKey && isInActiveVerse) {
@@ -1691,7 +1293,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       applyGreekRange(chapter, verse, token, token);
       setGreekRangeAnchorToken(token);
     },
-    [activeVerb, applyGreekRange, finiteVerbByAlignmentId, greekRangeAnchorToken, selectVerb]
+    [activeVerb, applyGreekRange, finiteVerbByAlignmentId, greekRangeAnchorToken, pickingSubjectHostKey, selectVerb]
   );
 
   // Clear must remove the *saved* assignment, not only the in-memory draft.
@@ -1753,6 +1355,12 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     if (!activeVerbId || !activeVerb || !draftGreekRange) return;
     const greekStartTokenId = `${activeVerb.chapter}:${activeVerb.verse}:${draftGreekRange.start}`;
     const greekEndTokenId = `${activeVerb.chapter}:${activeVerb.verse}:${draftGreekRange.end}`;
+    // Preserve place in the passage — Save used to reflow audits/lists and
+    // nested scrollIntoView calls yanked the window to the bottom.
+    const scrollY = window.scrollY;
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
 
     setAssignments(current => {
       const next = {
@@ -1774,6 +1382,11 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     setActiveVerbId(null);
     setDraftGreekRange(null);
     setGreekRangeAnchorToken(null);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        window.scrollTo(0, scrollY);
+      });
+    });
   }, [activeVerb, activeVerbId, bookId, draftGreekRange, draftSpan]);
 
   // Reload draft from storage when the active verb changes — not on every
@@ -1805,20 +1418,31 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       if (!row.finiteVerb.finiteVerbId) return;
       requestObservationScroll();
       setActiveBeginningVerbId(row.finiteVerb.finiteVerbId);
-      selectVerb(row.finiteVerb, { scrollTo: "none" });
+      // Observation only — do not open the Save/Clear span panel.
+      setActiveVerbId(null);
+      setDraftGreekRange(null);
+      setGreekRangeAnchorToken(null);
     },
-    [requestObservationScroll, selectVerb]
+    [requestObservationScroll]
   );
 
   // Skeleton is for scanning; fixing happens in the review panel. Always close
   // the popup so the selected clause is reachable (drawer-over-review was a trap).
+  // editSpan: true opens the Save/Clear panel (Greek span editing) — only for
+  // flows that actually need to change belonging, e.g. unparking a relative.
   const openClauseFromSkeleton = useCallback(
-    (finiteVerbId: string) => {
+    (finiteVerbId: string, options?: { editSpan?: boolean }) => {
       closeSkeletonPopup();
       requestObservationScroll();
       setActiveBeginningVerbId(finiteVerbId);
       const row = finiteVerbIdToRow.get(finiteVerbId);
-      if (row) selectVerb(row.finiteVerb, { scrollTo: "observation" });
+      if (options?.editSpan && row) {
+        selectVerb(row.finiteVerb, { scrollTo: "none" });
+        return;
+      }
+      setActiveVerbId(null);
+      setDraftGreekRange(null);
+      setGreekRangeAnchorToken(null);
     },
     [closeSkeletonPopup, finiteVerbIdToRow, requestObservationScroll, selectVerb]
   );
@@ -1829,7 +1453,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     (hostVerbId: string, parkedReference: string, nounText: string) => {
       setHostFixHint({ hostVerbId, parkedReference, nounText });
       setShowSpanishOnly(false);
-      openClauseFromSkeleton(hostVerbId);
+      openClauseFromSkeleton(hostVerbId, { editSpan: true });
     },
     [openClauseFromSkeleton]
   );
@@ -1981,13 +1605,221 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     [activeBeginningRow, nounAnchorId, updateActiveObservation, wordById]
   );
 
-  // Shared by renderClauseLine and renderSkeletonNode — the underline-in-place
-  // participle layer (technique A, always visible) plus the toggleable
-  // highlight (technique B) live on the same per-word render so a clause's
-  // text looks identical everywhere it's shown. Never adds a row or indent.
-  // Read-only here — identification happens in Brick 4 (Greek O-Prototype);
-  // this only renders what Brick 4 already confirmed, and lets the student
-  // click a confirmed participle to see its sort status / morphology.
+  const manualSubjectHostWords = useCallback(
+    (hostKey: string | null | undefined) => {
+      if (!hostKey) return [] as SpanishWord[];
+      const ids = participleSubjectHosts[hostKey] ?? [];
+      return ids.map(id => wordById.get(id)).filter((word): word is SpanishWord => Boolean(word));
+    },
+    [participleSubjectHosts, wordById]
+  );
+
+  const updateSubjectHostSpan = useCallback(
+    (hostKey: string, span: string[]) => {
+      setParticipleSubjectHosts(current => {
+        const next = { ...current };
+        if (span.length) next[hostKey] = span;
+        else delete next[hostKey];
+        writeParticipleSubjectHosts(next, bookId);
+        return next;
+      });
+    },
+    [bookId]
+  );
+
+  const selectSubjectHostWord = useCallback(
+    (hostKey: string, word: SpanishWord, event: MouseEvent<HTMLButtonElement>) => {
+      if (event.shiftKey && subjectHostAnchorId) {
+        const anchor = wordById.get(subjectHostAnchorId);
+        if (anchor) {
+          const span = spanFromRange(anchor, word);
+          if (span) {
+            updateSubjectHostSpan(hostKey, span);
+            setPickingSubjectHostKey(null);
+          }
+          return;
+        }
+      }
+      setSubjectHostAnchorId(word.id);
+      updateSubjectHostSpan(hostKey, [word.id]);
+      setPickingSubjectHostKey(null);
+    },
+    [subjectHostAnchorId, updateSubjectHostSpan, wordById]
+  );
+
+  const beginSubjectHostPick = useCallback(
+    (hostKey: string, options?: { force?: boolean }) => {
+      const nextKey =
+        !options?.force && pickingSubjectHostKey === hostKey ? null : hostKey;
+      setPickingSubjectHostKey(nextKey);
+      // Naming a subject host must not also edit clause belonging — clear any
+      // open Save/Clear span session.
+      setActiveVerbId(null);
+      setDraftGreekRange(null);
+      setGreekRangeAnchorToken(null);
+      if (!nextKey) return;
+      // Always work host picks in the bottom Skeleton section (phrase-style
+      // chapter list) — never jump to clause review or land on the tree.
+      setSkeletonOpen(true);
+      setSkeletonMaximized(false);
+      window.setTimeout(() => {
+        document
+          .querySelector<HTMLElement>(`[data-subject-host-key="${CSS.escape(nextKey)}"]`)
+          ?.scrollIntoView({ behavior: "smooth", block: "start" });
+        document
+          .querySelector<HTMLElement>('[data-host-source-verse="true"]')
+          ?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 100);
+    },
+    [pickingSubjectHostKey]
+  );
+
+  const renderSubjectHostChapterPicker = useCallback(
+    (hostKey: string, sourceChapter: number, sourceVerse: number) => {
+      if (pickingSubjectHostKey !== hostKey) return null;
+      const isPhrase = hostKey.split(":").length === 2;
+      return (
+        <div className="clause-subject-host-picker" aria-label="Pick who they ride with">
+          <p className="clause-participle-host-picker-note" role="status">
+            {isPhrase
+              ? "Phrase participle — tap who they ride with in any verse. This does not change a clause span."
+              : "Tap who they ride with in any verse. This does not change the clause span."}
+          </p>
+          {verses
+            .filter(v => v.chapter === sourceChapter)
+            .map(chapterVerse => {
+              const isSourceVerse =
+                chapterVerse.chapter === sourceChapter && chapterVerse.verse === sourceVerse;
+              return (
+                <p
+                  className={
+                    isSourceVerse
+                      ? "clause-subject-host-verse clause-subject-host-verse--current"
+                      : "clause-subject-host-verse"
+                  }
+                  key={`${chapterVerse.chapter}:${chapterVerse.verse}`}
+                  data-host-source-verse={isSourceVerse ? "true" : undefined}
+                >
+                  <span className="clause-subject-host-verse-label">
+                    {chapterVerse.chapter}:{chapterVerse.verse}
+                  </span>
+                  <span className="clause-subject-host-verse-text">
+                    {chapterVerse.words.map((word, position) => (
+                      <span key={word.id}>
+                        {position > 0 ? " " : null}
+                        <button
+                          type="button"
+                          className={
+                            (participleSubjectHosts[hostKey] ?? []).includes(word.id)
+                              ? "clause-noun-word clause-noun-word--selected"
+                              : "clause-noun-word clause-noun-word--subject-host"
+                          }
+                          onClick={event => selectSubjectHostWord(hostKey, word, event)}
+                        >
+                          {word.text}
+                        </button>
+                      </span>
+                    ))}
+                  </span>
+                </p>
+              );
+            })}
+        </div>
+      );
+    },
+    [participleSubjectHosts, pickingSubjectHostKey, selectSubjectHostWord, verses]
+  );
+
+  // Host first (oro / ustedes), participles under it. Subject-host picking
+  // always happens in the bottom Skeleton chapter list — not beside the tree
+  // and not in the clause-review panel.
+  const renderParticipleNounGroups = useCallback(
+    (participles: SpanishWord[], nearbyWords: SpanishWord[], hostKey: string) => {
+      if (!participles.length) return null;
+      const groups = groupParticiplesByNounHost(
+        participles,
+        nearbyWords,
+        manualSubjectHostWords(hostKey)
+      );
+      const picking = pickingSubjectHostKey === hostKey;
+      return (
+        <div className="clause-participle-noun-groups" aria-label="What hangs on the host">
+          {groups.map(group => (
+            <div
+              className={[
+                "clause-participle-noun-group",
+                group.needsHostPick ? "clause-participle-noun-group--pick" : "",
+                !group.noun && !group.needsHostPick && !group.isManualHost
+                  ? "clause-participle-noun-group--role"
+                  : ""
+              ]
+                .filter(Boolean)
+                .join(" ")}
+              key={group.noun?.id ?? `${group.hostLabel}:${group.items[0]?.word.participleId ?? ""}`}
+            >
+              <div className="clause-participle-noun-host">
+                {group.needsHostPick ? (
+                  <button
+                    type="button"
+                    className={
+                      picking
+                        ? "clause-participle-host-pick clause-participle-host-pick--active"
+                        : "clause-participle-host-pick"
+                    }
+                    onClick={event => {
+                      event.stopPropagation();
+                      beginSubjectHostPick(hostKey);
+                    }}
+                  >
+                    {picking ? "Tap a word in the list below →" : group.hostLabel}
+                  </button>
+                ) : (
+                  <div className="clause-participle-noun-host-row">
+                    <span>{group.hostLabel}</span>
+                    {group.isManualHost ? (
+                      <button
+                        type="button"
+                        className="clause-participle-host-clear"
+                        onClick={event => {
+                          event.stopPropagation();
+                          updateSubjectHostSpan(hostKey, []);
+                          beginSubjectHostPick(hostKey, { force: true });
+                        }}
+                      >
+                        Change
+                      </button>
+                    ) : null}
+                  </div>
+                )}
+              </div>
+              <ul className="clause-participle-noun-children">
+                {group.items.map(({ word, reading }) => (
+                  <li key={word.participleId}>
+                    <span className="clause-participle-satellite-text">
+                      {reading.spanish}
+                      {reading.greek && reading.greek !== reading.spanish ? (
+                        <span className="clause-participle-satellite-greek"> · {reading.greek}</span>
+                      ) : null}
+                    </span>
+                    <span className="clause-participle-satellite-form">{reading.formLine}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      );
+    },
+    [
+      beginSubjectHostPick,
+      manualSubjectHostWords,
+      pickingSubjectHostKey,
+      updateSubjectHostSpan
+    ]
+  );
+
+  // Shared by renderClauseLine and renderSkeletonNode — dotted underline on
+  // Brick-4-marked participles. Read-only: identification happens in Brick 4.
   const renderClauseWords = useCallback(
     (words: SpanishWord[], ownFiniteVerbId: string) => {
       return words.map((word, index) => {
@@ -1995,69 +1827,26 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
         if (word.finiteVerbId === ownFiniteVerbId) classes.push("clause-line-token--finite");
         if (word.dependentIntroducerId) classes.push("clause-line-token--dependent");
 
-        const isConfirmedParticiple = Boolean(word.participleId) && participleMarkedAlignmentIds.has(word.participleId as string);
+        const isConfirmedParticiple =
+          Boolean(word.participleId) && participleMarkedAlignmentIds.has(word.participleId as string);
+        if (isConfirmedParticiple) classes.push("clause-line-token--participle");
 
-        const content = (
-          <>
+        return (
+          <span className={classes.join(" ")} key={word.id}>
             {index > 0 ? " " : null}
             {word.text}
-          </>
-        );
-
-        if (!isConfirmedParticiple) {
-          return (
-            <span className={classes.join(" ")} key={word.id}>
-              {content}
-            </span>
-          );
-        }
-
-        const participleId = word.participleId as string;
-        const classification = resolveParticipleClassification(participleObservations[participleId]);
-        classes.push("clause-line-token--participle");
-        classes.push(classification ? `clause-line-token--participle-${classification}` : "clause-line-token--participle-unsorted");
-        if (showParticiples) classes.push("clause-line-token--participle-flow");
-        const ridingClauseId = participleObservations[participleId]?.ridingClauseId;
-        const ridingRow = ridingClauseId ? finiteVerbIdToRow.get(ridingClauseId) : undefined;
-
-        // A plain span, not a button — this can render inside other buttons
-        // (clause-only-item, clause-tree-node both wrap their whole line in
-        // one), and nested <button> inside <button> is invalid HTML.
-        return (
-          <span className="clause-line-token-wrap" key={word.id}>
-            {index > 0 ? " " : null}
-            <span
-              role="button"
-              tabIndex={0}
-              className={classes.filter(c => c !== "clause-line-token").join(" ")}
-              onClick={event => {
-                event.stopPropagation();
-                setOpenParticiplePopoverId(current => (current === participleId ? null : participleId));
-              }}
-              onKeyDown={event => {
-                if (event.key !== "Enter" && event.key !== " ") return;
-                event.preventDefault();
-                event.stopPropagation();
-                setOpenParticiplePopoverId(current => (current === participleId ? null : participleId));
-              }}
-            >
-              {word.text}
-            </span>
-            {showParticiples && classification === "circumstantial" && ridingRow ? (
-              <span className="clause-line-token-flow-tag">→ {ridingRow.reference}</span>
-            ) : null}
-            {openParticiplePopoverId === participleId ? (
-              <span className="clause-participle-popover" role="tooltip">
-                <strong>{classification ? capitalize(classification) : "Not yet sorted"}</strong>
-                {classification === "circumstantial" && ridingRow ? <span> — rides {ridingRow.reference}</span> : null}
-                {describeParticipleMorph(word) ? <span className="clause-participle-popover-morph">{describeParticipleMorph(word)}</span> : null}
-              </span>
-            ) : null}
           </span>
         );
       });
     },
-    [finiteVerbIdToRow, openParticiplePopoverId, participleMarkedAlignmentIds, participleObservations, showParticiples]
+    [participleMarkedAlignmentIds]
+  );
+
+  const wordsInVerse = useCallback(
+    (chapter: number, verse: number) => {
+      return verses.find(v => v.chapter === chapter && v.verse === verse)?.words ?? [];
+    },
+    [verses]
   );
 
   const renderClauseLine = useCallback(
@@ -2131,39 +1920,17 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
               </span>
             ) : null}
           </button>
-          {sequenceEntry?.genitiveAbsoluteParticiples.length ? (
-            <p className="sequence-genitive-flag">
-              Genitive absolute here — introduces its own subject, different from this clause's:{" "}
-              {sequenceEntry.genitiveAbsoluteParticiples.map((participle, index) => (
-                <span key={participle.participleId}>
-                  {index > 0 ? ", " : ""}
-                  <button
-                    type="button"
-                    className="participle-view-ref"
-                    onClick={() => jumpToParticipleClause(participle.participleId)}
-                  >
-                    {participle.label} — {participle.reference}
-                  </button>
-                </span>
-              ))}
-            </p>
-          ) : null}
-          {sequenceEntry?.subjectAgreementNotes.length ? (
-            <p className="sequence-subject-note">
-              Nominative participle riding here — likely agrees with this clause's subject:{" "}
-              {sequenceEntry.subjectAgreementNotes.map((note, index) => (
-                <span key={note.participleId}>
-                  {index > 0 ? ", " : ""}
-                  <button
-                    type="button"
-                    className="participle-view-ref"
-                    onClick={() => jumpToParticipleClause(note.participleId)}
-                  >
-                    {note.text} — {note.reference}
-                  </button>
-                </span>
-              ))}
-            </p>
+          {participleWordsByClauseId.get(node.finiteVerbId)?.length ? (
+            <div className="clause-participle-satellite-list" aria-label="What hangs with this clause">
+              {renderParticipleNounGroups(
+                participleWordsByClauseId.get(node.finiteVerbId)!,
+                wordsInVerse(
+                  participleWordsByClauseId.get(node.finiteVerbId)![0].chapter,
+                  participleWordsByClauseId.get(node.finiteVerbId)![0].verse
+                ),
+                node.finiteVerbId
+              )}
+            </div>
           ) : null}
           {node.children.length ? (
             <div className="clause-tree-children">{node.children.map(renderSkeletonNode)}</div>
@@ -2175,10 +1942,12 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       activeBeginningVerbId,
       clauseMarkers,
       finiteVerbIdToRow,
-      jumpToParticipleClause,
       openClauseFromSkeleton,
+      participleWordsByClauseId,
       renderClauseWords,
-      sequenceEntryByFiniteVerbId
+      renderParticipleNounGroups,
+      sequenceEntryByFiniteVerbId,
+      wordsInVerse
     ]
   );
 
@@ -2201,26 +1970,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
         </p>
       </header>
 
-      <div className="clause-view-switch" aria-label="Structure layers">
-        <button
-          type="button"
-          className={view === "structure" ? "clause-view-option clause-view-option--active" : "clause-view-option"}
-          onClick={() => setView("structure")}
-        >
-          Structure
-        </button>
-        <button
-          type="button"
-          className={view === "participle-views" ? "clause-view-option clause-view-option--active" : "clause-view-option"}
-          onClick={() => setView("participle-views")}
-          disabled={!savedClauseRows.length}
-        >
-          Participle Views
-        </button>
-      </div>
-
-      {view === "structure" ? (
-        <section className="structure-canvas" aria-labelledby="structure-heading">
+      <section className="structure-canvas" aria-labelledby="structure-heading">
           <div className="clause-only-header structure-toolbar">
             <div>
               <h2 id="structure-heading">Passage</h2>
@@ -2271,6 +2021,77 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
           </div>
 
           <div className="structure-audits" aria-label="Structure audits and warnings">
+          {unreviewedClauseRows.length ? (
+            <section className="clause-unresolved-participles" aria-label="Clauses not yet identified">
+              <div className="clause-audit-header">
+                <h3>
+                  Not yet identified — {unreviewedClauseRows.length} of {reviewClauseRows.length} mood-tagged
+                  clause{reviewClauseRows.length === 1 ? "" : "s"}
+                </h3>
+              </div>
+              <p className="clause-section-note">
+                Span is saved, but the clause shape is still open — Independent, relative, content, or
+                adverbial (time / reason / condition / purpose). Open one to finish it.
+              </p>
+              <ul className="clause-audit-list">
+                {unreviewedClauseRows.map(row => (
+                  <li key={row.finiteVerb.finiteVerbId}>
+                    <button
+                      type="button"
+                      className="clause-audit-ref clause-audit-ref--link"
+                      onClick={() => inspectClauseBeginning(row)}
+                    >
+                      {row.reference}
+                    </button>
+                    <span className="clause-audit-range">{row.spanText || "(no span text)"}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : reviewClauseRows.length ? (
+            <section
+              className="clause-unresolved-participles clause-unresolved-participles--clear"
+              aria-label="All clauses identified"
+            >
+              <h3>All mood-tagged clauses identified</h3>
+              <p className="clause-section-note">
+                Every saved mood-tagged clause has a shape. Reopen any from the list below if you want to
+                reconsider.
+              </p>
+            </section>
+          ) : null}
+
+          {categorizedClauseRows.length ? (
+            <section
+              className="clause-unresolved-participles clause-unresolved-participles--clear"
+              aria-label="Categorized clauses"
+            >
+              <div className="clause-audit-header">
+                <h3>
+                  Categorized — {categorizedClauseRows.length} of {reviewClauseRows.length} mood-tagged clause
+                  {reviewClauseRows.length === 1 ? "" : "s"}
+                </h3>
+              </div>
+              <p className="clause-section-note">
+                These already have a shape in Structure. Tap a reference to reopen and check it.
+              </p>
+              <ul className="clause-audit-list">
+                {categorizedClauseRows.map(row => (
+                  <li key={row.finiteVerb.finiteVerbId}>
+                    <button
+                      type="button"
+                      className="clause-audit-ref clause-audit-ref--link"
+                      onClick={() => inspectClauseBeginning(row)}
+                    >
+                      {row.reference}
+                    </button>
+                    <span className="clause-audit-range">{describeClauseCategory(row)}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+
           {greekSpanMismatches.length ? (
           <section className="clause-unresolved-participles" aria-label="Greek span audit">
             <div className="clause-audit-header">
@@ -2302,10 +2123,14 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                         type="button"
                         className="clause-audit-ref clause-audit-ref--link"
                         onClick={() => {
+                          // Span audit → edit belonging (Save/Clear panel).
                           const row = clauseRows.find(
                             candidate => candidate.finiteVerb.finiteVerbId === entry.finiteVerbId
                           );
-                          if (row) selectVerb(row.finiteVerb, { scrollTo: "observation" });
+                          if (row) {
+                            setActiveBeginningVerbId(entry.finiteVerbId);
+                            selectVerb(row.finiteVerb);
+                          }
                         }}
                       >
                         {bookInfo.displayName} {entry.chapter}:{entry.verse} ({entry.finiteVerbId})
@@ -2356,8 +2181,9 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                       type="button"
                       className="clause-audit-ref clause-audit-ref--link"
                       onClick={() => {
-                        setView("structure");
-                        selectVerb(row.finiteVerb, { scrollTo: "observation" });
+                        // Re-confirm Greek span — open the Save/Clear panel.
+                        setActiveBeginningVerbId(assignment.finiteVerbId);
+                        selectVerb(row.finiteVerb);
                       }}
                     >
                       {row.reference} ({assignment.finiteVerbId})
@@ -2392,8 +2218,9 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                       onClick={() => {
                         requestObservationScroll();
                         setActiveBeginningVerbId(flag.finiteVerbId);
-                        const row = finiteVerbIdToRow.get(flag.finiteVerbId);
-                        if (row) selectVerb(row.finiteVerb, { scrollTo: "none" });
+                        setActiveVerbId(null);
+                        setDraftGreekRange(null);
+                        setGreekRangeAnchorToken(null);
                       }}
                     >
                       {flag.reference} ({flag.finiteVerbId})
@@ -2404,46 +2231,6 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                   </li>
                 ))}
               </ul>
-            </section>
-          ) : null}
-
-          {unresolvedParticipleIds.length ? (
-            <section className="clause-unresolved-participles" aria-label="Unresolved participles">
-              <h3>
-                Data problem — {unresolvedParticipleIds.length} candidate{unresolvedParticipleIds.length === 1 ? "" : "s"} couldn't be matched
-              </h3>
-              <p className="clause-section-note">
-                Marked in Brick 4, but the alignment data couldn't match {unresolvedParticipleIds.length === 1 ? "it" : "them"} to any
-                Spanish word — this is a data bug, not something to sort. Reference id{unresolvedParticipleIds.length === 1 ? "" : "s"}:{" "}
-                {unresolvedParticipleIds.join(", ")}
-              </p>
-            </section>
-          ) : null}
-
-          {unsortedParticiples.length ? (
-            <section className="clause-unsorted-participles" aria-label="Unsorted participles">
-              <h3>
-                Unsorted participles
-                <span className="clause-unsorted-count">{unsortedParticiples.length}</span>
-              </h3>
-              <p className="clause-section-note">
-                Every marked participle still missing a classification, book order. Click one to jump straight to it.
-              </p>
-              <div className="clause-participle-chip-row">
-                {unsortedParticiples.map(entry => (
-                  <button
-                    type="button"
-                    key={entry.participleId}
-                    className="clause-participle-chip"
-                    onClick={() => jumpToUnsortedParticiple(entry)}
-                  >
-                    <span className="clause-unsorted-reference">
-                      {bookInfo.displayName} {entry.word.chapter}:{entry.word.verse}
-                    </span>
-                    {participleChipLabel(entry.word)}
-                  </button>
-                ))}
-              </div>
             </section>
           ) : null}
 
@@ -2674,124 +2461,14 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                   <p className="clause-active-span">{renderClauseLine(activeBeginningRow)}</p>
                 </article>
 
-                {activeParticiples.length ? (
-                  <section className="clause-participles-panel" aria-label="Participles in this clause">
-                    <div className="clause-participles-header">
-                      <h3>
-                        Participles found here
-                        <ParticipleCheck confirmed={participlesConfirmed} />
-                      </h3>
-                      <label className="clause-dependent-toggle">
-                        <input
-                          type="checkbox"
-                          checked={showParticiples}
-                          onChange={event => setShowParticiples(event.currentTarget.checked)}
-                        />
-                        <span>Show participle flow</span>
-                      </label>
-                    </div>
-                    <p className="clause-section-note">
-                      Found in Brick 4 (Greek). Sort each one below — the checkmark tracks sorting across the whole book.
-                    </p>
-                    <div className="clause-participle-chip-row">
-                      {activeParticiples.map(word => {
-                        const classification = word.participleId ? resolveParticipleClassification(participleObservations[word.participleId]) : null;
-                        return (
-                          <button
-                            type="button"
-                            key={word.participleId}
-                            className={[
-                              "clause-participle-chip",
-                              activeParticipleId === word.participleId ? "clause-participle-chip--active" : "",
-                              classification ? `clause-participle-chip--${classification}` : ""
-                            ].filter(Boolean).join(" ")}
-                            onClick={() => setActiveParticipleId(current => (current === word.participleId ? null : word.participleId ?? null))}
-                          >
-                            {participleChipLabel(word)}
-                            <span className="clause-participle-chip-state">{classification ?? "unsorted"}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                    {activeParticipleWord ? (
-                      <div className="clause-participle-detail">
-                        <p className="clause-participle-morph">
-                          {participleChipLabel(activeParticipleWord)} — {describeParticipleMorph(activeParticipleWord)}
-                          {activeParticipleWord.participleCase === "N" ? (
-                            <span className="clause-participle-fact"> · nominative is the case a subject takes</span>
-                          ) : null}
-                          {isPossibleGenitiveAbsolute(activeParticipleWord) ? (
-                            <span className="clause-participle-flag"> · possible genitive absolute — worth a second look</span>
-                          ) : null}
-                        </p>
-
-                        {activeParticipleObservation.agreesWithNoun === "yes" ? (
-                          <div className="clause-noun-picker">
-                            <p className="clause-observation-term">Attributive</p>
-                            <p>Select the noun this participle describes, in the text above.</p>
-                            {participleDescribedNounText ? <p className="clause-noun-selection">{participleDescribedNounText}</p> : null}
-                            <div className="clause-step-actions">
-                              <button
-                                type="button"
-                                className="clause-reconsider"
-                                onClick={resetParticipleObservation}
-                              >
-                                Not this — reconsider
-                              </button>
-                            </div>
-                            <div className="clause-context-panel clause-context-panel--compact" aria-label="Select the described noun">
-                              {activeObservationContextVerses.map(verse => (
-                                <p className="clause-noun-verse" key={`p-${verse.chapter}:${verse.verse}`}>
-                                  <span className="clause-noun-verse-label">
-                                    {verse.chapter}:{verse.verse}
-                                  </span>
-                                  <span>
-                                    {verse.words.map((word, position) => {
-                                      const isSelected = Boolean(activeParticipleObservation.describedNounSpan?.includes(word.id));
-                                      return (
-                                        <span key={word.id}>
-                                          {position > 0 ? " " : null}
-                                          <button
-                                            type="button"
-                                            className={isSelected ? "clause-noun-word clause-noun-word--selected" : "clause-noun-word"}
-                                            onClick={event => selectParticipleNounWord(word, event)}
-                                          >
-                                            {word.text}
-                                          </button>
-                                        </span>
-                                      );
-                                    })}
-                                  </span>
-                                </p>
-                              ))}
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="clause-choice-grid clause-choice-grid--participle">
-                            <button type="button" className="clause-choice-btn" onClick={chooseParticipleAttributive}>
-                              <span className="clause-choice-term">Attributive</span>
-                              Agrees with and describes a nearby noun
-                            </button>
-                            <button type="button" className="clause-choice-btn" onClick={chooseParticipleSubstantival}>
-                              <span className="clause-choice-term">Substantival</span>
-                              Stands alone, naming a person or thing
-                            </button>
-                            <button type="button" className="clause-choice-btn" onClick={chooseParticipleCircumstantial}>
-                              <span className="clause-choice-term">Circumstantial</span>
-                              Rides on this clause's finite verb
-                            </button>
-                          </div>
-                        )}
-
-                        {resolveParticipleClassification(activeParticipleObservation) && activeParticipleObservation.agreesWithNoun !== "yes" ? (
-                          <button type="button" className="clause-reconsider" onClick={resetParticipleObservation}>
-                            Not this — reconsider
-                          </button>
-                        ) : null}
-                      </div>
-                    ) : null}
-                  </section>
+                {activeParticiples.length && activeBeginningVerbId ? (
+                  <div className="clause-participle-satellite-list" aria-label="What hangs with this clause">
+                    {renderParticipleNounGroups(
+                      activeParticiples,
+                      wordsInVerse(activeParticiples[0].chapter, activeParticiples[0].verse),
+                      activeBeginningVerbId
+                    )}
+                  </div>
                 ) : null}
 
                 {showGreekBeginning && activeBeginningRow.beginningTokens.length ? (
@@ -2817,9 +2494,20 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                   </div>
                 ) : null}
 
-                <div className="clause-context-panel" aria-label="Surrounding Spanish context">
-                  {activeObservationContextVerses.map(verse => (
-                    <p className="clause-noun-verse" key={`${verse.chapter}:${verse.verse}`}>
+                <div
+                  className="clause-context-panel clause-context-panel--chapter"
+                  aria-label="Spanish context for this chapter"
+                >
+                  {activeObservationContextVerses.map(verse => {
+                    const isCurrentVerse =
+                      verse.chapter === activeBeginningRow.finiteVerb.chapter &&
+                      verse.verse === activeBeginningRow.finiteVerb.verse;
+                    return (
+                    <p
+                      className={isCurrentVerse ? "clause-noun-verse clause-noun-verse--current" : "clause-noun-verse"}
+                      key={`${verse.chapter}:${verse.verse}`}
+                      data-context-verse={`${verse.chapter}:${verse.verse}`}
+                    >
                       <span className="clause-noun-verse-label">
                         {verse.chapter}:{verse.verse}
                       </span>
@@ -2833,7 +2521,11 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                               {canSelectNoun ? (
                                 <button
                                   type="button"
-                                  className={isSelected ? "clause-noun-word clause-noun-word--selected" : "clause-noun-word"}
+                                  className={
+                                    isSelected
+                                      ? "clause-noun-word clause-noun-word--selected"
+                                      : "clause-noun-word"
+                                  }
                                   onClick={event => selectNounWord(word, event)}
                                 >
                                   {word.text}
@@ -2848,7 +2540,8 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                         })}
                       </span>
                     </p>
-                  ))}
+                    );
+                  })}
                 </div>
 
                 <section className="clause-observation" aria-label="Current observation">
@@ -3086,7 +2779,14 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                       ) : (
                         <>
                           {!forceChoices && !isActiveClauseRoot && activeSignal?.kind === "uncertain" ? (
-                            <p className="clause-uncertain-note">{activeSignal.reason}</p>
+                            <>
+                              <p className="clause-uncertain-note">{activeSignal.reason}</p>
+                              {activeChoiceGuidance?.suggested ? (
+                                <p className="clause-tutor-note">
+                                  The highlighted card is only a lean from that idiom — pick the shape that actually fits.
+                                </p>
+                              ) : null}
+                            </>
                           ) : null}
                           {activeChoiceGuidance &&
                           activeSignal?.kind !== "uncertain" &&
@@ -3316,387 +3016,140 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
               </div>
             ) : null}
 
+            <div className="clause-subject-host-section" data-subject-host-section="true">
             {verblessVerses.length ? (
               <div className="clause-verbless-section">
                 <h3>No finite verb — set aside for the detailed pass</h3>
                 <p className="clause-section-note">
                   These verses have no finite verb in the Greek at all, so Brick 1 never reaches them and they're not
                   part of the skeleton pass. Nothing to decide about them now — shown here only so they're visible,
-                  not silently missing.
+                  not silently missing. Brick-4-marked participles show their form and hang.
                 </p>
-                {verblessVerses.map(verse => (
-                  <p className="clause-verbless-item" key={verse.reference}>
-                    <span>{verse.reference}</span>
-                    {verse.text}
-                  </p>
-                ))}
+                {verblessVerses.map(verse => {
+                  const hostKey = verse.participles.length
+                    ? `${verse.participles[0].chapter}:${verse.participles[0].verse}`
+                    : verse.reference;
+                  return (
+                  <div
+                    className="clause-verbless-item"
+                    key={verse.reference}
+                    data-subject-host-key={verse.participles.length ? hostKey : undefined}
+                  >
+                    <p>
+                      <span>{verse.reference}</span>
+                      {verse.text}
+                    </p>
+                    {verse.participles.length ? (
+                      <>
+                        {renderParticipleNounGroups(verse.participles, verse.words, hostKey)}
+                        {renderSubjectHostChapterPicker(
+                          hostKey,
+                          verse.participles[0].chapter,
+                          verse.participles[0].verse
+                        )}
+                      </>
+                    ) : null}
+                  </div>
+                  );
+                })}
               </div>
             ) : null}
 
-            {standaloneParticipleGroups.length ? (
-              <div className="clause-standalone-participles">
-                <h3>
-                  Participles without a clause
-                  <ParticipleCheck confirmed={participlesConfirmed} />
-                </h3>
+            {orphanParticipleVerses.length ? (
+              <div className="clause-verbless-section">
+                <h3>Participles outside a saved clause span</h3>
                 <p className="clause-section-note">
-                  Found in Brick 4, in verses with no finite verb — so there's no clause for them to attach to.
-                  Sort each one below (circumstantial isn't offered here since there's no finite verb to ride).
+                  Marked in Brick 4 and sitting in a verse that has a finite verb, but not inside any saved clause
+                  span yet — so they are not shown on a clause card (that would invent a host). Grouped under the
+                  noun they hang on when morphology finds one; nominatives ask who they ride with. Expand the span
+                  that actually contains them, or leave them here until the detailed pass.
                 </p>
-                {standaloneParticipleGroups.map(group => (
-                  <div className="clause-standalone-group" key={group.reference}>
-                    <p className="clause-verbless-item">
-                      <span>{group.reference}</span>
-                      {verseTextByKey.get(`${group.chapter}:${group.verse}`) ?? ""}
+                {orphanParticipleVerses.map(verse => (
+                  <div
+                    className="clause-orphan-participle"
+                    key={verse.key}
+                    data-subject-host-key={verse.key}
+                  >
+                    <p>
+                      <span>{verse.reference}</span>
+                      {verse.text}
                     </p>
-                    <div className="clause-participle-chip-row">
-                      {group.entries.map(word => {
-                        const classification = word.participleId ? resolveParticipleClassification(participleObservations[word.participleId]) : null;
-                        return (
-                          <button
-                            type="button"
-                            key={word.participleId}
-                            className={[
-                              "clause-participle-chip",
-                              activeStandaloneParticipleId === word.participleId ? "clause-participle-chip--active" : "",
-                              classification ? `clause-participle-chip--${classification}` : ""
-                            ].filter(Boolean).join(" ")}
-                            onClick={() =>
-                              setActiveStandaloneParticipleId(current => (current === word.participleId ? null : word.participleId ?? null))
-                            }
-                          >
-                            {participleChipLabel(word)}
-                            <span className="clause-participle-chip-state">{classification ?? "unsorted"}</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-
-                    {activeStandaloneWord && group.entries.some(word => word.participleId === activeStandaloneParticipleId) ? (
-                      <div className="clause-participle-detail">
-                        <p className="clause-participle-morph">
-                          {participleChipLabel(activeStandaloneWord)} — {describeParticipleMorph(activeStandaloneWord)}
-                          {activeStandaloneWord.participleCase === "N" ? (
-                            <span className="clause-participle-fact"> · nominative is the case a subject takes</span>
-                          ) : null}
-                          {isPossibleGenitiveAbsolute(activeStandaloneWord) ? (
-                            <span className="clause-participle-flag"> · possible genitive absolute — worth a second look</span>
-                          ) : null}
-                        </p>
-
-                        {activeStandaloneObservation.agreesWithNoun === "yes" ? (
-                          <div className="clause-noun-picker">
-                            <p className="clause-observation-term">Attributive</p>
-                            <p>Select the noun this participle describes, in the text above.</p>
-                            {standaloneDescribedNounText ? <p className="clause-noun-selection">{standaloneDescribedNounText}</p> : null}
-                            <div className="clause-step-actions">
-                              <button
-                                type="button"
-                                className="clause-reconsider"
-                                onClick={resetStandaloneParticipleObservation}
-                              >
-                                Not this — reconsider
-                              </button>
-                            </div>
-                            <div className="clause-context-panel clause-context-panel--compact" aria-label="Select the described noun">
-                              {standaloneContextVerses.map(verse => (
-                                <p className="clause-noun-verse" key={`sp-${verse.chapter}:${verse.verse}`}>
-                                  <span className="clause-noun-verse-label">
-                                    {verse.chapter}:{verse.verse}
-                                  </span>
-                                  <span>
-                                    {verse.words.map((word, position) => {
-                                      const isSelected = Boolean(activeStandaloneObservation.describedNounSpan?.includes(word.id));
-                                      return (
-                                        <span key={word.id}>
-                                          {position > 0 ? " " : null}
-                                          <button
-                                            type="button"
-                                            className={isSelected ? "clause-noun-word clause-noun-word--selected" : "clause-noun-word"}
-                                            onClick={event => selectStandaloneNounWord(word, event)}
-                                          >
-                                            {word.text}
-                                          </button>
-                                        </span>
-                                      );
-                                    })}
-                                  </span>
-                                </p>
-                              ))}
-                            </div>
-                          </div>
-                        ) : (
-                          <div className="clause-choice-grid clause-choice-grid--participle">
-                            <button type="button" className="clause-choice-btn" onClick={chooseStandaloneAttributive}>
-                              <span className="clause-choice-term">Attributive</span>
-                              Agrees with and describes a nearby noun
-                            </button>
-                            <button type="button" className="clause-choice-btn" onClick={chooseStandaloneSubstantival}>
-                              <span className="clause-choice-term">Substantival</span>
-                              Stands alone, naming a person or thing
-                            </button>
-                          </div>
-                        )}
-
-                        {resolveParticipleClassification(activeStandaloneObservation) && activeStandaloneObservation.agreesWithNoun !== "yes" ? (
-                          <button type="button" className="clause-reconsider" onClick={resetStandaloneParticipleObservation}>
-                            Not this — reconsider
-                          </button>
-                        ) : null}
-                      </div>
-                    ) : null}
+                    {renderParticipleNounGroups(verse.participles, verse.words, verse.key)}
+                    {renderSubjectHostChapterPicker(
+                      verse.key,
+                      verse.participles[0].chapter,
+                      verse.participles[0].verse
+                    )}
                   </div>
                 ))}
               </div>
             ) : null}
 
-            {telos ? (
-              <div className="clause-telos-section">
-                <h3>Candidate telos</h3>
-                {telos.purposeClauses.map(clause => (
-                  <p className="clause-telos-item" key={clause.finiteVerbId}>
-                    {clause.spanText}
-                  </p>
-                ))}
-                {telos.lastOutlineClause ? (
-                  <>
-                    <p className="clause-telos-vs">compare with the outline's last point</p>
-                    <p className="clause-telos-item clause-telos-item--outline">{telos.lastOutlineClause.spanText}</p>
-                  </>
-                ) : null}
-                <p className="clause-telos-note">
-                  Does this look like the book's stated purpose? That's your call, not something the software concludes.
+            {clauseSubjectHostEntries.length ? (
+              <div className="clause-verbless-section">
+                <h3>Who they ride with</h3>
+                <p className="clause-section-note">
+                  Nominative participles that already sit on a saved clause — pick their subject host here in the
+                  same chapter list as phrase participles. This never changes clause length.
                 </p>
+                {clauseSubjectHostEntries.map(entry => (
+                  <div
+                    className="clause-orphan-participle"
+                    key={entry.key}
+                    data-subject-host-key={entry.key}
+                  >
+                    <p>
+                      <span>{entry.reference}</span>
+                      {entry.text}
+                    </p>
+                    {renderParticipleNounGroups(entry.participles, entry.words, entry.key)}
+                    {renderSubjectHostChapterPicker(entry.key, entry.sourceChapter, entry.sourceVerse)}
+                  </div>
+                ))}
               </div>
             ) : null}
+            </div>
+
+            {outline.length || skeleton.roots.length ? (
+              <div className="clause-telos-section" data-telos-section="true">
+                <h3>Candidate telos</h3>
+                {telos ? (
+                  <>
+                    {telos.purposeClauses.map(clause => (
+                      <p className="clause-telos-item" key={clause.finiteVerbId}>
+                        {clause.spanText}
+                      </p>
+                    ))}
+                    {telos.lastOutlineClause ? (
+                      <>
+                        <p className="clause-telos-vs">compare with the outline&apos;s last point</p>
+                        <p className="clause-telos-item clause-telos-item--outline">
+                          {telos.lastOutlineClause.spanText}
+                        </p>
+                      </>
+                    ) : null}
+                    <p className="clause-telos-note">
+                      Does this look like the book&apos;s stated purpose? That&apos;s your call, not something the
+                      software concludes.
+                    </p>
+                  </>
+                ) : (
+                  <p className="clause-telos-note">
+                    No candidate yet. A purpose clause (ἵνα / ὅπως) attached directly to a root independent
+                    clause will appear here, next to the outline&apos;s last point.
+                  </p>
+                )}
+              </div>
+            ) : null}
+
             </div>
           </aside>
           </div>
           ) : null}
         </div>
-        </section>
-      ) : view === "participle-views" ? (
-        <section className="participle-views" aria-labelledby="participle-views-heading">
-          <div className="clause-only-header">
-            <div>
-              <h2 id="participle-views-heading">Participle Views</h2>
-              <p>Aggregate patterns from participles classified so far — counts and locations only, no conclusions.</p>
-            </div>
-          </div>
+      </section>
 
-          <div className="participle-view-tabs" aria-label="Participle view">
-            <button
-              type="button"
-              className={participleViewTab === "flow" ? "clause-view-option clause-view-option--active" : "clause-view-option"}
-              onClick={() => setParticipleViewTab("flow")}
-            >
-              Flow
-            </button>
-            <button
-              type="button"
-              className={participleViewTab === "emphasis" ? "clause-view-option clause-view-option--active" : "clause-view-option"}
-              onClick={() => setParticipleViewTab("emphasis")}
-            >
-              Emphasis
-            </button>
-            <button
-              type="button"
-              className={participleViewTab === "cast" ? "clause-view-option clause-view-option--active" : "clause-view-option"}
-              onClick={() => setParticipleViewTab("cast")}
-            >
-              Cast
-            </button>
-          </div>
-
-          {participleViewTab === "emphasis" ? (
-            <div className="participle-view-panel">
-              <p className="clause-section-note">
-                From attributive participles — the noun each one was resolved to describe. Grouped by the Greek
-                lemma of that noun (via the same alignment data Interlinear surfaces), not the displayed Spanish
-                gloss — two different Greek words that happen to translate the same way stay separate rows rather
-                than merging into one. A row falls back to grouping by its exact word-span, shown without a lemma,
-                only if the lemma genuinely couldn't be resolved for that one occurrence.
-              </p>
-              {emphasisGroups.length ? (
-                <table className="participle-emphasis-table">
-                  <thead>
-                    <tr>
-                      <th>Noun</th>
-                      <th>Lemma</th>
-                      <th>Count</th>
-                      <th>References</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {emphasisGroups.map(group => (
-                      <tr key={group.entries[0].participleId}>
-                        <td>
-                          {group.nounText}
-                          {group.sharesGlossWithOther ? (
-                            <span className="participle-emphasis-gloss-note"> (also glossed this way elsewhere — different Greek word)</span>
-                          ) : null}
-                        </td>
-                        <td className="participle-emphasis-lemma">{group.nounLemma ?? "—"}</td>
-                        <td>{group.count}</td>
-                        <td>
-                          {group.entries.map((entry, index) => (
-                            <span key={entry.participleId}>
-                              {index > 0 ? ", " : ""}
-                              <button
-                                type="button"
-                                className="participle-view-ref"
-                                onClick={() => jumpToParticipleClause(entry.participleId)}
-                              >
-                                {entry.reference}
-                              </button>
-                            </span>
-                          ))}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              ) : (
-                <p className="clause-output-empty">No attributive participles sorted yet.</p>
-              )}
-            </div>
-          ) : null}
-
-          {participleViewTab === "cast" ? (
-            <div className="participle-view-panel">
-              <p className="clause-section-note">
-                From substantival participles — the categories the letter names via participle, in the author's own
-                words ("the one who teaches," "those who reject"). Grouped by Greek lemma.
-              </p>
-              <div className="participle-cast-group">
-                <h3>Recurring</h3>
-                {castGroups.recurring.length ? (
-                  castGroups.recurring.map(group => (
-                    <div className="participle-cast-item" key={group.lemma}>
-                      <span className="participle-cast-text">{group.textSample}</span>
-                      <span className="participle-cast-count">{group.count}×</span>
-                      <span className="participle-cast-refs">
-                        {group.entries.map((entry, index) => (
-                          <span key={entry.participleId}>
-                            {index > 0 ? ", " : ""}
-                            <button
-                              type="button"
-                              className="participle-view-ref"
-                              onClick={() => jumpToParticipleClause(entry.participleId)}
-                            >
-                              {entry.reference}
-                            </button>
-                          </span>
-                        ))}
-                      </span>
-                    </div>
-                  ))
-                ) : (
-                  <p className="clause-output-empty">None yet.</p>
-                )}
-              </div>
-              <div className="participle-cast-group">
-                <h3>Single occurrence</h3>
-                {castGroups.single.length ? (
-                  castGroups.single.map(group => (
-                    <div className="participle-cast-item" key={group.lemma}>
-                      <span className="participle-cast-text">{group.textSample}</span>
-                      <button
-                        type="button"
-                        className="participle-view-ref"
-                        onClick={() => jumpToParticipleClause(group.entries[0].participleId)}
-                      >
-                        {group.entries[0]?.reference}
-                      </button>
-                    </div>
-                  ))
-                ) : (
-                  <p className="clause-output-empty">None yet.</p>
-                )}
-              </div>
-            </div>
-          ) : null}
-
-          {participleViewTab === "flow" ? (
-            <div className="participle-view-panel">
-              <p className="clause-section-note">
-                From circumstantial participles — tallied against the root clause whose stretch of text they fall
-                within, even several levels deep. Bar height is a quick-scan aid; the number is the fact. Every root
-                clause in the outline gets a bar, labeled with its reference — a flat tick at 0 means that clause was
-                checked and none were found, not that it's missing.
-              </p>
-              {outline.length ? (
-                <div className="participle-flow-strip">
-                  {outline.map(clause => {
-                    const tally = flowTallies.get(clause.finiteVerbId);
-                    const count = tally?.count ?? 0;
-                    const heightPct = Math.round((count / maxFlowCount) * 100);
-                    return (
-                      <button
-                        type="button"
-                        className={[
-                          "participle-flow-marker",
-                          count === 0 ? "participle-flow-marker--zero" : "",
-                          expandedFlowRootId === clause.finiteVerbId ? "participle-flow-marker--active" : ""
-                        ].filter(Boolean).join(" ")}
-                        key={clause.finiteVerbId}
-                        onClick={() =>
-                          setExpandedFlowRootId(current => (current === clause.finiteVerbId ? null : clause.finiteVerbId))
-                        }
-                        title={`${clause.reference} — ${count} circumstantial participle${count === 1 ? "" : "s"}${count === 0 ? " (checked, none found)" : ""}`}
-                      >
-                        <span className="participle-flow-bar" style={{ height: `${count > 0 ? Math.max(heightPct, 6) : 2}%` }} />
-                        <span className="participle-flow-count">{count}</span>
-                        <span className="participle-flow-ref">
-                          {clause.reference.replace(`${bookInfo.displayName} `, "")}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-              ) : (
-                <p className="clause-output-empty">No root clauses in the outline yet.</p>
-              )}
-
-              {expandedFlowRootId ? (() => {
-                const rootClause = clauseSpanInfos.find(candidate => candidate.finiteVerbId === expandedFlowRootId);
-                const tally = flowTallies.get(expandedFlowRootId);
-                return (
-                  <div className="participle-flow-detail">
-                    <p className="participle-flow-detail-root">
-                      <span className="clause-output-meta">{rootClause?.reference}</span>
-                      {rootClause?.spanText ?? expandedFlowRootId}
-                    </p>
-                    {tally?.entries.length ? (
-                      <ul className="participle-flow-detail-list">
-                        {tally.entries.map(entry => {
-                          const ridingRow = finiteVerbIdToRow.get(entry.ridingClauseId);
-                          return (
-                            <li key={entry.participleId}>
-                              <button
-                                type="button"
-                                className="participle-view-ref"
-                                onClick={() => jumpToParticipleClause(entry.participleId)}
-                              >
-                                {entry.text} — {entry.reference}
-                              </button>
-                              <span> attached to {ridingRow?.spanText ?? entry.ridingClauseId}</span>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    ) : (
-                      <p className="clause-output-empty">No circumstantial participles under this root.</p>
-                    )}
-                  </div>
-                );
-              })() : null}
-            </div>
-          ) : null}
-        </section>
-      ) : null}
-
-      {view === "structure" && activeVerb ? (
+      {activeVerb && !showSpanishOnly ? (
         <aside className="clause-selection-panel" aria-live="polite">
           <p className="clause-active-verb">
             <span>

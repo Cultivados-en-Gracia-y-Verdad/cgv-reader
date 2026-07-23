@@ -178,6 +178,8 @@ export interface WorkshopProgressKeys {
   clauseAssignmentsLegacy: string | null;
   clauseObservations: string;
   participleObservations: string;
+  /** Manual subject-host word spans for nominative participles (clauseId or verseKey → word ids). */
+  participleSubjectHosts: string;
 }
 
 export function workshopProgressKeys(bookId: ReaderBookId): WorkshopProgressKeys {
@@ -194,6 +196,7 @@ export function workshopProgressKeys(bookId: ReaderBookId): WorkshopProgressKeys
     clauseAssignments: `the-reader:spanish-clause-builder:${s}:v3`,
     clauseAssignmentsLegacy: s === "titus" ? "the-reader:clause-builder:titus:1:1-4:v2" : null,
     clauseObservations: `the-reader:spanish-clause-builder:${s}:statement-command-review:v1`,
-    participleObservations: `the-reader:spanish-clause-builder:${s}:participles:v1`
+    participleObservations: `the-reader:spanish-clause-builder:${s}:participles:v1`,
+    participleSubjectHosts: `the-reader:spanish-clause-builder:${s}:participle-subjects:v1`
   };
 }

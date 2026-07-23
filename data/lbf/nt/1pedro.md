@@ -128,7 +128,7 @@ también ustedes, como piedras vivas, son edificados como casa espiritual, sacer
 
 ### 2:6
 
-Por lo cual también contiene la Escritura Por lo cual también contiene la Escritura Miren, pongo en Sion una piedra angular, elegida y preciosa y el que cree en él no será avergonzado
+Por lo cual también contiene la Escritura: Miren, pongo en Sion una piedra angular, elegida y preciosa y el que cree en él no será avergonzado
 
 ### 2:7
 

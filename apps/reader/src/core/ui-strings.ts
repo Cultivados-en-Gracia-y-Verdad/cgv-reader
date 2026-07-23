@@ -10,6 +10,10 @@ export interface UiStrings {
   languageAria: string;
   preferences: string;
   prefLanguage: string;
+  prefTheme: string;
+  themeSystem: string;
+  themeLight: string;
+  themeDark: string;
   prefBook: string;
   prefBible: string;
   prefBibleNote: string;
@@ -86,6 +90,10 @@ const EN: UiStrings = {
   languageAria: "Interface language",
   preferences: "Preferences",
   prefLanguage: "Interface language",
+  prefTheme: "Appearance",
+  themeSystem: "System",
+  themeLight: "Light",
+  themeDark: "Dark",
   prefBook: "Book",
   prefBible: "Bible text (Reader)",
   prefBibleNote:
@@ -170,6 +178,10 @@ const ES: UiStrings = {
   languageAria: "Idioma de la interfaz",
   preferences: "Preferencias",
   prefLanguage: "Idioma de la interfaz",
+  prefTheme: "Apariencia",
+  themeSystem: "Sistema",
+  themeLight: "Claro",
+  themeDark: "Oscuro",
   prefBook: "Libro",
   prefBible: "Texto bíblico (Lector)",
   prefBibleNote:
