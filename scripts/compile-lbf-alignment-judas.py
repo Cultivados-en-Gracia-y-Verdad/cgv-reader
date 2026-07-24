@@ -244,6 +244,48 @@ def main() -> None:
         if pending_tr_only:
             warnings.append(f"{chapter}:{verse}: unused TR-only surfaces {pending_tr_only}")
 
+    # MorphGNT-only tokens with no TR sourceTokenId (or TR reorder gaps).
+    morph_only_patches = [
+        (1, 3, 10, "de nuestra"),
+        (1, 12, 3, "escollos"),
+        (1, 23, 7, "y a otros"),
+        (1, 23, 8, "y a otros"),
+        (1, 23, 9, "tengan misericordia con temor"),
+        (1, 25, 5, "por medio de Jesús Cristo nuestro Señor"),
+        (1, 25, 6, "por medio de Jesús Cristo nuestro Señor"),
+        (1, 25, 7, "por medio de Jesús Cristo nuestro Señor"),
+        (1, 25, 8, "por medio de Jesús Cristo nuestro Señor"),
+        (1, 25, 9, "por medio de Jesús Cristo nuestro Señor"),
+        (1, 25, 10, "por medio de Jesús Cristo nuestro Señor"),
+        (1, 25, 16, "antes de todo el siglo, y ahora"),
+        (1, 25, 17, "antes de todo el siglo, y ahora"),
+        (1, 25, 18, "antes de todo el siglo, y ahora"),
+        (1, 25, 19, "antes de todo el siglo, y ahora"),
+    ]
+    morph_patches_applied = 0
+    for chapter, verse, morph_index, surface in morph_only_patches:
+        key = (chapter, verse, morph_index)
+        if key in records:
+            continue
+        verse_text = lbf.get((chapter, verse), "")
+        words = tokenize(verse_text)
+        try:
+            anchor, _ = unit_word_index(words, surface, 0)
+        except ValueError as err:
+            warnings.append(f"{chapter}:{verse}: morph-only patch failed: {err}")
+            continue
+        surfaces = ble.get((chapter, verse), [])
+        greek = surfaces[morph_index - 1] if 0 < morph_index <= len(surfaces) else "?"
+        records[key] = {
+            "chapter": chapter,
+            "verse": verse,
+            "token": morph_index,
+            "greekSurface": greek,
+            "lbfSurface": surface,
+            "lbfWordIndex": anchor,
+        }
+        morph_patches_applied += 1
+
     out_records = sorted(records.values(), key=lambda r: (r["chapter"], r["verse"], r["token"]))
     total = sum(len(v) for v in ble.values())
     payload = {
@@ -253,7 +295,8 @@ def main() -> None:
             "greekSpine": "MorphGNT/BLE",
             "note": (
                 "Compiled from translator reverse-links.json via TR spine morphIndex. "
-                "TR-only tokens skipped. Re-run compile-lbf-alignment-judas.py after link edits."
+                "TR-only tokens skipped. Morph-only gaps patched where Spanish is clear. "
+                "Re-run compile-lbf-alignment-judas.py after link edits."
             ),
             "coverage": f"{len(out_records)}/{total}",
             "alignedTokens": len(out_records),
@@ -261,6 +304,7 @@ def main() -> None:
             "repairs": {
                 "unitsApplied": units_applied,
                 "trOnlySkipped": tr_only_skipped,
+                "morphOnlyPatches": morph_patches_applied,
                 "warnings": len(warnings),
             },
         },

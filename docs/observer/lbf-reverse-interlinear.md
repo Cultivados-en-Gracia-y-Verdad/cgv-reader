@@ -85,7 +85,8 @@ Unaligned tokens show the BLE gloss in italics as a fallback cue.
 Same pipeline as 1 Pedro:
 
 1. Translator reverse links: `cgv-translator/translations/tr-spine/jude/jude-reverse-links.json`
-   (seed with `scripts/seed_jude_reverse_links.py`; hand-refine in UI).
+   (full-book manual realign via `scripts/rebuild_jude_manual_reverse_links.py` after the
+   auto-zip slide; do not re-seed with `seed_jude_reverse_links.py` unless starting over).
 2. Compile Reader alignment:
 
 ```bash
@@ -93,9 +94,25 @@ python3 scripts/compile-lbf-alignment-judas.py
 ```
 
 `data/lbf/nt/judas.alignment.json` is the Structure map. Re-run after link edits.
+Compile also patches MorphGNT-only gaps (no TR `sourceTokenId`) where LBF Spanish is clear.
+
+## 1 Juan
+
+Same pipeline as Judas / 1 Pedro:
+
+1. TR spine: `cgv-translator/scripts/build_tr_spine_1john.py`
+   → `translations/tr-spine/1john/`
+2. Reverse links: `scripts/seed_1john_reverse_links.py` (auto scaffold; hand-refine in UI)
+3. Compile Reader alignment:
+
+```bash
+python3 scripts/compile-lbf-alignment-1juan.py
+```
+
+`data/lbf/nt/1juan.alignment.json` is the Structure map. Re-run after link edits.
 
 ## Open follow-ups
 
-1. Finish 1 Pedro / Judas reverse links to Tito’s hand-quality bar (see ADR-0001 checklist).
-2. Promote Tito + 1 Pedro + Judas together into `cgv-data`; cut Reader over from staging.
+1. Finish 1 Pedro / Judas / 1 Juan reverse links to Tito’s hand-quality bar (see ADR-0001 checklist).
+2. Promote LBF Structure books together into `cgv-data`; cut Reader over from staging.
 3. Plan TR1894 Greek spine switch when multi-book LBF work demands it.
