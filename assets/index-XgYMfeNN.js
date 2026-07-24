@@ -13970,13 +13970,14 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
     "book": "judas",
     "spanish": "LBF",
     "greekSpine": "MorphGNT/BLE",
-    "note": "Compiled from translator reverse-links.json via TR spine morphIndex. TR-only tokens skipped. Re-run compile-lbf-alignment-judas.py after link edits.",
-    "coverage": "436/459",
-    "alignedTokens": 436,
+    "note": "Compiled from translator reverse-links.json via TR spine morphIndex. TR-only tokens skipped. Morph-only gaps patched where Spanish is clear. Re-run compile-lbf-alignment-judas.py after link edits.",
+    "coverage": "459/459",
+    "alignedTokens": 459,
     "totalTokens": 459,
     "repairs": {
-      "unitsApplied": 354,
-      "trOnlySkipped": 0,
+      "unitsApplied": 307,
+      "trOnlySkipped": 3,
+      "morphOnlyPatches": 15,
       "warnings": 0
     }
   },
@@ -13994,32 +13995,32 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 1,
       "token": 2,
       "greekSurface": "Ἰησοῦ",
-      "lbfSurface": "Judas",
-      "lbfWordIndex": 0
-    },
-    {
-      "chapter": 1,
-      "verse": 1,
-      "token": 3,
-      "greekSurface": "Χριστοῦ",
-      "lbfSurface": "siervo",
-      "lbfWordIndex": 1
-    },
-    {
-      "chapter": 1,
-      "verse": 1,
-      "token": 4,
-      "greekSurface": "δοῦλος,",
       "lbfSurface": "de Jesús",
       "lbfWordIndex": 3
     },
     {
       "chapter": 1,
       "verse": 1,
-      "token": 5,
-      "greekSurface": "ἀδελφὸς",
+      "token": 3,
+      "greekSurface": "Χριστοῦ",
       "lbfSurface": "Cristo",
       "lbfWordIndex": 4
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 4,
+      "greekSurface": "δοῦλος,",
+      "lbfSurface": "siervo",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 5,
+      "greekSurface": "ἀδελφὸς",
+      "lbfSurface": "y hermano",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 1,
@@ -14050,72 +14051,72 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 1,
       "token": 9,
       "greekSurface": "ἐν",
-      "lbfSurface": "a los llamados",
-      "lbfWordIndex": 11
+      "lbfSurface": "en Dios",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
       "verse": 1,
       "token": 10,
       "greekSurface": "θεῷ",
-      "lbfSurface": "amados",
-      "lbfWordIndex": 12
+      "lbfSurface": "en Dios",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
       "verse": 1,
       "token": 11,
       "greekSurface": "πατρὶ",
-      "lbfSurface": "en Dios",
-      "lbfWordIndex": 14
-    },
-    {
-      "chapter": 1,
-      "verse": 1,
-      "token": 12,
-      "greekSurface": "⸀ἠγαπημένοις",
-      "lbfSurface": "en Dios",
-      "lbfWordIndex": 14
-    },
-    {
-      "chapter": 1,
-      "verse": 1,
-      "token": 13,
-      "greekSurface": "καὶ",
       "lbfSurface": "Padre",
       "lbfWordIndex": 15
     },
     {
       "chapter": 1,
       "verse": 1,
+      "token": 12,
+      "greekSurface": "⸀ἠγαπημένοις",
+      "lbfSurface": "amados",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 13,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y guardados",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
       "token": 14,
       "greekSurface": "Ἰησοῦ",
-      "lbfSurface": "y guardados",
-      "lbfWordIndex": 17
-    },
-    {
-      "chapter": 1,
-      "verse": 1,
-      "token": 15,
-      "greekSurface": "Χριστῷ",
-      "lbfSurface": "y guardados",
-      "lbfWordIndex": 17
-    },
-    {
-      "chapter": 1,
-      "verse": 1,
-      "token": 16,
-      "greekSurface": "τετηρημένοις",
       "lbfSurface": "para Jesús",
       "lbfWordIndex": 19
     },
     {
       "chapter": 1,
       "verse": 1,
-      "token": 17,
-      "greekSurface": "κλητοῖς·",
+      "token": 15,
+      "greekSurface": "Χριστῷ",
       "lbfSurface": "Cristo",
       "lbfWordIndex": 20
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 16,
+      "greekSurface": "τετηρημένοις",
+      "lbfSurface": "y guardados",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 1,
+      "verse": 1,
+      "token": 17,
+      "greekSurface": "κλητοῖς·",
+      "lbfSurface": "a los llamados",
+      "lbfWordIndex": 11
     },
     {
       "chapter": 1,
@@ -14130,8 +14131,8 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 2,
       "token": 2,
       "greekSurface": "ὑμῖν",
-      "lbfSurface": "Misericordia",
-      "lbfWordIndex": 0
+      "lbfSurface": "les sean multiplicados",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 1,
@@ -14146,31 +14147,31 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 2,
       "token": 4,
       "greekSurface": "εἰρήνη",
-      "lbfSurface": "y amor",
-      "lbfWordIndex": 3
+      "lbfSurface": "paz",
+      "lbfWordIndex": 1
     },
     {
       "chapter": 1,
       "verse": 2,
       "token": 5,
       "greekSurface": "καὶ",
-      "lbfSurface": "les",
-      "lbfWordIndex": 4
+      "lbfSurface": "y amor",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 1,
       "verse": 2,
       "token": 6,
       "greekSurface": "ἀγάπη",
-      "lbfSurface": "sean",
-      "lbfWordIndex": 5
+      "lbfSurface": "y amor",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 1,
       "verse": 2,
       "token": 7,
       "greekSurface": "πληθυνθείη.",
-      "lbfSurface": "multiplicados",
+      "lbfSurface": "les sean multiplicados",
       "lbfWordIndex": 6
     },
     {
@@ -14186,32 +14187,32 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 3,
       "token": 2,
       "greekSurface": "πᾶσαν",
-      "lbfSurface": "Amados",
-      "lbfWordIndex": 0
-    },
-    {
-      "chapter": 1,
-      "verse": 3,
-      "token": 3,
-      "greekSurface": "σπουδὴν",
-      "lbfSurface": "poniéndome",
-      "lbfWordIndex": 1
-    },
-    {
-      "chapter": 1,
-      "verse": 3,
-      "token": 4,
-      "greekSurface": "ποιούμενος",
       "lbfSurface": "toda",
       "lbfWordIndex": 2
     },
     {
       "chapter": 1,
       "verse": 3,
-      "token": 5,
-      "greekSurface": "γράφειν",
+      "token": 3,
+      "greekSurface": "σπουδὴν",
       "lbfSurface": "diligencia",
       "lbfWordIndex": 3
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 4,
+      "greekSurface": "ποιούμενος",
+      "lbfSurface": "poniéndome",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 5,
+      "greekSurface": "γράφειν",
+      "lbfSurface": "en escribirles",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 1,
@@ -14248,6 +14249,14 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
     {
       "chapter": 1,
       "verse": 3,
+      "token": 10,
+      "greekSurface": "⸀ἡμῶν",
+      "lbfSurface": "de nuestra",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
       "token": 11,
       "greekSurface": "σωτηρίας",
       "lbfSurface": "salvación",
@@ -14258,184 +14267,184 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 3,
       "token": 12,
       "greekSurface": "ἀνάγκην",
-      "lbfSurface": "me",
-      "lbfWordIndex": 11
-    },
-    {
-      "chapter": 1,
-      "verse": 3,
-      "token": 13,
-      "greekSurface": "ἔσχον",
-      "lbfSurface": "me",
-      "lbfWordIndex": 11
-    },
-    {
-      "chapter": 1,
-      "verse": 3,
-      "token": 14,
-      "greekSurface": "γράψαι",
-      "lbfSurface": "vi",
-      "lbfWordIndex": 12
-    },
-    {
-      "chapter": 1,
-      "verse": 3,
-      "token": 15,
-      "greekSurface": "ὑμῖν",
       "lbfSurface": "en la necesidad",
       "lbfWordIndex": 15
     },
     {
       "chapter": 1,
       "verse": 3,
-      "token": 16,
-      "greekSurface": "παρακαλῶν",
+      "token": 13,
+      "greekSurface": "ἔσχον",
+      "lbfSurface": "me vi",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 14,
+      "greekSurface": "γράψαι",
       "lbfSurface": "de escribirles",
       "lbfWordIndex": 17
     },
     {
       "chapter": 1,
       "verse": 3,
-      "token": 17,
-      "greekSurface": "ἐπαγωνίζεσθαι",
+      "token": 15,
+      "greekSurface": "ὑμῖν",
+      "lbfSurface": "de escribirles",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
+      "token": 16,
+      "greekSurface": "παρακαλῶν",
       "lbfSurface": "exhortándolos",
       "lbfWordIndex": 18
     },
     {
       "chapter": 1,
       "verse": 3,
-      "token": 18,
-      "greekSurface": "τῇ",
+      "token": 17,
+      "greekSurface": "ἐπαγωνίζεσθαι",
       "lbfSurface": "a contender",
       "lbfWordIndex": 20
     },
     {
       "chapter": 1,
       "verse": 3,
-      "token": 19,
-      "greekSurface": "ἅπαξ",
+      "token": 18,
+      "greekSurface": "τῇ",
       "lbfSurface": "por la fe",
       "lbfWordIndex": 23
     },
     {
       "chapter": 1,
       "verse": 3,
-      "token": 20,
-      "greekSurface": "παραδοθείσῃ",
+      "token": 19,
+      "greekSurface": "ἅπαξ",
       "lbfSurface": "que una vez",
       "lbfWordIndex": 26
     },
     {
       "chapter": 1,
       "verse": 3,
+      "token": 20,
+      "greekSurface": "παραδοθείσῃ",
+      "lbfSurface": "fue entregada",
+      "lbfWordIndex": 27
+    },
+    {
+      "chapter": 1,
+      "verse": 3,
       "token": 21,
       "greekSurface": "τοῖς",
-      "lbfSurface": "fue",
-      "lbfWordIndex": 27
+      "lbfSurface": "a los santos",
+      "lbfWordIndex": 31
     },
     {
       "chapter": 1,
       "verse": 3,
       "token": 22,
       "greekSurface": "ἁγίοις",
-      "lbfSurface": "entregada",
-      "lbfWordIndex": 28
+      "lbfSurface": "a los santos",
+      "lbfWordIndex": 31
     },
     {
       "chapter": 1,
       "verse": 3,
       "token": 23,
       "greekSurface": "πίστει.",
-      "lbfSurface": "a los santos",
-      "lbfWordIndex": 31
+      "lbfSurface": "por la fe",
+      "lbfWordIndex": 23
     },
     {
       "chapter": 1,
       "verse": 4,
       "token": 1,
       "greekSurface": "παρεισέδυσαν",
-      "lbfSurface": "Porque",
-      "lbfWordIndex": 0
+      "lbfSurface": "se han infiltrado",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 1,
       "verse": 4,
       "token": 2,
       "greekSurface": "γάρ",
-      "lbfSurface": "se",
-      "lbfWordIndex": 1
+      "lbfSurface": "Porque",
+      "lbfWordIndex": 0
     },
     {
       "chapter": 1,
       "verse": 4,
       "token": 3,
       "greekSurface": "τινες",
-      "lbfSurface": "han",
-      "lbfWordIndex": 2
-    },
-    {
-      "chapter": 1,
-      "verse": 4,
-      "token": 4,
-      "greekSurface": "ἄνθρωποι,",
-      "lbfSurface": "infiltrado",
-      "lbfWordIndex": 3
-    },
-    {
-      "chapter": 1,
-      "verse": 4,
-      "token": 5,
-      "greekSurface": "οἱ",
       "lbfSurface": "algunos",
       "lbfWordIndex": 4
     },
     {
       "chapter": 1,
       "verse": 4,
-      "token": 6,
-      "greekSurface": "πάλαι",
+      "token": 4,
+      "greekSurface": "ἄνθρωποι,",
       "lbfSurface": "hombres",
       "lbfWordIndex": 5
     },
     {
       "chapter": 1,
       "verse": 4,
+      "token": 5,
+      "greekSurface": "οἱ",
+      "lbfSurface": "los cuales",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 6,
+      "greekSurface": "πάλαι",
+      "lbfSurface": "desde antiguo",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
       "token": 7,
       "greekSurface": "προγεγραμμένοι",
-      "lbfSurface": "desde",
-      "lbfWordIndex": 8
+      "lbfSurface": "estaban marcados",
+      "lbfWordIndex": 11
     },
     {
       "chapter": 1,
       "verse": 4,
       "token": 8,
       "greekSurface": "εἰς",
-      "lbfSurface": "antiguo",
-      "lbfWordIndex": 9
+      "lbfSurface": "para esta condenación",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
       "verse": 4,
       "token": 9,
       "greekSurface": "τοῦτο",
-      "lbfSurface": "estaban",
-      "lbfWordIndex": 10
+      "lbfSurface": "para esta condenación",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
       "verse": 4,
       "token": 10,
       "greekSurface": "τὸ",
-      "lbfSurface": "marcados",
-      "lbfWordIndex": 11
+      "lbfSurface": "para esta condenación",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
       "verse": 4,
       "token": 11,
       "greekSurface": "κρίμα,",
-      "lbfSurface": "para esta",
-      "lbfWordIndex": 13
+      "lbfSurface": "para esta condenación",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
@@ -14450,32 +14459,32 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 4,
       "token": 13,
       "greekSurface": "τὴν",
-      "lbfSurface": "impíos",
-      "lbfWordIndex": 15
+      "lbfSurface": "la gracia",
+      "lbfWordIndex": 21
     },
     {
       "chapter": 1,
       "verse": 4,
       "token": 14,
       "greekSurface": "τοῦ",
-      "lbfSurface": "que convierten",
-      "lbfWordIndex": 17
+      "lbfSurface": "de nuestro Dios",
+      "lbfWordIndex": 24
     },
     {
       "chapter": 1,
       "verse": 4,
       "token": 15,
       "greekSurface": "θεοῦ",
-      "lbfSurface": "en lascivia",
-      "lbfWordIndex": 19
+      "lbfSurface": "de nuestro Dios",
+      "lbfWordIndex": 24
     },
     {
       "chapter": 1,
       "verse": 4,
       "token": 16,
       "greekSurface": "ἡμῶν",
-      "lbfSurface": "en lascivia",
-      "lbfWordIndex": 19
+      "lbfSurface": "de nuestro Dios",
+      "lbfWordIndex": 24
     },
     {
       "chapter": 1,
@@ -14490,24 +14499,24 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 4,
       "token": 18,
       "greekSurface": "μετατιθέντες",
-      "lbfSurface": "de nuestro",
-      "lbfWordIndex": 23
+      "lbfSurface": "que convierten",
+      "lbfWordIndex": 17
     },
     {
       "chapter": 1,
       "verse": 4,
       "token": 19,
       "greekSurface": "εἰς",
-      "lbfSurface": "de nuestro",
-      "lbfWordIndex": 23
+      "lbfSurface": "en lascivia",
+      "lbfWordIndex": 19
     },
     {
       "chapter": 1,
       "verse": 4,
       "token": 20,
       "greekSurface": "ἀσέλγειαν",
-      "lbfSurface": "Dios",
-      "lbfWordIndex": 24
+      "lbfSurface": "en lascivia",
+      "lbfWordIndex": 19
     },
     {
       "chapter": 1,
@@ -14522,80 +14531,80 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 4,
       "token": 22,
       "greekSurface": "τὸν",
-      "lbfSurface": "y niegan",
-      "lbfWordIndex": 26
-    },
-    {
-      "chapter": 1,
-      "verse": 4,
-      "token": 23,
-      "greekSurface": "μόνον",
       "lbfSurface": "a nuestro",
       "lbfWordIndex": 28
     },
     {
       "chapter": 1,
       "verse": 4,
+      "token": 23,
+      "greekSurface": "μόνον",
+      "lbfSurface": "único",
+      "lbfWordIndex": 29
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
       "token": 24,
       "greekSurface": "⸀δεσπότην",
-      "lbfSurface": "único",
-      "lbfWordIndex": 29
-    },
-    {
-      "chapter": 1,
-      "verse": 4,
-      "token": 25,
-      "greekSurface": "καὶ",
-      "lbfSurface": "único",
-      "lbfWordIndex": 29
-    },
-    {
-      "chapter": 1,
-      "verse": 4,
-      "token": 26,
-      "greekSurface": "κύριον",
       "lbfSurface": "Dueño",
       "lbfWordIndex": 30
     },
     {
       "chapter": 1,
       "verse": 4,
-      "token": 27,
-      "greekSurface": "ἡμῶν",
+      "token": 25,
+      "greekSurface": "καὶ",
       "lbfSurface": "y Señor",
       "lbfWordIndex": 32
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 26,
+      "greekSurface": "κύριον",
+      "lbfSurface": "y Señor",
+      "lbfWordIndex": 32
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 27,
+      "greekSurface": "ἡμῶν",
+      "lbfSurface": "a nuestro",
+      "lbfWordIndex": 28
     },
     {
       "chapter": 1,
       "verse": 4,
       "token": 28,
       "greekSurface": "Ἰησοῦν",
-      "lbfSurface": "y Señor",
-      "lbfWordIndex": 32
-    },
-    {
-      "chapter": 1,
-      "verse": 4,
-      "token": 29,
-      "greekSurface": "Χριστὸν",
       "lbfSurface": "Jesús",
       "lbfWordIndex": 33
     },
     {
       "chapter": 1,
       "verse": 4,
-      "token": 30,
-      "greekSurface": "ἀρνούμενοι.",
+      "token": 29,
+      "greekSurface": "Χριστὸν",
       "lbfSurface": "Cristo",
       "lbfWordIndex": 34
+    },
+    {
+      "chapter": 1,
+      "verse": 4,
+      "token": 30,
+      "greekSurface": "ἀρνούμενοι.",
+      "lbfSurface": "y niegan",
+      "lbfWordIndex": 26
     },
     {
       "chapter": 1,
       "verse": 5,
       "token": 1,
       "greekSurface": "Ὑπομνῆσαι",
-      "lbfSurface": "Quiero",
-      "lbfWordIndex": 0
+      "lbfSurface": "recordarles",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 1,
@@ -14618,32 +14627,32 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 5,
       "token": 4,
       "greekSurface": "βούλομαι,",
-      "lbfSurface": "aunque",
-      "lbfWordIndex": 3
+      "lbfSurface": "Quiero",
+      "lbfWordIndex": 0
     },
     {
       "chapter": 1,
       "verse": 5,
       "token": 5,
       "greekSurface": "εἰδότας",
-      "lbfSurface": "ustedes",
-      "lbfWordIndex": 4
+      "lbfSurface": "ya lo saben",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 1,
       "verse": 5,
       "token": 6,
       "greekSurface": "⸂ὑμᾶς",
-      "lbfSurface": "ya",
-      "lbfWordIndex": 5
+      "lbfSurface": "aunque ustedes",
+      "lbfWordIndex": 4
     },
     {
       "chapter": 1,
       "verse": 5,
       "token": 7,
       "greekSurface": "ἅπαξ⸃",
-      "lbfSurface": "lo saben",
-      "lbfWordIndex": 7
+      "lbfSurface": "de una vez",
+      "lbfWordIndex": 11
     },
     {
       "chapter": 1,
@@ -14674,48 +14683,48 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 5,
       "token": 11,
       "greekSurface": "λαὸν",
-      "lbfSurface": "habiendo",
-      "lbfWordIndex": 14
+      "lbfSurface": "al pueblo",
+      "lbfWordIndex": 17
     },
     {
       "chapter": 1,
       "verse": 5,
       "token": 12,
       "greekSurface": "ἐκ",
-      "lbfSurface": "salvado",
-      "lbfWordIndex": 15
-    },
-    {
-      "chapter": 1,
-      "verse": 5,
-      "token": 13,
-      "greekSurface": "γῆς",
-      "lbfSurface": "al pueblo",
-      "lbfWordIndex": 17
-    },
-    {
-      "chapter": 1,
-      "verse": 5,
-      "token": 14,
-      "greekSurface": "Αἰγύπτου",
-      "lbfSurface": "al pueblo",
-      "lbfWordIndex": 17
-    },
-    {
-      "chapter": 1,
-      "verse": 5,
-      "token": 15,
-      "greekSurface": "σώσας",
       "lbfSurface": "de la tierra",
       "lbfWordIndex": 20
     },
     {
       "chapter": 1,
       "verse": 5,
-      "token": 16,
-      "greekSurface": "τὸ",
+      "token": 13,
+      "greekSurface": "γῆς",
+      "lbfSurface": "de la tierra",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 14,
+      "greekSurface": "Αἰγύπτου",
       "lbfSurface": "de Egipto",
       "lbfWordIndex": 22
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 15,
+      "greekSurface": "σώσας",
+      "lbfSurface": "habiendo salvado",
+      "lbfWordIndex": 15
+    },
+    {
+      "chapter": 1,
+      "verse": 5,
+      "token": 16,
+      "greekSurface": "τὸ",
+      "lbfSurface": "después",
+      "lbfWordIndex": 23
     },
     {
       "chapter": 1,
@@ -14730,32 +14739,32 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 5,
       "token": 18,
       "greekSurface": "τοὺς",
-      "lbfSurface": "después",
-      "lbfWordIndex": 23
+      "lbfSurface": "a los que no creyeron",
+      "lbfWordIndex": 29
     },
     {
       "chapter": 1,
       "verse": 5,
       "token": 19,
       "greekSurface": "μὴ",
-      "lbfSurface": "destruyó",
-      "lbfWordIndex": 24
+      "lbfSurface": "a los que no creyeron",
+      "lbfWordIndex": 29
     },
     {
       "chapter": 1,
       "verse": 5,
       "token": 20,
       "greekSurface": "πιστεύσαντας",
-      "lbfSurface": "a los que no",
-      "lbfWordIndex": 28
+      "lbfSurface": "a los que no creyeron",
+      "lbfWordIndex": 29
     },
     {
       "chapter": 1,
       "verse": 5,
       "token": 21,
       "greekSurface": "ἀπώλεσεν,",
-      "lbfSurface": "creyeron",
-      "lbfWordIndex": 29
+      "lbfSurface": "destruyó",
+      "lbfWordIndex": 24
     },
     {
       "chapter": 1,
@@ -14778,15 +14787,15 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 6,
       "token": 3,
       "greekSurface": "τοὺς",
-      "lbfSurface": "que no",
-      "lbfWordIndex": 5
+      "lbfSurface": "que no guardaron",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 1,
       "verse": 6,
       "token": 4,
       "greekSurface": "μὴ",
-      "lbfSurface": "guardaron",
+      "lbfSurface": "que no guardaron",
       "lbfWordIndex": 6
     },
     {
@@ -14794,7 +14803,7 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 6,
       "token": 5,
       "greekSurface": "τηρήσαντας",
-      "lbfSurface": "guardaron",
+      "lbfSurface": "que no guardaron",
       "lbfWordIndex": 6
     },
     {
@@ -14802,15 +14811,15 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 6,
       "token": 6,
       "greekSurface": "τὴν",
-      "lbfSurface": "su propio",
-      "lbfWordIndex": 8
+      "lbfSurface": "su propio dominio",
+      "lbfWordIndex": 9
     },
     {
       "chapter": 1,
       "verse": 6,
       "token": 7,
       "greekSurface": "ἑαυτῶν",
-      "lbfSurface": "dominio",
+      "lbfSurface": "su propio dominio",
       "lbfWordIndex": 9
     },
     {
@@ -14818,7 +14827,7 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 6,
       "token": 8,
       "greekSurface": "ἀρχὴν",
-      "lbfSurface": "dominio",
+      "lbfSurface": "su propio dominio",
       "lbfWordIndex": 9
     },
     {
@@ -14842,23 +14851,23 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 6,
       "token": 11,
       "greekSurface": "τὸ",
-      "lbfSurface": "que abandonaron",
-      "lbfWordIndex": 12
+      "lbfSurface": "su propia morada",
+      "lbfWordIndex": 15
     },
     {
       "chapter": 1,
       "verse": 6,
       "token": 12,
       "greekSurface": "ἴδιον",
-      "lbfSurface": "su propia",
-      "lbfWordIndex": 14
+      "lbfSurface": "su propia morada",
+      "lbfWordIndex": 15
     },
     {
       "chapter": 1,
       "verse": 6,
       "token": 13,
       "greekSurface": "οἰκητήριον",
-      "lbfSurface": "morada",
+      "lbfSurface": "su propia morada",
       "lbfWordIndex": 15
     },
     {
@@ -14866,32 +14875,32 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 6,
       "token": 14,
       "greekSurface": "εἰς",
-      "lbfSurface": "los ha",
-      "lbfWordIndex": 17
+      "lbfSurface": "para el juicio",
+      "lbfWordIndex": 26
     },
     {
       "chapter": 1,
       "verse": 6,
       "token": 15,
       "greekSurface": "κρίσιν",
-      "lbfSurface": "guardado",
-      "lbfWordIndex": 18
+      "lbfSurface": "para el juicio",
+      "lbfWordIndex": 26
     },
     {
       "chapter": 1,
       "verse": 6,
       "token": 16,
       "greekSurface": "μεγάλης",
-      "lbfSurface": "bajo",
-      "lbfWordIndex": 19
+      "lbfSurface": "del gran día",
+      "lbfWordIndex": 29
     },
     {
       "chapter": 1,
       "verse": 6,
       "token": 17,
       "greekSurface": "ἡμέρας",
-      "lbfSurface": "tinieblas",
-      "lbfWordIndex": 20
+      "lbfSurface": "del gran día",
+      "lbfWordIndex": 29
     },
     {
       "chapter": 1,
@@ -14914,24 +14923,24 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 6,
       "token": 20,
       "greekSurface": "ὑπὸ",
-      "lbfSurface": "para el juicio",
-      "lbfWordIndex": 26
+      "lbfSurface": "bajo tinieblas",
+      "lbfWordIndex": 20
     },
     {
       "chapter": 1,
       "verse": 6,
       "token": 21,
       "greekSurface": "ζόφον",
-      "lbfSurface": "del gran",
-      "lbfWordIndex": 28
+      "lbfSurface": "bajo tinieblas",
+      "lbfWordIndex": 20
     },
     {
       "chapter": 1,
       "verse": 6,
       "token": 22,
       "greekSurface": "τετήρηκεν·",
-      "lbfSurface": "día",
-      "lbfWordIndex": 29
+      "lbfSurface": "los ha guardado",
+      "lbfWordIndex": 18
     },
     {
       "chapter": 1,
@@ -14946,64 +14955,64 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 7,
       "token": 2,
       "greekSurface": "Σόδομα",
-      "lbfSurface": "como",
-      "lbfWordIndex": 0
+      "lbfSurface": "Sodoma",
+      "lbfWordIndex": 1
     },
     {
       "chapter": 1,
       "verse": 7,
       "token": 3,
       "greekSurface": "καὶ",
-      "lbfSurface": "Sodoma",
-      "lbfWordIndex": 1
+      "lbfSurface": "y Gomorra",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 1,
       "verse": 7,
       "token": 4,
       "greekSurface": "Γόμορρα",
-      "lbfSurface": "Sodoma",
-      "lbfWordIndex": 1
+      "lbfSurface": "y Gomorra",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 1,
       "verse": 7,
       "token": 5,
       "greekSurface": "καὶ",
-      "lbfSurface": "y Gomorra",
-      "lbfWordIndex": 3
+      "lbfSurface": "y las ciudades",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 1,
       "verse": 7,
       "token": 6,
       "greekSurface": "αἱ",
-      "lbfSurface": "y Gomorra",
-      "lbfWordIndex": 3
+      "lbfSurface": "y las ciudades",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 1,
       "verse": 7,
       "token": 7,
       "greekSurface": "περὶ",
-      "lbfSurface": "y las ciudades",
-      "lbfWordIndex": 6
+      "lbfSurface": "de alrededor",
+      "lbfWordIndex": 8
     },
     {
       "chapter": 1,
       "verse": 7,
       "token": 8,
       "greekSurface": "αὐτὰς",
-      "lbfSurface": "y las ciudades",
-      "lbfWordIndex": 6
+      "lbfSurface": "de alrededor",
+      "lbfWordIndex": 8
     },
     {
       "chapter": 1,
       "verse": 7,
       "token": 9,
       "greekSurface": "πόλεις,",
-      "lbfSurface": "de alrededor",
-      "lbfWordIndex": 8
+      "lbfSurface": "y las ciudades",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 1,
@@ -15018,71 +15027,79 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 7,
       "token": 11,
       "greekSurface": "ὅμοιον",
-      "lbfSurface": "de la misma",
-      "lbfWordIndex": 13
+      "lbfSurface": "de la misma manera",
+      "lbfWordIndex": 14
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 12,
+      "greekSurface": "⸂τρόπον",
+      "lbfSurface": "de la misma manera",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
       "verse": 7,
       "token": 13,
       "greekSurface": "τούτοις⸃",
-      "lbfSurface": "manera",
-      "lbfWordIndex": 14
-    },
-    {
-      "chapter": 1,
-      "verse": 7,
-      "token": 14,
-      "greekSurface": "ἐκπορνεύσασαι",
       "lbfSurface": "que aquellos",
       "lbfWordIndex": 16
     },
     {
       "chapter": 1,
       "verse": 7,
-      "token": 15,
-      "greekSurface": "καὶ",
-      "lbfSurface": "se",
-      "lbfWordIndex": 17
-    },
-    {
-      "chapter": 1,
-      "verse": 7,
-      "token": 16,
-      "greekSurface": "ἀπελθοῦσαι",
-      "lbfSurface": "a la fornicación",
+      "token": 14,
+      "greekSurface": "ἐκπορνεύσασαι",
+      "lbfSurface": "se entregaron a la fornicación",
       "lbfWordIndex": 21
     },
     {
       "chapter": 1,
       "verse": 7,
-      "token": 17,
-      "greekSurface": "ὀπίσω",
+      "token": 15,
+      "greekSurface": "καὶ",
       "lbfSurface": "y fueron",
       "lbfWordIndex": 23
     },
     {
       "chapter": 1,
       "verse": 7,
-      "token": 18,
-      "greekSurface": "σαρκὸς",
+      "token": 16,
+      "greekSurface": "ἀπελθοῦσαι",
+      "lbfSurface": "y fueron",
+      "lbfWordIndex": 23
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
+      "token": 17,
+      "greekSurface": "ὀπίσω",
       "lbfSurface": "tras",
       "lbfWordIndex": 24
     },
     {
       "chapter": 1,
       "verse": 7,
-      "token": 19,
-      "greekSurface": "ἑτέρας,",
+      "token": 18,
+      "greekSurface": "σαρκὸς",
       "lbfSurface": "carne",
       "lbfWordIndex": 25
     },
     {
       "chapter": 1,
       "verse": 7,
+      "token": 19,
+      "greekSurface": "ἑτέρας,",
+      "lbfSurface": "extraña",
+      "lbfWordIndex": 26
+    },
+    {
+      "chapter": 1,
+      "verse": 7,
       "token": 20,
       "greekSurface": "πρόκεινται",
-      "lbfSurface": "están",
+      "lbfSurface": "están puestas",
       "lbfWordIndex": 27
     },
     {
@@ -15090,24 +15107,24 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 7,
       "token": 21,
       "greekSurface": "δεῖγμα",
-      "lbfSurface": "puestas",
-      "lbfWordIndex": 28
+      "lbfSurface": "como ejemplo",
+      "lbfWordIndex": 30
     },
     {
       "chapter": 1,
       "verse": 7,
       "token": 22,
       "greekSurface": "πυρὸς",
-      "lbfSurface": "como",
-      "lbfWordIndex": 29
+      "lbfSurface": "de fuego",
+      "lbfWordIndex": 35
     },
     {
       "chapter": 1,
       "verse": 7,
       "token": 23,
       "greekSurface": "αἰωνίου",
-      "lbfSurface": "sufriendo",
-      "lbfWordIndex": 31
+      "lbfSurface": "eterno",
+      "lbfWordIndex": 36
     },
     {
       "chapter": 1,
@@ -15122,56 +15139,56 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 7,
       "token": 25,
       "greekSurface": "ὑπέχουσαι.",
-      "lbfSurface": "de fuego",
-      "lbfWordIndex": 35
+      "lbfSurface": "sufriendo",
+      "lbfWordIndex": 31
     },
     {
       "chapter": 1,
       "verse": 8,
       "token": 1,
       "greekSurface": "Ὁμοίως",
-      "lbfSurface": "De la misma",
-      "lbfWordIndex": 2
+      "lbfSurface": "De la misma manera",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 1,
       "verse": 8,
       "token": 2,
       "greekSurface": "μέντοι",
-      "lbfSurface": "De la misma",
-      "lbfWordIndex": 2
+      "lbfSurface": "De la misma manera",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 1,
       "verse": 8,
       "token": 3,
       "greekSurface": "καὶ",
-      "lbfSurface": "manera",
-      "lbfWordIndex": 3
-    },
-    {
-      "chapter": 1,
-      "verse": 8,
-      "token": 4,
-      "greekSurface": "οὗτοι",
       "lbfSurface": "también",
       "lbfWordIndex": 4
     },
     {
       "chapter": 1,
       "verse": 8,
-      "token": 5,
-      "greekSurface": "ἐνυπνιαζόμενοι",
+      "token": 4,
+      "greekSurface": "οὗτοι",
       "lbfSurface": "estos",
       "lbfWordIndex": 5
     },
     {
       "chapter": 1,
       "verse": 8,
-      "token": 6,
-      "greekSurface": "σάρκα",
+      "token": 5,
+      "greekSurface": "ἐνυπνιαζόμενοι",
       "lbfSurface": "soñando",
       "lbfWordIndex": 6
+    },
+    {
+      "chapter": 1,
+      "verse": 8,
+      "token": 6,
+      "greekSurface": "σάρκα",
+      "lbfSurface": "la carne",
+      "lbfWordIndex": 9
     },
     {
       "chapter": 1,
@@ -15186,16 +15203,16 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 8,
       "token": 8,
       "greekSurface": "μιαίνουσιν,",
-      "lbfSurface": "la carne",
-      "lbfWordIndex": 9
+      "lbfSurface": "mancillan",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 1,
       "verse": 8,
       "token": 9,
       "greekSurface": "κυριότητα",
-      "lbfSurface": "rechazan",
-      "lbfWordIndex": 10
+      "lbfSurface": "la autoridad",
+      "lbfWordIndex": 12
     },
     {
       "chapter": 1,
@@ -15210,16 +15227,16 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 8,
       "token": 11,
       "greekSurface": "ἀθετοῦσιν,",
-      "lbfSurface": "la autoridad",
-      "lbfWordIndex": 12
+      "lbfSurface": "rechazan",
+      "lbfWordIndex": 10
     },
     {
       "chapter": 1,
       "verse": 8,
       "token": 12,
       "greekSurface": "δόξας",
-      "lbfSurface": "y blasfeman",
-      "lbfWordIndex": 14
+      "lbfSurface": "de las glorias",
+      "lbfWordIndex": 17
     },
     {
       "chapter": 1,
@@ -15234,8 +15251,8 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 8,
       "token": 14,
       "greekSurface": "βλασφημοῦσιν.",
-      "lbfSurface": "de las glorias",
-      "lbfWordIndex": 17
+      "lbfSurface": "y blasfeman",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
@@ -15258,40 +15275,40 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 9,
       "token": 3,
       "greekSurface": "Μιχαὴλ",
-      "lbfSurface": "cuando",
-      "lbfWordIndex": 1
+      "lbfSurface": "Miguel",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 1,
       "verse": 9,
       "token": 4,
       "greekSurface": "ὁ",
-      "lbfSurface": "Miguel",
-      "lbfWordIndex": 2
-    },
-    {
-      "chapter": 1,
-      "verse": 9,
-      "token": 5,
-      "greekSurface": "ἀρχάγγελος,",
-      "lbfSurface": "Miguel",
-      "lbfWordIndex": 2
-    },
-    {
-      "chapter": 1,
-      "verse": 9,
-      "token": 6,
-      "greekSurface": "ὅτε",
       "lbfSurface": "el arcángel",
       "lbfWordIndex": 4
     },
     {
       "chapter": 1,
       "verse": 9,
+      "token": 5,
+      "greekSurface": "ἀρχάγγελος,",
+      "lbfSurface": "el arcángel",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
+      "token": 6,
+      "greekSurface": "ὅτε",
+      "lbfSurface": "cuando",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
       "token": 7,
       "greekSurface": "τῷ",
-      "lbfSurface": "disputando",
-      "lbfWordIndex": 5
+      "lbfSurface": "con el diablo",
+      "lbfWordIndex": 8
     },
     {
       "chapter": 1,
@@ -15306,8 +15323,8 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 9,
       "token": 9,
       "greekSurface": "διακρινόμενος",
-      "lbfSurface": "con el diablo",
-      "lbfWordIndex": 8
+      "lbfSurface": "disputando",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 1,
@@ -15330,48 +15347,48 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 9,
       "token": 12,
       "greekSurface": "τοῦ",
-      "lbfSurface": "acerca",
-      "lbfWordIndex": 10
-    },
-    {
-      "chapter": 1,
-      "verse": 9,
-      "token": 13,
-      "greekSurface": "Μωϋσέως",
       "lbfSurface": "del cuerpo",
       "lbfWordIndex": 12
     },
     {
       "chapter": 1,
       "verse": 9,
-      "token": 14,
-      "greekSurface": "σώματος,",
+      "token": 13,
+      "greekSurface": "Μωϋσέως",
       "lbfSurface": "de Moisés",
       "lbfWordIndex": 14
     },
     {
       "chapter": 1,
       "verse": 9,
+      "token": 14,
+      "greekSurface": "σώματος,",
+      "lbfSurface": "del cuerpo",
+      "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
       "token": 15,
       "greekSurface": "οὐκ",
-      "lbfSurface": "no",
-      "lbfWordIndex": 15
+      "lbfSurface": "no se atrevió",
+      "lbfWordIndex": 17
     },
     {
       "chapter": 1,
       "verse": 9,
       "token": 16,
       "greekSurface": "ἐτόλμησεν",
-      "lbfSurface": "se",
-      "lbfWordIndex": 16
+      "lbfSurface": "no se atrevió",
+      "lbfWordIndex": 17
     },
     {
       "chapter": 1,
       "verse": 9,
       "token": 17,
       "greekSurface": "κρίσιν",
-      "lbfSurface": "atrevió",
-      "lbfWordIndex": 17
+      "lbfSurface": "juicio",
+      "lbfWordIndex": 20
     },
     {
       "chapter": 1,
@@ -15386,32 +15403,32 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 9,
       "token": 19,
       "greekSurface": "βλασφημίας,",
-      "lbfSurface": "juicio",
-      "lbfWordIndex": 20
-    },
-    {
-      "chapter": 1,
-      "verse": 9,
-      "token": 20,
-      "greekSurface": "ἀλλὰ",
       "lbfSurface": "de blasfemia",
       "lbfWordIndex": 22
     },
     {
       "chapter": 1,
       "verse": 9,
-      "token": 21,
-      "greekSurface": "εἶπεν·",
+      "token": 20,
+      "greekSurface": "ἀλλὰ",
       "lbfSurface": "sino",
       "lbfWordIndex": 23
     },
     {
       "chapter": 1,
       "verse": 9,
+      "token": 21,
+      "greekSurface": "εἶπεν·",
+      "lbfSurface": "que dijo",
+      "lbfWordIndex": 25
+    },
+    {
+      "chapter": 1,
+      "verse": 9,
       "token": 22,
       "greekSurface": "Ἐπιτιμήσαι",
-      "lbfSurface": "El Señor",
-      "lbfWordIndex": 27
+      "lbfSurface": "reprenda",
+      "lbfWordIndex": 29
     },
     {
       "chapter": 1,
@@ -15426,16 +15443,16 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 9,
       "token": 24,
       "greekSurface": "κύριος.",
-      "lbfSurface": "reprenda",
-      "lbfWordIndex": 29
+      "lbfSurface": "El Señor",
+      "lbfWordIndex": 27
     },
     {
       "chapter": 1,
       "verse": 10,
       "token": 1,
       "greekSurface": "οὗτοι",
-      "lbfSurface": "Pero",
-      "lbfWordIndex": 0
+      "lbfSurface": "estos",
+      "lbfWordIndex": 1
     },
     {
       "chapter": 1,
@@ -15450,40 +15467,40 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 10,
       "token": 3,
       "greekSurface": "ὅσα",
-      "lbfSurface": "estos",
-      "lbfWordIndex": 1
+      "lbfSurface": "de lo que no conocen",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 1,
       "verse": 10,
       "token": 4,
       "greekSurface": "μὲν",
-      "lbfSurface": "blasfeman",
-      "lbfWordIndex": 2
+      "lbfSurface": "de lo que no conocen",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 1,
       "verse": 10,
       "token": 5,
       "greekSurface": "οὐκ",
-      "lbfSurface": "blasfeman",
-      "lbfWordIndex": 2
+      "lbfSurface": "de lo que no conocen",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 1,
       "verse": 10,
       "token": 6,
       "greekSurface": "οἴδασιν",
-      "lbfSurface": "de lo que no",
-      "lbfWordIndex": 6
+      "lbfSurface": "de lo que no conocen",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 1,
       "verse": 10,
       "token": 7,
       "greekSurface": "βλασφημοῦσιν,",
-      "lbfSurface": "conocen",
-      "lbfWordIndex": 7
+      "lbfSurface": "blasfeman",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 1,
@@ -15506,16 +15523,16 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 10,
       "token": 10,
       "greekSurface": "φυσικῶς",
-      "lbfSurface": "como",
-      "lbfWordIndex": 14
+      "lbfSurface": "y en lo que por naturaleza",
+      "lbfWordIndex": 13
     },
     {
       "chapter": 1,
       "verse": 10,
       "token": 11,
       "greekSurface": "ὡς",
-      "lbfSurface": "animales",
-      "lbfWordIndex": 15
+      "lbfSurface": "como",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
@@ -15530,23 +15547,23 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 10,
       "token": 13,
       "greekSurface": "ἄλογα",
-      "lbfSurface": "sí",
-      "lbfWordIndex": 17
+      "lbfSurface": "irracionales",
+      "lbfWordIndex": 16
     },
     {
       "chapter": 1,
       "verse": 10,
       "token": 14,
       "greekSurface": "ζῷα",
-      "lbfSurface": "sí",
-      "lbfWordIndex": 17
+      "lbfSurface": "animales",
+      "lbfWordIndex": 15
     },
     {
       "chapter": 1,
       "verse": 10,
       "token": 15,
       "greekSurface": "ἐπίστανται,",
-      "lbfSurface": "entienden",
+      "lbfSurface": "sí entienden",
       "lbfWordIndex": 18
     },
     {
@@ -15562,15 +15579,15 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 10,
       "token": 17,
       "greekSurface": "τούτοις",
-      "lbfSurface": "se",
-      "lbfWordIndex": 21
+      "lbfSurface": "en eso",
+      "lbfWordIndex": 20
     },
     {
       "chapter": 1,
       "verse": 10,
       "token": 18,
       "greekSurface": "φθείρονται.",
-      "lbfSurface": "corrompen",
+      "lbfSurface": "se corrompen",
       "lbfWordIndex": 22
     },
     {
@@ -15586,56 +15603,56 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 11,
       "token": 2,
       "greekSurface": "αὐτοῖς,",
-      "lbfSurface": "Ay",
-      "lbfWordIndex": 0
-    },
-    {
-      "chapter": 1,
-      "verse": 11,
-      "token": 3,
-      "greekSurface": "ὅτι",
       "lbfSurface": "de ellos",
       "lbfWordIndex": 2
     },
     {
       "chapter": 1,
       "verse": 11,
-      "token": 4,
-      "greekSurface": "τῇ",
+      "token": 3,
+      "greekSurface": "ὅτι",
       "lbfSurface": "porque",
       "lbfWordIndex": 3
     },
     {
       "chapter": 1,
       "verse": 11,
-      "token": 5,
-      "greekSurface": "ὁδῷ",
-      "lbfSurface": "han",
-      "lbfWordIndex": 4
-    },
-    {
-      "chapter": 1,
-      "verse": 11,
-      "token": 6,
-      "greekSurface": "τοῦ",
-      "lbfSurface": "seguido",
-      "lbfWordIndex": 5
-    },
-    {
-      "chapter": 1,
-      "verse": 11,
-      "token": 7,
-      "greekSurface": "Κάϊν",
+      "token": 4,
+      "greekSurface": "τῇ",
       "lbfSurface": "el camino",
       "lbfWordIndex": 7
     },
     {
       "chapter": 1,
       "verse": 11,
-      "token": 8,
-      "greekSurface": "ἐπορεύθησαν,",
+      "token": 5,
+      "greekSurface": "ὁδῷ",
+      "lbfSurface": "el camino",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 6,
+      "greekSurface": "τοῦ",
       "lbfSurface": "de Caín",
       "lbfWordIndex": 9
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 7,
+      "greekSurface": "Κάϊν",
+      "lbfSurface": "de Caín",
+      "lbfWordIndex": 9
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 8,
+      "greekSurface": "ἐπορεύθησαν,",
+      "lbfSurface": "han seguido",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 1,
@@ -15650,48 +15667,48 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 11,
       "token": 10,
       "greekSurface": "τῇ",
-      "lbfSurface": "y por la paga",
-      "lbfWordIndex": 13
-    },
-    {
-      "chapter": 1,
-      "verse": 11,
-      "token": 11,
-      "greekSurface": "πλάνῃ",
-      "lbfSurface": "se",
-      "lbfWordIndex": 14
-    },
-    {
-      "chapter": 1,
-      "verse": 11,
-      "token": 12,
-      "greekSurface": "τοῦ",
-      "lbfSurface": "han",
-      "lbfWordIndex": 15
-    },
-    {
-      "chapter": 1,
-      "verse": 11,
-      "token": 13,
-      "greekSurface": "Βαλαὰμ",
-      "lbfSurface": "lanzado",
-      "lbfWordIndex": 16
-    },
-    {
-      "chapter": 1,
-      "verse": 11,
-      "token": 14,
-      "greekSurface": "μισθοῦ",
       "lbfSurface": "al error",
       "lbfWordIndex": 18
     },
     {
       "chapter": 1,
       "verse": 11,
-      "token": 15,
-      "greekSurface": "ἐξεχύθησαν,",
+      "token": 11,
+      "greekSurface": "πλάνῃ",
+      "lbfSurface": "al error",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 12,
+      "greekSurface": "τοῦ",
       "lbfSurface": "de Balaam",
       "lbfWordIndex": 20
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 13,
+      "greekSurface": "Βαλαὰμ",
+      "lbfSurface": "de Balaam",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 14,
+      "greekSurface": "μισθοῦ",
+      "lbfSurface": "y por la paga",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 11,
+      "token": 15,
+      "greekSurface": "ἐξεχύθησαν,",
+      "lbfSurface": "se han lanzado",
+      "lbfWordIndex": 16
     },
     {
       "chapter": 1,
@@ -15714,8 +15731,8 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 11,
       "token": 18,
       "greekSurface": "ἀντιλογίᾳ",
-      "lbfSurface": "de Coré",
-      "lbfWordIndex": 26
+      "lbfSurface": "y en la rebelión",
+      "lbfWordIndex": 24
     },
     {
       "chapter": 1,
@@ -15730,8 +15747,8 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 11,
       "token": 20,
       "greekSurface": "Κόρε",
-      "lbfSurface": "perecieron",
-      "lbfWordIndex": 27
+      "lbfSurface": "de Coré",
+      "lbfWordIndex": 26
     },
     {
       "chapter": 1,
@@ -15754,24 +15771,32 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 12,
       "token": 2,
       "greekSurface": "εἰσιν",
-      "lbfSurface": "Estos",
-      "lbfWordIndex": 0
-    },
-    {
-      "chapter": 1,
-      "verse": 12,
-      "token": 4,
-      "greekSurface": "ἐν",
       "lbfSurface": "son",
       "lbfWordIndex": 1
     },
     {
       "chapter": 1,
       "verse": 12,
-      "token": 5,
-      "greekSurface": "ταῖς",
+      "token": 3,
+      "greekSurface": "⸀οἱ",
       "lbfSurface": "escollos",
       "lbfWordIndex": 2
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 4,
+      "greekSurface": "ἐν",
+      "lbfSurface": "en sus ágapes",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
+      "token": 5,
+      "greekSurface": "ταῖς",
+      "lbfSurface": "en sus ágapes",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 1,
@@ -15786,48 +15811,48 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 12,
       "token": 7,
       "greekSurface": "ὑμῶν",
-      "lbfSurface": "banqueteando",
-      "lbfWordIndex": 6
+      "lbfSurface": "en sus ágapes",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 1,
       "verse": 12,
       "token": 8,
       "greekSurface": "σπιλάδες",
-      "lbfSurface": "con ustedes",
-      "lbfWordIndex": 8
+      "lbfSurface": "escollos",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 1,
       "verse": 12,
       "token": 9,
       "greekSurface": "συνευωχούμενοι,",
-      "lbfSurface": "sin temor",
-      "lbfWordIndex": 10
+      "lbfSurface": "banqueteando",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 1,
       "verse": 12,
       "token": 10,
       "greekSurface": "ἀφόβως",
-      "lbfSurface": "apacentándose",
-      "lbfWordIndex": 11
+      "lbfSurface": "con ustedes sin temor",
+      "lbfWordIndex": 10
     },
     {
       "chapter": 1,
       "verse": 12,
       "token": 11,
       "greekSurface": "ἑαυτοὺς",
-      "lbfSurface": "a sí",
-      "lbfWordIndex": 13
+      "lbfSurface": "a sí mismos",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
       "verse": 12,
       "token": 12,
       "greekSurface": "ποιμαίνοντες,",
-      "lbfSurface": "mismos",
-      "lbfWordIndex": 14
+      "lbfSurface": "apacentándose",
+      "lbfWordIndex": 11
     },
     {
       "chapter": 1,
@@ -15842,32 +15867,32 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 12,
       "token": 14,
       "greekSurface": "ἄνυδροι",
-      "lbfSurface": "nubes",
-      "lbfWordIndex": 15
-    },
-    {
-      "chapter": 1,
-      "verse": 12,
-      "token": 15,
-      "greekSurface": "ὑπὸ",
       "lbfSurface": "sin agua",
       "lbfWordIndex": 17
     },
     {
       "chapter": 1,
       "verse": 12,
+      "token": 15,
+      "greekSurface": "ὑπὸ",
+      "lbfSurface": "por los vientos",
+      "lbfWordIndex": 21
+    },
+    {
+      "chapter": 1,
+      "verse": 12,
       "token": 16,
       "greekSurface": "ἀνέμων",
-      "lbfSurface": "llevadas",
-      "lbfWordIndex": 18
+      "lbfSurface": "por los vientos",
+      "lbfWordIndex": 21
     },
     {
       "chapter": 1,
       "verse": 12,
       "token": 17,
       "greekSurface": "παραφερόμεναι,",
-      "lbfSurface": "por los vientos",
-      "lbfWordIndex": 21
+      "lbfSurface": "llevadas",
+      "lbfWordIndex": 18
     },
     {
       "chapter": 1,
@@ -15898,24 +15923,24 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 12,
       "token": 21,
       "greekSurface": "δὶς",
-      "lbfSurface": "dos",
-      "lbfWordIndex": 27
+      "lbfSurface": "dos veces",
+      "lbfWordIndex": 28
     },
     {
       "chapter": 1,
       "verse": 12,
       "token": 22,
       "greekSurface": "ἀποθανόντα",
-      "lbfSurface": "veces",
-      "lbfWordIndex": 28
+      "lbfSurface": "muertos",
+      "lbfWordIndex": 29
     },
     {
       "chapter": 1,
       "verse": 12,
       "token": 23,
       "greekSurface": "ἐκριζωθέντα,",
-      "lbfSurface": "muertos",
-      "lbfWordIndex": 29
+      "lbfSurface": "desarraigados",
+      "lbfWordIndex": 30
     },
     {
       "chapter": 1,
@@ -15930,32 +15955,32 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 13,
       "token": 2,
       "greekSurface": "ἄγρια",
-      "lbfSurface": "olas",
-      "lbfWordIndex": 0
-    },
-    {
-      "chapter": 1,
-      "verse": 13,
-      "token": 3,
-      "greekSurface": "θαλάσσης",
       "lbfSurface": "bravías",
       "lbfWordIndex": 1
     },
     {
       "chapter": 1,
       "verse": 13,
-      "token": 4,
-      "greekSurface": "ἐπαφρίζοντα",
+      "token": 3,
+      "greekSurface": "θαλάσσης",
       "lbfSurface": "del mar",
       "lbfWordIndex": 3
     },
     {
       "chapter": 1,
       "verse": 13,
-      "token": 5,
-      "greekSurface": "τὰς",
+      "token": 4,
+      "greekSurface": "ἐπαφρίζοντα",
       "lbfSurface": "que espuman",
       "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 5,
+      "greekSurface": "τὰς",
+      "lbfSurface": "sus propias",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 1,
@@ -15986,24 +16011,24 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 13,
       "token": 9,
       "greekSurface": "πλανῆται",
-      "lbfSurface": "estrellas",
-      "lbfWordIndex": 9
-    },
-    {
-      "chapter": 1,
-      "verse": 13,
-      "token": 10,
-      "greekSurface": "οἷς",
       "lbfSurface": "errantes",
       "lbfWordIndex": 10
     },
     {
       "chapter": 1,
       "verse": 13,
-      "token": 11,
-      "greekSurface": "ὁ",
+      "token": 10,
+      "greekSurface": "οἷς",
       "lbfSurface": "para las cuales",
       "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 13,
+      "token": 11,
+      "greekSurface": "ὁ",
+      "lbfSurface": "la oscuridad",
+      "lbfWordIndex": 15
     },
     {
       "chapter": 1,
@@ -16034,32 +16059,32 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 13,
       "token": 15,
       "greekSurface": "εἰς",
-      "lbfSurface": "está",
-      "lbfWordIndex": 19
+      "lbfSurface": "para siempre",
+      "lbfWordIndex": 22
     },
     {
       "chapter": 1,
       "verse": 13,
       "token": 16,
       "greekSurface": "αἰῶνα",
-      "lbfSurface": "reservada",
-      "lbfWordIndex": 20
+      "lbfSurface": "para siempre",
+      "lbfWordIndex": 22
     },
     {
       "chapter": 1,
       "verse": 13,
       "token": 17,
       "greekSurface": "τετήρηται.",
-      "lbfSurface": "para siempre",
-      "lbfWordIndex": 22
+      "lbfSurface": "está reservada",
+      "lbfWordIndex": 19
     },
     {
       "chapter": 1,
       "verse": 14,
       "token": 1,
       "greekSurface": "Προεφήτευσεν",
-      "lbfSurface": "De estos",
-      "lbfWordIndex": 1
+      "lbfSurface": "profetizó",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 1,
@@ -16082,40 +16107,40 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 14,
       "token": 4,
       "greekSurface": "τούτοις",
-      "lbfSurface": "profetizó",
-      "lbfWordIndex": 3
+      "lbfSurface": "De estos",
+      "lbfWordIndex": 1
     },
     {
       "chapter": 1,
       "verse": 14,
       "token": 5,
       "greekSurface": "ἕβδομος",
-      "lbfSurface": "Enoc",
-      "lbfWordIndex": 4
-    },
-    {
-      "chapter": 1,
-      "verse": 14,
-      "token": 6,
-      "greekSurface": "ἀπὸ",
       "lbfSurface": "el séptimo",
       "lbfWordIndex": 6
     },
     {
       "chapter": 1,
       "verse": 14,
-      "token": 7,
-      "greekSurface": "Ἀδὰμ",
+      "token": 6,
+      "greekSurface": "ἀπὸ",
       "lbfSurface": "desde",
       "lbfWordIndex": 7
     },
     {
       "chapter": 1,
       "verse": 14,
-      "token": 8,
-      "greekSurface": "Ἑνὼχ",
+      "token": 7,
+      "greekSurface": "Ἀδὰμ",
       "lbfSurface": "Adán",
       "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 14,
+      "token": 8,
+      "greekSurface": "Ἑνὼχ",
+      "lbfSurface": "Enoc",
+      "lbfWordIndex": 4
     },
     {
       "chapter": 1,
@@ -16130,16 +16155,16 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 14,
       "token": 10,
       "greekSurface": "Ἰδοὺ",
-      "lbfSurface": "He",
-      "lbfWordIndex": 10
+      "lbfSurface": "He aquí",
+      "lbfWordIndex": 11
     },
     {
       "chapter": 1,
       "verse": 14,
       "token": 11,
       "greekSurface": "ἦλθεν",
-      "lbfSurface": "aquí",
-      "lbfWordIndex": 11
+      "lbfSurface": "vino",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
@@ -16154,23 +16179,31 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 14,
       "token": 13,
       "greekSurface": "ἐν",
-      "lbfSurface": "vino",
-      "lbfWordIndex": 14
+      "lbfSurface": "con sus santas miríadas",
+      "lbfWordIndex": 18
+    },
+    {
+      "chapter": 1,
+      "verse": 14,
+      "token": 14,
+      "greekSurface": "ἁγίαις",
+      "lbfSurface": "con sus santas miríadas",
+      "lbfWordIndex": 18
     },
     {
       "chapter": 1,
       "verse": 14,
       "token": 15,
       "greekSurface": "μυριάσιν",
-      "lbfSurface": "con sus santas",
-      "lbfWordIndex": 17
+      "lbfSurface": "con sus santas miríadas",
+      "lbfWordIndex": 18
     },
     {
       "chapter": 1,
       "verse": 14,
       "token": 16,
       "greekSurface": "αὐτοῦ,",
-      "lbfSurface": "miríadas",
+      "lbfSurface": "con sus santas miríadas",
       "lbfWordIndex": 18
     },
     {
@@ -16186,56 +16219,56 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 15,
       "token": 2,
       "greekSurface": "κρίσιν",
-      "lbfSurface": "para hacer",
-      "lbfWordIndex": 1
-    },
-    {
-      "chapter": 1,
-      "verse": 15,
-      "token": 3,
-      "greekSurface": "κατὰ",
       "lbfSurface": "juicio",
       "lbfWordIndex": 2
     },
     {
       "chapter": 1,
       "verse": 15,
+      "token": 3,
+      "greekSurface": "κατὰ",
+      "lbfSurface": "contra todos",
+      "lbfWordIndex": 4
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
       "token": 4,
       "greekSurface": "πάντων",
-      "lbfSurface": "contra",
-      "lbfWordIndex": 3
+      "lbfSurface": "contra todos",
+      "lbfWordIndex": 4
     },
     {
       "chapter": 1,
       "verse": 15,
       "token": 5,
       "greekSurface": "καὶ",
-      "lbfSurface": "todos",
-      "lbfWordIndex": 4
-    },
-    {
-      "chapter": 1,
-      "verse": 15,
-      "token": 6,
-      "greekSurface": "ἐλέγξαι",
-      "lbfSurface": "todos",
-      "lbfWordIndex": 4
-    },
-    {
-      "chapter": 1,
-      "verse": 15,
-      "token": 7,
-      "greekSurface": "⸂πάντας",
       "lbfSurface": "y convencer",
       "lbfWordIndex": 6
     },
     {
       "chapter": 1,
       "verse": 15,
-      "token": 8,
-      "greekSurface": "τοὺς",
+      "token": 6,
+      "greekSurface": "ἐλέγξαι",
+      "lbfSurface": "y convencer",
+      "lbfWordIndex": 6
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 7,
+      "greekSurface": "⸂πάντας",
       "lbfSurface": "a todos",
       "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 8,
+      "greekSurface": "τοὺς",
+      "lbfSurface": "los impíos",
+      "lbfWordIndex": 10
     },
     {
       "chapter": 1,
@@ -16258,32 +16291,32 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 15,
       "token": 11,
       "greekSurface": "πάντων",
-      "lbfSurface": "acerca",
-      "lbfWordIndex": 11
+      "lbfSurface": "de todas",
+      "lbfWordIndex": 13
     },
     {
       "chapter": 1,
       "verse": 15,
       "token": 12,
       "greekSurface": "τῶν",
-      "lbfSurface": "de todas",
-      "lbfWordIndex": 13
+      "lbfSurface": "las obras",
+      "lbfWordIndex": 15
     },
     {
       "chapter": 1,
       "verse": 15,
       "token": 13,
       "greekSurface": "ἔργων",
-      "lbfSurface": "de todas",
-      "lbfWordIndex": 13
+      "lbfSurface": "las obras",
+      "lbfWordIndex": 15
     },
     {
       "chapter": 1,
       "verse": 15,
       "token": 14,
       "greekSurface": "ἀσεβείας",
-      "lbfSurface": "las obras",
-      "lbfWordIndex": 15
+      "lbfSurface": "de impiedad",
+      "lbfWordIndex": 17
     },
     {
       "chapter": 1,
@@ -16298,8 +16331,8 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 15,
       "token": 16,
       "greekSurface": "ὧν",
-      "lbfSurface": "de impiedad",
-      "lbfWordIndex": 17
+      "lbfSurface": "que hicieron",
+      "lbfWordIndex": 19
     },
     {
       "chapter": 1,
@@ -16346,56 +16379,56 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 15,
       "token": 22,
       "greekSurface": "σκληρῶν",
-      "lbfSurface": "las cosas",
-      "lbfWordIndex": 25
-    },
-    {
-      "chapter": 1,
-      "verse": 15,
-      "token": 23,
-      "greekSurface": "ὧν",
       "lbfSurface": "duras",
       "lbfWordIndex": 26
     },
     {
       "chapter": 1,
       "verse": 15,
-      "token": 24,
-      "greekSurface": "ἐλάλησαν",
+      "token": 23,
+      "greekSurface": "ὧν",
       "lbfSurface": "que los pecadores",
       "lbfWordIndex": 29
     },
     {
       "chapter": 1,
       "verse": 15,
-      "token": 25,
-      "greekSurface": "κατ’",
-      "lbfSurface": "impíos",
-      "lbfWordIndex": 30
-    },
-    {
-      "chapter": 1,
-      "verse": 15,
-      "token": 26,
-      "greekSurface": "αὐτοῦ",
-      "lbfSurface": "impíos",
-      "lbfWordIndex": 30
-    },
-    {
-      "chapter": 1,
-      "verse": 15,
-      "token": 27,
-      "greekSurface": "ἁμαρτωλοὶ",
+      "token": 24,
+      "greekSurface": "ἐλάλησαν",
       "lbfSurface": "hablaron",
       "lbfWordIndex": 31
     },
     {
       "chapter": 1,
       "verse": 15,
-      "token": 28,
-      "greekSurface": "ἀσεβεῖς.",
+      "token": 25,
+      "greekSurface": "κατ’",
       "lbfSurface": "contra él",
       "lbfWordIndex": 33
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 26,
+      "greekSurface": "αὐτοῦ",
+      "lbfSurface": "contra él",
+      "lbfWordIndex": 33
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 27,
+      "greekSurface": "ἁμαρτωλοὶ",
+      "lbfSurface": "que los pecadores",
+      "lbfWordIndex": 29
+    },
+    {
+      "chapter": 1,
+      "verse": 15,
+      "token": 28,
+      "greekSurface": "ἀσεβεῖς.",
+      "lbfSurface": "impíos",
+      "lbfWordIndex": 30
     },
     {
       "chapter": 1,
@@ -16410,64 +16443,64 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 16,
       "token": 2,
       "greekSurface": "εἰσιν",
-      "lbfSurface": "Estos",
-      "lbfWordIndex": 0
-    },
-    {
-      "chapter": 1,
-      "verse": 16,
-      "token": 3,
-      "greekSurface": "γογγυσταί,",
       "lbfSurface": "son",
       "lbfWordIndex": 1
     },
     {
       "chapter": 1,
       "verse": 16,
-      "token": 4,
-      "greekSurface": "μεμψίμοιροι,",
+      "token": 3,
+      "greekSurface": "γογγυσταί,",
       "lbfSurface": "murmuradores",
       "lbfWordIndex": 2
     },
     {
       "chapter": 1,
       "verse": 16,
+      "token": 4,
+      "greekSurface": "μεμψίμοιροι,",
+      "lbfSurface": "quejumbrosos",
+      "lbfWordIndex": 3
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
       "token": 5,
       "greekSurface": "κατὰ",
-      "lbfSurface": "quejumbrosos",
-      "lbfWordIndex": 3
-    },
-    {
-      "chapter": 1,
-      "verse": 16,
-      "token": 6,
-      "greekSurface": "τὰς",
-      "lbfSurface": "quejumbrosos",
-      "lbfWordIndex": 3
-    },
-    {
-      "chapter": 1,
-      "verse": 16,
-      "token": 7,
-      "greekSurface": "ἐπιθυμίας",
-      "lbfSurface": "que andan",
-      "lbfWordIndex": 5
-    },
-    {
-      "chapter": 1,
-      "verse": 16,
-      "token": 8,
-      "greekSurface": "⸀αὐτῶν",
       "lbfSurface": "según",
       "lbfWordIndex": 6
     },
     {
       "chapter": 1,
       "verse": 16,
-      "token": 9,
-      "greekSurface": "πορευόμενοι,",
+      "token": 6,
+      "greekSurface": "τὰς",
       "lbfSurface": "sus deseos",
       "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 7,
+      "greekSurface": "ἐπιθυμίας",
+      "lbfSurface": "sus deseos",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 8,
+      "greekSurface": "⸀αὐτῶν",
+      "lbfSurface": "sus deseos",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 16,
+      "token": 9,
+      "greekSurface": "πορευόμενοι,",
+      "lbfSurface": "que andan",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 1,
@@ -16490,32 +16523,32 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 16,
       "token": 12,
       "greekSurface": "στόμα",
-      "lbfSurface": "habla",
-      "lbfWordIndex": 12
+      "lbfSurface": "y su boca",
+      "lbfWordIndex": 11
     },
     {
       "chapter": 1,
       "verse": 16,
       "token": 13,
       "greekSurface": "αὐτῶν",
-      "lbfSurface": "cosas",
-      "lbfWordIndex": 13
+      "lbfSurface": "y su boca",
+      "lbfWordIndex": 11
     },
     {
       "chapter": 1,
       "verse": 16,
       "token": 14,
       "greekSurface": "λαλεῖ",
-      "lbfSurface": "arrogantes",
-      "lbfWordIndex": 14
+      "lbfSurface": "habla",
+      "lbfWordIndex": 12
     },
     {
       "chapter": 1,
       "verse": 16,
       "token": 15,
       "greekSurface": "ὑπέρογκα,",
-      "lbfSurface": "admirando",
-      "lbfWordIndex": 15
+      "lbfSurface": "cosas arrogantes",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
@@ -16538,24 +16571,24 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 16,
       "token": 18,
       "greekSurface": "ὠφελείας",
-      "lbfSurface": "por causa",
-      "lbfWordIndex": 18
+      "lbfSurface": "del provecho",
+      "lbfWordIndex": 20
     },
     {
       "chapter": 1,
       "verse": 16,
       "token": 19,
       "greekSurface": "χάριν.",
-      "lbfSurface": "del provecho",
-      "lbfWordIndex": 20
+      "lbfSurface": "por causa",
+      "lbfWordIndex": 18
     },
     {
       "chapter": 1,
       "verse": 17,
       "token": 1,
       "greekSurface": "Ὑμεῖς",
-      "lbfSurface": "Pero",
-      "lbfWordIndex": 0
+      "lbfSurface": "ustedes",
+      "lbfWordIndex": 1
     },
     {
       "chapter": 1,
@@ -16570,37 +16603,21 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 17,
       "token": 3,
       "greekSurface": "ἀγαπητοί,",
-      "lbfSurface": "ustedes",
-      "lbfWordIndex": 1
+      "lbfSurface": "amados",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 1,
       "verse": 17,
       "token": 4,
       "greekSurface": "μνήσθητε",
-      "lbfSurface": "amados",
-      "lbfWordIndex": 2
-    },
-    {
-      "chapter": 1,
-      "verse": 17,
-      "token": 5,
-      "greekSurface": "τῶν",
-      "lbfSurface": "amados",
-      "lbfWordIndex": 2
-    },
-    {
-      "chapter": 1,
-      "verse": 17,
-      "token": 6,
-      "greekSurface": "ῥημάτων",
       "lbfSurface": "acuérdense",
       "lbfWordIndex": 3
     },
     {
       "chapter": 1,
       "verse": 17,
-      "token": 7,
+      "token": 5,
       "greekSurface": "τῶν",
       "lbfSurface": "de las palabras",
       "lbfWordIndex": 6
@@ -16608,18 +16625,34 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
     {
       "chapter": 1,
       "verse": 17,
-      "token": 8,
-      "greekSurface": "προειρημένων",
+      "token": 6,
+      "greekSurface": "ῥημάτων",
       "lbfSurface": "de las palabras",
       "lbfWordIndex": 6
     },
     {
       "chapter": 1,
       "verse": 17,
-      "token": 9,
-      "greekSurface": "ὑπὸ",
+      "token": 7,
+      "greekSurface": "τῶν",
       "lbfSurface": "predichas",
       "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 17,
+      "token": 8,
+      "greekSurface": "προειρημένων",
+      "lbfSurface": "predichas",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 17,
+      "token": 9,
+      "greekSurface": "ὑπὸ",
+      "lbfSurface": "por los apóstoles",
+      "lbfWordIndex": 10
     },
     {
       "chapter": 1,
@@ -16658,8 +16691,8 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 17,
       "token": 14,
       "greekSurface": "ἡμῶν",
-      "lbfSurface": "Señor",
-      "lbfWordIndex": 13
+      "lbfSurface": "de nuestro",
+      "lbfWordIndex": 12
     },
     {
       "chapter": 1,
@@ -16690,39 +16723,39 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 18,
       "token": 2,
       "greekSurface": "ἔλεγον",
-      "lbfSurface": "que les",
-      "lbfWordIndex": 1
-    },
-    {
-      "chapter": 1,
-      "verse": 18,
-      "token": 3,
-      "greekSurface": "⸀ὑμῖν·",
       "lbfSurface": "decían",
       "lbfWordIndex": 2
     },
     {
       "chapter": 1,
       "verse": 18,
+      "token": 3,
+      "greekSurface": "⸀ὑμῖν·",
+      "lbfSurface": "que les",
+      "lbfWordIndex": 1
+    },
+    {
+      "chapter": 1,
+      "verse": 18,
       "token": 4,
       "greekSurface": "⸂Ἐπ’",
-      "lbfSurface": "En el último",
-      "lbfWordIndex": 5
+      "lbfSurface": "decían",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 1,
       "verse": 18,
       "token": 5,
       "greekSurface": "ἐσχάτου",
-      "lbfSurface": "En el último",
-      "lbfWordIndex": 5
+      "lbfSurface": "En el último tiempo",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 1,
       "verse": 18,
       "token": 6,
       "greekSurface": "χρόνου⸃",
-      "lbfSurface": "tiempo",
+      "lbfSurface": "En el último tiempo",
       "lbfWordIndex": 6
     },
     {
@@ -16746,48 +16779,48 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 18,
       "token": 9,
       "greekSurface": "κατὰ",
-      "lbfSurface": "burladores",
-      "lbfWordIndex": 8
-    },
-    {
-      "chapter": 1,
-      "verse": 18,
-      "token": 10,
-      "greekSurface": "τὰς",
-      "lbfSurface": "que andarán",
-      "lbfWordIndex": 10
-    },
-    {
-      "chapter": 1,
-      "verse": 18,
-      "token": 11,
-      "greekSurface": "ἑαυτῶν",
       "lbfSurface": "según",
       "lbfWordIndex": 11
     },
     {
       "chapter": 1,
       "verse": 18,
-      "token": 12,
-      "greekSurface": "ἐπιθυμίας",
+      "token": 10,
+      "greekSurface": "τὰς",
       "lbfSurface": "sus propios",
       "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 18,
+      "token": 11,
+      "greekSurface": "ἑαυτῶν",
+      "lbfSurface": "sus propios",
+      "lbfWordIndex": 13
+    },
+    {
+      "chapter": 1,
+      "verse": 18,
+      "token": 12,
+      "greekSurface": "ἐπιθυμίας",
+      "lbfSurface": "deseos",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
       "verse": 18,
       "token": 13,
       "greekSurface": "πορευόμενοι",
-      "lbfSurface": "sus propios",
-      "lbfWordIndex": 13
+      "lbfSurface": "que andarán",
+      "lbfWordIndex": 10
     },
     {
       "chapter": 1,
       "verse": 18,
       "token": 14,
       "greekSurface": "τῶν",
-      "lbfSurface": "deseos",
-      "lbfWordIndex": 14
+      "lbfSurface": "de impiedades",
+      "lbfWordIndex": 16
     },
     {
       "chapter": 1,
@@ -16842,15 +16875,15 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 19,
       "token": 6,
       "greekSurface": "πνεῦμα",
-      "lbfSurface": "que no",
-      "lbfWordIndex": 8
+      "lbfSurface": "el Espíritu",
+      "lbfWordIndex": 11
     },
     {
       "chapter": 1,
       "verse": 19,
       "token": 7,
       "greekSurface": "μὴ",
-      "lbfSurface": "tienen",
+      "lbfSurface": "que no tienen",
       "lbfWordIndex": 9
     },
     {
@@ -16858,24 +16891,24 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 19,
       "token": 8,
       "greekSurface": "ἔχοντες.",
-      "lbfSurface": "el Espíritu",
-      "lbfWordIndex": 11
+      "lbfSurface": "que no tienen",
+      "lbfWordIndex": 9
     },
     {
       "chapter": 1,
       "verse": 20,
       "token": 1,
       "greekSurface": "ὑμεῖς",
-      "lbfSurface": "Pero",
-      "lbfWordIndex": 0
+      "lbfSurface": "ustedes",
+      "lbfWordIndex": 1
     },
     {
       "chapter": 1,
       "verse": 20,
       "token": 2,
       "greekSurface": "δέ,",
-      "lbfSurface": "ustedes",
-      "lbfWordIndex": 1
+      "lbfSurface": "Pero",
+      "lbfWordIndex": 0
     },
     {
       "chapter": 1,
@@ -16888,33 +16921,49 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
     {
       "chapter": 1,
       "verse": 20,
+      "token": 4,
+      "greekSurface": "⸂ἐποικοδομοῦντες",
+      "lbfSurface": "edificándose sobre su santísima fe",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 20,
+      "token": 5,
+      "greekSurface": "ἑαυτοὺς",
+      "lbfSurface": "edificándose sobre su santísima fe",
+      "lbfWordIndex": 7
+    },
+    {
+      "chapter": 1,
+      "verse": 20,
       "token": 6,
       "greekSurface": "τῇ",
-      "lbfSurface": "edificándose",
-      "lbfWordIndex": 3
+      "lbfSurface": "edificándose sobre su santísima fe",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 1,
       "verse": 20,
       "token": 7,
       "greekSurface": "ἁγιωτάτῃ",
-      "lbfSurface": "sobre",
-      "lbfWordIndex": 4
+      "lbfSurface": "edificándose sobre su santísima fe",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 1,
       "verse": 20,
       "token": 8,
       "greekSurface": "ὑμῶν",
-      "lbfSurface": "su santísima",
-      "lbfWordIndex": 6
+      "lbfSurface": "edificándose sobre su santísima fe",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 1,
       "verse": 20,
       "token": 9,
       "greekSurface": "πίστει⸃,",
-      "lbfSurface": "fe",
+      "lbfSurface": "edificándose sobre su santísima fe",
       "lbfWordIndex": 7
     },
     {
@@ -16922,32 +16971,32 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 20,
       "token": 10,
       "greekSurface": "ἐν",
-      "lbfSurface": "orando",
-      "lbfWordIndex": 8
-    },
-    {
-      "chapter": 1,
-      "verse": 20,
-      "token": 11,
-      "greekSurface": "πνεύματι",
-      "lbfSurface": "orando",
-      "lbfWordIndex": 8
-    },
-    {
-      "chapter": 1,
-      "verse": 20,
-      "token": 12,
-      "greekSurface": "ἁγίῳ",
       "lbfSurface": "en el Espíritu",
       "lbfWordIndex": 11
     },
     {
       "chapter": 1,
       "verse": 20,
-      "token": 13,
-      "greekSurface": "προσευχόμενοι,",
+      "token": 11,
+      "greekSurface": "πνεύματι",
+      "lbfSurface": "en el Espíritu",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 20,
+      "token": 12,
+      "greekSurface": "ἁγίῳ",
       "lbfSurface": "Santo",
       "lbfWordIndex": 12
+    },
+    {
+      "chapter": 1,
+      "verse": 20,
+      "token": 13,
+      "greekSurface": "προσευχόμενοι,",
+      "lbfSurface": "orando",
+      "lbfWordIndex": 8
     },
     {
       "chapter": 1,
@@ -16962,8 +17011,8 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 21,
       "token": 2,
       "greekSurface": "ἐν",
-      "lbfSurface": "guárdense",
-      "lbfWordIndex": 0
+      "lbfSurface": "en el amor",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 1,
@@ -16978,16 +17027,16 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 21,
       "token": 4,
       "greekSurface": "θεοῦ",
-      "lbfSurface": "en el amor",
-      "lbfWordIndex": 3
+      "lbfSurface": "de Dios",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 1,
       "verse": 21,
       "token": 5,
       "greekSurface": "τηρήσατε",
-      "lbfSurface": "de Dios",
-      "lbfWordIndex": 5
+      "lbfSurface": "guárdense",
+      "lbfWordIndex": 0
     },
     {
       "chapter": 1,
@@ -17002,8 +17051,8 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 21,
       "token": 7,
       "greekSurface": "τὸ",
-      "lbfSurface": "esperando",
-      "lbfWordIndex": 6
+      "lbfSurface": "la misericordia",
+      "lbfWordIndex": 8
     },
     {
       "chapter": 1,
@@ -17026,16 +17075,16 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 21,
       "token": 10,
       "greekSurface": "κυρίου",
-      "lbfSurface": "de nuestro",
-      "lbfWordIndex": 10
+      "lbfSurface": "Señor",
+      "lbfWordIndex": 11
     },
     {
       "chapter": 1,
       "verse": 21,
       "token": 11,
       "greekSurface": "ἡμῶν",
-      "lbfSurface": "Señor",
-      "lbfWordIndex": 11
+      "lbfSurface": "de nuestro",
+      "lbfWordIndex": 10
     },
     {
       "chapter": 1,
@@ -17058,8 +17107,8 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 21,
       "token": 14,
       "greekSurface": "εἰς",
-      "lbfSurface": "Cristo",
-      "lbfWordIndex": 13
+      "lbfSurface": "para vida",
+      "lbfWordIndex": 15
     },
     {
       "chapter": 1,
@@ -17098,104 +17147,160 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 22,
       "token": 3,
       "greekSurface": "μὲν",
-      "lbfSurface": "tengan",
-      "lbfWordIndex": 5
+      "lbfSurface": "tengan misericordia",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 1,
       "verse": 22,
       "token": 4,
       "greekSurface": "⸀ἐλεᾶτε",
-      "lbfSurface": "tengan",
-      "lbfWordIndex": 5
+      "lbfSurface": "tengan misericordia",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 1,
       "verse": 22,
       "token": 5,
       "greekSurface": "⸂διακρινομένους,",
-      "lbfSurface": "misericordia",
-      "lbfWordIndex": 6
+      "lbfSurface": "Y a los que dudan",
+      "lbfWordIndex": 4
     },
     {
       "chapter": 1,
       "verse": 23,
       "token": 1,
       "greekSurface": "οὓς",
-      "lbfSurface": "a otros",
-      "lbfWordIndex": 1
+      "lbfSurface": "a otros sálvenlos arrebatándolos del fuego",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 1,
       "verse": 23,
       "token": 2,
       "greekSurface": "δὲ",
-      "lbfSurface": "arrebatándolos",
-      "lbfWordIndex": 3
+      "lbfSurface": "a otros sálvenlos arrebatándolos del fuego",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 23,
+      "token": 3,
+      "greekSurface": "σῴζετε",
+      "lbfSurface": "a otros sálvenlos arrebatándolos del fuego",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 23,
+      "token": 4,
+      "greekSurface": "ἐκ",
+      "lbfSurface": "a otros sálvenlos arrebatándolos del fuego",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 23,
+      "token": 5,
+      "greekSurface": "πυρὸς",
+      "lbfSurface": "a otros sálvenlos arrebatándolos del fuego",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 23,
+      "token": 6,
+      "greekSurface": "ἁρπάζοντες,",
+      "lbfSurface": "a otros sálvenlos arrebatándolos del fuego",
+      "lbfWordIndex": 5
+    },
+    {
+      "chapter": 1,
+      "verse": 23,
+      "token": 7,
+      "greekSurface": "οὓς",
+      "lbfSurface": "y a otros",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 23,
+      "token": 8,
+      "greekSurface": "δὲ",
+      "lbfSurface": "y a otros",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 23,
+      "token": 9,
+      "greekSurface": "ἐλεᾶτε",
+      "lbfSurface": "tengan misericordia con temor",
+      "lbfWordIndex": 12
     },
     {
       "chapter": 1,
       "verse": 23,
       "token": 10,
       "greekSurface": "ἐν",
-      "lbfSurface": "y a otros",
-      "lbfWordIndex": 8
+      "lbfSurface": "tengan misericordia con temor",
+      "lbfWordIndex": 12
     },
     {
       "chapter": 1,
       "verse": 23,
       "token": 11,
       "greekSurface": "φόβῳ⸃,",
-      "lbfSurface": "y a otros",
-      "lbfWordIndex": 8
+      "lbfSurface": "tengan misericordia con temor",
+      "lbfWordIndex": 12
     },
     {
       "chapter": 1,
       "verse": 23,
       "token": 12,
       "greekSurface": "μισοῦντες",
-      "lbfSurface": "tengan",
-      "lbfWordIndex": 9
-    },
-    {
-      "chapter": 1,
-      "verse": 23,
-      "token": 13,
-      "greekSurface": "καὶ",
-      "lbfSurface": "misericordia",
-      "lbfWordIndex": 10
-    },
-    {
-      "chapter": 1,
-      "verse": 23,
-      "token": 14,
-      "greekSurface": "τὸν",
-      "lbfSurface": "con temor",
-      "lbfWordIndex": 12
-    },
-    {
-      "chapter": 1,
-      "verse": 23,
-      "token": 15,
-      "greekSurface": "ἀπὸ",
       "lbfSurface": "aborreciendo",
       "lbfWordIndex": 13
     },
     {
       "chapter": 1,
       "verse": 23,
-      "token": 16,
-      "greekSurface": "τῆς",
+      "token": 13,
+      "greekSurface": "καὶ",
+      "lbfSurface": "y a otros",
+      "lbfWordIndex": 8
+    },
+    {
+      "chapter": 1,
+      "verse": 23,
+      "token": 14,
+      "greekSurface": "τὸν",
       "lbfSurface": "aun",
       "lbfWordIndex": 14
     },
     {
       "chapter": 1,
       "verse": 23,
+      "token": 15,
+      "greekSurface": "ἀπὸ",
+      "lbfSurface": "por la carne",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 1,
+      "verse": 23,
+      "token": 16,
+      "greekSurface": "τῆς",
+      "lbfSurface": "por la carne",
+      "lbfWordIndex": 20
+    },
+    {
+      "chapter": 1,
+      "verse": 23,
       "token": 17,
       "greekSurface": "σαρκὸς",
-      "lbfSurface": "la ropa",
-      "lbfWordIndex": 16
+      "lbfSurface": "por la carne",
+      "lbfWordIndex": 20
     },
     {
       "chapter": 1,
@@ -17210,8 +17315,8 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 23,
       "token": 19,
       "greekSurface": "χιτῶνα.",
-      "lbfSurface": "por la carne",
-      "lbfWordIndex": 20
+      "lbfSurface": "la ropa",
+      "lbfWordIndex": 16
     },
     {
       "chapter": 1,
@@ -17306,16 +17411,16 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 24,
       "token": 12,
       "greekSurface": "αὐτοῦ",
-      "lbfSurface": "sin tacha",
-      "lbfWordIndex": 16
+      "lbfSurface": "de su gloria",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 1,
       "verse": 24,
       "token": 13,
       "greekSurface": "ἀμώμους",
-      "lbfSurface": "con gran",
-      "lbfWordIndex": 18
+      "lbfSurface": "sin tacha",
+      "lbfWordIndex": 16
     },
     {
       "chapter": 1,
@@ -17346,31 +17451,79 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 25,
       "token": 2,
       "greekSurface": "θεῷ",
-      "lbfSurface": "nuestro",
-      "lbfWordIndex": 3
+      "lbfSurface": "Dios",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 1,
       "verse": 25,
       "token": 3,
       "greekSurface": "σωτῆρι",
-      "lbfSurface": "por medio",
-      "lbfWordIndex": 6
+      "lbfSurface": "nuestro Salvador, por medio de Jesús Cristo nuestro Señor",
+      "lbfWordIndex": 11
     },
     {
       "chapter": 1,
       "verse": 25,
       "token": 4,
       "greekSurface": "ἡμῶν",
-      "lbfSurface": "Cristo",
-      "lbfWordIndex": 9
+      "lbfSurface": "nuestro Salvador, por medio de Jesús Cristo nuestro Señor",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 25,
+      "token": 5,
+      "greekSurface": "⸂διὰ",
+      "lbfSurface": "por medio de Jesús Cristo nuestro Señor",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 25,
+      "token": 6,
+      "greekSurface": "Ἰησοῦ",
+      "lbfSurface": "por medio de Jesús Cristo nuestro Señor",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 25,
+      "token": 7,
+      "greekSurface": "Χριστοῦ",
+      "lbfSurface": "por medio de Jesús Cristo nuestro Señor",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 25,
+      "token": 8,
+      "greekSurface": "τοῦ",
+      "lbfSurface": "por medio de Jesús Cristo nuestro Señor",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 25,
+      "token": 9,
+      "greekSurface": "κυρίου",
+      "lbfSurface": "por medio de Jesús Cristo nuestro Señor",
+      "lbfWordIndex": 11
+    },
+    {
+      "chapter": 1,
+      "verse": 25,
+      "token": 10,
+      "greekSurface": "ἡμῶν⸃",
+      "lbfSurface": "por medio de Jesús Cristo nuestro Señor",
+      "lbfWordIndex": 11
     },
     {
       "chapter": 1,
       "verse": 25,
       "token": 11,
       "greekSurface": "⸀δόξα",
-      "lbfSurface": "sea",
+      "lbfSurface": "sea gloria",
       "lbfWordIndex": 12
     },
     {
@@ -17378,37 +17531,21 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
       "verse": 25,
       "token": 12,
       "greekSurface": "μεγαλωσύνη",
-      "lbfSurface": "sea",
-      "lbfWordIndex": 12
-    },
-    {
-      "chapter": 1,
-      "verse": 25,
-      "token": 13,
-      "greekSurface": "κράτος",
-      "lbfSurface": "gloria",
-      "lbfWordIndex": 13
-    },
-    {
-      "chapter": 1,
-      "verse": 25,
-      "token": 14,
-      "greekSurface": "καὶ",
       "lbfSurface": "majestad",
       "lbfWordIndex": 14
     },
     {
       "chapter": 1,
       "verse": 25,
-      "token": 15,
-      "greekSurface": "ἐξουσία",
+      "token": 13,
+      "greekSurface": "κράτος",
       "lbfSurface": "dominio",
       "lbfWordIndex": 15
     },
     {
       "chapter": 1,
       "verse": 25,
-      "token": 20,
+      "token": 14,
       "greekSurface": "καὶ",
       "lbfSurface": "y autoridad",
       "lbfWordIndex": 17
@@ -17416,42 +17553,90 @@ Te saludan todos los que están conmigo. Saluda a los que nos aman en la fe. La 
     {
       "chapter": 1,
       "verse": 25,
+      "token": 15,
+      "greekSurface": "ἐξουσία",
+      "lbfSurface": "y autoridad",
+      "lbfWordIndex": 17
+    },
+    {
+      "chapter": 1,
+      "verse": 25,
+      "token": 16,
+      "greekSurface": "⸂πρὸ",
+      "lbfSurface": "antes de todo el siglo, y ahora",
+      "lbfWordIndex": 24
+    },
+    {
+      "chapter": 1,
+      "verse": 25,
+      "token": 17,
+      "greekSurface": "παντὸς",
+      "lbfSurface": "antes de todo el siglo, y ahora",
+      "lbfWordIndex": 24
+    },
+    {
+      "chapter": 1,
+      "verse": 25,
+      "token": 18,
+      "greekSurface": "τοῦ",
+      "lbfSurface": "antes de todo el siglo, y ahora",
+      "lbfWordIndex": 24
+    },
+    {
+      "chapter": 1,
+      "verse": 25,
+      "token": 19,
+      "greekSurface": "αἰῶνος⸃",
+      "lbfSurface": "antes de todo el siglo, y ahora",
+      "lbfWordIndex": 24
+    },
+    {
+      "chapter": 1,
+      "verse": 25,
+      "token": 20,
+      "greekSurface": "καὶ",
+      "lbfSurface": "antes de todo el siglo, y ahora",
+      "lbfWordIndex": 24
+    },
+    {
+      "chapter": 1,
+      "verse": 25,
       "token": 21,
       "greekSurface": "νῦν",
-      "lbfSurface": "antes",
-      "lbfWordIndex": 18
+      "lbfSurface": "antes de todo el siglo, y ahora",
+      "lbfWordIndex": 24
     },
     {
       "chapter": 1,
       "verse": 25,
       "token": 22,
       "greekSurface": "καὶ",
-      "lbfSurface": "de todo",
-      "lbfWordIndex": 20
+      "lbfSurface": "y por todos",
+      "lbfWordIndex": 27
     },
     {
       "chapter": 1,
       "verse": 25,
       "token": 23,
       "greekSurface": "εἰς",
-      "lbfSurface": "el siglo",
-      "lbfWordIndex": 22
+      "lbfSurface": "y por todos",
+      "lbfWordIndex": 27
     },
     {
       "chapter": 1,
       "verse": 25,
       "token": 24,
       "greekSurface": "πάντας",
-      "lbfSurface": "y ahora",
-      "lbfWordIndex": 24
+      "lbfSurface": "y por todos",
+      "lbfWordIndex": 27
     },
     {
       "chapter": 1,
       "verse": 25,
       "token": 25,
       "greekSurface": "τοὺς",
-      "lbfSurface": "y por todos",
-      "lbfWordIndex": 27
+      "lbfSurface": "los siglos",
+      "lbfWordIndex": 29
     },
     {
       "chapter": 1,
