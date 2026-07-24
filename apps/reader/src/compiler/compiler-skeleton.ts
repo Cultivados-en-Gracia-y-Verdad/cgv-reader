@@ -24,6 +24,7 @@ import {
 } from "@cgv/core";
 import {
   describeParticipleReading,
+  formatActorTriple,
   formatClauseSpan,
   getClauseBeginningTokens,
   loadClauseVerses,
@@ -488,8 +489,10 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   }
 
   const moodReviewedVerbIds = new Set<string>();
-  readMarkedAlignmentIds(progressKeys.commandMarks, bookId).forEach(id => moodReviewedVerbIds.add(id));
-  readMarkedAlignmentIds(progressKeys.statementMarks, bookId).forEach(id => moodReviewedVerbIds.add(id));
+  const commandMarkIds = readMarkedAlignmentIds(progressKeys.commandMarks, bookId);
+  const statementMarkIds = readMarkedAlignmentIds(progressKeys.statementMarks, bookId);
+  commandMarkIds.forEach(id => moodReviewedVerbIds.add(id));
+  statementMarkIds.forEach(id => moodReviewedVerbIds.add(id));
   readMarkedAlignmentIds(progressKeys.subjunctiveMarks, bookId).forEach(id => moodReviewedVerbIds.add(id));
   readMarkedAlignmentIds(progressKeys.optativeMarks, bookId).forEach(id => moodReviewedVerbIds.add(id));
   const participleMarkedAlignmentIds = readMarkedAlignmentIds(progressKeys.participleMarks, bookId);
@@ -573,6 +576,60 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
 
   const augmentedObservations = applyCoordinateInheritance(clauseSpanInfos, observationLikeById, coordinateContinuationIds);
   const skeleton = deriveSkeleton(clauseSpanInfos, augmentedObservations);
+
+  const clauseActors = readClauseActors(bookId);
+  function actorSpanText(ids: string[]): string {
+    if (!ids.length) return "";
+    const first = wordById.get(ids[0]);
+    if (!first) return "";
+    return formatClauseSpan(
+      ids,
+      wordsByVerse.get(`${first.chapter}:${first.verse}`) ?? [],
+      verseTextByKey.get(`${first.chapter}:${first.verse}`) ?? ""
+    ).trim();
+  }
+  function defaultVerbSpan(finiteVerbId: string): string[] {
+    const word = finiteVerbWordById.get(finiteVerbId);
+    return word ? [word.id] : [];
+  }
+  function actorSubjectText(finiteVerbId: string): string {
+    return actorSpanText(clauseActors[finiteVerbId]?.subjectSpan ?? []);
+  }
+
+  /**
+   * `* Actúan aquí: *X* (2) · *Y* (1)` — mechanical evidence line from observed
+   * subjects, so the human writer can name the H2 unit from who acts in it.
+   */
+  function actorEvidenceLine(finiteVerbIds: string[], label: string): string {
+    const counts = new Map<string, { label: string; count: number }>();
+    for (const id of finiteVerbIds) {
+      const subject = actorSubjectText(id);
+      if (!subject) continue;
+      const key = subject.toLowerCase();
+      const row = counts.get(key) ?? { label: subject, count: 0 };
+      row.count += 1;
+      counts.set(key, row);
+    }
+    if (!counts.size) return "";
+    const parts = Array.from(counts.values())
+      .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, undefined, { sensitivity: "base" }))
+      .map(row => `${scripture(row.label)} (${row.count})`);
+    return `${label}: ${parts.join(" · ")}`;
+  }
+
+  /** Scripture-wrapped `*sujeto* → *verbo* → *objeto` for Generate slides. */
+  function actorTripleScripture(finiteVerbId: string): string {
+    const stored = clauseActors[finiteVerbId];
+    const subject = actorSpanText(stored?.subjectSpan ?? []);
+    const verb = actorSpanText(
+      stored?.verbSpan?.length ? stored.verbSpan : defaultVerbSpan(finiteVerbId)
+    );
+    const object = actorSpanText(stored?.objectSpan ?? []);
+    if (!formatActorTriple(subject, verb, object)) return "";
+    return object
+      ? `${scripture(subject)} → ${scripture(verb)} → ${scripture(object)}`
+      : `${scripture(subject)} → ${scripture(verb)}`;
+  }
 
   // Participle emission: same-verse clause attachment only (mechanical).
   // No student classification — every Brick-4-marked participle is emitted.
@@ -976,6 +1033,8 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
 
     const dependent = dependentRender(node, clause);
     lines.push(...slide(`${indent}- ${scripture(node.spanText || clause.finiteVerbText)}`));
+    const dependentActor = actorTripleScripture(node.finiteVerbId);
+    if (dependentActor) lines.push(...starSlides(indent, [dependentActor]));
     lines.push(...commentSlides(takeReaderNoteComments(clause.chapter, clause.verse, indent)));
     const participleNotes = participleNotesFor(node.finiteVerbId, null);
     if (dependent.antecedentText) {
@@ -1256,12 +1315,25 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     block.push(`### ${reference} — ${rootQuote}`);
     block.push("");
 
+    // Unit-naming evidence (H2 help): who acts across root + dependents here.
+    const unitClauseIds = [root.finiteVerbId];
+    for (const event of unitEvents) {
+      if (event.kind === "dependent") unitClauseIds.push(event.node.finiteVerbId);
+      else if (event.kind === "orphan" && event.orphan.kind !== "phrase") {
+        unitClauseIds.push(event.orphan.node.finiteVerbId);
+      }
+    }
+    const unitActorEvidence = actorEvidenceLine(unitClauseIds, "Actúan en esta unidad");
+    if (unitActorEvidence) block.push(...starSlides("", [unitActorEvidence]));
+
     // Walk timeline: #### / - update currentDepth; + uses that indent (Fix A).
     let currentDepth = 0;
     const governing = root.spanText || clause.finiteVerbText;
     for (const event of unitEvents) {
       if (event.kind === "root") {
         block.push(...slide(`#### ${rootQuote}`));
+        const rootActor = actorTripleScripture(root.finiteVerbId);
+        if (rootActor) block.push(...starSlides("", [rootActor]));
         block.push(...commentSlides(takeReaderNoteComments(clause.chapter, clause.verse)));
         block.push(...starSlides("", rootExplanationLines(clause)));
         block.push(...emitInfinitiveSlides("", root.finiteVerbId, null));
@@ -1285,7 +1357,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     const block: string[] = [];
     block.push("### Pendiente de colocación");
     block.push("");
-    block.push("_Material sin cláusula raíz posterior en el libro — pendiente de colocación manual._");
+    block.push("{Material sin cláusula raíz posterior en el libro — pendiente de colocación manual.}");
     block.push("");
     for (const orphan of leftoverOrphans) {
       block.push(...renderOrphanBullet(orphan, "(sin cláusula gobernante identificada)"));
@@ -1294,41 +1366,22 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     warnings.push(`${leftoverOrphans.length} orphan item(s) had no following root clause to fold into — placed in a final "Pendiente de colocación" section.`);
   }
 
-  // Actor layer (Structure SVO) — concentration + flow appendix when observed.
-  const clauseActors = readClauseActors(bookId);
-  function actorSpanText(ids: string[]): string {
-    if (!ids.length) return "";
-    const first = wordById.get(ids[0]);
-    if (!first) return "";
-    return formatClauseSpan(
-      ids,
-      wordsByVerse.get(`${first.chapter}:${first.verse}`) ?? [],
-      verseTextByKey.get(`${first.chapter}:${first.verse}`) ?? ""
-    ).trim();
-  }
-  function defaultVerbSpan(finiteVerbId: string): string[] {
-    const word = finiteVerbWordById.get(finiteVerbId);
-    return word ? [word.id] : [];
-  }
-
-  type FlowAction = { verb: string; object: string; order: number };
+  // Actor layer (Structure SVO) — concentration + full-triple flow appendix.
+  type FlowAction = { triple: string; order: number };
   const concentrationCounts = new Map<string, { label: string; count: number }>();
   const flowByActor = new Map<string, { label: string; actions: FlowAction[] }>();
   for (const info of clauseSpanInfos) {
     const stored = clauseActors[info.finiteVerbId];
     const subject = actorSpanText(stored?.subjectSpan ?? []);
     if (!subject) continue;
-    const verb = actorSpanText(
-      stored?.verbSpan?.length ? stored.verbSpan : defaultVerbSpan(info.finiteVerbId)
-    );
-    if (!verb) continue;
-    const object = actorSpanText(stored?.objectSpan ?? []);
+    const tripleScripture = actorTripleScripture(info.finiteVerbId);
+    if (!tripleScripture) continue;
     const key = subject.toLowerCase();
     const conc = concentrationCounts.get(key) ?? { label: subject, count: 0 };
     conc.count += 1;
     concentrationCounts.set(key, conc);
     const flow = flowByActor.get(key) ?? { label: subject, actions: [] };
-    flow.actions.push({ verb, object, order: info.order });
+    flow.actions.push({ triple: tripleScripture, order: info.order });
     flowByActor.set(key, flow);
   }
 
@@ -1358,16 +1411,42 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       actorBlock.push(`#### ${group.label.toUpperCase()}`);
       actorBlock.push("");
       for (const action of group.actions) {
-        const line = action.object
-          ? `${scripture(action.verb)} → ${scripture(action.object)}`
-          : scripture(action.verb);
-        actorBlock.push(`- ${line}`);
+        actorBlock.push(`- ${action.triple}`);
         actorBlock.push("");
       }
     }
     sections.push(actorBlock.join("\n"));
   } else {
     warnings.push("No clause actors observed yet — Actor concentration / flow omitted from Generate.");
+  }
+
+  // H1/H2 evidence: the TODOs stay human-assigned, but the writer names them
+  // from observed data — dominant actors and the book's mood mix, up front.
+  {
+    const evidenceLines: string[] = [];
+    if (concentrationCounts.size) {
+      const top = Array.from(concentrationCounts.values())
+        .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, undefined, { sensitivity: "base" }))
+        .slice(0, 5)
+        .map(row => `${scripture(row.label)} — ${row.count} ${row.count === 1 ? "acción" : "acciones"}`);
+      evidenceLines.push(`Actores dominantes del libro: ${top.join(" · ")}.`);
+    }
+    const commandCount = clauses.filter(clause => commandMarkIds.has(clause.finiteVerbId)).length;
+    const statementCount = clauses.filter(clause => statementMarkIds.has(clause.finiteVerbId)).length;
+    if (commandCount || statementCount) {
+      evidenceLines.push(
+        `Tono observado: ${statementCount} ${statementCount === 1 ? "declaración" : "declaraciones"} · ${commandCount} ${commandCount === 1 ? "mandato" : "mandatos"}.`
+      );
+    }
+    if (evidenceLines.length) {
+      const evidenceBlock: string[] = [];
+      evidenceBlock.push(
+        "{Evidencia de Observador para nombrar desarrollo mayor (H1) y desarrollo continuo (H2) — no es comentario.}"
+      );
+      evidenceBlock.push("");
+      evidenceBlock.push(...starSlides("", evidenceLines));
+      sections.unshift(evidenceBlock.join("\n"));
+    }
   }
 
   const yaml = formatYamlFrontmatter(meta ?? createDefaultManualMeta());

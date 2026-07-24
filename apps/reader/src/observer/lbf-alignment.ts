@@ -85,13 +85,19 @@ export function findWordIndexBySurface(
 /**
  * LBF often stores a multi-word Spanish phrase for one Greek token
  * ("son guardados" for φρουρουμένους). Whitespace tokenization splits that
- * phrase, and the recorded index may land on an auxiliary ("son"). Prefer the
- * last content word of the phrase when it appears at/after the recorded index.
+ * phrase, and the recorded index may land on an edge word.
+ *
+ * - `last` (default): last content word.
+ * - `finite`: conjugated Spanish verb (*respondía con insultos* → *respondía*;
+ *   *lo soportan* → *soportan*).
+ * - `participle`: participial head, stopping before a trailing PP
+ *   (*muertos a los pecados* → *muertos*; *siendo golpeados* → *golpeados*).
  */
 export function resolveLbfPhraseWordIndex(
   words: { index: number; text: string }[],
   recordedIndex: number | undefined,
-  lbfSurface: string | undefined
+  lbfSurface: string | undefined,
+  prefer: "first" | "last" | "finite" | "participle" = "last"
 ): number | undefined {
   if (recordedIndex === undefined) return undefined;
   if (!lbfSurface) return recordedIndex;
@@ -101,12 +107,92 @@ export function resolveLbfPhraseWordIndex(
     .map(part => part.trim())
     .filter(Boolean);
   if (parts.length <= 1) return recordedIndex;
-  const wanted = normalizeSpanish(parts[parts.length - 1] ?? "");
-  if (!wanted) return recordedIndex;
-  const match = words.find(
-    word => word.index >= recordedIndex && normalizeSpanish(word.text) === wanted
+
+  const lastWanted = normalizeSpanish(parts[parts.length - 1] ?? "");
+  if (!lastWanted) return recordedIndex;
+
+  const endWord =
+    words.find(word => word.index >= recordedIndex && normalizeSpanish(word.text) === lastWanted) ??
+    words.find(word => word.index <= recordedIndex && normalizeSpanish(word.text) === lastWanted);
+  if (!endWord) return recordedIndex;
+
+  const startIndex = endWord.index - (parts.length - 1);
+  if (startIndex < 0) return recordedIndex;
+
+  const phraseWords: { index: number; text: string }[] = [];
+  for (let i = 0; i < parts.length; i += 1) {
+    const word = words.find(candidate => candidate.index === startIndex + i);
+    if (!word || normalizeSpanish(word.text) !== normalizeSpanish(parts[i] ?? "")) {
+      return recordedIndex;
+    }
+    phraseWords.push(word);
+  }
+
+  if (prefer === "first") return phraseWords[0]?.index ?? recordedIndex;
+  if (prefer === "last") return endWord.index;
+
+  if (prefer === "finite") {
+    // haber + participle (*han vuelto*): prefer the participle head, not the aux.
+    if (phraseWords.length >= 2) {
+      const head = phraseWords[0]!;
+      const tail = phraseWords[phraseWords.length - 1]!;
+      if (isSpanishHaberForm(head.text) && looksLikeSpanishParticipleForm(tail.text)) {
+        return tail.index;
+      }
+    }
+    const finiteHit = phraseWords.find(word => looksLikeSpanishFiniteForm(word.text));
+    return finiteHit?.index ?? endWord.index;
+  }
+
+  // participle: ignore a trailing prepositional complement (*a los pecados*).
+  const prepAt = phraseWords.findIndex(word => isSpanishPreposition(word.text));
+  const search = prepAt > 0 ? phraseWords.slice(0, prepAt) : phraseWords;
+  const participleHits = search.filter(word => looksLikeSpanishParticipleForm(word.text));
+  if (participleHits.length) return participleHits[participleHits.length - 1]!.index;
+  return search[search.length - 1]?.index ?? endWord.index;
+}
+
+function isSpanishHaberForm(text: string): boolean {
+  return /^(he|has|ha|han|hemos|habeis|habia|habias|habian|habiamos|hubo|hubieron|haya|hayan|habre|habran)$/.test(
+    normalizeSpanish(text)
   );
-  return match ? match.index : recordedIndex;
+}
+
+function isSpanishPreposition(text: string): boolean {
+  return /^(a|al|de|del|en|con|por|para|sin|sobre|ante|bajo|entre|hacia|hasta|segun)$/.test(
+    normalizeSpanish(text)
+  );
+}
+
+/** Prefer a conjugated Spanish head over clitics / nouns in a multi-word gloss. */
+function looksLikeSpanishFiniteForm(text: string): boolean {
+  const n = normalizeSpanish(text);
+  if (!n || n.length < 2) return false;
+  if (
+    /^(lo|la|los|las|le|les|me|te|se|nos|os|el|un|una|unos|unas|de|del|al|a|en|con|por|para|sin|y|o|que|no|si|cuando|pues|pero)$/.test(
+      n
+    )
+  ) {
+    return false;
+  }
+  if (
+    /^(es|son|soy|somos|fue|fueron|era|eran|hay|he|ha|han|hemos|sea|sean|esta|estan|estoy|estamos)$/.test(n)
+  ) {
+    return true;
+  }
+  return /(aba|abas|aban|abamos|ia|ias|ian|iamos|aron|ieron|aste|iste|amos|ais|an|en|io|ara|era|ira|aria|eria|iria)$/.test(
+    n
+  );
+}
+
+function looksLikeSpanishParticipleForm(text: string): boolean {
+  const n = normalizeSpanish(text);
+  if (!n || n.length < 3) return false;
+  if (isSpanishPreposition(text)) return false;
+  if (/^(lo|la|los|las|el|un|una|unos|unas|y|o|que|no|si)$/.test(n)) return false;
+  return /(ado|ados|ada|adas|ido|idos|ida|idas|ando|endo|iendo|iendo|to|tos|ta|tas|so|sos|cho|chos|muerto|muertos)$/.test(
+    n
+  );
 }
 
 function normalizeSpanish(value: string): string {

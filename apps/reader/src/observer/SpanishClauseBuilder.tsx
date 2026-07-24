@@ -16,12 +16,16 @@ import {
   writeClauseAssignments,
   writeClauseObservations,
   groupParticiplesByNounHost,
+  formatActorTriple,
   readClauseActors,
+  readH3FlowState,
   readParticipleSubjectHosts,
   writeClauseActors,
+  writeH3FlowState,
   writeParticipleSubjectHosts,
   type ClauseActorObservation,
   type ClauseActors,
+  type H3FlowState,
   type ClauseAssignments,
   type ClauseBeginningToken,
   type ClauseObservation,
@@ -58,6 +62,14 @@ import {
   type ClauseSpanInfo,
   type SkeletonNode
 } from "./clause-tree";
+import {
+  acceptH3FlowBreak,
+  buildH3FlowDevelopments,
+  buildH3FlowSuggestions,
+  clearH3FlowBreak,
+  ignoreH3FlowSuggestion,
+  reconcileH3FlowState
+} from "./h3-flow";
 
 const FALLBACK_CLAUSE_CHOICES: ClauseChoiceOption[] = [
   {
@@ -328,6 +340,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     readParticipleSubjectHosts(bookId)
   );
   const [clauseActors, setClauseActors] = useState<ClauseActors>(() => readClauseActors(bookId));
+  const [h3FlowState, setH3FlowState] = useState<H3FlowState>(() => readH3FlowState(bookId));
   const [nounAnchorId, setNounAnchorId] = useState<string | null>(null);
   const [subjectHostAnchorId, setSubjectHostAnchorId] = useState<string | null>(null);
   /** clauseId or verseKey currently picking a nominative subject host for. */
@@ -400,6 +413,8 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     setAssignments(readClauseAssignments(bookId));
     setObservations(readClauseObservations(bookId));
     setParticipleSubjectHosts(readParticipleSubjectHosts(bookId));
+    setClauseActors(readClauseActors(bookId));
+    setH3FlowState(readH3FlowState(bookId));
     setPickingSubjectHostKey(null);
     setSubjectHostAnchorId(null);
     setActiveVerbId(null);
@@ -2004,6 +2019,45 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     []
   );
 
+  // Keep the clause verse (or an existing field pick’s verse) visible inside
+  // the actor chapter list — scroll only that picker, not the window.
+  useEffect(() => {
+    if (!pickingActorField || !activeBeginningRow || !activeBeginningVerbId) return;
+    const actor = actorObservationFor(activeBeginningVerbId);
+    const span =
+      pickingActorField === "subject"
+        ? actor.subjectSpan
+        : pickingActorField === "verb"
+          ? actor.verbSpan
+          : actor.objectSpan;
+    let verseKey = `${activeBeginningRow.finiteVerb.chapter}:${activeBeginningRow.finiteVerb.verse}`;
+    if (span.length) {
+      const first = wordById.get(span[0]);
+      if (first) verseKey = `${first.chapter}:${first.verse}`;
+    }
+    const timer = window.setTimeout(() => {
+      const node = document.querySelector<HTMLElement>(
+        `[data-actor-verse="${CSS.escape(verseKey)}"]`
+      );
+      const panel = node?.closest<HTMLElement>(".clause-subject-host-picker");
+      if (!node || !panel) return;
+      const panelRect = panel.getBoundingClientRect();
+      const nodeRect = node.getBoundingClientRect();
+      const delta = nodeRect.top - panelRect.top - 8;
+      if (delta < 0 || nodeRect.bottom > panelRect.bottom) {
+        panel.scrollTop += delta;
+      }
+    }, 40);
+    return () => window.clearTimeout(timer);
+  }, [
+    pickingActorField,
+    activeBeginningVerbId,
+    activeBeginningRow,
+    actorObservationFor,
+    wordById,
+    clauseActors
+  ]);
+
   const selectActorWord = useCallback(
     (finiteVerbId: string, field: "subject" | "verb" | "object", word: SpanishWord, event: MouseEvent<HTMLButtonElement>) => {
       if (event.shiftKey && actorAnchorId) {
@@ -2055,19 +2109,35 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, undefined, { sensitivity: "base" }));
   }, [actorObservationFor, clauseSpanInfos, spanTextFromIds]);
 
+  const actorTripleFor = useCallback(
+    (finiteVerbId: string | null | undefined): string => {
+      if (!finiteVerbId) return "";
+      const actor = actorObservationFor(finiteVerbId);
+      return formatActorTriple(
+        spanTextFromIds(actor.subjectSpan),
+        spanTextFromIds(actor.verbSpan),
+        spanTextFromIds(actor.objectSpan)
+      );
+    },
+    [actorObservationFor, spanTextFromIds]
+  );
+
   const actorFlow = useMemo(() => {
-    type FlowAction = { verb: string; object: string; order: number };
+    type FlowAction = { triple: string; order: number };
     const byActor = new Map<string, { label: string; actions: FlowAction[] }>();
     for (const info of clauseSpanInfos) {
       const actor = actorObservationFor(info.finiteVerbId);
       const subject = spanTextFromIds(actor.subjectSpan);
       if (!subject) continue;
-      const verb = spanTextFromIds(actor.verbSpan);
-      if (!verb) continue;
-      const object = spanTextFromIds(actor.objectSpan);
+      const triple = formatActorTriple(
+        subject,
+        spanTextFromIds(actor.verbSpan),
+        spanTextFromIds(actor.objectSpan)
+      );
+      if (!triple) continue;
       const key = subject.toLowerCase();
       const group = byActor.get(key) ?? { label: subject, actions: [] };
-      group.actions.push({ verb, object, order: info.order });
+      group.actions.push({ triple, order: info.order });
       byActor.set(key, group);
     }
     return Array.from(byActor.values())
@@ -2077,6 +2147,67 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       }))
       .sort((a, b) => a.label.localeCompare(b.label, undefined, { sensitivity: "base" }));
   }, [actorObservationFor, clauseSpanInfos, spanTextFromIds]);
+
+  // H3 flow: clean independent-clause strip + accepted developments + suggestions.
+  const h3FlowInput = useMemo(() => {
+    const subjectByClauseId = new Map<string, string>();
+    for (const info of clauseSpanInfos) {
+      const subject = spanTextFromIds(actorObservationFor(info.finiteVerbId).subjectSpan);
+      if (subject) subjectByClauseId.set(info.finiteVerbId, subject);
+    }
+    return {
+      outline,
+      skeletonRoots: skeleton.roots,
+      subjectByClauseId,
+      imperativeRootIds,
+      statementRootIds,
+      recipientByRootId: recipientAssignments
+    };
+  }, [
+    actorObservationFor,
+    clauseSpanInfos,
+    imperativeRootIds,
+    outline,
+    recipientAssignments,
+    skeleton.roots,
+    spanTextFromIds,
+    statementRootIds
+  ]);
+
+  const h3FlowReconciled = useMemo(
+    () => reconcileH3FlowState(
+      h3FlowState,
+      outline.map(clause => clause.finiteVerbId)
+    ),
+    [h3FlowState, outline]
+  );
+
+  const h3FlowDevelopments = useMemo(
+    () => buildH3FlowDevelopments(h3FlowInput, h3FlowReconciled),
+    [h3FlowInput, h3FlowReconciled]
+  );
+
+  const h3FlowSuggestions = useMemo(
+    () => buildH3FlowSuggestions(h3FlowInput, h3FlowReconciled),
+    [h3FlowInput, h3FlowReconciled]
+  );
+
+  const h3FlowSuggestionByAfterId = useMemo(
+    () => new Map(h3FlowSuggestions.map(row => [row.afterH3Id, row])),
+    [h3FlowSuggestions]
+  );
+
+  const persistH3Flow = useCallback(
+    (next: H3FlowState) => {
+      const reconciled = reconcileH3FlowState(
+        next,
+        outline.map(clause => clause.finiteVerbId)
+      );
+      setH3FlowState(reconciled);
+      writeH3FlowState(reconciled, bookId);
+    },
+    [bookId, outline]
+  );
 
   // Shared by renderClauseLine and renderSkeletonNode — dotted underline on
   // Brick-4-marked participles. Read-only: identification happens in Brick 4.
@@ -2135,6 +2266,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       // looked up for root nodes (sequenceEntryByFiniteVerbId is built from
       // root-only `outline`, so a dependent node simply won't match).
       const sequenceEntry = sequenceEntryByFiniteVerbId.get(node.finiteVerbId);
+      const actorTriple = actorTripleFor(node.finiteVerbId);
       return (
         <div
           className={[
@@ -2173,6 +2305,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
             <span className="clause-tree-text">
               {row ? renderClauseWords(row.selectedWords, node.finiteVerbId) : node.spanText || node.reference}
             </span>
+            {actorTriple ? <span className="clause-actor-triple">{actorTriple}</span> : null}
             {marker ? (
               <span className="clause-marker-line">
                 “{marker.word}” — {marker.type === "relational" ? "conector relacional" : "marcador subordinante"} ·{" "}
@@ -2200,6 +2333,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     },
     [
       activeBeginningVerbId,
+      actorTripleFor,
       clauseMarkers,
       finiteVerbIdToRow,
       openClauseFromSkeleton,
@@ -3247,6 +3381,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                                     ? "clause-subject-host-verse clause-subject-host-verse--current"
                                     : "clause-subject-host-verse"
                                 }
+                                data-actor-verse={`${chapterVerse.chapter}:${chapterVerse.verse}`}
                                 key={`actor-${chapterVerse.chapter}:${chapterVerse.verse}`}
                               >
                                 <span className="clause-subject-host-verse-label">
@@ -3459,17 +3594,92 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
             )}
 
             {outline.length ? (
-              <div className="clause-outline-section">
-                <h3>Outline</h3>
+              <div className="clause-h3-flow" aria-label="H3 flow">
+                <h3>H3 flow</h3>
                 <p className="clause-section-note">
-                  Just the root clauses, book order — everything indented stripped out of the skeleton above.
+                  Independent clauses in book order — the canvas for continuous development. H2 is a
+                  stretch of consecutive H3s you keep together; Accept a suggested break when
+                  observations show the flow has changed. The app never invents a title.
                 </p>
-                {outline.map(clause => (
-                  <p className="clause-outline-item" key={clause.finiteVerbId}>
-                    <span>{clause.reference}</span>
-                    {clause.spanText}
+                <div className="clause-h3-flow-list">
+                  {h3FlowDevelopments.map((development, index) => (
+                    <div
+                      className="clause-h3-flow-band"
+                      key={`dev-${index}-${development.h3Ids[0] ?? index}`}
+                    >
+                      <p className="clause-h3-flow-band-title">
+                        Development {index + 1}
+                        {development.label ? <span> — {development.label}</span> : null}
+                      </p>
+                      {development.units.map(unit => {
+                        const suggestion = h3FlowSuggestionByAfterId.get(unit.finiteVerbId);
+                        const acceptedBreak = h3FlowReconciled.breaksAfter.includes(unit.finiteVerbId);
+                        return (
+                          <div key={unit.finiteVerbId}>
+                            <div className="clause-h3-flow-row">
+                              <span className="clause-h3-flow-ref">{unit.reference}</span>
+                              <span className="clause-h3-flow-span">{unit.spanText}</span>
+                            </div>
+                            {suggestion ? (
+                              <div className="clause-h3-flow-suggestion">
+                                <p className="clause-h2-transition" role="status">
+                                  ┄┄┄ {suggestion.transition.detail} ┄┄┄
+                                </p>
+                                <p className="clause-h2-transition-why">
+                                  Why suggested: {suggestion.transition.reason}
+                                </p>
+                                <div className="clause-h3-flow-suggestion-actions">
+                                  <button
+                                    type="button"
+                                    className="clause-h3-flow-accept"
+                                    onClick={() =>
+                                      persistH3Flow(acceptH3FlowBreak(h3FlowReconciled, unit.finiteVerbId))
+                                    }
+                                  >
+                                    Accept break
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="clause-h3-flow-ignore"
+                                    onClick={() =>
+                                      persistH3Flow(
+                                        ignoreH3FlowSuggestion(h3FlowReconciled, unit.finiteVerbId)
+                                      )
+                                    }
+                                  >
+                                    Ignore
+                                  </button>
+                                </div>
+                              </div>
+                            ) : null}
+                            {acceptedBreak && !suggestion ? (
+                              <div className="clause-h3-flow-accepted">
+                                <p className="clause-h2-transition" role="status">
+                                  ── accepted break ──
+                                </p>
+                                <button
+                                  type="button"
+                                  className="clause-h3-flow-ignore"
+                                  onClick={() =>
+                                    persistH3Flow(clearH3FlowBreak(h3FlowReconciled, unit.finiteVerbId))
+                                  }
+                                >
+                                  Undo break
+                                </button>
+                              </div>
+                            ) : null}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  ))}
+                </div>
+                {!h3FlowSuggestions.length && h3FlowDevelopments.length <= 1 ? (
+                  <p className="clause-output-empty">
+                    No open suggestions yet. Fill Quién actúa / mood on consecutive roots — or wait until
+                    observations differ enough to propose a break.
                   </p>
-                ))}
+                ) : null}
               </div>
             ) : null}
 
@@ -3499,7 +3709,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
             <div className="clause-actor-flow">
               <h3>C. Actor flow</h3>
               <p className="clause-section-note">
-                Actions gathered under their actors — verbo → objeto / receptor when observed.
+                Full actor lines gathered under each subject — sujeto → verbo → objeto when observed.
               </p>
               {actorFlow.length ? (
                 <div className="clause-actor-flow-list">
@@ -3508,11 +3718,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                       <p className="clause-actor-flow-actor">{group.label.toUpperCase()}</p>
                       <ul>
                         {group.actions.map((action, index) => (
-                          <li key={`${group.label}:${action.verb}:${index}`}>
-                            {action.object
-                              ? `${action.verb} → ${action.object}`
-                              : action.verb}
-                          </li>
+                          <li key={`${group.label}:${action.triple}:${index}`}>{action.triple}</li>
                         ))}
                       </ul>
                     </div>

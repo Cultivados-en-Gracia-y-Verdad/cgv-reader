@@ -79,8 +79,23 @@ already linked; do not use the deprecated bootstrap script for maintenance.
 
 Unaligned tokens show the BLE gloss in italics as a fallback cue.
 
+
+## Judas
+
+Same pipeline as 1 Pedro:
+
+1. Translator reverse links: `cgv-translator/translations/tr-spine/jude/jude-reverse-links.json`
+   (seed with `scripts/seed_jude_reverse_links.py`; hand-refine in UI).
+2. Compile Reader alignment:
+
+```bash
+python3 scripts/compile-lbf-alignment-judas.py
+```
+
+`data/lbf/nt/judas.alignment.json` is the Structure map. Re-run after link edits.
+
 ## Open follow-ups
 
-1. Finish 1 Pedro to Tito’s bar (see ADR-0001 checklist).
-2. Promote Tito + 1 Pedro together into `cgv-data`; cut Reader over from staging.
+1. Finish 1 Pedro / Judas reverse links to Tito’s hand-quality bar (see ADR-0001 checklist).
+2. Promote Tito + 1 Pedro + Judas together into `cgv-data`; cut Reader over from staging.
 3. Plan TR1894 Greek spine switch when multi-book LBF work demands it.

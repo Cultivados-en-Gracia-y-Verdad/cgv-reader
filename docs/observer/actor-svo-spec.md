@@ -22,6 +22,16 @@ multi-word span. Picks **never** change clause belonging.
 
 Live summary on the card: `SUJETO → VERBO → OBJETO / RECEPTOR`.
 
+**Locked teaching form** (same string everywhere once subject + verb exist):
+
+```text
+Cristo → llevó → nuestros pecados
+paciencia → esperaba
+```
+
+Omit the object slot when empty. Never drop the actor from the line in flow
+views.
+
 **Non-goal:** no automatic nominative subject from morphology (same lesson as
 nominative participle hosts).
 
@@ -63,19 +73,20 @@ Group by normalized subject-span text; count clauses; sort by count desc, then n
 
 ### C. Actor flow
 
-Actions under actors (document order within each group):
+Actions under actors (document order within each group) — **full triples**:
 
 ```
 DIOS
-  prometió → vida eterna
-  manifestó → su palabra
+  Dios → prometió → vida eterna
+  Dios → manifestó → su palabra
 
 PABLO
-  recibió → predicación
+  Pablo → recibió → predicación
 ```
 
-Omit `→` when there is no object span. Empty state until Quién actúa / Qué hace
-are observed.
+Also shown under each clause in the Skeleton tree and Outline.
+
+Empty state until Quién actúa / Qué hace are observed.
 
 ---
 
@@ -85,8 +96,16 @@ Every finite clause with a saved span (roots and dependents).
 
 ## 5. Compiler Generate
 
-When any clause has Quién actúa (+ verb, defaulting to the finite verb word),
-Generate appends an appendix after the outline:
+When a clause has Quién actúa (+ verb), Generate emits the triple as a `*`
+slide immediately under that clause’s `####` / `-` line:
+
+```markdown
+#### *y a su propio tiempo manifestó…*
+
+* *Dios* → *manifestó* → *su palabra*
+```
+
+Appendix after the outline (gathering view):
 
 ```markdown
 ## Actores
@@ -96,7 +115,25 @@ Generate appends an appendix after the outline:
 
 ### Flujo
 #### DIOS
-- *prometió* → *vida eterna*
+- *Dios* → *prometió* → *vida eterna*
 ```
 
 Omitted (with a Generate warning) when no actors are observed yet.
+
+## 6. H1/H2 evidence
+
+Actor observations feed the naming of `# contexto` / `## unidad` (still
+human-assigned):
+
+- Book-level block before the first H3: dominant actors (top 5, with counts)
+  and the mood mix (declaraciones · mandatos).
+- Per-unit line right after each H3: `* Actúan en esta unidad: *X* (2) · *Y* (1)`
+  from observed subjects on the unit's root + dependent clauses.
+
+Counts and Scripture words only — the Compiler never names the unit itself.
+
+In Observer Skeleton, the same actor (plus mood / recipient) signals drive
+**D. H2 developments (suggested)** — see `h2-movements-spec.md`.
+
+Locked hierarchy (never “theme”): H3 = independent clause; H2 = continuous
+development of consecutive H3s; H1 = major development of consecutive H2s.

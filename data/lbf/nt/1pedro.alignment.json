@@ -5916,7 +5916,7 @@
       "token": 4,
       "greekSurface": "ἀντελοιδόρει,",
       "lbfSurface": "respondía con insultos",
-      "lbfWordIndex": 7
+      "lbfWordIndex": 5
     },
     {
       "chapter": 2,
@@ -5995,24 +5995,24 @@
       "verse": 24,
       "token": 2,
       "greekSurface": "τὰς",
-      "lbfSurface": "llevó nuestros pecados",
-      "lbfWordIndex": 3
+      "lbfSurface": "nuestros pecados",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 2,
       "verse": 24,
       "token": 3,
       "greekSurface": "ἁμαρτίας",
-      "lbfSurface": "llevó nuestros pecados",
-      "lbfWordIndex": 3
+      "lbfSurface": "pecados",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 2,
       "verse": 24,
       "token": 4,
       "greekSurface": "ἡμῶν",
-      "lbfSurface": "llevó nuestros pecados",
-      "lbfWordIndex": 3
+      "lbfSurface": "nuestros",
+      "lbfWordIndex": 4
     },
     {
       "chapter": 2,
@@ -6027,7 +6027,7 @@
       "verse": 24,
       "token": 6,
       "greekSurface": "ἀνήνεγκεν",
-      "lbfSurface": "llevó nuestros pecados",
+      "lbfSurface": "llevó",
       "lbfWordIndex": 3
     },
     {
@@ -6099,7 +6099,7 @@
       "verse": 24,
       "token": 15,
       "greekSurface": "ταῖς",
-      "lbfSurface": "muertos a los pecados",
+      "lbfSurface": "a los pecados",
       "lbfWordIndex": 17
     },
     {
@@ -6107,7 +6107,7 @@
       "verse": 24,
       "token": 16,
       "greekSurface": "ἁμαρτίαις",
-      "lbfSurface": "muertos a los pecados",
+      "lbfSurface": "pecados",
       "lbfWordIndex": 17
     },
     {
@@ -6115,8 +6115,8 @@
       "verse": 24,
       "token": 17,
       "greekSurface": "ἀπογενόμενοι",
-      "lbfSurface": "muertos a los pecados",
-      "lbfWordIndex": 17
+      "lbfSurface": "muertos",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 2,
@@ -6179,7 +6179,7 @@
       "verse": 25,
       "token": 1,
       "greekSurface": "ἦτε",
-      "lbfSurface": "ustedes eran",
+      "lbfSurface": "eran",
       "lbfWordIndex": 2
     },
     {
@@ -6227,7 +6227,7 @@
       "verse": 25,
       "token": 7,
       "greekSurface": "ἐπεστράφητε",
-      "lbfSurface": "han vuelto",
+      "lbfSurface": "vuelto",
       "lbfWordIndex": 9
     },
     {
@@ -6243,8 +6243,8 @@
       "verse": 25,
       "token": 9,
       "greekSurface": "ἐπὶ",
-      "lbfSurface": "al Pastor",
-      "lbfWordIndex": 11
+      "lbfSurface": "al",
+      "lbfWordIndex": 10
     },
     {
       "chapter": 2,
@@ -6259,7 +6259,7 @@
       "verse": 25,
       "token": 11,
       "greekSurface": "ποιμένα",
-      "lbfSurface": "al Pastor",
+      "lbfSurface": "Pastor",
       "lbfWordIndex": 11
     },
     {
@@ -6283,15 +6283,15 @@
       "verse": 25,
       "token": 14,
       "greekSurface": "τῶν",
-      "lbfSurface": "de sus almas",
-      "lbfWordIndex": 16
+      "lbfSurface": "de",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 2,
       "verse": 25,
       "token": 15,
       "greekSurface": "ψυχῶν",
-      "lbfSurface": "de sus almas",
+      "lbfSurface": "almas",
       "lbfWordIndex": 16
     },
     {
@@ -6299,8 +6299,8 @@
       "verse": 25,
       "token": 16,
       "greekSurface": "ὑμῶν.",
-      "lbfSurface": "de sus almas",
-      "lbfWordIndex": 16
+      "lbfSurface": "sus",
+      "lbfWordIndex": 15
     },
     {
       "chapter": 3,

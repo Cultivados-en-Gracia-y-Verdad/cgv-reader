@@ -111,7 +111,7 @@ export function subscribeReaderBook(listener: (bookId: ReaderBookId) => void): (
 }
 
 /** Books with LBF reading text under `data/lbf/nt/{id}.md`. */
-const LBF_TEXT_BOOKS = new Set<ReaderBookId>(["tito", "1pedro"]);
+const LBF_TEXT_BOOKS = new Set<ReaderBookId>(["tito", "1pedro", "judas"]);
 
 /** LBF available as a Reader bible version. */
 export function readerBookHasLbf(bookId: ReaderBookId): boolean {
@@ -120,10 +120,10 @@ export function readerBookHasLbf(bookId: ReaderBookId): boolean {
 
 /**
  * Observer Structure / Compiler need reverse-interlinear alignment, not just
- * reading text. Titus only until each book gets `*.alignment.json` + wiring.
+ * reading text. Tito, 1 Pedro, and Judas have `data/lbf/nt/*.alignment.json`.
  */
 export function readerBookHasLbfStructure(bookId: ReaderBookId): boolean {
-  return bookId === "tito" || bookId === "1pedro";
+  return bookId === "tito" || bookId === "1pedro" || bookId === "judas";
 }
 
 /**
@@ -182,6 +182,8 @@ export interface WorkshopProgressKeys {
   participleSubjectHosts: string;
   /** Per finite clause: subject / verb / object spans (SVO actor observations). */
   clauseActors: string;
+  /** H3 flow: accepted development breaks + ignored suggestions. */
+  h3Flow: string;
 }
 
 export function workshopProgressKeys(bookId: ReaderBookId): WorkshopProgressKeys {
@@ -200,6 +202,7 @@ export function workshopProgressKeys(bookId: ReaderBookId): WorkshopProgressKeys
     clauseObservations: `the-reader:spanish-clause-builder:${s}:statement-command-review:v1`,
     participleObservations: `the-reader:spanish-clause-builder:${s}:participles:v1`,
     participleSubjectHosts: `the-reader:spanish-clause-builder:${s}:participle-subjects:v1`,
-    clauseActors: `the-reader:spanish-clause-builder:${s}:clause-actors:v1`
+    clauseActors: `the-reader:spanish-clause-builder:${s}:clause-actors:v1`,
+    h3Flow: `the-reader:spanish-clause-builder:${s}:h3-flow:v1`
   };
 }

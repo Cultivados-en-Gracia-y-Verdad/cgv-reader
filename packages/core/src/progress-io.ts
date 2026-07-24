@@ -35,7 +35,8 @@ export function progressKeysForBook(bookId: ReaderBookId): ProgressKeyInfo[] {
     { key: keys.clauseObservations, label: "Clause observations" },
     { key: keys.participleObservations, label: "Participle classifications" },
     { key: keys.participleSubjectHosts, label: "Participle subject hosts" },
-    { key: keys.clauseActors, label: "Clause actors (SVO)" }
+    { key: keys.clauseActors, label: "Clause actors (SVO)" },
+    { key: keys.h3Flow, label: "H3 flow developments" }
   ];
   if (keys.clauseAssignmentsLegacy) {
     entries.push({ key: keys.clauseAssignmentsLegacy, label: "Clause spans (legacy)" });

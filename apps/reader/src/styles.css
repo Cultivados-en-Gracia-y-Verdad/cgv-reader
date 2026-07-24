@@ -3961,6 +3961,202 @@ button.interlinear-token--pickable:focus-visible {
   font-style: italic;
 }
 
+.clause-actor-triple {
+  display: block;
+  margin: 0.35rem 0 0;
+  color: #3d5c63;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.clause-h3-flow {
+  margin: 1.25rem 0 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid #e4dccf;
+}
+
+.clause-h3-flow-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.clause-h3-flow-band {
+  padding: 0.55rem 0.65rem 0.35rem;
+  border: 1px solid rgba(61, 92, 99, 0.28);
+  border-radius: 8px;
+  background: rgba(61, 92, 99, 0.04);
+}
+
+.clause-h3-flow-band-title {
+  margin: 0 0 0.45rem;
+  color: #3d5c63;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.clause-h3-flow-row {
+  margin: 0 0 0.35rem;
+  padding: 0.25rem 0;
+}
+
+.clause-h3-flow-ref {
+  display: block;
+  color: #82796d;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+}
+
+.clause-h3-flow-span {
+  display: block;
+  color: #3f3a34;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.02rem;
+  line-height: 1.4;
+}
+
+.clause-h3-flow-suggestion,
+.clause-h3-flow-accepted {
+  margin: 0.25rem 0 0.65rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px dashed rgba(156, 74, 58, 0.45);
+  border-radius: 6px;
+  background: rgba(156, 74, 58, 0.05);
+}
+
+.clause-h3-flow-accepted {
+  border-style: solid;
+  border-color: rgba(61, 92, 99, 0.35);
+  background: rgba(61, 92, 99, 0.06);
+}
+
+.clause-h3-flow-suggestion-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.4rem;
+}
+
+.clause-h3-flow-accept,
+.clause-h3-flow-ignore {
+  border-radius: 6px;
+  padding: 0.28rem 0.65rem;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.clause-h3-flow-accept {
+  border: 1px solid rgba(61, 92, 99, 0.55);
+  background: #3d5c63;
+  color: #f7f3ea;
+}
+
+.clause-h3-flow-ignore {
+  border: 1px solid #cfc4b4;
+  background: #fffdf8;
+  color: #5f584e;
+}
+
+.clause-h2-movements {
+  margin: 1.25rem 0 0;
+  padding-top: 0.85rem;
+  border-top: 1px solid #e4dccf;
+}
+
+.clause-h2-movement-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.clause-h2-movement-title {
+  margin: 0 0 0.2rem;
+  color: #3d5c63;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.clause-h2-movement-open {
+  margin: 0 0 0.35rem;
+  color: #82796d;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-style: italic;
+}
+
+.clause-h2-transition-block {
+  margin: 0 0 0.55rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid rgba(156, 74, 58, 0.28);
+  border-radius: 6px;
+  background: rgba(156, 74, 58, 0.05);
+}
+
+.clause-h2-transition {
+  margin: 0 0 0.3rem;
+  color: #9c4a3a;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.clause-h2-transition-why {
+  margin: 0;
+  color: #5f584e;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.clause-h2-unit-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.clause-h2-unit-list li {
+  margin: 0 0 0.45rem;
+  padding: 0.35rem 0.5rem;
+  border-left: 3px solid rgba(61, 92, 99, 0.35);
+  background: rgba(61, 92, 99, 0.04);
+}
+
+.clause-h2-unit-ref {
+  display: block;
+  color: #82796d;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.75rem;
+}
+
+.clause-h2-unit-signals {
+  display: block;
+  margin: 0.1rem 0;
+  color: #3d5c63;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.clause-h2-unit-span {
+  display: block;
+  color: #3f3a34;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.clause-outline-item .clause-actor-triple {
+  margin-top: 0.2rem;
+  font-size: 0.9rem;
+}
+
 .sequence-genitive-flag,
 .sequence-subject-note {
   margin: 0.4rem 0 0;

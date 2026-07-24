@@ -241,9 +241,14 @@ pass** — do not attempt to build any of it now.
 
 ---
 
-## Actor appendix (from Structure SVO)
+## Actor lines (from Structure SVO)
 
-When O has Quién actúa on any saved clause, Generate appends after the outline:
+When O has Quién actúa (+ verb) on a clause, Generate emits a `*` slide with the
+full triple under that clause’s `####` / `-` line:
+
+`* *Dios* → *manifestó* → *su palabra*`
+
+Also appends after the outline:
 
 ```markdown
 ## Actores
@@ -253,11 +258,31 @@ When O has Quién actúa on any saved clause, Generate appends after the outline
 
 ### Flujo
 #### DIOS
-- *prometió* → *vida eterna*
+- *Dios* → *prometió* → *vida eterna*
 ```
 
 Same grouping rules as Skeleton B/C (`docs/observer/actor-svo-spec.md`). Omitted with a
 warning when no actors are observed.
+
+**H1 / H2 / H3 (locked).** Never “theme.”
+
+- **H3** — independent clause (objective; outline root + dependents).
+- **H2** — a continuous development of consecutive H3s.
+- **H1** — a major development of consecutive H2s.
+
+The `# TODO: contexto` / `## TODO: unidad` headings stay human-assigned. Generate
+emits mechanical evidence so the writer can name developments from observations:
+
+- Before the first H3 — a book-level evidence block, opened by a
+  `{…}` comment line (curly braces = generator comment, never italics):
+  `{Evidencia de Observador para nombrar desarrollo mayor (H1) y desarrollo continuo (H2) — no es comentario.}`
+  then `* Actores dominantes del libro: *Dios* — 5 acciones · …` and
+  `* Tono observado: 12 declaraciones · 3 mandatos.`
+- After each H3 unit claim — `* Actúan en esta unidad: *criados* (2) · *Dios* (1)`
+  counting observed subjects across the unit's root + dependents.
+
+Evidence lines are Observer `*` slides — counts and Scripture words only, never
+interpretation. Skeleton suggestions: `docs/observer/h2-movements-spec.md`.
 
 ## Not part of this pass
 

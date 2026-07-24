@@ -7,14 +7,17 @@ Writer output should follow, and the norm to teach writers directly.
 
 ## Heading structure
 
-- **H1** — context (human / TODO)
-- **H2** — unit (human / TODO)
-- **H3** — `### {reference} — *{independent clause}*`
+- **H3** — independent clause (objective). Rendered as
+  `### {reference} — *{independent clause}*`.
   - **Reference = grammatical unit** (root verse + dependents / phrases / parked in the
     unit). Always includes the independent clause’s own verse. Example: root in 1:5 with
     outline material through 1:11 → `### Tito 1:5–11 — *Por esta razón te dejé en Creta*`.
   - Own slide; blank line after.
   - **No reading block** after H3 (no large verse dumps). The reference is enough for that.
+- **H2** — a continuous development of consecutive H3s (human-named / TODO).
+- **H1** — a major development of consecutive H2s (human-named / TODO).
+
+Never “theme.” H1 is built from H2s; H2 is built from H3s.
 
 **Explicitly rejected:** one heading level per dependency depth. List nesting carries depth.
 

@@ -7,7 +7,10 @@ import {
 import type { FrameType } from "./clause-signals";
 import { loadLbfRaw, loadMorphRawSync, loadTokensRawSync } from "./book-assets";
 import { loadLbfTokenSurfaces, loadLbfTokenWordMap, resolveLbfPhraseWordIndex } from "./lbf-alignment";
+import { EMPTY_H3_FLOW_STATE, sanitizeH3FlowState, type H3FlowState } from "./h3-flow";
 import { getWorkshopBookId } from "./workshop-book";
+
+export type { H3FlowState };
 
 // The Clause Builder / Observer workshop reads LBF (La Biblia Fiel) as its
 // Spanish surface — reverse-interlinear / settled reading. Greek workstation
@@ -686,6 +689,36 @@ export function writeClauseActors(
   window.localStorage.setItem(progressKeys(bookId).clauseActors, JSON.stringify(actors));
 }
 
+export function readH3FlowState(bookId: ReaderBookId = getWorkshopBookId()): H3FlowState {
+  try {
+    const stored = window.localStorage.getItem(progressKeys(bookId).h3Flow);
+    if (!stored) return { ...EMPTY_H3_FLOW_STATE };
+    return sanitizeH3FlowState(JSON.parse(stored));
+  } catch {
+    return { ...EMPTY_H3_FLOW_STATE };
+  }
+}
+
+export function writeH3FlowState(
+  state: H3FlowState,
+  bookId: ReaderBookId = getWorkshopBookId()
+): void {
+  window.localStorage.setItem(progressKeys(bookId).h3Flow, JSON.stringify(state));
+}
+
+/**
+ * Teaching form for an observed actor line.
+ * Requires subject + verb; omits the object slot when empty.
+ * `Cristo → llevó → nuestros pecados` / `paciencia → esperaba`
+ */
+export function formatActorTriple(subject: string, verb: string, object = ""): string {
+  const s = subject.trim();
+  const v = verb.trim();
+  const o = object.trim();
+  if (!s || !v) return "";
+  return o ? `${s} → ${v} → ${o}` : `${s} → ${v}`;
+}
+
 /**
  * Verses whose Greek text has no finite verb at all (e.g. Titus 1:1's long
  * verbless run of appositions) — computed from the Greek morphology directly,
@@ -788,13 +821,25 @@ export function loadClauseVerses(bookId: ReaderBookId = getWorkshopBookId()): Sp
     }
   }
 
+  const finiteSurfacesByVerse = new Map<string, Map<number, string>>();
   for (const alignment of parseFiniteAlignments(bookId)) {
     if (!markedFiniteAlignmentIds.has(alignment.id)) continue;
 
     const key = `${alignment.chapter}:${alignment.verse}`;
     const verse = verseByKey.get(key);
     if (!verse) continue;
-    const wordIndex = getTokenWordMap(alignment.chapter, alignment.verse, verse.words).get(alignment.token);
+    const recordedIndex = getTokenWordMap(alignment.chapter, alignment.verse, verse.words).get(
+      alignment.token
+    );
+    if (!finiteSurfacesByVerse.has(key)) {
+      finiteSurfacesByVerse.set(key, loadLbfTokenSurfaces(alignment.chapter, alignment.verse, bookId));
+    }
+    const wordIndex = resolveLbfPhraseWordIndex(
+      verse.words,
+      recordedIndex,
+      finiteSurfacesByVerse.get(key)?.get(alignment.token),
+      "finite"
+    );
     if (wordIndex === undefined) continue;
     const anchor = verse.words[wordIndex];
     warnOnIdCollision(anchor, "finiteVerbId", alignment.id);
@@ -840,7 +885,8 @@ export function loadClauseVerses(bookId: ReaderBookId = getWorkshopBookId()): Sp
     const wordIndex = resolveLbfPhraseWordIndex(
       verse.words,
       recordedIndex,
-      participleSurfacesByVerse.get(key)?.get(alignment.token)
+      participleSurfacesByVerse.get(key)?.get(alignment.token),
+      "participle"
     );
     if (wordIndex === undefined) continue;
     const word = verse.words[wordIndex];
