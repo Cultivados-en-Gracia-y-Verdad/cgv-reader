@@ -284,17 +284,23 @@ export function readerNoteCommentLines(chapter: number, verse: number, notes: Re
   return lines;
 }
 
-/** Writer-entry pin lines (`>`). Distinct from Observer `*` grammar slides. */
+/**
+ * Compiler pin lines (Def / XRef) use Observer `*` — mechanical inserts, not
+ * Writer commentary. Reader notes stay `>`.
+ */
 export function formatAttachmentLine(item: CompilerAttachment): string {
   if (item.kind === "definition") {
     const body = item.text.trim() || item.spanishGloss?.trim() || "";
-    return `> Def. (${item.lemma}): ${body}`;
+    return `* Def. (${item.lemma}): ${body}`;
   }
   const ref = item.reference?.trim() || "";
   const gloss = item.spanishGloss?.trim() || item.text.trim();
-  const surface = item.surfaceForm?.trim() || "";
-  const body = [`XRef (${item.lemma}):`, ref, surface, gloss].filter(Boolean).join(" — ").replace(" — — ", " — ");
-  return `> ${body}`;
+  // Bold the specific occurrence word (Greek surface, else lemma).
+  const word = (item.surfaceForm?.trim() || item.lemma.trim() || "").trim();
+  const boldWord = word ? `**${word}**` : "";
+  const head = boldWord ? `XRef (${boldWord}):` : `XRef (${item.lemma}):`;
+  const body = [head, ref, gloss].filter(Boolean).join(" — ").replace(" — — ", " — ");
+  return `* ${body}`;
 }
 
 /**

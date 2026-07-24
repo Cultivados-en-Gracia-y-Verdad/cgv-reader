@@ -14,7 +14,7 @@ Writer output should follow, and the norm to teach writers directly.
     unit). Always includes the independent clause’s own verse. Example: root in 1:5 with
     outline material through 1:11 → `### Tito 1:5–11 — *Por esta razón te dejé en Creta*`.
   - Own slide; blank line after.
-  - Next slide = reading block (LBF verses for the unit, italics).
+  - **No reading block** after H3 (no large verse dumps). The reference is enough for that.
 
 **Explicitly rejected:** one heading level per dependency depth. List nesting carries depth.
 
@@ -23,8 +23,7 @@ Writer output should follow, and the norm to teach writers directly.
 ## Scripture outline (locked)
 
 Every blank line = a new slide. **Every scriptural word** must appear in the outline as
-exactly one of `####` / `-` / `+`. The reading block is for reading aloud; it does **not**
-replace clause-by-clause / phrase-by-phrase accounting.
+exactly one of `####` / `-` / `+`.
 
 | Marker | Meaning | Who produces it |
 |---|---|---|
@@ -32,7 +31,7 @@ replace clause-by-clause / phrase-by-phrase accounting.
 | `-` | Dependent clause (finite) | Compiler ← Observer |
 | `+` | Phrase — everything else scriptural (verbless runs, gaps) | Compiler ← Observer |
 | `*` | Mechanical grammar insert | Compiler ← Observer only |
-| `>` | Writer entry (commentary, Reader seeds, Def/XRef) | Writer / Reader / Compiler pins |
+| `>` | Writer entry (commentary, Reader seeds) | Writer / Reader |
 
 **Indentation** left→right = dependency depth under the governing independent clause.
 
@@ -42,20 +41,16 @@ replace clause-by-clause / phrase-by-phrase accounting.
 
 ### Tito 1:1–3 — *y a su propio tiempo manifestó su palabra…*
 
-*Pablo, siervo de Dios…*
-*para la esperanza…*
-*y a su propio tiempo manifestó su palabra…*
-
 + *Pablo, siervo de Dios…*
 
 - *la cual prometió el Dios que es sin mentira,*
-*la vida eterna*
 
-* "la cual" abre una frase que habla más de *la vida eterna*.
++ *la vida eterna*
+  * *la cual* abre una frase que habla más de *la vida eterna*. …
 
 #### *y a su propio tiempo manifestó su palabra…*
 
-* "y" une esta frase a la anterior. Solo suma; no cambia el sentido ni da una razón.
+* *y* (καί) es una palabra de enlace. …
 
 > Breve comentario del escritor sobre esta cláusula.
 ```
@@ -64,31 +59,32 @@ replace clause-by-clause / phrase-by-phrase accounting.
 
 ## Writer entries (`>`)
 
-Redefined: anything that is **not** Scripture and **not** an Observer grammar insert
-uses the Writer marker.
+Human / Reader commentary — not Scripture, not mechanical grammar, not Def/XRef pins.
 
 - **Form:** `> {text}` on its own slide (blank after).
 - **Sources today:**
   - Reader margin notes → `> {note text}`
-  - Compiler Def pins → `> Def. (lemma): …`
-  - Compiler XRef pins → `> XRef (lemma): …`
-- **Human Writer** adds further `>` slides in the same shape.
-- **Never** use `*` for Writer content. `*` is Observer-only mechanical grammar.
+  - Human Writer commentary in the same shape.
+- **Never** use `*` for Writer content.
 
 ---
 
 ## Marker-line convention (Observer `*`)
 
-For a clause that opens with a grammatical marker — state under the clause, no indent:
+Mechanical inserts from Observer / Compiler:
 
-`"{word}" — [type] · [subtype]`
+- Grammar notes under a clause (connectors, subordinators, participles, infinitives).
+- Compiler Def / XRef pins → `* Def. (lemma): …` / `* XRef (lemma): …`
 
-Types: **Conector relacional** vs **Marcador subordinante**. Name the type; do not explain
-theology or application.
+For a clause that opens with a grammatical marker — state under the clause, no indent.
+Name what the word is doing; do not explain theology or application.
 
 ---
 
 ## Scripture typography
 
-All Scripture = markdown italics `*…*` only. Grammar `*` lines stay roman; tokens `"así"`.
+All Scripture = markdown italics `*…*` only — H3 claim, outline spans, antecedents, and
+short tokens inside grammar notes (e.g. `*para que* (ἵνα)…`, `*dejé*`). No large
+reading-block verse dumps after H3. Grammar `*` lines stay roman for the explanation prose;
+pedagogical non-Scripture examples may use «…». Never quote Scripture with `"…"` or «…».
 Writer `>` lines stay roman.

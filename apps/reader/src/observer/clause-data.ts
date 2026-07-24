@@ -641,6 +641,51 @@ export function writeParticipleSubjectHosts(
   window.localStorage.setItem(progressKeys(bookId).participleSubjectHosts, JSON.stringify(hosts));
 }
 
+/** Student-observed SUJETO → VERBO → OBJETO/RECEPTOR for one finite clause. */
+export type ClauseActorObservation = {
+  /** Quién actúa — Spanish word ids. */
+  subjectSpan: string[];
+  /** Qué hace — defaults to the finite verb’s Spanish word. */
+  verbSpan: string[];
+  /** Sobre quién/qué recae — optional. */
+  objectSpan: string[];
+};
+
+export type ClauseActors = Record<string, ClauseActorObservation>;
+
+function sanitizeIdSpan(value: unknown): string[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter((id): id is string => typeof id === "string");
+}
+
+export function readClauseActors(bookId: ReaderBookId = getWorkshopBookId()): ClauseActors {
+  try {
+    const stored = window.localStorage.getItem(progressKeys(bookId).clauseActors);
+    const parsed = stored ? JSON.parse(stored) : {};
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return {};
+    const actors: ClauseActors = {};
+    for (const [key, value] of Object.entries(parsed)) {
+      if (!value || typeof value !== "object" || Array.isArray(value)) continue;
+      const row = value as Record<string, unknown>;
+      const subjectSpan = sanitizeIdSpan(row.subjectSpan);
+      const verbSpan = sanitizeIdSpan(row.verbSpan);
+      const objectSpan = sanitizeIdSpan(row.objectSpan);
+      if (!subjectSpan.length && !verbSpan.length && !objectSpan.length) continue;
+      actors[key] = { subjectSpan, verbSpan, objectSpan };
+    }
+    return actors;
+  } catch {
+    return {};
+  }
+}
+
+export function writeClauseActors(
+  actors: ClauseActors,
+  bookId: ReaderBookId = getWorkshopBookId()
+): void {
+  window.localStorage.setItem(progressKeys(bookId).clauseActors, JSON.stringify(actors));
+}
+
 /**
  * Verses whose Greek text has no finite verb at all (e.g. Titus 1:1's long
  * verbless run of appositions) — computed from the Greek morphology directly,

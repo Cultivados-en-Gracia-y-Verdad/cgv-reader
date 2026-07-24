@@ -16,8 +16,12 @@ import {
   writeClauseAssignments,
   writeClauseObservations,
   groupParticiplesByNounHost,
+  readClauseActors,
   readParticipleSubjectHosts,
+  writeClauseActors,
   writeParticipleSubjectHosts,
+  type ClauseActorObservation,
+  type ClauseActors,
   type ClauseAssignments,
   type ClauseBeginningToken,
   type ClauseObservation,
@@ -323,10 +327,14 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   const [participleSubjectHosts, setParticipleSubjectHosts] = useState<ParticipleSubjectHosts>(() =>
     readParticipleSubjectHosts(bookId)
   );
+  const [clauseActors, setClauseActors] = useState<ClauseActors>(() => readClauseActors(bookId));
   const [nounAnchorId, setNounAnchorId] = useState<string | null>(null);
   const [subjectHostAnchorId, setSubjectHostAnchorId] = useState<string | null>(null);
   /** clauseId or verseKey currently picking a nominative subject host for. */
   const [pickingSubjectHostKey, setPickingSubjectHostKey] = useState<string | null>(null);
+  /** Active clause SVO field being tapped in the passage. */
+  const [pickingActorField, setPickingActorField] = useState<"subject" | "verb" | "object" | null>(null);
+  const [actorAnchorId, setActorAnchorId] = useState<string | null>(null);
   const [forceChoices, setForceChoices] = useState(false);
   // Set only when the active clause changed via moveToNextClause (confirming
   // a clause auto-advances to the next one) rather than a direct click on a
@@ -343,6 +351,8 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   // immediately instead of that clause's own default/focused view.
   useEffect(() => {
     setForceChoices(false);
+    setPickingActorField(null);
+    setActorAnchorId(null);
   }, [activeBeginningVerbId]);
 
   useEffect(() => {
@@ -652,6 +662,17 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     [getClauseReviewState, reviewClauseRows]
   );
 
+  // Actor SVO: span saved, but Quién actúa not yet observed (verb defaults alone don't count).
+  const missingActorClauseRows = useMemo(
+    () =>
+      reviewClauseRows.filter(row => {
+        const id = row.finiteVerb.finiteVerbId;
+        if (!id || !row.selectedWords.length) return false;
+        return !(clauseActors[id]?.subjectSpan?.length);
+      }),
+    [clauseActors, reviewClauseRows]
+  );
+
   // Tokens belonging to the clause currently open in the review panel —
   // highlighted in the (always-Greek) passage so the workstation and the
   // panel stay visually linked without flipping language mid-verse.
@@ -709,6 +730,22 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   const skeleton = useMemo(() => deriveSkeleton(clauseSpanInfos, augmentedObservations), [clauseSpanInfos, augmentedObservations]);
   const outline = useMemo(() => deriveOutline(clauseSpanInfos, augmentedObservations), [clauseSpanInfos, augmentedObservations]);
   const telos = useMemo(() => deriveTelos(clauseSpanInfos, augmentedObservations), [clauseSpanInfos, augmentedObservations]);
+
+  // Word ids inside Independent (root) clause spans — used when picking a
+  // relative's noun so host material stands out in the chapter text.
+  const independentClauseWordIds = useMemo(() => {
+    const ids = new Set<string>();
+    for (const clause of outline) {
+      for (const wordId of clause.wordIds) ids.add(wordId);
+    }
+    return ids;
+  }, [outline]);
+
+  const activeClauseWordIds = useMemo(() => {
+    const ids = new Set<string>();
+    for (const word of activeBeginningRow?.selectedWords ?? []) ids.add(word.id);
+    return ids;
+  }, [activeBeginningRow]);
 
   // Grammatical-marker anchor lines (cgv-product-suite-spec.md, "Auto-suggested
   // anchor points"; format in manual-markdown-format-spec.md) — mechanical,
@@ -1458,6 +1495,69 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     [openClauseFromSkeleton]
   );
 
+  /** One-click: stretch a same-verse host’s Greek span until it covers the noun. */
+  const expandHostSpanToIncludeNoun = useCallback(
+    (hostVerbId: string, nounIds: string[], parkedReference: string, nounText: string) => {
+      const assignment = assignments[hostVerbId];
+      const hostVerse = verseKeyFromId(hostVerbId);
+      if (!assignment || !hostVerse) {
+        openHostToIncludeNoun(hostVerbId, parkedReference, nounText);
+        return;
+      }
+      const sameVerseNounIds = nounIds.filter(id => verseKeyFromId(id) === hostVerse);
+      if (!sameVerseNounIds.length) {
+        openHostToIncludeNoun(hostVerbId, parkedReference, nounText);
+        return;
+      }
+      const verseWords = wordsByVerse.get(hostVerse) ?? [];
+      const merged = new Set([...assignment.selectedSpan, ...sameVerseNounIds]);
+      const expandedSpan = verseWords.map(word => word.id).filter(id => merged.has(id));
+      const greek = deriveGreekClauseRange(expandedSpan, verseWords, hostVerbId);
+      if (!greek) {
+        openHostToIncludeNoun(hostVerbId, parkedReference, nounText);
+        return;
+      }
+      const start = parseGreekTokenId(greek.greekStartTokenId);
+      const end = parseGreekTokenId(greek.greekEndTokenId);
+      if (!start || !end) {
+        openHostToIncludeNoun(hostVerbId, parkedReference, nounText);
+        return;
+      }
+      const selectedSpan = deriveSpanishSpanFromGreekRange(
+        start.chapter,
+        start.verse,
+        Math.min(start.token, end.token),
+        Math.max(start.token, end.token),
+        verseWords,
+        bookId
+      );
+      if (!selectedSpan.length || !sameVerseNounIds.every(id => selectedSpan.includes(id))) {
+        // Couldn’t cover the noun from Greek — fall back to manual expand.
+        openHostToIncludeNoun(hostVerbId, parkedReference, nounText);
+        return;
+      }
+      setAssignments(current => {
+        const next = {
+          ...current,
+          [hostVerbId]: {
+            finiteVerbId: hostVerbId,
+            selectedSpan,
+            greekStartTokenId: greek.greekStartTokenId,
+            greekEndTokenId: greek.greekEndTokenId,
+            greekConfirmedAt: new Date().toISOString()
+          }
+        };
+        writeClauseAssignments(next, bookId);
+        return next;
+      });
+      setHostFixHint(null);
+      setActiveVerbId(null);
+      setDraftGreekRange(null);
+      setGreekRangeAnchorToken(null);
+    },
+    [assignments, bookId, openHostToIncludeNoun, wordsByVerse]
+  );
+
   const updateActiveObservation = useCallback(
     (patch: ClauseObservation) => {
       if (!activeBeginningVerbId) return;
@@ -1652,6 +1752,8 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       const nextKey =
         !options?.force && pickingSubjectHostKey === hostKey ? null : hostKey;
       setPickingSubjectHostKey(nextKey);
+      setPickingActorField(null);
+      setActorAnchorId(null);
       // Naming a subject host must not also edit clause belonging — clear any
       // open Save/Clear span session.
       setActiveVerbId(null);
@@ -1817,6 +1919,164 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       updateSubjectHostSpan
     ]
   );
+
+  const spanTextFromIds = useCallback(
+    (ids: string[]): string => {
+      if (!ids.length) return "";
+      const first = wordById.get(ids[0]);
+      if (!first) return "";
+      return formatClauseSpan(
+        ids,
+        wordsByVerse.get(`${first.chapter}:${first.verse}`) ?? [],
+        verseTextByKey.get(`${first.chapter}:${first.verse}`) ?? ""
+      ).trim();
+    },
+    [verseTextByKey, wordById, wordsByVerse]
+  );
+
+  const defaultVerbSpanFor = useCallback(
+    (finiteVerbId: string): string[] => {
+      for (const words of wordsByVerse.values()) {
+        const hit = words.find(word => word.finiteVerbId === finiteVerbId);
+        if (hit) return [hit.id];
+      }
+      return [];
+    },
+    [wordsByVerse]
+  );
+
+  const actorObservationFor = useCallback(
+    (finiteVerbId: string | null | undefined): ClauseActorObservation => {
+      if (!finiteVerbId) return { subjectSpan: [], verbSpan: [], objectSpan: [] };
+      const stored = clauseActors[finiteVerbId];
+      const verbSpan = stored?.verbSpan?.length
+        ? stored.verbSpan
+        : defaultVerbSpanFor(finiteVerbId);
+      return {
+        subjectSpan: stored?.subjectSpan ?? [],
+        verbSpan,
+        objectSpan: stored?.objectSpan ?? []
+      };
+    },
+    [clauseActors, defaultVerbSpanFor]
+  );
+
+  const updateActorField = useCallback(
+    (finiteVerbId: string, field: "subject" | "verb" | "object", span: string[]) => {
+      setClauseActors(current => {
+        const prior = current[finiteVerbId] ?? {
+          subjectSpan: [],
+          verbSpan: defaultVerbSpanFor(finiteVerbId),
+          objectSpan: []
+        };
+        const nextRow: ClauseActorObservation = {
+          subjectSpan: field === "subject" ? span : prior.subjectSpan,
+          verbSpan:
+            field === "verb"
+              ? span
+              : prior.verbSpan.length
+                ? prior.verbSpan
+                : defaultVerbSpanFor(finiteVerbId),
+          objectSpan: field === "object" ? span : prior.objectSpan
+        };
+        const next = { ...current };
+        if (!nextRow.subjectSpan.length && !nextRow.objectSpan.length && !nextRow.verbSpan.length) {
+          delete next[finiteVerbId];
+        } else {
+          next[finiteVerbId] = nextRow;
+        }
+        writeClauseActors(next, bookId);
+        return next;
+      });
+    },
+    [bookId, defaultVerbSpanFor]
+  );
+
+  const beginActorFieldPick = useCallback(
+    (field: "subject" | "verb" | "object") => {
+      setPickingSubjectHostKey(null);
+      setActiveVerbId(null);
+      setDraftGreekRange(null);
+      setGreekRangeAnchorToken(null);
+      setActorAnchorId(null);
+      setPickingActorField(current => (current === field ? null : field));
+    },
+    []
+  );
+
+  const selectActorWord = useCallback(
+    (finiteVerbId: string, field: "subject" | "verb" | "object", word: SpanishWord, event: MouseEvent<HTMLButtonElement>) => {
+      if (event.shiftKey && actorAnchorId) {
+        const anchor = wordById.get(actorAnchorId);
+        if (anchor) {
+          const span = spanFromRange(anchor, word);
+          if (span) {
+            updateActorField(finiteVerbId, field, span);
+            setPickingActorField(null);
+            setActorAnchorId(null);
+          }
+          return;
+        }
+      }
+      // Keep picker open after the first tap so shift-click can extend the span.
+      setActorAnchorId(word.id);
+      updateActorField(finiteVerbId, field, [word.id]);
+    },
+    [actorAnchorId, updateActorField, wordById]
+  );
+
+  const activeActor = useMemo(
+    () => actorObservationFor(activeBeginningVerbId),
+    [activeBeginningVerbId, actorObservationFor]
+  );
+
+  const actorConcentration = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const info of clauseSpanInfos) {
+      const actor = actorObservationFor(info.finiteVerbId);
+      const name = spanTextFromIds(actor.subjectSpan);
+      if (!name) continue;
+      const key = name.toLowerCase();
+      counts.set(key, (counts.get(key) ?? 0) + 1);
+    }
+    return Array.from(counts.entries())
+      .map(([key, count]) => {
+        // Recover display casing from first matching observation.
+        let label = key;
+        for (const info of clauseSpanInfos) {
+          const name = spanTextFromIds(actorObservationFor(info.finiteVerbId).subjectSpan);
+          if (name.toLowerCase() === key) {
+            label = name;
+            break;
+          }
+        }
+        return { label, count };
+      })
+      .sort((a, b) => b.count - a.count || a.label.localeCompare(b.label, undefined, { sensitivity: "base" }));
+  }, [actorObservationFor, clauseSpanInfos, spanTextFromIds]);
+
+  const actorFlow = useMemo(() => {
+    type FlowAction = { verb: string; object: string; order: number };
+    const byActor = new Map<string, { label: string; actions: FlowAction[] }>();
+    for (const info of clauseSpanInfos) {
+      const actor = actorObservationFor(info.finiteVerbId);
+      const subject = spanTextFromIds(actor.subjectSpan);
+      if (!subject) continue;
+      const verb = spanTextFromIds(actor.verbSpan);
+      if (!verb) continue;
+      const object = spanTextFromIds(actor.objectSpan);
+      const key = subject.toLowerCase();
+      const group = byActor.get(key) ?? { label: subject, actions: [] };
+      group.actions.push({ verb, object, order: info.order });
+      byActor.set(key, group);
+    }
+    return Array.from(byActor.values())
+      .map(group => ({
+        label: group.label,
+        actions: group.actions.sort((a, b) => a.order - b.order)
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label, undefined, { sensitivity: "base" }));
+  }, [actorObservationFor, clauseSpanInfos, spanTextFromIds]);
 
   // Shared by renderClauseLine and renderSkeletonNode — dotted underline on
   // Brick-4-marked participles. Read-only: identification happens in Brick 4.
@@ -2057,6 +2317,45 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
               <p className="clause-section-note">
                 Every saved mood-tagged clause has a shape. Reopen any from the list below if you want to
                 reconsider.
+              </p>
+            </section>
+          ) : null}
+
+          {missingActorClauseRows.length ? (
+            <section className="clause-unresolved-participles" aria-label="Clauses without actor">
+              <div className="clause-audit-header">
+                <h3>
+                  Actor not yet observed — {missingActorClauseRows.length} of {reviewClauseRows.length}{" "}
+                  mood-tagged clause{reviewClauseRows.length === 1 ? "" : "s"}
+                </h3>
+              </div>
+              <p className="clause-section-note">
+                Span is saved, but Quién actúa is still open. Open a clause and tap the subject in the chapter
+                text — this does not change the clause span.
+              </p>
+              <ul className="clause-audit-list">
+                {missingActorClauseRows.map(row => (
+                  <li key={`actor-${row.finiteVerb.finiteVerbId}`}>
+                    <button
+                      type="button"
+                      className="clause-audit-ref clause-audit-ref--link"
+                      onClick={() => inspectClauseBeginning(row)}
+                    >
+                      {row.reference}
+                    </button>
+                    <span className="clause-audit-range">{row.spanText || "(no span text)"}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : reviewClauseRows.length ? (
+            <section
+              className="clause-unresolved-participles clause-unresolved-participles--clear"
+              aria-label="All actors observed"
+            >
+              <h3>All mood-tagged clauses have Quién actúa</h3>
+              <p className="clause-section-note">
+                Every saved mood-tagged clause has a subject actor. Object / receptor remains optional.
               </p>
             </section>
           ) : null}
@@ -2495,16 +2794,39 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                 ) : null}
 
                 <div
-                  className="clause-context-panel clause-context-panel--chapter"
+                  className={
+                    activeObservation.describesNoun === "yes"
+                      ? "clause-context-panel clause-context-panel--chapter clause-context-panel--noun-pick"
+                      : "clause-context-panel clause-context-panel--chapter"
+                  }
                   aria-label="Spanish context for this chapter"
                 >
+                  {activeObservation.describesNoun === "yes" ? (
+                    <p className="clause-noun-host-legend" role="note">
+                      <span className="clause-noun-host-swatch" aria-hidden="true" />
+                      Independent clause spans are highlighted — look there for the noun this relative hangs
+                      on (often in a nearby verse).
+                    </p>
+                  ) : null}
                   {activeObservationContextVerses.map(verse => {
                     const isCurrentVerse =
                       verse.chapter === activeBeginningRow.finiteVerb.chapter &&
                       verse.verse === activeBeginningRow.finiteVerb.verse;
+                    const hasIndependentHost =
+                      activeObservation.describesNoun === "yes" &&
+                      verse.words.some(
+                        word =>
+                          independentClauseWordIds.has(word.id) && !activeClauseWordIds.has(word.id)
+                      );
                     return (
                     <p
-                      className={isCurrentVerse ? "clause-noun-verse clause-noun-verse--current" : "clause-noun-verse"}
+                      className={[
+                        "clause-noun-verse",
+                        isCurrentVerse ? "clause-noun-verse--current" : "",
+                        hasIndependentHost ? "clause-noun-verse--has-independent" : ""
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
                       key={`${verse.chapter}:${verse.verse}`}
                       data-context-verse={`${verse.chapter}:${verse.verse}`}
                     >
@@ -2515,17 +2837,23 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                         {verse.words.map((word, position) => {
                           const canSelectNoun = activeObservation.describesNoun === "yes";
                           const isSelected = Boolean(activeObservation.describedNounSpan?.includes(word.id));
+                          const isIndependentHost =
+                            canSelectNoun &&
+                            independentClauseWordIds.has(word.id) &&
+                            !activeClauseWordIds.has(word.id);
                           return (
                             <span key={word.id}>
                               {position > 0 ? " " : null}
                               {canSelectNoun ? (
                                 <button
                                   type="button"
-                                  className={
-                                    isSelected
-                                      ? "clause-noun-word clause-noun-word--selected"
-                                      : "clause-noun-word"
-                                  }
+                                  className={[
+                                    "clause-noun-word",
+                                    isSelected ? "clause-noun-word--selected" : "",
+                                    isIndependentHost ? "clause-noun-word--independent" : ""
+                                  ]
+                                    .filter(Boolean)
+                                    .join(" ")}
                                   onClick={event => selectNounWord(word, event)}
                                 >
                                   {word.text}
@@ -2572,9 +2900,9 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                               <p className="clause-parked-banner" role="status">
                                 {parkedHosts.length ? (
                                   <>
-                                    Parked — {describedNounText ? `“${describedNounText}”` : "the selected noun"} isn’t
-                                    inside any <em>other</em> clause’s span. Selecting this whole verse does nothing.
-                                    Expand a same-verse host below, or reconsider the class / noun.
+                                    Parked — “{describedNounText}” is in the same verse as a host clause, but outside
+                                    that host’s saved span. Tap below to stretch the host so it includes “
+                                    {describedNounText}”; then this relative can nest.
                                   </>
                                 ) : (
                                   <>
@@ -2588,7 +2916,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                               {parkedHosts.length && describedNounText && activeBeginningRow ? (
                                 <div className="clause-parked-hosts">
                                   <p className="clause-parked-hosts-label">
-                                    Open a same-verse host and expand its span to include the noun:
+                                    Stretch a host in that verse to include the noun:
                                   </p>
                                   {parkedHosts.map(host => (
                                     <button
@@ -2596,14 +2924,15 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                                       key={host.finiteVerbId}
                                       className="clause-parked-host-button"
                                       onClick={() =>
-                                        openHostToIncludeNoun(
+                                        expandHostSpanToIncludeNoun(
                                           host.finiteVerbId,
+                                          activeObservation.describedNounSpan ?? [],
                                           activeBeginningRow.reference,
                                           describedNounText
                                         )
                                       }
                                     >
-                                      {host.reference}
+                                      Include “{describedNounText}” in {host.reference}
                                       <span>{host.spanText || "(no span text)"}</span>
                                     </button>
                                   ))}
@@ -2613,7 +2942,10 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                           );
                         })()
                       ) : null}
-                      <p>Select the noun this clause describes, in the text above.</p>
+                      <p>
+                        Select the noun this clause describes, in the text above. Prefer words inside a highlighted
+                        independent clause (e.g. Jesucristo in 1:7 for «a quien» in 1:8).
+                      </p>
                       {describedNounText ? <p className="clause-noun-selection">{describedNounText}</p> : null}
                       <div className="clause-step-actions">
                         <button
@@ -2834,6 +3166,124 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                     </>
                   )}
                 </section>
+
+                {activeBeginningVerbId && activeBeginningRow.selectedWords.length ? (
+                  <section className="clause-actor-svo" aria-label="Actor observation">
+                    <p className="clause-observation-term">SUJETO → VERBO → OBJETO / RECEPTOR</p>
+                    <p className="clause-section-note">
+                      Quién actúa, qué hace, y sobre quién o qué recae la acción. Tap in the chapter text below —
+                      this does not change the clause span.
+                    </p>
+                    <p className="clause-actor-summary" role="status">
+                      <span>{spanTextFromIds(activeActor.subjectSpan) || "—"}</span>
+                      <span aria-hidden="true"> → </span>
+                      <span>{spanTextFromIds(activeActor.verbSpan) || "—"}</span>
+                      <span aria-hidden="true"> → </span>
+                      <span>{spanTextFromIds(activeActor.objectSpan) || "—"}</span>
+                    </p>
+                    <div className="clause-actor-fields">
+                      {(
+                        [
+                          ["subject", "Quién actúa", activeActor.subjectSpan],
+                          ["verb", "Qué hace", activeActor.verbSpan],
+                          ["object", "Sobre quién o qué recae la acción", activeActor.objectSpan]
+                        ] as const
+                      ).map(([field, label, span]) => (
+                        <div className="clause-actor-field" key={field}>
+                          <button
+                            type="button"
+                            className={
+                              pickingActorField === field
+                                ? "clause-participle-host-pick clause-participle-host-pick--active"
+                                : "clause-participle-host-pick"
+                            }
+                            onClick={() => beginActorFieldPick(field)}
+                          >
+                            {pickingActorField === field
+                              ? "Tap a word below →"
+                              : `${label}${span.length ? `: ${spanTextFromIds(span)}` : ""}`}
+                          </button>
+                          {span.length && field !== "verb" ? (
+                            <button
+                              type="button"
+                              className="clause-participle-host-clear"
+                              onClick={() => {
+                                updateActorField(activeBeginningVerbId, field, []);
+                                if (pickingActorField === field) setPickingActorField(null);
+                              }}
+                            >
+                              Clear
+                            </button>
+                          ) : null}
+                        </div>
+                      ))}
+                    </div>
+                    {pickingActorField ? (
+                      <div className="clause-subject-host-picker" aria-label="Pick actor span">
+                        <p className="clause-participle-host-picker-note" role="status">
+                          {pickingActorField === "subject"
+                            ? "Quién actúa — tap the subject (shift-click for a span)."
+                            : pickingActorField === "verb"
+                              ? "Qué hace — tap the verb (defaults to the finite verb; retap to change)."
+                              : "Sobre quién o qué — tap the object or receptor (optional; shift-click for a span)."}
+                        </p>
+                        {verses
+                          .filter(v => v.chapter === activeBeginningRow.finiteVerb.chapter)
+                          .map(chapterVerse => {
+                            const isSourceVerse =
+                              chapterVerse.chapter === activeBeginningRow.finiteVerb.chapter &&
+                              chapterVerse.verse === activeBeginningRow.finiteVerb.verse;
+                            const selectedIds = new Set(
+                              pickingActorField === "subject"
+                                ? activeActor.subjectSpan
+                                : pickingActorField === "verb"
+                                  ? activeActor.verbSpan
+                                  : activeActor.objectSpan
+                            );
+                            return (
+                              <p
+                                className={
+                                  isSourceVerse
+                                    ? "clause-subject-host-verse clause-subject-host-verse--current"
+                                    : "clause-subject-host-verse"
+                                }
+                                key={`actor-${chapterVerse.chapter}:${chapterVerse.verse}`}
+                              >
+                                <span className="clause-subject-host-verse-label">
+                                  {chapterVerse.chapter}:{chapterVerse.verse}
+                                </span>
+                                <span className="clause-subject-host-verse-text">
+                                  {chapterVerse.words.map((word, position) => (
+                                    <span key={word.id}>
+                                      {position > 0 ? " " : null}
+                                      <button
+                                        type="button"
+                                        className={
+                                          selectedIds.has(word.id)
+                                            ? "clause-noun-word clause-noun-word--selected"
+                                            : "clause-noun-word clause-noun-word--subject-host"
+                                        }
+                                        onClick={event =>
+                                          selectActorWord(
+                                            activeBeginningVerbId,
+                                            pickingActorField,
+                                            word,
+                                            event
+                                          )
+                                        }
+                                      >
+                                        {word.text}
+                                      </button>
+                                    </span>
+                                  ))}
+                                </span>
+                              </p>
+                            );
+                          })}
+                      </div>
+                    ) : null}
+                  </section>
+                ) : null}
               </section>
             ) : (
               <p className="clause-output-empty">Select a clause from the side menu to review it here.</p>
@@ -2952,9 +3402,16 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                                 type="button"
                                 key={host.finiteVerbId}
                                 className="clause-parked-host-button"
-                                onClick={() => openHostToIncludeNoun(host.finiteVerbId, parked.reference, nounText)}
+                                onClick={() =>
+                                  expandHostSpanToIncludeNoun(
+                                    host.finiteVerbId,
+                                    nounSpan,
+                                    parked.reference,
+                                    nounText
+                                  )
+                                }
                               >
-                                Expand host {host.reference}
+                                Include “{nounText}” in {host.reference}
                                 <span>{host.spanText || "(no span text)"}</span>
                               </button>
                             ))}
@@ -3015,6 +3472,58 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                 ))}
               </div>
             ) : null}
+
+            <div className="clause-actor-concentration">
+              <h3>B. Actor concentration</h3>
+              <p className="clause-section-note">
+                Who dominates the passage — how many actions each observed subject carries.
+              </p>
+              {actorConcentration.length ? (
+                <ul className="clause-actor-concentration-list">
+                  {actorConcentration.map(entry => (
+                    <li key={entry.label}>
+                      <span className="clause-actor-concentration-name">{entry.label}</span>
+                      <span className="clause-actor-concentration-count">
+                        {entry.count} {entry.count === 1 ? "acción" : "acciones"}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="clause-output-empty">
+                  No actors yet. On a clause with a saved span, answer Quién actúa.
+                </p>
+              )}
+            </div>
+
+            <div className="clause-actor-flow">
+              <h3>C. Actor flow</h3>
+              <p className="clause-section-note">
+                Actions gathered under their actors — verbo → objeto / receptor when observed.
+              </p>
+              {actorFlow.length ? (
+                <div className="clause-actor-flow-list">
+                  {actorFlow.map(group => (
+                    <div className="clause-actor-flow-group" key={group.label}>
+                      <p className="clause-actor-flow-actor">{group.label.toUpperCase()}</p>
+                      <ul>
+                        {group.actions.map((action, index) => (
+                          <li key={`${group.label}:${action.verb}:${index}`}>
+                            {action.object
+                              ? `${action.verb} → ${action.object}`
+                              : action.verb}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p className="clause-output-empty">
+                  No actor flow yet. Observe Quién actúa and Qué hace on saved clauses.
+                </p>
+              )}
+            </div>
 
             <div className="clause-subject-host-section" data-subject-host-section="true">
             {verblessVerses.length ? (

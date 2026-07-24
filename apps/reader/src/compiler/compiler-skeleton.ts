@@ -10,10 +10,12 @@
 //   -  dependent clauses
 //   +  phrases (every other scriptural word)
 //   *  Observer mechanical inserts only
-//   >  Writer entries (Reader notes, Def/XRef, human commentary)
+//   >  Writer entries (Reader notes, human commentary)
+//   Def/XRef pins also use `*` (applied after Generate)
 // Indentation (left→right) shows structural depth. Blank line = new slide.
-// H3 = unit claim (reference — independent clause). Reading quotes are the
-// next slide; the outline must still account for every word as #### / - / +.
+// H3 = unit claim (reference — independent clause). No large reading-block
+// verse quotes after H3 — the reference is enough for that. Outline #### /
+// - / + still carry LBF span text.
 
 import {
   getReaderBookInfo,
@@ -25,9 +27,11 @@ import {
   formatClauseSpan,
   getClauseBeginningTokens,
   loadClauseVerses,
+  readClauseActors,
   readClauseAssignments,
   readClauseObservations,
   readMarkedAlignmentIds,
+  readParticipleSubjectHosts,
   type ClauseBeginningToken,
   type SpanishWord
 } from "../observer/clause-data";
@@ -78,14 +82,27 @@ function byOrder(a: { order: number }, b: { order: number }): number {
 }
 
 /**
- * Scripture-only surface (locked): markdown italics `*…*`.
- * Reserved for H3 claim, reading quotes, #### / - / +, and antecedent lines.
- * Grammar-note lines still open with `* ` (marker + space) and stay roman;
- * metalinguistic tokens there use straight "…". Scripture named inside a note
- * also uses `*…*` (same reserved style).
+ * Scripture surface (locked): markdown italics `*…*`.
+ * Used for H3 claim, #### / - / +, antecedent lines, and short tokens inside
+ * grammar notes. Large reading-block verse dumps after H3 are not emitted.
+ * Greek confirmation in notes stays in parentheses: `*para que* (ἵνα)`.
+ * Pedagogical non-passage examples use «…».
  */
 function scripture(text: string): string {
   return `*${text.trim()}*`;
+}
+
+/**
+ * Parked Q1 spans sometimes include the antecedent noun at the front
+ * ("vida eterna, la cual…"). Strip that prefix so the `-` line is the clause
+ * and the antecedent sits on its own Scripture line underneath.
+ */
+function stripLeadingAntecedent(spanText: string, antecedent: string): string {
+  const span = spanText.trim();
+  const ant = antecedent.trim();
+  if (!ant || !span.toLowerCase().startsWith(ant.toLowerCase())) return span;
+  const stripped = span.slice(ant.length).replace(/^[\s,;:]+/, "").trim();
+  return stripped || span;
 }
 
 /** One presentation slide: marker (or heading) line, optional comment lines, then a blank. */
@@ -117,12 +134,15 @@ function commentSlides(comments: string[]): string[] {
   return lines;
 }
 
-/** Grammar labels: Spanish first, then Greek in parentheses when available. */
+/**
+ * Passage Spanish (italics) first, optional Greek confirmation in parentheses.
+ * Never quote Scripture with "…" or «…» — those are not the locked surface.
+ */
 function labeledWord(spanish: string, greek?: string | null): string {
-  const es = spanish.trim();
+  const es = scripture(spanish);
   const gr = (greek ?? "").trim();
-  if (gr && gr !== es) return `"${es}" (${gr})`;
-  return `"${es}"`;
+  if (gr && gr !== spanish.trim()) return `${es} (${gr})`;
+  return es;
 }
 
 /** Relative markers commonly visible in LBF Spanish when Greek range starts late. */
@@ -131,22 +151,9 @@ function spanishRelativeFromText(text: string): string | null {
   return match ? match[1] : null;
 }
 
-/**
- * Parked Q1 spans sometimes include the antecedent noun at the front
- * ("vida eterna, la cual…"). Strip that prefix so the `-` line is the clause
- * and the antecedent sits on its own Scripture line underneath.
- */
-function stripLeadingAntecedent(spanText: string, antecedent: string): string {
-  const span = spanText.trim();
-  const ant = antecedent.trim();
-  if (!ant || !span.toLowerCase().startsWith(ant.toLowerCase())) return span;
-  const stripped = span.slice(ant.length).replace(/^[\s,;:]+/, "").trim();
-  return stripped || span;
-}
-
-// Grammar notes are for Spanish-speaking readers/writers. Keep them in plain
-// language (roughly 5th-grade Spanish): state what the word is doing and why
-// that is certain from the grammar — never theology or "what this means for us."
+// Grammar notes are for Spanish-speaking readers/writers. Fully expound in
+// plain 5th-grade Spanish: say what the word is, what it does in the sentence,
+// and what it is not. Never theology or "what this means for us."
 // Every "{word}" is the Spanish alignment for that Greek token (via BLE), never
 // the Greek surface — except coordinate-inheritance's shared particle, which
 // names a DIFFERENT clause's marker and must stay Greek to identify it.
@@ -154,23 +161,49 @@ function relationalConnectorLine(spanish: string, lemma: string, greek?: string 
   const word = labeledWord(spanish, greek);
   switch (lemma) {
     case "καί":
-      return `${word} une esta frase a la anterior. Solo suma; no cambia el sentido ni da una razón.`;
+      return (
+        `${word} es una palabra de enlace. Une esta frase a la frase de antes, ` +
+        `como cuando en español decimos «y». Solo suma: añade otra idea a la misma línea. ` +
+        `No da una razón, no pone un «pero», y no cambia el sentido de lo que ya se dijo.`
+      );
     case "ἀλλά":
-      return `${word} marca un giro: lo que sigue va en otra dirección respecto a lo anterior.`;
+      return (
+        `${word} es una palabra de contraste. Marca un giro: lo que sigue no sigue ` +
+        `en la misma dirección que lo anterior. Es como decir «pero» o «sino»: ` +
+        `presta atención, porque la idea nueva se aparta de la idea de antes.`
+      );
     case "γάρ":
     case "διότι":
-      return `${word} da la razón de lo que se dijo antes.`;
+      return (
+        `${word} da la razón de lo que se acaba de decir. Después de esta palabra ` +
+        `viene el «por qué». No está empezando un tema nuevo: está explicando ` +
+        `el fundamento de la frase anterior.`
+      );
     case "οὖν":
-      return `${word} saca una conclusión de lo que se dijo antes.`;
+      return (
+        `${word} saca una conclusión de lo que se dijo antes. Es como decir ` +
+        `«entonces» o «por eso»: lo siguiente nace de lo anterior. ` +
+        `No es una razón nueva; es el siguiente paso lógico.`
+      );
     case "δέ":
-      return `${word} sigue la idea anterior y la une a esta frase.`;
+      return (
+        `${word} sigue la idea anterior y la une a esta frase. A veces solo ` +
+        `avanza la historia («y…»), y a veces marca un leve contraste («pero…»). ` +
+        `En todo caso, no abre un tema suelto: esta frase sigue conectada a la de antes.`
+      );
     default:
-      return `${word} une esta frase a la anterior.`;
+      return (
+        `${word} une esta frase a la anterior. Es una palabra de enlace: ` +
+        `muestra que lo que sigue no va solo, sino junto con lo que ya se dijo.`
+      );
   }
 }
 
 const ASYNDETON_LINE =
-  "Esta frase empieza sola, sin una palabra de enlace (como «y» o «porque»).";
+  "Esta frase empieza sola, sin una palabra de enlace al frente (como «y», «pero» o «porque»). " +
+  "Eso no significa que no tenga relación con lo anterior; solo que el griego no puso " +
+  "una palabra de unión visible al comenzar. Léela como un nuevo paso que sigue el hilo, " +
+  "aunque no diga «y» ni «entonces».";
 
 function subordinatingLine(
   frameType: FrameType | undefined,
@@ -183,22 +216,53 @@ function subordinatingLine(
 ): string {
   const word = labeledWord(spanish, greek);
   if (isContent) {
-    return `${word} abre lo que se dice o se piensa en la frase anterior — el contenido de esa idea.`;
+    return (
+      `${word} abre el contenido de la frase anterior: lo que se dice, se sabe o se piensa. ` +
+      `Imagina que la frase de arriba es «él dijo…» o «sabemos…»; lo que sigue después de ${word} ` +
+      `es precisamente ese mensaje o esa idea. No es una razón ni un «para qué»: ` +
+      `es el qué — el contenido mismo.`
+    );
   }
   if (isDescribes) {
     const noun = describedNounText ? scripture(describedNounText) : "alguien o algo mencionado antes";
-    return `${word} abre una frase que habla más de ${noun}.`;
+    return (
+      `${word} abre una frase que habla más de ${noun}. ` +
+      `No es el verbo principal de la sección; es una frase colgada de ese nombre ` +
+      `(o de esa persona o cosa). Todo lo que sigue bajo ${word} añade detalle: ` +
+      `quién es, cómo es, o qué se dice de ${noun}.`
+    );
   }
-  const parent = parentVerbText?.trim() || "la frase anterior";
+  const parent = parentVerbText?.trim()
+    ? scripture(parentVerbText.trim())
+    : "la frase anterior";
   switch (frameType) {
     case "purpose":
-      return `${word} dice el propósito de «${parent}» — para qué se hace esa acción.`;
+      return (
+        `${word} dice el propósito de ${parent} — el «para qué» de esa acción. ` +
+        `La frase de arriba nombra lo que se hace; esta frase, abierta por ${word}, ` +
+        `nombra el fin que se busca. No explica el motivo pasado («porque…»); ` +
+        `señala la meta hacia la que apunta la acción.`
+      );
     case "reason":
-      return `${word} da el motivo de la frase anterior — por qué se dijo eso.`;
+      return (
+        `${word} da el motivo de la frase anterior — el «por qué». ` +
+        `Lo de arriba afirma algo; lo que sigue después de ${word} explica ` +
+        `por qué se dijo o por qué es así. No es el propósito futuro («para que…»); ` +
+        `es la razón o el fundamento.`
+      );
     case "condition":
-      return `${word} pone una condición: «si esto…», entonces aplica lo de la frase anterior.`;
+      return (
+        `${word} pone una condición: «si esto…». ` +
+        `Lo que sigue no se afirma como un hecho seguro por sí solo; ` +
+        `depende de que se cumpla esa condición. Relaciónala con la frase anterior: ` +
+        `bajo esa condición aplica lo que ya se dijo (o lo que sigue).`
+      );
     case "time":
-      return `${word} dice el momento relacionado con la frase anterior — cuándo.`;
+      return (
+        `${word} marca el momento relacionado con la frase anterior — el «cuándo». ` +
+        `No da la razón ni el propósito; ubica en el tiempo: ` +
+        `cuándo ocurre, ocurrió u ocurrirá lo que se está diciendo.`
+      );
     default:
       return ASYNDETON_LINE;
   }
@@ -206,22 +270,93 @@ function subordinatingLine(
 
 function inheritanceLine(sharedParticleGreek: string, connectorSpanish: string, relationKey: string): string {
   const gender = RELATION_TYPE_GENDER[relationKey] ?? RELATION_TYPE_GENDER.reason;
+  const connector = scripture(connectorSpanish);
+  // Shared particle stays Greek (identifies a different clause's marker).
   return (
-    `Esta frase va unida con «${connectorSpanish}» y sigue bajo el mismo «${sharedParticleGreek}» ` +
-    `de la frase anterior. No abre ${gender.indefiniteArticle} ${gender.noun} nuev${gender.adjectiveEnding}; ` +
-    `continúa ${gender.definiteArticle} mism${gender.adjectiveEnding}.`
+    `Esta frase va unida con ${connector} y sigue bajo el mismo «${sharedParticleGreek}» ` +
+    `de la frase anterior. Eso importa: no está abriendo ${gender.indefiniteArticle} ${gender.noun} ` +
+    `nuev${gender.adjectiveEnding} por su cuenta. Sigue dentro de ${gender.definiteArticle} mism${gender.adjectiveEnding} ` +
+    `${gender.noun} que ya se abrió arriba. Léela como una continuación del mismo hilo, ` +
+    `no como un tipo de frase distinto.`
   );
 }
 
-function participleLine(word: SpanishWord, nearbyWords: SpanishWord[], hostSpanish: string | null): string {
+/**
+ * Participle `*` note. With a noun host (under `+ *oro*`), keep the line short —
+ * the nesting already shows the hang. Longer prose only when there is no host line.
+ */
+function participleLine(
+  word: SpanishWord,
+  nearbyWords: SpanishWord[],
+  clauseHostSpanish: string | null,
+  nounHostSpanish: string | null
+): string {
   const reading = describeParticipleReading(word, nearbyWords);
-  const label = reading.greek
-    ? `«${reading.spanish}» (${reading.greek})`
-    : `«${reading.spanish}»`;
-  const host = hostSpanish?.trim()
-    ? ` junto a la cláusula de «${hostSpanish}»`
-    : " en este versículo";
-  return `${label}${host}: ${reading.formLine}; ${reading.hangLine}.`;
+  const label = labeledWord(reading.spanish, reading.greek);
+  const whatIs =
+    `${label} es un participio: una forma verbal que no actúa como el verbo principal ` +
+    `de la frase. En español a menudo se parece a «-ando / -iendo» o a un adjetivo ` +
+    `hecho de un verbo («amado», «venido»).`;
+
+  // Nominatives: only a manual subject-host pick counts (auto CNG is unreliable).
+  // Other cases: morph agreement noun when found.
+  let nounText = nounHostSpanish?.trim() || null;
+  if (!nounText && word.participleCase !== "N" && reading.hangNoun) {
+    nounText = reading.hangNoun.text;
+  }
+
+  // Host line (`+ *oro*`) already names the noun — label only.
+  if (nounText) {
+    return `${label} - participio`;
+  }
+
+  if (word.participleCase === "N") {
+    return (
+      `${whatIs} Está en la forma que normalmente nombra quién hace o es algo ` +
+      `(caso nominativo). Todavía falta señalar de quién habla: ` +
+      `hasta que se elija ese nombre, no afirmes a quién describe.`
+    );
+  }
+
+  if (clauseHostSpanish?.trim()) {
+    return (
+      `${whatIs} Va junto a la afirmación cuyo verbo es ${scripture(clauseHostSpanish)}. ` +
+      `No reemplaza a ese verbo; añade acción o detalle ligado a esa misma afirmación ` +
+      `(algo que ocurre con ella, alrededor de ella, o en relación con ella).`
+    );
+  }
+
+  if (word.participleCase === "A") {
+    return (
+      `${whatIs} Está en acusativo (la forma que a menudo marca el objeto: ` +
+      `a quién o qué alcanza la acción). Suele colgarse de ese objeto cercano, ` +
+      `no del sujeto que hace la acción principal.`
+    );
+  }
+  if (word.participleCase === "G" && word.participlePrecededByPreposition) {
+    return (
+      `${whatIs} Está en genitivo y viene después de una preposición. ` +
+      `Léelo como parte de esa frase preposicional: no es el verbo principal; ` +
+      `completa el sentido de la preposición y de lo que la acompaña.`
+    );
+  }
+  if (word.participleCase === "G") {
+    return (
+      `${whatIs} Está en genitivo. Eso puede marcar una relación de «de…» ` +
+      `(de quién / de qué) o, a veces, una escena aparte llamada absoluto. ` +
+      `En todo caso, no es el verbo principal de la afirmación; añade detalle o trasfondo.`
+    );
+  }
+  if (word.participleCase === "D") {
+    return (
+      `${whatIs} Está en dativo (la forma que a menudo marca «a / para / con» alguien o algo). ` +
+      `No es el verbo principal; aporta detalle ligado a esa relación.`
+    );
+  }
+  return (
+    `${whatIs} Aparece en este versículo, pero aún no hay un nombre anfitrión claro ` +
+    `al que colgarlo. No lo trates como verbo principal hasta ver de quién o de qué habla.`
+  );
 }
 
 /** Complement infinitive under its host finite — names the chain in plain language. */
@@ -234,9 +369,35 @@ function infinitiveLine(
   const word = labeledWord(spanish, greek);
   if (hostSpanish?.trim()) {
     const host = labeledWord(hostSpanish, hostGreek);
-    return `${word} completa a ${host}: dice *qué* se debe hacer o qué acción sigue.`;
+    return (
+      `${word} es un infinitivo: nombra una acción («hacer», «ser», «ir») sin decir ` +
+      `quién la hace como verbo principal. Aquí completa a ${host}: ` +
+      `ese verbo pide o espera un «qué» — qué se debe hacer, qué se pide, o qué acción sigue. ` +
+      `Lee las dos piezas juntas: ${host} + ${word}.`
+    );
   }
-  return `${word} nombra una acción que depende de un verbo cercano (como «debe» o «pide»).`;
+  return (
+    `${word} es un infinitivo: nombra una acción sin ser el verbo principal de la frase. ` +
+    `Depende de un verbo cercano (como «debe», «pide», «quiere» o «puede»). ` +
+    `Busca ese verbo y lee ${word} como el «qué» de esa acción.`
+  );
+}
+
+function describesRelativeLine(relativeSpanish: string, noun: string): string {
+  const word = scripture(relativeSpanish);
+  return (
+    `${word} abre una frase que habla más de ${noun}. ` +
+    `Es una frase de descripción: no es el verbo principal de la sección; ` +
+    `está colgada de ese nombre (o de esa persona o cosa) para añadir detalle sobre ${noun}.`
+  );
+}
+
+function describesPhraseLine(noun: string): string {
+  return (
+    `Esta frase habla más de ${noun}. ` +
+    `No está afirmando una acción principal nueva; está añadiendo detalle ` +
+    `sobre esa persona o cosa ya mencionada.`
+  );
 }
 
 interface CompilerClause {
@@ -260,23 +421,10 @@ export interface GenerateManualOptions {
   meta?: ManualMeta;
   bookId?: ReaderBookId;
   /**
-   * Optional reading-block texts keyed `chapter:verse`. When omitted, reading
-   * quotes use LBF verse text from Observer (same as outline). Outline
-   * `####` / `-` / `+` always stay on O's LBF spans.
+   * Optional Bible-version verse texts. Unused while reading-block quotes after
+   * H3 are omitted; kept so CompilerShell call sites still type-check.
    */
   readingTextsByVerse?: Map<string, string> | Record<string, string>;
-}
-
-function readingTextLookup(
-  readingTextsByVerse: GenerateManualOptions["readingTextsByVerse"] | undefined,
-  chapter: number,
-  verse: number,
-  fallback: string
-): string {
-  if (!readingTextsByVerse) return fallback;
-  const key = `${chapter}:${verse}`;
-  if (readingTextsByVerse instanceof Map) return readingTextsByVerse.get(key) ?? fallback;
-  return readingTextsByVerse[key] ?? fallback;
 }
 
 /**
@@ -345,6 +493,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   readMarkedAlignmentIds(progressKeys.subjunctiveMarks, bookId).forEach(id => moodReviewedVerbIds.add(id));
   readMarkedAlignmentIds(progressKeys.optativeMarks, bookId).forEach(id => moodReviewedVerbIds.add(id));
   const participleMarkedAlignmentIds = readMarkedAlignmentIds(progressKeys.participleMarks, bookId);
+  const participleSubjectHosts = readParticipleSubjectHosts(bookId);
 
   const clauses: CompilerClause[] = [];
   for (const finiteVerb of finiteVerbs) {
@@ -475,18 +624,51 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     }
   }
 
-  function participleExplanationsFor(
+  /** Manual nominative subject-host span text (clause id or verse key). */
+  function subjectHostText(hostKey: string | null): string | null {
+    if (!hostKey) return null;
+    const ids = participleSubjectHosts[hostKey] ?? [];
+    if (!ids.length) return null;
+    const first = wordById.get(ids[0]);
+    if (!first) return null;
+    return (
+      formatClauseSpan(
+        ids,
+        wordsByVerse.get(`${first.chapter}:${first.verse}`) ?? [],
+        verseTextByKey.get(`${first.chapter}:${first.verse}`) ?? ""
+      ).trim() || null
+    );
+  }
+
+  function resolveParticipleNounHost(
+    word: SpanishWord,
+    nearby: SpanishWord[],
+    subjectHostKey: string | null
+  ): string | null {
+    if (word.participleCase === "N") return subjectHostText(subjectHostKey);
+    const reading = describeParticipleReading(word, nearby);
+    return reading.hangNoun?.text?.trim() || null;
+  }
+
+  interface ParticipleNote {
+    nounHost: string | null;
+    explanation: string;
+  }
+
+  function participleNotesFor(
     finiteVerbId: string | null,
     verseKey: string | null,
     onlyWordIds?: Set<string> | null
-  ): string[] {
+  ): ParticipleNote[] {
     const ids = finiteVerbId
       ? (participlesByClauseId.get(finiteVerbId) ?? [])
       : verseKey
         ? (participlesByVerseKey.get(verseKey) ?? [])
         : [];
+    // Same keys O uses for subject-host picks: clause id, or verse for orphans.
+    const subjectHostKey = finiteVerbId ?? verseKey;
     const seen = new Set<string>();
-    const explanations: string[] = [];
+    const notes: ParticipleNote[] = [];
     for (const participleId of ids) {
       if (seen.has(participleId)) continue;
       seen.add(participleId);
@@ -496,9 +678,63 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       const hostId = participleClauseAssignment.get(participleId);
       const hostSpanish = hostId ? finiteVerbWordById.get(hostId)?.text ?? null : null;
       const nearby = wordsByVerse.get(`${word.chapter}:${word.verse}`) ?? [];
-      explanations.push(participleLine(word, nearby, hostSpanish));
+      const nounHost = resolveParticipleNounHost(word, nearby, subjectHostKey);
+      notes.push({
+        nounHost,
+        explanation: participleLine(word, nearby, hostSpanish, nounHost)
+      });
     }
-    return explanations;
+    return notes;
+  }
+
+  function nounHostKey(text: string | null | undefined): string | null {
+    const trimmed = text?.trim();
+    return trimmed ? trimmed.toLowerCase() : null;
+  }
+
+  /**
+   * One presentation slide: noun host as `+` + nested `*` notes (no blank between).
+   * `+` keeps the host in the outline marker family (formats like other phrases).
+   * Blank line = new slide — so host and hangers must share a slide, or the
+   * host appears alone (useless) and the note loses its visual anchor.
+   */
+  function emitNounHostGroupSlide(
+    indent: string,
+    hostText: string,
+    explanations: string[]
+  ): string[] {
+    const nested = `${indent}  `;
+    const comments = explanations
+      .map(text => text.trim())
+      .filter(Boolean)
+      .filter((text, index, all) => text !== all[index - 1])
+      .map(text => `${nested}* ${text}`);
+    if (!comments.length) return [];
+    return slide(`${indent}+ ${scripture(hostText)}`, comments);
+  }
+
+  /** Group participle notes by noun host — each host group is one slide. */
+  function emitParticipleGroups(indent: string, notes: ParticipleNote[]): string[] {
+    const lines: string[] = [];
+    let index = 0;
+    while (index < notes.length) {
+      const note = notes[index];
+      const hostKey = nounHostKey(note.nounHost);
+      if (hostKey && note.nounHost) {
+        const batch = [note.explanation];
+        let next = index + 1;
+        while (next < notes.length && nounHostKey(notes[next].nounHost) === hostKey) {
+          batch.push(notes[next].explanation);
+          next += 1;
+        }
+        lines.push(...emitNounHostGroupSlide(indent, note.nounHost, batch));
+        index = next;
+        continue;
+      }
+      lines.push(...starSlides(indent, [note.explanation]));
+      index += 1;
+    }
+    return lines;
   }
 
   function emitParticipleSlides(
@@ -507,9 +743,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     verseKey: string | null,
     onlyWordIds?: Set<string> | null
   ): string[] {
-    // Antecedent noun is already named inside the `*` prose — do not emit a
-    // second Scripture line after the note (that looked like a misplaced comment).
-    return starSlides(indent, participleExplanationsFor(finiteVerbId, verseKey, onlyWordIds));
+    return emitParticipleGroups(indent, participleNotesFor(finiteVerbId, verseKey, onlyWordIds));
   }
 
   function nearestClauseIdInVerse(word: SpanishWord): string | null {
@@ -741,12 +975,30 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     }
 
     const dependent = dependentRender(node, clause);
-    const antecedent = dependent.antecedentText ? [`${indent}${scripture(dependent.antecedentText)}`] : [];
-    lines.push(...slide(`${indent}- ${scripture(node.spanText || clause.finiteVerbText)}`, antecedent));
+    lines.push(...slide(`${indent}- ${scripture(node.spanText || clause.finiteVerbText)}`));
     lines.push(...commentSlides(takeReaderNoteComments(clause.chapter, clause.verse, indent)));
-    lines.push(...starSlides(indent, dependent.explanations));
-    lines.push(...emitInfinitiveSlides(indent, node.finiteVerbId, null));
-    lines.push(...emitParticipleSlides(indent, node.finiteVerbId, null));
+    const participleNotes = participleNotesFor(node.finiteVerbId, null);
+    if (dependent.antecedentText) {
+      // One slide: host + relative note + matching hanging participles (same slide —
+      // blank lines would orphan the host on the previous presentation screen).
+      const hostKey = nounHostKey(dependent.antecedentText);
+      const underHost = [
+        ...dependent.explanations,
+        ...participleNotes
+          .filter(note => nounHostKey(note.nounHost) === hostKey)
+          .map(note => note.explanation)
+      ];
+      const otherParticiples = participleNotes.filter(
+        note => nounHostKey(note.nounHost) !== hostKey
+      );
+      lines.push(...emitNounHostGroupSlide(indent, dependent.antecedentText, underHost));
+      lines.push(...emitInfinitiveSlides(indent, node.finiteVerbId, null));
+      lines.push(...emitParticipleGroups(indent, otherParticiples));
+    } else {
+      lines.push(...starSlides(indent, dependent.explanations));
+      lines.push(...emitInfinitiveSlides(indent, node.finiteVerbId, null));
+      lines.push(...emitParticipleGroups(indent, participleNotes));
+    }
     return lines;
   }
 
@@ -848,11 +1100,6 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     return `${bookDisplayName} ${startChapter}:${startVerse}–${endChapter}:${endVerse}`;
   }
 
-  /** Verse floor order (token 0) — used so reading bounds don't steal the next root's verse. */
-  function verseStartOrder(chapter: number, verse: number): number {
-    return chapter * 100000 + verse * 1000;
-  }
-
   /**
    * Phrase / parked orphan at `depth` (Fix A: same indent as nearest preceding
    * #### / - so `+` does not jump to column 0 after a nested clause).
@@ -876,8 +1123,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     const clauseText = antecedentText
       ? stripLeadingAntecedent(orphan.node.spanText, antecedentText)
       : orphan.node.spanText;
-    const antecedent = antecedentText ? [`${indent}${scripture(antecedentText)}`] : [];
-    lines.push(...slide(`${indent}- ${scripture(clauseText)}`, antecedent));
+    lines.push(...slide(`${indent}- ${scripture(clauseText)}`));
     if (parkedClause) {
       lines.push(...commentSlides(takeReaderNoteComments(parkedClause.chapter, parkedClause.verse, indent)));
     }
@@ -890,52 +1136,37 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     if (looksLikeDescribes) {
       const noun = antecedentText ? scripture(antecedentText) : "un sustantivo anterior";
       if (relativeSpanish) {
-        explanations = [`"${relativeSpanish}" abre una frase que habla más de ${noun}.`];
-      } else if (!explanations.some(line => /habla más de|describe/i.test(line))) {
-        explanations = [`Esta frase habla más de ${noun}.`, ...explanations];
+        explanations = [describesRelativeLine(relativeSpanish, noun)];
+      } else if (!explanations.some(line => /habla más de|describe a /i.test(line))) {
+        explanations = [describesPhraseLine(noun), ...explanations];
       }
     }
-    lines.push(...starSlides(indent, explanations));
-    lines.push(...emitInfinitiveSlides(indent, orphan.node.finiteVerbId, null));
-    lines.push(...emitParticipleSlides(indent, orphan.node.finiteVerbId, null));
+    const participleNotes = participleNotesFor(orphan.node.finiteVerbId, null);
+    if (antecedentText) {
+      const hostKey = nounHostKey(antecedentText);
+      const underHost = [
+        ...explanations,
+        ...participleNotes
+          .filter(note => nounHostKey(note.nounHost) === hostKey)
+          .map(note => note.explanation)
+      ];
+      const otherParticiples = participleNotes.filter(
+        note => nounHostKey(note.nounHost) !== hostKey
+      );
+      lines.push(...emitNounHostGroupSlide(indent, antecedentText, underHost));
+      lines.push(...emitInfinitiveSlides(indent, orphan.node.finiteVerbId, null));
+      lines.push(...emitParticipleGroups(indent, otherParticiples));
+    } else {
+      lines.push(...starSlides(indent, explanations));
+      lines.push(...emitInfinitiveSlides(indent, orphan.node.finiteVerbId, null));
+      lines.push(...emitParticipleGroups(indent, participleNotes));
+    }
     for (const child of orphan.node.children) lines.push(...renderNode(child, depth + 1));
     return lines;
   }
 
   function childOrder(node: SkeletonNode): number {
     return clauseById.get(node.finiteVerbId)?.order ?? Infinity;
-  }
-
-  // Full-book verse list in document order — the reading spine walks this so
-  // every verse is quoted exactly once under whichever unit first needs it.
-  // Text may come from the Compiler Bible-version choice; outline stays LBF.
-  const allBookVerses = verses
-    .map(verse => ({
-      chapter: verse.chapter,
-      verse: verse.verse,
-      order: verse.chapter * 100000 + verse.verse * 1000,
-      text: readingTextLookup(
-        options.readingTextsByVerse,
-        verse.chapter,
-        verse.verse,
-        verse.text
-      )
-    }))
-    .sort(byOrder);
-  let readingCursor = 0;
-
-  function flushReadingBlockThrough(maxOrder: number): string[] {
-    const quotes: string[] = [];
-    while (readingCursor < allBookVerses.length && allBookVerses[readingCursor].order <= maxOrder) {
-      const entry = allBookVerses[readingCursor];
-      readingCursor += 1;
-      if (!entry.text.trim()) continue;
-      quotes.push(scripture(entry.text.trim()));
-    }
-    if (!quotes.length) return [];
-    // One slide with H3: no blank lines between verse quotes (blank = new slide).
-    // Trailing blank ends this slide before the outline items.
-    return [...quotes, ""];
   }
 
   // Tito 1:2:6 pattern: a relative pronoun opening a "root" that actually
@@ -990,17 +1221,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     unitEvents.push({ kind: "root", order: clause.order });
     unitEvents.sort((a, b) => a.order - b.order);
 
-    // Reading ends at the verse *before* the next root's verse — never
-    // `nextRootOrder - 1`, which still sits inside the next root's verse
-    // (verse order ignores token index) and steals that verse from the next H3.
-    const nextRootClause = nextRoot ? clauseById.get(nextRoot.finiteVerbId) : null;
-    const readingEndOrder = nextRootClause
-      ? verseStartOrder(nextRootClause.chapter, nextRootClause.verse) - 1
-      : Number.POSITIVE_INFINITY;
-
-    // H3 reference = grammatical unit (root + dependents + orphans), always
-    // including the independent clause's own verse — not the raw reading window
-    // alone (which can omit the root verse if a prior unit over-read).
+    // H3 reference = grammatical unit (root + dependents + orphans).
     type VersePin = { chapter: number; verse: number };
     const unitVerses: VersePin[] = [{ chapter: clause.chapter, verse: clause.verse }];
     function addVersePin(chapter: number, verse: number): void {
@@ -1030,12 +1251,10 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
 
     const rootQuote = scripture(root.spanText || clause.finiteVerbText);
     const block: string[] = [];
-    // H3 unit claim on its own slide; reading quotes on the next slide.
-    // Reading still runs through the verse before the next root so no LBF
-    // verse is skipped; H3 ref stays grammatical (includes the root verse).
+    // H3 unit claim on its own slide. No large reading-block verse quotes after
+    // it — the reference is enough; outline #### / - / + still carry span text.
     block.push(`### ${reference} — ${rootQuote}`);
     block.push("");
-    block.push(...flushReadingBlockThrough(readingEndOrder));
 
     // Walk timeline: #### / - update currentDepth; + uses that indent (Fix A).
     let currentDepth = 0;
@@ -1063,26 +1282,11 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
 
   const leftoverOrphans = orphans.slice(orphanCursor);
   if (leftoverOrphans.length) {
-    const leftoverOrders = leftoverOrphans.map(orphan => orphan.order);
-    const leftoverMax = leftoverOrders.length ? Math.max(...leftoverOrders) : 0;
     const block: string[] = [];
     block.push("### Pendiente de colocación");
-    if (leftoverMax) {
-      const reading = flushReadingBlockThrough(leftoverMax);
-      // Keep the note on the same slide as H3 + Scripture (before the trailing blank).
-      if (reading.length && reading[reading.length - 1] === "") {
-        block.push(...reading.slice(0, -1));
-        block.push("_Material sin cláusula raíz posterior en el libro — pendiente de colocación manual._");
-        block.push("");
-      } else {
-        block.push(...reading);
-        block.push("_Material sin cláusula raíz posterior en el libro — pendiente de colocación manual._");
-        block.push("");
-      }
-    } else {
-      block.push("_Material sin cláusula raíz posterior en el libro — pendiente de colocación manual._");
-      block.push("");
-    }
+    block.push("");
+    block.push("_Material sin cláusula raíz posterior en el libro — pendiente de colocación manual._");
+    block.push("");
     for (const orphan of leftoverOrphans) {
       block.push(...renderOrphanBullet(orphan, "(sin cláusula gobernante identificada)"));
     }
@@ -1090,16 +1294,80 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     warnings.push(`${leftoverOrphans.length} orphan item(s) had no following root clause to fold into — placed in a final "Pendiente de colocación" section.`);
   }
 
-  // Any trailing LBF verses not yet claimed by a unit — still must appear.
-  const remainingVerseCount = allBookVerses.length - readingCursor;
-  if (remainingVerseCount > 0) {
-    const block: string[] = [];
-    block.push("### Escritura restante");
-    block.push(...flushReadingBlockThrough(Number.POSITIVE_INFINITY));
-    sections.push(block.join("\n"));
-    warnings.push(
-      `${remainingVerseCount} verse(s) had no clause unit claiming them — emitted under "Escritura restante" so no Scripture is omitted.`
+  // Actor layer (Structure SVO) — concentration + flow appendix when observed.
+  const clauseActors = readClauseActors(bookId);
+  function actorSpanText(ids: string[]): string {
+    if (!ids.length) return "";
+    const first = wordById.get(ids[0]);
+    if (!first) return "";
+    return formatClauseSpan(
+      ids,
+      wordsByVerse.get(`${first.chapter}:${first.verse}`) ?? [],
+      verseTextByKey.get(`${first.chapter}:${first.verse}`) ?? ""
+    ).trim();
+  }
+  function defaultVerbSpan(finiteVerbId: string): string[] {
+    const word = finiteVerbWordById.get(finiteVerbId);
+    return word ? [word.id] : [];
+  }
+
+  type FlowAction = { verb: string; object: string; order: number };
+  const concentrationCounts = new Map<string, { label: string; count: number }>();
+  const flowByActor = new Map<string, { label: string; actions: FlowAction[] }>();
+  for (const info of clauseSpanInfos) {
+    const stored = clauseActors[info.finiteVerbId];
+    const subject = actorSpanText(stored?.subjectSpan ?? []);
+    if (!subject) continue;
+    const verb = actorSpanText(
+      stored?.verbSpan?.length ? stored.verbSpan : defaultVerbSpan(info.finiteVerbId)
     );
+    if (!verb) continue;
+    const object = actorSpanText(stored?.objectSpan ?? []);
+    const key = subject.toLowerCase();
+    const conc = concentrationCounts.get(key) ?? { label: subject, count: 0 };
+    conc.count += 1;
+    concentrationCounts.set(key, conc);
+    const flow = flowByActor.get(key) ?? { label: subject, actions: [] };
+    flow.actions.push({ verb, object, order: info.order });
+    flowByActor.set(key, flow);
+  }
+
+  if (concentrationCounts.size) {
+    const actorBlock: string[] = [];
+    actorBlock.push("## Actores");
+    actorBlock.push("");
+    actorBlock.push("### Concentración");
+    actorBlock.push("");
+    const concRows = Array.from(concentrationCounts.values()).sort(
+      (a, b) => b.count - a.count || a.label.localeCompare(b.label, undefined, { sensitivity: "base" })
+    );
+    for (const row of concRows) {
+      const n = row.count === 1 ? "acción" : "acciones";
+      actorBlock.push(`- ${scripture(row.label)} — ${row.count} ${n}`);
+      actorBlock.push("");
+    }
+    actorBlock.push("### Flujo");
+    actorBlock.push("");
+    const flowRows = Array.from(flowByActor.values())
+      .map(group => ({
+        label: group.label,
+        actions: group.actions.sort((a, b) => a.order - b.order)
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label, undefined, { sensitivity: "base" }));
+    for (const group of flowRows) {
+      actorBlock.push(`#### ${group.label.toUpperCase()}`);
+      actorBlock.push("");
+      for (const action of group.actions) {
+        const line = action.object
+          ? `${scripture(action.verb)} → ${scripture(action.object)}`
+          : scripture(action.verb);
+        actorBlock.push(`- ${line}`);
+        actorBlock.push("");
+      }
+    }
+    sections.push(actorBlock.join("\n"));
+  } else {
+    warnings.push("No clause actors observed yet — Actor concentration / flow omitted from Generate.");
   }
 
   const yaml = formatYamlFrontmatter(meta ?? createDefaultManualMeta());

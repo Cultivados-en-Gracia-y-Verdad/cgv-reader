@@ -2630,6 +2630,49 @@ button.interlinear-token--pickable:focus-visible {
   background: rgba(138, 96, 158, 0.34);
 }
 
+.clause-context-panel--noun-pick .clause-noun-host-legend {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+  margin: 0 0 0.65rem;
+  color: var(--reader-soft);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.clause-noun-host-swatch {
+  flex-shrink: 0;
+  width: 0.85rem;
+  height: 0.85rem;
+  margin-top: 0.15rem;
+  border-radius: 3px;
+  background: rgba(95, 140, 110, 0.35);
+  box-shadow: inset 0 -2px 0 rgba(70, 120, 88, 0.85);
+}
+
+.clause-noun-verse--has-independent {
+  border-radius: 6px;
+  background: rgba(95, 140, 110, 0.06);
+  padding: 0.15rem 0.3rem;
+  margin: 0 -0.3rem;
+}
+
+.clause-noun-word--independent {
+  background: rgba(95, 140, 110, 0.22);
+  box-shadow: inset 0 -2px 0 rgba(70, 120, 88, 0.75);
+}
+
+.clause-noun-word--independent:hover,
+.clause-noun-word--independent:focus-visible {
+  background: rgba(95, 140, 110, 0.34);
+}
+
+.clause-noun-word--independent.clause-noun-word--selected {
+  background: rgba(207, 229, 231, 0.85);
+  box-shadow: inset 0 -2px 0 rgba(70, 120, 88, 0.9);
+}
+
 .clause-noun-candidate-row {
   display: flex;
   flex-wrap: wrap;
@@ -3519,6 +3562,86 @@ button.interlinear-token--pickable:focus-visible {
 
 .clause-subject-host-picker .clause-subject-host-verse-text {
   display: inline;
+}
+
+.clause-actor-svo {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(107, 79, 42, 0.18);
+}
+
+.clause-actor-summary {
+  margin: 0.45rem 0 0.7rem;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.08rem;
+  line-height: 1.45;
+  color: var(--reader-text, #23201b);
+}
+
+.clause-actor-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.clause-actor-field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.clause-actor-concentration,
+.clause-actor-flow {
+  margin: 1.25rem 0 0;
+}
+
+.clause-actor-concentration-list {
+  list-style: none;
+  margin: 0.55rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.clause-actor-concentration-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.98rem;
+}
+
+.clause-actor-concentration-name {
+  font-weight: 600;
+}
+
+.clause-actor-concentration-count {
+  color: #756e64;
+}
+
+.clause-actor-flow-list {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 0.55rem;
+}
+
+.clause-actor-flow-actor {
+  margin: 0 0 0.25rem;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.clause-actor-flow-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 0.85rem;
+  display: grid;
+  gap: 0.2rem;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.02rem;
 }
 
 .clause-parked-item {
@@ -5072,6 +5195,20 @@ html[data-theme="dark"] .clause-noun-word--suggested {
   box-shadow: inset 0 -2px 0 rgba(214, 150, 178, 0.95);
   outline: 1px solid rgba(214, 150, 178, 0.55);
   outline-offset: 1px;
+}
+
+html[data-theme="dark"] .clause-noun-word--independent {
+  background: rgba(95, 140, 110, 0.32);
+  box-shadow: inset 0 -2px 0 rgba(140, 190, 155, 0.85);
+}
+
+html[data-theme="dark"] .clause-noun-verse--has-independent {
+  background: rgba(95, 140, 110, 0.12);
+}
+
+html[data-theme="dark"] .clause-noun-host-swatch {
+  background: rgba(95, 140, 110, 0.45);
+  box-shadow: inset 0 -2px 0 rgba(140, 190, 155, 0.9);
 }
 
 html[data-theme="dark"] .clause-noun-candidates-label,

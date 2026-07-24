@@ -30,11 +30,11 @@ only — **not** part of the outline.
 | `-` | Dependent clause |
 | `+` | Phrase — all other Scripture |
 | `*` | Observer mechanical insert only |
-| `>` | Writer entry (Reader notes, Def/XRef, human commentary) |
+| `>` | Writer entry (Reader notes, human commentary) |
 
 Indentation left→right = structural depth. **Every scriptural word** appears once as
-`####` / `-` / `+`. The reading block after H3 is for reading; it does not replace that
-accounting.
+`####` / `-` / `+`. There is **no large reading-block** of verse quotes after H3 — the
+H3 reference is enough for that; look up the full verses elsewhere.
 
 ```markdown
 # TODO: contexto
@@ -42,20 +42,16 @@ accounting.
 
 ### Tito 1:1–3 — *y a su propio tiempo manifestó su palabra por la predicación,*
 
-*Pablo, siervo de Dios, apóstol de Cristo Jesús, según la fe…*
-*para la esperanza de la vida eterna, la cual prometió…*
-*y a su propio tiempo manifestó su palabra por la predicación…*
-
 + *Pablo, siervo de Dios, apóstol de Cristo Jesús, según la fe…*
 
 - *la cual prometió el Dios que es sin mentira,*
-*la vida eterna*
 
-* "la cual" abre una frase que habla más de *la vida eterna*.
++ *la vida eterna*
+  * *la cual* abre una frase que habla más de *la vida eterna*. …
 
 #### *y a su propio tiempo manifestó su palabra por la predicación,*
 
-* "y" une esta frase a la anterior. Solo suma; no cambia el sentido ni da una razón.
+* *y* (καί) es una palabra de enlace. …
 
 > Comentario del escritor.
 ```
@@ -64,30 +60,30 @@ accounting.
 - **Blank line = new slide.** No exceptions.
 - **H3 unit claim = its own slide** — `### {reference} — *{independent clause}*`, then a
   blank line. **Reference = grammatical unit** (independent clause’s own verse plus
-  dependents / `+` / parked in that unit) — always includes the root verse. Never derive
-  the ref only from the reading cursor (a prior unit must not steal the next root’s verse).
-- **Reading quotes = the next slide** — no blanks between verse quotes; one trailing blank
-  ends that slide.
+  dependents / `+` / parked in that unit) — always includes the root verse.
+- **No reading-block quotes** after H3 (the large verse dumps). Reference is enough.
 - **Each `####` / `-` / `+` / `*` / `>` line is its own slide.**
 - **Keep slides short.** Clause slide = marker (+ optional antecedent only). Every `*` and
   every `>` gets its own slide.
-- **Grammar labels:** Spanish first, then Greek — `"enseñando" (διδάσκοντες)`.
+- **Grammar labels:** Spanish first (italics), then Greek — `*enseñando* (διδάσκοντες)`.
 
 **Structural rules:**
 - **H1 / H2** = context / unit (TODO). Not outline.
 - **H3** = reference span + independent clause claim.
-- **Reading block** = LBF verses for that span (after H3).
+- **No reading block** after H3.
 - **Outline:** `####` independent · `-` dependent · `+` phrase · `*` Observer · `>` Writer.
 - **`+` phrases:** every Spanish word not inside any finite-clause `selectedSpan`. Emitted
-  in the **same unit** as the reading span (through the next independent clause), including
-  gaps after the root in the same verse. **Indent** matches the nearest preceding `####` /
-  `-` in document order (not column 0 after a nested clause).
-- **Writer `>`:** Reader notes → `> {text}`; Def/XRef pins → `> Def. …` / `> XRef …`.
-  Never `*`.
+  in the **same unit** as the following root, including gaps after the root in the same
+  verse. **Indent** matches the nearest preceding `####` / `-` in document order.
+- **Writer `>`:** Reader notes → `> {text}` (and later human commentary). Never Def/XRef.
+- **Def/XRef pins:** `* Def. (lemma): …` / `* XRef (lemma): …` — Observer `*` slides.
 
 **Typography:**
-- **Scripture** → markdown italics `*…*` only.
-- **`*` grammar lines** stay roman; tokens `"…"`.
+- **Scripture** → markdown italics `*…*` only — H3 claim, outline spans, antecedents, and
+  short tokens inside `*` notes (e.g. `* *para que* (ἵνα) dice el propósito de *dejé*…`).
+  Greek confirmation stays in parentheses, roman.
+- **`*` grammar lines** stay roman for the explanation prose. Pedagogical examples that are
+  **not** quoting the passage may use «…». Never quote Scripture with `"…"` or «…».
 - **`>` Writer lines** stay roman.
 
 ---
@@ -115,18 +111,30 @@ For each finite-verb clause already reviewed in O:
 - **Parked clauses** (Q1 describes a noun not inside any clause row yet): still emit as
   **`-`** in document order under the following root’s unit. **No “pending” sentence in
   the body** — list each id in generation flags so O can finish attachment. Do not drop them.
-- **Nothing omitted:** every LBF word appears in the reading block and in exactly one of
-  `####` / `-` / `+` in the dissection; unresolved attachment is a flag, not silence.
-- **`*` notes:** one explanation per fact; never emit the same `*` text twice in a row;
-  never park a bare Scripture line after a `*` (antecedents for relatives sit under `-`;
-  participle antecedents are named only inside the `*` prose).
+- **Nothing omitted:** every LBF word appears in exactly one of `####` / `-` / `+` in the
+  dissection; unresolved attachment is a flag, not silence. (Full-verse reading dumps after
+  H3 are omitted on purpose.)
+- **`*` notes:** one explanation per fact; never emit the same `*` text twice in a row.
+- **Noun-host nesting (hanging participles / Q1):** when a relative or participle hangs on a
+  named noun, emit **one slide** with the host as `+ *{noun}*` and the nested `*` notes under
+  it (no blank line between host and hangers — a blank would put the host alone on the prior
+  presentation screen and the note would lose its anchor):
+  ```markdown
+  + *oro*
+    * *perece* (ἀπολλυμένου) - participio
+    * *probado* (δοκιμαζομένου) - participio
+  ```
+  Nesting under `+ *{noun}*` carries the hang; the `*` line only labels the form.
+  (A generic “participio” gloss may later open on click — not required in the markdown.)
+  Same for Q1 (`+ *Jesucristo*` + relative + hanging participles).
 - **Reader notes:** Writer entries `> {text}` under the matching verse’s parent (own slide).
 - **Compiler pins (definitions / cross-refs):** targeted by a line in the generated markdown
   (UI: click a line or search). Stored with the **exact text of that line** as a durable
   anchor, plus the current line number. Inserted after that line on Export as
-  `> Def. (lemma):` / `> XRef (lemma):` — each its own slide. **Never** as `*` grammar slides.
-  Regenerate **rematches** pins by anchor text (does not wipe them). If the target line
-  wording changed, the pin becomes an orphan until reattached in Occurrences.
+  `* Def. (lemma):` / `* XRef (lemma):` — each its own `*` slide (same marker family as
+  mechanical grammar notes). Regenerate **rematches** pins by anchor text (does not wipe
+  them). If the target line wording changed, the pin becomes an orphan until reattached in
+  Occurrences.
 
 ---
 
@@ -134,9 +142,9 @@ For each finite-verb clause already reviewed in O:
 
 Walk root clauses in document order. For each:
 
-1. Emit `### {reference} — *{independent clause}*` (H3 slide). **Reference = reading span**
-   of the unit (verses from the unread cursor up to the next independent clause), not only
-   the root verb’s verse. Then emit the reading-block quotes as the next slide.
+1. Emit `### {reference} — *{independent clause}*` (H3 slide). **Reference = grammatical
+   unit** (root verse plus dependents / `+` / parked). **Do not** emit a reading-block of
+   verse quotes after H3.
 2. Before the dissected root, emit dependents / `+` / parked items that appear *earlier*
    than the root — document order (bullets may sit above the `####`).
 3. Emit `#### *{independent clause}*` (same claim text as H3).
@@ -165,37 +173,41 @@ simple relative-pronoun + unplaced-neighbor flag is enough.
 Fill in `{word}`, `{parent}`, `{noun}`, etc. from the actual data — these are patterns, not
 literal strings to reuse verbatim if the specific case needs different phrasing.
 
-**Voice:** plain Spanish (roughly 5th-grade). State what the word is doing and why that is
-certain from the grammar. Explaining grammar and what is occurring is **not** interpretation.
-Do **not** add theology, application, or “what this means for us.”
+**Voice:** plain Spanish at about a **5th-grade** level. Fully expound: say what the
+word/form **is**, what it **does** in the sentence, and what it is **not**. Do not leave
+jargon unexplained (if you must name a case/role, define it in the same breath). Explaining
+grammar and what is occurring is **not** interpretation. Do **not** add theology,
+application, or “what this means for us.” Prefer 2–4 short sentences over a dense one-liner.
 
 **Relational connectors (root-clause level):**
-- Adición (καί): `"{word}" une esta frase a la anterior. Solo suma; no cambia el sentido ni da una razón.`
-- Contraste (ἀλλά): `"{word}" marca un giro: lo que sigue va en otra dirección respecto a lo anterior.`
-- Razón/fundamento (γάρ): `"{word}" da la razón de lo que se dijo antes.`
-- Inferencia (οὖν): `"{word}" saca una conclusión de lo que se dijo antes.`
-- Pivote suave (δέ): `"{word}" sigue la idea anterior y la une a esta frase.`
-- Asíndeton: `Esta frase empieza sola, sin una palabra de enlace (como «y» o «porque»).`
+- Adición (καί): link-word like Spanish «y»; only adds; not a reason, not a «pero».
+- Contraste (ἀλλά): turn/contrast; what follows goes another direction («pero» / «sino»).
+- Razón/fundamento (γάρ): the «por qué» of what was just said; not a new topic.
+- Inferencia (οὖν): «entonces» / «por eso» — next logical step, not a new reason.
+- Pivote suave (δέ): continues the prior idea; mild advance or mild contrast; still connected.
+- Asíndeton: starts with no visible link word; may still continue the thread.
 
 **Subordinating markers (dependent clauses):**
-- Propósito (ἵνα/ὅπως): `"{word}" dice el propósito de «{parent verb}» — para qué se hace esa acción.`
-- Contenido (ὅτι tras verbo de decir/pensar): `"{word}" abre lo que se dice o se piensa en la frase anterior — el contenido de esa idea.`
-- Condición (εἰ/ἐάν): `"{word}" pone una condición: «si esto…», entonces aplica lo de la frase anterior.`
-- Tiempo (ὅτε/ὡς/ἐπεί): `"{word}" dice el momento relacionado con la frase anterior — cuándo.`
-- Descripción (pronombre relativo): `"{word}" abre una frase que habla más de *{noun}*.`
-- Razón (subordinada): `"{word}" da el motivo de la frase anterior — por qué se dijo eso.`
+- Propósito (ἵνα/ὅπως): the «para qué» of the parent action (goal, not past reason).
+- Contenido (ὅτι tras verbo de decir/pensar): opens the *qué* that is said/known/thought.
+- Condición (εἰ/ἐάν): «si esto…»; not asserted as a free-standing fact.
+- Tiempo (ὅτε/ὡς/ἐπεί): the «cuándo» — not reason or purpose.
+- Descripción (pronombre relativo): opens a phrase hanging on *{noun}*; adds detail about it.
+- Razón (subordinada): the «por qué» of the prior phrase (foundation, not future purpose).
 
 **Coordinate inheritance:**
-`Esta frase va unida con «{connector}» y sigue bajo el mismo «{shared particle}» de la frase anterior. No abre un(a) {relation type} nuevo(a); continúa el/la mismo(a).`
+Joined by «{connector}» and still under the same «{shared particle}» as the prior phrase —
+continues that same relation type; does **not** open a new purpose/reason/etc. on its own.
 
 **Participles:**
-- Atributivo: `"{participle}" describe a *{noun}*. No es el verbo principal; añade detalle sobre esa persona o cosa.`
-- Sustantivado: `"{participle}" funciona como un nombre: señala a una persona o cosa (quién / qué), no solo describe a otra.`
-- Circunstancial: `"{participle}" va junto a «{finite verb}». No es el verbo principal; muestra algo que ocurre al mismo tiempo o en relación con esa acción.`
+- With noun host (under `+ *{noun}*`): compact only — `*{spanish}* ({greek}) - participio`.
+- Without noun host: define “participio” in plain Spanish, then nominative / clause-host /
+  case-role explanation as needed.
 
 **Infinitives (Compiler lists them; O find-step later):**
-- With host finite: `"{infinitive}" completa a "{host}": dice *qué* se debe hacer o qué acción sigue.`
-- No host clause yet: `"{infinitive}" nombra una acción que depende de un verbo cercano (como «debe» o «pide»).`
+- Always define “infinitivo” (names an action without being the main verb).
+- With host finite: completes "{host}" as the *qué*; read host + infinitive together.
+- No host clause yet: depends on a nearby verb like «debe», «pide», «quiere», «puede».
 - One `*` slide per infinitive. Emit under the clause only when the word is in that
   clause’s span; if the word is in a `+` gap, emit the `*` right after that `+` (still
   naming the nearest finite as host). Never before the Scripture line that carries it.
@@ -228,6 +240,24 @@ gatherer, "investigation" tools) is real, intended, and **explicitly out of scop
 pass** — do not attempt to build any of it now.
 
 ---
+
+## Actor appendix (from Structure SVO)
+
+When O has Quién actúa on any saved clause, Generate appends after the outline:
+
+```markdown
+## Actores
+
+### Concentración
+- *Dios* — 3 acciones
+
+### Flujo
+#### DIOS
+- *prometió* → *vida eterna*
+```
+
+Same grouping rules as Skeleton B/C (`docs/observer/actor-svo-spec.md`). Omitted with a
+warning when no actors are observed.
 
 ## Not part of this pass
 
