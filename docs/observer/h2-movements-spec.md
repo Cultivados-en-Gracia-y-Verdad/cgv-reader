@@ -34,29 +34,31 @@ Deferred (same idea, later pass):
 
 ## Output shape (Skeleton)
 
-Primary UI: **H3 flow** (`h3-flow-spec.md`) — clean independent-clause strip with
-Accept / Ignore on suggested breaks. Transition detection is this module;
-grouping into developments is the student’s.
+Primary UI: **H3 flow** (`h3-flow-spec.md`) — clean independent-clause strip.
+The student places H2 starts (“Begin new movement”). Transition detection here
+feeds **supporting observations after** a user decision — never Accept/Ignore prompts.
 
 ```
-Development 1
-  1:3   …
-  1:6   …
-  ┄┄┄ actor Dios → ustedes ┄┄┄  [Accept break] [Ignore]
-  Why suggested: …
-
-Development 2   ← after Accept
-  1:13  …
+H2                          ← always; book start (1:1)
+H3   1:1   …
+H3   1:2   Gracia y paz…
+     [Begin new movement]   ← quiet; hover/focus
+────────
+Observations supporting this decision
+  · New dominant actor (…)
+H2
+H3   1:3   En esto se alegran…
 ```
 
-The app **does not name** the development. It marks where observations change;
-the student Accepts the break (or Ignores it) and later may name the H2.
+The app **does not name** the H2 and **does not ask** the student to accept a
+computer boundary. Later the student may name the H2.
 
 ---
 
 ## Non-goals
 
 - No auto-written H1 or H2 title
+- No Accept / Ignore suggestion workflow
 - No theological summary
 - Does not change the outline / skeleton tree
 - Does not invent labels from unmarked clauses

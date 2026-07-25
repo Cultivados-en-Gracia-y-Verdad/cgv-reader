@@ -63,13 +63,12 @@ import {
   type SkeletonNode
 } from "./clause-tree";
 import {
-  acceptH3FlowBreak,
-  buildH3FlowDevelopments,
-  buildH3FlowSuggestions,
-  clearH3FlowBreak,
-  ignoreH3FlowSuggestion,
-  reconcileH3FlowState
+  buildH3FlowSupports,
+  clearH2Start,
+  reconcileH3FlowState,
+  startH2After
 } from "./h3-flow";
+import { buildH3UnitSignals } from "./h2-movements";
 
 const FALLBACK_CLAUSE_CHOICES: ClauseChoiceOption[] = [
   {
@@ -717,6 +716,26 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       ? nearby
       : reviewClauseRows.filter(row => row.finiteVerb.finiteVerbId !== activeBeginningRow.finiteVerb.finiteVerbId);
   }, [activeBeginningRow, reviewClauseRows]);
+
+  // When attaching a content/frame clause, the real governor may be another
+  // finite in the same verse that still has no clause span — so it never
+  // appears in the parent list (e.g. 4:18 εἰ…σῴζεται waiting on φανεῖται).
+  const unassignedSameVerseFinites = useMemo(() => {
+    if (!activeBeginningRow?.finiteVerb.finiteVerbId) return [];
+    const activeId = activeBeginningRow.finiteVerb.finiteVerbId;
+    const chapter = activeBeginningRow.finiteVerb.chapter;
+    const verse = activeBeginningRow.finiteVerb.verse;
+    const assignedIds = new Set(
+      Object.entries(assignments)
+        .filter(([, assignment]) => (assignment.selectedSpan?.length ?? 0) > 0)
+        .map(([id]) => id)
+    );
+    return finiteVerbs.filter(word => {
+      if (!word.finiteVerbId || word.finiteVerbId === activeId) return false;
+      if (word.chapter !== chapter || word.verse !== verse) return false;
+      return !assignedIds.has(word.finiteVerbId);
+    });
+  }, [activeBeginningRow, assignments, finiteVerbs]);
 
   const clauseSpanInfos = useMemo<ClauseSpanInfo[]>(
     () =>
@@ -2148,7 +2167,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       .sort((a, b) => a.label.localeCompare(b.label, undefined, { sensitivity: "base" }));
   }, [actorObservationFor, clauseSpanInfos, spanTextFromIds]);
 
-  // H3 flow: clean independent-clause strip + accepted developments + suggestions.
+  // H3 flow: continuous reading strip; user places H2 starts; observations support after.
   const h3FlowInput = useMemo(() => {
     const subjectByClauseId = new Map<string, string>();
     for (const info of clauseSpanInfos) {
@@ -2182,19 +2201,11 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     [h3FlowState, outline]
   );
 
-  const h3FlowDevelopments = useMemo(
-    () => buildH3FlowDevelopments(h3FlowInput, h3FlowReconciled),
-    [h3FlowInput, h3FlowReconciled]
-  );
+  const h3FlowUnits = useMemo(() => buildH3UnitSignals(h3FlowInput), [h3FlowInput]);
 
-  const h3FlowSuggestions = useMemo(
-    () => buildH3FlowSuggestions(h3FlowInput, h3FlowReconciled),
+  const h3FlowSupportByAfterId = useMemo(
+    () => new Map(buildH3FlowSupports(h3FlowInput, h3FlowReconciled).map(row => [row.afterH3Id, row])),
     [h3FlowInput, h3FlowReconciled]
-  );
-
-  const h3FlowSuggestionByAfterId = useMemo(
-    () => new Map(h3FlowSuggestions.map(row => [row.afterH3Id, row])),
-    [h3FlowSuggestions]
   );
 
   const persistH3Flow = useCallback(
@@ -2344,6 +2355,34 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       wordsInVerse
     ]
   );
+
+  const unassignedSameVerseNotice =
+    unassignedSameVerseFinites.length > 0 ? (
+      <div className="clause-proposal clause-unassigned-finite-notice" role="status">
+        <p className="clause-proposal-label">Unassigned finite in this verse</p>
+        <p className="clause-proposal-reason">
+          {unassignedSameVerseFinites.length === 1
+            ? "Another finite verb in this verse has not been assigned a clause span yet, so it cannot appear as a parent below. Assign it first if that is the clause this depends on."
+            : "Other finite verbs in this verse have not been assigned a clause span yet, so they cannot appear as parents below. Assign them first if one of them is the clause this depends on."}
+        </p>
+        <div className="clause-unassigned-finite-actions">
+          {unassignedSameVerseFinites.map(word => (
+            <button
+              type="button"
+              key={word.finiteVerbId ?? word.id}
+              className="clause-parked-host-button"
+              onClick={() => selectVerb(word, { scrollTo: "passage" })}
+            >
+              Assign {word.greekSurface || word.text}
+              <span>
+                {word.chapter}:{word.verse}
+                {word.text ? ` — ${word.text}` : ""}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+    ) : null;
 
   if (!interlinearReady) {
     return (
@@ -3106,6 +3145,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                     <div className="clause-parent-picker">
                       <p className="clause-observation-term">Content clause</p>
                       <p>Select the clause this is the content of.</p>
+                      {unassignedSameVerseNotice}
                       <div className="clause-parent-list">
                         {nearbyParentClauseRows.map(row => (
                           <button
@@ -3153,6 +3193,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                         {activeEffectiveFrameType ? `${capitalize(activeEffectiveFrameType)} clause` : "Adverbial clause"}
                       </p>
                       <p>Select the clause this explains — its time, reason, condition, or purpose.</p>
+                      {unassignedSameVerseNotice}
                       <div className="clause-parent-list">
                         {nearbyParentClauseRows.map(row => (
                           <button
@@ -3215,6 +3256,19 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                     <div className="clause-parent-picker">
                       <p className="clause-observation-term">Independent clause</p>
                       <p className="clause-tutor-note">Currently: stands on its own.</p>
+                      {/*
+                        "All three no" is a real answer, but the Greek can flatly
+                        contradict it — a clause opening with ἵνα/ὡς/ἐάν is not
+                        independent no matter how the questions were answered, and
+                        Compiler will end up demoting it downstream. Say so here,
+                        where it can still be fixed, instead of letting the outline
+                        carry a dependent clause as an H3.
+                      */}
+                      {activeSignal && activeSignal.kind !== "none" ? (
+                        <p className="clause-tutor-note clause-tutor-note--conflict">
+                          But the Greek disagrees: {activeSignal.reason}
+                        </p>
+                      ) : null}
                       <div className="clause-step-actions">
                         <button type="button" className="clause-reconsider" onClick={() => setForceChoices(true)}>
                           Not this — reconsider
@@ -3597,89 +3651,92 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
               <div className="clause-h3-flow" aria-label="H3 flow">
                 <h3>H3 flow</h3>
                 <p className="clause-section-note">
-                  Independent clauses in book order — the canvas for continuous development. H2 is a
-                  stretch of consecutive H3s you keep together; Accept a suggested break when
-                  observations show the flow has changed. The app never invents a title.
+                  Independent clauses in book order. Read the flow. Where you observe a new movement,
+                  begin an H2. The app never asks you to accept a boundary — it only shows
+                  observations that support the ones you place.
                 </p>
                 <div className="clause-h3-flow-list">
-                  {h3FlowDevelopments.map((development, index) => (
-                    <div
-                      className="clause-h3-flow-band"
-                      key={`dev-${index}-${development.h3Ids[0] ?? index}`}
-                    >
-                      <p className="clause-h3-flow-band-title">
-                        Development {index + 1}
-                        {development.label ? <span> — {development.label}</span> : null}
-                      </p>
-                      {development.units.map(unit => {
-                        const suggestion = h3FlowSuggestionByAfterId.get(unit.finiteVerbId);
-                        const acceptedBreak = h3FlowReconciled.breaksAfter.includes(unit.finiteVerbId);
-                        return (
-                          <div key={unit.finiteVerbId}>
-                            <div className="clause-h3-flow-row">
-                              <span className="clause-h3-flow-ref">{unit.reference}</span>
-                              <span className="clause-h3-flow-span">{unit.spanText}</span>
-                            </div>
-                            {suggestion ? (
-                              <div className="clause-h3-flow-suggestion">
-                                <p className="clause-h2-transition" role="status">
-                                  ┄┄┄ {suggestion.transition.detail} ┄┄┄
-                                </p>
-                                <p className="clause-h2-transition-why">
-                                  Why suggested: {suggestion.transition.reason}
-                                </p>
-                                <div className="clause-h3-flow-suggestion-actions">
-                                  <button
-                                    type="button"
-                                    className="clause-h3-flow-accept"
-                                    onClick={() =>
-                                      persistH3Flow(acceptH3FlowBreak(h3FlowReconciled, unit.finiteVerbId))
-                                    }
-                                  >
-                                    Accept break
-                                  </button>
-                                  <button
-                                    type="button"
-                                    className="clause-h3-flow-ignore"
-                                    onClick={() =>
-                                      persistH3Flow(
-                                        ignoreH3FlowSuggestion(h3FlowReconciled, unit.finiteVerbId)
-                                      )
-                                    }
-                                  >
-                                    Ignore
-                                  </button>
-                                </div>
-                              </div>
-                            ) : null}
-                            {acceptedBreak && !suggestion ? (
-                              <div className="clause-h3-flow-accepted">
-                                <p className="clause-h2-transition" role="status">
-                                  ── accepted break ──
-                                </p>
+                  {h3FlowUnits.map((unit, index) => {
+                    const prev = index > 0 ? h3FlowUnits[index - 1] : null;
+                    const h2StartsHere =
+                      prev != null && h3FlowReconciled.breaksAfter.includes(prev.finiteVerbId);
+                    const support = prev ? h3FlowSupportByAfterId.get(prev.finiteVerbId) : null;
+                    // First H3 always opens H2 (1:1 / book start). Later H2s are user-placed.
+                    const showH2Heading = index === 0 || h2StartsHere;
+                    return (
+                      <div key={unit.finiteVerbId} className="clause-h3-flow-item">
+                        {prev ? (
+                          <div className="clause-h3-flow-boundary">
+                            {h2StartsHere ? (
+                              <div className="clause-h3-flow-placed">
+                                <div className="clause-h3-flow-rule" aria-hidden="true" />
+                                {support?.observations.length ? (
+                                  <div className="clause-h3-flow-support">
+                                    <p className="clause-h3-flow-support-heading">
+                                      Observations supporting this decision
+                                    </p>
+                                    <ul>
+                                      {support.observations.map(item => (
+                                        <li key={item}>{item}</li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                ) : null}
                                 <button
                                   type="button"
-                                  className="clause-h3-flow-ignore"
+                                  className="clause-h3-flow-remove"
                                   onClick={() =>
-                                    persistH3Flow(clearH3FlowBreak(h3FlowReconciled, unit.finiteVerbId))
+                                    persistH3Flow(clearH2Start(h3FlowReconciled, prev.finiteVerbId))
                                   }
                                 >
-                                  Undo break
+                                  Remove movement start
                                 </button>
                               </div>
-                            ) : null}
+                            ) : (
+                              <button
+                                type="button"
+                                className="clause-h3-flow-begin"
+                                onClick={() =>
+                                  persistH3Flow(startH2After(h3FlowReconciled, prev.finiteVerbId))
+                                }
+                              >
+                                Begin new movement
+                              </button>
+                            )}
                           </div>
-                        );
-                      })}
-                    </div>
-                  ))}
+                        ) : null}
+                        {showH2Heading ? (
+                          <p className="clause-h3-flow-h2-heading">
+                            H2
+                            {h3FlowReconciled.labels[unit.finiteVerbId]
+                              ? ` — ${h3FlowReconciled.labels[unit.finiteVerbId]}`
+                              : ""}
+                          </p>
+                        ) : null}
+                        <div className="clause-h3-flow-row">
+                          <div className="clause-h3-flow-main">
+                            <span className="clause-h3-flow-kind">H3</span>
+                            <span className="clause-h3-flow-ref">{unit.reference}</span>
+                            <span className="clause-h3-flow-span">{unit.spanText}</span>
+                          </div>
+                          <div
+                            className={
+                              unit.subject
+                                ? "clause-h3-flow-subject"
+                                : "clause-h3-flow-subject clause-h3-flow-subject--empty"
+                            }
+                            title="Quién actúa (H3 root)"
+                          >
+                            <span className="clause-h3-flow-subject-label">sujeto</span>
+                            <span className="clause-h3-flow-subject-value">
+                              {unit.subject ?? "—"}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-                {!h3FlowSuggestions.length && h3FlowDevelopments.length <= 1 ? (
-                  <p className="clause-output-empty">
-                    No open suggestions yet. Fill Quién actúa / mood on consecutive roots — or wait until
-                    observations differ enough to propose a break.
-                  </p>
-                ) : null}
               </div>
             ) : null}
 

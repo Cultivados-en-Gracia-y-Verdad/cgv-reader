@@ -16,6 +16,8 @@ export type H3UnitSignals = {
   finiteVerbId: string;
   reference: string;
   spanText: string;
+  /** Quién actúa on the H3 root itself; null if not yet observed. */
+  subject: string | null;
   /** Majority Quién actúa across root + dependents; null if none observed. */
   dominantActor: string | null;
   mood: UnitMood;
@@ -126,10 +128,12 @@ export function buildH3UnitSignals(input: H2MovementInput): H3UnitSignals[] {
   return input.outline.map(clause => {
     const rootNode = rootById.get(clause.finiteVerbId);
     const clauseIds = rootNode ? collectSubtreeIds(rootNode) : [clause.finiteVerbId];
+    const rootSubject = input.subjectByClauseId.get(clause.finiteVerbId)?.trim() || null;
     return {
       finiteVerbId: clause.finiteVerbId,
       reference: clause.reference,
       spanText: clause.spanText,
+      subject: rootSubject,
       dominantActor: majorityActor(clauseIds, input.subjectByClauseId),
       mood: unitMood(clause.finiteVerbId, input.imperativeRootIds, input.statementRootIds),
       recipient: input.recipientByRootId.get(clause.finiteVerbId) ?? null,

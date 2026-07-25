@@ -19,18 +19,26 @@ and nothing silently omitted.
 Locked 2026-07-18. This markdown is the **presentation source**: **every blank line = a new
 slide.**
 
-Two axes: **grammar structure** (outline) and **Writer commentary**. H1/H2 are context
-only — **not** part of the outline.
+Two axes: **grammar structure** (outline) and **editorial navigation / Writer commentary**.
+**H1 / H2 / H3 are navigation** — not the outline. H2 stays top and small (development cue).
+H3 is a **section context title** (never replaces H4). **H4 / `-` / `+`** are the outline.
 
-**Outline markers (locked):**
+**Outline markers (locked — HARD):**
 
-| Marker | Meaning |
-|---|---|
-| `####` | Independent clause |
-| `-` | Dependent clause |
-| `+` | Phrase — all other Scripture |
-| `*` | Observer mechanical insert only |
-| `>` | Writer entry (Reader notes, human commentary) |
+| Marker | Meaning | Content |
+|---|---|---|
+| `####` | Independent clause | Scripture only |
+| `-` | Dependent clause | **Scripture only** — never meta, actors, grammar labels |
+| `+` | Phrase | **Scripture only** — never meta, actors, grammar labels |
+| `*` | Observer mechanical insert | Actors, tono, grammar, Def/XRef, triples… |
+| `>` | Writer entry | Reader notes, human commentary |
+
+**Hard rule:** `-` and `+` are reserved for Scripture. Lines such as
+`Actores principales: *Dios* (1) · …` **must** start with `*`:
+
+```markdown
+* Actores principales: *Dios* (1) · *prueba de su fe* (1) · *ustedes* (1)
+```
 
 Indentation left→right = structural depth. **Every scriptural word** appears once as
 `####` / `-` / `+`. There is **no large reading-block** of verse quotes after H3 — the
@@ -47,11 +55,11 @@ H3 reference is enough for that; look up the full verses elsewhere.
 - *la cual prometió el Dios que es sin mentira,*
 
 + *la vida eterna*
-  * *la cual* abre una frase que habla más de *la vida eterna*. …
+  * *la cual*[^rel]: describe a *la vida eterna*.
 
 #### *y a su propio tiempo manifestó su palabra por la predicación,*
 
-* *y* (καί) es una palabra de enlace. …
+* *y* (καί)[^kai] une esta cláusula con la anterior.
 
 > Comentario del escritor.
 ```
@@ -68,8 +76,9 @@ H3 reference is enough for that; look up the full verses elsewhere.
 - **Grammar labels:** Spanish first (italics), then Greek — `*enseñando* (διδάσκοντες)`.
 
 **Structural rules:**
-- **H1 / H2** = context / unit (TODO). Not outline.
-- **H3** = reference span + independent clause claim.
+- **H1 / H2** = navigation (TODO). H2 top and small. Not outline.
+- **H3** = section context title (seeded as reference + claim; may be retitled). Not outline.
+- **H4** = exact independent clause (outline anchor).
 - **No reading block** after H3.
 - **Outline:** `####` independent · `-` dependent · `+` phrase · `*` Observer · `>` Writer.
 - **`+` phrases:** every Spanish word not inside any finite-clause `selectedSpan`. Emitted
@@ -80,10 +89,12 @@ H3 reference is enough for that; look up the full verses elsewhere.
 
 **Typography:**
 - **Scripture** → markdown italics `*…*` only — H3 claim, outline spans, antecedents, and
-  short tokens inside `*` notes (e.g. `* *para que* (ἵνα) dice el propósito de *dejé*…`).
+  short tokens inside `*` notes (e.g. `* *para que* (ἵνα)[^hina] introduce el propósito de *dejé*.`).
   Greek confirmation stays in parentheses, roman.
-- **`*` grammar lines** stay roman for the explanation prose. Pedagogical examples that are
-  **not** quoting the passage may use «…». Never quote Scripture with `"…"` or «…».
+- **`*` grammar lines** stay roman for the explanation prose. Recurring connector / participle /
+  infinitive notes are **one short sentence + footnote** to Apéndices A–C. Do **not** emit the
+  generic asyndeton paragraph when a clause begins without a connector. Preserve fuller body
+  notes only when the passage is unusual (e.g. coordinate inheritance under an open particle).
 - **`>` Writer lines** stay roman.
 
 ---
@@ -165,6 +176,21 @@ inside unplaced 1:1–2 material, incorrectly sitting as root rather than as a Q
 Do **not** flag bare demonstratives the same way: openings like Ταῦτα λάλει (2:15, "Estas
 cosas habla") or Τούτου χάριν (1:5) are ordinary deictic roots, not the 1:2:6 pattern. A
 simple relative-pronoun + unplaced-neighbor flag is enough.
+
+**H3 reference pins (2026-07-24):** pin only the root verse + dependent finites + parked
+clauses that fall **before the next root** in book order. Phrase orphans (`+`) stay in
+the outline but do not widen the ref. Dependents wrongly attached to an early root but
+falling after a later root (e.g. 4:18 → parent 2:2, dragging 5:6) are peeled off that
+unit, flagged, and re-emitted at their own document order — that was the real
+`2:2–5:6` bug.
+
+**Provisional independents:** mood-reviewed finites with no Q1–Q3 yet are emitted as
+provisional H3/H4 roots (with a warning) so missing independents still break the book.
+
+**Demoted “roots”:** if a relative / ἵνα / ὅπως / εἰ / ὅτι / γάρ / ὡς… particle sits
+before the finite in the Greek range, or the finite mark is a participle, demote to `-`
+under the surrounding unit (warning). H3/H4 claim text starts at the finite verb’s Spanish
+word; leading participle/PP scaffolding is emitted as `+`.
 
 ---
 
@@ -278,11 +304,13 @@ emits mechanical evidence so the writer can name developments from observations:
   `{Evidencia de Observador para nombrar desarrollo mayor (H1) y desarrollo continuo (H2) — no es comentario.}`
   then `* Actores dominantes del libro: *Dios* — 5 acciones · …` and
   `* Tono observado: 12 declaraciones · 3 mandatos.`
-- After each H3 unit claim — `* Actúan en esta unidad: *criados* (2) · *Dios* (1)`
+- After each H3 unit claim — `* Actores principales: *criados* (2) · *Dios* (1)`
   counting observed subjects across the unit's root + dependents.
+- End of Generate — Apéndices A (conectores), B (formas verbales), C (estructura) with the
+  markdown footnote definitions cited by body `*` notes.
 
 Evidence lines are Observer `*` slides — counts and Scripture words only, never
-interpretation. Skeleton suggestions: `docs/observer/h2-movements-spec.md`.
+interpretation. H3 flow (user-led H2 starts): `docs/observer/h3-flow-spec.md`.
 
 ## Not part of this pass
 

@@ -232,6 +232,18 @@ export function detectClauseSignal(
     return { kind: "uncertain", reason };
   }
 
+  const buried = findSubordinatorPastLeadingWindow(clause.beginningTokens);
+  if (buried) {
+    return {
+      kind: "uncertain",
+      reason:
+        `Nothing at the very front of this clause, but “${buried.token.greek}” (${buried.token.lemma}) — ` +
+        `${buried.role} — sits several words in, past where Greek puts a clause's opening marker. That normally means ` +
+        `the span starts too early and is carrying words that belong to the clause before it. Tighten the span first: ` +
+        `until the front of the clause is right, “independent” isn't a safe read of it.`
+    };
+  }
+
   return {
     kind: "none",
     reason:
@@ -250,7 +262,33 @@ export function detectClauseSignal(
  */
 export function detectLeadingCoordinator(beginningTokens: ClauseBeginningToken[]): string | null {
   const token = findLeadingToken(beginningTokens, candidate => PLAIN_COORDINATORS.has(stripAccentless(candidate.lemma)));
-  return token ? stripAccentless(token.lemma) : null;
+  if (!token) return null;
+  if (joinsAgreeingSubstantives(beginningTokens, token)) return null;
+  return stripAccentless(token.lemma);
+}
+
+/**
+ * καί/ἤ sitting between two substantives that agree with each other is joining
+ * WORDS, not clauses — 1 Peter 4:18's ὁ ἀσεβὴς καὶ ἁμαρτωλός, both NSM. The
+ * leading window exists to tolerate a stray word or two leaking in from the
+ * previous clause, which also means it reaches far enough to catch a coordinator
+ * that belongs to a compound subject. Reading that as a clause connector makes
+ * the clause inherit a dependency it never claimed, silently and with no flag.
+ * A coordinator at position 0 is never word-level, so it is exempt.
+ */
+function joinsAgreeingSubstantives(
+  tokens: ClauseBeginningToken[],
+  coordinator: ClauseBeginningToken
+): boolean {
+  const index = tokens.indexOf(coordinator);
+  if (index <= 0) return false;
+  const before = tokens[index - 1];
+  const after = tokens[index + 1];
+  if (!before || !after) return false;
+  const isSubstantive = (token: ClauseBeginningToken): boolean =>
+    token.morph.startsWith("N") || token.morph.startsWith("A");
+  if (!isSubstantive(before) || !isSubstantive(after)) return false;
+  return agreementKey(before.morph) === agreementKey(after.morph);
 }
 
 /**
@@ -613,6 +651,32 @@ export function findLeadingMarkerToken(beginningTokens: ClauseBeginningToken[]):
   if (coordToken) return { kind: "coordinator", token: coordToken, lemma: stripAccentless(coordToken.lemma) };
 
   return { kind: "none" };
+}
+
+/**
+ * A subordinator sitting PAST the leading window — the signature of a clause
+ * span that starts too early (usually at the verse boundary), leaving the real
+ * opening (ἐάν, ὡς, ὅτι…) buried behind words that belong to what came before.
+ * Kept apart from findLeadingMarkerToken because it is never grounds for a
+ * proposal: what's in question is the span itself, so the fix is to tighten the
+ * span, not to read "no marker at the front" as "independent." A plain
+ * coordinator in the window doesn't disqualify the scan — καὶ … ἐάν is exactly
+ * the shape this catches.
+ */
+export function findSubordinatorPastLeadingWindow(
+  beginningTokens: ClauseBeginningToken[]
+): { token: ClauseBeginningToken; role: string } | null {
+  const leading = findLeadingMarkerToken(beginningTokens);
+  if (leading.kind !== "none" && leading.kind !== "coordinator") return null;
+
+  for (const token of beginningTokens.slice(LEADING_WINDOW)) {
+    if (token.morph.startsWith(RELATIVE_PRONOUN_PREFIX)) return { token, role: "a relative pronoun" };
+    const lemma = stripAccentless(token.lemma);
+    const frameType = FRAME_PARTICLES[lemma];
+    if (frameType) return { token, role: `a ${frameType} particle` };
+    if (AMBIGUOUS_PARTICLES[lemma]) return { token, role: "a content-or-reason particle" };
+  }
+  return null;
 }
 
 /**

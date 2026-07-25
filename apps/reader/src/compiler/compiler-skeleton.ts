@@ -7,15 +7,19 @@
 // Per the confirmed spec: YAML frontmatter is separate metadata (form on the
 // right). H1/H2 are context only (not the outline). Scripture outline:
 //   #### independent (root) clauses
-//   -  dependent clauses
-//   +  phrases (every other scriptural word)
-//   *  Observer mechanical inserts only
+//   -  dependent clauses — Scripture only (HARD)
+//   +  phrases — Scripture only (HARD)
+//   *  Observer mechanical inserts only (actors, grammar, tono, Def/XRef…)
 //   >  Writer entries (Reader notes, human commentary)
 //   Def/XRef pins also use `*` (applied after Generate)
 // Indentation (left→right) shows structural depth. Blank line = new slide.
 // H3 = unit claim (reference — independent clause). No large reading-block
 // verse quotes after H3 — the reference is enough for that. Outline #### /
 // - / + still carry LBF span text.
+//
+// HARD RULE: `-` and `+` never carry non-Scripture. Evidence lines such as
+// `Actores principales: …` / `Actores dominantes…` / `Tono observado: …`
+// always start with `*`.
 
 import {
   getReaderBookInfo,
@@ -39,7 +43,9 @@ import {
 import {
   detectClauseSignal,
   detectLeadingCoordinator,
+  detectRelativeOfConnection,
   findLeadingMarkerToken,
+  FRAME_PARTICLES,
   type ClauseSignalInput,
   type FrameType,
   type LeadingMarker
@@ -53,6 +59,19 @@ import {
   type ParkedClause,
   type SkeletonNode
 } from "../observer/clause-tree";
+
+function alignmentTokenNumber(id: string): number {
+  const parts = id.split(":");
+  return Number(parts[2]) || 0;
+}
+
+function collectSkeletonIds(node: SkeletonNode): string[] {
+  return [node.finiteVerbId, ...node.children.flatMap(collectSkeletonIds)];
+}
+
+function isParticipleGreekMorph(morph: string | undefined): boolean {
+  return Boolean(morph && morph.startsWith("V-") && morph.length > 5 && morph[5] === "P");
+}
 import { getWorkshopBookId } from "../observer/workshop-book";
 import { createDefaultManualMeta, formatYamlFrontmatter, type ManualMeta } from "./compiler-meta";
 import { readReaderNotes, readerNoteCommentLines, verseKeysFromNoteTarget } from "./compiler-gathering";
@@ -116,12 +135,46 @@ function starSlides(indent: string, explanations: string[]): string[] {
   const lines: string[] = [];
   let previous = "";
   for (const explanation of explanations) {
-    const normalized = explanation.trim();
+    // Strip a mistaken leading + / - — those markers are Scripture-only.
+    const normalized = explanation.trim().replace(/^[-+]\s+/, "");
     if (!normalized || normalized === previous) continue;
     previous = normalized;
     lines.push(...slide(`${indent}* ${normalized}`));
   }
   return lines;
+}
+
+/**
+ * HARD marker discipline:
+ * - `-` / `+` = Scripture only (body must open with italics `*…*`)
+ * - Evidence / meta (Actores…, Tono…) must start with `*`
+ */
+function markerDisciplineWarnings(markdown: string): string[] {
+  const out: string[] = [];
+  const lines = markdown.split("\n");
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+
+    if (/Actores principales|Actores dominantes|Tono observado/i.test(trimmed) && !/^\*/.test(trimmed)) {
+      out.push(
+        `Marker discipline L${i + 1}: Actores/Tono must start with * (never + or -) — got: ${trimmed.slice(0, 100)}`
+      );
+    }
+
+    const scriptureMarker = trimmed.match(/^([-+])\s+(.*)$/);
+    if (scriptureMarker) {
+      const body = scriptureMarker[2];
+      // Scripture outline lines wrap the span in *…*.
+      if (body && !body.startsWith("*")) {
+        out.push(
+          `Marker discipline L${i + 1}: '${scriptureMarker[1]}' is reserved for Scripture only — got: ${trimmed.slice(0, 100)}`
+        );
+      }
+    }
+  }
+  return out;
 }
 
 /** Each plain comment on its own slide — keeps presentation slides short. */
@@ -152,59 +205,73 @@ function spanishRelativeFromText(text: string): string | null {
   return match ? match[1] : null;
 }
 
-// Grammar notes are for Spanish-speaking readers/writers. Fully expound in
-// plain 5th-grade Spanish: say what the word is, what it does in the sentence,
-// and what it is not. Never theology or "what this means for us."
+// Grammar notes: one short observational sentence + markdown footnote to the
+// appendices. Expand in the body only when the passage does something unusual
+// (inheritance under an open particle, nominative participle without a host, etc.).
 // Every "{word}" is the Spanish alignment for that Greek token (via BLE), never
 // the Greek surface — except coordinate-inheritance's shared particle, which
 // names a DIFFERENT clause's marker and must stay Greek to identify it.
-function relationalConnectorLine(spanish: string, lemma: string, greek?: string | null): string {
-  const word = labeledWord(spanish, greek);
-  switch (lemma) {
-    case "καί":
-      return (
-        `${word} es una palabra de enlace. Une esta frase a la frase de antes, ` +
-        `como cuando en español decimos «y». Solo suma: añade otra idea a la misma línea. ` +
-        `No da una razón, no pone un «pero», y no cambia el sentido de lo que ya se dijo.`
-      );
-    case "ἀλλά":
-      return (
-        `${word} es una palabra de contraste. Marca un giro: lo que sigue no sigue ` +
-        `en la misma dirección que lo anterior. Es como decir «pero» o «sino»: ` +
-        `presta atención, porque la idea nueva se aparta de la idea de antes.`
-      );
-    case "γάρ":
-    case "διότι":
-      return (
-        `${word} da la razón de lo que se acaba de decir. Después de esta palabra ` +
-        `viene el «por qué». No está empezando un tema nuevo: está explicando ` +
-        `el fundamento de la frase anterior.`
-      );
-    case "οὖν":
-      return (
-        `${word} saca una conclusión de lo que se dijo antes. Es como decir ` +
-        `«entonces» o «por eso»: lo siguiente nace de lo anterior. ` +
-        `No es una razón nueva; es el siguiente paso lógico.`
-      );
-    case "δέ":
-      return (
-        `${word} sigue la idea anterior y la une a esta frase. A veces solo ` +
-        `avanza la historia («y…»), y a veces marca un leve contraste («pero…»). ` +
-        `En todo caso, no abre un tema suelto: esta frase sigue conectada a la de antes.`
-      );
+function footnoteKeyForLemma(lemma: string): string {
+  const key = lemma
+    .normalize("NFD")
+    .replace(/\p{M}/gu, "")
+    .toLowerCase()
+    .replace(/[^α-ωa-z]/gu, "");
+  switch (key) {
+    case "και":
+      return "kai";
+    case "δε":
+      return "de";
+    case "γαρ":
+      return "gar";
+    case "διοτι":
+      return "dioti";
+    case "ουν":
+      return "oun";
+    case "αλλα":
+      return "alla";
+    case "η":
+      return "e";
+    case "ινα":
+      return "hina";
+    case "ει":
+      return "ei";
+    case "οτι":
+      return "hoti";
+    case "ως":
+      return "hos";
+    case "οτε":
+      return "hote";
     default:
-      return (
-        `${word} une esta frase a la anterior. Es una palabra de enlace: ` +
-        `muestra que lo que sigue no va solo, sino junto con lo que ya se dijo.`
-      );
+      return "conn";
   }
 }
 
-const ASYNDETON_LINE =
-  "Esta frase empieza sola, sin una palabra de enlace al frente (como «y», «pero» o «porque»). " +
-  "Eso no significa que no tenga relación con lo anterior; solo que el griego no puso " +
-  "una palabra de unión visible al comenzar. Léela como un nuevo paso que sigue el hilo, " +
-  "aunque no diga «y» ni «entonces».";
+function footnoteKeyForGreek(greek: string | null | undefined, fallback: string): string {
+  const surface = (greek ?? "").trim();
+  if (!surface) return fallback;
+  return footnoteKeyForLemma(surface);
+}
+
+function relationalConnectorLine(spanish: string, lemma: string, greek?: string | null): string {
+  const word = labeledWord(spanish, greek);
+  const fn = footnoteKeyForLemma(lemma);
+  switch (lemma) {
+    case "καί":
+      return `${word}[^${fn}] une esta cláusula con la anterior.`;
+    case "ἀλλά":
+      return `${word}[^${fn}] introduce un contraste.`;
+    case "γάρ":
+    case "διότι":
+      return `${word}[^${fn}] introduce la razón.`;
+    case "οὖν":
+      return `${word}[^${fn}] introduce la conclusión.`;
+    case "δέ":
+      return `${word}[^${fn}] continúa el desarrollo.`;
+    default:
+      return `${word}[^${fn}] une esta cláusula con la anterior.`;
+  }
+}
 
 function subordinatingLine(
   frameType: FrameType | undefined,
@@ -217,55 +284,27 @@ function subordinatingLine(
 ): string {
   const word = labeledWord(spanish, greek);
   if (isContent) {
-    return (
-      `${word} abre el contenido de la frase anterior: lo que se dice, se sabe o se piensa. ` +
-      `Imagina que la frase de arriba es «él dijo…» o «sabemos…»; lo que sigue después de ${word} ` +
-      `es precisamente ese mensaje o esa idea. No es una razón ni un «para qué»: ` +
-      `es el qué — el contenido mismo.`
-    );
+    return `${word}[^hoti] introduce el contenido.`;
   }
   if (isDescribes) {
     const noun = describedNounText ? scripture(describedNounText) : "alguien o algo mencionado antes";
-    return (
-      `${word} abre una frase que habla más de ${noun}. ` +
-      `No es el verbo principal de la sección; es una frase colgada de ese nombre ` +
-      `(o de esa persona o cosa). Todo lo que sigue bajo ${word} añade detalle: ` +
-      `quién es, cómo es, o qué se dice de ${noun}.`
-    );
+    return `${word}[^rel]: describe a ${noun}.`;
   }
-  const parent = parentVerbText?.trim()
-    ? scripture(parentVerbText.trim())
-    : "la frase anterior";
+  const parent = parentVerbText?.trim() ? scripture(parentVerbText.trim()) : null;
   switch (frameType) {
     case "purpose":
-      return (
-        `${word} dice el propósito de ${parent} — el «para qué» de esa acción. ` +
-        `La frase de arriba nombra lo que se hace; esta frase, abierta por ${word}, ` +
-        `nombra el fin que se busca. No explica el motivo pasado («porque…»); ` +
-        `señala la meta hacia la que apunta la acción.`
-      );
+      return parent
+        ? `${word}[^hina] introduce el propósito de ${parent}.`
+        : `${word}[^hina] introduce el propósito.`;
     case "reason":
-      return (
-        `${word} da el motivo de la frase anterior — el «por qué». ` +
-        `Lo de arriba afirma algo; lo que sigue después de ${word} explica ` +
-        `por qué se dijo o por qué es así. No es el propósito futuro («para que…»); ` +
-        `es la razón o el fundamento.`
-      );
+      return `${word}[^${footnoteKeyForGreek(greek, "gar")}] introduce la razón.`;
     case "condition":
-      return (
-        `${word} pone una condición: «si esto…». ` +
-        `Lo que sigue no se afirma como un hecho seguro por sí solo; ` +
-        `depende de que se cumpla esa condición. Relaciónala con la frase anterior: ` +
-        `bajo esa condición aplica lo que ya se dijo (o lo que sigue).`
-      );
+      return `${word}[^${footnoteKeyForGreek(greek, "ei")}] introduce una condición.`;
     case "time":
-      return (
-        `${word} marca el momento relacionado con la frase anterior — el «cuándo». ` +
-        `No da la razón ni el propósito; ubica en el tiempo: ` +
-        `cuándo ocurre, ocurrió u ocurrirá lo que se está diciendo.`
-      );
+      return `${word}[^${footnoteKeyForGreek(greek, "hos")}] marca el momento.`;
     default:
-      return ASYNDETON_LINE;
+      // No connector comment when none is visible — silence, not a generic note.
+      return "";
   }
 }
 
@@ -294,10 +333,6 @@ function participleLine(
 ): string {
   const reading = describeParticipleReading(word, nearbyWords);
   const label = labeledWord(reading.spanish, reading.greek);
-  const whatIs =
-    `${label} es un participio: una forma verbal que no actúa como el verbo principal ` +
-    `de la frase. En español a menudo se parece a «-ando / -iendo» o a un adjetivo ` +
-    `hecho de un verbo («amado», «venido»).`;
 
   // Nominatives: only a manual subject-host pick counts (auto CNG is unreliable).
   // Other cases: morph agreement noun when found.
@@ -311,53 +346,19 @@ function participleLine(
     return `${label} - participio`;
   }
 
+  // Unique: nominative without a chosen host — keep the warning in the body.
   if (word.participleCase === "N") {
     return (
-      `${whatIs} Está en la forma que normalmente nombra quién hace o es algo ` +
-      `(caso nominativo). Todavía falta señalar de quién habla: ` +
-      `hasta que se elija ese nombre, no afirmes a quién describe.`
+      `Participio[^part] ${label}: forma nominativa sin anfitrión señalado aún — ` +
+      `no afirmes a quién describe hasta elegirlo en Observador.`
     );
   }
 
   if (clauseHostSpanish?.trim()) {
-    return (
-      `${whatIs} Va junto a la afirmación cuyo verbo es ${scripture(clauseHostSpanish)}. ` +
-      `No reemplaza a ese verbo; añade acción o detalle ligado a esa misma afirmación ` +
-      `(algo que ocurre con ella, alrededor de ella, o en relación con ella).`
-    );
+    return `Participio[^part] ${label}: añade información a ${scripture(clauseHostSpanish)}.`;
   }
 
-  if (word.participleCase === "A") {
-    return (
-      `${whatIs} Está en acusativo (la forma que a menudo marca el objeto: ` +
-      `a quién o qué alcanza la acción). Suele colgarse de ese objeto cercano, ` +
-      `no del sujeto que hace la acción principal.`
-    );
-  }
-  if (word.participleCase === "G" && word.participlePrecededByPreposition) {
-    return (
-      `${whatIs} Está en genitivo y viene después de una preposición. ` +
-      `Léelo como parte de esa frase preposicional: no es el verbo principal; ` +
-      `completa el sentido de la preposición y de lo que la acompaña.`
-    );
-  }
-  if (word.participleCase === "G") {
-    return (
-      `${whatIs} Está en genitivo. Eso puede marcar una relación de «de…» ` +
-      `(de quién / de qué) o, a veces, una escena aparte llamada absoluto. ` +
-      `En todo caso, no es el verbo principal de la afirmación; añade detalle o trasfondo.`
-    );
-  }
-  if (word.participleCase === "D") {
-    return (
-      `${whatIs} Está en dativo (la forma que a menudo marca «a / para / con» alguien o algo). ` +
-      `No es el verbo principal; aporta detalle ligado a esa relación.`
-    );
-  }
-  return (
-    `${whatIs} Aparece en este versículo, pero aún no hay un nombre anfitrión claro ` +
-    `al que colgarlo. No lo trates como verbo principal hasta ver de quién o de qué habla.`
-  );
+  return `Participio[^part] ${label}: añade información al verbo principal.`;
 }
 
 /** Complement infinitive under its host finite — names the chain in plain language. */
@@ -370,36 +371,46 @@ function infinitiveLine(
   const word = labeledWord(spanish, greek);
   if (hostSpanish?.trim()) {
     const host = labeledWord(hostSpanish, hostGreek);
-    return (
-      `${word} es un infinitivo: nombra una acción («hacer», «ser», «ir») sin decir ` +
-      `quién la hace como verbo principal. Aquí completa a ${host}: ` +
-      `ese verbo pide o espera un «qué» — qué se debe hacer, qué se pide, o qué acción sigue. ` +
-      `Lee las dos piezas juntas: ${host} + ${word}.`
-    );
+    return `Infinitivo[^inf] ${word}: completa a ${host}.`;
   }
-  return (
-    `${word} es un infinitivo: nombra una acción sin ser el verbo principal de la frase. ` +
-    `Depende de un verbo cercano (como «debe», «pide», «quiere» o «puede»). ` +
-    `Busca ese verbo y lee ${word} como el «qué» de esa acción.`
-  );
+  return `Infinitivo[^inf] ${word}: completa la acción del verbo principal.`;
 }
 
 function describesRelativeLine(relativeSpanish: string, noun: string): string {
   const word = scripture(relativeSpanish);
-  return (
-    `${word} abre una frase que habla más de ${noun}. ` +
-    `Es una frase de descripción: no es el verbo principal de la sección; ` +
-    `está colgada de ese nombre (o de esa persona o cosa) para añadir detalle sobre ${noun}.`
-  );
+  return `${word}[^rel]: describe a ${noun}.`;
 }
 
 function describesPhraseLine(noun: string): string {
-  return (
-    `Esta frase habla más de ${noun}. ` +
-    `No está afirmando una acción principal nueva; está añadiendo detalle ` +
-    `sobre esa persona o cosa ya mencionada.`
-  );
+  return `Describe a ${noun}.`;
 }
+
+/** Generic explanations live once, at the end — body notes only cite them. */
+const MANUAL_APPENDICES = `## Apéndice A — Conectores griegos
+
+[^kai]: **καί**. Une esta cláusula con la anterior. Solo suma: añade otra idea a la misma línea. No da razón ni contraste.
+[^de]: **δέ**. Continúa el desarrollo. A veces solo avanza («y…»); a veces marca un leve contraste («pero…»). Sigue conectada a lo anterior.
+[^gar]: **γάρ**. Introduce la razón — el «por qué» de lo que se acaba de decir. No es propósito («para que…»).
+[^dioti]: **διότι**. Introduce la razón, como γάρ: el fundamento de la frase anterior.
+[^alla]: **ἀλλά**. Introduce un contraste: lo que sigue se aparta de la dirección anterior («pero» / «sino»).
+[^oun]: **οὖν**. Introduce la conclusión: «entonces» / «por eso» — el siguiente paso lógico.
+[^e]: **ἤ**. Une alternativas («o»).
+[^hina]: **ἵνα**. Introduce el propósito — el «para qué» de la acción gobernante.
+[^ei]: **εἰ**. Introduce una condición: lo que sigue depende de que se cumpla esa condición.
+[^hoti]: **ὅτι**. Puede introducir el contenido (lo que se dice, se sabe o se piensa) o la razón (el «por qué»), según el contexto.
+[^hos]: **ὡς**. Marca el momento o la manera relacionada con la frase anterior — a menudo el «cuándo» o el «como».
+[^hote]: **ὅτε**. Marca el momento — el «cuándo».
+[^conn]: Conector relacional. Une esta cláusula con lo anterior.
+
+## Apéndice B — Formas verbales
+
+[^part]: **Participio**. Forma verbal que no actúa como el verbo principal. Añade acción o detalle ligado a un nombre o a la afirmación cercana (a menudo se parece a «-ando / -iendo» o a un adjetivo hecho de un verbo).
+[^inf]: **Infinitivo**. Nombra una acción sin ser el verbo principal. Completa el «qué» de un verbo cercano (debe, pide, quiere, puede…).
+
+## Apéndice C — Observando la estructura
+
+[^rel]: **Cláusula relativa**. No es el verbo principal de la sección; cuelga de un nombre (o persona o cosa) ya mencionado y añade detalle sobre ese anfitrión.
+`;
 
 interface CompilerClause {
   finiteVerbId: string;
@@ -577,6 +588,211 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   const augmentedObservations = applyCoordinateInheritance(clauseSpanInfos, observationLikeById, coordinateContinuationIds);
   const skeleton = deriveSkeleton(clauseSpanInfos, augmentedObservations);
 
+  /**
+   * H3/H4 claim should start at the finite verb's Spanish word — leading
+   * participles / PP scaffolding (ἐραυνῶντες…, Διὰ Σιλουανοῦ…) emit as `+`.
+   */
+  function splitClaimAtFinite(finiteVerbId: string): { prefixWordIds: string[]; claimText: string } {
+    const full = spanTextFor(finiteVerbId);
+    const assignment = assignments[finiteVerbId];
+    const clause = clauseById.get(finiteVerbId);
+    const finiteWord = finiteVerbWordById.get(finiteVerbId);
+    if (!assignment?.selectedSpan.length || !clause || !finiteWord) {
+      return { prefixWordIds: [], claimText: full };
+    }
+    const ids = assignment.selectedSpan;
+    let cut = ids.indexOf(finiteWord.id);
+    if (cut < 0) {
+      cut = ids.findIndex(id => {
+        const word = wordById.get(id);
+        return Boolean(
+          word &&
+            word.chapter === finiteWord.chapter &&
+            word.verse === finiteWord.verse &&
+            word.index >= finiteWord.index
+        );
+      });
+    }
+    if (cut <= 0) return { prefixWordIds: [], claimText: full };
+
+    const prefixWordIds = ids.slice(0, cut);
+    const claimIds = ids.slice(cut);
+    // Prefer same-verse formatting; fall back to full span text from cut onward
+    // by rebuilding from word texts when the span crosses verses.
+    const claimParts: string[] = [];
+    let runIds: string[] = [];
+    let runKey = "";
+    const flushRun = () => {
+      if (!runIds.length) return;
+      const [chapterText, verseText] = runKey.split(":");
+      const key = `${chapterText}:${verseText}`;
+      const text = formatClauseSpan(runIds, wordsByVerse.get(key) ?? [], verseTextByKey.get(key) ?? "").trim();
+      if (text) claimParts.push(text);
+      runIds = [];
+    };
+    for (const id of claimIds) {
+      const word = wordById.get(id);
+      if (!word) continue;
+      const key = `${word.chapter}:${word.verse}`;
+      if (runKey && key !== runKey) flushRun();
+      runKey = key;
+      runIds.push(id);
+    }
+    flushRun();
+    const claimText = claimParts.join(" ").trim() || full;
+    return { prefixWordIds, claimText };
+  }
+
+  /**
+   * A "root" that opens with a real subordinator/relative in its own leading
+   * window (or whose finite mark is a participle) must not get #### / H3.
+   *
+   * The window is the point. Scanning every token up to the finite verb also
+   * catches words that subordinate nothing: in ὁ ἀντίδικος ὑμῶν διάβολος ὡς
+   * λέων ὠρυόμενος περιπατεῖ (1 P 5:8) the ὡς heads a verbless comparative
+   * phrase and περιπατεῖ is the clause's own main verb, so a full scan demoted
+   * a genuine independent. Using findLeadingMarkerToken also keeps this rule
+   * from contradicting the marker lines the rest of the pipeline renders from
+   * the same clause — the two used to disagree, flagging one clause both as
+   * "subordinated" and as having no leading marker at all.
+   */
+  function rootDemoteReason(clause: CompilerClause): string | null {
+    const finiteWord = finiteVerbWordById.get(clause.finiteVerbId);
+    if (finiteWord && isParticipleGreekMorph(finiteWord.greekMorph)) {
+      return "finiteVerbId points at a participle form — emit as dependent/participle material, not an independent H3";
+    }
+    const marker = findLeadingMarkerToken(clause.beginningTokens);
+    if (marker.kind !== "relative" && marker.kind !== "frame" && marker.kind !== "content") return null;
+    if (alignmentTokenNumber(marker.token.id) >= alignmentTokenNumber(clause.finiteVerbId)) return null;
+    if (marker.kind === "relative") {
+      // Relative of connection (δι' ἣν αἰτίαν and kin): the noun it agrees with
+      // sits inside this same clause, so it reads as a connective rather than a
+      // relative clause hanging on an outside noun. clause-signals treats that
+      // as a genuine judgment call — don't settle it here by demoting.
+      if (detectRelativeOfConnection(clause.beginningTokens)) return null;
+      return `relative “${marker.token.greek}” in the leading window — not an independent clause`;
+    }
+    return `“${marker.token.greek}” (${marker.token.lemma.trim()}) in the leading window — subordinated, not an independent H3`;
+  }
+
+  /**
+   * Roots that rootDemoteReason deliberately lets through but that still need a
+   * human look — silence here would hide a real judgment call behind a clean
+   * skeleton. Two shapes:
+   *
+   *   1. Relative of connection — the relative's own antecedent sits inside the
+   *      clause, so it may be reading as a connector ("por lo cual") rather than
+   *      as a relative clause on an outside noun. clause-signals calls this
+   *      genuinely uncertain; the student decides, not the generator.
+   *   2. A subordinator/relative before the finite but outside the leading
+   *      window. Either it subordinates nothing (comparative ὡς λέων ὠρυόμενος,
+   *      1 P 5:8 — the root is correct), or it does subordinate and the clause
+   *      span starts too early, having swallowed the governing clause (a span
+   *      running καὶ τίς ὁ κακώσων ὑμᾶς ἐὰν … γένησθε, where only ἐὰν … γένησθε
+   *      is the dependent). Code can't tell those apart; the span can, in O.
+   */
+  function rootSuspicionReason(clause: CompilerClause): string | null {
+    const connection = detectRelativeOfConnection(clause.beginningTokens);
+    if (connection) {
+      return (
+        `kept as independent, but it opens with relative “${connection.relative.greek}” whose agreeing noun ` +
+        `“${connection.antecedent.greek}” sits inside this same clause — relative of connection (a connector) or a real ` +
+        `dependent? Decide in O.`
+      );
+    }
+    const finiteTok = alignmentTokenNumber(clause.finiteVerbId);
+    for (const token of clause.beginningTokens) {
+      if (alignmentTokenNumber(token.id) >= finiteTok) break;
+      const lemma = token.lemma.trim();
+      if (!token.morph.startsWith("RR") && !FRAME_PARTICLES[lemma] && lemma !== "ὅτι") continue;
+      return (
+        `kept as independent, but “${token.greek}” (${lemma}) sits before the finite and outside the leading window — ` +
+        `fine if it subordinates nothing here (e.g. comparative ὡς + noun); if it does subordinate this verb, the clause ` +
+        `span starts too early. Check the span in O.`
+      );
+    }
+    return null;
+  }
+
+  // Promote mood-reviewed finites with no Q1–Q3 yet so they break orphan floods
+  // (e.g. one early root swallowing 2:2–5:6 of phrase material).
+  const claimedIds = new Set<string>();
+  for (const root of skeleton.roots) {
+    for (const id of collectSkeletonIds(root)) claimedIds.add(id);
+  }
+  for (const parked of skeleton.parked) {
+    for (const id of collectSkeletonIds(parked)) claimedIds.add(id);
+  }
+
+  // Roots O resolved itself, as opposed to the provisional promotions pushed
+  // below or the cycle-breakers, neither of which is a decision O recorded.
+  const observerRootIds = new Set(
+    skeleton.roots.map(root => root.finiteVerbId).filter(id => !skeleton.cycleBrokenIds.has(id))
+  );
+  const workingRoots: SkeletonNode[] = [...skeleton.roots];
+  for (const info of clauseSpanInfos) {
+    if (claimedIds.has(info.finiteVerbId)) continue;
+    const resolved = resolveClause(info, augmentedObservations[info.finiteVerbId], clauseSpanInfos);
+    if (resolved.relation !== null) continue;
+    warnings.push(
+      `${info.reference} (${info.finiteVerbId}): mood-reviewed finite with no Q1–Q3 yet — emitted as provisional independent (H3/H4). Finish the clause review in O.`
+    );
+    workingRoots.push({
+      finiteVerbId: info.finiteVerbId,
+      reference: info.reference,
+      spanText: info.spanText,
+      relation: "root",
+      children: []
+    });
+    claimedIds.add(info.finiteVerbId);
+  }
+  workingRoots.sort(
+    (a, b) => (clauseById.get(a.finiteVerbId)?.order ?? 0) - (clauseById.get(b.finiteVerbId)?.order ?? 0)
+  );
+
+  // A clause can reach this loop as a "root" three different ways, and saying so
+  // matters more than the demotion itself: the student answered Q1–Q3 as root, or
+  // Q1–Q3 aren't answered yet (promoted provisionally above), or deriveSkeleton
+  // stood it up to break a cycle in the recorded parents. Only the first is a
+  // decision to second-guess; the third is a data problem in O that no amount of
+  // Compiler cleverness can fix.
+  for (const id of skeleton.cycleBrokenIds) {
+    const info = clauseSpanInfoById.get(id);
+    if (!info) continue;
+    const resolved = resolveClause(info, augmentedObservations[id], clauseSpanInfos);
+    warnings.push(
+      `${info.reference} (${id}): O resolves this as ${resolved.relation ?? "dependent"}` +
+        `${resolved.parentClauseId ? ` under ${resolved.parentClauseId}` : ""}, but that parent chain loops back here — ` +
+        `stood up as a top-level clause only to keep the cycle visible, not because it is independent. ` +
+        `Repoint one of the two parents in O.`
+    );
+  }
+
+  // Demote false independents → parked-style orphans under the surrounding root unit.
+  const demotedParked: ParkedClause[] = [];
+  const rootsAfterDemote: SkeletonNode[] = [];
+  for (const root of workingRoots) {
+    const clause = clauseById.get(root.finiteVerbId);
+    const why = clause ? rootDemoteReason(clause) : null;
+    if (why) {
+      const origin = skeleton.cycleBrokenIds.has(root.finiteVerbId)
+        ? "demoted from independent (it was only standing up to break a parent cycle — see the cycle flag above)"
+        : observerRootIds.has(root.finiteVerbId)
+          ? "demoted from independent (O marks it independent — verify there)"
+          : "demoted from independent";
+      warnings.push(`${root.reference} (${root.finiteVerbId}): ${origin} — ${why}`);
+      demotedParked.push({
+        ...root,
+        describedNounSpan: [],
+        relation: root.relation
+      });
+      continue;
+    }
+    const suspicion = clause ? rootSuspicionReason(clause) : null;
+    if (suspicion) warnings.push(`${root.reference} (${root.finiteVerbId}): ${suspicion}`);
+    rootsAfterDemote.push(root);
+  }
+
   const clauseActors = readClauseActors(bookId);
   function actorSpanText(ids: string[]): string {
     if (!ids.length) return "";
@@ -597,7 +813,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   }
 
   /**
-   * `* Actúan aquí: *X* (2) · *Y* (1)` — mechanical evidence line from observed
+   * `* Actores principales: *X* (2) · *Y* (1)` — mechanical evidence line from observed
    * subjects, so the human writer can name the H2 unit from who acts in it.
    */
   function actorEvidenceLine(finiteVerbIds: string[], label: string): string {
@@ -1001,7 +1217,8 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
 
   function rootExplanationLines(clause: CompilerClause): string[] {
     const marker = findLeadingMarkerToken(clause.beginningTokens);
-    if (marker.kind === "none") return [ASYNDETON_LINE];
+    // Asyndeton: no connector comment — silence teaches better than a repeated note.
+    if (marker.kind === "none") return [];
     if (marker.kind === "relative") {
       // A relative pronoun opening what's already resolved as an independent
       // clause is the "relative of connection" idiom (see clause-signals.ts) —
@@ -1015,7 +1232,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     if (marker.kind === "frame") {
       return [relationalConnectorLine(marker.token.ble, marker.token.lemma.trim(), marker.token.greek)];
     }
-    return [ASYNDETON_LINE];
+    return [];
   }
 
   /** One dependent `-` plus its notes — children are emitted by the unit timeline. */
@@ -1109,18 +1326,69 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     flushRun();
   }
 
+  // Roots after provisional promotion + demotion of subordinated "roots".
+  const roots = rootsAfterDemote;
+
+  /**
+   * Dependents attached in O to a root but falling *after the next root* in
+   * book order (e.g. 4:18 → parent 2:2:8, with 5:6 hanging under 4:18) must
+   * not stay inside that early unit — that was the real `2:2–5:6` H3 bug.
+   * Peel them off the tree for unit building and re-inject as parked orphans
+   * at their own document order so they land under the chronologically right unit.
+   */
+  const strayFromDistantParent: ParkedClause[] = [];
+  const strayIds = new Set<string>();
+  function pruneDependentsPastNextRoot(
+    node: SkeletonNode,
+    owningRootId: string,
+    nextRootId: string | undefined,
+    nextOrder: number
+  ): SkeletonNode | null {
+    const order = clauseById.get(node.finiteVerbId)?.order ?? 0;
+    if (order >= nextOrder) {
+      warnings.push(
+        `${node.reference} (${node.finiteVerbId}): attached under ${owningRootId} but falls after next root ${nextRootId ?? "(none)"} — excluded from that H3 unit (was inflating the reference). Check the parent in O.`
+      );
+      strayFromDistantParent.push({ ...node, describedNounSpan: [] });
+      for (const id of collectSkeletonIds(node)) strayIds.add(id);
+      return null;
+    }
+    node.children = node.children
+      .map(child => pruneDependentsPastNextRoot(child, owningRootId, nextRootId, nextOrder))
+      .filter((child): child is SkeletonNode => child !== null);
+    return node;
+  }
+  for (let rootIndex = 0; rootIndex < roots.length; rootIndex += 1) {
+    const root = roots[rootIndex];
+    const next = roots[rootIndex + 1];
+    const nextOrder = next
+      ? clauseById.get(next.finiteVerbId)?.order ?? Number.POSITIVE_INFINITY
+      : Number.POSITIVE_INFINITY;
+    root.children = root.children
+      .map(child =>
+        pruneDependentsPastNextRoot(child, root.finiteVerbId, next?.finiteVerbId, nextOrder)
+      )
+      .filter((child): child is SkeletonNode => child !== null);
+  }
+
   const orphans: Orphan[] = [
     ...phraseGaps,
     ...skeleton.parked.map(node => ({
       kind: "parked" as const,
       order: clauseById.get(node.finiteVerbId)?.order ?? 0,
       node
+    })),
+    ...demotedParked.map(node => ({
+      kind: "parked" as const,
+      order: clauseById.get(node.finiteVerbId)?.order ?? 0,
+      node
+    })),
+    ...strayFromDistantParent.map(node => ({
+      kind: "parked" as const,
+      order: clauseById.get(node.finiteVerbId)?.order ?? 0,
+      node
     }))
   ].sort((a, b) => a.order - b.order);
-
-  // deriveSkeleton already sorts topLevelIds by document order before
-  // building nodes, so skeleton.roots is already in the right walk order.
-  const roots = skeleton.roots;
 
   // Parked = Q1 describes a noun that isn't inside any clause row yet (often
   // verbless material). Compiler still places them chronologically in the
@@ -1269,7 +1537,10 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     const unitEvents: UnitEvent[] = [];
 
     function appendDependentTree(node: SkeletonNode, depth: number): void {
-      unitEvents.push({ kind: "dependent", order: childOrder(node), node, depth });
+      const order = childOrder(node);
+      // Belt-and-suspenders: never let a post-next-root dependent into this unit.
+      if (order >= nextRootOrder || strayIds.has(node.finiteVerbId)) return;
+      unitEvents.push({ kind: "dependent", order, node, depth });
       for (const child of node.children) appendDependentTree(child, depth + 1);
     }
 
@@ -1280,7 +1551,10 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     unitEvents.push({ kind: "root", order: clause.order });
     unitEvents.sort((a, b) => a.order - b.order);
 
-    // H3 reference = grammatical unit (root + dependents + orphans).
+    // H3 reference = root + in-unit dependent finites + parked only.
+    // (1) Phrase orphans do not widen the ref.
+    // (2) Dependents after the next root are stripped above — that was the
+    //     real `2:2–5:6` bug (4:18 → parent 2:2:8, with 5:6 under 4:18).
     type VersePin = { chapter: number; verse: number };
     const unitVerses: VersePin[] = [{ chapter: clause.chapter, verse: clause.verse }];
     function addVersePin(chapter: number, verse: number): void {
@@ -1291,14 +1565,10 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     for (const event of unitEvents) {
       if (event.kind === "dependent") {
         const dep = clauseById.get(event.node.finiteVerbId);
-        if (dep) addVersePin(dep.chapter, dep.verse);
-      } else if (event.kind === "orphan") {
-        if (event.orphan.kind === "phrase") {
-          addVersePin(event.orphan.chapter, event.orphan.verse);
-        } else {
-          const parked = clauseById.get(event.orphan.node.finiteVerbId);
-          if (parked) addVersePin(parked.chapter, parked.verse);
-        }
+        if (dep && dep.order < nextRootOrder) addVersePin(dep.chapter, dep.verse);
+      } else if (event.kind === "orphan" && event.orphan.kind !== "phrase") {
+        const parked = clauseById.get(event.orphan.node.finiteVerbId);
+        if (parked && parked.order < nextRootOrder) addVersePin(parked.chapter, parked.verse);
       }
     }
     unitVerses.sort((a, b) => a.chapter - b.chapter || a.verse - b.verse);
@@ -1308,7 +1578,8 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     const endVerse = unitVerses[unitVerses.length - 1].verse;
     const reference = formatUnitReference(startChapter, startVerse, endChapter, endVerse);
 
-    const rootQuote = scripture(root.spanText || clause.finiteVerbText);
+    const { prefixWordIds, claimText } = splitClaimAtFinite(root.finiteVerbId);
+    const rootQuote = scripture(claimText || root.spanText || clause.finiteVerbText);
     const block: string[] = [];
     // H3 unit claim on its own slide. No large reading-block verse quotes after
     // it — the reference is enough; outline #### / - / + still carry span text.
@@ -1323,14 +1594,45 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
         unitClauseIds.push(event.orphan.node.finiteVerbId);
       }
     }
-    const unitActorEvidence = actorEvidenceLine(unitClauseIds, "Actúan en esta unidad");
+    const unitActorEvidence = actorEvidenceLine(unitClauseIds, "Actores principales");
     if (unitActorEvidence) block.push(...starSlides("", [unitActorEvidence]));
 
     // Walk timeline: #### / - update currentDepth; + uses that indent (Fix A).
     let currentDepth = 0;
-    const governing = root.spanText || clause.finiteVerbText;
+    const governing = claimText || root.spanText || clause.finiteVerbText;
+    let emittedClaimPrefix = false;
     for (const event of unitEvents) {
       if (event.kind === "root") {
+        // Leading participle / PP scaffolding before the finite → `+` slides.
+        if (!emittedClaimPrefix && prefixWordIds.length) {
+          emittedClaimPrefix = true;
+          const prefixParts: string[] = [];
+          let runIds: string[] = [];
+          let runKey = "";
+          const flushPrefixRun = () => {
+            if (!runIds.length) return;
+            const key = runKey;
+            const text = formatClauseSpan(
+              runIds,
+              wordsByVerse.get(key) ?? [],
+              verseTextByKey.get(key) ?? ""
+            ).trim();
+            if (text) prefixParts.push(text);
+            runIds = [];
+          };
+          for (const id of prefixWordIds) {
+            const word = wordById.get(id);
+            if (!word) continue;
+            const key = `${word.chapter}:${word.verse}`;
+            if (runKey && key !== runKey) flushPrefixRun();
+            runKey = key;
+            runIds.push(id);
+          }
+          flushPrefixRun();
+          for (const part of prefixParts) {
+            block.push(...slide(`+ ${scripture(part)}`));
+          }
+        }
         block.push(...slide(`#### ${rootQuote}`));
         const rootActor = actorTripleScripture(root.finiteVerbId);
         if (rootActor) block.push(...starSlides("", [rootActor]));
@@ -1449,15 +1751,18 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     }
   }
 
+  sections.push(MANUAL_APPENDICES.trimEnd());
+
   const yaml = formatYamlFrontmatter(meta ?? createDefaultManualMeta());
   // H1/H2 = context only (same slide). Blank line before first H3 begins the outline.
   const markdown = [yaml, "", "# TODO: contexto", "## TODO: unidad", "", ...sections].join("\n");
+  warnings.push(...markerDisciplineWarnings(markdown));
 
   return {
     markdown,
     clauseCount: clauses.length,
     verblessCount: phraseGaps.length,
-    pendingCount: skeleton.parked.length,
+    pendingCount: skeleton.parked.length + demotedParked.length + strayFromDistantParent.length,
     warnings
   };
 }

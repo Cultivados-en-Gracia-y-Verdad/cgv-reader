@@ -166,6 +166,13 @@ export function applyCoordinateInheritance(
     const previous = sorted[index - 1];
     const previousResolved = resolveClause(previous, augmented[previous.finiteVerbId], clauses);
     if (previousResolved.parked || previousResolved.relation === "root" || !previousResolved.relation) continue;
+    // Copying the previous clause's parent makes this clause its OWN parent whenever
+    // that parent is this clause — 1 Peter 4:18, where the protasis (καὶ εἰ ὁ δίκαιος
+    // μόλις σῴζεται) already points forward at the apodosis. A self-parent is a cycle
+    // no traversal can reach, so the clause would be pulled out of the skeleton and
+    // stood back up as a cycle-broken root, taking the protasis with it. Whatever the
+    // coordinator is doing here, it is not inheritance.
+    if (previousResolved.parentClauseId === clause.finiteVerbId) continue;
 
     if (previousResolved.relation === "describes") {
       augmented[clause.finiteVerbId] = {
@@ -198,7 +205,7 @@ export function applyCoordinateInheritance(
 export function deriveSkeleton(
   clauses: ClauseSpanInfo[],
   observations: Record<string, ClauseObservationLike>
-): { roots: SkeletonNode[]; parked: ParkedClause[] } {
+): { roots: SkeletonNode[]; parked: ParkedClause[]; cycleBrokenIds: Set<string> } {
   const byId = new Map(clauses.map(clause => [clause.finiteVerbId, clause]));
   const resolvedById = new Map<string, ResolvedClause>();
   for (const clause of clauses) {
@@ -250,6 +257,7 @@ export function deriveSkeleton(
       .filter(id => resolvedById.has(id) && !reached.has(id))
   );
 
+  const cycleBrokenIds = new Set<string>();
   const groupVisited = new Set<string>();
   for (const start of unreachedSet) {
     if (groupVisited.has(start)) continue;
@@ -270,7 +278,14 @@ export function deriveSkeleton(
       .map(id => byId.get(id))
       .filter((c): c is ClauseSpanInfo => Boolean(c))
       .sort(byOrder)[0];
-    if (rootOfComponent) topLevelIds.add(rootOfComponent.finiteVerbId);
+    if (rootOfComponent) {
+      topLevelIds.add(rootOfComponent.finiteVerbId);
+      // Standing this clause up as top-level keeps the cycle visible instead of
+      // dropping it, but the clause is NOT a root the student chose — it is a
+      // dependent whose recorded parent chain loops. Report it so callers can
+      // say that rather than presenting it as an independent clause.
+      cycleBrokenIds.add(rootOfComponent.finiteVerbId);
+    }
   }
 
   function buildNode(id: string, ancestors: Set<string>): SkeletonNode {
@@ -313,7 +328,7 @@ export function deriveSkeleton(
       ambiguousOwnerIds: resolvedById.get(clause.finiteVerbId)?.ambiguousOwnerIds
     }));
 
-  return { roots, parked };
+  return { roots, parked, cycleBrokenIds };
 }
 
 /** Outline = root clauses only, book order — what's left if you strip everything indented out of the skeleton. */

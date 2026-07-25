@@ -127,13 +127,14 @@ human-assigned):
 
 - Book-level block before the first H3: dominant actors (top 5, with counts)
   and the mood mix (declaraciones · mandatos).
-- Per-unit line right after each H3: `* Actúan en esta unidad: *X* (2) · *Y* (1)`
+- Per-unit line right after each H3: `* Actores principales: *X* (2) · *Y* (1)`
   from observed subjects on the unit's root + dependent clauses.
 
 Counts and Scripture words only — the Compiler never names the unit itself.
 
 In Observer Skeleton, the same actor (plus mood / recipient) signals drive
-**D. H2 developments (suggested)** — see `h2-movements-spec.md`.
+**H3 flow** — user-led H2 starts; observations support after the fact
+(`h3-flow-spec.md`, `h2-movements-spec.md`).
 
 Locked hierarchy (never “theme”): H3 = independent clause; H2 = continuous
 development of consecutive H3s; H1 = major development of consecutive H2s.

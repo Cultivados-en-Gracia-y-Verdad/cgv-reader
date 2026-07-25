@@ -7,17 +7,21 @@ Writer output should follow, and the norm to teach writers directly.
 
 ## Heading structure
 
-- **H3** — independent clause (objective). Rendered as
-  `### {reference} — *{independent clause}*`.
-  - **Reference = grammatical unit** (root verse + dependents / phrases / parked in the
-    unit). Always includes the independent clause’s own verse. Example: root in 1:5 with
-    outline material through 1:11 → `### Tito 1:5–11 — *Por esta razón te dejé en Creta*`.
-  - Own slide; blank line after.
-  - **No reading block** after H3 (no large verse dumps). The reference is enough for that.
-- **H2** — a continuous development of consecutive H3s (human-named / TODO).
-- **H1** — a major development of consecutive H2s (human-named / TODO).
+Navigation vs structure (see also `CGV Editorial Architecture.md`):
 
-Never “theme.” H1 is built from H2s; H2 is built from H3s.
+- **H2** — development navigation. Stays **top and small**. Groups consecutive H3s.
+  Human-named / TODO. Helps the reader track where the author has moved. Not outline.
+- **H3** — **section context title** (navigation). Short, clear, reader-oriented,
+  non-theological, non-preachy. Helps the reader recognize what this section is about.
+  **Never replaces the H4.** Compiler may seed
+  `### {reference} — *{independent clause}*`, but H3 remains a context title — Writer/Escriba
+  may retitle it for clarity. Own slide; blank line after. **No reading block** after H3.
+  - **Reference = grammatical unit** (root verse + dependents / phrases / parked in the
+    unit). Always includes the independent clause’s own verse.
+- **H4** — exact independent clause (textual structure / outline anchor). Never paraphrased.
+- **H1** — major movement navigation. Groups consecutive H2s. Human-named / TODO.
+
+Never “theme.” H1 is built from H2s; H2 is built from H3s. Outline structure is H4 / `-` / `+`.
 
 **Explicitly rejected:** one heading level per dependency depth. List nesting carries depth.
 
@@ -30,11 +34,15 @@ exactly one of `####` / `-` / `+`.
 
 | Marker | Meaning | Who produces it |
 |---|---|---|
-| `####` | Independent clause (finite root) | Compiler ← Observer |
-| `-` | Dependent clause (finite) | Compiler ← Observer |
-| `+` | Phrase — everything else scriptural (verbless runs, gaps) | Compiler ← Observer |
-| `*` | Mechanical grammar insert | Compiler ← Observer only |
+| `####` | Independent clause (finite root) — Scripture only | Compiler ← Observer |
+| `-` | Dependent clause (finite) — **Scripture only** | Compiler ← Observer |
+| `+` | Phrase — **Scripture only** (verbless runs, gaps) | Compiler ← Observer |
+| `*` | Mechanical insert (actors, tono, grammar, Def/XRef) | Compiler ← Observer only |
 | `>` | Writer entry (commentary, Reader seeds) | Writer / Reader |
+
+**Hard rule:** Never put non-Scripture on `-` or `+`. Evidence lines start with `*`:
+
+`* Actores principales: *Dios* (1) · *ustedes* (1)`
 
 **Indentation** left→right = dependency depth under the governing independent clause.
 
@@ -49,11 +57,11 @@ exactly one of `####` / `-` / `+`.
 - *la cual prometió el Dios que es sin mentira,*
 
 + *la vida eterna*
-  * *la cual* abre una frase que habla más de *la vida eterna*. …
+  * *la cual*[^rel]: describe a *la vida eterna*.
 
 #### *y a su propio tiempo manifestó su palabra…*
 
-* *y* (καί) es una palabra de enlace. …
+* *y* (καί)[^kai] une esta cláusula con la anterior.
 
 > Breve comentario del escritor sobre esta cláusula.
 ```

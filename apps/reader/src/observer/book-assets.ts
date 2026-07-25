@@ -26,14 +26,15 @@ const morphFiles = import.meta.glob("@cgv-data/morphology/MorphGNT/*-morphgnt.tx
 }) as Record<string, () => Promise<string>>;
 
 /**
- * Sync morph/tokens only for LBF Structure books (Tito, 1 Pedro, Judas).
+ * Sync morph/tokens only for LBF Structure books.
  * Eager-loading the whole NT overflows Cloudflare Workers' 25 MiB asset limit.
  */
 const morphFilesEager = import.meta.glob(
   [
     "@cgv-data/morphology/MorphGNT/77-Tit-morphgnt.txt",
     "@cgv-data/morphology/MorphGNT/81-1Pe-morphgnt.txt",
-    "@cgv-data/morphology/MorphGNT/86-Jud-morphgnt.txt"
+    "@cgv-data/morphology/MorphGNT/86-Jud-morphgnt.txt",
+    "@cgv-data/morphology/MorphGNT/83-1Jn-morphgnt.txt"
   ],
   {
     query: "?raw",
@@ -51,7 +52,8 @@ const tokenFilesEager = import.meta.glob(
   [
     "@cgv-data/interlinears/NT/tito.tokens.jsonl",
     "@cgv-data/interlinears/NT/1pedro.tokens.jsonl",
-    "@cgv-data/interlinears/NT/judas.tokens.jsonl"
+    "@cgv-data/interlinears/NT/judas.tokens.jsonl",
+    "@cgv-data/interlinears/NT/1juan.tokens.jsonl"
   ],
   {
     query: "?raw",

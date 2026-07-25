@@ -111,7 +111,7 @@ export function subscribeReaderBook(listener: (bookId: ReaderBookId) => void): (
 }
 
 /** Books with LBF reading text under `data/lbf/nt/{id}.md`. */
-const LBF_TEXT_BOOKS = new Set<ReaderBookId>(["tito", "1pedro", "judas"]);
+const LBF_TEXT_BOOKS = new Set<ReaderBookId>(["tito", "1pedro", "judas", "1juan"]);
 
 /** LBF available as a Reader bible version. */
 export function readerBookHasLbf(bookId: ReaderBookId): boolean {
@@ -120,10 +120,10 @@ export function readerBookHasLbf(bookId: ReaderBookId): boolean {
 
 /**
  * Observer Structure / Compiler need reverse-interlinear alignment, not just
- * reading text. Tito, 1 Pedro, and Judas have `data/lbf/nt/*.alignment.json`.
+ * reading text. Books with `data/lbf/nt/*.alignment.json`.
  */
 export function readerBookHasLbfStructure(bookId: ReaderBookId): boolean {
-  return bookId === "tito" || bookId === "1pedro" || bookId === "judas";
+  return bookId === "tito" || bookId === "1pedro" || bookId === "judas" || bookId === "1juan";
 }
 
 /**
