@@ -139,7 +139,10 @@ const EN: UiStrings = {
   resetDefaults: "Reset defaults",
   summaryClauses: n => `${n} clause${n === 1 ? "" : "s"} in outline`,
   summaryPhrases: n => `${n} phrase${n === 1 ? "" : "s"} (+)`,
-  summaryParked: n => `${n} parked in O (see flags)`,
+  // Parked in O is only one of the three things counted here — demotions and
+  // dependents pulled out of their unit are Compiler's own doing, so naming O
+  // sends you to the wrong place for two thirds of them.
+  summaryParked: n => `${n} outside their unit (see flags)`,
   summaryPins: n => `${n} line pin${n === 1 ? "" : "s"}`,
   summaryFlagsHidden: n => `${n} flag${n === 1 ? "" : "s"} hidden`,
 
@@ -227,7 +230,7 @@ const ES: UiStrings = {
   resetDefaults: "Restablecer valores",
   summaryClauses: n => `${n} cláusula${n === 1 ? "" : "s"} en el esquema`,
   summaryPhrases: n => `${n} frase${n === 1 ? "" : "s"} (+)`,
-  summaryParked: n => `${n} aparcada${n === 1 ? "" : "s"} en O (ver avisos)`,
+  summaryParked: n => `${n} fuera de su unidad (ver avisos)`,
   summaryPins: n => `${n} pin${n === 1 ? "" : "es"} de línea`,
   summaryFlagsHidden: n => `${n} aviso${n === 1 ? "" : "s"} oculto${n === 1 ? "" : "s"}`,
 
