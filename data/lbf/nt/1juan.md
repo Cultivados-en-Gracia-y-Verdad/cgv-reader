@@ -14,11 +14,11 @@ y la vida fue manifestada, y la hemos visto, y damos testimonio, y les anunciamo
 
 ### 1:3
 
-lo que hemos visto y oído les anunciamos también a ustedes, para que ustedes también tengan comunión con nosotros; y nuestra comunión es con el Padre y con su Hijo, Jesús Cristo.
+lo que hemos visto y oído les anunciamos a ustedes, para que ustedes también tengan comunión con nosotros; y nuestra comunión es con el Padre y con su Hijo, Jesús Cristo.
 
 ### 1:4
 
-Y escribimos estas cosas para que nuestro gozo sea completo.
+Y estas cosas les escribimos para que su gozo sea completo.
 
 ### 1:5
 
@@ -30,7 +30,7 @@ Si decimos que tenemos comunión con él y andamos en las tinieblas, mentimos y 
 
 ### 1:7
 
-Pero si andamos en la luz, como él está en la luz, tenemos comunión unos con otros, y la sangre de Jesús, su Hijo, nos limpia de todo pecado.
+Pero si andamos en la luz, como él está en la luz, tenemos comunión unos con otros, y la sangre de Jesús Cristo, su Hijo, nos limpia de todo pecado.
 
 ### 1:8
 
@@ -96,11 +96,11 @@ Les escribo a ustedes, hijitos, porque sus pecados les han sido perdonados por c
 
 ### 2:13
 
-Les escribo a ustedes, padres, porque han conocido al que es desde el principio. Les escribo a ustedes, jóvenes, porque han vencido al maligno.
+Les escribo a ustedes, padres, porque han conocido al que es desde el principio. Les escribo a ustedes, jóvenes, porque han vencido al maligno. Les escribo a ustedes, niñitos, porque han conocido al Padre.
 
 ### 2:14
 
-Les he escrito a ustedes, niñitos, porque han conocido al Padre. Les he escrito a ustedes, padres, porque han conocido al que es desde el principio. Les he escrito a ustedes, jóvenes, porque son fuertes, y la palabra de Dios permanece en ustedes, y han vencido al maligno.
+Les he escrito a ustedes, padres, porque han conocido al que es desde el principio. Les he escrito a ustedes, jóvenes, porque son fuertes, y la palabra de Dios permanece en ustedes, y han vencido al maligno.
 
 ### 2:15
 
@@ -234,7 +234,7 @@ Pero el que tiene los bienes de este mundo y ve a su hermano en necesidad, y le 
 
 ### 3:18
 
-Hijitos, no amemos de palabra ni de lengua, sino con hechos y en verdad.
+Hijitos míos, no amemos de palabra ni de lengua, sino con hechos y verdad.
 
 ### 3:19
 
@@ -324,7 +324,7 @@ El que confiese que Jesús es el Hijo de Dios, Dios permanece en él, y él en D
 
 ### 4:16
 
-Y nosotros hemos conocido y creído el amor que Dios tiene en nosotros. Dios es amor; y el que permanece en el amor permanece en Dios, y Dios permanece en él.
+Y nosotros hemos conocido y creído el amor que Dios tiene en nosotros. Dios es amor; y el que permanece en el amor permanece en Dios, y Dios en él.
 
 ### 4:17
 
@@ -398,7 +398,7 @@ El que tiene al Hijo tiene la vida; el que no tiene al Hijo de Dios no tiene la 
 
 ### 5:13
 
-Estas cosas les he escrito para que sepan que tienen vida eterna, ustedes que creen en el nombre del Hijo de Dios.
+Estas cosas les he escrito a ustedes que creen en el nombre del Hijo de Dios, para que sepan que tienen vida eterna, y para que sigan creyendo en el nombre del Hijo de Dios.
 
 ### 5:14
 
