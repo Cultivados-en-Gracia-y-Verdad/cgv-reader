@@ -1,5 +1,5 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { getReaderBookInfo, workshopProgressKeys, type ReaderBookId } from "@cgv/core";
+import { getReaderBookInfo, readerBookHasOshb, workshopProgressKeys, type ReaderBookId } from "@cgv/core";
 import {
   describeMorph,
   getVerseInterlinear,
@@ -1047,10 +1047,19 @@ function OPrototypeLoaded({
     setDraftRecipientPicks([]);
   }, []);
 
+  // Hebrew/Aramaic morph tags (HVqp3ms…) are harder to scan than Greek V-AAI-3S.
+  // In Brick 1, signal ground-truth finites so the student knows what to confirm.
+  const signalOshbFiniteCandidates = readerBookHasOshb(bookId);
+
   const getTokenMarkClassName = useCallback(
     (token: GreekToken) => {
       if (participation === "finite") {
-        return finiteMarkedIds.has(token.id) ? "greek-token--finite-marked" : "";
+        if (finiteMarkedIds.has(token.id)) return "greek-token--finite-marked";
+        if (signalOshbFiniteCandidates && groundTruth.finiteIds.has(token.id)) {
+          return "greek-token--finite-candidate";
+        }
+        if (signalOshbFiniteCandidates) return "greek-token--oshb-non-candidate";
+        return "";
       }
 
       if (participation === "nominal") {
@@ -1065,19 +1074,44 @@ function OPrototypeLoaded({
         ].filter(Boolean).join(" ");
       }
 
+      if (participation === "mood-commands") {
+        if (commandMarkedIds.has(token.id)) return "greek-token--command-marked";
+        const moodEligible = finiteMarkedIds.has(token.id) || nominalHeadIds.has(token.id);
+        if (!moodEligible) {
+          return signalOshbFiniteCandidates ? "greek-token--oshb-non-candidate" : "";
+        }
+        // OSHB: morph tags don't read as "imperative" at a glance — signal them.
+        if (signalOshbFiniteCandidates) {
+          return groundTruth.byMood.imperative.has(token.id)
+            ? "greek-token--command-candidate"
+            : "greek-token--oshb-non-candidate";
+        }
+        return "greek-token--finite-candidate";
+      }
+
       if (participation === "mood-statements") {
-        if (!finiteMarkedIds.has(token.id)) return "";
+        if (!finiteMarkedIds.has(token.id) && !nominalHeadIds.has(token.id)) {
+          return signalOshbFiniteCandidates ? "greek-token--oshb-non-candidate" : "";
+        }
         if (statementLens === "Statements only") {
-          return statementMarkedIds.has(token.id) ? "greek-token--statement-marked" : "";
+          if (statementMarkedIds.has(token.id)) return "greek-token--statement-marked";
+          if (signalOshbFiniteCandidates && groundTruth.byMood.indicative.has(token.id)) {
+            return "greek-token--statement-candidate";
+          }
+          return signalOshbFiniteCandidates ? "greek-token--oshb-non-candidate" : "";
         }
         if (statementLens === "Commands only") {
           return commandMarkedIds.has(token.id) ? "greek-token--command-marked" : "";
         }
-        return [
-          "greek-token--finite-candidate",
-          commandMarkedIds.has(token.id) ? "greek-token--command-marked" : "",
-          statementMarkedIds.has(token.id) ? "greek-token--statement-marked" : ""
-        ].filter(Boolean).join(" ");
+        // All finite verbs
+        if (commandMarkedIds.has(token.id)) return "greek-token--command-marked";
+        if (statementMarkedIds.has(token.id)) return "greek-token--statement-marked";
+        if (signalOshbFiniteCandidates) {
+          return groundTruth.byMood.indicative.has(token.id)
+            ? "greek-token--statement-candidate"
+            : "greek-token--oshb-non-candidate";
+        }
+        return "greek-token--finite-candidate";
       }
 
       if (participation === "mood-subjunctive") {
@@ -1114,10 +1148,15 @@ function OPrototypeLoaded({
       commandMarkedIds,
       draftGroupTokenIds,
       finiteMarkedIds,
+      groundTruth.byMood.imperative,
+      groundTruth.byMood.indicative,
+      groundTruth.finiteIds,
       groupedTokenIds,
+      nominalHeadIds,
       optativeMarkedIds,
       participation,
       participleMarkedIds,
+      signalOshbFiniteCandidates,
       statementLens,
       statementMarkedIds,
       subjunctiveMarkedIds
@@ -1179,6 +1218,7 @@ function OPrototypeLoaded({
               className={`participation-option${
                 participation === "mood-commands" ? " participation-option--active" : ""
               }`}
+              disabled={!finiteMarkedIds.size}
               onClick={() => setParticipation("mood-commands")}
               aria-pressed={participation === "mood-commands"}
             >

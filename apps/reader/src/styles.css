@@ -898,15 +898,32 @@ textarea {
   padding-inline: 0.2rem;
 }
 
+/* OSHB Brick 1: fade words that are not finite-verb candidates. */
+.greek-token--oshb-non-candidate {
+  opacity: 0.42;
+}
+
 .greek-token--command-marked {
   border-color: #8b6fa8;
   background: #ded0eb;
   padding-inline: 0.2rem;
 }
 
+.greek-token--command-candidate {
+  border-color: rgba(139, 111, 168, 0.4);
+  background: rgba(222, 208, 235, 0.45);
+  padding-inline: 0.2rem;
+}
+
 .greek-token--statement-marked {
   border-color: #6f8f86;
   background: #d5e8df;
+  padding-inline: 0.2rem;
+}
+
+.greek-token--statement-candidate {
+  border-color: rgba(111, 143, 134, 0.4);
+  background: rgba(213, 232, 223, 0.45);
   padding-inline: 0.2rem;
 }
 
@@ -6472,6 +6489,8 @@ html[data-theme="dark"] .greek-token--participle-marked {
 
 html[data-theme="dark"] :is(
   .greek-token--finite-candidate,
+  .greek-token--command-candidate,
+  .greek-token--statement-candidate,
   .greek-token--dependent-candidate,
   .clause-greek-token--saved,
   .clause-greek-token--reviewing
