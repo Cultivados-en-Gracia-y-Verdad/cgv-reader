@@ -66,14 +66,16 @@ H3 reference is enough for that; look up the full verses elsewhere.
 
 **Slide / blank-line rules:**
 - **Blank line = new slide.** No exceptions.
-- **H3 unit claim = its own slide** — `### {reference} — *{independent clause}*`, then a
-  blank line. **Reference = grammatical unit** (independent clause’s own verse plus
-  dependents / `+` / parked in that unit) — always includes the root verse.
+- **H3 unit claim = its own slide** — `### {book} {chapter:verse:token} — *{independent
+  clause}*`, then a blank line. **Reference = independent-clause id** (finite-verb token),
+  not a verse bag. Dependents nest under the unit; they do not widen the H3 ref.
 - **No reading-block quotes** after H3 (the large verse dumps). Reference is enough.
 - **Each `####` / `-` / `+` / `*` / `>` line is its own slide.**
 - **Keep slides short.** Clause slide = marker (+ optional antecedent only). Every `*` and
   every `>` gets its own slide.
 - **Grammar labels:** Spanish first (italics), then Greek — `*enseñando* (διδάσκοντες)`.
+  Connector / relative Spanish in `*` notes is the **LBF surface for that Greek token**
+  (e.g. ὃ → *lo que*). No BLE gloss. Unaligned tokens omit Spanish and keep Greek only.
 
 **Structural rules:**
 - **H1 / H2** = navigation (TODO). H2 top and small. Not outline.
@@ -132,8 +134,8 @@ For each finite-verb clause already reviewed in O:
   presentation screen and the note would lose its anchor):
   ```markdown
   + *oro*
-    * *perece* (ἀπολλυμένου) - participio
-    * *probado* (δοκιμαζομένου) - participio
+    * *perece* (ἀπολλυμένου)[^part]
+    * *probado* (δοκιμαζομένου)[^part]
   ```
   Nesting under `+ *{noun}*` carries the hang; the `*` line only labels the form.
   (A generic “participio” gloss may later open on click — not required in the markdown.)
@@ -153,9 +155,9 @@ For each finite-verb clause already reviewed in O:
 
 Walk root clauses in document order. For each:
 
-1. Emit `### {reference} — *{independent clause}*` (H3 slide). **Reference = grammatical
-   unit** (root verse plus dependents / `+` / parked). **Do not** emit a reading-block of
-   verse quotes after H3.
+1. Emit `### {book} {chapter:verse:token} — *{independent clause}*` (H3 slide).
+   **Reference = independent-clause id** (finite-verb token), not a verse bag / range.
+   **Do not** emit a reading-block of verse quotes after H3.
 2. Before the dissected root, emit dependents / `+` / parked items that appear *earlier*
    than the root — document order (bullets may sit above the `####`).
 3. Emit `#### *{independent clause}*` (same claim text as H3).
@@ -167,6 +169,41 @@ Walk root clauses in document order. For each:
 7. Infinitives / participles → each its own Observer `*`.
 8. Verbless material → `+` only (never `-`). Parked finite clauses → `-`, flagged.
 
+**Protasis / condition packaging (D — after `###`, before `####`, + `… ⤵`):**
+
+For a condition whose head is this unit’s independent clause (`whenIfParentClauseId` =
+apodosis root; `frameType: condition`):
+
+```markdown
+### {ref} — *{apodosis claim}*
+- *Si confesamos nuestros pecados…* ⤵
+#### *{apodosis claim}*
+```
+
+- **Place:** after `###`, **before** `####`. Same H3 card / unit. Do **not** put *Si*
+  before the `###`, and do **not** relocate it under the H4.
+- **Marker:** every Scripture line in the protasis package ends with `…`. The **last**
+  line of the package also gets `⤵` (on the last child when *Si* has *que…* under it).
+  Bare *Si…* ⤵ when it has no children. Arrow points into the apodosis H4 below.
+- **Span bleed:** Compiler clips dependent Scripture against whenIf / expressed
+  parents **and** the climbed apodosis (e.g. *como* → *Si* → *tenemos*). Drop
+  shared tokens; cut at apodosis span start only when that start is after this
+  dependent’s first word; then drop words after a clause comma following this
+  finite (orphan *él* between «pecados,» and «es fiel»). Prevents «Si
+  confesamos…, él», «que no tenemos pecado, nos engañamos…», and
+  «como…tenemos comunión…». Gappy spans format by word join, not char-slice.
+- **H4 claim:** full independent-clause span by default. Leading words before the finite
+  stay in `####` unless the prefix contains a marked/morph participle (then peel as `+`).
+- **Ownership:** package belongs to this apodosis root. Never flush it into the **previous**
+  unit’s post-`####` trailer (that was the 1:8 card / divider / 1:9 gap).
+- **Emit:** when walking the unit timeline, conditions with `order` before the root finite
+  print after H3 and before H4 (existing pre-root slot) and receive `… ⤵` on the package
+  close. Dependents that follow the finite still nest under H4.
+- **Upstream:** wrong `whenIfParentClauseId` packages wrong — fix Observer first.
+
+Failure mode this prevents: *Si confesamos…* under `1:8:13`’s card, divider, then
+`1:9:7` *él es fiel*.
+
 **Before generating, verify the root clause itself is actually correctly classified —
 Compiler should not silently trust a clause tagged root without basis.** Concretely: if a
 clause tagged root sits immediately adjacent to still-unplaced verbless material, and that
@@ -177,7 +214,10 @@ Do **not** flag bare demonstratives the same way: openings like Ταῦτα λά
 cosas habla") or Τούτου χάριν (1:5) are ordinary deictic roots, not the 1:2:6 pattern. A
 simple relative-pronoun + unplaced-neighbor flag is enough.
 
-**H3 reference pins (2026-07-24):** pin only the root verse + dependent finites + parked
+**H3 reference (Version A):** H3 = `### {book} {finiteVerbId}` only (`1 Juan 1:9:7`).
+Do not widen with dependent verses. Packaging D still nests those dependents under the unit.
+
+**H3 reference pins (legacy, superseded for the H3 title line):** pin only the root verse + dependent finites + parked
 clauses that fall **before the next root** in book order. Phrase orphans (`+`) stay in
 the outline but do not widen the ref. Dependents wrongly attached to an early root but
 falling after a later root (e.g. 4:18 → parent 2:2, dragging 5:6) are peeled off that
@@ -226,9 +266,9 @@ Joined by «{connector}» and still under the same «{shared particle}» as the 
 continues that same relation type; does **not** open a new purpose/reason/etc. on its own.
 
 **Participles:**
-- With noun host (under `+ *{noun}*`): compact only — `*{spanish}* ({greek}) - participio`.
-- Without noun host: define “participio” in plain Spanish, then nominative / clause-host /
-  case-role explanation as needed.
+- With noun host (under `+ *{noun}*`): compact — `*{spanish}* ({greek})[^part]`.
+- Without noun host: `*{spanish}* ({greek})[^part]: …` (nominative / clause-host /
+  case-role explanation as needed). Never `Participio[^part] …` before the label.
 
 **Infinitives (Compiler lists them; O find-step later):**
 - Always define “infinitivo” (names an action without being the main verb).
@@ -302,15 +342,21 @@ emits mechanical evidence so the writer can name developments from observations:
 - Before the first H3 — a book-level evidence block, opened by a
   `{…}` comment line (curly braces = generator comment, never italics):
   `{Evidencia de Observador para nombrar desarrollo mayor (H1) y desarrollo continuo (H2) — no es comentario.}`
-  then `* Actores dominantes del libro: *Dios* — 5 acciones · …` and
-  `* Tono observado: 12 declaraciones · 3 mandatos.`
+  then, when present (any of these; omit empty):
+  - `* Actores dominantes del libro: *Dios* — 5 acciones · …`
+  - `* Tono observado: 12 declaraciones · 3 mandatos.`
+  - `* Trayectoria de propósito de escritura: 1:3 anunciamos → comunión · 2:1 escribo → …`
+    (from Observer writing-purpose detectors on H3-root spans — verse + trajectory text only)
+  - `* Hilo de taller (hipótesis de movimiento — no es título H1/H2): 1:3 Fellowship ↓ … ↓ 5:13 Know`
+    (from student-named book thread; labels only; never paste as H1/H2 titles)
 - After each H3 unit claim — `* Actores principales: *criados* (2) · *Dios* (1)`
   counting observed subjects across the unit's root + dependents.
 - End of Generate — Apéndices A (conectores), B (formas verbales), C (estructura) with the
   markdown footnote definitions cited by body `*` notes.
 
-Evidence lines are Observer `*` slides — counts and Scripture words only, never
-interpretation. H3 flow (user-led H2 starts): `docs/observer/h3-flow-spec.md`.
+Evidence lines are Observer `*` slides — counts, Scripture words, stored trajectories, and
+student workshop labels only; never new interpretation. H3 flow (user-led H2 starts):
+`docs/observer/h3-flow-spec.md`. Book thread: `docs/observer/book-threads-spec.md`.
 
 ## Not part of this pass
 

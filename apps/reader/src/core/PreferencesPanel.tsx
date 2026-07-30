@@ -4,7 +4,7 @@ import {
   READER_BOOKS,
   readBibleVersion,
   readReaderBook,
-  readerBookHasLbf,
+  readerBookHasBibleVersion,
   subscribeBibleVersion,
   subscribeReaderBook,
   writeBibleVersion,
@@ -31,10 +31,16 @@ export default function PreferencesPanel() {
   useEffect(() => subscribeBibleVersion(setBibleVersion), []);
   useEffect(() => subscribeReaderBook(setBookId), []);
 
-  const versionOptions = useMemo(() => {
-    if (readerBookHasLbf(bookId)) return BIBLE_VERSIONS;
-    return BIBLE_VERSIONS.filter(entry => entry.id !== "LBF");
-  }, [bookId]);
+  const versionOptions = useMemo(
+    () => BIBLE_VERSIONS.filter(entry => readerBookHasBibleVersion(bookId, entry.id)),
+    [bookId]
+  );
+
+  const effectiveBibleVersion = readerBookHasBibleVersion(bookId, bibleVersion)
+    ? bibleVersion
+    : ((["LBF", "BLE", "SPNBES", "RV1909", "NBLA"] as BibleVersionId[]).find(id =>
+        readerBookHasBibleVersion(bookId, id)
+      ) ?? "BLE");
 
   useEffect(() => {
     if (!open) return;
@@ -55,9 +61,11 @@ export default function PreferencesPanel() {
   function handleBookChange(next: ReaderBookId) {
     writeReaderBook(next);
     setBookId(next);
-    if (bibleVersion === "LBF" && !readerBookHasLbf(next)) {
-      writeBibleVersion("NBLA");
-      setBibleVersion("NBLA");
+    if (!readerBookHasBibleVersion(next, bibleVersion)) {
+      const preferred: BibleVersionId[] = ["LBF", "BLE", "SPNBES", "RV1909", "NBLA"];
+      const fallback = preferred.find(id => readerBookHasBibleVersion(next, id)) ?? "BLE";
+      writeBibleVersion(fallback);
+      setBibleVersion(fallback);
     }
   }
 
@@ -126,7 +134,7 @@ export default function PreferencesPanel() {
           <label className="prefs-field">
             <span>{t.prefBible}</span>
             <select
-              value={bibleVersion === "LBF" && !readerBookHasLbf(bookId) ? "NBLA" : bibleVersion}
+              value={effectiveBibleVersion}
               onChange={event => handleBibleChange(event.target.value as BibleVersionId)}
             >
               {versionOptions.map(entry => (

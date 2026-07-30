@@ -17,6 +17,11 @@ export type H3FlowState = {
   ignoredSuggestions: string[];
   /** Optional human name keyed by the first H3 id of an H2. */
   labels: Record<string, string>;
+  /**
+   * Student-marked pressure seams: tension/opposition observed after these H3 ids
+   * (before the next H3). Does not create an H2; may support a later user-placed start.
+   */
+  pressureAfter: string[];
 };
 
 export type H3FlowMovement = {
@@ -34,7 +39,8 @@ export type H3FlowSupport = {
 export const EMPTY_H3_FLOW_STATE: H3FlowState = {
   breaksAfter: [],
   ignoredSuggestions: [],
-  labels: {}
+  labels: {},
+  pressureAfter: []
 };
 
 export function sanitizeH3FlowState(value: unknown): H3FlowState {
@@ -46,25 +52,31 @@ export function sanitizeH3FlowState(value: unknown): H3FlowState {
   const ignoredSuggestions = Array.isArray(row.ignoredSuggestions)
     ? row.ignoredSuggestions.filter((id): id is string => typeof id === "string")
     : [];
+  const pressureAfter = Array.isArray(row.pressureAfter)
+    ? row.pressureAfter.filter((id): id is string => typeof id === "string")
+    : [];
   const labels: Record<string, string> = {};
   if (row.labels && typeof row.labels === "object" && !Array.isArray(row.labels)) {
     for (const [key, label] of Object.entries(row.labels as Record<string, unknown>)) {
       if (typeof label === "string" && label.trim()) labels[key] = label.trim();
     }
   }
-  return { breaksAfter, ignoredSuggestions, labels };
+  return { breaksAfter, ignoredSuggestions, labels, pressureAfter };
 }
 
-/** Drop breaks / labels that no longer match the current outline. */
+/** Drop breaks / labels / pressure marks that no longer match the current outline. */
 export function reconcileH3FlowState(state: H3FlowState, h3Ids: string[]): H3FlowState {
   const idSet = new Set(h3Ids);
   const breaksAfter = state.breaksAfter.filter(id => idSet.has(id) && h3Ids[h3Ids.length - 1] !== id);
+  const pressureAfter = (state.pressureAfter ?? []).filter(
+    id => idSet.has(id) && h3Ids[h3Ids.length - 1] !== id
+  );
   const labels: Record<string, string> = {};
   for (const [key, label] of Object.entries(state.labels)) {
     if (idSet.has(key)) labels[key] = label;
   }
   // Drop legacy ignores; they are not part of the user-led model.
-  return { breaksAfter, ignoredSuggestions: [], labels };
+  return { breaksAfter, ignoredSuggestions: [], labels, pressureAfter };
 }
 
 export function partitionH3Ids(h3Ids: string[], breaksAfter: Iterable<string>): string[][] {
@@ -107,12 +119,17 @@ export const buildH3FlowDevelopments = buildH3FlowMovements;
 /**
  * Observations that support a boundary *after* `prev` (before `next`).
  * All measurable signals that apply — assistant evidence, not a prompt to decide.
+ * When `hadPressure` is true, the student had marked tension on this seam.
  */
 export function supportingObservationsBetween(
   prev: H3UnitSignals,
-  next: H3UnitSignals
+  next: H3UnitSignals,
+  hadPressure = false
 ): string[] {
   const out: string[] = [];
+  if (hadPressure) {
+    out.push("You marked pressure here");
+  }
   if (
     prev.dominantActor &&
     next.dominantActor &&
@@ -147,6 +164,7 @@ export function buildH3FlowSupports(
   const h3Ids = units.map(unit => unit.finiteVerbId);
   const reconciled = reconcileH3FlowState(state, h3Ids);
   const breakSet = new Set(reconciled.breaksAfter);
+  const pressureSet = new Set(reconciled.pressureAfter);
   const out: H3FlowSupport[] = [];
   for (let i = 0; i < units.length - 1; i += 1) {
     const prev = units[i]!;
@@ -154,7 +172,7 @@ export function buildH3FlowSupports(
     if (!breakSet.has(prev.finiteVerbId)) continue;
     out.push({
       afterH3Id: prev.finiteVerbId,
-      observations: supportingObservationsBetween(prev, next)
+      observations: supportingObservationsBetween(prev, next, pressureSet.has(prev.finiteVerbId))
     });
   }
   return out;
@@ -175,6 +193,34 @@ export function clearH2Start(state: H3FlowState, afterH3Id: string): H3FlowState
     breaksAfter: state.breaksAfter.filter(id => id !== afterH3Id),
     ignoredSuggestions: []
   };
+}
+
+/** Student marks tension/opposition after this H3 (before the next). */
+export function markPressureAfter(state: H3FlowState, afterH3Id: string): H3FlowState {
+  const pressureAfter = state.pressureAfter.includes(afterH3Id)
+    ? state.pressureAfter
+    : [...state.pressureAfter, afterH3Id];
+  return { ...state, pressureAfter };
+}
+
+/** Clear a student pressure mark. */
+export function clearPressureAfter(state: H3FlowState, afterH3Id: string): H3FlowState {
+  return {
+    ...state,
+    pressureAfter: state.pressureAfter.filter(id => id !== afterH3Id)
+  };
+}
+
+/** Set or clear the optional human name for an H2 (keyed by its first H3 id). */
+export function setH2Label(state: H3FlowState, firstH3Id: string, label: string): H3FlowState {
+  const labels = { ...state.labels };
+  // Keep interior / trailing spaces while typing — only clear when the field is blank.
+  if (!label.trim()) {
+    delete labels[firstH3Id];
+  } else {
+    labels[firstH3Id] = label;
+  }
+  return { ...state, labels };
 }
 
 /** @deprecated Use startH2After */

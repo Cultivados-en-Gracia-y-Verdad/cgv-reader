@@ -3,6 +3,7 @@ import {
   getReaderBookInfo,
   readReaderBook,
   readerBookHasLbfStructure,
+  readerBookHasObserverMark,
   subscribeReaderBook,
   type ReaderBookId
 } from "@cgv/core";
@@ -34,6 +35,7 @@ export default function ObserverShell() {
   const [bookId, setBookId] = useState<ReaderBookId>(() => readReaderBook());
   const bookInfo = getReaderBookInfo(bookId);
   const hasLbfStructure = readerBookHasLbfStructure(bookId);
+  const hasMarkSpine = readerBookHasObserverMark(bookId);
 
   // Keep the module workshop book aligned before children render. Structure
   // helpers still read getWorkshopBookId() in places; a useEffect sync would
@@ -96,8 +98,12 @@ export default function ObserverShell() {
               {t.structureNeedsLbf(bookInfo.displayName)}
             </p>
           )
-        ) : (
+        ) : hasMarkSpine ? (
           <OPrototype key={bookId} bookId={bookId} />
+        ) : (
+          <p className="workshop-lbf-gate" role="status">
+            {t.markNeedsMorphGnt(bookInfo.displayName)}
+          </p>
         )}
       </div>
     </main>

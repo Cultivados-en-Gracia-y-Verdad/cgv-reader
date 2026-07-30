@@ -21,7 +21,7 @@ export const BIBLE_VERSIONS: BibleVersionInfo[] = [
   { id: "BLE", label: "BLE", description: "Biblia Literal en Español (working gloss)" },
   { id: "SPNBES", label: "SPNBES", description: "Biblia en Español Sencillo" },
   { id: "RV1909", label: "RV1909", description: "Reina Valera 1909" },
-  { id: "LBF", label: "LBF", description: "La Biblia Fiel — Titus only (Observer Spanish)" }
+  { id: "LBF", label: "LBF", description: "La Biblia Fiel (where draft text exists)" }
 ];
 
 const VALID = new Set<string>(BIBLE_VERSIONS.map(entry => entry.id));

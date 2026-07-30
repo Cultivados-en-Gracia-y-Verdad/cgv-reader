@@ -22,5 +22,6 @@ export const PROGRESS_KEYS: ProgressKeyInfo[] = [
 ];
 
 export const LANGUAGE_KEY = "the-reader:titus:language";
+/** @deprecated Prefer workshopProgressKeys(bookId).readerNotes — kept for Titus legacy. */
 export const NOTES_KEY = "the-reader:titus:notes";
 // Bible version key lives in bible-version.ts (BIBLE_VERSION_KEY).

@@ -280,7 +280,7 @@ Ustedes son de Dios, hijitos, y los han vencido, porque mayor es el que está en
 
 ### 4:5
 
-Ellos son del mundo; por eso hablan desde el mundo, y el mundo los escucha.
+Ellos son del mundo; por eso hablan del mundo, y el mundo los escucha.
 
 ### 4:6
 

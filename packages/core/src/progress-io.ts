@@ -1,29 +1,32 @@
 import {
   getReaderBookInfo,
   readReaderBook,
+  readerBookIdFromWorkshopSlug,
   workshopProgressKeys,
   workshopStorageSlug,
   type ReaderBookId
 } from "./reader-book";
-import { NOTES_KEY, PROGRESS_KEYS, type ProgressKeyInfo } from "./progress-keys";
-
-const KNOWN_KEYS = new Set(PROGRESS_KEYS.map(entry => entry.key));
+import type { ProgressKeyInfo } from "./progress-keys";
 
 export interface ProgressBundle {
   schema: 1;
-  /** Workshop storage slug (`titus`, `mateo`, …). Legacy exports always used `titus`. */
+  /** Workshop storage slug (`titus`, `1juan`, …). Legacy exports always used `titus`. */
   book: string;
   exportedAt: string;
   data: Record<string, unknown>;
   source?: "cgv-reader" | "cgv-suite";
 }
 
-/** Progress keys for one workshop book (Mark + Structure), plus shared Reader notes. */
+/**
+ * Progress keys for **one** workshop book only (Mark + Structure + Reader notes).
+ * Never merges another book’s keys — books are independent.
+ */
 export function progressKeysForBook(bookId: ReaderBookId): ProgressKeyInfo[] {
   const keys = workshopProgressKeys(bookId);
   const entries: ProgressKeyInfo[] = [
-    { key: NOTES_KEY, label: "Notes" },
+    { key: keys.readerNotes, label: "Notes" },
     { key: keys.finiteMarks, label: "Finite verb marks (Brick 1)" },
+    { key: keys.nominalHeads, label: "Nominal clause heads" },
     { key: keys.commandMarks, label: "Command mood marks" },
     { key: keys.statementMarks, label: "Statement mood marks" },
     { key: keys.subjunctiveMarks, label: "Subjunctive mood marks" },
@@ -36,7 +39,10 @@ export function progressKeysForBook(bookId: ReaderBookId): ProgressKeyInfo[] {
     { key: keys.participleObservations, label: "Participle classifications" },
     { key: keys.participleSubjectHosts, label: "Participle subject hosts" },
     { key: keys.clauseActors, label: "Clause actors (SVO)" },
-    { key: keys.h3Flow, label: "H3 flow developments" }
+    { key: keys.h3Flow, label: "H3 flow developments" },
+    { key: keys.contrasts, label: "Contrast observations" },
+    { key: keys.bookDefinitions, label: "Book definitions" },
+    { key: keys.bookThread, label: "Book thread" }
   ];
   if (keys.clauseAssignmentsLegacy) {
     entries.push({ key: keys.clauseAssignmentsLegacy, label: "Clause spans (legacy)" });
@@ -44,17 +50,10 @@ export function progressKeysForBook(bookId: ReaderBookId): ProgressKeyInfo[] {
   return entries;
 }
 
-function collectKeySet(bookId: ReaderBookId): ProgressKeyInfo[] {
-  const byKey = new Map<string, ProgressKeyInfo>();
-  for (const entry of PROGRESS_KEYS) byKey.set(entry.key, entry);
-  for (const entry of progressKeysForBook(bookId)) byKey.set(entry.key, entry);
-  return Array.from(byKey.values());
-}
-
 export function buildProgressBundle(bookId: ReaderBookId = readReaderBook()): ProgressBundle {
   const data: Record<string, unknown> = {};
 
-  for (const { key } of collectKeySet(bookId)) {
+  for (const { key } of progressKeysForBook(bookId)) {
     const raw = window.localStorage.getItem(key);
     if (raw === null) continue;
     try {
@@ -97,7 +96,10 @@ export function readProgressFile(file: File): Promise<unknown> {
 
 export interface ImportSummary {
   restoredCount: number;
+  /** Keys in the file that are not progress keys for this book’s slug. */
   unrecognizedKeys: string[];
+  /** Keys skipped because they belong to another book (must never restore). */
+  skippedForeignKeys: string[];
 }
 
 export function applyProgressBundle(bundle: unknown): ImportSummary {
@@ -115,36 +117,45 @@ export function applyProgressBundle(bundle: unknown): ImportSummary {
     throw new Error(`Unsupported progress schema: ${String(record.schema)}`);
   }
 
+  const bookId = readerBookIdFromWorkshopSlug(record.book);
+  if (!bookId) {
+    throw new Error(`Unknown progress book slug: ${record.book}`);
+  }
+
+  const allowed = new Set(progressKeysForBook(bookId).map(entry => entry.key));
   const data = record.data as Record<string, unknown>;
   const unrecognizedKeys: string[] = [];
+  const skippedForeignKeys: string[] = [];
   let restoredCount = 0;
 
   for (const [key, value] of Object.entries(data)) {
+    if (!allowed.has(key)) {
+      // Another book’s stores (or unknown keys) must never wipe this browser’s other books.
+      if (looksLikeWorkshopProgressKey(key)) skippedForeignKeys.push(key);
+      else unrecognizedKeys.push(key);
+      continue;
+    }
     window.localStorage.setItem(key, JSON.stringify(value));
     restoredCount += 1;
-    if (!KNOWN_KEYS.has(key)) unrecognizedKeys.push(key);
   }
 
-  return { restoredCount, unrecognizedKeys };
+  return { restoredCount, unrecognizedKeys, skippedForeignKeys };
 }
 
-/** Count how many known progress keys already have data in this browser. */
-export function countExistingProgressKeys(): number {
+function looksLikeWorkshopProgressKey(key: string): boolean {
+  return (
+    key.startsWith("o-prototype:") ||
+    key.startsWith("roots:") ||
+    key.startsWith("the-reader:spanish-clause-builder:") ||
+    /^the-reader:[^:]+:notes$/.test(key)
+  );
+}
+
+/** Count how many progress keys for the **current** book already have data. */
+export function countExistingProgressKeys(bookId: ReaderBookId = readReaderBook()): number {
   let count = 0;
-  const seen = new Set<string>();
-  for (const { key } of PROGRESS_KEYS) {
-    if (seen.has(key)) continue;
-    seen.add(key);
+  for (const { key } of progressKeysForBook(bookId)) {
     if (window.localStorage.getItem(key) !== null) count += 1;
-  }
-  try {
-    for (const { key } of progressKeysForBook(readReaderBook())) {
-      if (seen.has(key)) continue;
-      seen.add(key);
-      if (window.localStorage.getItem(key) !== null) count += 1;
-    }
-  } catch {
-    /* non-browser */
   }
   return count;
 }

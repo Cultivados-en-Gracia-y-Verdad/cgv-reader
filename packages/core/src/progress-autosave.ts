@@ -2,10 +2,10 @@ import {
   applyProgressBundle,
   buildProgressBundle,
   countExistingProgressKeys,
+  progressKeysForBook,
   type ProgressBundle
 } from "./progress-io";
-import { PROGRESS_KEYS } from "./progress-keys";
-import { readReaderBook, workshopStorageSlug } from "./reader-book";
+import { readReaderBook, workshopProgressKeys, workshopStorageSlug } from "./reader-book";
 
 // Keep the IndexedDB name so existing browser autosave backups still open.
 const DB_NAME = "cgv-suite-progress";
@@ -16,8 +16,6 @@ const HANDLE_KEY = "fileHandle";
 const META_KEY = "meta";
 const DEBOUNCE_MS = 1500;
 const STATUS_EVENT = "cgv:progress-autosave";
-
-const PROGRESS_KEY_SET = new Set(PROGRESS_KEYS.map(entry => entry.key));
 
 export type AutosaveMode = "file" | "browser" | "off";
 
@@ -239,7 +237,7 @@ export async function maybeRestoreFromAutosave(): Promise<boolean> {
   return true;
 }
 
-const CLAUSE_ASSIGNMENTS_KEY = "the-reader:spanish-clause-builder:titus:v3";
+const CLAUSE_ASSIGNMENTS_KEY_FALLBACK = "the-reader:spanish-clause-builder:titus:v3";
 
 /**
  * Repair greekConfirmedAt if a buggy reader dropped it from in-memory state
@@ -247,7 +245,9 @@ const CLAUSE_ASSIGNMENTS_KEY = "the-reader:spanish-clause-builder:titus:v3";
  * the IndexedDB autosave snapshot when present.
  */
 export async function recoverGreekConfirmationsFromAutosave(): Promise<number> {
-  const raw = window.localStorage.getItem(CLAUSE_ASSIGNMENTS_KEY);
+  const bookId = readReaderBook();
+  const assignmentsKey = workshopProgressKeys(bookId).clauseAssignments;
+  const raw = window.localStorage.getItem(assignmentsKey);
   if (!raw) return 0;
 
   let current: Record<string, Record<string, unknown>>;
@@ -264,7 +264,9 @@ export async function recoverGreekConfirmationsFromAutosave(): Promise<number> {
   if (alreadyConfirmed > 0) return 0;
 
   const backup = await idbGet<ProgressBundle>(BACKUP_KEY);
-  const backupAssignments = backup?.data?.[CLAUSE_ASSIGNMENTS_KEY];
+  const backupAssignments =
+    backup?.data?.[assignmentsKey] ??
+    (bookId === "tito" ? backup?.data?.[CLAUSE_ASSIGNMENTS_KEY_FALLBACK] : undefined);
   if (!backupAssignments || typeof backupAssignments !== "object") return 0;
 
   let merged = 0;
@@ -279,18 +281,22 @@ export async function recoverGreekConfirmationsFromAutosave(): Promise<number> {
   }
 
   if (merged > 0) {
-    window.localStorage.setItem(CLAUSE_ASSIGNMENTS_KEY, JSON.stringify(current));
+    window.localStorage.setItem(assignmentsKey, JSON.stringify(current));
   }
   return merged;
 }
 
 function isProgressStorageKey(key: string): boolean {
-  if (PROGRESS_KEY_SET.has(key)) return true;
+  try {
+    if (progressKeysForBook(readReaderBook()).some(entry => entry.key === key)) return true;
+  } catch {
+    /* non-browser or book unread */
+  }
   return (
     key.startsWith("o-prototype:") ||
     key.startsWith("roots:") ||
     key.startsWith("the-reader:spanish-clause-builder:") ||
-    key === "the-reader:titus:notes"
+    /^the-reader:[^:]+:notes$/.test(key)
   );
 }
 

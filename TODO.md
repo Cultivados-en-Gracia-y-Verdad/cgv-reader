@@ -19,6 +19,27 @@
    - **Path:** finish 1 Pedro on the current bridge → TR spine in Reader for LBF books → explicit Tito migrate-or-reset → later whole NT once spines exist.  
    - See `docs/observer/lbf-reverse-interlinear.md` (“Why MorphGNT stays”).
 
+5. **Reader: reading-only outline view (Version A)**  
+   Add a **read-only** view in Reader that presents Scripture the same way the Current-vs-A outline tests did — for reading/teaching preview, not for editing Observer or generating manuals.  
+   - **Layout:** H3 = clause id (`1 Juan 1:9:7`); H4 = independent claim; dependents nested under.  
+   - **Packaging D:** condition / lead-in after `###`, before `####`, last line of package closes with `… ⤵`.  
+   - **Source:** same independence + `whenIf` tree Compiler now emits (Version A in `compiler-skeleton.ts` / spec).  
+   - **Not:** Writer commentary, slide rehearsal, or a second Compiler — just navigate/read the clause outline.  
+   - **Tests / sketch:** `~/Downloads/1juan-H2-*-Current-vs-A.md` (1:5–2:2, 2:3–2:11, 2:12–2:17).
+
+6. **Arquitecto: dual MD outputs (locked design)**  
+   Compiler → one Version A MD. Arquitecto → **two** files after H1/H2 naming:  
+   - **Outline view** (`{libro}-outline.md`) — clean H1/H2 + H3/H4 Scripture outline (log / beautiful reading view). **Escriba does not depend on it.**  
+   - **Manual skeleton** — Compiler MD with H1/H2 filled — **Escriba’s** input for `>`.  
+   Skill: `cgv-structure-architect` (Role + Deliverable + Boundaries). Agent: `arquitecto.md`.
+
+7. **1 Juan restart audit (in progress)**  
+   - [x] Fix progress I/O: export/import **only** the active book’s keys (was merging hardcoded Titus `PROGRESS_KEYS` into every book’s export).  
+   - [x] Strip Tito keys from existing 1 Juan progress JSON files.  
+   - [ ] Re-import clean 1 Juan JSON in Reader and verify counts (v3 / observations / marks).  
+   - [ ] Compiler Generate for 1 Juan — Version A H3 clause-ids + D packing smoke-check.  
+   - [ ] Full Observer audit (independence / whenIf parents) before Arquitecto.
+
 ## Done
 
 1. **Compiler: nest `+` phrases under the nearest preceding clause (Fix A)**  

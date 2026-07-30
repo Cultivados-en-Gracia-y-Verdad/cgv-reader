@@ -422,6 +422,102 @@ def main() -> None:
         # 5:16 λέγω — digo
         (5, 16, 29, 34, "digo"),
         (5, 16, 22, 27, "Hay"),
+        # Participles: reverse-link object phrases → LBF verbal head (not BLE)
+        # 2:9 μισῶν — not "a su hermano"
+        (2, 9, 11, 9, "aborrece"),
+        # 2:22 ἀρνούμενος (2nd) — not "al Padre"
+        (2, 22, 20, 19, "niega"),
+        # 3:15 μένουσαν — not "en él"
+        (3, 15, 20, 17, "permaneciendo"),
+        # 4:16 μένων — not "en el amor"
+        (4, 16, 20, 19, "permanece"),
+        # 4:21 ἀγαπῶν — not "a Dios"
+        (4, 21, 10, 9, "ama"),
+        # 5:1 γεγεννημένον — not "de él"
+        (5, 1, 22, 26, "nacido"),
+        # 5:4 νικήσασα — not "al mundo"
+        (5, 4, 17, 18, "vencido"),
+        # 5:5 νικῶν — not "al mundo"
+        (5, 5, 5, 5, "vence"),
+        # 5:6 ἐλθὼν — not "agua"
+        (5, 6, 4, 4, "vino"),
+        # 5:16 ἁμαρτάνοντα — not "un pecado"
+        (5, 16, 7, 6, "pecar"),
+        # 4:5 ἐκ…λαλοῦσιν — LBF «del mundo» (not «desde»); verb on hablan
+        (4, 5, 2, 2, "del"),
+        (4, 5, 4, 3, "mundo"),
+        (4, 5, 5, 1, "son"),
+        (4, 5, 8, 7, "del"),
+        (4, 5, 10, 8, "mundo"),
+        (4, 5, 11, 6, "hablan"),
+        (4, 5, 14, 11, "mundo"),
+        (4, 5, 16, 13, "escucha"),
+        # 4:21 ἔχομεν / ἀγαπῶν / ἀγαπᾷ — was landing on «ama»/«también»
+        # (participle demote buried the mandamiento unit under 4:20)
+        (4, 21, 5, 1, "tenemos"),
+        (4, 21, 4, 5, "mandamiento"),
+        (4, 21, 10, 9, "ama"),
+        (4, 21, 13, 12, "ame"),
+        # 5:1 ἐστιν / γεγέννηται — was on «Jesús» / «de Dios»
+        (5, 1, 6, 6, "es"),
+        # Stamp finite on «ha», not «nacido» — participle γεγεννημένον also
+        # lands on nacido and won the morph stamp → Compiler demoted 5:1:12.
+        (5, 1, 12, 9, "ha"),
+        (5, 1, 3, 3, "cree"),
+        (5, 1, 19, 21, "ama"),
+        # Pass 5 — Compiler H3/H4 peels (skeleton 20)
+        # 2:6 ὀφείλει / περιεπάτησεν — phrase landed on «en él debe» / «andar»
+        (2, 6, 6, 7, "debe"),
+        (2, 6, 9, 11, "anduvo"),
+        (2, 6, 12, 8, "andar"),
+        # 3:24 μένει — phrase «permanece…ese» resolved to word *ese*
+        (3, 24, 9, 6, "permanece"),
+        (3, 24, 19, 19, "permanece"),
+        # 4:18 τετελείωται — was on *perfeccionado*; stamp «ha» like 5:1
+        (4, 18, 24, 25, "ha"),
+        # 5:18 τηρεῖ — was on *Dios* (de Dios); conjugated verb is *guarda*
+        (5, 18, 17, 19, "guarda"),
+        (5, 18, 18, 18, "lo"),
+        # Pass 6 — soft-H4 audit (skeleton 21)
+        # 2:7 ἐστιν — was on *antiguo*
+        (2, 7, 18, 20, "es"),
+        # 2:27 ἐστιν / ἔστιν / μένετε — phrase edges *mentira* / *tal* / end
+        (2, 27, 31, 36, "es"),
+        (2, 27, 34, 40, "es"),
+        (2, 27, 40, 47, "permanezcan"),
+        (2, 27, 38, 46, "enseñó"),
+        # 3:20 γινώσκει — was on *todas*
+        (3, 20, 16, 13, "conoce"),
+        # 3:21 ἔχομεν — was on *delante*
+        (3, 21, 9, 7, "tenemos"),
+        # 3:24 γινώσκομεν — was colliding with 2nd μένει on *permanece*
+        (3, 24, 17, 16, "sabemos"),
+        # 4:16 πεπιστεύκαμεν / ἔχει — matrix + relative object
+        (4, 16, 5, 5, "creído"),
+        (4, 16, 9, 10, "tiene"),
+        # 5:15 2nd οἴδαμεν — was on *pedimos*
+        (5, 15, 10, 12, "sabemos"),
+        (5, 15, 12, 14, "tenemos"),
+        # Pass 7 — skeleton 22 soft remainders
+        # 2:7 λόγος — phrase on «es la palabra»; relative host needs *palabra*
+        (2, 7, 20, 22, "palabra"),
+        # 2:22 ἐστιν / ἀντίχριστος — mentiroso/anticristo edges
+        (2, 22, 2, 1, "es"),
+        (2, 22, 16, 14, "es"),
+        (2, 22, 18, 16, "anticristo"),
+        # 2:27 ἀληθές / ψεῦδος — actors were *alguien* / *tal*
+        (2, 27, 30, 37, "verdadera"),
+        (2, 27, 35, 41, "mentira"),
+        (2, 27, 33, 39, "no"),
+        # 5:5 ἐστιν — stamp conjugated *es*
+        (5, 5, 3, 2, "es"),
+        # 4:16 ἀγάπην — relative host *amor* (not *creído*)
+        (4, 16, 7, 7, "amor"),
+        # 4:16 ἐστίν / μένει — ἐστίν was on «y el que permanece» → demoted «Dios es amor»
+        (4, 16, 17, 14, "es"),
+        (4, 16, 16, 15, "amor"),
+        (4, 16, 27, 23, "permanece"),
+        (4, 16, 33, 29, "él"),
     ]
     hand_overrides_applied = 0
     for chapter, verse, morph_index, word_index, surface in hand_overrides:

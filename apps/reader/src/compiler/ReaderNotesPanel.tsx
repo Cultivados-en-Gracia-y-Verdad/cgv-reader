@@ -1,9 +1,10 @@
+import { readReaderBook } from "@cgv/core";
 import { readReaderNotes } from "./compiler-gathering";
 
 // Live R→C bridge: shows Reader margin notes. Generate folds them in as
 // Writer entries (`> …`) under the matching verse — never as Observer `*`.
 export default function ReaderNotesPanel() {
-  const notes = readReaderNotes().filter(note => note.text.trim());
+  const notes = readReaderNotes(readReaderBook()).filter(note => note.text.trim());
 
   return (
     <section className="compiler-tool" aria-label="Reader notes">
@@ -12,6 +13,7 @@ export default function ReaderNotesPanel() {
         Notes written in Reader. On Generate they become Writer entries (
         <code>&gt; …</code>) under the verse — separate from Observer grammar <code>*</code>{" "}
         inserts and from Scripture markers (<code>####</code> / <code>-</code> / <code>+</code>).
+        Only notes for the current workshop book are included.
       </p>
       {notes.length ? (
         <ul className="compiler-notes-list">
@@ -23,7 +25,7 @@ export default function ReaderNotesPanel() {
           ))}
         </ul>
       ) : (
-        <p className="compiler-tool-note">No Reader notes in this browser yet.</p>
+        <p className="compiler-tool-note">No Reader notes for this book yet.</p>
       )}
     </section>
   );

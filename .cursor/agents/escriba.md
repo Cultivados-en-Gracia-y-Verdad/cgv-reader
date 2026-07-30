@@ -70,8 +70,13 @@ Bring the author’s pressure into clear view; never hide it; never resolve in `
 **Questions — only the author's**
 - Questions are excellent, but only the ones **the text itself opens** (something named and its purpose delayed, a condition held open, an actor unnamed).
 - When the author delays, let the reader feel the delay; say what is pending, do not fill it.
-- When the author answers immediately, do not manufacture suspense.
+- When the author answers immediately, do not manufacture suspense — but ask the question anyway.
 - Never invent an artificial question, and never pose one you then answer. Test: can you point to the words in *this* passage that raise it? If not, cut it.
+
+**Ask it right before the answer arrives**
+- A question answered in the very next line is still worth asking out loud: it shows both that the line left something unnamed and how fast the author supplies it. Skipping it because the answer is near loses the observation.
+- On the line that leaves it open, name the question and say the answer is coming now — *la respuesta llega en el renglón siguiente*, *y lo dice de inmediato*. Never *todavía no dice…* or *eso queda pendiente*: that wording belongs to a real delay, and over a one-line gap it is manufactured suspense.
+- On the line that answers it, pick the question back up so the reader sees it paid off.
 
 **Comments and underlines**
 - Comments are made as the Scripture speaks (each `>` under the line it observes).
@@ -131,7 +136,7 @@ Follow skill **`cgv-manual-writer`** in full — especially **Who Escriba is**, 
 
 **May edit**
 - `###` — refine the wording of Arquitecto's context title (not theology; not a rival to H4). Arquitecto assigns it from the H4.
-- `+` — **break up large phrase texts** into shorter `+` lines at natural seams; omit no inspired word; comments welcome between each `+`
+- `+` — **break up large phrase texts** into shorter `+` lines at natural seams; omit no inspired word; comments welcome between each `+`; carry each word-detail group to the piece that holds its head word
 
 ```markdown
 + *Bendito el Dios y Padre de nuestro Señor Jesucristo*
@@ -143,6 +148,34 @@ Follow skill **`cgv-manual-writer`** in full — especially **Who Escriba is**, 
 > Recién aquí llega la acción, y el «nos» mete al que escribe junto a los que <u>leen</u>
 + *mediante la resurrección de Jesucristo de entre los muertos*
 ```
+
+**When you split, the word detail moves with its piece.** The Compiler stacks its word-detail groups — a
+`+ *word*` line with `*` grammar notes under it — after the whole block, because at that point the whole
+block is one line. Splitting changes where they belong: each group must end up directly under the piece
+containing its head word, never left in a stack at the bottom describing text now several lines above.
+
+```markdown
++ *Bendito el Dios y Padre de nuestro Señor Jesucristo quien,*
++ *según su grande misericordia, nos hizo renacer*
+
++ *nos*
+  * *renacer* (ἀναγεννήσας) - participio
+
++ *para una esperanza viva*
+
++ *esperanza*
+  * *viva* (ζῶσαν) - participio
+
++ *mediante la resurrección de Jesucristo*
++ *de entre los muertos*
+```
+
+Cut the seams around the annotated words, never through them — if a natural seam would separate a word
+from its detail, move the seam. Move each group untouched, indentation included: the `*` lines are
+Compiler's and the `+ *word*` head is its own line. Your `>` comment on that piece goes below the group,
+so nothing separates a piece from the detail belonging to it. Two groups on one piece keep the order
+their head words appear. If a head word ends up in none of your pieces, the split dropped or altered
+text — the pieces read in order must reproduce the span word for word.
 - `>` — write and nest:
 
 ```markdown

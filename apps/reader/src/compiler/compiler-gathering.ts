@@ -2,7 +2,7 @@
 // Pins anchor to the *text* of the target line so they rematch after Generate.
 // Never mixed into Observer's mechanical `*` grammar slides.
 
-import { NOTES_KEY } from "@cgv/core";
+import { getReaderBookInfo, workshopProgressKeys, type ReaderBookId } from "@cgv/core";
 
 export interface ReaderNote {
   id: string;
@@ -49,23 +49,33 @@ function makeId(prefix: string): string {
   return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
-export function readReaderNotes(): ReaderNote[] {
+export function readReaderNotes(bookId: ReaderBookId): ReaderNote[] {
   try {
-    const stored = window.localStorage.getItem(NOTES_KEY);
+    const key = workshopProgressKeys(bookId).readerNotes;
+    const stored = window.localStorage.getItem(key);
     if (!stored) return [];
     const parsed = JSON.parse(stored);
     if (!Array.isArray(parsed)) return [];
+    const bookName = getReaderBookInfo(bookId).displayName;
     return parsed.filter(
       (note): note is ReaderNote =>
         Boolean(note) &&
         typeof note === "object" &&
         typeof note.id === "string" &&
         typeof note.target === "string" &&
-        typeof note.text === "string"
+        typeof note.text === "string" &&
+        noteTargetBelongsToBook(note.target, bookName)
     );
   } catch {
     return [];
   }
+}
+
+/** Note targets are `Tito.1.1` / `1 Juan.1.1` — book name must match the workshop book. */
+export function noteTargetBelongsToBook(target: string, bookDisplayName: string): boolean {
+  const start = target.split("--")[0]?.trim() ?? "";
+  if (!start) return false;
+  return start === bookDisplayName || start.startsWith(`${bookDisplayName}.`);
 }
 
 function isAttachment(item: unknown): item is CompilerAttachment {

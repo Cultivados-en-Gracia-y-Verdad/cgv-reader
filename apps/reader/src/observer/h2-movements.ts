@@ -166,8 +166,10 @@ export function movementReferenceSpan(movement: H2Movement): string {
   const last = movement.units[movement.units.length - 1]?.reference ?? "";
   if (!first) return "";
   if (!last || first === last) return first;
-  // Prefer short "1:3–1:12" when both refs share a book prefix.
+  // Prefer short clause-id "1:9:7–2:4:13", else verse "1:3–1:12".
   const stripBook = (ref: string) => {
+    const clause = ref.match(/(\d+:\d+:\d+)\s*$/);
+    if (clause) return clause[1];
     const m = ref.match(/(\d+:\d+)\s*$/);
     return m ? m[1] : ref;
   };

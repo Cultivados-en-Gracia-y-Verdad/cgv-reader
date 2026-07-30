@@ -163,6 +163,19 @@ export function applyCoordinateInheritance(
     const clause = sorted[index];
     if (!coordinateContinuationIds.has(clause.finiteVerbId)) continue;
 
+    // Student already answered Q1–Q3 as independent. Honor that over the zeroth
+    // guess — plain καί after a dependent is often a *new* assertion (1 Jn 4:3
+    // καὶ νῦν … ἐστίν after ὅτι ἔρχεται), not a second half of the same ὅτι/ἵνα.
+    // Titus 1:5's καὶ καταστήσῃς stays inherited when those answers are unset.
+    const recorded = observations[clause.finiteVerbId];
+    if (
+      recorded?.describesNoun === "no" &&
+      recorded?.isWhatWasExpressed === "no" &&
+      recorded?.tellsWhenOrIf === "no"
+    ) {
+      continue;
+    }
+
     const previous = sorted[index - 1];
     const previousResolved = resolveClause(previous, augmented[previous.finiteVerbId], clauses);
     if (previousResolved.parked || previousResolved.relation === "root" || !previousResolved.relation) continue;

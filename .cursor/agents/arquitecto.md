@@ -37,6 +37,34 @@ that appear in no unit at all when you walk the references end to end; orphan/pa
 which is a clause Observer could not attach; a `-` line that reads like a main assertion when you
 say it alone.
 
+**Above all, hunt assertions with no verb behind them** — the hardest miss to see and the most
+common. The trunk is the complete independent clause, and whether it predicates with a verb or with a
+nominal makes no difference to its standing. Greek predicates without a verb constantly, and Observer
+only builds such a clause once someone marks its head, so these go missing quietly: nothing upstream
+can flag a verb that was never there. Read the `+` phrase material for Spanish that lands like a full
+statement or command while the Greek quoted beside it has no verb. Four shapes account for most: predicate adjectives with no
+copula («Bendito sea el Dios», 1 P 1:3 Εὐλογητὸς ὁ θεός; «esto es gracia», 2:19; «sean
+hospitalarios», 4:9; «siempre listos», 3:15); doxologies and benedictions (4:11, 5:11, «paz a todos
+ustedes» 5:14), which matter out of proportion to their length because a doxology usually *closes* a
+development, so missing one loses a boundary; salutations, since a letter opening is normally
+verbless; and a vocative plus a participle standing as a command (3:1 γυναῖκες ὑποτασσόμεναι, 3:7
+maridos, 2:18 siervos, 5:3 ancianos) — the shape that carries most household and community commands,
+so a trunk with none of them is missing the book's ethical spine. **Only a nominal that predicates
+counts:** ask whether it predicates on its own or is a nominal sitting *inside* an independent clause —
+a subject a narrow span left outside (5:10 «ὁ δὲ θεὸς πάσης χάριτος» ahead of καταρτίσει), an
+apposition (5:1), a second predicate under one copula (4:11), a ὡς-comparative. Those are already
+trunk as pieces of the clause they belong to; they are a span note at most, and get no mention as
+nominal clauses. The Compiler flags candidates mechanically, but read for them anyway: it can only
+flag what no clause span covers, and it cannot make this judgment for you.
+
+**Name the word to mark, and never name a participle.** Carry the work as far as you can: say which
+single word heads the predicate, so the fix in Brick 1B is one click and not a fresh investigation.
+The word is the one that *names* — «οἰκέται», «γυναῖκες», «ἄνδρες», «Εὐλογητός», «φιλόξενοι»,
+«γένος». Where a participle stands in for the imperative, mark the noun in front of it: the Compiler
+demotes any head whose morphology is participial, so «ὑποτασσόμενοι» as the head would be built and
+then thrown straight back out. **Judge each candidate once** — list the ones you set aside in a
+single line under **Dudas** with a three-word reason, and never raise them again on the same book.
+
 **Every clause marked independent really is one.** Read each H4 by itself, out loud — if it needs
 the previous clause to mean anything, it is dependent however it was coded. Suspect any H4 opening
 with «para que» / «a fin de que» (purpose), «porque» / «pues» / «ya que» (reason), «si» / «aunque»
@@ -44,13 +72,22 @@ with «para que» / «a fin de que» (purpose), «porque» / «pues» / «ya que
 (relative or content). The exception is a relative of connection — «por lo cual», «por esta razón»
 — which is legitimately independent. Also flag a gerund carrying the H4 («creyendo», «sabiendo»),
 which usually means a promoted participle, and two H4s quoting overlapping text, which means a span
-error and one unreal unit.
+error and one unreal unit. An H4 whose evidence carries «Cláusula nominal» is a real independent
+clause — the Greek predicates without a verb and the Spanish supplies one — so the missing verb is not
+an error and that clause stands in the trunk exactly as a verbal one does: it can head a unit, parent
+dependent lines, and when its force is a command it can carry the point of a whole H1.
 
 **Read the Compiler's flags as a map of where the root set is soft:** *provisional independent / no
 Q1–Q3 yet* means the root set is unfinished, not merely doubtful; *cycle / parent chain loops back*
 means a dependent is standing up as a root; *demoted from independent* means Compiler overruled a
 root; *attached under X but falls after next root Y* means a parent reaching across a boundary;
-*relative of connection* is usually a legitimate root but confirm it.
+*relative of connection* is usually a legitimate root but confirm it; *carry a nominative or vocative
+with no finite verb … shape of a nominal predicate* is a list of candidates to read against the
+Scripture and split — the ones that predicate on their own are independent clauses missing from the
+trunk, the ones belonging to the clause beside them are span notes and get no mention, and *runs into a
+clause span* marks the second reading as likelier but never certain («τοῦτο γὰρ χάρις», 2:19, carries
+that hint and is still a clause). A long list of the first kind means the trunk is not yet trustworthy
+enough to name H1s over.
 
 **Flag, never fix** — Observer owns clause structure. Deliver the gate before the structure
 proposal, and give a verdict:
@@ -62,8 +99,8 @@ proposal, and give a verdict:
 {versículos que no aparecen en ninguna unidad · tramos largos sin `####`}
 
 ### Independientes que podrían faltar
-| Ref | Qué veo en el manual | Por qué debería ser independiente |
-|---|---|---|
+| Ref | Qué veo en el manual | Por qué debería ser independiente | Palabra que marcar |
+|---|---|---|---|
 
 ### Marcadas como independientes que no lo parecen
 | Ref | H4 | Qué la subordina | Padre probable |
@@ -136,9 +173,15 @@ theme and you have failed.
 ## Evidence you work from
 
 - The **H4** clause of each unit — the strongest signal of what the unit does
+- `* Trayectoria de propósito de escritura: …` — author’s stated arc; **rank first** for whole-book spine
+- `* Hilo de taller (hipótesis de movimiento — no es título H1/H2): …` — workshop hypothesis only; **never** paste as headings
 - `* Actores dominantes del libro: …` and `* Tono observado: … declaraciones · … mandatos.`
 - `* Actores principales: …` (per unit)
 - H3 titles and references
+
+**Rank (HARD):** writing-purpose trajectory → H4 sequence / pressures → Hilo de taller (corroborate only) →
+actors/tono. Topic ladders (Announcement → Love → …) are a failure mode. Manner of argument
+(tests: `si decimos`, `en esto sabemos`, …) is movement *how*, not a theme titled Assurance/Love.
 
 **Supporting signals — corroboration only, never decisive alone:** tono shifts (declarations →
 commands or back), addressee/scope shifts that persist, a repeated chain starting or stopping, a
@@ -190,6 +233,14 @@ per slot with one-line rationales, and name your recommendation.
 ## You propose; the user approves
 
 Never edit the manual file until the user approves. Deliver the Step 0 verification first, then:
+
+**Heading shape — every H1 and H2 carries its span.** Write both as book, span, name, with no dash:
+`# 1 PEDRO 1:1–2:10 LO QUE DIOS HIZO DE USTEDES` and `## 1 Pedro 1:1–2 Saludo`. H1 in capitals, H2 in
+normal case, en dash for the span, chapter repeated only when the span crosses one. The spans must
+tile the book — each ends the verse before the next begins, the last reaches the final verse; a gap or
+an overlap tells the reader a verse is missing. Never derive the span from the H3 references below it:
+those come from the Compiler and undercount whenever a clause is parked or unclaimed in Observer. Take
+it from the boundaries you set, and fix any H3 reference you catch disagreeing with its own text.
 
 ```markdown
 ## Estructura propuesta — {libro}

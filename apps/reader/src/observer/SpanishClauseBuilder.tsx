@@ -11,20 +11,34 @@ import {
   readClauseObservations,
   readCommandRecipientAssignments,
   readMarkedAlignmentIds,
+  readNominalClauseHeadIds,
   spanFromRange,
   wordInSpan,
   writeClauseAssignments,
   writeClauseObservations,
   groupParticiplesByNounHost,
   formatActorTriple,
+  readBookDefinitions,
+  readBookThread,
   readClauseActors,
+  readContrastObservations,
   readH3FlowState,
   readParticipleSubjectHosts,
+  writeBookDefinitions,
+  writeBookThread,
   writeClauseActors,
+  writeContrastObservations,
   writeH3FlowState,
   writeParticipleSubjectHosts,
+  type BookDefinitionHit,
+  type BookDefinitionTerm,
+  type BookDefinitionsState,
+  type BookThreadState,
+  type BookThreadStep,
   type ClauseActorObservation,
   type ClauseActors,
+  type ContrastObservation,
+  type ContrastObservationsState,
   type H3FlowState,
   type ClauseAssignments,
   type ClauseBeginningToken,
@@ -63,12 +77,33 @@ import {
   type SkeletonNode
 } from "./clause-tree";
 import {
+  buildH3FlowMovements,
   buildH3FlowSupports,
   clearH2Start,
+  clearPressureAfter,
+  markPressureAfter,
   reconcileH3FlowState,
+  setH2Label,
   startH2After
 } from "./h3-flow";
 import { buildH3UnitSignals } from "./h2-movements";
+import { buildBookMovementReport } from "./book-movement";
+import {
+  investigateBookDefinition,
+  type DefinitionInvestigation
+} from "./book-definitions";
+import {
+  proposeThreadWaypoints,
+  verseKeyFromReference,
+  type ThreadWaypointProposal
+} from "./book-threads";
+import {
+  buildConvergenceReport,
+  buildVerseDashboard,
+  buildVerseDevelopment,
+  type ReasonHit,
+  type VerseConvergence
+} from "./convergence-engine";
 
 const FALLBACK_CLAUSE_CHOICES: ClauseChoiceOption[] = [
   {
@@ -286,6 +321,9 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     readMarkedAlignmentIds(progressKeys.statementMarks, bookId).forEach(id => ids.add(id));
     readMarkedAlignmentIds(progressKeys.subjunctiveMarks, bookId).forEach(id => ids.add(id));
     readMarkedAlignmentIds(progressKeys.optativeMarks, bookId).forEach(id => ids.add(id));
+    // A verbless nominal clause may carry a mood the student read into it, but it
+    // reaches this workspace either way — there is no morphology to review first.
+    readNominalClauseHeadIds(bookId).forEach(id => ids.add(id));
     return ids;
   }, [bookId, progressKeys]);
 
@@ -332,6 +370,10 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   // Skeleton lives in a popup (not the Structure canvas) — open/maximized.
   const [skeletonOpen, setSkeletonOpen] = useState(false);
   const [skeletonMaximized, setSkeletonMaximized] = useState(false);
+  /** Passage | Movement | Definitions | Thread. */
+  const [structureMode, setStructureMode] = useState<
+    "passage" | "movement" | "definitions" | "thread"
+  >("passage");
   const [hostFixHint, setHostFixHint] = useState<HostFixHint | null>(null);
   const [activeBeginningVerbId, setActiveBeginningVerbId] = useState<string | null>(null);
   const [observations, setObservations] = useState<ClauseObservations>(() => readClauseObservations(bookId));
@@ -340,6 +382,23 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   );
   const [clauseActors, setClauseActors] = useState<ClauseActors>(() => readClauseActors(bookId));
   const [h3FlowState, setH3FlowState] = useState<H3FlowState>(() => readH3FlowState(bookId));
+  const [contrastState, setContrastState] = useState<ContrastObservationsState>(() =>
+    readContrastObservations(bookId)
+  );
+  const [bookDefinitions, setBookDefinitions] = useState<BookDefinitionsState>(() =>
+    readBookDefinitions(bookId)
+  );
+  const [bookThread, setBookThread] = useState<BookThreadState>(() => readBookThread(bookId));
+  const [selectedThreadStepId, setSelectedThreadStepId] = useState<string | null>(null);
+  const [definitionSeedDraft, setDefinitionSeedDraft] = useState("");
+  const [activeDefinitionTermId, setActiveDefinitionTermId] = useState<string | null>(null);
+  const [definitionInvestigation, setDefinitionInvestigation] = useState<DefinitionInvestigation | null>(
+    null
+  );
+  const [selectedDefinitionHitId, setSelectedDefinitionHitId] = useState<string | null>(null);
+  const [contrastDraftA, setContrastDraftA] = useState("");
+  const [contrastDraftB, setContrastDraftB] = useState("");
+  const [contrastDraftNote, setContrastDraftNote] = useState("");
   const [nounAnchorId, setNounAnchorId] = useState<string | null>(null);
   const [subjectHostAnchorId, setSubjectHostAnchorId] = useState<string | null>(null);
   /** clauseId or verseKey currently picking a nominative subject host for. */
@@ -414,6 +473,17 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     setParticipleSubjectHosts(readParticipleSubjectHosts(bookId));
     setClauseActors(readClauseActors(bookId));
     setH3FlowState(readH3FlowState(bookId));
+    setContrastState(readContrastObservations(bookId));
+    setBookDefinitions(readBookDefinitions(bookId));
+    setBookThread(readBookThread(bookId));
+    setSelectedThreadStepId(null);
+    setDefinitionSeedDraft("");
+    setActiveDefinitionTermId(null);
+    setDefinitionInvestigation(null);
+    setSelectedDefinitionHitId(null);
+    setContrastDraftA("");
+    setContrastDraftB("");
+    setContrastDraftNote("");
     setPickingSubjectHostKey(null);
     setSubjectHostAnchorId(null);
     setActiveVerbId(null);
@@ -597,14 +667,20 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   // exists. getClauseReviewState below also treats these as settled, since
   // Q1/Q2/Q3 genuinely don't apply — nothing to review.
   const coordinateContinuationIds = useMemo(() => {
+    const nominalHeadIds = readNominalClauseHeadIds(bookId);
     const ids = new Set<string>();
     for (const input of clauseSignalInputs) {
       if (!input.finiteVerbId) continue;
       if (detectClauseSignal(input, clauseSignalInputs).kind !== "none") continue;
-      if (detectLeadingCoordinator(input.beginningTokens)) ids.add(input.finiteVerbId);
+      // A hand-marked nominal head claims its own predicate, and inheritance
+      // would silently settle it as a continuation — leaving no Q1/Q2/Q3 to
+      // answer and no way to say otherwise. 1 Peter 3:8's transitional δέ is
+      // the case in point: a command, not a coupling.
+      if (nominalHeadIds.has(input.finiteVerbId)) continue;
+      if (detectLeadingCoordinator(input.beginningTokens, input.finiteVerbId)) ids.add(input.finiteVerbId);
     }
     return ids;
-  }, [clauseSignalInputs]);
+  }, [bookId, clauseSignalInputs]);
 
   useEffect(() => {
     let changed = false;
@@ -792,7 +868,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     for (const clause of clauseSpanInfos) {
       const beginningTokens = beginningTokensById.get(clause.finiteVerbId) ?? [];
       const resolved = resolveClause(clause, augmentedObservations[clause.finiteVerbId], clauseSpanInfos);
-      const marker = detectClauseMarker(beginningTokens, resolved.relation, resolved.frameType);
+      const marker = detectClauseMarker(beginningTokens, resolved.relation, resolved.frameType, clause.finiteVerbId);
       if (marker) map.set(clause.finiteVerbId, marker);
     }
     return map;
@@ -816,7 +892,10 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
 
   const activeFrameType = useMemo<FrameType | undefined>(() => {
     if (!activeBeginningRow) return undefined;
-    return detectLeadingFrameType(activeBeginningRow.beginningTokens);
+    return detectLeadingFrameType(
+      activeBeginningRow.beginningTokens,
+      activeBeginningRow.finiteVerb.finiteVerbId ?? undefined
+    );
   }, [activeBeginningRow]);
 
   // What the parent-picker header should actually show while it's open: the
@@ -1183,6 +1262,24 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     return ids;
   }, [augmentedObservations, clauseSpanInfos]);
 
+  /** Reason-frame clauses for convergence scoring + verse dashboard. */
+  const reasonHits = useMemo((): ReasonHit[] => {
+    const hits: ReasonHit[] = [];
+    for (const clause of clauseSpanInfos) {
+      const resolved = resolveClause(clause, augmentedObservations[clause.finiteVerbId], clauseSpanInfos);
+      if (resolved.relation !== "frame" || resolved.frameType !== "reason") continue;
+      const rootId = findRootAncestor(clause.finiteVerbId, clauseSpanInfos, augmentedObservations);
+      if (!rootId) continue;
+      hits.push({
+        finiteVerbId: clause.finiteVerbId,
+        rootId,
+        reference: clause.reference,
+        spanText: clause.spanText
+      });
+    }
+    return hits;
+  }, [augmentedObservations, clauseSpanInfos]);
+
   // Purpose stays a single direct hop — the same "directly-attached child"
   // shape deriveTelos already uses, generalized here to every qualifying
   // root instead of just the book's first one.
@@ -1503,6 +1600,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   // flows that actually need to change belonging, e.g. unparking a relative.
   const openClauseFromSkeleton = useCallback(
     (finiteVerbId: string, options?: { editSpan?: boolean }) => {
+      setStructureMode("passage");
       closeSkeletonPopup();
       requestObservationScroll();
       setActiveBeginningVerbId(finiteVerbId);
@@ -2201,11 +2299,106 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     [h3FlowState, outline]
   );
 
-  const h3FlowUnits = useMemo(() => buildH3UnitSignals(h3FlowInput), [h3FlowInput]);
+  const h3FlowMovements = useMemo(
+    () => buildH3FlowMovements(h3FlowInput, h3FlowReconciled),
+    [h3FlowInput, h3FlowReconciled]
+  );
 
   const h3FlowSupportByAfterId = useMemo(
     () => new Map(buildH3FlowSupports(h3FlowInput, h3FlowReconciled).map(row => [row.afterH3Id, row])),
     [h3FlowInput, h3FlowReconciled]
+  );
+
+  const h3FlowPressureSet = useMemo(
+    () => new Set(h3FlowReconciled.pressureAfter),
+    [h3FlowReconciled.pressureAfter]
+  );
+
+  const bookMovementClauses = useMemo(() => {
+    const units = buildH3UnitSignals(h3FlowInput);
+    const spanById = new Map(clauseSpanInfos.map(info => [info.finiteVerbId, info.spanText]));
+    return units.map((unit, order) => ({
+      finiteVerbId: unit.finiteVerbId,
+      reference: unit.reference,
+      order,
+      spanText: unit.clauseIds
+        .map(id => spanById.get(id) ?? "")
+        .filter(Boolean)
+        .join(" ")
+    }));
+  }, [clauseSpanInfos, h3FlowInput]);
+
+  const bookMovementReport = useMemo(() => {
+    const movementVerses = verses.map(v => ({
+      verseKey: `${v.chapter}:${v.verse}`,
+      reference: `${bookInfo.displayName} ${v.chapter}:${v.verse}`,
+      text: v.text
+    }));
+    return buildBookMovementReport(bookMovementClauses, { verses: movementVerses });
+  }, [bookInfo.displayName, bookMovementClauses, verses]);
+
+  const convergenceReport = useMemo(
+    () =>
+      buildConvergenceReport(bookMovementClauses, bookMovementReport, {
+        imperativeH3Ids: imperativeRootIds,
+        pressureAfterH3Ids: h3FlowReconciled.pressureAfter,
+        reasonHits,
+        contrastHits: contrastState.items
+      }),
+    [
+      bookMovementClauses,
+      bookMovementReport,
+      contrastState.items,
+      h3FlowReconciled.pressureAfter,
+      imperativeRootIds,
+      reasonHits
+    ]
+  );
+
+  const [selectedConvergenceKey, setSelectedConvergenceKey] = useState<string | null>(null);
+
+  const scoredConvergenceVerses = useMemo(
+    () => convergenceReport.verses.filter(v => v.score > 0),
+    [convergenceReport.verses]
+  );
+
+  const selectedConvergence: VerseConvergence | null = useMemo(() => {
+    if (!selectedConvergenceKey) return convergenceReport.hotspots[0] ?? scoredConvergenceVerses[0] ?? null;
+    return (
+      convergenceReport.verses.find(v => v.verseKey === selectedConvergenceKey) ??
+      convergenceReport.hotspots[0] ??
+      null
+    );
+  }, [convergenceReport, scoredConvergenceVerses, selectedConvergenceKey]);
+
+  const selectedVerseDashboard = useMemo(
+    () => (selectedConvergence ? buildVerseDashboard(selectedConvergence) : []),
+    [selectedConvergence]
+  );
+
+  const selectedVerseDevelopment = useMemo(
+    () => (selectedConvergence ? buildVerseDevelopment(selectedConvergence) : []),
+    [selectedConvergence]
+  );
+
+  const hotspotVerseKeys = useMemo(
+    () => new Set(convergenceReport.hotspots.map(h => h.verseKey)),
+    [convergenceReport.hotspots]
+  );
+
+  const contrastsOnSelectedVerse = useMemo(() => {
+    if (!selectedConvergence) return [] as ContrastObservation[];
+    return contrastState.items.filter(item => item.verseKey === selectedConvergence.verseKey);
+  }, [contrastState.items, selectedConvergence]);
+
+  const candidateBoundaryAfterIds = useMemo(
+    () => new Set(bookMovementReport.candidateBoundaries.map(row => row.afterH3Id)),
+    [bookMovementReport.candidateBoundaries]
+  );
+
+  const discourseResetIds = useMemo(
+    () => new Set(bookMovementReport.discourseResets.map(row => row.finiteVerbId)),
+    [bookMovementReport.discourseResets]
   );
 
   const persistH3Flow = useCallback(
@@ -2218,6 +2411,380 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       writeH3FlowState(reconciled, bookId);
     },
     [bookId, outline]
+  );
+
+  const persistContrasts = useCallback(
+    (next: ContrastObservationsState) => {
+      setContrastState(next);
+      writeContrastObservations(next, bookId);
+    },
+    [bookId]
+  );
+
+  const addContrastOnSelected = useCallback(() => {
+    if (!selectedConvergence) return;
+    const poleA = contrastDraftA.trim();
+    const poleB = contrastDraftB.trim();
+    if (!poleA || !poleB) return;
+    const id = `contrast:${selectedConvergence.verseKey}:${Date.now()}`;
+    const note = contrastDraftNote.trim() || undefined;
+    persistContrasts({
+      items: [
+        ...contrastState.items,
+        { id, verseKey: selectedConvergence.verseKey, poleA, poleB, note }
+      ]
+    });
+    setContrastDraftA("");
+    setContrastDraftB("");
+    setContrastDraftNote("");
+  }, [
+    contrastDraftA,
+    contrastDraftB,
+    contrastDraftNote,
+    contrastState.items,
+    persistContrasts,
+    selectedConvergence
+  ]);
+
+  const removeContrast = useCallback(
+    (id: string) => {
+      persistContrasts({ items: contrastState.items.filter(item => item.id !== id) });
+    },
+    [contrastState.items, persistContrasts]
+  );
+
+  const movementVerses = useMemo(
+    () =>
+      verses.map(v => ({
+        verseKey: `${v.chapter}:${v.verse}`,
+        reference: `${bookInfo.displayName} ${v.chapter}:${v.verse}`,
+        text: v.text
+      })),
+    [bookInfo.displayName, verses]
+  );
+
+  const persistBookDefinitions = useCallback(
+    (next: BookDefinitionsState) => {
+      setBookDefinitions(next);
+      writeBookDefinitions(next, bookId);
+    },
+    [bookId]
+  );
+
+  const activeDefinitionTerm = useMemo(
+    () => bookDefinitions.terms.find(t => t.id === activeDefinitionTermId) ?? null,
+    [activeDefinitionTermId, bookDefinitions.terms]
+  );
+
+  const investigateTerm = useCallback(
+    (seedRaw: string) => {
+      const seed = seedRaw.trim();
+      if (!seed) return;
+      const writingPurposeTexts = bookMovementReport.writingPurposes.map(h => h.spanText);
+      const investigation = investigateBookDefinition(seed, movementVerses, { writingPurposeTexts });
+      setDefinitionInvestigation(investigation);
+      setDefinitionSeedDraft(seed);
+      setStructureMode("definitions");
+
+      const existing = bookDefinitions.terms.find(
+        t => t.seed.trim().toLowerCase() === seed.toLowerCase()
+      );
+      if (existing) {
+        setActiveDefinitionTermId(existing.id);
+        setSelectedDefinitionHitId(existing.hits.find(h => h.confirmed)?.id ?? null);
+        return;
+      }
+      const id = `term:${seed.toLowerCase()}:${Date.now()}`;
+      const term: BookDefinitionTerm = {
+        id,
+        seed,
+        relatedConfirmed: [],
+        hits: [],
+        workingDefinition: ""
+      };
+      persistBookDefinitions({ terms: [...bookDefinitions.terms, term] });
+      setActiveDefinitionTermId(id);
+      setSelectedDefinitionHitId(null);
+    },
+    [
+      bookDefinitions.terms,
+      bookMovementReport.writingPurposes,
+      movementVerses,
+      persistBookDefinitions
+    ]
+  );
+
+  const updateActiveDefinitionTerm = useCallback(
+    (updater: (term: BookDefinitionTerm) => BookDefinitionTerm) => {
+      if (!activeDefinitionTermId) return;
+      persistBookDefinitions({
+        terms: bookDefinitions.terms.map(t =>
+          t.id === activeDefinitionTermId ? updater(t) : t
+        )
+      });
+    },
+    [activeDefinitionTermId, bookDefinitions.terms, persistBookDefinitions]
+  );
+
+  const confirmDefinitionHit = useCallback(
+    (proposal: { id: string; verseKey: string; kind: BookDefinitionHit["kind"]; snippet: string }) => {
+      updateActiveDefinitionTerm(term => {
+        const existing = term.hits.find(h => h.id === proposal.id);
+        if (existing) {
+          return {
+            ...term,
+            hits: term.hits.map(h =>
+              h.id === proposal.id ? { ...h, confirmed: true, kind: proposal.kind, snippet: proposal.snippet } : h
+            )
+          };
+        }
+        return {
+          ...term,
+          hits: [
+            ...term.hits,
+            {
+              id: proposal.id,
+              verseKey: proposal.verseKey,
+              kind: proposal.kind,
+              snippet: proposal.snippet,
+              confirmed: true
+            }
+          ]
+        };
+      });
+      setSelectedDefinitionHitId(proposal.id);
+    },
+    [updateActiveDefinitionTerm]
+  );
+
+  const dismissDefinitionHit = useCallback(
+    (hitId: string) => {
+      updateActiveDefinitionTerm(term => {
+        if (term.hits.some(h => h.id === hitId)) {
+          return {
+            ...term,
+            hits: term.hits.map(h => (h.id === hitId ? { ...h, confirmed: false } : h))
+          };
+        }
+        const proposal = definitionInvestigation?.hits.find(h => h.id === hitId);
+        if (!proposal) return term;
+        return {
+          ...term,
+          hits: [
+            ...term.hits,
+            {
+              id: proposal.id,
+              verseKey: proposal.verseKey,
+              kind: proposal.kind,
+              snippet: proposal.snippet,
+              confirmed: false
+            }
+          ]
+        };
+      });
+      if (selectedDefinitionHitId === hitId) setSelectedDefinitionHitId(null);
+    },
+    [definitionInvestigation, selectedDefinitionHitId, updateActiveDefinitionTerm]
+  );
+
+  const toggleRelatedSurface = useCallback(
+    (display: string, on: boolean) => {
+      updateActiveDefinitionTerm(term => {
+        const set = new Set(term.relatedConfirmed);
+        if (on) set.add(display);
+        else set.delete(display);
+        return { ...term, relatedConfirmed: [...set] };
+      });
+    },
+    [updateActiveDefinitionTerm]
+  );
+
+  const confirmedHitsForSelectedVerse = useMemo(() => {
+    if (!selectedConvergence) return [] as Array<{ seed: string; termId: string }>;
+    const out: Array<{ seed: string; termId: string }> = [];
+    for (const term of bookDefinitions.terms) {
+      if (term.hits.some(h => h.confirmed && h.verseKey === selectedConvergence.verseKey)) {
+        out.push({ seed: term.seed, termId: term.id });
+      }
+    }
+    return out;
+  }, [bookDefinitions.terms, selectedConvergence]);
+
+  const selectedDefinitionHit = useMemo(() => {
+    if (!selectedDefinitionHitId) return null;
+    const fromTerm = activeDefinitionTerm?.hits.find(h => h.id === selectedDefinitionHitId);
+    if (fromTerm) return fromTerm;
+    const fromProposal = definitionInvestigation?.hits.find(h => h.id === selectedDefinitionHitId);
+    if (!fromProposal) return null;
+    return {
+      id: fromProposal.id,
+      verseKey: fromProposal.verseKey,
+      kind: fromProposal.kind,
+      snippet: fromProposal.snippet,
+      confirmed: false
+    } satisfies BookDefinitionHit;
+  }, [activeDefinitionTerm, definitionInvestigation, selectedDefinitionHitId]);
+
+  /** Evidence inventory only — never a composed sense. */
+  const definitionEvidenceSumUp = useMemo(() => {
+    if (!activeDefinitionTerm) return null;
+    const confirmed = [...activeDefinitionTerm.hits]
+      .filter(h => h.confirmed)
+      .sort((a, b) => {
+        const [ac, av] = a.verseKey.split(":").map(Number);
+        const [bc, bv] = b.verseKey.split(":").map(Number);
+        return ac - bc || av - bv;
+      });
+    const byKind = { equative: 0, contrast: 0, use: 0, other: 0 };
+    for (const hit of confirmed) {
+      byKind[hit.kind] += 1;
+    }
+    return {
+      seed: activeDefinitionTerm.seed,
+      confirmedCount: confirmed.length,
+      byKind,
+      related: activeDefinitionTerm.relatedConfirmed,
+      verses: confirmed.map(h => h.verseKey),
+      lines: confirmed.map(h => ({
+        verseKey: h.verseKey,
+        kind: h.kind,
+        snippet: h.snippet,
+        note: h.note
+      }))
+    };
+  }, [activeDefinitionTerm]);
+
+  const persistBookThread = useCallback(
+    (next: BookThreadState) => {
+      setBookThread(next);
+      writeBookThread(next, bookId);
+    },
+    [bookId]
+  );
+
+  const threadWaypointProposals = useMemo(() => {
+    const definitionHits = bookDefinitions.terms.flatMap(term =>
+      term.hits
+        .filter(h => h.confirmed)
+        .map(h => ({
+          hitId: h.id,
+          verseKey: h.verseKey,
+          seed: term.seed,
+          snippet: h.snippet
+        }))
+    );
+    const opens = scoredConvergenceVerses
+      .filter(v => v.phase === "opens")
+      .map(v => ({ verseKey: v.verseKey, reference: v.reference }));
+    return proposeThreadWaypoints({
+      writingPurposes: bookMovementReport.writingPurposes,
+      opens,
+      definitionHits,
+      alreadyOnThread: bookThread.steps
+    });
+  }, [
+    bookDefinitions.terms,
+    bookMovementReport.writingPurposes,
+    bookThread.steps,
+    scoredConvergenceVerses
+  ]);
+
+  const selectedThreadStep = useMemo(
+    () => bookThread.steps.find(s => s.id === selectedThreadStepId) ?? null,
+    [bookThread.steps, selectedThreadStepId]
+  );
+
+  const addThreadWaypoint = useCallback(
+    (proposal: ThreadWaypointProposal) => {
+      const step: BookThreadStep = {
+        id: `step:${proposal.source}:${proposal.verseKey}:${Date.now()}`,
+        label: "",
+        verseKey: proposal.verseKey,
+        source: proposal.source,
+        evidence: proposal.evidence,
+        seed: proposal.seed
+      };
+      const next = { steps: [...bookThread.steps, step] };
+      persistBookThread(next);
+      setSelectedThreadStepId(step.id);
+      setStructureMode("thread");
+    },
+    [bookThread.steps, persistBookThread]
+  );
+
+  const addThreadFromWritingPurpose = useCallback(
+    (hit: { finiteVerbId: string; reference: string; spanText: string; trajectory: string }) => {
+      const verseKey = verseKeyFromReference(hit.reference, hit.finiteVerbId);
+      if (!verseKey) return;
+      if (
+        bookThread.steps.some(s => s.source === "writing-purpose" && s.verseKey === verseKey)
+      ) {
+        setStructureMode("thread");
+        const existing = bookThread.steps.find(
+          s => s.source === "writing-purpose" && s.verseKey === verseKey
+        );
+        if (existing) setSelectedThreadStepId(existing.id);
+        return;
+      }
+      addThreadWaypoint({
+        id: `wp:${hit.finiteVerbId}`,
+        verseKey,
+        reference: hit.reference,
+        source: "writing-purpose",
+        evidence: hit.trajectory || hit.spanText
+      });
+    },
+    [addThreadWaypoint, bookThread.steps]
+  );
+
+  const addThreadFromOpens = useCallback(
+    (verseKey: string, reference: string) => {
+      if (bookThread.steps.some(s => s.source === "opens" && s.verseKey === verseKey)) {
+        setStructureMode("thread");
+        const existing = bookThread.steps.find(s => s.source === "opens" && s.verseKey === verseKey);
+        if (existing) setSelectedThreadStepId(existing.id);
+        return;
+      }
+      addThreadWaypoint({
+        id: `opens:${verseKey}`,
+        verseKey,
+        reference,
+        source: "opens",
+        evidence: "opens"
+      });
+    },
+    [addThreadWaypoint, bookThread.steps]
+  );
+
+  const updateThreadStep = useCallback(
+    (stepId: string, updater: (step: BookThreadStep) => BookThreadStep) => {
+      persistBookThread({
+        steps: bookThread.steps.map(s => (s.id === stepId ? updater(s) : s))
+      });
+    },
+    [bookThread.steps, persistBookThread]
+  );
+
+  const removeThreadStep = useCallback(
+    (stepId: string) => {
+      persistBookThread({ steps: bookThread.steps.filter(s => s.id !== stepId) });
+      if (selectedThreadStepId === stepId) setSelectedThreadStepId(null);
+    },
+    [bookThread.steps, persistBookThread, selectedThreadStepId]
+  );
+
+  const moveThreadStep = useCallback(
+    (stepId: string, direction: -1 | 1) => {
+      const index = bookThread.steps.findIndex(s => s.id === stepId);
+      if (index < 0) return;
+      const nextIndex = index + direction;
+      if (nextIndex < 0 || nextIndex >= bookThread.steps.length) return;
+      const steps = [...bookThread.steps];
+      const [row] = steps.splice(index, 1);
+      steps.splice(nextIndex, 0, row!);
+      persistBookThread({ steps });
+    },
+    [bookThread.steps, persistBookThread]
   );
 
   // Shared by renderClauseLine and renderSkeletonNode — dotted underline on
@@ -2406,29 +2973,104 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       <section className="structure-canvas" aria-labelledby="structure-heading">
           <div className="clause-only-header structure-toolbar">
             <div>
-              <h2 id="structure-heading">Passage</h2>
+              <h2 id="structure-heading">
+                {structureMode === "thread"
+                  ? "Thread"
+                  : structureMode === "definitions"
+                    ? "Definitions"
+                    : structureMode === "movement"
+                      ? "Movement"
+                      : "Passage"}
+              </h2>
               <p>
-                {reviewedCount} of {reviewClauseRows.length} mood-tagged clauses reviewed
-                {clauseRows.length ? ` · ${savedClauseRows.length} of ${clauseRows.length} spans saved` : ""}
-                {greekSpanMismatches.length
-                  ? ` · ${greekSpanMismatches.length} span drift${greekSpanMismatches.length === 1 ? "" : "s"}`
-                  : ""}
-                {greekReconfirmationProgress.unconfirmed.length
-                  ? ` · ${greekReconfirmationProgress.unconfirmed.length} unconfirmed`
-                  : ""}
-                {relativeOfConnectionFlags.length
-                  ? ` · ${relativeOfConnectionFlags.length} relative-of-connection`
-                  : ""}
+                {structureMode === "thread"
+                  ? "One book-level story — software proposes waypoints; you name each step."
+                  : structureMode === "definitions"
+                    ? "Authorial use in this book — software proposes; you confirm and name."
+                    : structureMode === "movement"
+                      ? "Convergence by verse — open, intensify, or resolve. You name the H2."
+                      : `${reviewedCount} of ${reviewClauseRows.length} mood-tagged clauses reviewed${
+                          clauseRows.length ? ` · ${savedClauseRows.length} of ${clauseRows.length} spans saved` : ""
+                        }${
+                          greekSpanMismatches.length
+                            ? ` · ${greekSpanMismatches.length} span drift${greekSpanMismatches.length === 1 ? "" : "s"}`
+                            : ""
+                        }${
+                          greekReconfirmationProgress.unconfirmed.length
+                            ? ` · ${greekReconfirmationProgress.unconfirmed.length} unconfirmed`
+                            : ""
+                        }${
+                          relativeOfConnectionFlags.length
+                            ? ` · ${relativeOfConnectionFlags.length} relative-of-connection`
+                            : ""
+                        }`}
               </p>
             </div>
-            <label className="clause-dependent-toggle">
-              <input
-                type="checkbox"
-                checked={showSpanishOnly}
-                onChange={event => setShowSpanishOnly(event.currentTarget.checked)}
-              />
-              <span>Show Spanish only</span>
-            </label>
+            <div className="structure-toolbar-modes" role="group" aria-label="Structure view">
+              <button
+                type="button"
+                className={
+                  structureMode === "passage"
+                    ? "clause-print-btn structure-toolbar-mode structure-toolbar-mode--active"
+                    : "clause-print-btn structure-toolbar-mode"
+                }
+                aria-pressed={structureMode === "passage"}
+                onClick={() => setStructureMode("passage")}
+              >
+                Passage
+              </button>
+              <button
+                type="button"
+                className={
+                  structureMode === "movement"
+                    ? "clause-print-btn structure-toolbar-mode structure-toolbar-mode--active"
+                    : "clause-print-btn structure-toolbar-mode"
+                }
+                aria-pressed={structureMode === "movement"}
+                onClick={() => setStructureMode("movement")}
+              >
+                Movement
+                {convergenceReport.hotspots.length
+                  ? ` (${convergenceReport.hotspots.length})`
+                  : ""}
+              </button>
+              <button
+                type="button"
+                className={
+                  structureMode === "definitions"
+                    ? "clause-print-btn structure-toolbar-mode structure-toolbar-mode--active"
+                    : "clause-print-btn structure-toolbar-mode"
+                }
+                aria-pressed={structureMode === "definitions"}
+                onClick={() => setStructureMode("definitions")}
+              >
+                Definitions
+                {bookDefinitions.terms.length ? ` (${bookDefinitions.terms.length})` : ""}
+              </button>
+              <button
+                type="button"
+                className={
+                  structureMode === "thread"
+                    ? "clause-print-btn structure-toolbar-mode structure-toolbar-mode--active"
+                    : "clause-print-btn structure-toolbar-mode"
+                }
+                aria-pressed={structureMode === "thread"}
+                onClick={() => setStructureMode("thread")}
+              >
+                Thread
+                {bookThread.steps.length ? ` (${bookThread.steps.length})` : ""}
+              </button>
+            </div>
+            {structureMode === "passage" ? (
+              <label className="clause-dependent-toggle">
+                <input
+                  type="checkbox"
+                  checked={showSpanishOnly}
+                  onChange={event => setShowSpanishOnly(event.currentTarget.checked)}
+                />
+                <span>Show Spanish only</span>
+              </label>
+            ) : null}
             <button
               type="button"
               className="clause-print-btn"
@@ -2453,6 +3095,1020 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
             </button>
           </div>
 
+          {structureMode === "movement" ? (
+            <div className="clause-movement-view" aria-label="Movement Explorer">
+              <p className="clause-section-note clause-movement-view-intro">
+                Where signals pile up — writing purpose, resets, reasons, formulas, repeated words,
+                contrasts, commands, assurance, and pressure you marked. The software never names the H2.
+              </p>
+              <div className="clause-movement-view-grid">
+                <div className="clause-movement-strip-col">
+                  <h3 className="clause-movement-explorer-heading">Convergence</h3>
+                  {scoredConvergenceVerses.length ? (
+                    <div className="clause-convergence-strip" role="list">
+                      {scoredConvergenceVerses.map(hit => (
+                        <button
+                          key={hit.verseKey}
+                          type="button"
+                          role="listitem"
+                          className={[
+                            "clause-convergence-bar",
+                            selectedConvergence?.verseKey === hit.verseKey
+                              ? "clause-convergence-bar--selected"
+                              : "",
+                            hotspotVerseKeys.has(hit.verseKey)
+                              ? "clause-convergence-bar--hotspot"
+                              : ""
+                          ]
+                            .filter(Boolean)
+                            .join(" ")}
+                          title={`${hit.reference} · score ${hit.score}${hit.phase ? ` · ${hit.phase}` : ""}`}
+                          onClick={() => setSelectedConvergenceKey(hit.verseKey)}
+                        >
+                          <span className="clause-convergence-bar-ref">{hit.verseKey}</span>
+                          <span
+                            className="clause-convergence-bar-fill"
+                            style={{ width: `${hit.bar * 10}%` }}
+                            aria-hidden="true"
+                          />
+                          {hit.phase ? (
+                            <span className={`clause-convergence-phase clause-convergence-phase--${hit.phase}`}>
+                              {hit.phase}
+                            </span>
+                          ) : null}
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="clause-output-empty">
+                      No scored verses yet — keep observing; single weak signals stay quiet.
+                    </p>
+                  )}
+                </div>
+
+                <div className="clause-movement-dashboard" aria-label="Verse dashboard">
+                  {selectedConvergence ? (
+                    <>
+                      <p className="clause-convergence-evidence-heading">
+                        {selectedConvergence.reference}
+                        <span className="clause-convergence-score">
+                          score {selectedConvergence.score}
+                        </span>
+                        {selectedConvergence.phase ? (
+                          <span
+                            className={`clause-convergence-phase clause-convergence-phase--${selectedConvergence.phase}`}
+                          >
+                            {selectedConvergence.phase}
+                          </span>
+                        ) : null}
+                      </p>
+                      <p className="clause-section-note">
+                        Why look here — signals for this verse.
+                      </p>
+                      {selectedVerseDashboard.length ? (
+                        <div className="clause-movement-dashboard-sections">
+                          {selectedVerseDashboard.map(section => (
+                            <section
+                              key={section.id}
+                              className="clause-movement-dashboard-section"
+                              aria-label={section.title}
+                            >
+                              <h4 className="clause-movement-dashboard-section-title">
+                                {section.title}
+                              </h4>
+                              <ul className="clause-book-movement-list">
+                                {section.items.map(item => (
+                                  <li key={`${section.id}:${item.label}:${item.detail ?? ""}`}>
+                                    <span className="clause-book-movement-badge">{item.label}</span>
+                                    {item.detail ? (
+                                      <span className="clause-book-movement-meta">{item.detail}</span>
+                                    ) : null}
+                                  </li>
+                                ))}
+                              </ul>
+                            </section>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="clause-output-empty">No evidence items on this verse.</p>
+                      )}
+
+                      <section className="clause-movement-contrasts" aria-label="Add contrast">
+                        <h4 className="clause-movement-dashboard-section-title">Your contrast</h4>
+                        <p className="clause-section-note">
+                          Mark a pole pair you notice on this verse — not an app theme.
+                        </p>
+                        {contrastsOnSelectedVerse.length ? (
+                          <ul className="clause-book-movement-list">
+                            {contrastsOnSelectedVerse.map(item => (
+                              <li key={item.id}>
+                                <span className="clause-book-movement-badge">
+                                  {item.poleA} / {item.poleB}
+                                </span>
+                                {item.note ? (
+                                  <span className="clause-book-movement-meta">{item.note}</span>
+                                ) : null}
+                                <button
+                                  type="button"
+                                  className="clause-h3-flow-remove"
+                                  onClick={() => removeContrast(item.id)}
+                                >
+                                  Remove
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
+                        <div className="clause-movement-contrast-form">
+                          <input
+                            type="text"
+                            className="clause-h3-flow-h2-name"
+                            value={contrastDraftA}
+                            placeholder="pole A"
+                            aria-label="Contrast pole A"
+                            onChange={event => setContrastDraftA(event.target.value)}
+                          />
+                          <span className="clause-movement-contrast-slash" aria-hidden="true">
+                            /
+                          </span>
+                          <input
+                            type="text"
+                            className="clause-h3-flow-h2-name"
+                            value={contrastDraftB}
+                            placeholder="pole B"
+                            aria-label="Contrast pole B"
+                            onChange={event => setContrastDraftB(event.target.value)}
+                          />
+                          <input
+                            type="text"
+                            className="clause-h3-flow-h2-name clause-movement-contrast-note"
+                            value={contrastDraftNote}
+                            placeholder="optional note"
+                            aria-label="Contrast note"
+                            onChange={event => setContrastDraftNote(event.target.value)}
+                          />
+                          <button
+                            type="button"
+                            className="clause-print-btn"
+                            disabled={!contrastDraftA.trim() || !contrastDraftB.trim()}
+                            onClick={addContrastOnSelected}
+                          >
+                            Add contrast
+                          </button>
+                        </div>
+                      </section>
+
+                      {selectedVerseDevelopment.length ? (
+                        <section
+                          className="clause-movement-development"
+                          aria-label="Development"
+                        >
+                          <h4 className="clause-movement-explorer-heading">Development</h4>
+                          <p className="clause-section-note">
+                            Tension, pressure, and argument from what you marked and what returns —
+                            not section titles.
+                          </p>
+                          <div className="clause-movement-dashboard-sections">
+                            {selectedVerseDevelopment.map(section => (
+                              <section
+                                key={section.id}
+                                className="clause-movement-dashboard-section"
+                                aria-label={section.title}
+                              >
+                                <h5 className="clause-movement-dashboard-section-title">
+                                  {section.title}
+                                </h5>
+                                <ul className="clause-book-movement-list">
+                                  {section.items.map(item => (
+                                    <li key={`${section.id}:${item.label}:${item.detail ?? ""}`}>
+                                      <span className="clause-book-movement-badge">{item.label}</span>
+                                      {item.detail ? (
+                                        <span className="clause-book-movement-meta">{item.detail}</span>
+                                      ) : null}
+                                    </li>
+                                  ))}
+                                </ul>
+                                {section.id === "pressure" &&
+                                selectedConvergence.previousH3Id ? (
+                                  <div className="clause-convergence-h2-row">
+                                    {h3FlowPressureSet.has(selectedConvergence.previousH3Id) ? (
+                                      <button
+                                        type="button"
+                                        className="clause-h3-flow-pressure clause-h3-flow-pressure--on"
+                                        aria-pressed="true"
+                                        onClick={() =>
+                                          persistH3Flow(
+                                            clearPressureAfter(
+                                              h3FlowReconciled,
+                                              selectedConvergence.previousH3Id!
+                                            )
+                                          )
+                                        }
+                                      >
+                                        Clear pressure into this verse
+                                      </button>
+                                    ) : (
+                                      <button
+                                        type="button"
+                                        className="clause-h3-flow-pressure"
+                                        aria-pressed="false"
+                                        onClick={() =>
+                                          persistH3Flow(
+                                            markPressureAfter(
+                                              h3FlowReconciled,
+                                              selectedConvergence.previousH3Id!
+                                            )
+                                          )
+                                        }
+                                      >
+                                        Mark pressure into this verse
+                                      </button>
+                                    )}
+                                  </div>
+                                ) : null}
+                              </section>
+                            ))}
+                          </div>
+                        </section>
+                      ) : selectedConvergence.previousH3Id ? (
+                        <section
+                          className="clause-movement-development"
+                          aria-label="Development"
+                        >
+                          <h4 className="clause-movement-explorer-heading">Development</h4>
+                          <p className="clause-section-note">
+                            No tension or argument signals yet — you can still mark pressure.
+                          </p>
+                          <div className="clause-convergence-h2-row">
+                            {h3FlowPressureSet.has(selectedConvergence.previousH3Id) ? (
+                              <button
+                                type="button"
+                                className="clause-h3-flow-pressure clause-h3-flow-pressure--on"
+                                aria-pressed="true"
+                                onClick={() =>
+                                  persistH3Flow(
+                                    clearPressureAfter(
+                                      h3FlowReconciled,
+                                      selectedConvergence.previousH3Id!
+                                    )
+                                  )
+                                }
+                              >
+                                Clear pressure into this verse
+                              </button>
+                            ) : (
+                              <button
+                                type="button"
+                                className="clause-h3-flow-pressure"
+                                aria-pressed="false"
+                                onClick={() =>
+                                  persistH3Flow(
+                                    markPressureAfter(
+                                      h3FlowReconciled,
+                                      selectedConvergence.previousH3Id!
+                                    )
+                                  )
+                                }
+                              >
+                                Mark pressure into this verse
+                              </button>
+                            )}
+                          </div>
+                        </section>
+                      ) : null}
+
+                      <div className="clause-convergence-h2">
+                        <p className="clause-convergence-h2-caption">Your H2</p>
+                        <div className="clause-convergence-h2-row">
+                          <input
+                            type="text"
+                            className="clause-h3-flow-h2-name"
+                            value={h3FlowReconciled.labels[selectedConvergence.anchorH3Id] ?? ""}
+                            placeholder="optional name — you decide"
+                            aria-label="Name this movement"
+                            onChange={event =>
+                              persistH3Flow(
+                                setH2Label(
+                                  h3FlowReconciled,
+                                  selectedConvergence.anchorH3Id,
+                                  event.target.value
+                                )
+                              )
+                            }
+                          />
+                          {selectedConvergence.previousH3Id &&
+                          !h3FlowReconciled.breaksAfter.includes(selectedConvergence.previousH3Id) ? (
+                            <button
+                              type="button"
+                              className="clause-h3-flow-begin clause-h3-flow-begin--candidate"
+                              onClick={() =>
+                                persistH3Flow(
+                                  startH2After(
+                                    h3FlowReconciled,
+                                    selectedConvergence.previousH3Id!
+                                  )
+                                )
+                              }
+                            >
+                              Begin movement here
+                            </button>
+                          ) : selectedConvergence.previousH3Id &&
+                            h3FlowReconciled.breaksAfter.includes(
+                              selectedConvergence.previousH3Id
+                            ) ? (
+                            <span className="clause-book-movement-meta">Movement start placed</span>
+                          ) : null}
+                        </div>
+                      </div>
+                      {confirmedHitsForSelectedVerse.length ? (
+                        <p className="clause-section-note clause-definitions-open-links">
+                          {confirmedHitsForSelectedVerse.map(link => (
+                            <button
+                              key={link.termId}
+                              type="button"
+                              className="clause-audit-ref clause-audit-ref--link"
+                              onClick={() => investigateTerm(link.seed)}
+                            >
+                              Book definition open for {link.seed}
+                            </button>
+                          ))}
+                        </p>
+                      ) : null}
+                      {selectedConvergence.phase === "opens" ? (
+                        <p className="clause-section-note">
+                          <button
+                            type="button"
+                            className="clause-print-btn"
+                            onClick={() =>
+                              addThreadFromOpens(
+                                selectedConvergence.verseKey,
+                                selectedConvergence.reference
+                              )
+                            }
+                          >
+                            Add opens to thread
+                          </button>
+                        </p>
+                      ) : null}
+                      <p className="clause-section-note">
+                        <button
+                          type="button"
+                          className="clause-audit-ref clause-audit-ref--link"
+                          onClick={() => openClauseFromSkeleton(selectedConvergence.anchorH3Id)}
+                        >
+                          Open anchor clause in Passage
+                        </button>
+                      </p>
+                    </>
+                  ) : (
+                    <p className="clause-output-empty">
+                      Select a verse in the strip to open its dashboard.
+                    </p>
+                  )}
+                </div>
+
+                <aside className="clause-movement-verse" aria-label="Selected verse">
+                  {selectedConvergence ? (
+                    <>
+                      <p className="clause-verse-label">{selectedConvergence.verseKey}</p>
+                      <p className="clause-movement-verse-text">
+                        {verseTextByKey.get(selectedConvergence.verseKey) ||
+                          wordsByVerse
+                            .get(selectedConvergence.verseKey)
+                            ?.map(w => w.text)
+                            .join(" ") ||
+                          "(no verse text)"}
+                      </p>
+                    </>
+                  ) : (
+                    <p className="clause-output-empty">Select a verse to read it here.</p>
+                  )}
+                </aside>
+              </div>
+
+              <details className="clause-book-movement-panel clause-movement-repeated-panel">
+                <summary>
+                  Repeated words
+                  <span className="clause-book-movement-count">
+                    {bookMovementReport.repeatedWords.length}
+                  </span>
+                </summary>
+                {bookMovementReport.repeatedWords.length ? (
+                  <div className="clause-book-movement-families">
+                    {bookMovementReport.repeatedWords.slice(0, 40).map(entry => (
+                      <div key={entry.word} className="clause-book-movement-family">
+                        <p className="clause-book-movement-family-label">
+                          {entry.display}
+                          <span className="clause-book-movement-count">{entry.count}</span>
+                          <button
+                            type="button"
+                            className="clause-print-btn clause-definitions-investigate-btn"
+                            onClick={() => investigateTerm(entry.display)}
+                          >
+                            Investigate
+                          </button>
+                        </p>
+                        <p className="clause-book-movement-chain">
+                          {entry.verses.map((hit, hitIndex) => (
+                            <span key={`${entry.word}:${hit.verseKey}`}>
+                              {hitIndex > 0 ? " → " : null}
+                              <button
+                                type="button"
+                                className={
+                                  hit.isReturn
+                                    ? "clause-book-movement-hit clause-book-movement-hit--return clause-book-movement-hit--btn"
+                                    : "clause-book-movement-hit clause-book-movement-hit--btn"
+                                }
+                                title={hit.isReturn ? "Return" : undefined}
+                                onClick={() => setSelectedConvergenceKey(hit.verseKey)}
+                              >
+                                {hit.verseKey}
+                                {hit.isReturn ? "↩" : ""}
+                              </button>
+                            </span>
+                          ))}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="clause-output-empty">No repeated content words yet.</p>
+                )}
+              </details>
+            </div>
+          ) : null}
+
+          {structureMode === "definitions" ? (
+            <div className="clause-definitions-view" aria-label="Book definitions">
+              <p className="clause-section-note clause-definitions-view-intro">
+                Gather what this letter means by a word from its own use. Proposals are candidates —
+                never a finished glossary sense.
+              </p>
+              <div className="clause-definitions-view-grid">
+                <aside className="clause-definitions-glossary" aria-label="Terms">
+                  <h3 className="clause-movement-explorer-heading">Glossary</h3>
+                  {bookDefinitions.terms.length ? (
+                    <ul className="clause-definitions-term-list">
+                      {bookDefinitions.terms.map(term => (
+                        <li key={term.id}>
+                          <button
+                            type="button"
+                            className={
+                              term.id === activeDefinitionTermId
+                                ? "clause-definitions-term clause-definitions-term--active"
+                                : "clause-definitions-term"
+                            }
+                            onClick={() => investigateTerm(term.seed)}
+                          >
+                            <span>{term.seed}</span>
+                            <span className="clause-book-movement-count">
+                              {term.hits.filter(h => h.confirmed).length}
+                            </span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="clause-output-empty">No investigated terms yet.</p>
+                  )}
+
+                  <div className="clause-definitions-seed-row">
+                    <input
+                      type="text"
+                      className="clause-h3-flow-h2-name"
+                      value={definitionSeedDraft}
+                      placeholder="seed, e.g. luz"
+                      aria-label="Definition seed"
+                      onChange={event => setDefinitionSeedDraft(event.target.value)}
+                      onKeyDown={event => {
+                        if (event.key === "Enter") {
+                          event.preventDefault();
+                          investigateTerm(definitionSeedDraft);
+                        }
+                      }}
+                    />
+                    <button
+                      type="button"
+                      className="clause-print-btn"
+                      disabled={!definitionSeedDraft.trim()}
+                      onClick={() => investigateTerm(definitionSeedDraft)}
+                    >
+                      Investigate
+                    </button>
+                  </div>
+
+                  <h4 className="clause-movement-dashboard-section-title">Repeated words</h4>
+                  {bookMovementReport.repeatedWords.length ? (
+                    <div className="clause-definitions-chip-row">
+                      {bookMovementReport.repeatedWords.slice(0, 24).map(entry => (
+                        <button
+                          key={entry.word}
+                          type="button"
+                          className="clause-definitions-chip"
+                          onClick={() => investigateTerm(entry.display)}
+                        >
+                          {entry.display}
+                          <span className="clause-book-movement-count">{entry.count}</span>
+                        </button>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="clause-output-empty">No repeated words yet.</p>
+                  )}
+                </aside>
+
+                <div className="clause-definitions-center" aria-label="Active term">
+                  {activeDefinitionTerm && definitionInvestigation ? (
+                    <>
+                      <h3 className="clause-movement-explorer-heading">
+                        {activeDefinitionTerm.seed}
+                      </h3>
+
+                      {definitionEvidenceSumUp ? (
+                        <details className="clause-definitions-sumup">
+                          <summary>
+                            Investigation sum-up
+                            <span className="clause-book-movement-count">
+                              {definitionEvidenceSumUp.confirmedCount}
+                            </span>
+                          </summary>
+                          <p className="clause-section-note">
+                            Evidence from your confirmed dossier — not a definition.
+                          </p>
+                          {definitionEvidenceSumUp.confirmedCount === 0 ? (
+                            <p className="clause-output-empty">
+                              Confirm hits to build a sum-up.
+                            </p>
+                          ) : (
+                            <>
+                              <ul className="clause-definitions-sumup-counts">
+                                {(
+                                  [
+                                    ["equative", definitionEvidenceSumUp.byKind.equative],
+                                    ["contrast", definitionEvidenceSumUp.byKind.contrast],
+                                    ["use", definitionEvidenceSumUp.byKind.use],
+                                    ["other", definitionEvidenceSumUp.byKind.other]
+                                  ] as const
+                                )
+                                  .filter(([, n]) => n > 0)
+                                  .map(([kind, n]) => (
+                                    <li key={kind}>
+                                      <span className="clause-definitions-hit-kind">{kind}</span>
+                                      <span className="clause-book-movement-count">{n}</span>
+                                    </li>
+                                  ))}
+                              </ul>
+                              {definitionEvidenceSumUp.related.length ? (
+                                <p className="clause-definitions-sumup-related">
+                                  Related confirmed:{" "}
+                                  {definitionEvidenceSumUp.related.join(" · ")}
+                                </p>
+                              ) : null}
+                              <p className="clause-definitions-sumup-chain">
+                                {definitionEvidenceSumUp.verses.join(" → ")}
+                              </p>
+                              <ul className="clause-book-movement-list">
+                                {definitionEvidenceSumUp.lines.map(line => (
+                                  <li key={`${line.verseKey}:${line.kind}:${line.snippet}`}>
+                                    <button
+                                      type="button"
+                                      className="clause-audit-ref clause-audit-ref--link"
+                                      onClick={() => {
+                                        const hit = activeDefinitionTerm.hits.find(
+                                          h =>
+                                            h.confirmed &&
+                                            h.verseKey === line.verseKey &&
+                                            h.snippet === line.snippet
+                                        );
+                                        if (hit) setSelectedDefinitionHitId(hit.id);
+                                      }}
+                                    >
+                                      {line.verseKey}
+                                    </button>
+                                    <span className="clause-definitions-hit-kind">{line.kind}</span>
+                                    <span className="clause-book-movement-meta">
+                                      {line.snippet}
+                                      {line.note ? ` — ${line.note}` : ""}
+                                    </span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </>
+                          )}
+                        </details>
+                      ) : null}
+
+                      <section aria-label="Related surfaces">
+                        <h4 className="clause-movement-dashboard-section-title">Related surfaces</h4>
+                        <p className="clause-section-note">
+                          Confirm partners you accept for this book — proposals only.
+                        </p>
+                        {definitionInvestigation.related.length ? (
+                          <div className="clause-definitions-chip-row">
+                            {definitionInvestigation.related.map(surface => {
+                              const on = activeDefinitionTerm.relatedConfirmed.includes(
+                                surface.display
+                              );
+                              return (
+                                <button
+                                  key={`${surface.reason}:${surface.word}`}
+                                  type="button"
+                                  className={
+                                    on
+                                      ? "clause-definitions-chip clause-definitions-chip--on"
+                                      : "clause-definitions-chip"
+                                  }
+                                  aria-pressed={on}
+                                  title={surface.reason === "partner" ? "contrast partner" : "stem"}
+                                  onClick={() => toggleRelatedSurface(surface.display, !on)}
+                                >
+                                  {surface.display}
+                                  <span className="clause-book-movement-count">{surface.count}</span>
+                                </button>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <p className="clause-output-empty">No related surfaces proposed.</p>
+                        )}
+                      </section>
+
+                      <section aria-label="Proposed hits">
+                        <h4 className="clause-movement-dashboard-section-title">Proposed hits</h4>
+                        <ul className="clause-definitions-hit-list">
+                          {definitionInvestigation.hits.map(hit => {
+                            const stored = activeDefinitionTerm.hits.find(h => h.id === hit.id);
+                            const status = stored
+                              ? stored.confirmed
+                                ? "confirmed"
+                                : "dismissed"
+                              : "pending";
+                            if (status === "confirmed" || status === "dismissed") return null;
+                            return (
+                              <li
+                                key={hit.id}
+                                className={
+                                  selectedDefinitionHitId === hit.id
+                                    ? "clause-definitions-hit clause-definitions-hit--selected"
+                                    : "clause-definitions-hit"
+                                }
+                              >
+                                <button
+                                  type="button"
+                                  className="clause-definitions-hit-main"
+                                  onClick={() => setSelectedDefinitionHitId(hit.id)}
+                                >
+                                  <span className="clause-book-movement-badge">{hit.verseKey}</span>
+                                  <span className="clause-definitions-hit-kind">{hit.kind}</span>
+                                  <span className="clause-book-movement-meta">{hit.snippet}</span>
+                                </button>
+                                <div className="clause-definitions-hit-actions">
+                                  <button
+                                    type="button"
+                                    className="clause-print-btn"
+                                    onClick={() =>
+                                      confirmDefinitionHit({
+                                        id: hit.id,
+                                        verseKey: hit.verseKey,
+                                        kind: hit.kind,
+                                        snippet: hit.snippet
+                                      })
+                                    }
+                                  >
+                                    Confirm
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="clause-h3-flow-remove"
+                                    onClick={() => dismissDefinitionHit(hit.id)}
+                                  >
+                                    Dismiss
+                                  </button>
+                                </div>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                        {definitionInvestigation.hits.every(hit =>
+                          activeDefinitionTerm.hits.some(h => h.id === hit.id)
+                        ) ? (
+                          <p className="clause-output-empty">
+                            {definitionInvestigation.hits.length
+                              ? "All proposals reviewed — see confirmed dossier below."
+                              : "No definitional hits proposed for this seed."}
+                          </p>
+                        ) : null}
+                      </section>
+
+                      <section aria-label="Confirmed dossier">
+                        <h4 className="clause-movement-dashboard-section-title">
+                          Confirmed dossier
+                        </h4>
+                        {activeDefinitionTerm.hits.filter(h => h.confirmed).length ? (
+                          <ul className="clause-definitions-hit-list">
+                            {[...activeDefinitionTerm.hits]
+                              .filter(h => h.confirmed)
+                              .sort((a, b) => {
+                                const [ac, av] = a.verseKey.split(":").map(Number);
+                                const [bc, bv] = b.verseKey.split(":").map(Number);
+                                return ac - bc || av - bv;
+                              })
+                              .map(hit => (
+                                <li
+                                  key={hit.id}
+                                  className={
+                                    selectedDefinitionHitId === hit.id
+                                      ? "clause-definitions-hit clause-definitions-hit--selected clause-definitions-hit--confirmed"
+                                      : "clause-definitions-hit clause-definitions-hit--confirmed"
+                                  }
+                                >
+                                  <button
+                                    type="button"
+                                    className="clause-definitions-hit-main"
+                                    onClick={() => setSelectedDefinitionHitId(hit.id)}
+                                  >
+                                    <span className="clause-book-movement-badge">
+                                      {hit.verseKey}
+                                    </span>
+                                    <span className="clause-definitions-hit-kind">{hit.kind}</span>
+                                    <span className="clause-book-movement-meta">{hit.snippet}</span>
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className="clause-h3-flow-remove"
+                                    onClick={() => dismissDefinitionHit(hit.id)}
+                                  >
+                                    Remove
+                                  </button>
+                                </li>
+                              ))}
+                          </ul>
+                        ) : (
+                          <p className="clause-output-empty">
+                            Confirm hits to build the dossier for this term.
+                          </p>
+                        )}
+                      </section>
+                    </>
+                  ) : (
+                    <p className="clause-output-empty">
+                      Pick a repeated word or type a seed, then Investigate.
+                    </p>
+                  )}
+                </div>
+
+                <aside className="clause-definitions-verse" aria-label="Verse and working definition">
+                  {selectedDefinitionHit ? (
+                    <>
+                      <p className="clause-verse-label">{selectedDefinitionHit.verseKey}</p>
+                      <p className="clause-movement-verse-text">
+                        {verseTextByKey.get(selectedDefinitionHit.verseKey) ||
+                          wordsByVerse
+                            .get(selectedDefinitionHit.verseKey)
+                            ?.map(w => w.text)
+                            .join(" ") ||
+                          selectedDefinitionHit.snippet ||
+                          "(no verse text)"}
+                      </p>
+                      {selectedDefinitionHit.confirmed && activeDefinitionTerm ? (
+                        <label className="clause-definitions-hit-note">
+                          <span className="clause-movement-dashboard-section-title">Hit note</span>
+                          <input
+                            type="text"
+                            className="clause-h3-flow-h2-name"
+                            value={selectedDefinitionHit.note ?? ""}
+                            placeholder="optional note"
+                            aria-label="Note for this hit"
+                            onChange={event => {
+                              const note = event.target.value;
+                              const hitId = selectedDefinitionHit.id;
+                              updateActiveDefinitionTerm(term => ({
+                                ...term,
+                                hits: term.hits.map(h =>
+                                  h.id === hitId
+                                    ? { ...h, note: note.trim() || undefined }
+                                    : h
+                                )
+                              }));
+                            }}
+                          />
+                        </label>
+                      ) : null}
+                    </>
+                  ) : (
+                    <p className="clause-output-empty">Select a hit to read the verse.</p>
+                  )}
+
+                  {activeDefinitionTerm ? (
+                    <label className="clause-definitions-working">
+                      <span className="clause-movement-dashboard-section-title">
+                        Working definition
+                      </span>
+                      <p className="clause-section-note">
+                        What John means by {activeDefinitionTerm.seed} in this letter — your prose
+                        only.
+                      </p>
+                      <textarea
+                        className="clause-definitions-working-text"
+                        rows={8}
+                        value={activeDefinitionTerm.workingDefinition}
+                        placeholder="Write from the confirmed dossier — do not paste a lexicon sense."
+                        onChange={event => {
+                          const workingDefinition = event.target.value;
+                          updateActiveDefinitionTerm(term => ({
+                            ...term,
+                            workingDefinition
+                          }));
+                        }}
+                      />
+                    </label>
+                  ) : null}
+                </aside>
+              </div>
+            </div>
+          ) : null}
+
+          {structureMode === "thread" ? (
+            <div className="clause-thread-view" aria-label="Book thread">
+              <p className="clause-section-note clause-thread-view-intro">
+                Software proposes waypoints. You name the short steps — never auto themes.
+              </p>
+              <div className="clause-thread-view-grid">
+                <aside className="clause-thread-proposals" aria-label="Proposed waypoints">
+                  <h3 className="clause-movement-explorer-heading">Proposed waypoints</h3>
+                  {threadWaypointProposals.length ? (
+                    <ul className="clause-thread-proposal-list">
+                      {threadWaypointProposals.map(proposal => (
+                        <li key={proposal.id} className="clause-thread-proposal">
+                          <div className="clause-definitions-hit-main">
+                            <span className="clause-book-movement-badge">{proposal.verseKey}</span>
+                            <span className="clause-definitions-hit-kind">{proposal.source}</span>
+                            <span className="clause-book-movement-meta">{proposal.evidence}</span>
+                          </div>
+                          <button
+                            type="button"
+                            className="clause-print-btn"
+                            onClick={() => addThreadWaypoint(proposal)}
+                          >
+                            Add
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="clause-output-empty">
+                      No open proposals — writing purposes, opens, and confirmed definition hits
+                      already on the thread, or none detected yet.
+                    </p>
+                  )}
+                </aside>
+
+                <div className="clause-thread-center" aria-label="Your thread">
+                  <h3 className="clause-movement-explorer-heading">Your thread</h3>
+                  {bookThread.steps.length ? (
+                    <ol className="clause-thread-chain">
+                      {bookThread.steps.map((step, index) => (
+                        <li key={step.id} className="clause-thread-step-wrap">
+                          {index > 0 ? (
+                            <span className="clause-thread-arrow" aria-hidden="true">
+                              ↓
+                            </span>
+                          ) : null}
+                          <div
+                            className={
+                              selectedThreadStepId === step.id
+                                ? "clause-thread-step clause-thread-step--selected"
+                                : "clause-thread-step"
+                            }
+                          >
+                            <button
+                              type="button"
+                              className="clause-thread-step-select"
+                              onClick={() => setSelectedThreadStepId(step.id)}
+                            >
+                              <span className="clause-book-movement-badge">{step.verseKey}</span>
+                              <span className="clause-definitions-hit-kind">{step.source}</span>
+                            </button>
+                            <input
+                              type="text"
+                              className="clause-h3-flow-h2-name clause-thread-step-label"
+                              value={step.label}
+                              placeholder="…"
+                              aria-label={`Name step at ${step.verseKey}`}
+                              onFocus={() => setSelectedThreadStepId(step.id)}
+                              onChange={event =>
+                                updateThreadStep(step.id, s => ({
+                                  ...s,
+                                  label: event.target.value
+                                }))
+                              }
+                            />
+                            {step.evidence ? (
+                              <p className="clause-book-movement-meta clause-thread-step-evidence">
+                                {step.evidence}
+                              </p>
+                            ) : null}
+                            <div className="clause-thread-step-actions">
+                              <button
+                                type="button"
+                                className="clause-print-btn"
+                                disabled={index === 0}
+                                onClick={() => moveThreadStep(step.id, -1)}
+                              >
+                                Up
+                              </button>
+                              <button
+                                type="button"
+                                className="clause-print-btn"
+                                disabled={index === bookThread.steps.length - 1}
+                                onClick={() => moveThreadStep(step.id, 1)}
+                              >
+                                Down
+                              </button>
+                              <button
+                                type="button"
+                                className="clause-h3-flow-remove"
+                                onClick={() => removeThreadStep(step.id)}
+                              >
+                                Remove
+                              </button>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
+                  ) : (
+                    <p className="clause-output-empty">
+                      Add waypoints from the left, then name each step.
+                    </p>
+                  )}
+
+                  {bookThread.steps.some(s => s.label.trim()) ? (
+                    <div className="clause-thread-sum-chain" aria-label="Named chain">
+                      <h4 className="clause-movement-dashboard-section-title">Named chain</h4>
+                      <ol className="clause-thread-sum-chain-list">
+                        {bookThread.steps.map((step, index) => (
+                          <li key={step.id} className="clause-thread-sum-chain-item">
+                            {index > 0 ? (
+                              <span className="clause-thread-sum-arrow" aria-hidden="true">
+                                ↓
+                              </span>
+                            ) : null}
+                            <button
+                              type="button"
+                              className={
+                                selectedThreadStepId === step.id
+                                  ? "clause-thread-sum-label clause-thread-sum-label--selected"
+                                  : "clause-thread-sum-label"
+                              }
+                              onClick={() => setSelectedThreadStepId(step.id)}
+                            >
+                              {step.label.trim() || "…"}
+                            </button>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  ) : null}
+                </div>
+
+                <aside className="clause-thread-verse" aria-label="Selected step verse">
+                  {selectedThreadStep ? (
+                    <>
+                      <p className="clause-verse-label">{selectedThreadStep.verseKey}</p>
+                      <p className="clause-movement-verse-text">
+                        {verseTextByKey.get(selectedThreadStep.verseKey) ||
+                          wordsByVerse
+                            .get(selectedThreadStep.verseKey)
+                            ?.map(w => w.text)
+                            .join(" ") ||
+                          "(no verse text)"}
+                      </p>
+                      {selectedThreadStep.evidence ? (
+                        <p className="clause-section-note">{selectedThreadStep.evidence}</p>
+                      ) : null}
+                    </>
+                  ) : (
+                    <p className="clause-output-empty">Select a step to read its verse.</p>
+                  )}
+                </aside>
+              </div>
+            </div>
+          ) : null}
+
+          <div
+            className="structure-passage-stack"
+            hidden={
+              structureMode === "movement" ||
+              structureMode === "definitions" ||
+              structureMode === "thread"
+            }
+            aria-hidden={
+              structureMode === "movement" ||
+              structureMode === "definitions" ||
+              structureMode === "thread"
+            }
+          >
           <div className="structure-audits" aria-label="Structure audits and warnings">
           {unreviewedClauseRows.length ? (
             <section className="clause-unresolved-participles" aria-label="Clauses not yet identified">
@@ -2748,10 +4404,9 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                     const overlaps = overlapGreekTokenIds.has(tokenId);
                     const reviewing = reviewingGreekTokenIds.has(tokenId);
                     const lbfAid = lbfSurfaces.get(tokenNumber);
-                    // Prefer LBF; fall back to BLE gloss so unaligned tokens still
-                    // show a Spanish cue instead of an empty ·.
-                    const aidText = lbfAid ?? token.gloss;
-                    const aidIsFallback = !lbfAid && Boolean(token.gloss);
+                    // LBF only under the token. Unaligned → · (MorphGNT spine
+                    // stays; Spanish surface is LBF — no BLE gloss fallback).
+                    const aidText = lbfAid;
 
                     let className = "clause-greek-token";
                     if (isVerbToken) className += " clause-greek-token--verb";
@@ -2761,7 +4416,6 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                     if (overlaps) className += " clause-greek-token--overlap";
                     if (reviewing) className += " clause-greek-token--reviewing";
                     if (!lbfAid) className += " clause-greek-token--unaligned";
-                    if (aidIsFallback) className += " clause-greek-token--ble-fallback";
 
                     return (
                       <button
@@ -2787,9 +4441,8 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                               {token.morph ? <span className="token-detail-rmac">{token.morph}</span> : null}
                             </span>
                             <span className="token-detail-morph-desc">{describeRmac(token.morph)}</span>
-                            {token.gloss ? <span className="token-detail-gloss">BLE: {token.gloss}</span> : null}
                             <span className="token-detail-gloss">
-                              {lbfAid ? `LBF: ${lbfAid}` : "LBF: (unaligned — showing BLE under token)"}
+                              {lbfAid ? `LBF: ${lbfAid}` : "LBF: (unaligned)"}
                             </span>
                           </span>
                         </span>
@@ -2957,12 +4610,19 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                         {token.greek}
                       </span>
                     ))}
-                    <span className="clause-beginning-label">BLE</span>
-                    {activeBeginningRow.beginningTokens.map(token => (
-                      <span className="clause-beginning-token clause-beginning-token--ble" key={`ble-${token.id}`}>
-                        {token.ble}
-                      </span>
-                    ))}
+                    <span className="clause-beginning-label">LBF</span>
+                    {activeBeginningRow.beginningTokens.map(token => {
+                      const [ch, vs, tok] = token.id.split(":").map(Number);
+                      const lbf =
+                        Number.isFinite(ch) && Number.isFinite(vs) && Number.isFinite(tok)
+                          ? loadLbfTokenSurfaces(ch, vs, bookId).get(tok)
+                          : undefined;
+                      return (
+                        <span className="clause-beginning-token clause-beginning-token--lbf" key={`lbf-${token.id}`}>
+                          {lbf?.replace(/·/g, " ").trim() || "·"}
+                        </span>
+                      );
+                    })}
                   </div>
                 ) : null}
 
@@ -3478,6 +5138,10 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
               <p className="clause-output-empty">Select a clause from the side menu to review it here.</p>
             )}
           </div>
+          </div>
+          </div>
+
+      </section>
 
           {skeletonOpen ? (
           <div
@@ -3613,126 +5277,480 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
               </div>
             ) : null}
 
-            {sequenceEntryByFiniteVerbId.size ? (
-              <dl className="sequence-legend">
-                <div>
-                  <dt className="sequence-tag sequence-tag--reason">Reason</dt>
-                  <dd>carries an attached reason clause (γάρ / διότι / ὅτι), at any depth</dd>
-                </div>
-                <div>
-                  <dt className="sequence-tag sequence-tag--statement">Statement</dt>
-                  <dd>statement mood, and not already a reason — the content being asserted</dd>
-                </div>
-                <div>
-                  <dt className="sequence-tag sequence-tag--imperative">Imperative</dt>
-                  <dd>a command (Brick 2)</dd>
-                </div>
-                <div>
-                  <dt className="sequence-tag sequence-tag--purpose">Purpose</dt>
-                  <dd>has a directly-attached purpose clause</dd>
-                </div>
-                <div>
-                  <dt className="sequence-tag sequence-tag--recipient">Recipient</dt>
-                  <dd>who an imperative is addressed to, from Brick 2B — consecutive same-recipient roots are grouped visually</dd>
-                </div>
-              </dl>
+            {outline.length || skeleton.roots.length ? (
+              <div className="clause-telos-section clause-telos-section--compact" data-telos-section="true">
+                <h3>Candidate telos</h3>
+                {telos ? (
+                  <>
+                    {telos.purposeClauses.map(clause => (
+                      <p className="clause-telos-item" key={clause.finiteVerbId}>
+                        {clause.spanText}
+                      </p>
+                    ))}
+                    {telos.lastOutlineClause ? (
+                      <>
+                        <p className="clause-telos-vs">compare with the outline&apos;s last point</p>
+                        <p className="clause-telos-item clause-telos-item--outline">
+                          {telos.lastOutlineClause.spanText}
+                        </p>
+                      </>
+                    ) : null}
+                    <p className="clause-telos-note">
+                      Does this look like the book&apos;s stated purpose? That&apos;s your call, not something the
+                      software concludes.
+                    </p>
+                  </>
+                ) : (
+                  <p className="clause-telos-note">
+                    No candidate yet. A purpose clause (ἵνα / ὅπως) attached directly to a root independent
+                    clause will appear here, next to the outline&apos;s last point.
+                  </p>
+                )}
+              </div>
             ) : null}
 
-            {skeleton.roots.length ? (
-              <div className="clause-tree">{skeleton.roots.map(renderSkeletonNode)}</div>
-            ) : (
-              <p className="clause-output-empty">
-                Nothing placed yet. Classify a clause as Independent, or as content/frame pointing at one, and it
-                shows up here.
-              </p>
-            )}
+            {outline.length ? (
+              <div className="clause-book-movement" aria-label="Book movement">
+                <h3>Book movement</h3>
+                <p className="clause-section-note">
+                  What keeps returning, what is added, and where threads converge — not themes, not
+                  automatic H2s. Use the Movement view for the verse dashboard; inventory stays here.
+                </p>
+                <p className="clause-section-note">
+                  <button
+                    type="button"
+                    className="clause-print-btn"
+                    onClick={() => {
+                      closeSkeletonPopup();
+                      setStructureMode("movement");
+                    }}
+                  >
+                    Open Movement view
+                    {convergenceReport.hotspots.length
+                      ? ` (${convergenceReport.hotspots.length} hotspots)`
+                      : ""}
+                  </button>
+                </p>
+
+                <details className="clause-book-movement-panel" open>
+                  <summary>1. Writing-purpose trajectory</summary>
+                  {bookMovementReport.writingPurposes.length ? (
+                    <ol className="clause-book-movement-trajectory">
+                      {bookMovementReport.writingPurposes.map(hit => (
+                        <li key={hit.finiteVerbId}>
+                          <span className="clause-book-movement-ref">{hit.reference}</span>
+                          <span className="clause-book-movement-traj">{hit.trajectory}</span>
+                          <button
+                            type="button"
+                            className="clause-print-btn clause-definitions-investigate-btn"
+                            onClick={() => {
+                              closeSkeletonPopup();
+                              addThreadFromWritingPurpose(hit);
+                            }}
+                          >
+                            Add to thread
+                          </button>
+                        </li>
+                      ))}
+                    </ol>
+                  ) : (
+                    <p className="clause-output-empty">No writing-purpose statements detected yet.</p>
+                  )}
+                </details>
+
+                <details className="clause-book-movement-panel">
+                  <summary>
+                    2. Possible discourse resets
+                    <span className="clause-book-movement-count">
+                      {bookMovementReport.discourseResets.length}
+                    </span>
+                  </summary>
+                  {bookMovementReport.discourseResets.length ? (
+                    <ul className="clause-book-movement-list">
+                      {bookMovementReport.discourseResets.map(hit => (
+                        <li key={`${hit.finiteVerbId}:${hit.label}`}>
+                          <span className="clause-book-movement-ref">{hit.reference}</span>
+                          <span className="clause-book-movement-badge">{hit.label}</span>
+                          <span className="clause-book-movement-kind">{hit.kind}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="clause-output-empty">No strong reset formulas detected.</p>
+                  )}
+                </details>
+
+                <details className="clause-book-movement-panel">
+                  <summary>
+                    3. Repeated formulas
+                    <span className="clause-book-movement-count">
+                      {bookMovementReport.formulas.length}
+                    </span>
+                  </summary>
+                  {bookMovementReport.formulasByFamily.length ? (
+                    <div className="clause-book-movement-families">
+                      {bookMovementReport.formulasByFamily.map(family => (
+                        <div key={family.familyId} className="clause-book-movement-family">
+                          <p className="clause-book-movement-family-label">{family.familyLabel}</p>
+                          <p className="clause-book-movement-chain">
+                            {family.hits.map(hit => hit.reference).join(" → ")}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="clause-output-empty">No formula families matched.</p>
+                  )}
+                </details>
+
+                <details className="clause-book-movement-panel">
+                  <summary>
+                    4. Repeated words
+                    <span className="clause-book-movement-count">
+                      {bookMovementReport.repeatedWords.length}
+                    </span>
+                  </summary>
+                  {bookMovementReport.repeatedWords.length ? (
+                    <div className="clause-book-movement-families">
+                      {bookMovementReport.repeatedWords.slice(0, 40).map(entry => (
+                        <div key={entry.word} className="clause-book-movement-family">
+                          <p className="clause-book-movement-family-label">
+                            {entry.display}
+                            <span className="clause-book-movement-count">{entry.count}</span>
+                          </p>
+                          <p className="clause-book-movement-chain">
+                            {entry.verses.map((hit, hitIndex) => (
+                              <span key={`${entry.word}:${hit.verseKey}`}>
+                                {hitIndex > 0 ? " → " : null}
+                                <span
+                                  className={
+                                    hit.isReturn
+                                      ? "clause-book-movement-hit clause-book-movement-hit--return"
+                                      : "clause-book-movement-hit"
+                                  }
+                                  title={
+                                    hit.isReturn
+                                      ? `Return · ×${hit.count}`
+                                      : `×${hit.count}`
+                                  }
+                                >
+                                  {hit.reference.replace(/^.*\s+(\d+:\d+)\s*$/, "$1") || hit.verseKey}
+                                  {hit.isReturn ? "↩" : ""}
+                                </span>
+                              </span>
+                            ))}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="clause-output-empty">No repeated content words yet.</p>
+                  )}
+                </details>
+
+                <details className="clause-book-movement-panel">
+                  <summary>
+                    5. Semantic families
+                    <span className="clause-book-movement-count">
+                      {bookMovementReport.vocabByField.length} fields
+                    </span>
+                  </summary>
+                  {bookMovementReport.vocabByField.length ? (
+                    <div className="clause-book-movement-families">
+                      {bookMovementReport.vocabByField.map(field => (
+                        <div key={field.fieldId} className="clause-book-movement-family">
+                          <p className="clause-book-movement-family-label">{field.fieldLabel}</p>
+                          <p className="clause-book-movement-chain">
+                            {field.hits.map((hit, hitIndex) => (
+                              <span key={`${hit.finiteVerbId}:${hit.fieldId}`}>
+                                {hitIndex > 0 ? " → " : null}
+                                <span
+                                  className={
+                                    hit.isReturn
+                                      ? "clause-book-movement-hit clause-book-movement-hit--return"
+                                      : "clause-book-movement-hit"
+                                  }
+                                  title={
+                                    hit.isReturn
+                                      ? `Return: ${hit.matched.join(" · ")}`
+                                      : hit.matched.join(" · ")
+                                  }
+                                >
+                                  {hit.reference}
+                                  {hit.isReturn ? "↩" : ""}
+                                </span>
+                              </span>
+                            ))}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="clause-output-empty">No semantic families matched.</p>
+                  )}
+                </details>
+
+                <details className="clause-book-movement-panel">
+                  <summary>
+                    6. Convergence &amp; candidate boundaries
+                    <span className="clause-book-movement-count">
+                      {bookMovementReport.candidateBoundaries.length}
+                    </span>
+                  </summary>
+                  {bookMovementReport.convergences.length ? (
+                    <>
+                      <p className="clause-book-movement-subhead">Convergence points</p>
+                      <ul className="clause-book-movement-list">
+                        {bookMovementReport.convergences.slice(0, 12).map(hit => (
+                          <li key={hit.finiteVerbId}>
+                            <span className="clause-book-movement-ref">{hit.reference}</span>
+                            <span className="clause-book-movement-meta">
+                              {hit.strength} signals
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : null}
+                  {bookMovementReport.candidateBoundaries.length ? (
+                    <>
+                      <p className="clause-book-movement-subhead">
+                        Candidate large boundaries (≥3 independent signals)
+                      </p>
+                      <ul className="clause-book-movement-list">
+                        {bookMovementReport.candidateBoundaries.map(hit => (
+                          <li key={hit.afterH3Id}>
+                            <span className="clause-book-movement-ref">{hit.reference}</span>
+                            <span className="clause-book-movement-meta">
+                              {hit.signalKinds.join(" · ")}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : (
+                    <p className="clause-output-empty">
+                      No candidate boundaries yet — one weak signal never opens a movement.
+                    </p>
+                  )}
+                </details>
+              </div>
+            ) : null}
 
             {outline.length ? (
               <div className="clause-h3-flow" aria-label="H3 flow">
                 <h3>H3 flow</h3>
                 <p className="clause-section-note">
-                  Independent clauses in book order. Read the flow. Where you observe a new movement,
-                  begin an H2. The app never asks you to accept a boundary — it only shows
-                  observations that support the ones you place.
+                  Linear clauses in book order. Prefer the Movement view when placing H2s —
+                  begin a movement where several threads converge, not at every subject change.
+                  Mark pressure where you notice tension.
                 </p>
                 <div className="clause-h3-flow-list">
-                  {h3FlowUnits.map((unit, index) => {
-                    const prev = index > 0 ? h3FlowUnits[index - 1] : null;
-                    const h2StartsHere =
-                      prev != null && h3FlowReconciled.breaksAfter.includes(prev.finiteVerbId);
-                    const support = prev ? h3FlowSupportByAfterId.get(prev.finiteVerbId) : null;
-                    // First H3 always opens H2 (1:1 / book start). Later H2s are user-placed.
-                    const showH2Heading = index === 0 || h2StartsHere;
+                  {h3FlowMovements.map((movement, movementIndex) => {
+                    const movementFirstId = movement.h3Ids[0] ?? "";
+                    const prevMovementLast =
+                      movementIndex > 0
+                        ? h3FlowMovements[movementIndex - 1]?.units[
+                            (h3FlowMovements[movementIndex - 1]?.units.length ?? 1) - 1
+                          ]
+                        : null;
+                    const support = prevMovementLast
+                      ? h3FlowSupportByAfterId.get(prevMovementLast.finiteVerbId)
+                      : null;
                     return (
-                      <div key={unit.finiteVerbId} className="clause-h3-flow-item">
-                        {prev ? (
-                          <div className="clause-h3-flow-boundary">
-                            {h2StartsHere ? (
-                              <div className="clause-h3-flow-placed">
-                                <div className="clause-h3-flow-rule" aria-hidden="true" />
-                                {support?.observations.length ? (
-                                  <div className="clause-h3-flow-support">
-                                    <p className="clause-h3-flow-support-heading">
-                                      Observations supporting this decision
-                                    </p>
-                                    <ul>
-                                      {support.observations.map(item => (
-                                        <li key={item}>{item}</li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                ) : null}
-                                <button
-                                  type="button"
-                                  className="clause-h3-flow-remove"
-                                  onClick={() =>
-                                    persistH3Flow(clearH2Start(h3FlowReconciled, prev.finiteVerbId))
-                                  }
-                                >
-                                  Remove movement start
-                                </button>
+                      <div
+                        key={movementFirstId || `movement-${movementIndex}`}
+                        className="clause-h3-flow-movement"
+                      >
+                        {movementIndex > 0 && prevMovementLast ? (
+                          <div className="clause-h3-flow-placed">
+                            <div className="clause-h3-flow-rule" aria-hidden="true" />
+                            {support?.observations.length ? (
+                              <div className="clause-h3-flow-support">
+                                <p className="clause-h3-flow-support-heading">
+                                  Observations supporting this decision
+                                </p>
+                                <ul>
+                                  {support.observations.map(item => (
+                                    <li key={item}>{item}</li>
+                                  ))}
+                                </ul>
                               </div>
-                            ) : (
+                            ) : null}
+                            <div className="clause-h3-flow-boundary clause-h3-flow-boundary--placed">
                               <button
                                 type="button"
-                                className="clause-h3-flow-begin"
+                                className="clause-h3-flow-remove"
                                 onClick={() =>
-                                  persistH3Flow(startH2After(h3FlowReconciled, prev.finiteVerbId))
+                                  persistH3Flow(
+                                    clearH2Start(h3FlowReconciled, prevMovementLast.finiteVerbId)
+                                  )
                                 }
                               >
-                                Begin new movement
+                                Remove movement start
                               </button>
-                            )}
+                              <button
+                                type="button"
+                                className={
+                                  h3FlowPressureSet.has(prevMovementLast.finiteVerbId)
+                                    ? "clause-h3-flow-pressure clause-h3-flow-pressure--on"
+                                    : "clause-h3-flow-pressure"
+                                }
+                                aria-pressed={h3FlowPressureSet.has(prevMovementLast.finiteVerbId)}
+                                title={
+                                  h3FlowPressureSet.has(prevMovementLast.finiteVerbId)
+                                    ? "Clear pressure mark"
+                                    : "Mark pressure — tension or opposition you notice here"
+                                }
+                                onClick={() =>
+                                  persistH3Flow(
+                                    h3FlowPressureSet.has(prevMovementLast.finiteVerbId)
+                                      ? clearPressureAfter(
+                                          h3FlowReconciled,
+                                          prevMovementLast.finiteVerbId
+                                        )
+                                      : markPressureAfter(
+                                          h3FlowReconciled,
+                                          prevMovementLast.finiteVerbId
+                                        )
+                                  )
+                                }
+                              >
+                                {h3FlowPressureSet.has(prevMovementLast.finiteVerbId)
+                                  ? "Pressure marked"
+                                  : "Mark pressure"}
+                              </button>
+                            </div>
                           </div>
                         ) : null}
-                        {showH2Heading ? (
-                          <p className="clause-h3-flow-h2-heading">
-                            H2
-                            {h3FlowReconciled.labels[unit.finiteVerbId]
-                              ? ` — ${h3FlowReconciled.labels[unit.finiteVerbId]}`
-                              : ""}
-                          </p>
-                        ) : null}
-                        <div className="clause-h3-flow-row">
-                          <div className="clause-h3-flow-main">
-                            <span className="clause-h3-flow-kind">H3</span>
-                            <span className="clause-h3-flow-ref">{unit.reference}</span>
-                            <span className="clause-h3-flow-span">{unit.spanText}</span>
-                          </div>
-                          <div
-                            className={
-                              unit.subject
-                                ? "clause-h3-flow-subject"
-                                : "clause-h3-flow-subject clause-h3-flow-subject--empty"
-                            }
-                            title="Quién actúa (H3 root)"
-                          >
-                            <span className="clause-h3-flow-subject-label">sujeto</span>
-                            <span className="clause-h3-flow-subject-value">
-                              {unit.subject ?? "—"}
-                            </span>
-                          </div>
+                        <div className="clause-h3-flow-h2-bar">
+                          <p className="clause-h3-flow-h2-heading">H2</p>
+                          <label className="clause-h3-flow-h2-name-label">
+                            <span className="clause-h3-flow-h2-name-caption">Name</span>
+                            <input
+                              type="text"
+                              className="clause-h3-flow-h2-name"
+                              value={h3FlowReconciled.labels[movementFirstId] ?? ""}
+                              placeholder="optional"
+                              aria-label="Name this movement"
+                              onChange={event =>
+                                persistH3Flow(
+                                  setH2Label(h3FlowReconciled, movementFirstId, event.target.value)
+                                )
+                              }
+                            />
+                          </label>
                         </div>
+                        {movement.units.map((unit, unitIndex) => {
+                          const prevInMovement =
+                            unitIndex > 0 ? movement.units[unitIndex - 1] ?? null : null;
+                          const pressureMarked = prevInMovement
+                            ? h3FlowPressureSet.has(prevInMovement.finiteVerbId)
+                            : false;
+                          const isCandidateSeam = prevInMovement
+                            ? candidateBoundaryAfterIds.has(prevInMovement.finiteVerbId)
+                            : false;
+                          const isDiscourseReset = discourseResetIds.has(unit.finiteVerbId);
+                          return (
+                            <div key={unit.finiteVerbId} className="clause-h3-flow-item">
+                              {prevInMovement ? (
+                                <div
+                                  className={
+                                    isCandidateSeam
+                                      ? "clause-h3-flow-boundary clause-h3-flow-boundary--candidate"
+                                      : "clause-h3-flow-boundary"
+                                  }
+                                >
+                                  {isCandidateSeam ? (
+                                    <span className="clause-h3-flow-candidate-label">
+                                      Candidate boundary
+                                    </span>
+                                  ) : null}
+                                  <button
+                                    type="button"
+                                    className={
+                                      isCandidateSeam
+                                        ? "clause-h3-flow-begin clause-h3-flow-begin--candidate"
+                                        : "clause-h3-flow-begin"
+                                    }
+                                    onClick={() =>
+                                      persistH3Flow(
+                                        startH2After(h3FlowReconciled, prevInMovement.finiteVerbId)
+                                      )
+                                    }
+                                  >
+                                    Begin new movement
+                                  </button>
+                                  <button
+                                    type="button"
+                                    className={
+                                      pressureMarked
+                                        ? "clause-h3-flow-pressure clause-h3-flow-pressure--on"
+                                        : "clause-h3-flow-pressure"
+                                    }
+                                    aria-pressed={pressureMarked}
+                                    title={
+                                      pressureMarked
+                                        ? "Clear pressure mark"
+                                        : "Mark pressure — tension or opposition you notice here"
+                                    }
+                                    onClick={() =>
+                                      persistH3Flow(
+                                        pressureMarked
+                                          ? clearPressureAfter(
+                                              h3FlowReconciled,
+                                              prevInMovement.finiteVerbId
+                                            )
+                                          : markPressureAfter(
+                                              h3FlowReconciled,
+                                              prevInMovement.finiteVerbId
+                                            )
+                                      )
+                                    }
+                                  >
+                                    {pressureMarked ? "Pressure marked" : "Mark pressure"}
+                                  </button>
+                                </div>
+                              ) : null}
+                              <div className="clause-h3-flow-row">
+                                <div className="clause-h3-flow-main">
+                                  <span className="clause-h3-flow-kind">H3</span>
+                                  <span className="clause-h3-flow-ref">{unit.reference}</span>
+                                  <span className="clause-h3-flow-span">{unit.spanText}</span>
+                                  {isDiscourseReset ? (
+                                    <span
+                                      className="clause-h3-flow-reset-tick"
+                                      title="Possible discourse reset — authorial reorientation, not an automatic H2"
+                                    >
+                                      Possible discourse reset
+                                    </span>
+                                  ) : null}
+                                  {h3FlowPressureSet.has(unit.finiteVerbId) ? (
+                                    <span
+                                      className="clause-h3-flow-pressure-tick"
+                                      title="Pressure marked after this H3"
+                                    >
+                                      pressure
+                                    </span>
+                                  ) : null}
+                                </div>
+                                <div
+                                  className={
+                                    unit.subject
+                                      ? "clause-h3-flow-subject"
+                                      : "clause-h3-flow-subject clause-h3-flow-subject--empty"
+                                  }
+                                  title="Quién actúa (H3 root)"
+                                >
+                                  <span className="clause-h3-flow-subject-label">sujeto</span>
+                                  <span className="clause-h3-flow-subject-value">
+                                    {unit.subject ?? "—"}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     );
                   })}
@@ -3787,6 +5805,49 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                 </p>
               )}
             </div>
+
+            <details className="clause-skeleton-tree-details">
+              <summary>Clause tree (grammar nest)</summary>
+              <p className="clause-section-note">
+                How clauses attach — relative, content, frame. Read the book in H3 flow above;
+                open this when you need the nest.
+              </p>
+              {sequenceEntryByFiniteVerbId.size ? (
+                <dl className="sequence-legend">
+                  <div>
+                    <dt className="sequence-tag sequence-tag--reason">Reason</dt>
+                    <dd>carries an attached reason clause (γάρ / διότι / ὅτι), at any depth</dd>
+                  </div>
+                  <div>
+                    <dt className="sequence-tag sequence-tag--statement">Statement</dt>
+                    <dd>statement mood, and not already a reason — the content being asserted</dd>
+                  </div>
+                  <div>
+                    <dt className="sequence-tag sequence-tag--imperative">Imperative</dt>
+                    <dd>a command (Brick 2)</dd>
+                  </div>
+                  <div>
+                    <dt className="sequence-tag sequence-tag--purpose">Purpose</dt>
+                    <dd>has a directly-attached purpose clause</dd>
+                  </div>
+                  <div>
+                    <dt className="sequence-tag sequence-tag--recipient">Recipient</dt>
+                    <dd>
+                      who an imperative is addressed to, from Brick 2B — consecutive same-recipient
+                      roots are grouped visually
+                    </dd>
+                  </div>
+                </dl>
+              ) : null}
+              {skeleton.roots.length ? (
+                <div className="clause-tree">{skeleton.roots.map(renderSkeletonNode)}</div>
+              ) : (
+                <p className="clause-output-empty">
+                  Nothing placed yet. Classify a clause as Independent, or as content/frame pointing
+                  at one, and it shows up here.
+                </p>
+              )}
+            </details>
 
             <div className="clause-subject-host-section" data-subject-host-section="true">
             {verblessVerses.length ? (
@@ -3882,44 +5943,11 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
             ) : null}
             </div>
 
-            {outline.length || skeleton.roots.length ? (
-              <div className="clause-telos-section" data-telos-section="true">
-                <h3>Candidate telos</h3>
-                {telos ? (
-                  <>
-                    {telos.purposeClauses.map(clause => (
-                      <p className="clause-telos-item" key={clause.finiteVerbId}>
-                        {clause.spanText}
-                      </p>
-                    ))}
-                    {telos.lastOutlineClause ? (
-                      <>
-                        <p className="clause-telos-vs">compare with the outline&apos;s last point</p>
-                        <p className="clause-telos-item clause-telos-item--outline">
-                          {telos.lastOutlineClause.spanText}
-                        </p>
-                      </>
-                    ) : null}
-                    <p className="clause-telos-note">
-                      Does this look like the book&apos;s stated purpose? That&apos;s your call, not something the
-                      software concludes.
-                    </p>
-                  </>
-                ) : (
-                  <p className="clause-telos-note">
-                    No candidate yet. A purpose clause (ἵνα / ὅπως) attached directly to a root independent
-                    clause will appear here, next to the outline&apos;s last point.
-                  </p>
-                )}
-              </div>
-            ) : null}
-
             </div>
           </aside>
           </div>
           ) : null}
-        </div>
-      </section>
+
 
       {activeVerb && !showSpanishOnly ? (
         <aside className="clause-selection-panel" aria-live="polite">

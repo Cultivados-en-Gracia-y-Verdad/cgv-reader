@@ -1,7 +1,8 @@
-import { getReaderBookInfo, type ReaderBookId } from "@cgv/core";
+import { getReaderBookInfo, readerBookHasOshb, type ReaderBookId } from "@cgv/core";
 import { parseNblaContent } from "cgv-bible";
 import type { BibleVerse } from "cgv-bible";
-import { loadInterlinearRaw, loadMorphRaw, loadNblaRaw, loadTokensRaw } from "./book-assets";
+import { loadInterlinearRaw, loadLbfRaw, loadMorphRaw, loadNblaRaw, loadTokensRaw } from "./book-assets";
+import { mtToProtestant, oshbToSourceMorph, otTokenId } from "./oshb";
 import { getWorkshopBookId } from "./workshop-book";
 
 export interface GreekToken {
@@ -67,10 +68,16 @@ function parseAlignmentLine(line: string, bookId: ReaderBookId): AlignmentToken 
   try {
     const parsed = JSON.parse(line);
     if (!parsed || parsed.book !== bookId) return null;
+    const tokenNum =
+      typeof parsed.tok === "number"
+        ? parsed.tok
+        : typeof parsed.w === "number"
+          ? parsed.w
+          : null;
     if (
       typeof parsed.ch !== "number" ||
       typeof parsed.vs !== "number" ||
-      typeof parsed.tok !== "number" ||
+      tokenNum === null ||
       typeof parsed.surface !== "string" ||
       typeof parsed.lemma !== "string" ||
       typeof parsed.morph !== "string" ||
@@ -80,10 +87,10 @@ function parseAlignmentLine(line: string, bookId: ReaderBookId): AlignmentToken 
     }
 
     return {
-      id: `${parsed.ch}:${parsed.vs}:${parsed.tok}`,
+      id: `${parsed.ch}:${parsed.vs}:${tokenNum}`,
       chapter: parsed.ch,
       verse: parsed.vs,
-      token: parsed.tok,
+      token: tokenNum,
       surface: parsed.surface,
       lemma: parsed.lemma,
       morph: parsed.morph,
@@ -125,7 +132,15 @@ function parseInterlinearVerseLine(
     tokens.push({ surface, lemma, strongs, morph, gloss: gloss.replace(/·/g, " ") });
   }
 
-  return { chapter: Number(match[1]), verse: Number(match[2]), tokens };
+  let chapter = Number(match[1]);
+  let verse = Number(match[2]);
+  if (readerBookHasOshb(bookId)) {
+    const remapped = mtToProtestant(chapter, verse);
+    chapter = remapped.chapter;
+    verse = remapped.verse;
+  }
+
+  return { chapter, verse, tokens };
 }
 
 const interlinearCache = new Map<ReaderBookId, Map<string, VerseInterlinearToken[]>>();
@@ -351,6 +366,69 @@ export function describeRmac(rmac: string): string {
   return rmac;
 }
 
+function parseOshbTokensToGreek(
+  tokensRaw: string,
+  bookId: ReaderBookId,
+  displayName: string
+): Map<string, GreekVerse> {
+  const verses = new Map<string, GreekVerse>();
+  for (const line of tokensRaw.replace(/\r\n/g, "\n").split("\n")) {
+    if (!line.trim()) continue;
+    let row: Record<string, unknown>;
+    try {
+      row = JSON.parse(line) as Record<string, unknown>;
+    } catch {
+      continue;
+    }
+    if (row.book !== bookId || typeof row.ch !== "number" || typeof row.vs !== "number") continue;
+    const w = typeof row.w === "number" ? row.w : typeof row.tok === "number" ? row.tok : null;
+    if (w === null || typeof row.surface !== "string" || typeof row.morph !== "string") continue;
+
+    const { chapter, verse } = mtToProtestant(row.ch, row.vs);
+    const morph = row.morph;
+    const lemma = typeof row.lemma === "string" ? row.lemma : "";
+    const sourceMorph = oshbToSourceMorph(morph);
+    const key = `${chapter}:${verse}`;
+    const greekVerse =
+      verses.get(key) ??
+      {
+        chapter,
+        verse,
+        label: `${displayName} ${chapter}:${verse}`,
+        tokens: [] as GreekToken[]
+      };
+
+    greekVerse.tokens.push({
+      id: otTokenId(chapter, verse, w),
+      chapter,
+      verse,
+      token: w,
+      surface: row.surface,
+      sourceMorph,
+      rmac: morph,
+      lemma
+    });
+    verses.set(key, greekVerse);
+  }
+  for (const verse of verses.values()) {
+    verse.tokens.sort((a, b) => a.token - b.token);
+  }
+  return verses;
+}
+
+function remapOshbAlignmentTokens(tokens: AlignmentToken[]): AlignmentToken[] {
+  return tokens.map(token => {
+    const { chapter, verse } = mtToProtestant(token.chapter, token.verse);
+    if (chapter === token.chapter && verse === token.verse) return token;
+    return {
+      ...token,
+      id: `${chapter}:${verse}:${token.token}`,
+      chapter,
+      verse
+    };
+  });
+}
+
 export async function loadBookData(bookId: ReaderBookId): Promise<BookMorphData> {
   const cached = bookDataCache.get(bookId);
   if (cached) return cached;
@@ -361,6 +439,44 @@ export async function loadBookData(bookId: ReaderBookId): Promise<BookMorphData>
   const promise = (async () => {
     const displayName = getReaderBookInfo(bookId).displayName;
     const verses = new Map<string, GreekVerse>();
+
+    if (readerBookHasOshb(bookId)) {
+      const [tokensRaw] = await Promise.all([loadTokensRaw(bookId), loadVerseInterlinearMap(bookId)]);
+      for (const [key, verse] of parseOshbTokensToGreek(tokensRaw, bookId, displayName)) {
+        verses.set(key, verse);
+      }
+
+      const byChapter = new Map<number, GreekVerse[]>();
+      for (const verse of verses.values()) {
+        const chapter = byChapter.get(verse.chapter) ?? [];
+        chapter.push(verse);
+        byChapter.set(verse.chapter, chapter);
+      }
+      for (const chapterVerses of byChapter.values()) {
+        chapterVerses.sort((a, b) => a.verse - b.verse);
+      }
+
+      const alignment = remapOshbAlignmentTokens(
+        tokensRaw
+          .replace(/\r\n/g, "\n")
+          .split("\n")
+          .map(line => parseAlignmentLine(line.trim(), bookId))
+          .filter((token): token is AlignmentToken => Boolean(token))
+      );
+
+      // Mark Spanish column: LBF (no NBLA for Daniel).
+      const spanish = parseLbfAsBibleVerses(bookId);
+
+      const data: BookMorphData = {
+        alignment,
+        greek: Array.from(byChapter.entries()).sort((a, b) => a[0] - b[0]),
+        spanish
+      };
+      bookDataCache.set(bookId, data);
+      bookDataPending.delete(bookId);
+      return data;
+    }
+
     const [morphRaw, tokensRaw, nblaRaw] = await Promise.all([
       loadMorphRaw(bookId),
       loadTokensRaw(bookId),
@@ -412,6 +528,48 @@ export async function loadBookData(bookId: ReaderBookId): Promise<BookMorphData>
   })();
   bookDataPending.set(bookId, promise);
   return promise;
+}
+
+/** Minimal BibleVerse[] from LBF markdown for Mark's Spanish column. */
+function parseLbfAsBibleVerses(bookId: ReaderBookId): BibleVerse[] {
+  const raw = loadLbfRaw(bookId);
+  const verses: BibleVerse[] = [];
+  let chapter = 0;
+  let verse = 0;
+  let parts: string[] = [];
+
+  const flush = () => {
+    if (chapter && verse && parts.length) {
+      verses.push({
+        book: getReaderBookInfo(bookId).displayName,
+        chapter,
+        verse,
+        text: parts.join(" ").trim()
+      });
+    }
+    parts = [];
+  };
+
+  for (const line of raw.split("\n")) {
+    const ch = line.match(/^##\s+Capítulo\s+(\d+)/i);
+    if (ch) {
+      flush();
+      chapter = Number(ch[1]);
+      verse = 0;
+      continue;
+    }
+    const vs = line.match(/^###\s+(\d+):(\d+)/);
+    if (vs) {
+      flush();
+      chapter = Number(vs[1]);
+      verse = Number(vs[2]);
+      continue;
+    }
+    if (!line.trim() || line.startsWith("#") || line.startsWith(">")) continue;
+    if (chapter && verse) parts.push(line.trim());
+  }
+  flush();
+  return verses;
 }
 
 export async function loadTitusData(): Promise<BookMorphData> {

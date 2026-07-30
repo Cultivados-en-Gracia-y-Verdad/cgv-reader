@@ -1,6 +1,7 @@
 import { parseNblaContent, type BibleVerse } from "cgv-bible";
 import {
   getReaderBookInfo,
+  readerBookHasBibleVersion,
   readerBookHasLbf,
   type BibleVersionId,
   type ReaderBookId
@@ -85,7 +86,8 @@ const bleFiles = import.meta.glob(
     "@cgv-data/bibles/BLE/2juan.ble.md",
     "@cgv-data/bibles/BLE/3juan.ble.md",
     "@cgv-data/bibles/BLE/judas.ble.md",
-    "@cgv-data/bibles/BLE/apocalipsis.ble.md"
+    "@cgv-data/bibles/BLE/apocalipsis.ble.md",
+    "@cgv-data/bibles/BLE/daniel.ble.md"
   ],
   { query: "?raw", import: "default" }
 ) as Record<string, () => Promise<string>>;
@@ -118,7 +120,8 @@ const spnbesFiles = import.meta.glob(
     "@cgv-data/bibles/SPNBES/2juan.txt",
     "@cgv-data/bibles/SPNBES/3juan.txt",
     "@cgv-data/bibles/SPNBES/judas.txt",
-    "@cgv-data/bibles/SPNBES/apocalipsis.txt"
+    "@cgv-data/bibles/SPNBES/apocalipsis.txt",
+    "@cgv-data/bibles/SPNBES/daniel.txt"
   ],
   { query: "?raw", import: "default" }
 ) as Record<string, () => Promise<string>>;
@@ -151,7 +154,8 @@ const rv1909Files = import.meta.glob(
     "@cgv-data/bibles/RV1909/md/63.content.md",
     "@cgv-data/bibles/RV1909/md/64.content.md",
     "@cgv-data/bibles/RV1909/md/65.content.md",
-    "@cgv-data/bibles/RV1909/md/66.content.md"
+    "@cgv-data/bibles/RV1909/md/66.content.md",
+    "@cgv-data/bibles/RV1909/md/27.content.md"
   ],
   { query: "?raw", import: "default" }
 ) as Record<string, () => Promise<string>>;
@@ -296,13 +300,15 @@ function parseLbfContent(displayName: string, content: string): BibleVerse[] {
   return normalizeVerses(displayName, verses);
 }
 
-/** Effective Reader version — LBF only where `readerBookHasLbf` is true. */
+/** Prefer requested version when present for the book; else first available. */
 export function resolveReaderVersion(
   bookId: ReaderBookId,
   version: BibleVersionId
 ): BibleVersionId {
-  if (version === "LBF" && !readerBookHasLbf(bookId)) return "NBLA";
-  return version;
+  if (readerBookHasBibleVersion(bookId, version)) return version;
+  const fallback: BibleVersionId[] = ["LBF", "BLE", "SPNBES", "RV1909", "NBLA"];
+  const hit = fallback.find(v => readerBookHasBibleVersion(bookId, v));
+  return hit ?? "BLE";
 }
 
 export async function loadReaderBook(

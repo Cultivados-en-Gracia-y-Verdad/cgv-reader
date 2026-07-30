@@ -180,6 +180,10 @@ function looksLikeSpanishFiniteForm(text: string): boolean {
   ) {
     return true;
   }
+  // Explicit 1sg presents that do not match the tense-ending list (*escribo*).
+  if (/^(escribo|digo|hago|veo|tengo|vengo|pongo|salgo|oigo|conozco|parezco|ando|estoy)$/.test(n)) {
+    return true;
+  }
   return /(aba|abas|aban|abamos|ia|ias|ian|iamos|aron|ieron|aste|iste|amos|ais|an|en|io|ara|era|ira|aria|eria|iria)$/.test(
     n
   );

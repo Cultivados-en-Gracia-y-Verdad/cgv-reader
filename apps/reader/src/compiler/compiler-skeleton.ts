@@ -13,13 +13,14 @@
 //   >  Writer entries (Reader notes, human commentary)
 //   Def/XRef pins also use `*` (applied after Generate)
 // Indentation (left→right) shows structural depth. Blank line = new slide.
-// H3 = unit claim (reference — independent clause). No large reading-block
-// verse quotes after H3 — the reference is enough for that. Outline #### /
-// - / + still carry LBF span text.
+// H3 = unit claim (clause-id reference — independent finite, e.g. `1 Juan 1:9:7`).
+// No large reading-block verse quotes after H3. Outline #### / - / + still carry
+// LBF span text. Conditions owned by this root that precede the finite emit after
+// ### and before ####, closing with `… ⤵` (packaging D).
 //
 // HARD RULE: `-` and `+` never carry non-Scripture. Evidence lines such as
-// `Actores principales: …` / `Actores dominantes…` / `Tono observado: …`
-// always start with `*`.
+// `Actores principales: …` / `Actores dominantes…` / `Tono observado: …` /
+// `Trayectoria de propósito…` / `Hilo de taller…` always start with `*`.
 
 import {
   getReaderBookInfo,
@@ -29,21 +30,27 @@ import {
 import {
   describeParticipleReading,
   formatActorTriple,
+  findNominalClauseCandidates,
   formatClauseSpan,
   getClauseBeginningTokens,
   loadClauseVerses,
   readClauseActors,
   readClauseAssignments,
   readClauseObservations,
+  readBookThread,
   readMarkedAlignmentIds,
+  readNominalClauseHeadIds,
   readParticipleSubjectHosts,
   type ClauseBeginningToken,
   type SpanishWord
 } from "../observer/clause-data";
+import { loadLbfTokenSurfaces } from "../observer/lbf-alignment";
+import { buildBookMovementReport } from "../observer/book-movement";
 import {
   detectClauseSignal,
   detectLeadingCoordinator,
   detectRelativeOfConnection,
+  detectRelativeOverImperative,
   findLeadingMarkerToken,
   FRAME_PARTICLES,
   type ClauseSignalInput,
@@ -191,26 +198,56 @@ function commentSlides(comments: string[]): string[] {
 /**
  * Passage Spanish (italics) first, optional Greek confirmation in parentheses.
  * Never quote Scripture with "…" or «…» — those are not the locked surface.
+ * Empty Spanish (no LBF row) → Greek only, never a BLE gloss.
  */
 function labeledWord(spanish: string, greek?: string | null): string {
-  const es = scripture(spanish);
+  const es = spanish.trim();
   const gr = (greek ?? "").trim();
-  if (gr && gr !== spanish.trim()) return `${es} (${gr})`;
-  return es;
+  if (!es) return gr ? `(${gr})` : "";
+  if (gr && gr !== es) return `${scripture(es)} (${gr})`;
+  return scripture(es);
 }
 
 /** Relative markers commonly visible in LBF Spanish when Greek range starts late. */
 function spanishRelativeFromText(text: string): string | null {
-  const match = text.match(/\b(la cual|el cual|los cuales|las cuales|quienes|quien)\b/i);
+  const match = text.match(
+    /\b(lo que|los que|las que|lo cual|la cual|el cual|los cuales|las cuales|quienes|quien)\b/i
+  );
   return match ? match[1] : null;
+}
+
+/**
+ * Passage Spanish for a Greek beginning-token: LBF surface only
+ * (e.g. ὃ → «lo que»). No BLE gloss fallback — MorphGNT spine stays; Spanish
+ * is LBF.
+ *
+ * LBF alignment sometimes stamps a whole phrase onto one Greek token
+ * («lo cual es verdadero» for ὅ) — extract the relative / keep a short head.
+ */
+function passageSpanishForMarker(
+  token: ClauseBeginningToken,
+  bookId: ReaderBookId
+): string {
+  const parts = token.id.split(":").map(Number);
+  if (parts.length !== 3 || !parts.every(n => Number.isFinite(n))) return "";
+  const [chapter, verse, tok] = parts;
+  const surface = loadLbfTokenSurfaces(chapter, verse, bookId).get(tok);
+  if (!surface?.trim()) return "";
+  const cleaned = surface.replace(/·/g, " ").trim();
+  const relative = spanishRelativeFromText(cleaned);
+  if (relative) return relative;
+  const words = cleaned.split(/\s+/).filter(Boolean);
+  if (words.length <= 2) return cleaned;
+  // Over-long phrase surface — take the first word, not a BLE gloss.
+  return words[0] ?? cleaned;
 }
 
 // Grammar notes: one short observational sentence + markdown footnote to the
 // appendices. Expand in the body only when the passage does something unusual
 // (inheritance under an open particle, nominative participle without a host, etc.).
-// Every "{word}" is the Spanish alignment for that Greek token (via BLE), never
-// the Greek surface — except coordinate-inheritance's shared particle, which
-// names a DIFFERENT clause's marker and must stay Greek to identify it.
+// Every "{word}" is the LBF Spanish for that Greek token — never BLE, never the
+// Greek surface — except coordinate-inheritance's shared particle, which names
+// a DIFFERENT clause's marker and must stay Greek.
 function footnoteKeyForLemma(lemma: string): string {
   const key = lemma
     .normalize("NFD")
@@ -255,6 +292,7 @@ function footnoteKeyForGreek(greek: string | null | undefined, fallback: string)
 
 function relationalConnectorLine(spanish: string, lemma: string, greek?: string | null): string {
   const word = labeledWord(spanish, greek);
+  if (!word) return "";
   const fn = footnoteKeyForLemma(lemma);
   switch (lemma) {
     case "καί":
@@ -283,6 +321,7 @@ function subordinatingLine(
   describedNounText: string | null
 ): string {
   const word = labeledWord(spanish, greek);
+  if (!word) return "";
   if (isContent) {
     return `${word}[^hoti] introduce el contenido.`;
   }
@@ -324,6 +363,7 @@ function inheritanceLine(sharedParticleGreek: string, connectorSpanish: string, 
 /**
  * Participle `*` note. With a noun host (under `+ *oro*`), keep the line short —
  * the nesting already shows the hang. Longer prose only when there is no host line.
+ * Form: `*{spanish}* ({greek})[^part]` or `*{spanish}* ({greek})[^part]: …`.
  */
 function participleLine(
   word: SpanishWord,
@@ -341,24 +381,24 @@ function participleLine(
     nounText = reading.hangNoun.text;
   }
 
-  // Host line (`+ *oro*`) already names the noun — label only.
+  // Host line (`+ *oro*`) already names the noun — label + [^part] footnote only.
   if (nounText) {
-    return `${label} - participio`;
+    return `${label}[^part]`;
   }
 
   // Unique: nominative without a chosen host — keep the warning in the body.
   if (word.participleCase === "N") {
     return (
-      `Participio[^part] ${label}: forma nominativa sin anfitrión señalado aún — ` +
+      `${label}[^part]: forma nominativa sin anfitrión señalado aún — ` +
       `no afirmes a quién describe hasta elegirlo en Observador.`
     );
   }
 
   if (clauseHostSpanish?.trim()) {
-    return `Participio[^part] ${label}: añade información a ${scripture(clauseHostSpanish)}.`;
+    return `${label}[^part]: añade información a ${scripture(clauseHostSpanish)}.`;
   }
 
-  return `Participio[^part] ${label}: añade información al verbo principal.`;
+  return `${label}[^part]: añade información al verbo principal.`;
 }
 
 /** Complement infinitive under its host finite — names the chain in plain language. */
@@ -419,6 +459,8 @@ interface CompilerClause {
   order: number;
   beginningTokens: ClauseBeginningToken[];
   finiteVerbText: string;
+  greekStartTokenId: string | null;
+  greekEndTokenId: string | null;
 }
 
 interface GeneratedDoc {
@@ -456,7 +498,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   const verses = loadClauseVerses(bookId);
   const assignments = readClauseAssignments(bookId);
   const observations = readClauseObservations(bookId);
-  const readerNotes = readReaderNotes();
+  const readerNotes = readReaderNotes(bookId);
   // Reader notes emit once under the first parent that claims their verse.
   // Def/XRef pins attach after Generate; rematched by line text on regenerate
   // (see compiler-gathering).
@@ -506,6 +548,11 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   statementMarkIds.forEach(id => moodReviewedVerbIds.add(id));
   readMarkedAlignmentIds(progressKeys.subjunctiveMarks, bookId).forEach(id => moodReviewedVerbIds.add(id));
   readMarkedAlignmentIds(progressKeys.optativeMarks, bookId).forEach(id => moodReviewedVerbIds.add(id));
+  // A nominal clause has no verb, so it has no Greek mood to review — marking it
+  // as the head IS the whole review. Gating it behind the mood bricks would keep
+  // it out of the outline permanently.
+  const nominalHeadIds = readNominalClauseHeadIds(bookId);
+  nominalHeadIds.forEach(id => moodReviewedVerbIds.add(id));
   const participleMarkedAlignmentIds = readMarkedAlignmentIds(progressKeys.participleMarks, bookId);
   const participleSubjectHosts = readParticipleSubjectHosts(bookId);
 
@@ -525,12 +572,55 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       verse: finiteVerb.verse,
       order: finiteVerb.chapter * 100000 + finiteVerb.verse * 1000 + finiteVerb.index,
       beginningTokens: getClauseBeginningTokens(greekRange),
-      finiteVerbText: finiteVerb.text
+      finiteVerbText: finiteVerb.text,
+      greekStartTokenId: greekRange?.greekStartTokenId ?? null,
+      greekEndTokenId: greekRange?.greekEndTokenId ?? null
     });
   }
   clauses.sort(byOrder);
 
   const clauseById = new Map(clauses.map(clause => [clause.finiteVerbId, clause]));
+
+  // Every Greek token some clause span covers — so a marker sitting outside all of
+  // them can be told apart from one that simply belongs to the clause next door.
+  const claimedGreekTokenIds = new Set<string>();
+  for (const clause of clauses) {
+    if (!clause.greekStartTokenId || !clause.greekEndTokenId) continue;
+    const from = alignmentTokenNumber(clause.greekStartTokenId);
+    const to = alignmentTokenNumber(clause.greekEndTokenId);
+    for (let tok = Math.min(from, to); tok <= Math.max(from, to); tok += 1) {
+      claimedGreekTokenIds.add(`${clause.chapter}:${clause.verse}:${tok}`);
+    }
+  }
+
+  // Verbless assertions no clause covers yet. The trunk is the complete independent
+  // clause whether its predicate is verbal or nominal, and a nominal predicate is the
+  // one miss nothing else here can report: every other root check reasons from a verb.
+  // Grouped into a single flag — a list to work through in O, not one defect per line.
+  const nominalCandidates = findNominalClauseCandidates(claimedGreekTokenIds, bookId);
+  if (nominalCandidates.length) {
+    // No practical cap: this is a backlog to work through, and an item hidden behind
+    // "… and N more" is an assertion that stays missing from the trunk.
+    const listed = nominalCandidates
+      .map(candidate => {
+        const hints = [
+          candidate.hasNominativeParticiple
+            ? "carries a participle in the subject case"
+            : "no verb at all",
+          candidate.touchesClauseSpan ? "runs into a clause span — a span may be the real issue" : null
+        ].filter(Boolean);
+        return `    · ${bookDisplayName} ${candidate.chapter}:${candidate.verse} (${candidate.chapter}:${candidate.verse}:${candidate.startToken}–${candidate.endToken}; ${hints.join("; ")}): “${candidate.greek}”`;
+      })
+      .join("\n");
+    warnings.push(
+      `${nominalCandidates.length} stretch(es) of Greek belong to no clause and carry a nominative or ` +
+        `vocative with no finite verb — the shape of a nominal predicate. Ask of each one only this: does it ` +
+        `predicate on its own, or is it a nominal *inside* an independent clause? If it predicates, it is an ` +
+        `independent clause missing from the trunk — mark its head in O (Brick 1B) so it becomes an H4. If it ` +
+        `is a subject, apposition or second predicate belonging to the clause beside it, widen that span and ` +
+        `note nothing: it is already trunk. Settle these before trusting the H4 sequence:\n${listed}`
+    );
+  }
 
   function spanTextFor(finiteVerbId: string): string {
     const assignment = assignments[finiteVerbId];
@@ -568,7 +658,14 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   const coordinateContinuationIds = new Set<string>();
   for (const input of clauseSignalInputs) {
     if (detectClauseSignal(input, clauseSignalInputs).kind !== "none") continue;
-    if (detectLeadingCoordinator(input.beginningTokens)) coordinateContinuationIds.add(input.finiteVerbId);
+    // A hand-marked nominal head is a deliberate claim that this stretch
+    // predicates on its own, and those clauses open a new assertion far more
+    // often than they continue one — 1 Peter 3:8's Τὸ δὲ τέλος πάντες
+    // ὁμόφρονες and 2:9's Ὑμεῖς δὲ γένος ἐκλεκτόν both carry a transitional δέ
+    // that inheritance would read as a coupling, burying a command four levels
+    // deep inside the relative chain that happens to precede it.
+    if (nominalHeadIds.has(input.finiteVerbId)) continue;
+    if (detectLeadingCoordinator(input.beginningTokens, input.finiteVerbId)) coordinateContinuationIds.add(input.finiteVerbId);
   }
 
   const clauseSpanInfos: ClauseSpanInfo[] = clauses.map(clause => ({
@@ -589,8 +686,10 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   const skeleton = deriveSkeleton(clauseSpanInfos, augmentedObservations);
 
   /**
-   * H3/H4 claim should start at the finite verb's Spanish word — leading
-   * participles / PP scaffolding (ἐραυνῶντες…, Διὰ Σιλουανοῦ…) emit as `+`.
+   * H3/H4 claim = full independent-clause span by default (Version A).
+   * Only peel leading words into `+` when the prefix contains a marked / morph
+   * participle (heavy scaffolding such as ἐραυνῶντες…). Short openings like
+   * «Y este» stay inside the claim: `#### *Y este es el mensaje*`.
    */
   function splitClaimAtFinite(finiteVerbId: string): { prefixWordIds: string[]; claimText: string } {
     const full = spanTextFor(finiteVerbId);
@@ -616,6 +715,15 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     if (cut <= 0) return { prefixWordIds: [], claimText: full };
 
     const prefixWordIds = ids.slice(0, cut);
+    const prefixHasParticiple = prefixWordIds.some(id => {
+      if (participleMarkedAlignmentIds.has(id)) return true;
+      const word = wordById.get(id);
+      return isParticipleGreekMorph(word?.greekMorph);
+    });
+    if (!prefixHasParticiple) {
+      return { prefixWordIds: [], claimText: full };
+    }
+
     const claimIds = ids.slice(cut);
     // Prefer same-verse formatting; fall back to full span text from cut onward
     // by rebuilding from word texts when the span crosses verses.
@@ -624,8 +732,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     let runKey = "";
     const flushRun = () => {
       if (!runIds.length) return;
-      const [chapterText, verseText] = runKey.split(":");
-      const key = `${chapterText}:${verseText}`;
+      const key = runKey;
       const text = formatClauseSpan(runIds, wordsByVerse.get(key) ?? [], verseTextByKey.get(key) ?? "").trim();
       if (text) claimParts.push(text);
       runIds = [];
@@ -661,7 +768,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     if (finiteWord && isParticipleGreekMorph(finiteWord.greekMorph)) {
       return "finiteVerbId points at a participle form — emit as dependent/participle material, not an independent H3";
     }
-    const marker = findLeadingMarkerToken(clause.beginningTokens);
+    const marker = findLeadingMarkerToken(clause.beginningTokens, clause.finiteVerbId);
     if (marker.kind !== "relative" && marker.kind !== "frame" && marker.kind !== "content") return null;
     if (alignmentTokenNumber(marker.token.id) >= alignmentTokenNumber(clause.finiteVerbId)) return null;
     if (marker.kind === "relative") {
@@ -670,6 +777,10 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       // relative clause hanging on an outside noun. clause-signals treats that
       // as a genuine judgment call — don't settle it here by demoting.
       if (detectRelativeOfConnection(clause.beginningTokens)) return null;
+      // 1 Peter 3:3's ὧν ἔστω … κόσμος: a relative clause never governs an
+      // imperative, so the pronoun is connective even though its antecedent
+      // (γυναῖκες, 3:1) is too far back for the check above to see.
+      if (detectRelativeOverImperative(clause)) return null;
       return `relative “${marker.token.greek}” in the leading window — not an independent clause`;
     }
     return `“${marker.token.greek}” (${marker.token.lemma.trim()}) in the leading window — subordinated, not an independent H3`;
@@ -692,6 +803,8 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
    *      is the dependent). Code can't tell those apart; the span can, in O.
    */
   function rootSuspicionReason(clause: CompilerClause): string | null {
+    // Settled by grammar, not a judgment call — see rootDemoteReason.
+    if (detectRelativeOverImperative(clause)) return null;
     const connection = detectRelativeOfConnection(clause.beginningTokens);
     if (connection) {
       return (
@@ -711,7 +824,38 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
         `span starts too early. Check the span in O.`
       );
     }
-    return null;
+    return orphanedSubordinatorReason(clause);
+  }
+
+  /**
+   * The mirror image of a span that starts too early: one that starts too LATE,
+   * leaving its own subordinator just outside. Every marker check reads the span,
+   * so the clause looks unmarked and reads as independent with nothing anywhere to
+   * flag it — this is the one shape the generator is otherwise blind to. 1 Peter
+   * 3:6's ἧς ἐγενήθητε τέκνα is the case: the span opens at ἐγενήθητε and the
+   * relative sits one token back, inside no clause at all. Only reported when no
+   * other clause claims that token, since a subordinator belonging to the previous
+   * clause is none of this clause's business.
+   */
+  function orphanedSubordinatorReason(clause: CompilerClause): string | null {
+    if (!clause.greekStartTokenId) return null;
+    const startTok = alignmentTokenNumber(clause.greekStartTokenId);
+    if (startTok <= 1) return null;
+    const previousId = `${clause.chapter}:${clause.verse}:${startTok - 1}`;
+    if (claimedGreekTokenIds.has(previousId)) return null;
+    const [token] = getClauseBeginningTokens({
+      greekStartTokenId: previousId,
+      greekEndTokenId: previousId
+    });
+    if (!token) return null;
+    const lemma = token.lemma.trim();
+    const isRelative = token.morph.startsWith("RR");
+    if (!isRelative && !FRAME_PARTICLES[lemma] && lemma !== "ὅτι") return null;
+    return (
+      `kept as independent, but ${isRelative ? "relative " : ""}“${token.greek}” (${lemma}) sits immediately before ` +
+      `this clause's span and belongs to no clause — if it subordinates this verb, the span starts one token too late ` +
+      `and every marker check is blind to it. Widen the span in O.`
+    );
   }
 
   // Promote mood-reviewed finites with no Q1–Q3 yet so they break orphan floods
@@ -1127,7 +1271,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       if (!candidateInfo) continue;
       const resolved = resolveClause(candidateInfo, augmentedObservations[candidate.finiteVerbId], clauseSpanInfos);
       const relationKey = resolved.frameType ?? (resolved.relation === "content" ? "content" : "describes");
-      return { marker: findLeadingMarkerToken(candidate.beginningTokens), relationKey };
+      return { marker: findLeadingMarkerToken(candidate.beginningTokens, candidate.finiteVerbId), relationKey };
     }
     return null;
   }
@@ -1141,8 +1285,11 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
 
   function dependentRender(node: SkeletonNode, clause: CompilerClause): DependentRender {
     if (coordinateContinuationIds.has(node.finiteVerbId)) {
-      const connectorMarker = findLeadingMarkerToken(clause.beginningTokens);
-      const connectorWord = connectorMarker.kind === "coordinator" ? connectorMarker.token.ble : "";
+      const connectorMarker = findLeadingMarkerToken(clause.beginningTokens, clause.finiteVerbId);
+      const connectorWord =
+        connectorMarker.kind === "coordinator"
+          ? passageSpanishForMarker(connectorMarker.token, bookId)
+          : "";
       const origin = findOriginatingMarker(clause);
       if (origin && origin.marker.kind !== "none") {
         return { antecedentText: null, explanations: [inheritanceLine(origin.marker.token.greek, connectorWord, origin.relationKey)] };
@@ -1151,7 +1298,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       return { antecedentText: null, explanations: [inheritanceLine("?", connectorWord, "reason")] };
     }
 
-    let marker = findLeadingMarkerToken(clause.beginningTokens);
+    let marker = findLeadingMarkerToken(clause.beginningTokens, clause.finiteVerbId);
     const isContent = node.relation === "content";
     const isDescribes = node.relation === "describes";
 
@@ -1179,7 +1326,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
           greekStartTokenId: expandedStart,
           greekEndTokenId: assignment.greekEndTokenId
         });
-        const retry = findLeadingMarkerToken(expandedTokens);
+        const retry = findLeadingMarkerToken(expandedTokens, clause.finiteVerbId);
         if (retry.kind === "relative") {
           marker = retry;
           warnings.push(
@@ -1205,7 +1352,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       };
     }
 
-    const spanish = marker.token.ble;
+    const spanish = passageSpanishForMarker(marker.token, bookId);
     const greek = marker.token.greek;
     return {
       antecedentText: isDescribes ? describedNounText : null,
@@ -1216,23 +1363,268 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   }
 
   function rootExplanationLines(clause: CompilerClause): string[] {
-    const marker = findLeadingMarkerToken(clause.beginningTokens);
+    const marker = findLeadingMarkerToken(clause.beginningTokens, clause.finiteVerbId);
     // Asyndeton: no connector comment — silence teaches better than a repeated note.
     if (marker.kind === "none") return [];
     if (marker.kind === "relative") {
       // A relative pronoun opening what's already resolved as an independent
       // clause is the "relative of connection" idiom (see clause-signals.ts) —
       // functions as a connector, not a description, so it still gets a
-      // relational line, using its own Spanish alignment.
-      return [relationalConnectorLine(marker.token.ble, "δέ", marker.token.greek)];
+      // relational line, using LBF Spanish for that Greek token.
+      return [
+        relationalConnectorLine(
+          passageSpanishForMarker(marker.token, bookId),
+          "δέ",
+          marker.token.greek
+        )
+      ];
     }
     if (marker.kind === "coordinator") {
-      return [relationalConnectorLine(marker.token.ble, marker.lemma, marker.token.greek)];
+      return [
+        relationalConnectorLine(
+          passageSpanishForMarker(marker.token, bookId),
+          marker.lemma,
+          marker.token.greek
+        )
+      ];
     }
     if (marker.kind === "frame") {
-      return [relationalConnectorLine(marker.token.ble, marker.token.lemma.trim(), marker.token.greek)];
+      return [
+        relationalConnectorLine(
+          passageSpanishForMarker(marker.token, bookId),
+          marker.token.lemma.trim(),
+          marker.token.greek
+        )
+      ];
     }
     return [];
+  }
+
+  function withProtasisOpen(text: string): string {
+    let t = text.trimEnd();
+    t = t.replace(/\s*⤵\s*$/u, "").replace(/\s*(?:\.\.\.|…)\s*$/u, "");
+    return `${t}…`;
+  }
+
+  function withProtasisTrail(text: string): string {
+    return `${withProtasisOpen(text)} ⤵`;
+  }
+
+  function isConditionNode(node: SkeletonNode): boolean {
+    if (node.frameType === "condition") return true;
+    const observation = augmentedObservations[node.finiteVerbId];
+    return observation?.tellsWhenOrIf === "yes" && observation?.frameType === "condition";
+  }
+
+  function lastDescendantId(node: SkeletonNode): string {
+    let last = node;
+    const walk = (n: SkeletonNode) => {
+      last = n;
+      for (const child of n.children) walk(child);
+    };
+    walk(node);
+    return last.finiteVerbId;
+  }
+
+  /**
+   * Climb whenIf links to the governing apodosis root.
+   * e.g. *como* → whenIf *Si* → whenIf *tenemos* → use *tenemos* for cutAt.
+   * Cutting at *Si*’s span start would empty the *como* line and fall back to bleed.
+   */
+  function climbWhenIfToApodosis(startId: string): string | null {
+    let current = startId.trim();
+    if (!current) return null;
+    const seen = new Set<string>();
+    while (current && !seen.has(current)) {
+      seen.add(current);
+      const next = (augmentedObservations[current]?.whenIfParentClauseId || "").trim();
+      if (!next) return current;
+      current = next;
+    }
+    return current || null;
+  }
+
+  /**
+   * Parents whose spans may bleed into this dependent:
+   * direct whenIf / expressed, plus the climbed apodosis and (for content under
+   * *Si*) the condition’s governing apodosis.
+   */
+  function clipExcludeFiniteIds(finiteVerbId: string): string[] {
+    const observation = augmentedObservations[finiteVerbId];
+    if (!observation) return [];
+    const ids: string[] = [];
+    const whenIf = (observation.whenIfParentClauseId || "").trim();
+    const expressed = (observation.expressedParentClauseId || "").trim();
+    if (whenIf) {
+      ids.push(whenIf);
+      const apodosis = climbWhenIfToApodosis(whenIf);
+      if (apodosis) ids.push(apodosis);
+    }
+    if (expressed) {
+      ids.push(expressed);
+      const grandWhen = (augmentedObservations[expressed]?.whenIfParentClauseId || "").trim();
+      if (grandWhen) {
+        ids.push(grandWhen);
+        const apodosis = climbWhenIfToApodosis(grandWhen);
+        if (apodosis) ids.push(apodosis);
+      }
+    }
+    return [...new Set(ids)];
+  }
+
+  /**
+   * Cut at span *start* only for apodosis roots (climbed whenIf / grand whenIf).
+   * Never cut at an earlier *Si* that this time/content clause hangs under —
+   * that empties the line and falls back to the unclipped bleed.
+   */
+  function clipCutAtFiniteIds(finiteVerbId: string): string[] {
+    const observation = augmentedObservations[finiteVerbId];
+    if (!observation) return [];
+    const ids: string[] = [];
+    const whenIf = (observation.whenIfParentClauseId || "").trim();
+    if (whenIf) {
+      const apodosis = climbWhenIfToApodosis(whenIf);
+      if (apodosis) ids.push(apodosis);
+    }
+    const expressed = (observation.expressedParentClauseId || "").trim();
+    if (expressed) {
+      const grandWhen = (augmentedObservations[expressed]?.whenIfParentClauseId || "").trim();
+      if (grandWhen) {
+        const apodosis = climbWhenIfToApodosis(grandWhen);
+        if (apodosis) ids.push(apodosis);
+      }
+    }
+    return [...new Set(ids)];
+  }
+
+  function registerCutAt(
+    cutAtByVerse: Map<string, number>,
+    parentId: string,
+    /** Only register a cut that starts after this dependent’s first word. */
+    minKeepIndexByVerse: Map<string, number>
+  ): void {
+    const parentSpan = assignments[parentId]?.selectedSpan ?? [];
+    const spanWords = parentSpan
+      .map(id => wordById.get(id))
+      .filter((word): word is SpanishWord => Boolean(word));
+    const candidates = spanWords.length
+      ? spanWords
+      : (() => {
+          const finiteWord = wordById.get(parentId) ?? finiteVerbWordById.get(parentId);
+          return finiteWord ? [finiteWord] : [];
+        })();
+    for (const word of candidates) {
+      const key = `${word.chapter}:${word.verse}`;
+      const minKeep = minKeepIndexByVerse.get(key);
+      // Parent sits before this dependent in the verse — not an apodosis cut.
+      if (minKeep !== undefined && word.index <= minKeep) continue;
+      const prev = cutAtByVerse.get(key);
+      if (prev === undefined || word.index < prev) cutAtByVerse.set(key, word.index);
+    }
+  }
+
+  /**
+   * Drop words after a clause comma that follows this finite — e.g. orphan *él*
+   * between «pecados,» and apodosis «es fiel…» when *él* is outside the parent span.
+   * (tokenizeVerse skips punctuation, so char-slice still pulls «, él».)
+   */
+  function dropWordsAfterClauseComma(finiteVerbId: string, useIds: string[]): string[] {
+    const finiteWord = finiteVerbWordById.get(finiteVerbId);
+    if (!finiteWord || !useIds.length) return useIds;
+    const verseText = verseTextByKey.get(`${finiteWord.chapter}:${finiteWord.verse}`) ?? "";
+    if (!verseText) return useIds;
+    return useIds.filter(id => {
+      const word = wordById.get(id);
+      if (!word) return false;
+      if (word.chapter !== finiteWord.chapter || word.verse !== finiteWord.verse) return true;
+      if (word.index <= finiteWord.index) return true;
+      const between = verseText.slice(finiteWord.endChar, word.startChar);
+      return !/,/.test(between);
+    });
+  }
+
+  /**
+   * Format a dependent’s Scripture for the outline. O spans often bleed into the
+   * apodosis — drop shared tokens and cut at the climbed apodosis span *start*,
+   * then drop post-comma orphans so we don’t print «Si confesamos…, él» or
+   * «como…, tenemos comunión…» on the protasis lines.
+   */
+  function displaySpanText(finiteVerbId: string, fallback: string): string {
+    const ids = assignments[finiteVerbId]?.selectedSpan ?? [];
+    if (!ids.length) return fallback;
+    const minKeepIndexByVerse = new Map<string, number>();
+    for (const id of ids) {
+      const word = wordById.get(id);
+      if (!word) continue;
+      const key = `${word.chapter}:${word.verse}`;
+      const prev = minKeepIndexByVerse.get(key);
+      if (prev === undefined || word.index < prev) minKeepIndexByVerse.set(key, word.index);
+    }
+    const exclude = new Set<string>();
+    for (const parentId of clipExcludeFiniteIds(finiteVerbId)) {
+      for (const id of assignments[parentId]?.selectedSpan ?? []) exclude.add(id);
+    }
+    /** Per "chapter:verse", earliest word index belonging to an apodosis clip target. */
+    const cutAtByVerse = new Map<string, number>();
+    for (const parentId of clipCutAtFiniteIds(finiteVerbId)) {
+      registerCutAt(cutAtByVerse, parentId, minKeepIndexByVerse);
+    }
+    let useIds = ids.filter(id => {
+      if (exclude.has(id)) return false;
+      const word = wordById.get(id);
+      if (!word) return false;
+      const cutAt = cutAtByVerse.get(`${word.chapter}:${word.verse}`);
+      if (cutAt !== undefined && word.index >= cutAt) return false;
+      return true;
+    });
+    useIds = dropWordsAfterClauseComma(finiteVerbId, useIds);
+    if (!useIds.length) useIds = ids;
+    const parts: string[] = [];
+    let runIds: string[] = [];
+    let runKey = "";
+    const flushRun = () => {
+      if (!runIds.length) return;
+      const key = runKey;
+      const text = formatClauseSpan(
+        runIds,
+        wordsByVerse.get(key) ?? [],
+        verseTextByKey.get(key) ?? ""
+      ).trim();
+      if (text) parts.push(text);
+      runIds = [];
+    };
+    for (const id of useIds) {
+      const word = wordById.get(id);
+      if (!word) continue;
+      const key = `${word.chapter}:${word.verse}`;
+      if (runKey && key !== runKey) flushRun();
+      runKey = key;
+      runIds.push(id);
+    }
+    flushRun();
+    const joined = parts.join(" ").trim();
+    // Char-slice formatting can leave a dangling comma / conjunction after a cut.
+    return joined.replace(/[,:;]\s*$/u, "").trim() || fallback;
+  }
+
+  /** Condition-package nodes that get trailing `…` (open). */
+  let protasisOpenIds = new Set<string>();
+  /** Last node of each pre-#### condition package — gets `… ⤵`. */
+  let protasisCloseIds = new Set<string>();
+
+  function markProtasisPackage(node: SkeletonNode): void {
+    const walk = (n: SkeletonNode) => {
+      protasisOpenIds.add(n.finiteVerbId);
+      for (const child of n.children) walk(child);
+    };
+    walk(node);
+    protasisCloseIds.add(lastDescendantId(node));
+  }
+
+  function applyProtasisMarker(finiteVerbId: string, text: string): string {
+    if (protasisCloseIds.has(finiteVerbId)) return withProtasisTrail(text);
+    if (protasisOpenIds.has(finiteVerbId)) return withProtasisOpen(text);
+    return text;
   }
 
   /** One dependent `-` plus its notes — children are emitted by the unit timeline. */
@@ -1242,14 +1634,20 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     const indent = "  ".repeat(depth);
 
     if (!clause) {
-      lines.push(...slide(`${indent}- ${scripture(node.spanText || node.reference)}`));
+      const missingText = applyProtasisMarker(
+        node.finiteVerbId,
+        node.spanText || node.reference
+      );
+      lines.push(...slide(`${indent}- ${scripture(missingText)}`));
       lines.push(...slide(`${indent}* Aún no está colocado en Observador — falta responder las preguntas de esta frase.`));
       warnings.push(`${node.reference} (${node.finiteVerbId}): no beginning-token data available — check manually.`);
       return lines;
     }
 
     const dependent = dependentRender(node, clause);
-    lines.push(...slide(`${indent}- ${scripture(node.spanText || clause.finiteVerbText)}`));
+    const rawSpan = displaySpanText(node.finiteVerbId, node.spanText || clause.finiteVerbText);
+    const spanText = applyProtasisMarker(node.finiteVerbId, rawSpan);
+    lines.push(...slide(`${indent}- ${scripture(spanText)}`));
     const dependentActor = actorTripleScripture(node.finiteVerbId);
     if (dependentActor) lines.push(...starSlides(indent, [dependentActor]));
     lines.push(...commentSlides(takeReaderNoteComments(clause.chapter, clause.verse, indent)));
@@ -1347,7 +1745,11 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     const order = clauseById.get(node.finiteVerbId)?.order ?? 0;
     if (order >= nextOrder) {
       warnings.push(
-        `${node.reference} (${node.finiteVerbId}): attached under ${owningRootId} but falls after next root ${nextRootId ?? "(none)"} — excluded from that H3 unit (was inflating the reference). Check the parent in O.`
+        // A relative clause whose antecedent sits two roots back is ordinary Greek
+        // sentence length, not a coding error — the unit simply cannot host it without
+        // inflating its reference. Saying "check the parent" for those sends the reader
+        // after a bug that isn't there, so name both possibilities.
+        `${node.reference} (${node.finiteVerbId}): attached under ${owningRootId} but falls after next root ${nextRootId ?? "(none)"} — excluded from that H3 unit (was inflating the reference) and emitted in document order instead. Re-parent in O only if the link itself is wrong; if the antecedent genuinely sits that far back, this is sentence length and nothing to fix.`
       );
       strayFromDistantParent.push({ ...node, describedNounSpan: [] });
       for (const id of collectSkeletonIds(node)) strayIds.add(id);
@@ -1403,28 +1805,76 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   let pendingOrphans: Orphan[] = [];
   let orphanCursor = 0;
 
-  function flushOrphansBefore(order: number): Orphan[] {
-    const collected: Orphan[] = [];
-    while (orphanCursor < orphans.length && orphans[orphanCursor].order < order) {
-      collected.push(orphans[orphanCursor]);
-      orphanCursor += 1;
-    }
-    return collected;
+  /** H3 ref = independent-clause id (`book chapter:verse:token`), not a verse bag. */
+  function formatClauseUnitReference(finiteVerbId: string): string {
+    return `${bookDisplayName} ${finiteVerbId}`;
   }
 
-  function formatUnitReference(
-    startChapter: number,
-    startVerse: number,
-    endChapter: number,
-    endVerse: number
-  ): string {
-    if (startChapter === endChapter && startVerse === endVerse) {
-      return `${bookDisplayName} ${startChapter}:${startVerse}`;
+  function whenIfOwnerId(finiteVerbId: string): string | null {
+    const parent = augmentedObservations[finiteVerbId]?.whenIfParentClauseId?.trim();
+    return parent || null;
+  }
+
+  const rootIdSet = new Set(roots.map(root => root.finiteVerbId));
+  const reservedOrphansByRoot = new Map<string, Orphan[]>();
+
+  /**
+   * Peel conditions whose whenIf parent is another independent root — they must
+   * not trail under this unit’s card (1:8 / divider / 1:9 failure mode).
+   */
+  function peelConditionOwnedElsewhere(
+    node: SkeletonNode,
+    owningRootId: string
+  ): SkeletonNode | null {
+    if (isConditionNode(node)) {
+      const owner = whenIfOwnerId(node.finiteVerbId);
+      if (owner && rootIdSet.has(owner) && owner !== owningRootId) {
+        const order = clauseById.get(node.finiteVerbId)?.order ?? 0;
+        const bucket = reservedOrphansByRoot.get(owner) ?? [];
+        bucket.push({
+          kind: "parked",
+          order,
+          node: { ...node, describedNounSpan: [] }
+        });
+        reservedOrphansByRoot.set(owner, bucket);
+        for (const id of collectSkeletonIds(node)) strayIds.add(id);
+        warnings.push(
+          `${node.reference} (${node.finiteVerbId}): condition owned by ${owner} — moved off ${owningRootId} into that H3 unit (packaging D).`
+        );
+        return null;
+      }
     }
-    if (startChapter === endChapter) {
-      return `${bookDisplayName} ${startChapter}:${startVerse}–${endVerse}`;
+    node.children = node.children
+      .map(child => peelConditionOwnedElsewhere(child, owningRootId))
+      .filter((child): child is SkeletonNode => child !== null);
+    return node;
+  }
+  for (const root of roots) {
+    root.children = root.children
+      .map(child => peelConditionOwnedElsewhere(child, root.finiteVerbId))
+      .filter((child): child is SkeletonNode => child !== null);
+  }
+
+  function flushOrphansBefore(order: number, currentRootId: string): Orphan[] {
+    const collected: Orphan[] = [];
+    while (orphanCursor < orphans.length && orphans[orphanCursor].order < order) {
+      const orphan = orphans[orphanCursor];
+      orphanCursor += 1;
+      if (orphan.kind === "parked") {
+        const owner = whenIfOwnerId(orphan.node.finiteVerbId);
+        if (owner && rootIdSet.has(owner) && owner !== currentRootId) {
+          const bucket = reservedOrphansByRoot.get(owner) ?? [];
+          bucket.push(orphan);
+          reservedOrphansByRoot.set(owner, bucket);
+          warnings.push(
+            `${orphan.node.reference} (${orphan.node.finiteVerbId}): condition/frame owned by ${owner} — held for that H3 unit instead of trailing under ${currentRootId}.`
+          );
+          continue;
+        }
+      }
+      collected.push(orphan);
     }
-    return `${bookDisplayName} ${startChapter}:${startVerse}–${endChapter}:${endVerse}`;
+    return collected;
   }
 
   /**
@@ -1447,9 +1897,13 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     const dependent = parkedClause ? dependentRender(orphan.node, parkedClause) : null;
     const antecedentText =
       dependent?.antecedentText ?? spanTextAtItsOwnVerse(orphan.node.describedNounSpan);
-    const clauseText = antecedentText
-      ? stripLeadingAntecedent(orphan.node.spanText, antecedentText)
-      : orphan.node.spanText;
+    const clauseTextRaw = antecedentText
+      ? stripLeadingAntecedent(
+          displaySpanText(orphan.node.finiteVerbId, orphan.node.spanText),
+          antecedentText
+        )
+      : displaySpanText(orphan.node.finiteVerbId, orphan.node.spanText);
+    const clauseText = applyProtasisMarker(orphan.node.finiteVerbId, clauseTextRaw);
     lines.push(...slide(`${indent}- ${scripture(clauseText)}`));
     if (parkedClause) {
       lines.push(...commentSlides(takeReaderNoteComments(parkedClause.chapter, parkedClause.verse, indent)));
@@ -1462,10 +1916,14 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       orphan.node.relation === "describes" || orphan.node.describedNounSpan.length > 0;
     if (looksLikeDescribes) {
       const noun = antecedentText ? scripture(antecedentText) : "un sustantivo anterior";
-      if (relativeSpanish) {
-        explanations = [describesRelativeLine(relativeSpanish, noun)];
-      } else if (!explanations.some(line => /habla más de|describe a /i.test(line))) {
-        explanations = [describesPhraseLine(noun), ...explanations];
+      // Prefer dependentRender’s LBF+Greek [^rel] line. Only invent a Spanish-only
+      // relative note when O gave no leading marker.
+      if (!explanations.some(line => /\[\^rel\]|describe a /i.test(line))) {
+        if (relativeSpanish) {
+          explanations = [describesRelativeLine(relativeSpanish, noun)];
+        } else {
+          explanations = [describesPhraseLine(noun), ...explanations];
+        }
       }
     }
     const participleNotes = participleNotesFor(orphan.node.finiteVerbId, null);
@@ -1501,7 +1959,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   // this pattern — Ταῦτα λάλει (2:15) and Τούτου χάριν (1:5) are ordinary
   // deictic openings of real independent clauses.
   function opensWithRelativePronoun(clause: CompilerClause): boolean {
-    return findLeadingMarkerToken(clause.beginningTokens).kind === "relative";
+    return findLeadingMarkerToken(clause.beginningTokens, clause.finiteVerbId).kind === "relative";
   }
 
   for (let rootIndex = 0; rootIndex < roots.length; rootIndex += 1) {
@@ -1514,17 +1972,41 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
 
     // Unit owns every orphan until the next independent clause begins — so a
     // `+` after the root in the same verse stays in this unit's outline.
+    // Conditions/frames whose whenIf parent is another root are reserved for
+    // that unit (packaging D — not left as trailer on the previous card).
     const nextRoot = roots[rootIndex + 1];
     const nextRootOrder = nextRoot
       ? clauseById.get(nextRoot.finiteVerbId)?.order ?? Number.POSITIVE_INFINITY
       : Number.POSITIVE_INFINITY;
-    pendingOrphans = flushOrphansBefore(nextRootOrder);
+    const reserved = reservedOrphansByRoot.get(root.finiteVerbId) ?? [];
+    reservedOrphansByRoot.delete(root.finiteVerbId);
+    pendingOrphans = [...reserved, ...flushOrphansBefore(nextRootOrder, root.finiteVerbId)].sort(
+      (a, b) => a.order - b.order
+    );
 
     const beforeOrphans = pendingOrphans.filter(orphan => orphan.order < clause.order);
     if (opensWithRelativePronoun(clause) && beforeOrphans.length) {
       warnings.push(
         `${root.reference} (${root.finiteVerbId}): opens with a relative pronoun and sits next to unplaced material — verify this is really root, not a Q1 description of something in that material (the Tito 1:2:6 pattern).`
       );
+    }
+
+    // Packaging D: pre-#### condition packages — every line gets `…`;
+    // last line also gets `⤵`.
+    protasisOpenIds = new Set<string>();
+    protasisCloseIds = new Set<string>();
+    for (const child of root.children) {
+      const order = childOrder(child);
+      if (order < clause.order && isConditionNode(child)) {
+        markProtasisPackage(child);
+      }
+    }
+    for (const orphan of beforeOrphans) {
+      if (orphan.kind !== "parked") continue;
+      if (!isConditionNode(orphan.node)) continue;
+      const owner = whenIfOwnerId(orphan.node.finiteVerbId);
+      if (owner && owner !== root.finiteVerbId) continue;
+      markProtasisPackage(orphan.node);
     }
 
     // Flat document-order timeline so `+` can inherit the nearest preceding
@@ -1551,32 +2033,8 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     unitEvents.push({ kind: "root", order: clause.order });
     unitEvents.sort((a, b) => a.order - b.order);
 
-    // H3 reference = root + in-unit dependent finites + parked only.
-    // (1) Phrase orphans do not widen the ref.
-    // (2) Dependents after the next root are stripped above — that was the
-    //     real `2:2–5:6` bug (4:18 → parent 2:2:8, with 5:6 under 4:18).
-    type VersePin = { chapter: number; verse: number };
-    const unitVerses: VersePin[] = [{ chapter: clause.chapter, verse: clause.verse }];
-    function addVersePin(chapter: number, verse: number): void {
-      if (!unitVerses.some(pin => pin.chapter === chapter && pin.verse === verse)) {
-        unitVerses.push({ chapter, verse });
-      }
-    }
-    for (const event of unitEvents) {
-      if (event.kind === "dependent") {
-        const dep = clauseById.get(event.node.finiteVerbId);
-        if (dep && dep.order < nextRootOrder) addVersePin(dep.chapter, dep.verse);
-      } else if (event.kind === "orphan" && event.orphan.kind !== "phrase") {
-        const parked = clauseById.get(event.orphan.node.finiteVerbId);
-        if (parked && parked.order < nextRootOrder) addVersePin(parked.chapter, parked.verse);
-      }
-    }
-    unitVerses.sort((a, b) => a.chapter - b.chapter || a.verse - b.verse);
-    const startChapter = unitVerses[0].chapter;
-    const startVerse = unitVerses[0].verse;
-    const endChapter = unitVerses[unitVerses.length - 1].chapter;
-    const endVerse = unitVerses[unitVerses.length - 1].verse;
-    const reference = formatUnitReference(startChapter, startVerse, endChapter, endVerse);
+    // H3 reference = independent-clause id only (Version A).
+    const reference = formatClauseUnitReference(root.finiteVerbId);
 
     const { prefixWordIds, claimText } = splitClaimAtFinite(root.finiteVerbId);
     const rootQuote = scripture(claimText || root.spanText || clause.finiteVerbText);
@@ -1634,6 +2092,15 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
           }
         }
         block.push(...slide(`#### ${rootQuote}`));
+        // The Spanish reads with a verb the Greek doesn't have, so the H4 would
+        // otherwise imply one. Say where it came from instead.
+        if (nominalHeadIds.has(root.finiteVerbId)) {
+          block.push(
+            ...starSlides("", [
+              "Cláusula nominal: en griego esta cláusula no tiene verbo; el español lo suple para poder leerse."
+            ])
+          );
+        }
         const rootActor = actorTripleScripture(root.finiteVerbId);
         if (rootActor) block.push(...starSlides("", [rootActor]));
         block.push(...commentSlides(takeReaderNoteComments(clause.chapter, clause.verse)));
@@ -1723,7 +2190,8 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   }
 
   // H1/H2 evidence: the TODOs stay human-assigned, but the writer names them
-  // from observed data — dominant actors and the book's mood mix, up front.
+  // from observed data — dominant actors, mood mix, writing-purpose trajectory,
+  // and student Thread as workshop hypothesis (never as titles).
   {
     const evidenceLines: string[] = [];
     if (concentrationCounts.size) {
@@ -1740,6 +2208,56 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
         `Tono observado: ${statementCount} ${statementCount === 1 ? "declaración" : "declaraciones"} · ${commandCount} ${commandCount === 1 ? "mandato" : "mandatos"}.`
       );
     }
+
+    // Writing-purpose detectors need the ἵνα / "para que" text. That usually
+    // lives on a purpose-frame child, not inside the root's own selectedSpan —
+    // join direct purpose dependents so 1:3 / 2:1 / 5:13 show in the trajectory.
+    const purposeTextByParent = new Map<string, string[]>();
+    for (const [childId, observation] of Object.entries(augmentedObservations)) {
+      if (observation.tellsWhenOrIf !== "yes" || observation.frameType !== "purpose") continue;
+      const parentId = observation.whenIfParentClauseId;
+      if (!parentId) continue;
+      const childText = spanTextFor(childId).trim();
+      if (!childText) continue;
+      const bucket = purposeTextByParent.get(parentId) ?? [];
+      bucket.push(childText);
+      purposeTextByParent.set(parentId, bucket);
+    }
+    const movementClauses = workingRoots
+      .filter(root => !skeleton.cycleBrokenIds.has(root.finiteVerbId))
+      .map((root, order) => {
+        const parts = root.finiteVerbId.split(":");
+        const verseKey = parts.length >= 2 ? `${parts[0]}:${parts[1]}` : root.finiteVerbId;
+        const rootText = spanTextFor(root.finiteVerbId).trim();
+        const purposeBits = purposeTextByParent.get(root.finiteVerbId) ?? [];
+        const spanText = [rootText, ...purposeBits].filter(Boolean).join(" ");
+        return {
+          finiteVerbId: root.finiteVerbId,
+          reference: `${bookDisplayName} ${verseKey}`,
+          spanText,
+          order
+        };
+      });
+    const writingPurposes = buildBookMovementReport(movementClauses).writingPurposes;
+    if (writingPurposes.length) {
+      const traj = writingPurposes.map(hit => {
+        const parts = hit.finiteVerbId.split(":");
+        const verseKey = parts.length >= 2 ? `${parts[0]}:${parts[1]}` : hit.reference;
+        return `${verseKey} ${hit.trajectory}`;
+      });
+      evidenceLines.push(`Trayectoria de propósito de escritura: ${traj.join(" · ")}.`);
+    }
+
+    const namedThread = readBookThread(bookId).steps.filter(step => step.label.trim());
+    if (namedThread.length) {
+      const chain = namedThread
+        .map(step => `${step.verseKey} ${step.label.trim()}`)
+        .join(" ↓ ");
+      evidenceLines.push(
+        `Hilo de taller (hipótesis de movimiento — no es título H1/H2): ${chain}`
+      );
+    }
+
     if (evidenceLines.length) {
       const evidenceBlock: string[] = [];
       evidenceBlock.push(

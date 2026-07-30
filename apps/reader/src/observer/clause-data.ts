@@ -1,6 +1,7 @@
 import type { BibleVerse } from "cgv-bible";
 import {
   getReaderBookInfo,
+  readerBookHasOshb,
   workshopProgressKeys,
   type ReaderBookId
 } from "@cgv/core";
@@ -8,6 +9,14 @@ import type { FrameType } from "./clause-signals";
 import { loadLbfRaw, loadMorphRawSync, loadTokensRawSync } from "./book-assets";
 import { loadLbfTokenSurfaces, loadLbfTokenWordMap, resolveLbfPhraseWordIndex } from "./lbf-alignment";
 import { EMPTY_H3_FLOW_STATE, sanitizeH3FlowState, type H3FlowState } from "./h3-flow";
+import {
+  isAlignmentStyleId,
+  isOshbFiniteVerb,
+  isOshbInfinitive,
+  isOshbParticiple,
+  mtToProtestant,
+  otTokenId
+} from "./oshb";
 import { getWorkshopBookId } from "./workshop-book";
 
 export type { H3FlowState };
@@ -186,6 +195,16 @@ function stripGreekPunctuation(value: string): string {
 // grouped by recipient, not a flat marked set) can reuse it too.
 function buildGreekIdToAlignmentIdMap(bookId: ReaderBookId = getWorkshopBookId()): Map<string, string> {
   const map = new Map<string, string>();
+
+  if (readerBookHasOshb(bookId)) {
+    for (const row of parseTokenRows(bookId)) {
+      const { chapter, verse } = mtToProtestant(row.ch, row.vs);
+      const id = otTokenId(chapter, verse, row.tok);
+      map.set(id, id);
+    }
+    return map;
+  }
+
   const verseTokenCounts = new Map<string, number>();
   const morphRaw = loadMorphRawSync(bookId);
 
@@ -229,6 +248,10 @@ export function readMarkedAlignmentIds(
   const greekIdToAlignmentId = buildGreekIdToAlignmentIdMap(bookId);
   const alignmentIds = new Set<string>();
   for (const greekId of markedGreekIds) {
+    if (isAlignmentStyleId(greekId)) {
+      alignmentIds.add(greekId);
+      continue;
+    }
     const alignmentId = greekIdToAlignmentId.get(greekId);
     if (alignmentId) alignmentIds.add(alignmentId);
   }
@@ -259,6 +282,10 @@ export function readCommandRecipientAssignments(
       if (typeof record.recipient !== "string" || !record.recipient.trim() || !Array.isArray(record.tokenIds)) continue;
       for (const tokenId of record.tokenIds) {
         if (typeof tokenId !== "string") continue;
+        if (isAlignmentStyleId(tokenId)) {
+          assignments.set(tokenId, record.recipient);
+          continue;
+        }
         const alignmentId = greekIdToAlignmentId.get(tokenId);
         if (alignmentId) assignments.set(alignmentId, record.recipient);
       }
@@ -270,8 +297,24 @@ export function readCommandRecipientAssignments(
   return assignments;
 }
 
+/**
+ * Tokens marked as the predicate head of a verbless (nominal) clause. Greek
+ * writes whole clauses with no verb in them — 1 Peter 3:8's Τὸ δὲ τέλος πάντες
+ * ὁμόφρονες, συμπαθεῖς… is an imperatival nominal clause, and the participles of
+ * 3:9 plus the ὅτι clause explaining them all hang on it. With no anchor there,
+ * those dependents have no possible parent, so O ends up recording a false one.
+ */
+export function readNominalClauseHeadIds(bookId: ReaderBookId = getWorkshopBookId()): Set<string> {
+  return readMarkedAlignmentIds(progressKeys(bookId).nominalHeads, bookId);
+}
+
+// A nominal head is a clause anchor exactly like a marked finite verb, so every
+// consumer of the finite marks sees the union. Brick 1's own confirmation still
+// reads finiteMarks alone, so marking one never looks like a finite-verb error.
 function readFiniteMarkedAlignmentIds(bookId: ReaderBookId): Set<string> {
-  return readMarkedAlignmentIds(progressKeys(bookId).finiteMarks, bookId);
+  const ids = readMarkedAlignmentIds(progressKeys(bookId).finiteMarks, bookId);
+  for (const id of readNominalClauseHeadIds(bookId)) ids.add(id);
+  return ids;
 }
 
 function readDependentIntroducerMarkedAlignmentIds(bookId: ReaderBookId): Set<string> {
@@ -303,77 +346,103 @@ function tokenizeVerse(verse: BibleVerse): SpanishWord[] {
   return words;
 }
 
-function parseFiniteAlignments(bookId: ReaderBookId = getWorkshopBookId()): FiniteAlignment[] {
+function parseTokenRows(bookId: ReaderBookId): Array<{
+  ch: number;
+  vs: number;
+  tok: number;
+  surface: string;
+  morph: string;
+  lemma: string;
+  es: string;
+}> {
   const tokensRaw = loadTokensRawSync(bookId);
-  return tokensRaw
-    .replace(/\r\n/g, "\n")
-    .split("\n")
-    .map(line => {
-      try {
-        return JSON.parse(line);
-      } catch {
-        return null;
-      }
+  const rows: Array<{
+    ch: number;
+    vs: number;
+    tok: number;
+    surface: string;
+    morph: string;
+    lemma: string;
+    es: string;
+  }> = [];
+  for (const line of tokensRaw.replace(/\r\n/g, "\n").split("\n")) {
+    if (!line.trim()) continue;
+    let row: Record<string, unknown>;
+    try {
+      row = JSON.parse(line) as Record<string, unknown>;
+    } catch {
+      continue;
+    }
+    if (row.book !== bookId) continue;
+    const tok = typeof row.tok === "number" ? row.tok : typeof row.w === "number" ? row.w : null;
+    if (
+      typeof row.ch !== "number" ||
+      typeof row.vs !== "number" ||
+      tok === null ||
+      typeof row.surface !== "string" ||
+      typeof row.morph !== "string" ||
+      typeof row.es !== "string"
+    ) {
+      continue;
+    }
+    rows.push({
+      ch: row.ch,
+      vs: row.vs,
+      tok,
+      surface: row.surface,
+      morph: row.morph,
+      lemma: typeof row.lemma === "string" ? row.lemma : "",
+      es: row.es
+    });
+  }
+  return rows;
+}
+
+function isFiniteMorphTag(morph: string): boolean {
+  return /^V-[123]/.test(morph) || isOshbFiniteVerb(morph);
+}
+
+function parseFiniteAlignments(bookId: ReaderBookId = getWorkshopBookId()): FiniteAlignment[] {
+  const nominalHeadIds = readNominalClauseHeadIds(bookId);
+  const oshb = readerBookHasOshb(bookId);
+  return parseTokenRows(bookId)
+    .map(row => {
+      const { chapter, verse } = oshb ? mtToProtestant(row.ch, row.vs) : { chapter: row.ch, verse: row.vs };
+      return { ...row, ch: chapter, vs: verse };
     })
-    .filter((row): row is Record<string, unknown> => Boolean(row))
     .filter(row => {
       return (
-        row.book === bookId &&
-        typeof row.ch === "number" &&
-        typeof row.vs === "number" &&
-        typeof row.tok === "number" &&
-        typeof row.surface === "string" &&
-        typeof row.morph === "string" &&
-        typeof row.es === "string" &&
-        /^V-[123]/.test(row.morph)
+        isFiniteMorphTag(row.morph) ||
+        nominalHeadIds.has(finiteAlignmentId(row.ch, row.vs, row.tok))
       );
     })
     .map(row => ({
-      id: finiteAlignmentId(row.ch as number, row.vs as number, row.tok as number),
-      chapter: row.ch as number,
-      verse: row.vs as number,
-      token: row.tok as number,
-      greekSurface: row.surface as string,
-      greekMorph: row.morph as string,
-      greekLemma: typeof row.lemma === "string" ? row.lemma : "",
-      spanishHint: row.es as string
+      id: finiteAlignmentId(row.ch, row.vs, row.tok),
+      chapter: row.ch,
+      verse: row.vs,
+      token: row.tok,
+      greekSurface: row.surface,
+      greekMorph: row.morph,
+      greekLemma: row.lemma,
+      spanishHint: row.es
     }));
 }
 
 function parseTokenAlignments(bookId: ReaderBookId = getWorkshopBookId()): FiniteAlignment[] {
-  const tokensRaw = loadTokensRawSync(bookId);
-  return tokensRaw
-    .replace(/\r\n/g, "\n")
-    .split("\n")
-    .map(line => {
-      try {
-        return JSON.parse(line);
-      } catch {
-        return null;
-      }
-    })
-    .filter((row): row is Record<string, unknown> => Boolean(row))
-    .filter(row => {
-      return (
-        row.book === bookId &&
-        typeof row.ch === "number" &&
-        typeof row.vs === "number" &&
-        typeof row.tok === "number" &&
-        typeof row.surface === "string" &&
-        typeof row.morph === "string" &&
-        typeof row.es === "string"
-      );
-    })
-    .map(row => ({
-      id: finiteAlignmentId(row.ch as number, row.vs as number, row.tok as number),
-      chapter: row.ch as number,
-      verse: row.vs as number,
-      token: row.tok as number,
-      greekSurface: row.surface as string,
-      greekMorph: row.morph as string,
-      greekLemma: typeof row.lemma === "string" ? row.lemma : "",
-      spanishHint: row.es as string
-    }));
+  const oshb = readerBookHasOshb(bookId);
+  return parseTokenRows(bookId).map(row => {
+    const { chapter, verse } = oshb ? mtToProtestant(row.ch, row.vs) : { chapter: row.ch, verse: row.vs };
+    return {
+      id: finiteAlignmentId(chapter, verse, row.tok),
+      chapter,
+      verse,
+      token: row.tok,
+      greekSurface: row.surface,
+      greekMorph: row.morph,
+      greekLemma: row.lemma,
+      spanishHint: row.es
+    };
+  });
 }
 
 // MorphGNT's verb tag is "V-" + 8 chars: person, tense, voice, mood, case,
@@ -383,12 +452,132 @@ function parseTokenAlignments(bookId: ReaderBookId = getWorkshopBookId()): Finit
 // morphology lookup — same mechanical certainty as Brick 1's finite-verb
 // detection, no judgment involved in deciding whether a token is one.
 function isParticipleMorph(morph: string): boolean {
-  return morph.startsWith("V-") && morph[5] === "P";
+  return (morph.startsWith("V-") && morph[5] === "P") || isOshbParticiple(morph);
 }
 
-/** MorphGNT mood slot N — infinitive (e.g. V--PAN---- εἶναι). */
+/** MorphGNT mood slot N — infinitive (e.g. V--PAN---- εἶναι). Also OSHB inf. */
 export function isInfinitiveMorph(morph: string): boolean {
-  return morph.startsWith("V-") && morph[5] === "N";
+  return (morph.startsWith("V-") && morph[5] === "N") || isOshbInfinitive(morph);
+}
+
+/** Case letter of a noun or adjective, across both tag styles in the token files. */
+function substantiveCaseLetter(morph: string): string | null {
+  if (!/^[NA]/.test(morph)) return null;
+  if (/^[NA]-[A-Z]/.test(morph)) return morph.charAt(2); // Robinson: N-NSM / A-NPM
+  return morph.length > 6 ? morph.charAt(6) : null; // MorphGNT: N-----NSM-
+}
+
+export interface NominalClauseCandidate {
+  chapter: number;
+  verse: number;
+  startToken: number;
+  endToken: number;
+  /** Greek surface of the whole run, for the flag text. */
+  greek: string;
+  tokenCount: number;
+  /**
+   * A participle in the subject case sits in the run — the shape an imperatival
+   * participle takes (2:18 ὑποτασσόμενοι). Only nominatives count: an accusative or
+   * genitive participle modifies something inside the run and says nothing about
+   * whether the run predicates. Even a nominative may only be attributive (1:3
+   * ὁ … ἀναγεννήσας), so this describes the form and claims nothing more.
+   */
+  hasNominativeParticiple: boolean;
+  /** Runs into a clause span with no sentence break between — a span may be the real issue. */
+  touchesClauseSpan: boolean;
+}
+
+/** ὡς-comparatives modify the clause they sit in; they never predicate on their own. */
+const COMPARATIVE_LEMMAS = new Set(["ὡς", "καθώς", "ὥσπερ", "καθάπερ", "ὡσεί"]);
+
+/** Greek full stop and question mark close a sentence; the raised dot is a colon. */
+function closesSentence(surface: string): boolean {
+  return /[.;]$/.test(surface.replace(/[⸀⸁⸂⸃”’")\]]+$/g, "").trim());
+}
+
+/**
+ * Stretches of Greek that no clause span covers, contain no finite verb, and still
+ * carry a nominative or vocative substantive.
+ *
+ * That is the shape of a clause whose predicate is nominal rather than verbal —
+ * «Εὐλογητὸς ὁ θεός», «τοῦτο χάρις», «εἰρήνη ὑμῖν πᾶσιν», «φιλόξενοι εἰς ἀλλήλους».
+ * Observer can only build such a clause once a student marks its head, and no other
+ * check can miss it on the student's behalf: every one of them reasons from a verb,
+ * and here there is none. Left unmarked, the assertion never enters the trunk — in
+ * 1 Pedro that silently costs the commands to wives, husbands, servants and elders.
+ *
+ * Only a nominal that predicates counts. A nominal sitting *inside* an independent
+ * clause — a subject a narrow span left outside (5:10 «ὁ δὲ θεὸς πάσης χάριτος»
+ * before καταρτίσει), an apposition (5:1), a second predicate under one copula
+ * (4:11) — is part of that clause, not a clause of its own, and is worth no note as
+ * a nominal clause. That call is editorial, so the only class dropped here is the
+ * one that is mechanical: a ὡς-comparative can only modify its host. The rest are
+ * reported with `touchesClauseSpan` so the reader knows a span may be the real
+ * question — filtering them out would bury the genuine ones that simply happen to
+ * govern a subordinate clause in the same sentence («τοῦτο γὰρ χάρις, εἰ …»).
+ */
+export function findNominalClauseCandidates(
+  claimedGreekTokenIds: Set<string>,
+  bookId: ReaderBookId = getWorkshopBookId()
+): NominalClauseCandidate[] {
+  const nominalHeadIds = readNominalClauseHeadIds(bookId);
+  const tokens = parseTokenAlignments(bookId).sort(
+    (a, b) => a.chapter - b.chapter || a.verse - b.verse || a.token - b.token
+  );
+
+  const runs: FiniteAlignment[][] = [];
+  let current: FiniteAlignment[] | null = null;
+  for (const token of tokens) {
+    if (claimedGreekTokenIds.has(token.id)) {
+      current = null;
+      continue;
+    }
+    const previous = current?.[current.length - 1];
+    if (previous && previous.chapter === token.chapter && previous.verse === token.verse && previous.token === token.token - 1) {
+      current?.push(token);
+    } else {
+      current = [token];
+      runs.push(current);
+    }
+  }
+
+  const tokenById = new Map(tokens.map(token => [token.id, token]));
+  const candidates: NominalClauseCandidate[] = [];
+  for (const run of runs) {
+    if (run.length < 3) continue;
+    if (run.some(token => isFiniteMorphTag(token.greekMorph))) continue;
+    // Already marked: the student has seen this one, so it is not a miss.
+    if (run.some(token => nominalHeadIds.has(token.id))) continue;
+    if (COMPARATIVE_LEMMAS.has(run[0].greekLemma.trim())) continue;
+    const hasPredicate = run.some(token => {
+      const letter = substantiveCaseLetter(token.greekMorph);
+      return letter === "N" || letter === "V";
+    });
+    if (!hasPredicate) continue;
+
+    const first = run[0];
+    const last = run[run.length - 1];
+    const before = tokenById.get(`${first.chapter}:${first.verse}:${first.token - 1}`);
+    const after = tokenById.get(`${last.chapter}:${last.verse}:${last.token + 1}`);
+    const touchesClauseSpan = Boolean(
+      (before && claimedGreekTokenIds.has(before.id) && !closesSentence(before.greekSurface)) ||
+        (after && claimedGreekTokenIds.has(after.id) && !closesSentence(last.greekSurface))
+    );
+
+    candidates.push({
+      chapter: first.chapter,
+      verse: first.verse,
+      startToken: first.token,
+      endToken: last.token,
+      greek: run.map(token => stripGreekPunctuation(token.greekSurface)).join(" "),
+      tokenCount: run.length,
+      hasNominativeParticiple: run.some(
+        token => isParticipleMorph(token.greekMorph) && token.greekMorph[6] === "N"
+      ),
+      touchesClauseSpan
+    });
+  }
+  return candidates;
 }
 
 const PARTICIPLE_ASPECT: Record<string, string> = {
@@ -706,6 +895,228 @@ export function writeH3FlowState(
   window.localStorage.setItem(progressKeys(bookId).h3Flow, JSON.stringify(state));
 }
 
+/** Student-marked contrast observation (never an app-supplied theme). */
+export type ContrastObservation = {
+  id: string;
+  verseKey: string;
+  poleA: string;
+  poleB: string;
+  note?: string;
+};
+
+export type ContrastObservationsState = {
+  items: ContrastObservation[];
+};
+
+const EMPTY_CONTRASTS: ContrastObservationsState = { items: [] };
+
+function sanitizeContrasts(raw: unknown): ContrastObservationsState {
+  if (!raw || typeof raw !== "object") return { ...EMPTY_CONTRASTS, items: [] };
+  const itemsRaw = (raw as { items?: unknown }).items;
+  if (!Array.isArray(itemsRaw)) return { ...EMPTY_CONTRASTS, items: [] };
+  const items: ContrastObservation[] = [];
+  for (const row of itemsRaw) {
+    if (!row || typeof row !== "object") continue;
+    const r = row as Record<string, unknown>;
+    const id = typeof r.id === "string" ? r.id : "";
+    const verseKey = typeof r.verseKey === "string" ? r.verseKey : "";
+    const poleA = typeof r.poleA === "string" ? r.poleA.trim() : "";
+    const poleB = typeof r.poleB === "string" ? r.poleB.trim() : "";
+    if (!id || !verseKey || !poleA || !poleB) continue;
+    const note = typeof r.note === "string" && r.note.trim() ? r.note.trim() : undefined;
+    items.push({ id, verseKey, poleA, poleB, note });
+  }
+  return { items };
+}
+
+export function readContrastObservations(
+  bookId: ReaderBookId = getWorkshopBookId()
+): ContrastObservationsState {
+  try {
+    const stored = window.localStorage.getItem(progressKeys(bookId).contrasts);
+    if (!stored) return { ...EMPTY_CONTRASTS, items: [] };
+    return sanitizeContrasts(JSON.parse(stored));
+  } catch {
+    return { ...EMPTY_CONTRASTS, items: [] };
+  }
+}
+
+export function writeContrastObservations(
+  state: ContrastObservationsState,
+  bookId: ReaderBookId = getWorkshopBookId()
+): void {
+  window.localStorage.setItem(
+    progressKeys(bookId).contrasts,
+    JSON.stringify(sanitizeContrasts(state))
+  );
+}
+
+/** Confirmed book-definition dossier (authorial use — see book-definitions-spec.md). */
+export type BookDefinitionHitKind = "equative" | "contrast" | "use" | "other";
+
+export type BookDefinitionHit = {
+  id: string;
+  verseKey: string;
+  kind: BookDefinitionHitKind;
+  snippet: string;
+  note?: string;
+  /** true = in dossier; false = dismissed proposal. */
+  confirmed: boolean;
+};
+
+export type BookDefinitionTerm = {
+  id: string;
+  seed: string;
+  relatedConfirmed: string[];
+  hits: BookDefinitionHit[];
+  workingDefinition: string;
+};
+
+export type BookDefinitionsState = {
+  terms: BookDefinitionTerm[];
+};
+
+const EMPTY_BOOK_DEFINITIONS: BookDefinitionsState = { terms: [] };
+
+const HIT_KINDS = new Set<BookDefinitionHitKind>(["equative", "contrast", "use", "other"]);
+
+function sanitizeBookDefinitions(raw: unknown): BookDefinitionsState {
+  if (!raw || typeof raw !== "object") return { terms: [] };
+  const termsRaw = (raw as { terms?: unknown }).terms;
+  if (!Array.isArray(termsRaw)) return { terms: [] };
+  const terms: BookDefinitionTerm[] = [];
+  for (const row of termsRaw) {
+    if (!row || typeof row !== "object") continue;
+    const r = row as Record<string, unknown>;
+    const id = typeof r.id === "string" ? r.id : "";
+    const seed = typeof r.seed === "string" ? r.seed.trim() : "";
+    if (!id || !seed) continue;
+    const relatedConfirmed = Array.isArray(r.relatedConfirmed)
+      ? r.relatedConfirmed.filter((x): x is string => typeof x === "string" && Boolean(x.trim()))
+      : [];
+    const workingDefinition = typeof r.workingDefinition === "string" ? r.workingDefinition : "";
+    const hitsRaw = Array.isArray(r.hits) ? r.hits : [];
+    const hits: BookDefinitionHit[] = [];
+    for (const h of hitsRaw) {
+      if (!h || typeof h !== "object") continue;
+      const hr = h as Record<string, unknown>;
+      const hid = typeof hr.id === "string" ? hr.id : "";
+      const verseKey = typeof hr.verseKey === "string" ? hr.verseKey : "";
+      const kind = typeof hr.kind === "string" && HIT_KINDS.has(hr.kind as BookDefinitionHitKind)
+        ? (hr.kind as BookDefinitionHitKind)
+        : "use";
+      const snippet = typeof hr.snippet === "string" ? hr.snippet : "";
+      if (!hid || !verseKey) continue;
+      const note = typeof hr.note === "string" && hr.note.trim() ? hr.note.trim() : undefined;
+      hits.push({
+        id: hid,
+        verseKey,
+        kind,
+        snippet,
+        note,
+        confirmed: hr.confirmed === true
+      });
+    }
+    terms.push({ id, seed, relatedConfirmed, hits, workingDefinition });
+  }
+  return { terms };
+}
+
+export function readBookDefinitions(
+  bookId: ReaderBookId = getWorkshopBookId()
+): BookDefinitionsState {
+  try {
+    const stored = window.localStorage.getItem(progressKeys(bookId).bookDefinitions);
+    if (!stored) return { ...EMPTY_BOOK_DEFINITIONS, terms: [] };
+    return sanitizeBookDefinitions(JSON.parse(stored));
+  } catch {
+    return { ...EMPTY_BOOK_DEFINITIONS, terms: [] };
+  }
+}
+
+export function writeBookDefinitions(
+  state: BookDefinitionsState,
+  bookId: ReaderBookId = getWorkshopBookId()
+): void {
+  window.localStorage.setItem(
+    progressKeys(bookId).bookDefinitions,
+    JSON.stringify(sanitizeBookDefinitions(state))
+  );
+}
+
+/** Student-named book movement thread (see book-threads-spec.md). */
+export type BookThreadStepSource =
+  | "writing-purpose"
+  | "opens"
+  | "definition"
+  | "manual";
+
+export type BookThreadStep = {
+  id: string;
+  label: string;
+  verseKey: string;
+  source: BookThreadStepSource;
+  evidence?: string;
+  seed?: string;
+};
+
+export type BookThreadState = {
+  steps: BookThreadStep[];
+};
+
+const EMPTY_BOOK_THREAD: BookThreadState = { steps: [] };
+
+const THREAD_SOURCES = new Set<BookThreadStepSource>([
+  "writing-purpose",
+  "opens",
+  "definition",
+  "manual"
+]);
+
+function sanitizeBookThread(raw: unknown): BookThreadState {
+  if (!raw || typeof raw !== "object") return { steps: [] };
+  const stepsRaw = (raw as { steps?: unknown }).steps;
+  if (!Array.isArray(stepsRaw)) return { steps: [] };
+  const steps: BookThreadStep[] = [];
+  for (const row of stepsRaw) {
+    if (!row || typeof row !== "object") continue;
+    const r = row as Record<string, unknown>;
+    const id = typeof r.id === "string" ? r.id : "";
+    const verseKey = typeof r.verseKey === "string" ? r.verseKey.trim() : "";
+    const source =
+      typeof r.source === "string" && THREAD_SOURCES.has(r.source as BookThreadStepSource)
+        ? (r.source as BookThreadStepSource)
+        : null;
+    if (!id || !verseKey || !source) continue;
+    const label = typeof r.label === "string" ? r.label : "";
+    const evidence =
+      typeof r.evidence === "string" && r.evidence.trim() ? r.evidence.trim() : undefined;
+    const seed = typeof r.seed === "string" && r.seed.trim() ? r.seed.trim() : undefined;
+    steps.push({ id, label, verseKey, source, evidence, seed });
+  }
+  return { steps };
+}
+
+export function readBookThread(bookId: ReaderBookId = getWorkshopBookId()): BookThreadState {
+  try {
+    const stored = window.localStorage.getItem(progressKeys(bookId).bookThread);
+    if (!stored) return { ...EMPTY_BOOK_THREAD, steps: [] };
+    return sanitizeBookThread(JSON.parse(stored));
+  } catch {
+    return { ...EMPTY_BOOK_THREAD, steps: [] };
+  }
+}
+
+export function writeBookThread(
+  state: BookThreadState,
+  bookId: ReaderBookId = getWorkshopBookId()
+): void {
+  window.localStorage.setItem(
+    progressKeys(bookId).bookThread,
+    JSON.stringify(sanitizeBookThread(state))
+  );
+}
+
 /**
  * Teaching form for an observed actor line.
  * Requires subject + verb; omits the object slot when empty.
@@ -734,7 +1145,7 @@ export function getVersesWithoutFiniteVerb(): Set<string> {
   for (const alignment of parseTokenAlignments()) {
     const key = `${alignment.chapter}:${alignment.verse}`;
     allVerses.add(key);
-    if (/^V-[123]/.test(alignment.greekMorph)) hasFiniteVerb.add(key);
+    if (isFiniteMorphTag(alignment.greekMorph)) hasFiniteVerb.add(key);
   }
 
   const verbless = new Set<string>();
@@ -975,7 +1386,13 @@ export function formatClauseSpan(
     .sort((a, b) => a.index - b.index);
   if (!selected.length) return "";
 
-  if (verseText) {
+  // Contiguous char-slice only when every index between first and last is
+  // selected. After span-clip, gaps are common — slicing would re-include the
+  // dropped words (e.g. apodosis crumbs inside a condition line).
+  const contiguous = selected.every(
+    (word, i) => i === 0 || word.index === selected[i - 1].index + 1
+  );
+  if (verseText && contiguous) {
     return verseText.slice(selected[0].startChar, selected[selected.length - 1].endChar);
   }
 
@@ -1034,7 +1451,7 @@ export function deriveGreekClauseRange(
 
   const previousBoundaryTokens = verseTokens
     .filter(alignment => alignment.token < finiteToken.token)
-    .filter(alignment => /[,.;·]/.test(alignment.greekSurface) || /^V-[123]/.test(alignment.greekMorph));
+    .filter(alignment => /[,.;·]/.test(alignment.greekSurface) || isFiniteMorphTag(alignment.greekMorph));
   const previousBoundaryToken = previousBoundaryTokens[previousBoundaryTokens.length - 1];
   const startToken = Math.max((previousBoundaryToken?.token ?? 0) + 1, 1);
   const endToken = Math.max(...selectedTokenIds, finiteVerbPosition.token);

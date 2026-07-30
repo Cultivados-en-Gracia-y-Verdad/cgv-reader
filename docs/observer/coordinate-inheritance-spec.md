@@ -42,6 +42,12 @@ root-clause-connectives work already flagged as a later phase) — it does not m
 one should inherit anything. Inheritance only fires when what's being coordinated is itself
 already a subordinate clause sharing one dependency marker across multiple verbs.
 
+Second boundary: if the student has already answered Q1–Q3 as independent (`no` / `no` /
+`no`), do **not** overwrite that with inheritance. The zeroth check is a default for
+unanswered coordinate continuations (Titus 1:5 καὶ καταστήσῃς). It must not force a new
+discourse assertion into the prior subordinate — e.g. 1 Juan 4:3 `καὶ νῦν … ἐστίν` after
+`ὅτι ἔρχεται` is a fresh claim, not a second ὅτι-verb.
+
 ## Immediate data fix needed
 
 In the current Titus export: clause `1:5:12` ("καὶ καταστήσῃς κατὰ πόλιν πρεσβυτέρους" — "and

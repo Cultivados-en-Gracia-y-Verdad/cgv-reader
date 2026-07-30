@@ -25,10 +25,12 @@ units — never from naming a topic.
 | Sentence type | Root mood shifts statement ↔ imperative |
 | Recipient | Brick 2B addressee changes (imperative runs) |
 
-Deferred (same idea, later pass):
+Deferred (same idea, later pass — support after a user-placed H2 only):
 
-- **Pressure** — hope → holiness → submission → suffering (vocab + actors + mood together)
 - **Repeated vocabulary** — clusters of observed verb/object spans shifting
+
+Student **pressure** marks (tension at a seam) live in `h3-flow-spec.md` — participatory,
+not computer-suggested poles.
 
 ---
 

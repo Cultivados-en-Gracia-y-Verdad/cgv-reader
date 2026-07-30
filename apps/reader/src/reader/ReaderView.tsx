@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { BibleVerse } from "cgv-bible";
 import {
-  NOTES_KEY,
   READER_BOOKS,
+  getReaderBookInfo,
   readBibleVersion,
   readReaderBook,
   subscribeBibleVersion,
   subscribeReaderBook,
+  workshopProgressKeys,
   writeReaderBook,
   type BibleVersionId,
   type ReaderBookId
@@ -41,9 +42,19 @@ function targetContainsVerse(target: string, key: string): boolean {
   return key >= start && key <= end;
 }
 
-function readNotes(): ReaderNote[] {
+function notesStorageKey(bookId: ReaderBookId): string {
+  return workshopProgressKeys(bookId).readerNotes;
+}
+
+function noteBelongsToBook(target: string, bookDisplayName: string): boolean {
+  const start = target.split("--")[0]?.trim() ?? "";
+  if (!start) return false;
+  return start === bookDisplayName || start.startsWith(`${bookDisplayName}.`);
+}
+
+function readNotes(bookId: ReaderBookId): ReaderNote[] {
   try {
-    const stored = window.localStorage.getItem(NOTES_KEY);
+    const stored = window.localStorage.getItem(notesStorageKey(bookId));
     if (!stored) return [];
     const parsed = JSON.parse(stored);
     return Array.isArray(parsed) ? parsed : [];
@@ -68,7 +79,7 @@ export default function ReaderView() {
   const [bookId, setBookId] = useState<ReaderBookId>(() => readReaderBook());
   const [book, setBook] = useState<ReaderBook | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
-  const [notes, setNotes] = useState<ReaderNote[]>(readNotes);
+  const [notes, setNotes] = useState<ReaderNote[]>(() => readNotes(readReaderBook()));
   const [activeTarget, setActiveTarget] = useState<NoteTarget | null>(null);
   const [draft, setDraft] = useState("");
   const noteInputRef = useRef<HTMLTextAreaElement | null>(null);
@@ -81,6 +92,7 @@ export default function ReaderView() {
     setBook(null);
     setLoadError(null);
     setActiveTarget(null);
+    setNotes(readNotes(bookId));
 
     void loadReaderBook(bookId, bibleVersion)
       .then(next => {
@@ -98,8 +110,14 @@ export default function ReaderView() {
   }, [bookId, bibleVersion]);
 
   useEffect(() => {
-    window.localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
-  }, [notes]);
+    // Do not persist another book's notes into this book's key during the
+    // book-switch render (old notes briefly remain until the load effect runs).
+    const bookName = getReaderBookInfo(bookId).displayName;
+    if (notes.some(note => note.target && !noteBelongsToBook(note.target, bookName))) {
+      return;
+    }
+    window.localStorage.setItem(notesStorageKey(bookId), JSON.stringify(notes));
+  }, [bookId, notes]);
 
   useEffect(() => {
     if (!activeTarget) return;

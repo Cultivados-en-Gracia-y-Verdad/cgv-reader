@@ -30,6 +30,7 @@ export interface UiStrings {
   mark: string;
   structure: string;
   structureNeedsLbf: (book: string) => string;
+  markNeedsMorphGnt: (book: string) => string;
 
   compilerKicker: string;
   compilerTitle: (book: string) => string;
@@ -114,6 +115,8 @@ const EN: UiStrings = {
   structure: "Structure",
   structureNeedsLbf: book =>
     `Structure needs LBF reverse-interlinear alignment. ${book} has LBF reading text (and Mark); switch to Titus for Structure until alignment ships.`,
+  markNeedsMorphGnt: book =>
+    `Mark needs a source-language spine for ${book}. Switch to a book with MorphGNT (NT) or OSHB (Daniel) wired.`,
 
   compilerKicker: "Compiler",
   compilerTitle: book => `Manual skeleton — ${book}`,
@@ -205,6 +208,8 @@ const ES: UiStrings = {
   structure: "Estructura",
   structureNeedsLbf: book =>
     `Estructura necesita alineación inversa LBF. ${book} ya tiene texto LBF (y Marcar); cambie a Tito para Estructura hasta que exista la alineación.`,
+  markNeedsMorphGnt: book =>
+    `Marcar necesita columna fuente para ${book}. Cambie a un libro con MorphGNT (NT) o OSHB (Daniel) cableado.`,
 
   compilerKicker: "Compilador",
   compilerTitle: book => `Esqueleto del manual — ${book}`,

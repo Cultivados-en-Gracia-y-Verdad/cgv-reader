@@ -13,6 +13,7 @@ import { getWorkshopBookId } from "./workshop-book";
 
 type ParticipationMode =
   | "finite"
+  | "nominal"
   | "mood-commands"
   | "mood-statements"
   | "mood-subjunctive"
@@ -375,6 +376,11 @@ function OPrototypeLoaded({
   const [finiteMarkedIds, setFiniteMarkedIds] = useState<Set<string>>(
     () => new Set(readMarks(keys.finiteMarks))
   );
+  // Heads of verbless (nominal) clauses — kept in their own store so Brick 1 keeps
+  // checking against MorphGNT's finite tags. See WorkshopProgressKeys.nominalHeads.
+  const [nominalHeadIds, setNominalHeadIds] = useState<Set<string>>(
+    () => new Set(readMarks(keys.nominalHeads))
+  );
   const [commandMarkedIds, setCommandMarkedIds] = useState<Set<string>>(
     () => new Set(readMarks(keys.commandMarks))
   );
@@ -448,11 +454,20 @@ function OPrototypeLoaded({
     return { finiteIds, byMood, participleIds };
   }, [data.greek]);
 
+  // A nominal clause's mood is a reading, not a morph — the Greek has no verb to
+  // tag. So it takes part in the mood bricks (its force has to reach the tone
+  // evidence somehow) but sits outside the morphology comparison, which would
+  // otherwise read every one as a mismarked verb and withhold the ✓ forever.
+  const withoutNominalHeads = useCallback(
+    (marked: Set<string>) => new Set(Array.from(marked).filter(id => !nominalHeadIds.has(id))),
+    [nominalHeadIds]
+  );
+
   const brick1Confirmed = brickConfirmed(finiteMarkedIds, groundTruth.finiteIds);
-  const brick2Confirmed = brickConfirmed(commandMarkedIds, groundTruth.byMood.imperative);
-  const brick2cConfirmed = brickConfirmed(statementMarkedIds, groundTruth.byMood.indicative);
-  const brick3Confirmed = brickConfirmed(subjunctiveMarkedIds, groundTruth.byMood.subjunctive);
-  const brick3cConfirmed = brickConfirmed(optativeMarkedIds, groundTruth.byMood.optative);
+  const brick2Confirmed = brickConfirmed(withoutNominalHeads(commandMarkedIds), groundTruth.byMood.imperative);
+  const brick2cConfirmed = brickConfirmed(withoutNominalHeads(statementMarkedIds), groundTruth.byMood.indicative);
+  const brick3Confirmed = brickConfirmed(withoutNominalHeads(subjunctiveMarkedIds), groundTruth.byMood.subjunctive);
+  const brick3cConfirmed = brickConfirmed(withoutNominalHeads(optativeMarkedIds), groundTruth.byMood.optative);
   const brick4Confirmed = brickConfirmed(participleMarkedIds, groundTruth.participleIds);
 
   // Marks that are not participles in the Greek — these alone will block the ✓
@@ -488,6 +503,10 @@ function OPrototypeLoaded({
   }, [finiteMarkedIds, keys.finiteMarks]);
 
   useEffect(() => {
+    window.localStorage.setItem(keys.nominalHeads, JSON.stringify(Array.from(nominalHeadIds)));
+  }, [keys.nominalHeads, nominalHeadIds]);
+
+  useEffect(() => {
     window.localStorage.setItem(keys.commandMarks, JSON.stringify(Array.from(commandMarkedIds)));
   }, [commandMarkedIds, keys.commandMarks]);
 
@@ -521,7 +540,9 @@ function OPrototypeLoaded({
   const activeMarkedIds =
     participation === "finite"
       ? finiteMarkedIds
-      : participation === "mood-statements"
+      : participation === "nominal"
+        ? nominalHeadIds
+        : participation === "mood-statements"
         ? statementMarkedIds
         : participation === "mood-subjunctive"
           ? subjunctiveMarkedIds
@@ -533,7 +554,9 @@ function OPrototypeLoaded({
   const activeLabel =
     participation === "finite"
       ? "Finite verbs"
-      : participation === "mood-commands"
+      : participation === "nominal"
+        ? "Nominal clauses"
+        : participation === "mood-commands"
         ? "Commands"
         : participation === "mood-statements"
           ? "Statements"
@@ -908,14 +931,19 @@ function OPrototypeLoaded({
 
     if (participation === "finite") {
       setFiniteMarkedIds(updateMarks);
+    } else if (participation === "nominal") {
+      setNominalHeadIds(updateMarks);
     } else if (participation === "participles") {
       // Independent of finite-verb marking — participles are a separate
       // grammatical category, not a mood of an already-marked finite verb.
       setParticipleMarkedIds(updateMarks);
-    } else if (finiteMarkedIds.has(token.id)) {
+    } else if (finiteMarkedIds.has(token.id) || nominalHeadIds.has(token.id)) {
       // A finite verb has exactly one mood — marking it here must clear any
       // mark left over from the other three mood bricks, or a verb could
       // silently sit in two moods at once with nothing in the UI showing it.
+      // A nominal clause head is admitted here too: 3:8's Τὸ δὲ τέλος πάντες
+      // ὁμόφρονες is a command, and without a mood its force never reaches the
+      // tone counts Arquitecto reads.
       if (participation === "mood-statements") {
         setStatementMarkedIds(updateMarks);
         setSubjunctiveMarkedIds(discardMark);
@@ -938,7 +966,7 @@ function OPrototypeLoaded({
         setOptativeMarkedIds(discardMark);
       }
     }
-  }, [finiteMarkedIds, participation]);
+  }, [finiteMarkedIds, nominalHeadIds, participation]);
 
   const selectCommandGroupToken = useCallback((token: GreekToken, verse: GreekVerse) => {
     setActiveVerse(verse);
@@ -958,6 +986,8 @@ function OPrototypeLoaded({
   const clearMarks = useCallback(() => {
     if (participation === "finite") {
       setFiniteMarkedIds(new Set());
+    } else if (participation === "nominal") {
+      setNominalHeadIds(new Set());
     } else if (participation === "mood-commands") {
       setCommandMarkedIds(new Set());
     } else if (participation === "mood-statements") {
@@ -1015,6 +1045,10 @@ function OPrototypeLoaded({
     (token: GreekToken) => {
       if (participation === "finite") {
         return finiteMarkedIds.has(token.id) ? "greek-token--finite-marked" : "";
+      }
+
+      if (participation === "nominal") {
+        return nominalHeadIds.has(token.id) ? "greek-token--nominal-marked" : "";
       }
 
       if (participation === "command-recipients") {
@@ -1127,6 +1161,16 @@ function OPrototypeLoaded({
             <button
               type="button"
               className={`participation-option${
+                participation === "nominal" ? " participation-option--active" : ""
+              }`}
+              onClick={() => setParticipation("nominal")}
+              aria-pressed={participation === "nominal"}
+            >
+              Brick 1B — Nominal Clauses
+            </button>
+            <button
+              type="button"
+              className={`participation-option${
                 participation === "mood-commands" ? " participation-option--active" : ""
               }`}
               onClick={() => setParticipation("mood-commands")}
@@ -1223,7 +1267,9 @@ function OPrototypeLoaded({
                         return verse.tokens.map(token => (
                           <GreekTokenButton
                             disabled={
-                              (isFiniteMoodParticipation(participation) && !finiteMarkedIds.has(token.id)) ||
+                              (isFiniteMoodParticipation(participation) &&
+                                !finiteMarkedIds.has(token.id) &&
+                                !nominalHeadIds.has(token.id)) ||
                               (participation === "command-recipients" && !commandMarkedIds.has(token.id))
                             }
                             key={token.id}
@@ -1253,6 +1299,24 @@ function OPrototypeLoaded({
               <p className="participation-note">Find every finite verb that is a command.</p>
               {commandMarkedIds.size > 0 && (
                 <p className="terminology-note">Term: imperative mood</p>
+              )}
+            </section>
+          )}
+
+          {participation === "nominal" && (
+            <section className="result-card participation-card">
+              <p className="result-label">Current Participation</p>
+              <h2>Brick 1B — Nominal Clauses</h2>
+              <p className="participation-note">
+                Greek can assert a whole clause with no verb in it — 3:8&apos;s Τὸ δὲ τέλος πάντες ὁμόφρονες,
+                συμπαθεῖς… is a command with nothing finite anywhere in it. Mark the word that carries the
+                predicate, and the clause becomes something other clauses can hang on.
+              </p>
+              {nominalHeadIds.size > 0 && (
+                <p className="terminology-note">
+                  Only mark these where the Greek really has no verb. If a finite verb is present, it belongs in
+                  Brick 1.
+                </p>
               )}
             </section>
           )}
@@ -1596,6 +1660,12 @@ function OPrototypeLoaded({
               {participation === "finite" && selectedTokens.length ? (
                 selectedTokens.map(token => (
                   <span className="marked-token" key={token.id}>
+                    {tokenText(token)}
+                  </span>
+                ))
+              ) : participation === "nominal" && selectedTokens.length ? (
+                selectedTokens.map(token => (
+                  <span className="marked-token nominal-token" key={token.id}>
                     {tokenText(token)}
                   </span>
                 ))

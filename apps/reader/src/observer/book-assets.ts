@@ -3,21 +3,28 @@ import {
   getReaderBookInfo,
   readerBookHasLbf,
   readerBookHasLbfStructure,
+  readerBookHasOshb,
   type ReaderBookId
 } from "@cgv/core";
 
 /** Eager so Reader / Mark can load LBF sync when the book has text. */
-const lbfMdFiles = import.meta.glob("@cgv-lbf/nt/*.md", {
-  query: "?raw",
-  import: "default",
-  eager: true
-}) as Record<string, string>;
+const lbfMdFiles = import.meta.glob(
+  ["@cgv-lbf/nt/*.md", "@cgv-lbf/ot/*.md"],
+  {
+    query: "?raw",
+    import: "default",
+    eager: true
+  }
+) as Record<string, string>;
 
-const lbfAlignmentFiles = import.meta.glob("@cgv-lbf/nt/*.alignment.json", {
-  query: "?raw",
-  import: "default",
-  eager: true
-}) as Record<string, string>;
+const lbfAlignmentFiles = import.meta.glob(
+  ["@cgv-lbf/nt/*.alignment.json", "@cgv-lbf/ot/*.alignment.json"],
+  {
+    query: "?raw",
+    import: "default",
+    eager: true
+  }
+) as Record<string, string>;
 
 /** Lazy globs — keep each book under the Cloudflare Workers 25 MiB asset limit. */
 const morphFiles = import.meta.glob("@cgv-data/morphology/MorphGNT/*-morphgnt.txt", {
@@ -43,17 +50,21 @@ const morphFilesEager = import.meta.glob(
   }
 ) as Record<string, string>;
 
-const tokenFiles = import.meta.glob("@cgv-data/interlinears/NT/*.tokens.jsonl", {
-  query: "?raw",
-  import: "default"
-}) as Record<string, () => Promise<string>>;
+const tokenFiles = import.meta.glob(
+  ["@cgv-data/interlinears/NT/*.tokens.jsonl", "@cgv-data/interlinears/OT/*.tokens.jsonl"],
+  {
+    query: "?raw",
+    import: "default"
+  }
+) as Record<string, () => Promise<string>>;
 
 const tokenFilesEager = import.meta.glob(
   [
     "@cgv-data/interlinears/NT/tito.tokens.jsonl",
     "@cgv-data/interlinears/NT/1pedro.tokens.jsonl",
     "@cgv-data/interlinears/NT/judas.tokens.jsonl",
-    "@cgv-data/interlinears/NT/1juan.tokens.jsonl"
+    "@cgv-data/interlinears/NT/1juan.tokens.jsonl",
+    "@cgv-data/interlinears/OT/daniel.tokens.jsonl"
   ],
   {
     query: "?raw",
@@ -62,10 +73,16 @@ const tokenFilesEager = import.meta.glob(
   }
 ) as Record<string, string>;
 
-const interlinearFiles = import.meta.glob("@cgv-data/interlinears/NT/*.interlinear.txt", {
-  query: "?raw",
-  import: "default"
-}) as Record<string, () => Promise<string>>;
+const interlinearFiles = import.meta.glob(
+  [
+    "@cgv-data/interlinears/NT/*.interlinear.txt",
+    "@cgv-data/interlinears/OT/*.interlinear.txt"
+  ],
+  {
+    query: "?raw",
+    import: "default"
+  }
+) as Record<string, () => Promise<string>>;
 
 const nblaFiles = import.meta.glob(
   [
@@ -111,11 +128,25 @@ async function loadByEndsWith(
 
 export async function loadMorphRaw(bookId: ReaderBookId): Promise<string> {
   const stem = MORPHGNT_STEM_BY_BOOK[bookId];
+  if (!stem) {
+    throw new Error(
+      `No MorphGNT spine for ${getReaderBookInfo(bookId).displayName} (OT uses OSHB tokens).`
+    );
+  }
   return loadByEndsWith(morphFiles, `/${stem}-morphgnt.txt`);
 }
 
 export function loadMorphRawSync(bookId: ReaderBookId): string {
+  if (readerBookHasOshb(bookId)) {
+    // Structure maps OT progress ids without MorphGNT lines.
+    return "";
+  }
   const stem = MORPHGNT_STEM_BY_BOOK[bookId];
+  if (!stem) {
+    throw new Error(
+      `Sync MorphGNT is only bundled for LBF Structure books; missing ${getReaderBookInfo(bookId).displayName}`
+    );
+  }
   const endsWith = `/${stem}-morphgnt.txt`;
   const key = Object.keys(morphFilesEager).find(path => path.endsWith(endsWith));
   if (!key) {
@@ -162,7 +193,8 @@ export async function loadInterlinearRaw(bookId: ReaderBookId): Promise<string> 
 }
 
 function lbfMarkdownPath(bookId: ReaderBookId): string {
-  const endsWith = `/nt/${bookId}.md`;
+  const folder = getReaderBookInfo(bookId).testament === "ot" ? "ot" : "nt";
+  const endsWith = `/${folder}/${bookId}.md`;
   const key = Object.keys(lbfMdFiles).find(path => path.endsWith(endsWith));
   if (!key) {
     throw new Error(`Missing LBF markdown for ${getReaderBookInfo(bookId).displayName}`);
@@ -178,11 +210,12 @@ export function loadLbfRaw(bookId: ReaderBookId): string {
 }
 
 export function loadLbfAlignmentRaw(bookId: ReaderBookId): string {
-  // Alignment is Structure-only until a book has `*.alignment.json`.
+  // Alignment is Structure-only until a book has `*.alignment.json` and Structure is enabled.
   if (!readerBookHasLbfStructure(bookId)) {
     return JSON.stringify({ records: [] });
   }
-  const endsWith = `/nt/${bookId}.alignment.json`;
+  const folder = getReaderBookInfo(bookId).testament === "ot" ? "ot" : "nt";
+  const endsWith = `/${folder}/${bookId}.alignment.json`;
   const key = Object.keys(lbfAlignmentFiles).find(path => path.endsWith(endsWith));
   if (!key) {
     return JSON.stringify({ records: [] });

@@ -1,4 +1,6 @@
-// Reader book selection (NT). Observer / Compiler stay Titus until more LBF exists.
+// Reader book selection. Observer Structure stays NT MorphGNT until OT spine exists.
+
+import type { BibleVersionId } from "./bible-version";
 
 export const READER_BOOK_KEY = "the-reader:selected-book";
 
@@ -30,45 +32,49 @@ export type ReaderBookId =
   | "2juan"
   | "3juan"
   | "judas"
-  | "apocalipsis";
+  | "apocalipsis"
+  | "daniel";
 
 export interface ReaderBookInfo {
   id: ReaderBookId;
   /** Stable note / verse key book name (`Tito.1.1`). */
   displayName: string;
-  /** RV1909 Aquifer book number (40–66 for NT). */
+  /** RV1909 Aquifer book number (01–66 Protestant canon). */
   rv1909: string;
+  /** Testament for LBF path / morph spine selection. */
+  testament: "ot" | "nt";
 }
 
-/** New Testament in canonical order. */
+/** Reader books (NT + OT drafts as they gain LBF / bible text). */
 export const READER_BOOKS: ReaderBookInfo[] = [
-  { id: "mateo", displayName: "Mateo", rv1909: "40" },
-  { id: "marcos", displayName: "Marcos", rv1909: "41" },
-  { id: "lucas", displayName: "Lucas", rv1909: "42" },
-  { id: "juan", displayName: "Juan", rv1909: "43" },
-  { id: "hechos", displayName: "Hechos", rv1909: "44" },
-  { id: "romanos", displayName: "Romanos", rv1909: "45" },
-  { id: "1corintios", displayName: "1 Corintios", rv1909: "46" },
-  { id: "2corintios", displayName: "2 Corintios", rv1909: "47" },
-  { id: "galatas", displayName: "Gálatas", rv1909: "48" },
-  { id: "efesios", displayName: "Efesios", rv1909: "49" },
-  { id: "filipenses", displayName: "Filipenses", rv1909: "50" },
-  { id: "colosenses", displayName: "Colosenses", rv1909: "51" },
-  { id: "1tesalonicenses", displayName: "1 Tesalonicenses", rv1909: "52" },
-  { id: "2tesalonicenses", displayName: "2 Tesalonicenses", rv1909: "53" },
-  { id: "1timoteo", displayName: "1 Timoteo", rv1909: "54" },
-  { id: "2timoteo", displayName: "2 Timoteo", rv1909: "55" },
-  { id: "tito", displayName: "Tito", rv1909: "56" },
-  { id: "filemon", displayName: "Filemón", rv1909: "57" },
-  { id: "hebreos", displayName: "Hebreos", rv1909: "58" },
-  { id: "santiago", displayName: "Santiago", rv1909: "59" },
-  { id: "1pedro", displayName: "1 Pedro", rv1909: "60" },
-  { id: "2pedro", displayName: "2 Pedro", rv1909: "61" },
-  { id: "1juan", displayName: "1 Juan", rv1909: "62" },
-  { id: "2juan", displayName: "2 Juan", rv1909: "63" },
-  { id: "3juan", displayName: "3 Juan", rv1909: "64" },
-  { id: "judas", displayName: "Judas", rv1909: "65" },
-  { id: "apocalipsis", displayName: "Apocalipsis", rv1909: "66" }
+  { id: "mateo", displayName: "Mateo", rv1909: "40", testament: "nt" },
+  { id: "marcos", displayName: "Marcos", rv1909: "41", testament: "nt" },
+  { id: "lucas", displayName: "Lucas", rv1909: "42", testament: "nt" },
+  { id: "juan", displayName: "Juan", rv1909: "43", testament: "nt" },
+  { id: "hechos", displayName: "Hechos", rv1909: "44", testament: "nt" },
+  { id: "romanos", displayName: "Romanos", rv1909: "45", testament: "nt" },
+  { id: "1corintios", displayName: "1 Corintios", rv1909: "46", testament: "nt" },
+  { id: "2corintios", displayName: "2 Corintios", rv1909: "47", testament: "nt" },
+  { id: "galatas", displayName: "Gálatas", rv1909: "48", testament: "nt" },
+  { id: "efesios", displayName: "Efesios", rv1909: "49", testament: "nt" },
+  { id: "filipenses", displayName: "Filipenses", rv1909: "50", testament: "nt" },
+  { id: "colosenses", displayName: "Colosenses", rv1909: "51", testament: "nt" },
+  { id: "1tesalonicenses", displayName: "1 Tesalonicenses", rv1909: "52", testament: "nt" },
+  { id: "2tesalonicenses", displayName: "2 Tesalonicenses", rv1909: "53", testament: "nt" },
+  { id: "1timoteo", displayName: "1 Timoteo", rv1909: "54", testament: "nt" },
+  { id: "2timoteo", displayName: "2 Timoteo", rv1909: "55", testament: "nt" },
+  { id: "tito", displayName: "Tito", rv1909: "56", testament: "nt" },
+  { id: "filemon", displayName: "Filemón", rv1909: "57", testament: "nt" },
+  { id: "hebreos", displayName: "Hebreos", rv1909: "58", testament: "nt" },
+  { id: "santiago", displayName: "Santiago", rv1909: "59", testament: "nt" },
+  { id: "1pedro", displayName: "1 Pedro", rv1909: "60", testament: "nt" },
+  { id: "2pedro", displayName: "2 Pedro", rv1909: "61", testament: "nt" },
+  { id: "1juan", displayName: "1 Juan", rv1909: "62", testament: "nt" },
+  { id: "2juan", displayName: "2 Juan", rv1909: "63", testament: "nt" },
+  { id: "3juan", displayName: "3 Juan", rv1909: "64", testament: "nt" },
+  { id: "judas", displayName: "Judas", rv1909: "65", testament: "nt" },
+  { id: "apocalipsis", displayName: "Apocalipsis", rv1909: "66", testament: "nt" },
+  { id: "daniel", displayName: "Daniel", rv1909: "27", testament: "ot" }
 ];
 
 export const DEFAULT_READER_BOOK: ReaderBookId = "tito";
@@ -110,8 +116,8 @@ export function subscribeReaderBook(listener: (bookId: ReaderBookId) => void): (
   };
 }
 
-/** Books with LBF reading text under `data/lbf/nt/{id}.md`. */
-const LBF_TEXT_BOOKS = new Set<ReaderBookId>(["tito", "1pedro", "judas", "1juan"]);
+/** Books with LBF reading text under `data/lbf/{nt|ot}/{id}.md`. */
+const LBF_TEXT_BOOKS = new Set<ReaderBookId>(["tito", "1pedro", "judas", "1juan", "daniel"]);
 
 /** LBF available as a Reader bible version. */
 export function readerBookHasLbf(bookId: ReaderBookId): boolean {
@@ -120,10 +126,42 @@ export function readerBookHasLbf(bookId: ReaderBookId): boolean {
 
 /**
  * Observer Structure / Compiler need reverse-interlinear alignment, not just
- * reading text. Books with `data/lbf/nt/*.alignment.json`.
+ * reading text. NT: MorphGNT + `data/lbf/nt/*.alignment.json`.
+ * OT: OSHB tokens + `data/lbf/ot/*.alignment.json` (Daniel pilot).
  */
 export function readerBookHasLbfStructure(bookId: ReaderBookId): boolean {
-  return bookId === "tito" || bookId === "1pedro" || bookId === "judas" || bookId === "1juan";
+  return (
+    bookId === "tito" ||
+    bookId === "1pedro" ||
+    bookId === "judas" ||
+    bookId === "1juan" ||
+    bookId === "daniel"
+  );
+}
+
+/** MorphGNT Mark layer (NT). */
+export function readerBookHasMorphGnt(bookId: ReaderBookId): boolean {
+  return Boolean(MORPHGNT_STEM_BY_BOOK[bookId]);
+}
+
+/** OSHB/WLC Mark spine (OT pilot). */
+export function readerBookHasOshb(bookId: ReaderBookId): boolean {
+  return bookId === "daniel";
+}
+
+/** Observer Mark can load a source-language spine for this book. */
+export function readerBookHasObserverMark(bookId: ReaderBookId): boolean {
+  return readerBookHasMorphGnt(bookId) || readerBookHasOshb(bookId);
+}
+
+/** Bible versions present in cgv-data for this book (Reader prefs). */
+export function readerBookHasBibleVersion(bookId: ReaderBookId, version: BibleVersionId): boolean {
+  if (version === "LBF") return readerBookHasLbf(bookId);
+  if (bookId === "daniel") {
+    // No NBLA OT pack yet; BLE / SPNBES / RV1909 are available (LBF via readerBookHasLbf).
+    return version === "BLE" || version === "SPNBES" || version === "RV1909";
+  }
+  return true;
 }
 
 /**
@@ -132,6 +170,13 @@ export function readerBookHasLbfStructure(bookId: ReaderBookId): boolean {
  */
 export function workshopStorageSlug(bookId: ReaderBookId): string {
   return bookId === "tito" ? "titus" : bookId;
+}
+
+/** Inverse of workshopStorageSlug — for progress import (`book` field). */
+export function readerBookIdFromWorkshopSlug(slug: string): ReaderBookId | null {
+  if (slug === "titus") return "tito";
+  if (isReaderBookId(slug)) return slug;
+  return null;
 }
 
 /** MorphGNT filename stem under morphology/MorphGNT/ (e.g. `77-Tit`). */
@@ -162,11 +207,22 @@ export const MORPHGNT_STEM_BY_BOOK: Record<ReaderBookId, string> = {
   "2juan": "84-2Jn",
   "3juan": "85-3Jn",
   judas: "86-Jud",
-  apocalipsis: "87-Re"
+  apocalipsis: "87-Re",
+  /** OT — no MorphGNT; Observer Structure not enabled yet. */
+  daniel: ""
 };
 
 export interface WorkshopProgressKeys {
   finiteMarks: string;
+  /**
+   * Greek tokens marked as the predicate head of a verbless (nominal) clause —
+   * 1 Peter 3:8's Τὸ δὲ τέλος πάντες ὁμόφρονες… carries an imperatival force with
+   * no finite verb anywhere in it. Kept apart from finiteMarks so Brick 1 still
+   * checks against MorphGNT's finite tags, but treated as a clause anchor
+   * everywhere downstream: without one, any ὅτι/ἵνα explaining such a clause has
+   * nothing to attach to.
+   */
+  nominalHeads: string;
   commandMarks: string;
   statementMarks: string;
   subjunctiveMarks: string;
@@ -174,6 +230,8 @@ export interface WorkshopProgressKeys {
   participleMarks: string;
   commandRecipients: string;
   dependentIntroducers: string;
+  /** Reader margin notes — scoped per workshop book (`the-reader:{slug}:notes`). */
+  readerNotes: string;
   clauseAssignments: string;
   clauseAssignmentsLegacy: string | null;
   clauseObservations: string;
@@ -184,12 +242,19 @@ export interface WorkshopProgressKeys {
   clauseActors: string;
   /** H3 flow: accepted development breaks + ignored suggestions. */
   h3Flow: string;
+  /** Student-marked contrast pairs (poleA / poleB on a verse). */
+  contrasts: string;
+  /** Book definitions dossiers (authorial use — propose/confirm). */
+  bookDefinitions: string;
+  /** Student-named book movement thread (waypoints + labels). */
+  bookThread: string;
 }
 
 export function workshopProgressKeys(bookId: ReaderBookId): WorkshopProgressKeys {
   const s = workshopStorageSlug(bookId);
   return {
     finiteMarks: `o-prototype:${s}:finite-verb-marks`,
+    nominalHeads: `roots:${s}:brick1b:nominalClauseHeads`,
     commandMarks: `roots:${s}:brick2:mood:imperativeCandidates`,
     statementMarks: `roots:${s}:brick2c:mood:statementCandidates`,
     subjunctiveMarks: `roots:${s}:brick3:mood:subjunctiveCandidates`,
@@ -197,12 +262,16 @@ export function workshopProgressKeys(bookId: ReaderBookId): WorkshopProgressKeys
     participleMarks: `roots:${s}:brick4:participleCandidates`,
     commandRecipients: `roots:${s}:brick2b:commandRecipients`,
     dependentIntroducers: `roots:${s}:brick3:dependentThoughtIntroducers`,
+    readerNotes: `the-reader:${s}:notes`,
     clauseAssignments: `the-reader:spanish-clause-builder:${s}:v3`,
     clauseAssignmentsLegacy: s === "titus" ? "the-reader:clause-builder:titus:1:1-4:v2" : null,
     clauseObservations: `the-reader:spanish-clause-builder:${s}:statement-command-review:v1`,
     participleObservations: `the-reader:spanish-clause-builder:${s}:participles:v1`,
     participleSubjectHosts: `the-reader:spanish-clause-builder:${s}:participle-subjects:v1`,
     clauseActors: `the-reader:spanish-clause-builder:${s}:clause-actors:v1`,
-    h3Flow: `the-reader:spanish-clause-builder:${s}:h3-flow:v1`
+    h3Flow: `the-reader:spanish-clause-builder:${s}:h3-flow:v1`,
+    contrasts: `the-reader:spanish-clause-builder:${s}:contrasts:v1`,
+    bookDefinitions: `the-reader:spanish-clause-builder:${s}:book-definitions:v1`,
+    bookThread: `the-reader:spanish-clause-builder:${s}:book-thread:v1`
   };
 }

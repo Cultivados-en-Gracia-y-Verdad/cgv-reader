@@ -11,6 +11,7 @@ export {
   readProgressFile,
   applyProgressBundle,
   countExistingProgressKeys,
+  progressKeysForBook,
   type ProgressBundle,
   type ImportSummary
 } from "./progress-io";
@@ -76,7 +77,12 @@ export {
   subscribeReaderBook,
   readerBookHasLbf,
   readerBookHasLbfStructure,
+  readerBookHasMorphGnt,
+  readerBookHasOshb,
+  readerBookHasObserverMark,
+  readerBookHasBibleVersion,
   workshopStorageSlug,
+  readerBookIdFromWorkshopSlug,
   workshopProgressKeys,
   MORPHGNT_STEM_BY_BOOK,
   type ReaderBookId,

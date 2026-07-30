@@ -22,9 +22,9 @@ not RV1909.
 | Layer | Source | Role |
 |-------|--------|------|
 | Reader | NBLA | Pure encounter |
-| Observer Greek spine | MorphGNT / BLE tokens | Grammar workstation + progress ids |
+| Observer Greek spine | MorphGNT token ids | Grammar workstation + progress ids |
 | Observer Spanish surface | **LBF** | Settled reading + reverse interlinear |
-| Per-token gloss (working) | BLE `es` | Greek-primary interlinear aid |
+| Per-token Spanish aid | **LBF** alignment | Under-token + Compiler notes (no BLE gloss) |
 
 ## Why not RV1909
 
@@ -62,8 +62,10 @@ Fix the reverse link, then recompile.
 
 ## Display rule (Structure passage)
 
-- Under each Greek token: **aligned LBF surface** (from this file), not the BLE gloss.
-- BLE gloss stays in the token popover for cross-check.
+- Under each Greek token: **aligned LBF surface** (from this file) only.
+- Unaligned tokens show `·` (no BLE gloss under the token).
+- Token popover: lemma / Strong’s / morph + LBF line only.
+- Beginning-token strip: label **LBF**, not BLE.
 - The full verse line under the interlinear is LBF in **Spanish reading order** — it will not
   line up column-for-column with Greek; that is expected, not a bug.
 
@@ -77,7 +79,7 @@ through cgv-translator → Biblia-LBF; sync staging copies intentionally.
 `scripts/compile-lbf-alignment-1pedro.py`. Do not hand-patch the JSON for verses
 already linked; do not use the deprecated bootstrap script for maintenance.
 
-Unaligned tokens show the BLE gloss in italics as a fallback cue.
+Unaligned tokens show `·` under the Greek (no BLE fallback).
 
 
 ## Judas
@@ -111,8 +113,38 @@ python3 scripts/compile-lbf-alignment-1juan.py
 
 `data/lbf/nt/1juan.alignment.json` is the Structure map. Re-run after link edits.
 
+## Daniel (OT — Reader text + ch.1 alignment pilot)
+
+First OT LBF book in Reader. Canon: `herramientas/Biblia-LBF/translation/ot/daniel.md`.
+Staging: `data/lbf/ot/daniel.md`.
+
+| Layer | Status |
+|-------|--------|
+| Reader LBF | Full-book draft (chs 1–12); revise verse-by-verse vs OSHB |
+| BLE / SPNBES / RV1909 | Available in Reader prefs (no NBLA OT pack) |
+| OSHB spine | `cgv-translator/translations/oshb-spine/daniel/daniel-oshb-spine.json` (`h27…` ids) |
+| Reverse links | Full-book gloss seed (`daniel-reverse-links.json`); hand-refine pending |
+| Alignment | `data/lbf/ot/daniel.alignment.json` — **6035/6035** (Protestant refs; gloss-seed draft) |
+| Observer Mark | Enabled — OSHB spine via `daniel.tokens.jsonl` (MT→Prot remap) |
+| Observer Structure | Enabled — LBF reverse-interlinear; finite detection via OSHB morph |
+
+Verse numbering: OSHB spine uses **MT**; LBF/alignment/Observer display use **Protestant**. Remap: MT 3:31–33→4:1–3; MT 4:n→4:(n+3); MT 6:1→5:31; MT 6:n(n≥2)→6:(n−1).
+
+### Daniel compile pipeline
+
+```bash
+python3 scripts/build-daniel-oshb-spine.py
+python3 scripts/seed-daniel-reverse-links.py          # all chapters
+python3 scripts/compile-lbf-alignment-daniel.py
+```
+
+Fix reverse links, then recompile. Do not hand-patch `daniel.alignment.json` for linked verses.
+
+Author in Biblia-LBF; sync staging intentionally.
+
 ## Open follow-ups
 
 1. Finish 1 Pedro / Judas / 1 Juan reverse links to Tito’s hand-quality bar (see ADR-0001 checklist).
 2. Promote LBF Structure books together into `cgv-data`; cut Reader over from staging.
 3. Plan TR1894 Greek spine switch when multi-book LBF work demands it.
+4. Hand-refine Daniel reverse links (esp. Aramaic 2:4–7); tune OSHB finite/participle Mark bricks.

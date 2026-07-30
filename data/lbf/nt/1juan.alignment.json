@@ -4,15 +4,15 @@
     "spanish": "LBF",
     "greekSpine": "MorphGNT/BLE",
     "note": "Compiled from translator reverse-links.json via TR spine morphIndex. TR-only tokens skipped. Morph-only gaps patched where Spanish is clear. Hand overrides retarget known bad finite anchors. Re-run compile-lbf-alignment-1juan.py after link edits.",
-    "coverage": "2118/2137",
-    "alignedTokens": 2118,
+    "coverage": "2117/2137",
+    "alignedTokens": 2117,
     "totalTokens": 2137,
     "repairs": {
-      "unitsApplied": 985,
+      "unitsApplied": 984,
       "trOnlySkipped": 31,
       "morphOnlyPatches": 9,
-      "handOverrides": 80,
-      "warnings": 2
+      "handOverrides": 139,
+      "warnings": 3
     }
   },
   "records": [
@@ -2453,7 +2453,7 @@
       "verse": 6,
       "token": 6,
       "greekSurface": "ὀφείλει",
-      "lbfSurface": "en él debe",
+      "lbfSurface": "debe",
       "lbfWordIndex": 7
     },
     {
@@ -2477,8 +2477,8 @@
       "verse": 6,
       "token": 9,
       "greekSurface": "περιεπάτησεν",
-      "lbfSurface": "andar",
-      "lbfWordIndex": 8
+      "lbfSurface": "anduvo",
+      "lbfWordIndex": 11
     },
     {
       "chapter": 2,
@@ -2501,8 +2501,8 @@
       "verse": 6,
       "token": 12,
       "greekSurface": "περιπατεῖν.",
-      "lbfSurface": "como él anduvo",
-      "lbfWordIndex": 11
+      "lbfSurface": "andar",
+      "lbfWordIndex": 8
     },
     {
       "chapter": 2,
@@ -2645,8 +2645,8 @@
       "verse": 7,
       "token": 18,
       "greekSurface": "ἐστιν",
-      "lbfSurface": "antiguo",
-      "lbfWordIndex": 19
+      "lbfSurface": "es",
+      "lbfWordIndex": 20
     },
     {
       "chapter": 2,
@@ -2661,8 +2661,8 @@
       "verse": 7,
       "token": 20,
       "greekSurface": "λόγος",
-      "lbfSurface": "es la palabra",
-      "lbfWordIndex": 20
+      "lbfSurface": "palabra",
+      "lbfWordIndex": 22
     },
     {
       "chapter": 2,
@@ -2957,8 +2957,8 @@
       "verse": 9,
       "token": 11,
       "greekSurface": "μισῶν",
-      "lbfSurface": "a su hermano",
-      "lbfWordIndex": 12
+      "lbfSurface": "aborrece",
+      "lbfWordIndex": 9
     },
     {
       "chapter": 2,
@@ -4973,8 +4973,8 @@
       "verse": 22,
       "token": 2,
       "greekSurface": "ἐστιν",
-      "lbfSurface": "Quién es el mentiroso",
-      "lbfWordIndex": 3
+      "lbfSurface": "es",
+      "lbfWordIndex": 1
     },
     {
       "chapter": 2,
@@ -5085,8 +5085,8 @@
       "verse": 22,
       "token": 16,
       "greekSurface": "ἐστιν",
-      "lbfSurface": "el que niega",
-      "lbfWordIndex": 19
+      "lbfSurface": "es",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 2,
@@ -5101,8 +5101,8 @@
       "verse": 22,
       "token": 18,
       "greekSurface": "ἀντίχριστος,",
-      "lbfSurface": "el que niega",
-      "lbfWordIndex": 19
+      "lbfSurface": "anticristo",
+      "lbfWordIndex": 16
     },
     {
       "chapter": 2,
@@ -5117,8 +5117,8 @@
       "verse": 22,
       "token": 20,
       "greekSurface": "ἀρνούμενος",
-      "lbfSurface": "al Padre",
-      "lbfWordIndex": 21
+      "lbfSurface": "niega",
+      "lbfWordIndex": 19
     },
     {
       "chapter": 2,
@@ -5893,7 +5893,7 @@
       "verse": 27,
       "token": 30,
       "greekSurface": "ἀληθές",
-      "lbfSurface": "y es verdadera",
+      "lbfSurface": "verdadera",
       "lbfWordIndex": 37
     },
     {
@@ -5901,8 +5901,8 @@
       "verse": 27,
       "token": 31,
       "greekSurface": "ἐστιν",
-      "lbfSurface": "y no es mentira",
-      "lbfWordIndex": 41
+      "lbfSurface": "es",
+      "lbfWordIndex": 36
     },
     {
       "chapter": 2,
@@ -5917,24 +5917,24 @@
       "verse": 27,
       "token": 33,
       "greekSurface": "οὐκ",
-      "lbfSurface": "y tal",
-      "lbfWordIndex": 43
+      "lbfSurface": "no",
+      "lbfWordIndex": 39
     },
     {
       "chapter": 2,
       "verse": 27,
       "token": 34,
       "greekSurface": "ἔστιν",
-      "lbfSurface": "y tal",
-      "lbfWordIndex": 43
+      "lbfSurface": "es",
+      "lbfWordIndex": 40
     },
     {
       "chapter": 2,
       "verse": 27,
       "token": 35,
       "greekSurface": "ψεῦδος,",
-      "lbfSurface": "y tal",
-      "lbfWordIndex": 43
+      "lbfSurface": "mentira",
+      "lbfWordIndex": 41
     },
     {
       "chapter": 2,
@@ -5957,7 +5957,7 @@
       "verse": 27,
       "token": 38,
       "greekSurface": "ἐδίδαξεν",
-      "lbfSurface": "como les enseñó",
+      "lbfSurface": "enseñó",
       "lbfWordIndex": 46
     },
     {
@@ -5973,8 +5973,8 @@
       "verse": 27,
       "token": 40,
       "greekSurface": "⸀μένετε",
-      "lbfSurface": "permanezcan en él",
-      "lbfWordIndex": 49
+      "lbfSurface": "permanezcan",
+      "lbfWordIndex": 47
     },
     {
       "chapter": 2,
@@ -8589,8 +8589,8 @@
       "verse": 15,
       "token": 20,
       "greekSurface": "μένουσαν.",
-      "lbfSurface": "permaneciendo en él",
-      "lbfWordIndex": 19
+      "lbfSurface": "permaneciendo",
+      "lbfWordIndex": 17
     },
     {
       "chapter": 3,
@@ -9333,8 +9333,8 @@
       "verse": 20,
       "token": 16,
       "greekSurface": "γινώσκει",
-      "lbfSurface": "todas",
-      "lbfWordIndex": 14
+      "lbfSurface": "conoce",
+      "lbfWordIndex": 13
     },
     {
       "chapter": 3,
@@ -9413,8 +9413,8 @@
       "verse": 21,
       "token": 9,
       "greekSurface": "ἔχομεν",
-      "lbfSurface": "delante",
-      "lbfWordIndex": 9
+      "lbfSurface": "tenemos",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 3,
@@ -9829,8 +9829,8 @@
       "verse": 24,
       "token": 9,
       "greekSurface": "μένει",
-      "lbfSurface": "permanece en él, y él en ese",
-      "lbfWordIndex": 12
+      "lbfSurface": "permanece",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 3,
@@ -9893,8 +9893,8 @@
       "verse": 24,
       "token": 17,
       "greekSurface": "γινώσκομεν",
-      "lbfSurface": "que él permanece",
-      "lbfWordIndex": 19
+      "lbfSurface": "sabemos",
+      "lbfWordIndex": 16
     },
     {
       "chapter": 3,
@@ -9909,8 +9909,8 @@
       "verse": 24,
       "token": 19,
       "greekSurface": "μένει",
-      "lbfSurface": "en nosotros",
-      "lbfWordIndex": 21
+      "lbfSurface": "permanece",
+      "lbfWordIndex": 19
     },
     {
       "chapter": 3,
@@ -10717,8 +10717,8 @@
       "verse": 5,
       "token": 2,
       "greekSurface": "ἐκ",
-      "lbfSurface": "Ellos",
-      "lbfWordIndex": 0
+      "lbfSurface": "del",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 4,
@@ -10733,15 +10733,15 @@
       "verse": 5,
       "token": 4,
       "greekSurface": "κόσμου",
-      "lbfSurface": "Ellos",
-      "lbfWordIndex": 0
+      "lbfSurface": "mundo",
+      "lbfWordIndex": 3
     },
     {
       "chapter": 4,
       "verse": 5,
       "token": 5,
       "greekSurface": "εἰσίν·",
-      "lbfSurface": "son del mundo",
+      "lbfSurface": "son",
       "lbfWordIndex": 1
     },
     {
@@ -10765,15 +10765,7 @@
       "verse": 5,
       "token": 8,
       "greekSurface": "ἐκ",
-      "lbfSurface": "desde",
-      "lbfWordIndex": 7
-    },
-    {
-      "chapter": 4,
-      "verse": 5,
-      "token": 9,
-      "greekSurface": "τοῦ",
-      "lbfSurface": "desde",
+      "lbfSurface": "del",
       "lbfWordIndex": 7
     },
     {
@@ -10781,16 +10773,16 @@
       "verse": 5,
       "token": 10,
       "greekSurface": "κόσμου",
-      "lbfSurface": "desde",
-      "lbfWordIndex": 7
+      "lbfSurface": "mundo",
+      "lbfWordIndex": 8
     },
     {
       "chapter": 4,
       "verse": 5,
       "token": 11,
       "greekSurface": "λαλοῦσιν",
-      "lbfSurface": "el mundo",
-      "lbfWordIndex": 9
+      "lbfSurface": "hablan",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 4,
@@ -10798,7 +10790,7 @@
       "token": 12,
       "greekSurface": "καὶ",
       "lbfSurface": "y el mundo",
-      "lbfWordIndex": 12
+      "lbfWordIndex": 11
     },
     {
       "chapter": 4,
@@ -10806,15 +10798,15 @@
       "token": 13,
       "greekSurface": "ὁ",
       "lbfSurface": "y el mundo",
-      "lbfWordIndex": 12
+      "lbfWordIndex": 11
     },
     {
       "chapter": 4,
       "verse": 5,
       "token": 14,
       "greekSurface": "κόσμος",
-      "lbfSurface": "y el mundo",
-      "lbfWordIndex": 12
+      "lbfSurface": "mundo",
+      "lbfWordIndex": 11
     },
     {
       "chapter": 4,
@@ -10822,15 +10814,15 @@
       "token": 15,
       "greekSurface": "αὐτῶν",
       "lbfSurface": "los escucha",
-      "lbfWordIndex": 14
+      "lbfWordIndex": 13
     },
     {
       "chapter": 4,
       "verse": 5,
       "token": 16,
       "greekSurface": "ἀκούει.",
-      "lbfSurface": "los escucha",
-      "lbfWordIndex": 14
+      "lbfSurface": "escucha",
+      "lbfWordIndex": 13
     },
     {
       "chapter": 4,
@@ -12461,8 +12453,8 @@
       "verse": 16,
       "token": 5,
       "greekSurface": "πεπιστεύκαμεν",
-      "lbfSurface": "hemos conocido",
-      "lbfWordIndex": 3
+      "lbfSurface": "creído",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 4,
@@ -12477,8 +12469,8 @@
       "verse": 16,
       "token": 7,
       "greekSurface": "ἀγάπην",
-      "lbfSurface": "y creído",
-      "lbfWordIndex": 5
+      "lbfSurface": "amor",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 4,
@@ -12549,16 +12541,16 @@
       "verse": 16,
       "token": 16,
       "greekSurface": "ἀγάπη",
-      "lbfSurface": "es amor",
-      "lbfWordIndex": 14
+      "lbfSurface": "amor",
+      "lbfWordIndex": 15
     },
     {
       "chapter": 4,
       "verse": 16,
       "token": 17,
       "greekSurface": "ἐστίν,",
-      "lbfSurface": "y el que permanece",
-      "lbfWordIndex": 19
+      "lbfSurface": "es",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 4,
@@ -12581,8 +12573,8 @@
       "verse": 16,
       "token": 20,
       "greekSurface": "μένων",
-      "lbfSurface": "en el amor",
-      "lbfWordIndex": 22
+      "lbfSurface": "permanece",
+      "lbfWordIndex": 19
     },
     {
       "chapter": 4,
@@ -12637,8 +12629,8 @@
       "verse": 16,
       "token": 27,
       "greekSurface": "μένει",
-      "lbfSurface": "en Dios",
-      "lbfWordIndex": 25
+      "lbfSurface": "permanece",
+      "lbfWordIndex": 23
     },
     {
       "chapter": 4,
@@ -13085,8 +13077,8 @@
       "verse": 18,
       "token": 24,
       "greekSurface": "τετελείωται",
-      "lbfSurface": "perfeccionado",
-      "lbfWordIndex": 27
+      "lbfSurface": "ha",
+      "lbfWordIndex": 25
     },
     {
       "chapter": 4,
@@ -13445,7 +13437,7 @@
       "verse": 21,
       "token": 4,
       "greekSurface": "ἐντολὴν",
-      "lbfSurface": "de él este mandamiento",
+      "lbfSurface": "mandamiento",
       "lbfWordIndex": 5
     },
     {
@@ -13453,8 +13445,8 @@
       "verse": 21,
       "token": 5,
       "greekSurface": "ἔχομεν",
-      "lbfSurface": "que el que ama",
-      "lbfWordIndex": 9
+      "lbfSurface": "tenemos",
+      "lbfWordIndex": 1
     },
     {
       "chapter": 4,
@@ -13493,8 +13485,8 @@
       "verse": 21,
       "token": 10,
       "greekSurface": "ἀγαπῶν",
-      "lbfSurface": "a Dios",
-      "lbfWordIndex": 11
+      "lbfSurface": "ama",
+      "lbfWordIndex": 9
     },
     {
       "chapter": 4,
@@ -13517,8 +13509,8 @@
       "verse": 21,
       "token": 13,
       "greekSurface": "ἀγαπᾷ",
-      "lbfSurface": "también",
-      "lbfWordIndex": 13
+      "lbfSurface": "ame",
+      "lbfWordIndex": 12
     },
     {
       "chapter": 4,
@@ -13573,7 +13565,7 @@
       "verse": 1,
       "token": 3,
       "greekSurface": "πιστεύων",
-      "lbfSurface": "el que cree",
+      "lbfSurface": "cree",
       "lbfWordIndex": 3
     },
     {
@@ -13597,8 +13589,8 @@
       "verse": 1,
       "token": 6,
       "greekSurface": "ἐστιν",
-      "lbfSurface": "que Jesús",
-      "lbfWordIndex": 5
+      "lbfSurface": "es",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 5,
@@ -13645,8 +13637,8 @@
       "verse": 1,
       "token": 12,
       "greekSurface": "γεγέννηται,",
-      "lbfSurface": "de Dios",
-      "lbfWordIndex": 12
+      "lbfSurface": "ha",
+      "lbfWordIndex": 9
     },
     {
       "chapter": 5,
@@ -13701,8 +13693,8 @@
       "verse": 1,
       "token": 19,
       "greekSurface": "ἀγαπᾷ",
-      "lbfSurface": "también",
-      "lbfWordIndex": 22
+      "lbfSurface": "ama",
+      "lbfWordIndex": 21
     },
     {
       "chapter": 5,
@@ -13725,8 +13717,8 @@
       "verse": 1,
       "token": 22,
       "greekSurface": "γεγεννημένον",
-      "lbfSurface": "al que ha nacido de él",
-      "lbfWordIndex": 28
+      "lbfSurface": "nacido",
+      "lbfWordIndex": 26
     },
     {
       "chapter": 5,
@@ -14173,8 +14165,8 @@
       "verse": 4,
       "token": 17,
       "greekSurface": "νικήσασα",
-      "lbfSurface": "al mundo",
-      "lbfWordIndex": 20
+      "lbfSurface": "vencido",
+      "lbfWordIndex": 18
     },
     {
       "chapter": 5,
@@ -14229,8 +14221,8 @@
       "verse": 5,
       "token": 3,
       "greekSurface": "ἐστιν⸃",
-      "lbfSurface": "Quién es el que vence",
-      "lbfWordIndex": 5
+      "lbfSurface": "es",
+      "lbfWordIndex": 2
     },
     {
       "chapter": 5,
@@ -14245,8 +14237,8 @@
       "verse": 5,
       "token": 5,
       "greekSurface": "νικῶν",
-      "lbfSurface": "al mundo",
-      "lbfWordIndex": 7
+      "lbfSurface": "vence",
+      "lbfWordIndex": 5
     },
     {
       "chapter": 5,
@@ -14381,8 +14373,8 @@
       "verse": 6,
       "token": 4,
       "greekSurface": "ἐλθὼν",
-      "lbfSurface": "agua",
-      "lbfWordIndex": 6
+      "lbfSurface": "vino",
+      "lbfWordIndex": 4
     },
     {
       "chapter": 5,
@@ -15933,8 +15925,8 @@
       "verse": 15,
       "token": 10,
       "greekSurface": "οἴδαμεν",
-      "lbfSurface": "lo que pedimos",
-      "lbfWordIndex": 11
+      "lbfSurface": "sabemos",
+      "lbfWordIndex": 12
     },
     {
       "chapter": 5,
@@ -15949,8 +15941,8 @@
       "verse": 15,
       "token": 12,
       "greekSurface": "ἔχομεν",
-      "lbfSurface": "sabemos",
-      "lbfWordIndex": 12
+      "lbfSurface": "tenemos",
+      "lbfWordIndex": 14
     },
     {
       "chapter": 5,
@@ -16053,8 +16045,8 @@
       "verse": 16,
       "token": 7,
       "greekSurface": "ἁμαρτάνοντα",
-      "lbfSurface": "un pecado",
-      "lbfWordIndex": 8
+      "lbfSurface": "pecar",
+      "lbfWordIndex": 6
     },
     {
       "chapter": 5,
@@ -16461,16 +16453,16 @@
       "verse": 18,
       "token": 17,
       "greekSurface": "τηρεῖ",
-      "lbfSurface": "de Dios",
-      "lbfWordIndex": 17
+      "lbfSurface": "guarda",
+      "lbfWordIndex": 19
     },
     {
       "chapter": 5,
       "verse": 18,
       "token": 18,
       "greekSurface": "⸀αὐτόν,",
-      "lbfSurface": "lo guarda",
-      "lbfWordIndex": 19
+      "lbfSurface": "lo",
+      "lbfWordIndex": 18
     },
     {
       "chapter": 5,
