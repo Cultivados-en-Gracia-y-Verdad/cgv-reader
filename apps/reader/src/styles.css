@@ -672,6 +672,7 @@ textarea {
 }
 
 .greek-verse {
+  position: relative;
   display: grid;
   grid-template-columns: 2rem minmax(0, 1fr);
   gap: 0.52rem;
@@ -725,6 +726,7 @@ textarea {
 
 .greek-token:hover,
 .greek-token:focus-visible {
+  z-index: 40;
   border-color: transparent;
   background: rgba(228, 234, 220, 0.42);
   outline: none;
@@ -733,13 +735,15 @@ textarea {
 /* Reference popover — hover/focus only, never blocks the click-to-mark
    interaction it sits on top of. See interlinear-correction-spec.md: this is
    the relocated Greek/lemma/Strong's/gloss detail, available at the same
-   place and moment as marking, not a separate screen. */
+   place and moment as marking, not a separate screen.
+   Stacking: later verses paint over earlier ones, so the hovered token AND
+   its verse must rise above neighboring sections while the tip is open. */
 .token-detail-popover {
   position: absolute;
   bottom: calc(100% + 0.3rem);
   left: 50%;
   transform: translateX(-50%) translateY(4px);
-  z-index: 20;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -757,6 +761,21 @@ textarea {
   pointer-events: none;
   white-space: normal;
   text-align: center;
+}
+
+.clause-word:hover,
+.clause-word:focus-visible {
+  z-index: 40;
+}
+
+.greek-verse:has(.greek-token:hover),
+.greek-verse:has(.greek-token:focus-visible),
+.clause-verse:has(.clause-greek-token:hover),
+.clause-verse:has(.clause-greek-token:focus-visible),
+.clause-verse:has(.clause-word:hover),
+.clause-verse:has(.clause-word:focus-visible) {
+  position: relative;
+  z-index: 60;
 }
 
 .greek-token:hover .token-detail-popover,
@@ -802,10 +821,49 @@ textarea {
   letter-spacing: 0.02em;
 }
 
+
+/* Portaled tip — separate from .token-detail-popover so absolute `bottom`
+   / opacity:0 never stretch or hide it under the bricks bar. */
+.token-detail-floating {
+  position: fixed;
+  z-index: 2147483000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.18rem;
+  min-width: 8.5rem;
+  max-width: 18rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid #cfc4b2;
+  border-radius: 8px;
+  background: #fffef9;
+  box-shadow: 0 12px 32px rgba(40, 30, 18, 0.28);
+  color: #23201b;
+  pointer-events: none;
+  white-space: normal;
+  text-align: center;
+}
+
+.token-detail-floating .token-detail-morph-desc {
+  color: #2f2b24;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.token-detail-floating .token-detail-gloss {
+  margin-top: 0.1rem;
+  color: #23201b;
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
 .token-detail-morph-desc {
-  color: #756e64;
+  color: #4a453c;
   font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.74rem;
+  font-weight: 500;
+  line-height: 1.35;
 }
 
 .token-detail-gloss {
@@ -1714,6 +1772,7 @@ button.interlinear-token--pickable:focus-visible {
 }
 
 .clause-verse {
+  position: relative;
   display: grid;
   grid-template-columns: 3.6rem minmax(0, 1fr);
   gap: 0.8rem;
@@ -1852,6 +1911,7 @@ button.interlinear-token--pickable:focus-visible {
 
 .clause-greek-token:hover,
 .clause-greek-token:focus-visible {
+  z-index: 40;
   border-color: transparent;
   background: rgba(228, 234, 220, 0.42);
   outline: none;
@@ -6316,6 +6376,13 @@ html[data-theme="dark"] :is(
   .clause-only-item:focus-visible
 ) {
   color: #fff;
+}
+
+html[data-theme="dark"] .token-detail-floating {
+  border-color: #4a4338;
+  background: #1f1c18;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+  color: #f3efe6;
 }
 
 html[data-theme="dark"] .token-detail-popover {

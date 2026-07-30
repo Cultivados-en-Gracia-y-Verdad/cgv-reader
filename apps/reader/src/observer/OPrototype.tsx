@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { getReaderBookInfo, workshopProgressKeys, type ReaderBookId } from "@cgv/core";
 import {
-  describeRmac,
+  describeMorph,
   getVerseInterlinear,
   loadBookData,
   type BookMorphData,
@@ -9,6 +9,7 @@ import {
   type GreekVerse,
   type VerseInterlinearToken
 } from "./o-data";
+import { TokenDetailAnchor } from "./TokenDetailPopover";
 import { getWorkshopBookId } from "./workshop-book";
 
 type ParticipationMode =
@@ -283,6 +284,7 @@ interface GreekTokenButtonProps {
 // with the marking click itself. Per interlinear-correction-spec.md: this
 // replaces the standalone Interlinear screen, folded into the one place
 // Brick 1-4 marking already happens instead of a separate destination.
+// Portaled (fixed) so the tip clears Mark's sticky bricks bar + scroll clip.
 const GreekTokenButton = memo(function GreekTokenButton({
   disabled = false,
   isPressed,
@@ -294,27 +296,31 @@ const GreekTokenButton = memo(function GreekTokenButton({
   gloss
 }: GreekTokenButtonProps) {
   return (
-    <button
-      type="button"
+    <TokenDetailAnchor
       className={`greek-token${markClassName ? ` ${markClassName}` : ""}`}
       disabled={disabled}
       onClick={() => onToggle(token, verse)}
       aria-pressed={isPressed}
       aria-label={tokenLabel(token)}
       data-token-id={token.id}
-    >
-      <span className="token-surface">{token.surface}</span>
-      <span className="token-morph">{token.rmac}</span>
-      <span className="token-detail-popover" role="tooltip">
-        {token.lemma !== token.surface ? <span className="token-detail-lemma">{token.lemma}</span> : null}
-        <span className="token-detail-codes">
-          {strongs ? <span className="token-detail-strongs">{strongs}</span> : null}
-          {token.rmac ? <span className="token-detail-rmac">{token.rmac}</span> : null}
-        </span>
-        <span className="token-detail-morph-desc">{describeRmac(token.rmac)}</span>
-        {gloss ? <span className="token-detail-gloss">{gloss}</span> : null}
-      </span>
-    </button>
+      surface={
+        <>
+          <span className="token-surface">{token.surface}</span>
+          <span className="token-morph">{token.rmac}</span>
+        </>
+      }
+      detail={
+        <>
+          {token.lemma !== token.surface ? <span className="token-detail-lemma">{token.lemma}</span> : null}
+          <span className="token-detail-codes">
+            {strongs ? <span className="token-detail-strongs">{strongs}</span> : null}
+            {token.rmac ? <span className="token-detail-rmac">{token.rmac}</span> : null}
+          </span>
+          <span className="token-detail-morph-desc">{describeMorph(token.rmac)}</span>
+          {gloss ? <span className="token-detail-gloss">{gloss}</span> : null}
+        </>
+      }
+    />
   );
 });
 

@@ -64,7 +64,8 @@ import {
   type FrameType
 } from "./clause-signals";
 import { loadLbfTokenSurfaces } from "./lbf-alignment";
-import { describeRmac, ensureVerseInterlinear, getVerseInterlinear } from "./o-data";
+import { describeMorph, ensureVerseInterlinear, getVerseInterlinear } from "./o-data";
+import { TokenDetailAnchor } from "./TokenDetailPopover";
 import { getReaderBookInfo, workshopProgressKeys, type ReaderBookId } from "@cgv/core";
 import {
   applyCoordinateInheritance,
@@ -4418,20 +4419,22 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                     if (!lbfAid) className += " clause-greek-token--unaligned";
 
                     return (
-                      <button
-                        type="button"
+                      <TokenDetailAnchor
                         key={tokenId}
                         className={className}
                         onClick={event => handleGreekTokenClick(verse.chapter, verse.verse, tokenNumber, event)}
                         aria-pressed={isActiveToken || inDraft || reviewing}
                         data-token-id={tokenId}
                         disabled={!isVerbToken && !isActiveVerse}
-                      >
-                        <span className="clause-greek-token-surface">
-                          {token.surface.replace(/[⸀⸁⸂⸃,.;·]/g, "")}
-                        </span>
-                        <span className="clause-greek-token-gloss">{aidText || "·"}</span>
-                        <span className="token-detail-popover" role="tooltip">
+                        surface={
+                          <>
+                            <span className="clause-greek-token-surface">
+                              {token.surface.replace(/[⸀⸁⸂⸃,.;·]/g, "")}
+                            </span>
+                            <span className="clause-greek-token-gloss">{aidText || "·"}</span>
+                          </>
+                        }
+                        detail={
                           <span className="token-detail-entry">
                             {token.lemma !== token.surface ? (
                               <span className="token-detail-lemma">{token.lemma}</span>
@@ -4440,13 +4443,13 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                               <span className="token-detail-strongs">{token.strongs}</span>
                               {token.morph ? <span className="token-detail-rmac">{token.morph}</span> : null}
                             </span>
-                            <span className="token-detail-morph-desc">{describeRmac(token.morph)}</span>
+                            <span className="token-detail-morph-desc">{describeMorph(token.morph)}</span>
                             <span className="token-detail-gloss">
                               {lbfAid ? `LBF: ${lbfAid}` : "LBF: (unaligned)"}
                             </span>
                           </span>
-                        </span>
-                      </button>
+                        }
+                      />
                     );
                   })}
                 </p>
