@@ -1,0 +1,248 @@
+const e=`# Reina Valera 1909
+
+## License Information
+
+**Reina Valera 1909** is based on and adapted from: _Reina Valera 1909_, [Public Domain](https://creativecommons.org/public-domain/cc0/), 1909, which is licensed under a [Public Domain CC0](https://creativecommons.org/public-domain/cc0/).
+
+This markdown version is provided under the same license.
+
+
+
+--------------------------------
+
+
+## 2 Tesalonicenses 1:1 (id: 10053001001)
+
+1PABLO, y Silvano, y Timoteo, á la iglesia de los Tesalonicenses que es en Dios nuestro Padre y en el Señor Jesucristo:
+
+
+## 2 Tesalonicenses 1:2 (id: 10053001002)
+
+2Gracia y paz á vosotros de Dios nuestro Padre y del Señor Jesucristo.
+
+
+## 2 Tesalonicenses 1:3 (id: 10053001003)
+
+3Debemos siempre dar gracias á Dios de vosotros, hermanos, como es digno, por cuanto vuestra fe va creciendo, y la caridad de cada uno de todos vosotros abunda entre vosotros;
+
+
+## 2 Tesalonicenses 1:4 (id: 10053001004)
+
+4Tanto, que nosotros mismos nos gloriamos de vosotros en las iglesias de Dios, de vuestra paciencia y fe en todas vuestras persecuciones y tribulaciones que sufrís:
+
+
+## 2 Tesalonicenses 1:5 (id: 10053001005)
+
+5Una demostración del justo juicio de Dios, para que seáis tenidos por dignos del reino de Dios, por el cual asimismo padecéis.
+
+
+## 2 Tesalonicenses 1:6 (id: 10053001006)
+
+6Porque es justo para con Dios pagar con tribulación á los que os atribulan.
+
+
+## 2 Tesalonicenses 1:7 (id: 10053001007)
+
+7Y á vosotros, que sois atribulados, dar reposo con nosotros, cuando se manifestará el Señor Jesús del cielo con los ángeles de su potencia,
+
+
+## 2 Tesalonicenses 1:8 (id: 10053001008)
+
+8En llama de fuego, para dar el pago á los que no conocieron á Dios, ni obedecen al evangelio de nuestro Señor Jesucristo;
+
+
+## 2 Tesalonicenses 1:9 (id: 10053001009)
+
+9Los cuales serán castigados de eterna perdición por la presencia del Señor, y por la gloria de su potencia,
+
+
+## 2 Tesalonicenses 1:10 (id: 10053001010)
+
+10Cuando viniere para ser glorificado en sus santos, y á hacerse admirable en aquel día en todos los que creyeron: (por cuanto nuestro testimonio ha sido creído entre vosotros.)
+
+
+## 2 Tesalonicenses 1:11 (id: 10053001011)
+
+11Por lo cual, asimismo oramos siempre por vosotros, que nuestro Dios os tenga por dignos de su vocación, é hincha de bondad todo buen intento, y toda obra de fe con potencia,
+
+
+## 2 Tesalonicenses 1:12 (id: 10053001012)
+
+12Para que el nombre de nuestro Señor Jesucristo sea glorificado en vosotros, y vosotros en él, por la gracia de nuestro Dios y del Señor Jesucristo.
+
+
+## 2 Tesalonicenses 2:1 (id: 10053002001)
+
+1EMPERO os rogamos, hermanos, cuanto á la venida de nuestro Señor Jesucristo, y nuestro recogimiento á él,
+
+
+## 2 Tesalonicenses 2:2 (id: 10053002002)
+
+2Que no os mováis fácilmente de vuestro sentimiento, ni os conturbéis ni por espíritu, ni por palabra, ni por carta como nuestra, como que el día del Señor esté cerca.
+
+
+## 2 Tesalonicenses 2:3 (id: 10053002003)
+
+3No os engañe nadie en ninguna manera; porque no vendrá sin que venga antes la apostasía, y se manifieste el hombre de pecado, el hijo de perdición,
+
+
+## 2 Tesalonicenses 2:4 (id: 10053002004)
+
+4Oponiéndose, y levantándose contra todo lo que se llama Dios, ó que se adora; tanto que se asiente en el templo de Dios como Dios, haciéndose parecer Dios.
+
+
+## 2 Tesalonicenses 2:5 (id: 10053002005)
+
+5¿No os acordáis que cuando estaba todavía con vosotros, os decía esto?
+
+
+## 2 Tesalonicenses 2:6 (id: 10053002006)
+
+6Y ahora vosotros sabéis lo que impide, para que á su tiempo se manifieste.
+
+
+## 2 Tesalonicenses 2:7 (id: 10053002007)
+
+7Porque ya está obrando el misterio de iniquidad: solamente espera hasta que sea quitado de en medio el que ahora impide;
+
+
+## 2 Tesalonicenses 2:8 (id: 10053002008)
+
+8Y entonces será manifestado aquel inicuo, al cual el Señor matará con el espíritu de su boca, y destruirá con el resplandor de su venida;
+
+
+## 2 Tesalonicenses 2:9 (id: 10053002009)
+
+9A aquel inicuo, cuyo advenimiento es según operación de Satanás, con grande potencia, y señales, y milagros mentirosos,
+
+
+## 2 Tesalonicenses 2:10 (id: 10053002010)
+
+10Y con todo engaño de iniquidad en los que perecen; por cuanto no recibieron el amor de la verdad para ser salvos.
+
+
+## 2 Tesalonicenses 2:11 (id: 10053002011)
+
+11Por tanto, pues, les envía Dios operación de error, para que crean á la mentira;
+
+
+## 2 Tesalonicenses 2:12 (id: 10053002012)
+
+12Para que sean condenados todos los que no creyeron á la verdad, antes consintieron á la iniquidad.
+
+
+## 2 Tesalonicenses 2:13 (id: 10053002013)
+
+13Mas nosotros debemos dar siempre gracias á Dios por vosotros, hermanos amados del Señor, de que Dios os haya escogido desde el principio para salud, por la santificación del Espíritu y fe de la verdad:
+
+
+## 2 Tesalonicenses 2:14 (id: 10053002014)
+
+14A lo cual os llamó por nuestro evangelio, para alcanzar la gloria de nuestro Señor Jesucristo.
+
+
+## 2 Tesalonicenses 2:15 (id: 10053002015)
+
+15Así que, hermanos, estad firmes, y retened la doctrina que habéis aprendido, sea por palabra, ó por carta nuestra.
+
+
+## 2 Tesalonicenses 2:16 (id: 10053002016)
+
+16Y el mismo Señor nuestro Jesucristo, y Dios y Padre nuestro, el cual nos amó, y nos dió consolación eterna, y buena esperanza por gracia,
+
+
+## 2 Tesalonicenses 2:17 (id: 10053002017)
+
+17Consuele vuestros corazones, y os confirme en toda buena palabra y obra.
+
+
+## 2 Tesalonicenses 3:1 (id: 10053003001)
+
+1RESTA, hermanos, que oréis por nosotros, que la palabra del Señor corra y sea glorificada así como entre vosotros:
+
+
+## 2 Tesalonicenses 3:2 (id: 10053003002)
+
+2Y que seamos librados de hombres importunos y malos; porque no es de todos la fe.
+
+
+## 2 Tesalonicenses 3:3 (id: 10053003003)
+
+3Mas fiel es el Señor, que os confirmará y guardará del mal.
+
+
+## 2 Tesalonicenses 3:4 (id: 10053003004)
+
+4Y tenemos confianza de vosotros en el Señor, que hacéis y haréis lo que os hemos mandado.
+
+
+## 2 Tesalonicenses 3:5 (id: 10053003005)
+
+5Y el Señor enderece vuestros corazones en el amor de Dios, y en la paciencia de Cristo.
+
+
+## 2 Tesalonicenses 3:6 (id: 10053003006)
+
+6Empero os denunciamos, hermanos, en el nombre de nuestro Señor Jesucristo, que os apartéis de todo hermano que anduviere fuera de orden, y no conforme á la doctrina que recibieron de nosotros:
+
+
+## 2 Tesalonicenses 3:7 (id: 10053003007)
+
+7Porque vosotros mismos sabéis de qué manera debéis imitarnos: porque no anduvimos desordenadamente entre vosotros,
+
+
+## 2 Tesalonicenses 3:8 (id: 10053003008)
+
+8Ni comimos el pan de ninguno de balde; antes, obrando con trabajo y fatiga de noche y de día, por no ser gravosos á ninguno de vosotros;
+
+
+## 2 Tesalonicenses 3:9 (id: 10053003009)
+
+9No porque no tuviésemos potestad, sino por daros en nosotros un dechado, para que nos imitaseis.
+
+
+## 2 Tesalonicenses 3:10 (id: 10053003010)
+
+10Porque aun estando con vosotros, os denunciábamos esto: Que si alguno no quisiere trabajar, tampoco coma.
+
+
+## 2 Tesalonicenses 3:11 (id: 10053003011)
+
+11Porque oímos que andan algunos entre vosotros fuera de orden, no trabajando en nada, sino ocupados en curiosear.
+
+
+## 2 Tesalonicenses 3:12 (id: 10053003012)
+
+12Y á los tales requerimos y rogamos por nuestro Señor Jesucristo, que, trabajando con reposo, coman su pan.
+
+
+## 2 Tesalonicenses 3:13 (id: 10053003013)
+
+13Y vosotros, hermanos, no os canséis de hacer bien.
+
+
+## 2 Tesalonicenses 3:14 (id: 10053003014)
+
+14Y si alguno no obedeciere á nuestra palabra por carta, notad al tal, y no os juntéis con él, para que se avergüence.
+
+
+## 2 Tesalonicenses 3:15 (id: 10053003015)
+
+15Mas no lo tengáis como á enemigo, sino amonestadle como á hermano.
+
+
+## 2 Tesalonicenses 3:16 (id: 10053003016)
+
+16Y el mismo Señor de paz os dé siempre paz en toda manera. El Señor sea con todos vosotros.
+
+
+## 2 Tesalonicenses 3:17 (id: 10053003017)
+
+17Salud de mi mano, Pablo, que es mi signo en toda carta mía: así escribo.
+
+
+## 2 Tesalonicenses 3:18 (id: 10053003018)
+
+18La gracia de nuestro Señor Jesucristo sea con todos vosotros. Amén. La segunda Epístola á los Tesalonicenses fué escrita de Atenas.
+
+`;export{e as default};

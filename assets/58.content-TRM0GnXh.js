@@ -1,0 +1,1528 @@
+const e=`# Reina Valera 1909
+
+## License Information
+
+**Reina Valera 1909** is based on and adapted from: _Reina Valera 1909_, [Public Domain](https://creativecommons.org/public-domain/cc0/), 1909, which is licensed under a [Public Domain CC0](https://creativecommons.org/public-domain/cc0/).
+
+This markdown version is provided under the same license.
+
+
+
+--------------------------------
+
+
+## Hebreos 1:1 (id: 10058001001)
+
+1DIOS, habiendo hablado muchas veces y en muchas maneras en otro tiempo á los padres por los profetas,
+
+
+## Hebreos 1:2 (id: 10058001002)
+
+2En estos postreros días nos ha hablado por el Hijo, al cual constituyó heredero de todo, por el cual asimismo hizo el universo:
+
+
+## Hebreos 1:3 (id: 10058001003)
+
+3El cual siendo el resplandor de su gloria, y la misma imagen de su sustancia, y sustentando todas las cosas con la palabra de su potencia, habiendo hecho la purgación de nuestros pecados por sí mismo, se sentó á la diestra de la Majestad en las alturas,
+
+
+## Hebreos 1:4 (id: 10058001004)
+
+4Hecho tanto más excelente que los ángeles, cuanto alcanzó por herencia más excelente nombre que ellos.
+
+
+## Hebreos 1:5 (id: 10058001005)
+
+5Porque ¿á cuál de los ángeles dijo Dios jamás: Mi hijo eres tú, hoy yo te he engendrado? y otra vez: Yo seré á él Padre, y él me será á mí hijo?
+
+
+## Hebreos 1:6 (id: 10058001006)
+
+6Y otra vez, cuando introduce al Primogénito en la tierra, dice: Y adórenle todos los ángeles de Dios.
+
+
+## Hebreos 1:7 (id: 10058001007)
+
+7Y ciertamente de los ángeles dice: El que hace á sus ángeles espíritus, y á sus ministros llama de fuego.
+
+
+## Hebreos 1:8 (id: 10058001008)
+
+8Mas al hijo: Tu trono, oh Dios, por el siglo del siglo; vara de equidad la vara de tu reino;
+
+
+## Hebreos 1:9 (id: 10058001009)
+
+9Has amado la justicia, y aborrecido la maldad; por lo cual te ungió Dios, el Dios tuyo, con óleo de alegría más que á tus compañeros.
+
+
+## Hebreos 1:10 (id: 10058001010)
+
+10Y: Tú, oh Señor, en el principio fundaste la tierra; y los cielos son obras de tus manos:
+
+
+## Hebreos 1:11 (id: 10058001011)
+
+11Ellos perecerán, mas tú eres permanente; y todos ellos se envejecerán como una vestidura;
+
+
+## Hebreos 1:12 (id: 10058001012)
+
+12Y como un vestido los envolverás, y serán mudados; empero tú eres el mismo, y tus años no acabarán.
+
+
+## Hebreos 1:13 (id: 10058001013)
+
+13Pues, ¿á cuál de los ángeles dijo jamás: Siéntate á mi diestra, hasta que ponga á tus enemigos por estrado de tus pies?
+
+
+## Hebreos 1:14 (id: 10058001014)
+
+14¿No son todos espíritus administradores, enviados para servicio á favor de los que serán herederos de salud?
+
+
+## Hebreos 2:1 (id: 10058002001)
+
+1POR tanto, es menester que con más diligencia atendamos á las cosas que hemos oído, porque acaso no nos escurramos.
+
+
+## Hebreos 2:2 (id: 10058002002)
+
+2Porque si la palabra dicha por los ángeles fué firme, y toda rebelión y desobediencia recibió justa paga de retribución,
+
+
+## Hebreos 2:3 (id: 10058002003)
+
+3¿Cómo escaparemos nosotros, si tuviéremos en poco una salud tan grande? La cual, habiendo comenzado á ser publicada por el Señor, ha sido confirmada hasta nosotros por los que oyeron;
+
+
+## Hebreos 2:4 (id: 10058002004)
+
+4Testificando juntamente con ellos Dios, con señales y milagros, y diversas maravillas, y repartimientos del Espíritu Santo según su voluntad.
+
+
+## Hebreos 2:5 (id: 10058002005)
+
+5Porque no sujetó á los ángeles el mundo venidero, del cual hablamos.
+
+
+## Hebreos 2:6 (id: 10058002006)
+
+6Testificó empero uno en cierto lugar, diciendo: ¿Qué es el hombre, que te acuerdas de él? ¿ó el hijo del hombre, que le visitas?
+
+
+## Hebreos 2:7 (id: 10058002007)
+
+7Tú le hiciste un poco menor que los ángeles, coronástele de gloria y de honra, y pusístele sobre las obras de tus manos;
+
+
+## Hebreos 2:8 (id: 10058002008)
+
+8Todas las cosas sujetaste debajo de sus pies. Porque en cuanto le sujetó todas las cosas, nada dejó que no sea sujeto á él; mas aun no vemos que todas las cosas le sean sujetas.
+
+
+## Hebreos 2:9 (id: 10058002009)
+
+9Empero vemos coronado de gloria y de honra, por el padecimiento de muerte, á aquel Jesús que es hecho un poco menor que los ángeles, para que por gracia de Dios gustase la muerte por todos.
+
+
+## Hebreos 2:10 (id: 10058002010)
+
+10Porque convenía que aquel por cuya causa son todas las cosas, y por el cual todas las cosas subsisten, habiendo de llevar á la gloria á muchos hijos, hiciese consumado por aflicciones al autor de la salud de ellos.
+
+
+## Hebreos 2:11 (id: 10058002011)
+
+11Porque el que santifica y los que son santificados, de uno son todos: por lo cual no se avergüenza de llamarlos hermanos,
+
+
+## Hebreos 2:12 (id: 10058002012)
+
+12Diciendo: Anunciaré á mis hermanos tu nombre, en medio de la congregación te alabaré.
+
+
+## Hebreos 2:13 (id: 10058002013)
+
+13Y otra vez: Yo confiaré en él. Y otra vez: He aquí, yo y los hijos que me dió Dios.
+
+
+## Hebreos 2:14 (id: 10058002014)
+
+14Así que, por cuanto los hijos participaron de carne y sangre, él también participó de lo mismo, para destruir por la muerte al que tenía el imperio de la muerte, es á saber, al diablo,
+
+
+## Hebreos 2:15 (id: 10058002015)
+
+15Y librar á los que por el temor de la muerte estaban por toda la vida sujetos á servidumbre.
+
+
+## Hebreos 2:16 (id: 10058002016)
+
+16Porque ciertamente no tomó á los ángeles, sino á la simiente de Abraham tomó.
+
+
+## Hebreos 2:17 (id: 10058002017)
+
+17Por lo cual, debía ser en todo semejante á los hermanos, para venir á ser misericordioso y fiel Pontífice en lo que es para con Dios, para expiar los pecados del pueblo.
+
+
+## Hebreos 2:18 (id: 10058002018)
+
+18Porque en cuanto él mismo padeció siendo tentado, es poderoso para socorrer á los que son tentados.
+
+
+## Hebreos 3:1 (id: 10058003001)
+
+1POR tanto, hermanos santos, participantes de la vocación celestial, considerad al Apóstol y Pontífice de nuestra profesión, Cristo Jesús;
+
+
+## Hebreos 3:2 (id: 10058003002)
+
+2El cual es fiel al que le constituyó, como también lo fué Moisés sobre toda su casa.
+
+
+## Hebreos 3:3 (id: 10058003003)
+
+3Porque de tanto mayor gloria que Moisés éste es estimado digno, cuanto tiene mayor dignidad que la casa el que la fabricó.
+
+
+## Hebreos 3:4 (id: 10058003004)
+
+4Porque toda casa es edificada de alguno: mas el que crió todas las cosas es Dios.
+
+
+## Hebreos 3:5 (id: 10058003005)
+
+5Y Moisés á la verdad fué fiel sobre toda su casa, como siervo, para testificar lo que se había de decir;
+
+
+## Hebreos 3:6 (id: 10058003006)
+
+6Mas Cristo como hijo, sobre su casa; la cual casa somos nosotros, si hasta el cabo retuviéremos firme la confianza y la gloria de la esperanza.
+
+
+## Hebreos 3:7 (id: 10058003007)
+
+7Por lo cual, como dice el Espíritu Santo: Si oyereis hoy su voz,
+
+
+## Hebreos 3:8 (id: 10058003008)
+
+8No endurezcáis vuestros corazones como en la provocación, en el día de la tentación en el desierto,
+
+
+## Hebreos 3:9 (id: 10058003009)
+
+9Donde me tentaron vuestros padres; me probaron, y vieron mis obras cuarenta años.
+
+
+## Hebreos 3:10 (id: 10058003010)
+
+10A causa de lo cual me enemisté con esta generación, y dije: Siempre divagan ellos de corazón, y no han conocido mis caminos.
+
+
+## Hebreos 3:11 (id: 10058003011)
+
+11Juré, pues, en mi ira: No entrarán en mi reposo.
+
+
+## Hebreos 3:12 (id: 10058003012)
+
+12Mirad, hermanos, que en ninguno de vosotros haya corazón malo de incredulidad para apartarse del Dios vivo:
+
+
+## Hebreos 3:13 (id: 10058003013)
+
+13Antes exhortaos los unos á los otros cada día, entre tanto que se dice Hoy; porque ninguno de vosotros se endurezca con engaño de pecado:
+
+
+## Hebreos 3:14 (id: 10058003014)
+
+14Porque participantes de Cristo somos hechos, con tal que conservemos firme hasta el fin el principio de nuestra confianza;
+
+
+## Hebreos 3:15 (id: 10058003015)
+
+15Entre tanto que se dice: Si oyereis hoy su voz, no endurezcáis vuestros corazones, como en la provocación.
+
+
+## Hebreos 3:16 (id: 10058003016)
+
+16Porque algunos de los que habían salido de Egipto con Moisés, habiendo oído, provocaron, aunque no todos.
+
+
+## Hebreos 3:17 (id: 10058003017)
+
+17Mas ¿con cuáles estuvo enojado cuarenta años? ¿No fué con los que pecaron, cuyos cuerpos cayeron en el desierto?
+
+
+## Hebreos 3:18 (id: 10058003018)
+
+18¿Y á quiénes juró que no entrarían en su reposo, sino á aquellos que no obedecieron?
+
+
+## Hebreos 3:19 (id: 10058003019)
+
+19Y vemos que no pudieron entrar á causa de incredulidad.
+
+
+## Hebreos 4:1 (id: 10058004001)
+
+1TEMAMOS, pues, que quedando aún la promesa de entrar en su reposo, parezca alguno de vosotros haberse apartado.
+
+
+## Hebreos 4:2 (id: 10058004002)
+
+2Porque también á nosotros se nos ha evangelizado como á ellos; mas no les aprovechó el oir la palabra á los que la oyeron sin mezclar fe.
+
+
+## Hebreos 4:3 (id: 10058004003)
+
+3Empero entramos en el reposo los que hemos creído, de la manera que dijo: Como juré en mi ira, no entrarán en mi reposo: aun acabadas las obras desde el principio del mundo.
+
+
+## Hebreos 4:4 (id: 10058004004)
+
+4Porque en un cierto lugar dijo así del séptimo día: Y reposó Dios de todas sus obras en el séptimo día.
+
+
+## Hebreos 4:5 (id: 10058004005)
+
+5Y otra vez aquí: No entrarán en mi reposo.
+
+
+## Hebreos 4:6 (id: 10058004006)
+
+6Así que, pues que resta que algunos han de entrar en él, y aquellos á quienes primero fué anunciado no entraron por causa de desobediencia,
+
+
+## Hebreos 4:7 (id: 10058004007)
+
+7Determina otra vez un cierto día, diciendo por David: Hoy, después de tanto tiempo; como está dicho: Si oyereis su voz hoy, no endurezcáis vuestros corazones.
+
+
+## Hebreos 4:8 (id: 10058004008)
+
+8Porque si Josué les hubiera dado el reposo, no hablaría después de otro día.
+
+
+## Hebreos 4:9 (id: 10058004009)
+
+9Por tanto, queda un reposo para el pueblo de Dios.
+
+
+## Hebreos 4:10 (id: 10058004010)
+
+10Porque el que ha entrado en su reposo, también él ha reposado de sus obras, como Dios de las suyas.
+
+
+## Hebreos 4:11 (id: 10058004011)
+
+11Procuremos pues de entrar en aquel reposo; que ninguno caiga en semejante ejemplo de desobediencia.
+
+
+## Hebreos 4:12 (id: 10058004012)
+
+12Porque la palabra de Dios es viva y eficaz, y más penetrante que toda espada de dos filos: y que alcanza hasta partir el alma, y aun el espíritu, y las coyunturas y tuétanos, y discierne los pensamientos y las intenciones del corazón.
+
+
+## Hebreos 4:13 (id: 10058004013)
+
+13Y no hay cosa criada que no sea manifiesta en su presencia; antes todas las cosas están desnudas y abiertas á los ojos de aquel á quien tenemos que dar cuenta.
+
+
+## Hebreos 4:14 (id: 10058004014)
+
+14Por tanto, teniendo un gran Pontífice, que penetró los cielos, Jesús el Hijo de Dios, retengamos nuestra profesión.
+
+
+## Hebreos 4:15 (id: 10058004015)
+
+15Porque no tenemos un Pontífice que no se pueda compadecer de nuestras flaquezas; mas tentado en todo según nuestra semejanza, pero sin pecado.
+
+
+## Hebreos 4:16 (id: 10058004016)
+
+16Lleguémonos pues confiadamente al trono de la gracia, para alcanzar misericordia, y hallar gracia para el oportuno socorro.
+
+
+## Hebreos 5:1 (id: 10058005001)
+
+1PORQUE todo pontífice, tomado de entre los hombres, es constituído á favor de los hombres en lo que á Dios toca, para que ofrezca presentes y sacrificios por los pecados:
+
+
+## Hebreos 5:2 (id: 10058005002)
+
+2Que se pueda compadecer de los ignorantes y extraviados, pues que él también está rodeado de flaqueza;
+
+
+## Hebreos 5:3 (id: 10058005003)
+
+3Y por causa de ella debe, como por sí mismo, así también por el pueblo, ofrecer por los pecados.
+
+
+## Hebreos 5:4 (id: 10058005004)
+
+4Ni nadie toma para sí la honra, sino el que es llamado de Dios, como Aarón.
+
+
+## Hebreos 5:5 (id: 10058005005)
+
+5Así también Cristo no se glorificó á sí mismo haciéndose Pontífice, mas el que le dijo: Tú eres mi Hijo, yo te he engendrado hoy;
+
+
+## Hebreos 5:6 (id: 10058005006)
+
+6Como también dice en otro lugar: Tú eres sacerdote eternamente, según el orden de Melchîsedec.
+
+
+## Hebreos 5:7 (id: 10058005007)
+
+7El cual en los días de su carne, ofreciendo ruegos y súplicas con gran clamor y lágrimas al que le podía librar de la muerte, fué oído por su reverencial miedo.
+
+
+## Hebreos 5:8 (id: 10058005008)
+
+8Y aunque era Hijo, por lo que padeció aprendió la obediencia;
+
+
+## Hebreos 5:9 (id: 10058005009)
+
+9Y consumado, vino á ser causa de eterna salud á todos los que le obedecen;
+
+
+## Hebreos 5:10 (id: 10058005010)
+
+10Nombrado de Dios pontífice según el orden de Melchîsedec.
+
+
+## Hebreos 5:11 (id: 10058005011)
+
+11Del cual tenemos mucho que decir, y dificultoso de declarar, por cuanto sois flacos para oir.
+
+
+## Hebreos 5:12 (id: 10058005012)
+
+12Porque debiendo ser ya maestros á causa del tiempo, tenéis necesidad de volver á ser enseñados cuáles sean los primeros rudimentos de las palabras de Dios; y habéis llegado á ser tales que tengáis necesidad de leche, y no de manjar sólido.
+
+
+## Hebreos 5:13 (id: 10058005013)
+
+13Que cualquiera que participa de la leche, es inhábil para la palabra de la justicia, porque es niño;
+
+
+## Hebreos 5:14 (id: 10058005014)
+
+14Mas la vianda firme es para los perfectos, para los que por la costumbre tienen los sentidos ejercitados en el discernimiento del bien y del mal.
+
+
+## Hebreos 6:1 (id: 10058006001)
+
+1POR tanto, dejando la palabra del comienzo en la doctrina de Cristo, vamos adelante á la perfección; no echando otra vez el fundamento del arrepentimiento de obras muertas, y de la fe en Dios,
+
+
+## Hebreos 6:2 (id: 10058006002)
+
+2De la doctrina de bautismos, y de la imposición de manos, y de la resurrección de los muertos, y del juicio eterno.
+
+
+## Hebreos 6:3 (id: 10058006003)
+
+3Y esto haremos á la verdad, si Dios lo permitiere.
+
+
+## Hebreos 6:4 (id: 10058006004)
+
+4Porque es imposible que los que una vez fueron iluminados y gustaron el don celestial, y fueron hechos partícipes del Espíritu Santo,
+
+
+## Hebreos 6:5 (id: 10058006005)
+
+5Y asimismo gustaron la buena palabra de Dios, y las virtudes del siglo venidero,
+
+
+## Hebreos 6:6 (id: 10058006006)
+
+6Y recayeron, sean otra vez renovados para arrepentimiento, crucificando de nuevo para sí mismos al Hijo de Dios, y exponiéndole á vituperio.
+
+
+## Hebreos 6:7 (id: 10058006007)
+
+7Porque la tierra que embebe el agua que muchas veces vino sobre ella, y produce hierba provechosa á aquellos de los cuales es labrada, recibe bendición de Dios:
+
+
+## Hebreos 6:8 (id: 10058006008)
+
+8Mas la que produce espinas y abrojos, es reprobada, y cercana de maldición; cuyo fin será el ser abrasada.
+
+
+## Hebreos 6:9 (id: 10058006009)
+
+9Pero de vosotros, oh amados, esperamos mejores cosas, y más cercanas á salud, aunque hablamos así.
+
+
+## Hebreos 6:10 (id: 10058006010)
+
+10Porque Dios no es injusto para olvidar vuestra obra y el trabajo de amor que habéis mostrado á su nombre, habiendo asistido y asistiendo aún á los santos.
+
+
+## Hebreos 6:11 (id: 10058006011)
+
+11Mas deseamos que cada uno de vosotros muestre la misma solicitud hasta el cabo, para cumplimiento de la esperanza:
+
+
+## Hebreos 6:12 (id: 10058006012)
+
+12Que no os hagáis perezosos, mas imitadores de aquellos que por la fe y la paciencia heredan las promesas.
+
+
+## Hebreos 6:13 (id: 10058006013)
+
+13Porque prometiendo Dios á Abraham, no pudiendo jurar por otro mayor, juró por sí mismo,
+
+
+## Hebreos 6:14 (id: 10058006014)
+
+14Diciendo: De cierto te bendeciré bendiciendo, y multiplicando te multiplicaré.
+
+
+## Hebreos 6:15 (id: 10058006015)
+
+15Y así, esperando con largura de ánimo, alcanzó la promesa.
+
+
+## Hebreos 6:16 (id: 10058006016)
+
+16Porque los hombres ciertamente por el mayor que ellos juran: y el fin de todas sus controversias es el juramento para confirmación.
+
+
+## Hebreos 6:17 (id: 10058006017)
+
+17Por lo cual, queriendo Dios mostrar más abundantemente á los herederos de la promesa la inmutabilidad de su consejo, interpuso juramento;
+
+
+## Hebreos 6:18 (id: 10058006018)
+
+18Para que por dos cosas inmutables, en las cuales es imposible que Dios mienta, tengamos un fortísimo consuelo, los que nos acogemos á trabarnos de la esperanza propuesta:
+
+
+## Hebreos 6:19 (id: 10058006019)
+
+19La cual tenemos como segura y firme ancla del alma, y que entra hasta dentro del velo;
+
+
+## Hebreos 6:20 (id: 10058006020)
+
+20Donde entró por nosotros como precursor Jesús, hecho Pontífice eternalmente según el orden de Melchîsedec.
+
+
+## Hebreos 7:1 (id: 10058007001)
+
+1PORQUE este Melchîsedec, rey de Salem, sacerdote del Dios Altísimo, el cual salió á recibir á Abraham que volvía de la derrota de los reyes, y le bendijo,
+
+
+## Hebreos 7:2 (id: 10058007002)
+
+2Al cual asimismo dió Abraham los diezmos de todo, primeramente él se interpreta Rey de justicia; y luego también Rey de Salem, que es, Rey de paz;
+
+
+## Hebreos 7:3 (id: 10058007003)
+
+3Sin padre, sin madre, sin linaje; que ni tiene principio de días, ni fin de vida, mas hecho semejante al Hijo de Dios, permanece sacerdote para siempre.
+
+
+## Hebreos 7:4 (id: 10058007004)
+
+4Mirad pues cuán grande fué éste, al cual aun Abraham el patriarca dió diezmos de los despojos.
+
+
+## Hebreos 7:5 (id: 10058007005)
+
+5Y ciertamente los que de los hijos de Leví toman el sacerdocio, tienen mandamiento de tomar del pueblo los diezmos según la ley, es á saber, de sus hermanos aunque también hayan salido de los lomos de Abraham.
+
+
+## Hebreos 7:6 (id: 10058007006)
+
+6Mas aquél cuya genealogía no es contada de ellos, tomó de Abraham los diezmos, y bendijo al que tenía las promesas.
+
+
+## Hebreos 7:7 (id: 10058007007)
+
+7Y sin contradicción alguna, lo que es menos es bendecido de lo que es más.
+
+
+## Hebreos 7:8 (id: 10058007008)
+
+8Y aquí ciertamente los hombres mortales toman los diezmos: mas allí, aquel del cual está dado testimonio que vive.
+
+
+## Hebreos 7:9 (id: 10058007009)
+
+9Y, por decirlo así, en Abraham fué diezmado también Leví, que recibe los diezmos;
+
+
+## Hebreos 7:10 (id: 10058007010)
+
+10Porque aun estaba en los lomos de su padre cuando Melchîsedec le salió al encuentro.
+
+
+## Hebreos 7:11 (id: 10058007011)
+
+11Si pues la perfección era por el sacerdocio Levítico (porque debajo de él recibió el pueblo la ley) ¿qué necesidad había aún de que se levantase otro sacerdote según el orden de Melchîsedec, y que no fuese llamado según el orden de Aarón?
+
+
+## Hebreos 7:12 (id: 10058007012)
+
+12Pues mudado el sacerdocio, necesario es que se haga también mudanza de la ley.
+
+
+## Hebreos 7:13 (id: 10058007013)
+
+13Porque aquel del cual esto se dice, de otra tribu es, de la cual nadie asistió al altar.
+
+
+## Hebreos 7:14 (id: 10058007014)
+
+14Porque notorio es que el Señor nuestro nació de la tribu de Judá, sobre cuya tribu nada habló Moisés tocante al sacerdocio.
+
+
+## Hebreos 7:15 (id: 10058007015)
+
+15Y aun más manifiesto es, si á semejanza de Melchîsedec se levanta otro sacerdote,
+
+
+## Hebreos 7:16 (id: 10058007016)
+
+16El cual no es hecho conforme á la ley del mandamiento carnal, sino según la virtud de vida indisoluble;
+
+
+## Hebreos 7:17 (id: 10058007017)
+
+17Pues se da testimonio de él: Tú eres sacerdote para siempre, según el orden de Melchîsedec.
+
+
+## Hebreos 7:18 (id: 10058007018)
+
+18El mandamiento precedente, cierto se abroga por su flaqueza é inutilidad;
+
+
+## Hebreos 7:19 (id: 10058007019)
+
+19Porque nada perfeccionó la ley; mas hízolo la introducción de mejor esperanza, por la cual nos acercamos á Dios.
+
+
+## Hebreos 7:20 (id: 10058007020)
+
+20Y por cuanto no fué sin juramento,
+
+
+## Hebreos 7:21 (id: 10058007021)
+
+21(Porque los otros cierto sin juramento fueron hechos sacerdotes; mas éste, con juramento por el que le dijo: Juró el Señor, y no se arrepentirá: Tú eres sacerdote eternamente según el orden de Melchîsedec:)
+
+
+## Hebreos 7:22 (id: 10058007022)
+
+22Tanto de mejor testamento es hecho fiador Jesús.
+
+
+## Hebreos 7:23 (id: 10058007023)
+
+23Y los otros cierto fueron muchos sacerdotes, en cuanto por la muerte no podían permanecer.
+
+
+## Hebreos 7:24 (id: 10058007024)
+
+24Mas éste, por cuanto permanece para siempre, tiene un sacerdocio inmutable:
+
+
+## Hebreos 7:25 (id: 10058007025)
+
+25Por lo cual puede también salvar eternamente á los que por él se allegan á Dios, viviendo siempre para interceder por ellos.
+
+
+## Hebreos 7:26 (id: 10058007026)
+
+26Porque tal pontífice nos convenía: santo, inocente, limpio, apartado de los pecadores, y hecho más sublime que los cielos;
+
+
+## Hebreos 7:27 (id: 10058007027)
+
+27Que no tiene necesidad cada día, como los otros sacerdotes, de ofrecer primero sacrificios por sus pecados, y luego por los del pueblo: porque esto lo hizo una sola vez, ofreciéndose á sí mismo.
+
+
+## Hebreos 7:28 (id: 10058007028)
+
+28Porque la ley constituye sacerdotes á hombres flacos; mas la palabra del juramento, después de la ley, constituye al Hijo, hecho perfecto para siempre.
+
+
+## Hebreos 8:1 (id: 10058008001)
+
+1ASÍ que, la suma acerca de lo dicho es: Tenemos tal pontífice que se asentó á la diestra del trono de la Majestad en los cielos;
+
+
+## Hebreos 8:2 (id: 10058008002)
+
+2Ministro del santuario, y de aquel verdadero tabernáculo que el Señor asentó, y no hombre.
+
+
+## Hebreos 8:3 (id: 10058008003)
+
+3Porque todo pontífice es puesto para ofrecer presentes y sacrificios; por lo cual es necesario que también éste tuviese algo que ofrecer.
+
+
+## Hebreos 8:4 (id: 10058008004)
+
+4Así que, si estuviese sobre la tierra, ni aun sería sacerdote, habiendo aún los sacerdotes que ofrecen los presentes según la ley;
+
+
+## Hebreos 8:5 (id: 10058008005)
+
+5Los cuales sirven de bosquejo y sombra de las cosas celestiales, como fué respondido á Moisés cuando había de acabar el tabernáculo: Mira, dice, haz todas las cosas conforme al dechado que te ha sido mostrado en el monte.
+
+
+## Hebreos 8:6 (id: 10058008006)
+
+6Mas ahora tanto mejor ministerio es el suyo, cuanto es mediador de un mejor pacto, el cual ha sido formado sobre mejores promesas.
+
+
+## Hebreos 8:7 (id: 10058008007)
+
+7Porque si aquel primero fuera sin falta, cierto no se hubiera procurado lugar de segundo.
+
+
+## Hebreos 8:8 (id: 10058008008)
+
+8Porque reprendiéndolos dice: He aquí vienen días, dice el Señor, y consumaré para con la casa de Israel y para con la casa de Judá un nuevo pacto;
+
+
+## Hebreos 8:9 (id: 10058008009)
+
+9No como el pacto que hice con sus padres el día que los tomé por la mano para sacarlos de la tierra de Egipto: porque ellos no permanecieron en mi pacto, y yo los menosprecié, dice el Señor.
+
+
+## Hebreos 8:10 (id: 10058008010)
+
+10Por lo cual, este es el pacto que ordenaré á la casa de Israel después de aquellos días, dice el Señor: Daré mis leyes en el alma de ellos, y sobre el corazón de ellos las escribiré; y seré á ellos por Dios, y ellos me serán á mí por pueblo:
+
+
+## Hebreos 8:11 (id: 10058008011)
+
+11Y ninguno enseñará á su prójimo, ni ninguno á su hermano, diciendo: Conoce al Señor: porque todos me conocerán, desde el menor de ellos hasta el mayor.
+
+
+## Hebreos 8:12 (id: 10058008012)
+
+12Porque seré propicio á sus injusticias, y de sus pecados y de sus iniquidades no me acordaré más.
+
+
+## Hebreos 8:13 (id: 10058008013)
+
+13Diciendo, Nuevo pacto, dió por viejo al primero; y lo que es dado por viejo y se envejece, cerca está de desvanecerse.
+
+
+## Hebreos 9:1 (id: 10058009001)
+
+1TENÍA empero también el primer pacto reglamentos del culto, y santuario mundano.
+
+
+## Hebreos 9:2 (id: 10058009002)
+
+2Porque el tabernáculo fué hecho: el primero, en que estaban las lámparas, y la mesa, y los panes de la proposición; lo que llaman el Santuario.
+
+
+## Hebreos 9:3 (id: 10058009003)
+
+3Tras el segundo velo estaba el tabernáculo, que llaman el Lugar Santísimo;
+
+
+## Hebreos 9:4 (id: 10058009004)
+
+4El cual tenía un incensario de oro, y el arca del pacto cubierta de todas partes alrededor de oro; en la que estaba una urna de oro que contenía el maná, y la vara de Aarón que reverdeció, y las tablas del pacto;
+
+
+## Hebreos 9:5 (id: 10058009005)
+
+5Y sobre ella los querubines de gloria que cubrían el propiciatorio; de las cuales cosas no se puede ahora hablar en particular.
+
+
+## Hebreos 9:6 (id: 10058009006)
+
+6Y estas cosas así ordenadas, en el primer tabernáculo siempre entraban los sacerdotes para hacer los oficios del culto;
+
+
+## Hebreos 9:7 (id: 10058009007)
+
+7Mas en el segundo, sólo el pontífice una vez en el año, no sin sangre, la cual ofrece por sí mismo, y por los pecados de ignorancia del pueblo:
+
+
+## Hebreos 9:8 (id: 10058009008)
+
+8Dando en esto á entender el Espíritu Santo, que aun no estaba descubierto el camino para el santuario, entre tanto que el primer tabernáculo estuviese en pie.
+
+
+## Hebreos 9:9 (id: 10058009009)
+
+9Lo cual era figura de aquel tiempo presente, en el cual se ofrecían presentes y sacrificios que no podían hacer perfecto, cuanto á la conciencia, al que servía con ellos;
+
+
+## Hebreos 9:10 (id: 10058009010)
+
+10Consistiendo sólo en viandas y en bebidas, y en diversos lavamientos, y ordenanzas acerca de la carne, impuestas hasta el tiempo de la corrección.
+
+
+## Hebreos 9:11 (id: 10058009011)
+
+11Mas estando ya presente Cristo, pontífice de los bienes que habían de venir, por el más amplio y más perfecto tabernáculo, no hecho de manos, es á saber, no de esta creación;
+
+
+## Hebreos 9:12 (id: 10058009012)
+
+12Y no por sangre de machos cabríos ni de becerros, mas por su propia sangre, entró una sola vez en el santuario, habiendo obtenido eterna redención.
+
+
+## Hebreos 9:13 (id: 10058009013)
+
+13Porque si la sangre de los toros y de los machos cabríos, y la ceniza de la becerra, rociada á los inmundos, santifica para la purificación de la carne,
+
+
+## Hebreos 9:14 (id: 10058009014)
+
+14¿Cuánto más la sangre de Cristo, el cual por el Espíritu eterno se ofreció á sí mismo sin mancha á Dios, limpiará vuestras conciencias de las obras de muerte para que sirváis al Dios vivo?
+
+
+## Hebreos 9:15 (id: 10058009015)
+
+15Así que, por eso es mediador del nuevo testamento, para que interviniendo muerte para la remisión de las rebeliones que había bajo del primer testamento, los que son llamados reciban la promesa de la herencia eterna.
+
+
+## Hebreos 9:16 (id: 10058009016)
+
+16Porque donde hay testamento, necesario es que intervenga muerte del testador.
+
+
+## Hebreos 9:17 (id: 10058009017)
+
+17Porque el testamento con la muerte es confirmado; de otra manera no es válido entre tanto que el testador vive.
+
+
+## Hebreos 9:18 (id: 10058009018)
+
+18De donde vino que ni aun el primero fué consagrado sin sangre.
+
+
+## Hebreos 9:19 (id: 10058009019)
+
+19Porque habiendo leído Moisés todos los mandamientos de la ley á todo el pueblo, tomando la sangre de los becerros y de los machos cabríos, con agua, y lana de grana, é hisopo, roció al mismo libro, y también á todo el pueblo,
+
+
+## Hebreos 9:20 (id: 10058009020)
+
+20Diciendo: Esta es la sangre del testamento que Dios os ha mandado.
+
+
+## Hebreos 9:21 (id: 10058009021)
+
+21Y además de esto roció también con la sangre el tabernáculo y todos los vasos del ministerio.
+
+
+## Hebreos 9:22 (id: 10058009022)
+
+22Y casi todo es purificado según la ley con sangre; y sin derramamiento de sangre no se hace remisión.
+
+
+## Hebreos 9:23 (id: 10058009023)
+
+23Fué, pues, necesario que las figuras de las cosas celestiales fuesen purificadas con estas cosas; empero las mismas cosas celestiales con mejores sacrificios que éstos.
+
+
+## Hebreos 9:24 (id: 10058009024)
+
+24Porque no entró Cristo en el santuario hecho de mano, figura del verdadero, sino en el mismo cielo para presentarse ahora por nosotros en la presencia de Dios.
+
+
+## Hebreos 9:25 (id: 10058009025)
+
+25Y no para ofrecerse muchas veces á sí mismo, como entra el pontífice en el santuario cada año con sangre ajena;
+
+
+## Hebreos 9:26 (id: 10058009026)
+
+26De otra manera fuera necesario que hubiera padecido muchas veces desde el principio del mundo: mas ahora una vez en la consumación de los siglos, para deshacimiento del pecado se presentó por el sacrificio de sí mismo.
+
+
+## Hebreos 9:27 (id: 10058009027)
+
+27Y de la manera que está establecido á los hombres que mueran una vez, y después el juicio;
+
+
+## Hebreos 9:28 (id: 10058009028)
+
+28Así también Cristo fué ofrecido una vez para agotar los pecados de muchos; y la segunda vez, sin pecado, será visto de los que le esperan para salud.
+
+
+## Hebreos 10:1 (id: 10058010001)
+
+1PORQUE la ley, teniendo la sombra de los bienes venideros, no la imagen misma de las cosas, nunca puede, por los mismos sacrificios que ofrecen continuamente cada año, hacer perfectos á los que se allegan.
+
+
+## Hebreos 10:2 (id: 10058010002)
+
+2De otra manera cesarían de ofrecerse; porque los que tributan este culto, limpios de una vez, no tendrían más conciencia de pecado.
+
+
+## Hebreos 10:3 (id: 10058010003)
+
+3Empero en estos sacrificios cada año se hace conmemoración de los pecados.
+
+
+## Hebreos 10:4 (id: 10058010004)
+
+4Porque la sangre de los toros y de los machos cabríos no puede quitar los pecados.
+
+
+## Hebreos 10:5 (id: 10058010005)
+
+5Por lo cual, entrando en el mundo, dice: Sacrificio y presente no quisiste; mas me apropiaste cuerpo:
+
+
+## Hebreos 10:6 (id: 10058010006)
+
+6Holocaustos y expiaciones por el pecado no te agradaron.
+
+
+## Hebreos 10:7 (id: 10058010007)
+
+7Entonces dije: Heme aquí (en la cabecera del libro está escrito de mí) para que haga, oh Dios, tu voluntad.
+
+
+## Hebreos 10:8 (id: 10058010008)
+
+8Diciendo arriba: Sacrificio y presente, y holocaustos y expiaciones por el pecado no quisiste, ni te agradaron, (las cuales cosas se ofrecen según la ley,)
+
+
+## Hebreos 10:9 (id: 10058010009)
+
+9Entonces dijo: Heme aquí para que haga, oh Dios, tu voluntad. Quita lo primero, para establecer lo postrero.
+
+
+## Hebreos 10:10 (id: 10058010010)
+
+10En la cual voluntad somos santificados por la ofrenda del cuerpo de Jesucristo hecha una sola vez.
+
+
+## Hebreos 10:11 (id: 10058010011)
+
+11Así que, todo sacerdote se presenta cada día ministrando y ofreciendo muchas veces los mismos sacrificios, que nunca pueden quitar los pecados:
+
+
+## Hebreos 10:12 (id: 10058010012)
+
+12Pero éste, habiendo ofrecido por los pecados un solo sacrificio para siempre, está sentado á la diestra de Dios,
+
+
+## Hebreos 10:13 (id: 10058010013)
+
+13Esperando lo que resta, hasta que sus enemigos sean puestos por estrado de sus pies.
+
+
+## Hebreos 10:14 (id: 10058010014)
+
+14Porque con una sola ofrenda hizo perfectos para siempre á los santificados.
+
+
+## Hebreos 10:15 (id: 10058010015)
+
+15Y atestíguanos lo mismo el Espíritu Santo; que después que dijo:
+
+
+## Hebreos 10:16 (id: 10058010016)
+
+16Y este es el pacto que haré con ellos después de aquellos días, dice el Señor: Daré mis leyes en sus corazones, y en sus almas las escribiré;
+
+
+## Hebreos 10:17 (id: 10058010017)
+
+17Añade: Y nunca más me acordaré de sus pecados é iniquidades.
+
+
+## Hebreos 10:18 (id: 10058010018)
+
+18Pues donde hay remisión de éstos, no hay más ofrenda por pecado.
+
+
+## Hebreos 10:19 (id: 10058010019)
+
+19Así que, hermanos, teniendo libertad para entrar en el santuario por la sangre de Jesucristo,
+
+
+## Hebreos 10:20 (id: 10058010020)
+
+20Por el camino que él nos consagró nuevo y vivo, por el velo, esto es, por su carne;
+
+
+## Hebreos 10:21 (id: 10058010021)
+
+21Y teniendo un gran sacerdote sobre la casa de Dios,
+
+
+## Hebreos 10:22 (id: 10058010022)
+
+22Lleguémonos con corazón verdadero, en plena certidumbre de fe, purificados los corazones de mala conciencia, y lavados los cuerpos con agua limpia.
+
+
+## Hebreos 10:23 (id: 10058010023)
+
+23Mantengamos firme la profesión de nuestra fe sin fluctuar; que fiel es el que prometió:
+
+
+## Hebreos 10:24 (id: 10058010024)
+
+24Y considerémonos los unos á los otros para provocarnos al amor y á las buenas obras;
+
+
+## Hebreos 10:25 (id: 10058010025)
+
+25No dejando nuestra congregación, como algunos tienen por costumbre, mas exhortándonos; y tanto más, cuanto veis que aquel día se acerca.
+
+
+## Hebreos 10:26 (id: 10058010026)
+
+26Porque si pecáremos voluntariamente después de haber recibido el conocimiento de la verdad, ya no queda sacrificio por el pecado.
+
+
+## Hebreos 10:27 (id: 10058010027)
+
+27Sino una horrenda esperanza de juicio, y hervor de fuego que ha de devorar á los adversarios.
+
+
+## Hebreos 10:28 (id: 10058010028)
+
+28El que menospreciare la ley de Moisés, por el testimonio de dos ó de tres testigos muere sin ninguna misericordia:
+
+
+## Hebreos 10:29 (id: 10058010029)
+
+29¿Cuánto pensáis que será más digno de mayor castigo, el que hollare al Hijo de Dios, y tuviere por inmunda la sangre del testamento, en la cual fué santificado, é hiciere afrenta al Espíritu de gracia?
+
+
+## Hebreos 10:30 (id: 10058010030)
+
+30Sabemos quién es el que dijo: Mía es la venganza, yo daré el pago, dice el Señor. Y otra vez: El Señor juzgará su pueblo.
+
+
+## Hebreos 10:31 (id: 10058010031)
+
+31Horrenda cosa es caer en las manos del Dios vivo.
+
+
+## Hebreos 10:32 (id: 10058010032)
+
+32Empero traed á la memoria los días pasados, en los cuales, después de haber sido iluminados, sufristeis gran combate de aflicciones:
+
+
+## Hebreos 10:33 (id: 10058010033)
+
+33Por una parte, ciertamente, con vituperios y tribulaciones fuisteis hechos espectáculo; y por otra parte hechos compañeros de los que estaban en tal estado.
+
+
+## Hebreos 10:34 (id: 10058010034)
+
+34Porque de mis prisiones también os resentisteis conmigo, y el robo de vuestros bienes padecisteis con gozo, conociendo que tenéis en vosotros una mejor sustancia en los cielos, y que permanece.
+
+
+## Hebreos 10:35 (id: 10058010035)
+
+35No perdáis pues vuestra confianza, que tiene grande remuneración de galardón:
+
+
+## Hebreos 10:36 (id: 10058010036)
+
+36Porque la paciencia os es necesaria; para que, habiendo hecho la voluntad de Dios, obtengáis la promesa.
+
+
+## Hebreos 10:37 (id: 10058010037)
+
+37Porque aun un poquito, y el que ha de venir vendrá, y no tardará.
+
+
+## Hebreos 10:38 (id: 10058010038)
+
+38Ahora el justo vivirá por fe; mas si se retirare, no agradará á mi alma.
+
+
+## Hebreos 10:39 (id: 10058010039)
+
+39Pero nosotros no somos tales que nos retiremos para perdición, sino fieles para ganancia del alma.
+
+
+## Hebreos 11:1 (id: 10058011001)
+
+1ES pues la fe la sustancia de las cosas que se esperan, la demostración de las cosas que no se ven.
+
+
+## Hebreos 11:2 (id: 10058011002)
+
+2Porque por ella alcanzaron testimonio los antiguos.
+
+
+## Hebreos 11:3 (id: 10058011003)
+
+3Por la fe entendemos haber sido compuestos los siglos por la palabra de Dios, siendo hecho lo que se ve, de lo que no se veía.
+
+
+## Hebreos 11:4 (id: 10058011004)
+
+4Por la fe Abel ofreció á Dios mayor sacrificio que Caín, por la cual alcanzó testimonio de que era justo, dando Dios testimonio á sus presentes; y difunto, aun habla por ella.
+
+
+## Hebreos 11:5 (id: 10058011005)
+
+5Por la fe Enoc fué traspuesto para no ver muerte, y no fué hallado, porque lo traspuso Dios. Y antes que fuese traspuesto, tuvo testimonio de haber agradado á Dios.
+
+
+## Hebreos 11:6 (id: 10058011006)
+
+6Empero sin fe es imposible agradar á Dios; porque es menester que el que á Dios se allega, crea que le hay, y que es galardonador de los que le buscan.
+
+
+## Hebreos 11:7 (id: 10058011007)
+
+7Por la fe Noé, habiendo recibido respuesta de cosas que aun no se veían, con temor aparejó el arca en que su casa se salvase: por la cual fe condenó al mundo, y fué hecho heredero de la justicia que es por la fe.
+
+
+## Hebreos 11:8 (id: 10058011008)
+
+8Por la fe Abraham, siendo llamado, obedeció para salir al lugar que había de recibir por heredad; y salió sin saber dónde iba.
+
+
+## Hebreos 11:9 (id: 10058011009)
+
+9Por fe habitó en la tierra prometida como en tierra ajena, morando en cabañas con Isaac y Jacob, herederos juntamente de la misma promesa:
+
+
+## Hebreos 11:10 (id: 10058011010)
+
+10Porque esperaba ciudad con fundamentos, el artífice y hacedor de la cual es Dios.
+
+
+## Hebreos 11:11 (id: 10058011011)
+
+11Por la fe también la misma Sara, siendo estéril, recibió fuerza para concebir simiente; y parió aun fuera del tiempo de la edad, porque creyó ser fiel el que lo había prometido.
+
+
+## Hebreos 11:12 (id: 10058011012)
+
+12Por lo cual también, de uno, y ése ya amortecido, salieron como las estrellas del cielo en multitud, y como la arena innumerable que está á la orilla de la mar.
+
+
+## Hebreos 11:13 (id: 10058011013)
+
+13Conforme á la fe murieron todos éstos sin haber recibido las promesas, sino mirándolas de lejos, y creyéndolas, y saludándolas, y confesando que eran peregrinos y advenedizos sobre la tierra.
+
+
+## Hebreos 11:14 (id: 10058011014)
+
+14Porque los que esto dicen, claramente dan á entender que buscan una patria.
+
+
+## Hebreos 11:15 (id: 10058011015)
+
+15Que si se acordaran de aquella de donde salieron, cierto tenían tiempo para volverse:
+
+
+## Hebreos 11:16 (id: 10058011016)
+
+16Empero deseaban la mejor, es á saber, la celestial; por lo cual Dios no se avergüenza de llamarse Dios de ellos: porque les había aparejado ciudad.
+
+
+## Hebreos 11:17 (id: 10058011017)
+
+17Por fe ofreció Abraham á Isaac cuando fué probado, y ofrecía al unigénito el que había recibido las promesas,
+
+
+## Hebreos 11:18 (id: 10058011018)
+
+18Habiéndole sido dicho: En Isaac te será llamada simiente:
+
+
+## Hebreos 11:19 (id: 10058011019)
+
+19Pensando que aun de los muertos es Dios poderoso para levantar; de donde también le volvió á recibir por figura.
+
+
+## Hebreos 11:20 (id: 10058011020)
+
+20Por fe bendijo Isaac á Jacob y á Esaú respecto á cosas que habían de ser.
+
+
+## Hebreos 11:21 (id: 10058011021)
+
+21Por fe Jacob, muriéndose, bendijo á cada uno de los hijos de José, y adoró estribando sobre la punta de su bordón.
+
+
+## Hebreos 11:22 (id: 10058011022)
+
+22Por fe José, muriéndose, se acordó de la partida de los hijos de Israel; y dió mandamiento acerca de sus huesos.
+
+
+## Hebreos 11:23 (id: 10058011023)
+
+23Por fe Moisés, nacido, fué escondido de sus padres por tres meses, porque le vieron hermoso niño; y no temieron el mandamiento del rey.
+
+
+## Hebreos 11:24 (id: 10058011024)
+
+24Por fe Moisés, hecho ya grande, rehusó ser llamado hijo de la hija de Faraón;
+
+
+## Hebreos 11:25 (id: 10058011025)
+
+25Escogiendo antes ser afligido con el pueblo de Dios, que gozar de comodidades temporales de pecado.
+
+
+## Hebreos 11:26 (id: 10058011026)
+
+26Teniendo por mayores riquezas el vituperio de Cristo que los tesoros de los Egipcios; porque miraba á la remuneración.
+
+
+## Hebreos 11:27 (id: 10058011027)
+
+27Por fe dejó á Egipto, no temiendo la ira del rey; porque se sostuvo como viendo al Invisible.
+
+
+## Hebreos 11:28 (id: 10058011028)
+
+28Por fe celebró la pascua y el derramamiento de la sangre, para que el que mataba los primogénitos no los tocase.
+
+
+## Hebreos 11:29 (id: 10058011029)
+
+29Por fe pasaron el mar Bermejo como por tierra seca: lo cual probando los Egipcios, fueron sumergidos.
+
+
+## Hebreos 11:30 (id: 10058011030)
+
+30Por fe cayeron los muros de Jericó con rodearlos siete días.
+
+
+## Hebreos 11:31 (id: 10058011031)
+
+31Por fe Rahab la ramera no pereció juntamente con los incrédulos, habiendo recibido á los espías con paz.
+
+
+## Hebreos 11:32 (id: 10058011032)
+
+32¿Y qué más digo? porque el tiempo me faltará contando de Gedeón, de Barac, de Samsón, de Jephté, de David, de Samuel, y de los profetas:
+
+
+## Hebreos 11:33 (id: 10058011033)
+
+33Que por fe ganaron reinos, obraron justicia, alcanzaron promesas, taparon las bocas de leones,
+
+
+## Hebreos 11:34 (id: 10058011034)
+
+34Apagaron fuegos impetuosos, evitaron filo de cuchillo, convalecieron de enfermedades, fueron hechos fuertes en batallas, trastornaron campos de extraños.
+
+
+## Hebreos 11:35 (id: 10058011035)
+
+35Las mujeres recibieron sus muertos por resurrección; unos fueron estirados, no aceptando el rescate, para ganar mejor resurrección;
+
+
+## Hebreos 11:36 (id: 10058011036)
+
+36Otros experimentaron vituperios y azotes; y á más de esto prisiones y cárceles;
+
+
+## Hebreos 11:37 (id: 10058011037)
+
+37Fueron apedreados, aserrados, tentados, muertos á cuchillo; anduvieron de acá para allá cubiertos de pieles de ovejas y de cabras, pobres, angustiados, maltratados;
+
+
+## Hebreos 11:38 (id: 10058011038)
+
+38De los cuales el mundo no era digno; perdidos por los desiertos, por los montes, por las cuevas y por las cavernas de la tierra.
+
+
+## Hebreos 11:39 (id: 10058011039)
+
+39Y todos éstos, aprobados por testimonio de la fe, no recibieron la promesa;
+
+
+## Hebreos 11:40 (id: 10058011040)
+
+40Proveyendo Dios alguna cosa mejor para nosotros, para que no fuesen perfeccionados sin nosotros.
+
+
+## Hebreos 12:1 (id: 10058012001)
+
+1POR tanto nosotros también, teniendo en derredor nuestro una tan grande nube de testigos, dejando todo el peso del pecado que nos rodea, corramos con paciencia la carrera que nos es propuesta,
+
+
+## Hebreos 12:2 (id: 10058012002)
+
+2Puestos los ojos en al autor y consumador de la fe, en Jesús; el cual, habiéndole sido propuesto gozo, sufrió la cruz, menospreciando la vergüenza, y sentóse á la diestra del trono de Dios.
+
+
+## Hebreos 12:3 (id: 10058012003)
+
+3Reducid pues á vuestro pensamiento á aquel que sufrió tal contradicción de pecadores contra sí mismo, porque no os fatiguéis en vuestros ánimos desmayando.
+
+
+## Hebreos 12:4 (id: 10058012004)
+
+4Que aun no habéis resistido hasta la sangre, combatiendo contra el pecado:
+
+
+## Hebreos 12:5 (id: 10058012005)
+
+5Y estáis ya olvidados de la exhortación que como con hijos habla con vosotros, diciendo: Hijo mío, no menosprecies el castigo del Señor, ni desmayes cuando eres de él reprendido.
+
+
+## Hebreos 12:6 (id: 10058012006)
+
+6Porque el Señor al que ama castiga, y azota á cualquiera que recibe por hijo.
+
+
+## Hebreos 12:7 (id: 10058012007)
+
+7Si sufrís el castigo, Dios se os presenta como á hijos; porque ¿qué hijo es aquel á quien el padre no castiga?
+
+
+## Hebreos 12:8 (id: 10058012008)
+
+8Mas si estáis fuera del castigo, del cual todos han sido hechos participantes, luego sois bastardos, y no hijos.
+
+
+## Hebreos 12:9 (id: 10058012009)
+
+9Por otra parte, tuvimos por castigadores á los padres de nuestra carne, y los reverenciábamos, ¿por qué no obedeceremos mucho mejor al Padre de los espíritus, y viviremos?
+
+
+## Hebreos 12:10 (id: 10058012010)
+
+10Y aquéllos, á la verdad, por pocos días nos castigaban como á ellos les parecía, mas éste para lo que nos es provechoso, para que recibamos su santificación.
+
+
+## Hebreos 12:11 (id: 10058012011)
+
+11Es verdad que ningún castigo al presente parece ser causa de gozo, sino de tristeza; mas después da fruto apacible de justicia á los que en él son ejercitados.
+
+
+## Hebreos 12:12 (id: 10058012012)
+
+12Por lo cual alzad las manos caídas y las rodillas paralizadas;
+
+
+## Hebreos 12:13 (id: 10058012013)
+
+13Y haced derechos pasos á vuestros pies, porque lo que es cojo no salga fuera de camino, antes sea sanado.
+
+
+## Hebreos 12:14 (id: 10058012014)
+
+14Seguid la paz con todos, y la santidad, sin la cual nadie verá al Señor:
+
+
+## Hebreos 12:15 (id: 10058012015)
+
+15Mirando bien que ninguno se aparte de la gracia de Dios, que ninguna raíz de amargura brotando os impida, y por ella muchos sean contaminados;
+
+
+## Hebreos 12:16 (id: 10058012016)
+
+16Que ninguno sea fornicario, ó profano, como Esaú, que por una vianda vendió su primogenitura.
+
+
+## Hebreos 12:17 (id: 10058012017)
+
+17Porque ya sabéis que aun después, deseando heredar la bendición, fué reprobado (que no halló lugar de arrepentimiento), aunque la procuró con lágrimas.
+
+
+## Hebreos 12:18 (id: 10058012018)
+
+18Porque no os habéis llegado al monte que se podía tocar, y al fuego encendido, y al turbión, y á la oscuridad, y á la tempestad,
+
+
+## Hebreos 12:19 (id: 10058012019)
+
+19Y al sonido de la trompeta, y á la voz de las palabras, la cual los que la oyeron rogaron que no se les hablase más;
+
+
+## Hebreos 12:20 (id: 10058012020)
+
+20Porque no podían tolerar lo que se mandaba: Si bestia tocare al monte, será apedreada, ó pasada con dardo.
+
+
+## Hebreos 12:21 (id: 10058012021)
+
+21Y tan terrible cosa era lo que se veía, que Moisés dijo: Estoy asombrado y temblando.
+
+
+## Hebreos 12:22 (id: 10058012022)
+
+22Mas os habéis llegado al monte de Sión, y á la ciudad del Dios vivo, Jerusalem la celestial, y á la compañía de muchos millares de ángeles,
+
+
+## Hebreos 12:23 (id: 10058012023)
+
+23Y á la congregación de los primogénitos que están alistados en los cielos, y á Dios el Juez de todos, y á los espíritus de los justos hechos perfectos,
+
+
+## Hebreos 12:24 (id: 10058012024)
+
+24Y á Jesús el Mediador del nuevo testamento, y á la sangre del esparcimiento que habla mejor que la de Abel.
+
+
+## Hebreos 12:25 (id: 10058012025)
+
+25Mirad que no desechéis al que habla. Porque si aquellos no escaparon que desecharon al que hablaba en la tierra, mucho menos nosotros, si desecháramos al que habla de los cielos.
+
+
+## Hebreos 12:26 (id: 10058012026)
+
+26La voz del cual entonces conmovió la tierra; mas ahora ha denunciado, diciendo: Aun una vez, y yo conmoveré no solamente la tierra, mas aun el cielo.
+
+
+## Hebreos 12:27 (id: 10058012027)
+
+27Y esta palabra, Aun una vez, declara la mudanza de las cosas movibles, como de cosas hechas, para que queden las cosas que son firmes.
+
+
+## Hebreos 12:28 (id: 10058012028)
+
+28Así que, tomando el reino inmóvil, retengamos la gracia por la cual sirvamos á Dios agradándole con temor y reverencia;
+
+
+## Hebreos 12:29 (id: 10058012029)
+
+29Porque nuestro Dios es fuego consumidor.
+
+
+## Hebreos 13:1 (id: 10058013001)
+
+1PERMANEZCA el amor fraternal.
+
+
+## Hebreos 13:2 (id: 10058013002)
+
+2No olvidéis la hospitalidad, porque por ésta algunos, sin saberlo, hospedaron ángeles.
+
+
+## Hebreos 13:3 (id: 10058013003)
+
+3Acordaos de los presos, como presos juntamente con ellos; y de los afligidos, como que también vosotros mismos sois del cuerpo.
+
+
+## Hebreos 13:4 (id: 10058013004)
+
+4Honroso es en todos el matrimonio, y el lecho sin mancilla; mas á los fornicarios y á los adúlteros juzgará Dios.
+
+
+## Hebreos 13:5 (id: 10058013005)
+
+5Sean las costumbres vuestras sin avaricia; contentos de lo presente; porque él dijo: No te desampararé, ni te dejaré.
+
+
+## Hebreos 13:6 (id: 10058013006)
+
+6De tal manera que digamos confiadamente: El Señor es mi ayudador; no temeré lo que me hará el hombre.
+
+
+## Hebreos 13:7 (id: 10058013007)
+
+7Acordaos de vuestros pastores, que os hablaron la palabra de Dios; la fe de los cuales imitad, considerando cuál haya sido el éxito de su conducta.
+
+
+## Hebreos 13:8 (id: 10058013008)
+
+8Jesucristo es el mismo ayer, y hoy, y por los siglos.
+
+
+## Hebreos 13:9 (id: 10058013009)
+
+9No seáis llevados de acá para allá por doctrinas diversas y extrañas; porque buena cosa es afirmar el corazón en la gracia, no en viandas, que nunca aprovecharon á los que anduvieron en ellas.
+
+
+## Hebreos 13:10 (id: 10058013010)
+
+10Tenemos un altar, del cual no tienen facultad de comer los que sirven al tabernáculo.
+
+
+## Hebreos 13:11 (id: 10058013011)
+
+11Porque los cuerpos de aquellos animales, la sangre de los cuales es metida por el pecado en el santuario por el pontífice, son quemados fuera del real.
+
+
+## Hebreos 13:12 (id: 10058013012)
+
+12Por lo cual también Jesús, para santificar al pueblo por su propia sangre, padeció fuera de la puerta.
+
+
+## Hebreos 13:13 (id: 10058013013)
+
+13Salgamos pues á él fuera del real, llevando su vituperio.
+
+
+## Hebreos 13:14 (id: 10058013014)
+
+14Porque no tenemos aquí ciudad permanente, mas buscamos la por venir.
+
+
+## Hebreos 13:15 (id: 10058013015)
+
+15Así que, ofrezcamos por medio de él á Dios siempre sacrificio de alabanza, es á saber, fruto de labios que confiesen á su nombre.
+
+
+## Hebreos 13:16 (id: 10058013016)
+
+16Y de hacer bien y de la comunicación no os olvidéis: porque de tales sacrificios se agrada Dios.
+
+
+## Hebreos 13:17 (id: 10058013017)
+
+17Obedeced á vuestros pastores, y sujetaos á ellos; porque ellos velan por vuestras almas, como aquellos que han de dar cuenta; para que lo hagan con alegría, y no gimiendo; porque esto no os es útil.
+
+
+## Hebreos 13:18 (id: 10058013018)
+
+18Orad por nosotros: porque confiamos que tenemos buena conciencia, deseando conversar bien en todo.
+
+
+## Hebreos 13:19 (id: 10058013019)
+
+19Y más os ruego que lo hagáis así, para que yo os sea más presto restituído.
+
+
+## Hebreos 13:20 (id: 10058013020)
+
+20Y el Dios de paz que sacó de los muertos á nuestro Señor Jesucristo, el gran pastor de las ovejas, por la sangre del testamento eterno,
+
+
+## Hebreos 13:21 (id: 10058013021)
+
+21Os haga aptos en toda obra buena para que hagáis su voluntad, haciendo él en vosotros lo que es agradable delante de él por Jesucristo: al cual sea gloria por los siglos de los siglos. Amén.
+
+
+## Hebreos 13:22 (id: 10058013022)
+
+22Empero os ruego, hermanos, que soportéis la palabra de exhortación; porque os he escrito en breve.
+
+
+## Hebreos 13:23 (id: 10058013023)
+
+23Sabed que nuestro hermano Timoteo está suelto; con el cual, si viniere más presto, os iré á ver.
+
+
+## Hebreos 13:24 (id: 10058013024)
+
+24Saludad á todos vuestros pastores, y á todos los santos. Los de Italia os saludan.
+
+
+## Hebreos 13:25 (id: 10058013025)
+
+25La gracia sea con todos vosotros. Amén. Fué escrita á los Hebreos desde Italia con Timoteo.
+
+`;export{e as default};

@@ -1,0 +1,533 @@
+const e=`# Reina Valera 1909
+
+## License Information
+
+**Reina Valera 1909** is based on and adapted from: _Reina Valera 1909_, [Public Domain](https://creativecommons.org/public-domain/cc0/), 1909, which is licensed under a [Public Domain CC0](https://creativecommons.org/public-domain/cc0/).
+
+This markdown version is provided under the same license.
+
+
+
+--------------------------------
+
+
+## Filipenses 1:1 (id: 10050001001)
+
+1PABLO y Timoteo, siervos de Jesucristo, á todos los santos en Cristo Jesús que están en Filipos, con los obispos y diáconos:
+
+
+## Filipenses 1:2 (id: 10050001002)
+
+2Gracia sea á vosotros, y paz de Dios nuestro Padre y del Señor Jesucristo.
+
+
+## Filipenses 1:3 (id: 10050001003)
+
+3Doy gracias á mi Dios en toda memoria de vosotros,
+
+
+## Filipenses 1:4 (id: 10050001004)
+
+4Siempre en todas mis oraciones haciendo oración por todos vosotros con gozo,
+
+
+## Filipenses 1:5 (id: 10050001005)
+
+5Por vuestra comunión en el evangelio, desde el primer día hasta ahora:
+
+
+## Filipenses 1:6 (id: 10050001006)
+
+6Estando confiado de esto, que el que comenzó en vosotros la buena obra, la perfeccionará hasta el día de Jesucristo;
+
+
+## Filipenses 1:7 (id: 10050001007)
+
+7Como me es justo sentir esto de todos vosotros, por cuanto os tengo en el corazón; y en mis prisiones, y en la defensa y confirmación del evangelio, sois todos vosotros compañeros de mi gracia.
+
+
+## Filipenses 1:8 (id: 10050001008)
+
+8Porque Dios me es testigo de cómo os amo á todos vosotros en las entrañas de Jesucristo.
+
+
+## Filipenses 1:9 (id: 10050001009)
+
+9Y esto ruego, que vuestro amor abunde aun más y más en ciencia y en todo conocimiento,
+
+
+## Filipenses 1:10 (id: 10050001010)
+
+10Para que discernáis lo mejor; que seáis sinceros y sin ofensa para el día de Cristo;
+
+
+## Filipenses 1:11 (id: 10050001011)
+
+11Llenos de frutos de justicia, que son por Jesucristo, á gloria y loor de Dios.
+
+
+## Filipenses 1:12 (id: 10050001012)
+
+12Y quiero, hermanos, que sepáis que las cosas que me han sucedido, han redundado más en provecho del evangelio;
+
+
+## Filipenses 1:13 (id: 10050001013)
+
+13De manera que mis prisiones han sido célebres en Cristo en todo el pretorio, y á todos los demás;
+
+
+## Filipenses 1:14 (id: 10050001014)
+
+14Y muchos de los hermanos en el Señor, tomando ánimo con mis prisiones, se atreven mucho más á hablar la palabra sin temor.
+
+
+## Filipenses 1:15 (id: 10050001015)
+
+15Y algunos, á la verdad, predican á Cristo por envidia y porfía; mas algunos también por buena voluntad.
+
+
+## Filipenses 1:16 (id: 10050001016)
+
+16Los unos anuncian á Cristo por contención, no sinceramente, pensando añadir aflicción á mis prisiones;
+
+
+## Filipenses 1:17 (id: 10050001017)
+
+17Pero los otros por amor, sabiendo que soy puesto por la defensa del evangelio.
+
+
+## Filipenses 1:18 (id: 10050001018)
+
+18¿Qué pues? Que no obstante, en todas maneras, ó por pretexto ó por verdad, es anunciado Cristo; y en esto me huelgo, y aun me holgaré.
+
+
+## Filipenses 1:19 (id: 10050001019)
+
+19Porque sé que esto se me tornará á salud, por vuestra oración, y por la suministración del Espíritu de Jesucristo;
+
+
+## Filipenses 1:20 (id: 10050001020)
+
+20Conforme á mi mira y esperanza, que en nada seré confundido; antes bien con toda confianza, como siempre, ahora también será engrandecido Cristo en mi cuerpo, ó por vida, ó por muerte.
+
+
+## Filipenses 1:21 (id: 10050001021)
+
+21Porque para mí el vivir es Cristo, y el morir es ganancia.
+
+
+## Filipenses 1:22 (id: 10050001022)
+
+22Mas si el vivir en la carne, esto me será para fruto de la obra, no sé entonces qué escoger;
+
+
+## Filipenses 1:23 (id: 10050001023)
+
+23Porque de ambas cosas estoy puesto en estrecho, teniendo deseo de ser desatado, y estar con Cristo, lo cual es mucho mejor:
+
+
+## Filipenses 1:24 (id: 10050001024)
+
+24Empero quedar en la carne es más necesario por causa de vosotros.
+
+
+## Filipenses 1:25 (id: 10050001025)
+
+25Y confiado en esto, sé que quedaré, que aun permaneceré con todos vosotros, para provecho vuestro y gozo de la fe;
+
+
+## Filipenses 1:26 (id: 10050001026)
+
+26Para que crezca vuestra gloria de mí en Cristo Jesús por mi venida otra vez á vosotros.
+
+
+## Filipenses 1:27 (id: 10050001027)
+
+27Solamente que converséis como es digno del evangelio de Cristo; para que, ó sea que vaya á veros, ó que esté ausente, oiga de vosotros que estáis firmes en un mismo espíritu, unánimes combatiendo juntamente por la fe del evangelio,
+
+
+## Filipenses 1:28 (id: 10050001028)
+
+28Y en nada intimidados de los que se oponen: que á ellos ciertamente es indicio de perdición, mas á vosotros de salud; y esto de Dios;
+
+
+## Filipenses 1:29 (id: 10050001029)
+
+29Porque á vosotros es concedido por Cristo, no sólo que creáis en él, sino también que padezcáis por él,
+
+
+## Filipenses 1:30 (id: 10050001030)
+
+30Teniendo el mismo conflicto que habéis visto en mí, y ahora oís estar en mí.
+
+
+## Filipenses 2:1 (id: 10050002001)
+
+1POR tanto, si hay alguna consolación en Cristo; si algún refrigerio de amor; si alguna comunión del Espíritu; si algunas entrañas y misericordias,
+
+
+## Filipenses 2:2 (id: 10050002002)
+
+2Cumplid mi gozo; que sintáis lo mismo, teniendo el mismo amor, unánimes, sintiendo una misma cosa.
+
+
+## Filipenses 2:3 (id: 10050002003)
+
+3Nada hagáis por contienda ó por vanagloria; antes bien en humildad, estimándoos inferiores los unos á los otros:
+
+
+## Filipenses 2:4 (id: 10050002004)
+
+4No mirando cada uno á lo suyo propio, sino cada cual también á lo de los otros.
+
+
+## Filipenses 2:5 (id: 10050002005)
+
+5Haya, pues, en vosotros este sentir que hubo también en Cristo Jesús:
+
+
+## Filipenses 2:6 (id: 10050002006)
+
+6El cual, siendo en forma de Dios, no tuvo por usurpación ser igual á Dios:
+
+
+## Filipenses 2:7 (id: 10050002007)
+
+7Sin embargo, se anonadó á sí mismo, tomando forma de siervo, hecho semejante á los hombres;
+
+
+## Filipenses 2:8 (id: 10050002008)
+
+8Y hallado en la condición como hombre, se humilló á sí mismo, hecho obediente hasta la muerte, y muerte de cruz.
+
+
+## Filipenses 2:9 (id: 10050002009)
+
+9Por lo cual Dios también le ensalzó á lo sumo, y dióle un nombre que es sobre todo nombre;
+
+
+## Filipenses 2:10 (id: 10050002010)
+
+10Para que en el nombre de Jesús se doble toda rodilla de los que están en los cielos, y de los que en la tierra, y de los que debajo de la tierra;
+
+
+## Filipenses 2:11 (id: 10050002011)
+
+11Y toda lengua confiese que Jesucristo es el Señor, á la gloria de Dios Padre.
+
+
+## Filipenses 2:12 (id: 10050002012)
+
+12Por tanto, amados míos, como siempre habéis obedecido, no como en mi presencia solamente, sino mucho más ahora en mi ausencia, ocupaos en vuestra salvación con temor y temblor;
+
+
+## Filipenses 2:13 (id: 10050002013)
+
+13Porque Dios es el que en vosotros obra así el querer como el hacer, por su buena voluntad.
+
+
+## Filipenses 2:14 (id: 10050002014)
+
+14Haced todo sin murmuraciones y contiendas,
+
+
+## Filipenses 2:15 (id: 10050002015)
+
+15Para que seáis irreprensibles y sencillos, hijos de Dios sin culpa en medio de la nación maligna y perversa, entre los cuales resplandecéis como luminares en el mundo;
+
+
+## Filipenses 2:16 (id: 10050002016)
+
+16Reteniendo la palabra de vida para que yo pueda gloriarme en el día de Cristo, que no he corrido en vano, ni trabajado en vano.
+
+
+## Filipenses 2:17 (id: 10050002017)
+
+17Y aun si soy derramado en libación sobre el sacrificio y servicio de vuestra fe, me gozo y congratulo por todos vosotros.
+
+
+## Filipenses 2:18 (id: 10050002018)
+
+18Y asimismo gozaos también vosotros, y regocijaos conmigo.
+
+
+## Filipenses 2:19 (id: 10050002019)
+
+19Mas espero en el Señor Jesús enviaros presto á Timoteo, para que yo también esté de buen ánimo, entendido vuestro estado.
+
+
+## Filipenses 2:20 (id: 10050002020)
+
+20Porque á ninguno tengo tan unánime, y que con sincera afición esté solícito por vosotros.
+
+
+## Filipenses 2:21 (id: 10050002021)
+
+21Porque todos buscan lo suyo propio, no lo que es de Cristo Jesús.
+
+
+## Filipenses 2:22 (id: 10050002022)
+
+22Pero la experiencia de él habéis conocido, que como hijo á padre ha servido conmigo en el evangelio.
+
+
+## Filipenses 2:23 (id: 10050002023)
+
+23Así que á éste espero enviaros, luego que yo viere cómo van mis negocios;
+
+
+## Filipenses 2:24 (id: 10050002024)
+
+24Y confío en el Señor que yo también iré presto á vosotros.
+
+
+## Filipenses 2:25 (id: 10050002025)
+
+25Mas tuve por cosa necesaria enviaros á Epafrodito, mi hermano, y colaborador y compañero de milicia, y vuestro mensajero, y ministrador de mis necesidades;
+
+
+## Filipenses 2:26 (id: 10050002026)
+
+26Porque tenía gran deseo de ver á todos vosotros, y gravemente se angustió porque habíais oído que había enfermado.
+
+
+## Filipenses 2:27 (id: 10050002027)
+
+27Pues en verdad estuvo enfermo á la muerte: mas Dios tuvo misericordia de él; y no solamente de él, sino aun de mí, para que yo no tuviese tristeza sobre tristeza.
+
+
+## Filipenses 2:28 (id: 10050002028)
+
+28Así que le envío más presto, para que viéndole os volváis á gozar, y yo esté con menos tristeza.
+
+
+## Filipenses 2:29 (id: 10050002029)
+
+29Recibidle pues en el Señor con todo gozo; y tened en estima á los tales:
+
+
+## Filipenses 2:30 (id: 10050002030)
+
+30Porque por la obra de Cristo estuvo cercano á la muerte, poniendo su vida para suplir vuestra falta en mi servicio.
+
+
+## Filipenses 3:1 (id: 10050003001)
+
+1RESTA, hermanos, que os gocéis en el Señor. A mí, á la verdad, no es molesto el escribiros las mismas cosas, y para vosotros es seguro.
+
+
+## Filipenses 3:2 (id: 10050003002)
+
+2Guardaos de los perros, guardaos de los malos obreros, guardaos del cortamiento.
+
+
+## Filipenses 3:3 (id: 10050003003)
+
+3Porque nosotros somos la circuncisión, los que servimos en espíritu á Dios, y nos gloriamos en Cristo Jesús, no teniendo confianza en la carne.
+
+
+## Filipenses 3:4 (id: 10050003004)
+
+4Aunque yo tengo también de qué confiar en la carne. Si alguno parece que tiene de qué confiar en la carne, yo más:
+
+
+## Filipenses 3:5 (id: 10050003005)
+
+5Circuncidado al octavo día, del linaje de Israel, de la tribu de Benjamín, Hebreo de Hebreos; cuanto á la ley, Fariseo;
+
+
+## Filipenses 3:6 (id: 10050003006)
+
+6Cuanto al celo, perseguidor de la iglesia; cuanto á la justicia que es en la ley, irreprensible.
+
+
+## Filipenses 3:7 (id: 10050003007)
+
+7Pero las cosas que para mí eran ganancias, helas reputado pérdidas por amor de Cristo.
+
+
+## Filipenses 3:8 (id: 10050003008)
+
+8Y ciertamente, aun reputo todas las cosas pérdida por el eminente conocimiento de Cristo Jesús, mi Señor, por amor del cual lo he perdido todo, y téngolo por estiércol, para ganar á Cristo,
+
+
+## Filipenses 3:9 (id: 10050003009)
+
+9Y ser hallado en él, no teniendo mi justicia, que es por la ley, sino la que es por la fe de Cristo, la justicia que es de Dios por la fe;
+
+
+## Filipenses 3:10 (id: 10050003010)
+
+10A fin de conocerle, y la virtud de su resurrección, y la participación de sus padecimientos, en conformidad á su muerte,
+
+
+## Filipenses 3:11 (id: 10050003011)
+
+11Si en alguna manera llegase á la resurrección de los muertos.
+
+
+## Filipenses 3:12 (id: 10050003012)
+
+12No que ya haya alcanzado, ni que ya sea perfecto; sino que prosigo, por ver si alcanzo aquello para lo cual fuí también alcanzado de Cristo Jesús.
+
+
+## Filipenses 3:13 (id: 10050003013)
+
+13Hermanos, yo mismo no hago cuenta de haberlo ya alcanzado; pero una cosa hago: olvidando ciertamente lo que queda atrás, y extendiéndome á lo que está delante,
+
+
+## Filipenses 3:14 (id: 10050003014)
+
+14Prosigo al blanco, al premio de la soberana vocación de Dios en Cristo Jesús.
+
+
+## Filipenses 3:15 (id: 10050003015)
+
+15Así que, todos los que somos perfectos, esto mismo sintamos: y si otra cosa sentís, esto también os revelará Dios.
+
+
+## Filipenses 3:16 (id: 10050003016)
+
+16Empero en aquello á que hemos llegado, vamos por la misma regla, sintamos una misma cosa.
+
+
+## Filipenses 3:17 (id: 10050003017)
+
+17Hermanos, sed imitadores de mí, y mirad los que así anduvieren como nos tenéis por ejemplo.
+
+
+## Filipenses 3:18 (id: 10050003018)
+
+18Porque muchos andan, de los cuales os dije muchas veces, y aun ahora lo digo llorando, que son enemigos de la cruz de Cristo:
+
+
+## Filipenses 3:19 (id: 10050003019)
+
+19Cuyo fin será perdición, cuyo dios es el vientre, y su gloria es en confusión; que sienten lo terreno.
+
+
+## Filipenses 3:20 (id: 10050003020)
+
+20Mas nuestra vivienda es en los cielos; de donde también esperamos al Salvador, al Señor Jesucristo;
+
+
+## Filipenses 3:21 (id: 10050003021)
+
+21El cual transformará el cuerpo de nuestra bajeza, para ser semejante al cuerpo de su gloria, por la operación con la cual puede también sujetar á sí todas las cosas.
+
+
+## Filipenses 4:1 (id: 10050004001)
+
+1ASÍ que, hermanos míos amados y deseados, gozo y corona mía, estad así firmes en el Señor, amados.
+
+
+## Filipenses 4:2 (id: 10050004002)
+
+2A Euodias ruego, y á Syntychê exhorto, que sientan lo mismo en el Señor.
+
+
+## Filipenses 4:3 (id: 10050004003)
+
+3Asimismo te ruego también á ti, hermano compañero, ayuda á las que trabajaron juntamente conmigo en el evangelio, con Clemente también, y los demás mis colaboradores, cuyos nombres están en el libro de la vida.
+
+
+## Filipenses 4:4 (id: 10050004004)
+
+4Gozaos en el Señor siempre: otra vez digo: Que os gocéis.
+
+
+## Filipenses 4:5 (id: 10050004005)
+
+5Vuestra modestia sea conocida de todos los hombres. El Señor está cerca.
+
+
+## Filipenses 4:6 (id: 10050004006)
+
+6Por nada estéis afanosos; sino sean notorias vuestras peticiones delante de Dios en toda oración y ruego, con hacimiento de gracias.
+
+
+## Filipenses 4:7 (id: 10050004007)
+
+7Y la paz de Dios, que sobrepuja todo entendimiento, guardará vuestros corazones y vuestros entendimientos en Cristo Jesús.
+
+
+## Filipenses 4:8 (id: 10050004008)
+
+8Por lo demás, hermanos, todo lo que es verdadero, todo lo honesto, todo lo justo, todo lo puro, todo lo amable, todo lo que es de buen nombre; si hay virtud alguna, si alguna alabanza, en esto pensad.
+
+
+## Filipenses 4:9 (id: 10050004009)
+
+9Lo que aprendisteis y recibisteis y oísteis y visteis en mí, esto haced; y el Dios de paz será con vosotros.
+
+
+## Filipenses 4:10 (id: 10050004010)
+
+10Mas en gran manera me gocé en el Señor de que ya al fin ha reflorecido vuestro cuidado de mí; de lo cual aun estabais solícitos, pero os faltaba la oportunidad.
+
+
+## Filipenses 4:11 (id: 10050004011)
+
+11No lo digo en razón de indigencia, pues he aprendido á contentarme con lo que tengo.
+
+
+## Filipenses 4:12 (id: 10050004012)
+
+12Sé estar humillado, y sé tener abundancia: en todo y por todo estoy enseñado, así para hartura como para hambre, así para tener abundancia como para padecer necesidad.
+
+
+## Filipenses 4:13 (id: 10050004013)
+
+13Todo lo puedo en Cristo que me fortalece.
+
+
+## Filipenses 4:14 (id: 10050004014)
+
+14Sin embargo, bien hicisteis que comunicasteis juntamente á mi tribulación.
+
+
+## Filipenses 4:15 (id: 10050004015)
+
+15Y sabéis también vosotros, oh Filipenses, que al principio del evangelio, cuando partí de Macedonia, ninguna iglesia me comunicó en razón de dar y recibir, sino vosotros solos.
+
+
+## Filipenses 4:16 (id: 10050004016)
+
+16Porque aun á Tesalónica me enviasteis lo necesario una y dos veces.
+
+
+## Filipenses 4:17 (id: 10050004017)
+
+17No porque busque dádivas; mas busco fruto que abunde en vuestra cuenta.
+
+
+## Filipenses 4:18 (id: 10050004018)
+
+18Empero todo lo he recibido, y tengo abundancia: estoy lleno, habiendo recibido de Epafrodito lo que enviasteis, olor de suavidad, sacrificio acepto, agradable á Dios.
+
+
+## Filipenses 4:19 (id: 10050004019)
+
+19Mi Dios, pues, suplirá todo lo que os falta conforme á sus riquezas en gloria en Cristo Jesús.
+
+
+## Filipenses 4:20 (id: 10050004020)
+
+20Al Dios pues y Padre nuestro sea gloria por los siglos de los siglos. Amén.
+
+
+## Filipenses 4:21 (id: 10050004021)
+
+21Saludad á todos los santos en Cristo Jesús. Los hermanos que están conmigo os saludan.
+
+
+## Filipenses 4:22 (id: 10050004022)
+
+22Todos los santos os saludan, y mayormente los que son de casa de César.
+
+
+## Filipenses 4:23 (id: 10050004023)
+
+23La gracia de nuestro Señor Jesucristo sea con todos vosotros. Amén. Escrita de Roma con Epafrodito.
+
+`;export{e as default};

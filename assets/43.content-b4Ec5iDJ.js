@@ -1,0 +1,4408 @@
+const e=`# Reina Valera 1909
+
+## License Information
+
+**Reina Valera 1909** is based on and adapted from: _Reina Valera 1909_, [Public Domain](https://creativecommons.org/public-domain/cc0/), 1909, which is licensed under a [Public Domain CC0](https://creativecommons.org/public-domain/cc0/).
+
+This markdown version is provided under the same license.
+
+
+
+--------------------------------
+
+
+## Juan 1:1 (id: 10043001001)
+
+1EN el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios.
+
+
+## Juan 1:2 (id: 10043001002)
+
+2Este era en el principio con Dios.
+
+
+## Juan 1:3 (id: 10043001003)
+
+3Todas las cosas por él fueron hechas; y sin él nada de lo que es hecho, fué hecho.
+
+
+## Juan 1:4 (id: 10043001004)
+
+4En él estaba la vida, y la vida era la luz de los hombres.
+
+
+## Juan 1:5 (id: 10043001005)
+
+5Y la luz en las tinieblas resplandece; mas las tinieblas no la comprendieron.
+
+
+## Juan 1:6 (id: 10043001006)
+
+6Fué un hombre enviado de Dios, el cual se llamaba Juan.
+
+
+## Juan 1:7 (id: 10043001007)
+
+7Este vino por testimonio, para que diese testimonio de la luz, para que todos creyesen por él.
+
+
+## Juan 1:8 (id: 10043001008)
+
+8No era él la luz, sino para que diese testimonio de la luz.
+
+
+## Juan 1:9 (id: 10043001009)
+
+9Aquél era la luz verdadera, que alumbra á todo hombre que viene á este mundo.
+
+
+## Juan 1:10 (id: 10043001010)
+
+10En el mundo estaba, y el mundo fué hecho por él; y el mundo no le conoció.
+
+
+## Juan 1:11 (id: 10043001011)
+
+11A lo suyo vino, y los suyos no le recibieron.
+
+
+## Juan 1:12 (id: 10043001012)
+
+12Mas á todos los que le recibieron, dióles potestad de ser hechos hijos de Dios, á los que creen en su nombre:
+
+
+## Juan 1:13 (id: 10043001013)
+
+13Los cuales no son engendrados de sangre, ni de voluntad de carne, ni de voluntad de varón, mas de Dios.
+
+
+## Juan 1:14 (id: 10043001014)
+
+14Y aquel Verbo fué hecho carne, y habitó entre nosotros (y vimos su gloria, gloria como del unigénito del Padre), lleno de gracia y de verdad.
+
+
+## Juan 1:15 (id: 10043001015)
+
+15Juan dió testimonio de él, y clamó diciendo: Este es del que yo decía: El que viene tras mí, es antes de mí: porque es primero que yo.
+
+
+## Juan 1:16 (id: 10043001016)
+
+16Porque de su plenitud tomamos todos, y gracia por gracia.
+
+
+## Juan 1:17 (id: 10043001017)
+
+17Porque la ley por Moisés fué dada: mas la gracia y la verdad por Jesucristo fué hecha.
+
+
+## Juan 1:18 (id: 10043001018)
+
+18A Dios nadie le vió jamás: el unigénito Hijo, que está en el seno del Padre, él le declaró.
+
+
+## Juan 1:19 (id: 10043001019)
+
+19Y éste es el testimonio de Juan, cuando los Judíos enviaron de Jerusalem sacerdotes y Levitas, que le preguntasen: ¿Tú, quién eres?
+
+
+## Juan 1:20 (id: 10043001020)
+
+20Y confesó, y no negó; mas declaró: No soy yo el Cristo.
+
+
+## Juan 1:21 (id: 10043001021)
+
+21Y le preguntaron: ¿Qué pues? ¿Eres tú Elías? Dijo: No soy. ¿Eres tú el profeta? Y respondió: No.
+
+
+## Juan 1:22 (id: 10043001022)
+
+22Dijéronle: ¿Pues quién eres? para que demos respuesta á los que nos enviaron. ¿Qué dices de ti mismo?
+
+
+## Juan 1:23 (id: 10043001023)
+
+23Dijo: Yo soy la voz del que clama en el desierto: Enderezad el camino del Señor, como dijo Isaías profeta.
+
+
+## Juan 1:24 (id: 10043001024)
+
+24Y los que habían sido enviados eran de los Fariseos.
+
+
+## Juan 1:25 (id: 10043001025)
+
+25Y preguntáronle, y dijéronle: ¿Por qué pues bautizas, si tú no eres el Cristo, ni Elías, ni el profeta?
+
+
+## Juan 1:26 (id: 10043001026)
+
+26Y Juan les respondió, diciendo: Yo bautizo con agua; mas en medio de vosotros ha estado á quien vosotros no conocéis.
+
+
+## Juan 1:27 (id: 10043001027)
+
+27Este es el que ha de venir tras mí, el cual es antes de mí: del cual yo no soy digno de desatar la correa del zapato.
+
+
+## Juan 1:28 (id: 10043001028)
+
+28Estas cosas acontecieron en Betábara, de la otra parte del Jordán, donde Juan bautizaba.
+
+
+## Juan 1:29 (id: 10043001029)
+
+29El siguiente día ve Juan á Jesús que venía á él, y dice: He aquí el Cordero de Dios, que quita el pecado del mundo.
+
+
+## Juan 1:30 (id: 10043001030)
+
+30Este es del que dije: Tras mí viene un varón, el cual es antes de mí: porque era primero que yo.
+
+
+## Juan 1:31 (id: 10043001031)
+
+31Y yo no le conocía; más para que fuese manifestado á Israel, por eso vine yo bautizando con agua.
+
+
+## Juan 1:32 (id: 10043001032)
+
+32Y Juan dió testimonio, diciendo: Vi al Espíritu que descendía del cielo como paloma, y reposó sobre él.
+
+
+## Juan 1:33 (id: 10043001033)
+
+33Y yo no le conocía; mas el que me envió á bautizar con agua, aquél me dijo: Sobre quien vieres descender el Espíritu, y que reposa sobre él, éste es el que bautiza con Espíritu Santo.
+
+
+## Juan 1:34 (id: 10043001034)
+
+34Y yo le vi, y he dado testimonio que éste es el Hijo de Dios.
+
+
+## Juan 1:35 (id: 10043001035)
+
+35El siguiente día otra vez estaba Juan, y dos de sus discípulos.
+
+
+## Juan 1:36 (id: 10043001036)
+
+36Y mirando á Jesús que andaba por allí, dijo: He aquí el Cordero de Dios.
+
+
+## Juan 1:37 (id: 10043001037)
+
+37Y oyéronle los dos discípulos hablar, y siguieron á Jesús.
+
+
+## Juan 1:38 (id: 10043001038)
+
+38Y volviéndose Jesús, y viéndolos seguirle, díceles: ¿Qué buscáis? Y ellos le dijeron: Rabbí (que declarado quiere decir Maestro) ¿dónde moras?
+
+
+## Juan 1:39 (id: 10043001039)
+
+39Díceles: Venid y ved. Vinieron, y vieron donde moraba, y quedáronse con él aquel día: porque era como la hora de las diez.
+
+
+## Juan 1:40 (id: 10043001040)
+
+40Era Andrés, hermano de Simón Pedro, uno de los dos que habían oído de Juan, y le habían seguido.
+
+
+## Juan 1:41 (id: 10043001041)
+
+41Este halló primero á su hermano Simón, y díjole: Hemos hallado al Mesías (que declarado es, el Cristo).
+
+
+## Juan 1:42 (id: 10043001042)
+
+42Y le trajo á Jesús. Y mirándole Jesús, dijo: Tú eres Simón, hijo de Jonás: tú serás llamado Cephas (que quiere decir, Piedra).
+
+
+## Juan 1:43 (id: 10043001043)
+
+43El siguiente día quiso Jesús ir á Galilea, y halla á Felipe, al cual dijo: Sígueme.
+
+
+## Juan 1:44 (id: 10043001044)
+
+44Y era Felipe de Bethsaida, la ciudad de Andrés y de Pedro.
+
+
+## Juan 1:45 (id: 10043001045)
+
+45Felipe halló á Natanael, y dícele: Hemos hallado á aquel de quien escribió Moisés en la ley, y los profetas: á Jesús, el hijo de José, de Nazaret.
+
+
+## Juan 1:46 (id: 10043001046)
+
+46Y díjole Natanael: ¿De Nazaret puede haber algo de bueno? Dícele Felipe: Ven y ve.
+
+
+## Juan 1:47 (id: 10043001047)
+
+47Jesús vió venir á sí á Natanael, y dijo de él: He aquí un verdadero Israelita, en el cual no hay engaño.
+
+
+## Juan 1:48 (id: 10043001048)
+
+48Dícele Natanael: ¿De dónde me conoces? Respondió Jesús, y díjole: Antes que Felipe te llamara, cuando estabas debajo de la higuera te vi.
+
+
+## Juan 1:49 (id: 10043001049)
+
+49Respondió Natanael, y díjole: Rabbí, tú eres el Hijo de Dios; tú eres el Rey de Israel.
+
+
+## Juan 1:50 (id: 10043001050)
+
+50Respondió Jesús y díjole: ¿Porque te dije, te vi debajo de la higuera, crees? cosas mayores que éstas verás.
+
+
+## Juan 1:51 (id: 10043001051)
+
+51Y dícele: De cierto, de cierto os digo: De aquí adelante veréis el cielo abierto, y los ángeles de Dios que suben y descienden sobre el Hijo del hombre.
+
+
+## Juan 2:1 (id: 10043002001)
+
+1Y AL tercer día hiciéronse unas bodas en Caná de Galilea; y estaba allí la madre de Jesús.
+
+
+## Juan 2:2 (id: 10043002002)
+
+2Y fué también llamado Jesús y sus discípulos á las bodas.
+
+
+## Juan 2:3 (id: 10043002003)
+
+3Y faltando el vino, la madre de Jesús le dijo: Vino no tienen.
+
+
+## Juan 2:4 (id: 10043002004)
+
+4Y dícele Jesús: ¿Qué tengo yo contigo, mujer? aun no ha venido mi hora.
+
+
+## Juan 2:5 (id: 10043002005)
+
+5Su madre dice á los que servían: Haced todo lo que os dijere.
+
+
+## Juan 2:6 (id: 10043002006)
+
+6Y estaban allí seis tinajuelas de piedra para agua, conforme á la purificación de los Judíos, que cabían en cada una dos ó tres cántaros.
+
+
+## Juan 2:7 (id: 10043002007)
+
+7Díceles Jesús: Henchid estas tinajuelas de agua. E hinchiéronlas hasta arriba.
+
+
+## Juan 2:8 (id: 10043002008)
+
+8Y díceles: Sacad ahora, y presentad al maestresala. Y presentáronle.
+
+
+## Juan 2:9 (id: 10043002009)
+
+9Y como el maestresala gustó el agua hecha vino, que no sabía de dónde era (mas lo sabían los sirvientes que habían sacado el agua), el maestresala llama al esposo,
+
+
+## Juan 2:10 (id: 10043002010)
+
+10Y dícele: Todo hombre pone primero el buen vino, y cuando están satisfechos, entonces lo que es peor; mas tú has guardado el buen vino hasta ahora.
+
+
+## Juan 2:11 (id: 10043002011)
+
+11Este principio de señales hizo Jesús en Caná de Galilea, y manifestó su gloria; y sus discípulos creyeron en él.
+
+
+## Juan 2:12 (id: 10043002012)
+
+12Después de esto descendió á Capernaum, él, y su madre, y hermanos, y discípulos; y estuvieron allí no muchos días.
+
+
+## Juan 2:13 (id: 10043002013)
+
+13Y estaba cerca la Pascua de los Judíos; y subió Jesús á Jerusalem.
+
+
+## Juan 2:14 (id: 10043002014)
+
+14Y halló en el templo á los que vendían bueyes, y ovejas, y palomas, y á los cambiadores sentados.
+
+
+## Juan 2:15 (id: 10043002015)
+
+15Y hecho un azote de cuerdas, echólos á todos del templo, y las ovejas, y los bueyes; y derramó los dineros de los cambiadores, y trastornó las mesas;
+
+
+## Juan 2:16 (id: 10043002016)
+
+16Y á los que vendían las palomas, dijo: Quitad de aquí esto, y no hagáis la casa de mi Padre casa de mercado.
+
+
+## Juan 2:17 (id: 10043002017)
+
+17Entonces se acordaron sus discípulos que está escrito: El celo de tu casa me comió.
+
+
+## Juan 2:18 (id: 10043002018)
+
+18Y los Judíos respondieron, y dijéronle: ¿Qué señal nos muestras de que haces esto?
+
+
+## Juan 2:19 (id: 10043002019)
+
+19Respondió Jesús, y díjoles: Destruid este templo, y en tres días lo levantaré.
+
+
+## Juan 2:20 (id: 10043002020)
+
+20Dijeron luego los Judíos: En cuarenta y seis años fué este templo edificado, ¿y tú en tres días lo levantarás?
+
+
+## Juan 2:21 (id: 10043002021)
+
+21Mas él hablaba del templo de su cuerpo.
+
+
+## Juan 2:22 (id: 10043002022)
+
+22Por tanto, cuando resucitó de los muertos, sus discípulos se acordaron que había dicho esto; y creyeron á la Escritura, y á la palabra que Jesús había dicho.
+
+
+## Juan 2:23 (id: 10043002023)
+
+23Y estando en Jerusalem en la Pascua, en el día de la fiesta, muchos creyeron en su nombre, viendo las señales que hacía.
+
+
+## Juan 2:24 (id: 10043002024)
+
+24Mas el mismo Jesús no se confiaba á sí mismo de ellos, porque él conocía á todos,
+
+
+## Juan 2:25 (id: 10043002025)
+
+25Y no tenía necesidad que alguien le diese testimonio del hombre; porque él sabía lo que había en el hombre.
+
+
+## Juan 3:1 (id: 10043003001)
+
+1Y HABÍA un hombre de los Fariseos que se llamaba Nicodemo, príncipe de los Judíos.
+
+
+## Juan 3:2 (id: 10043003002)
+
+2Este vino á Jesús de noche, y díjole: Rabbí, sabemos que has venido de Dios por maestro; porque nadie puede hacer estas señales que tú haces, si no fuere Dios con él.
+
+
+## Juan 3:3 (id: 10043003003)
+
+3Respondió Jesús, y díjole: De cierto, de cierto te digo, que el que no naciere otra vez, no puede ver el reino de Dios.
+
+
+## Juan 3:4 (id: 10043003004)
+
+4Dícele Nicodemo: ¿Cómo puede el hombre nacer siendo viejo? ¿puede entrar otra vez en el vientre de su madre, y nacer?
+
+
+## Juan 3:5 (id: 10043003005)
+
+5Respondió Jesús: De cierto, de cierto te digo, que el que no naciere de agua y del Espíritu, no puede entrar en el reino de Dios.
+
+
+## Juan 3:6 (id: 10043003006)
+
+6Lo que es nacido de la carne, carne es; y lo que es nacido del Espíritu, espíritu es.
+
+
+## Juan 3:7 (id: 10043003007)
+
+7No te maravilles de que te dije: Os es necesario nacer otra vez.
+
+
+## Juan 3:8 (id: 10043003008)
+
+8El viento de donde quiere sopla, y oyes su sonido; mas ni sabes de dónde viene, ni á dónde vaya: así es todo aquel que es nacido del Espíritu.
+
+
+## Juan 3:9 (id: 10043003009)
+
+9Respondió Nicodemo, y díjole: ¿Cómo puede esto hacerse?
+
+
+## Juan 3:10 (id: 10043003010)
+
+10Respondió Jesús, y díjole: ¿Tú eres el maestro de Israel, y no sabes esto?
+
+
+## Juan 3:11 (id: 10043003011)
+
+11De cierto, de cierto te digo, que lo que sabemos hablamos, y lo que hemos visto, testificamos; y no recibís nuestro testimonio.
+
+
+## Juan 3:12 (id: 10043003012)
+
+12Si os he dicho cosas terrenas, y no creéis, ¿cómo creeréis si os dijere las celestiales?
+
+
+## Juan 3:13 (id: 10043003013)
+
+13Y nadie subió al cielo, sino el que descendió del cielo, el Hijo del hombre, que está en el cielo.
+
+
+## Juan 3:14 (id: 10043003014)
+
+14Y como Moisés levantó la serpiente en el desierto, así es necesario que el Hijo del hombre sea levantado;
+
+
+## Juan 3:15 (id: 10043003015)
+
+15Para que todo aquel que en él creyere, no se pierda, sino que tenga vida eterna.
+
+
+## Juan 3:16 (id: 10043003016)
+
+16Porque de tal manera amó Dios al mundo, que ha dado á su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.
+
+
+## Juan 3:17 (id: 10043003017)
+
+17Porque no envió Dios á su Hijo al mundo para que condene al mundo, mas para que el mundo sea salvo por él.
+
+
+## Juan 3:18 (id: 10043003018)
+
+18El que en él cree, no es condenado; mas el que no cree, ya es condenado, porque no creyó en el nombre del unigénito Hijo de Dios.
+
+
+## Juan 3:19 (id: 10043003019)
+
+19Y esta es la condenación: porque la luz vino al mundo, y los hombres amaron más las tinieblas que la luz; porque sus obras eran malas.
+
+
+## Juan 3:20 (id: 10043003020)
+
+20Porque todo aquel que hace lo malo, aborrece la luz y no viene á la luz, porque sus obras no sean redargüidas.
+
+
+## Juan 3:21 (id: 10043003021)
+
+21Mas el que obra verdad, viene á la luz, para que sus obras sean manifestadas que son hechas en Dios.
+
+
+## Juan 3:22 (id: 10043003022)
+
+22Pasado esto, vino Jesús con sus discípulos á la tierra de Judea; y estaba allí con ellos, y bautizaba.
+
+
+## Juan 3:23 (id: 10043003023)
+
+23Y bautizaba también Juan en Enón junto á Salim, porque había allí muchas aguas; y venían, y eran bautizados.
+
+
+## Juan 3:24 (id: 10043003024)
+
+24Porque Juan no había sido aún puesto en la carcel.
+
+
+## Juan 3:25 (id: 10043003025)
+
+25Y hubo cuestión entre los discípulos de Juan y los Judíos acerca de la purificación.
+
+
+## Juan 3:26 (id: 10043003026)
+
+26Y vinieron á Juan, y dijéronle: Rabbí, el que estaba contigo de la otra parte del Jordán, del cual tú diste testimonio, he aquí bautiza, y todos vienen á él.
+
+
+## Juan 3:27 (id: 10043003027)
+
+27Respondió Juan, y dijo: No puede el hombre recibir algo, si no le fuere dado del cielo.
+
+
+## Juan 3:28 (id: 10043003028)
+
+28Vosotros mismos me sois testigos que dije: Yo no soy el Cristo, sino que soy enviado delante de él.
+
+
+## Juan 3:29 (id: 10043003029)
+
+29El que tiene la esposa, es el esposo; mas el amigo del esposo, que está en pie y le oye, se goza grandemente de la voz del esposo; así pues, este mi gozo es cumplido.
+
+
+## Juan 3:30 (id: 10043003030)
+
+30A él conviene crecer, mas á mí menguar.
+
+
+## Juan 3:31 (id: 10043003031)
+
+31El que de arriba viene, sobre todos es: el que es de la tierra, terreno es, y cosas terrenas habla: el que viene del cielo, sobre todos es.
+
+
+## Juan 3:32 (id: 10043003032)
+
+32Y lo que vió y oyó, esto testifica: y nadie recibe su testimonio.
+
+
+## Juan 3:33 (id: 10043003033)
+
+33El que recibe su testimonio, éste signó que Dios es verdadero.
+
+
+## Juan 3:34 (id: 10043003034)
+
+34Porque el que Dios envió, las palabras de Dios habla: porque no da Dios el Espíritu por medida.
+
+
+## Juan 3:35 (id: 10043003035)
+
+35El Padre ama al Hijo, y todas las cosas dió en su mano.
+
+
+## Juan 3:36 (id: 10043003036)
+
+36El que cree en el Hijo, tiene vida eterna; mas el que es incrédulo al Hijo, no verá la vida, sino que la ira de Dios está sobre él.
+
+
+## Juan 4:1 (id: 10043004001)
+
+1DE manera que como Jesús entendió que los Fariseos habían oído que Jesús hacía y bautizaba más discípulos que Juan,
+
+
+## Juan 4:2 (id: 10043004002)
+
+2(Aunque Jesús no bautizaba, sino sus discípulos),
+
+
+## Juan 4:3 (id: 10043004003)
+
+3Dejó á Judea, y fuése otra vez á Galilea.
+
+
+## Juan 4:4 (id: 10043004004)
+
+4Y era menester que pasase por Samaria.
+
+
+## Juan 4:5 (id: 10043004005)
+
+5Vino, pues, á una ciudad de Samaria que se llamaba Sichâr, junto á la heredad que Jacob dió á José su hijo.
+
+
+## Juan 4:6 (id: 10043004006)
+
+6Y estaba allí la fuente de Jacob. Pues Jesús, cansado del camino, así se sentó á la fuente. Era como la hora de sexta.
+
+
+## Juan 4:7 (id: 10043004007)
+
+7Vino una mujer de Samaria á sacar agua: y Jesús le dice: Dame de beber.
+
+
+## Juan 4:8 (id: 10043004008)
+
+8(Porque sus discípulos habían ido á la ciudad á comprar de comer.)
+
+
+## Juan 4:9 (id: 10043004009)
+
+9Y la mujer Samaritana le dice: ¿Cómo tú, siendo Judío, me pides á mí de beber, que soy mujer Samaritana? porque los Judíos no se tratan con los Samaritanos.
+
+
+## Juan 4:10 (id: 10043004010)
+
+10Respondió Jesús y díjole: Si conocieses el don de Dios, y quién es el que te dice: Dame de beber: tú pedirías de él, y él te daría agua viva.
+
+
+## Juan 4:11 (id: 10043004011)
+
+11La mujer le dice: Señor, no tienes con qué sacarla, y el pozo es hondo: ¿de dónde, pues, tienes el agua viva?
+
+
+## Juan 4:12 (id: 10043004012)
+
+12¿Eres tú mayor que nuestro padre Jacob, que nos dió este pozo, del cual él bebió, y sus hijos, y sus ganados?
+
+
+## Juan 4:13 (id: 10043004013)
+
+13Respondió Jesús y díjole: Cualquiera que bebiere de esta agua, volverá á tener sed;
+
+
+## Juan 4:14 (id: 10043004014)
+
+14Mas el que bebiere del agua que yo le daré, para siempre no tendrá sed: mas el agua que yo le daré, será en él una fuente de agua que salte para vida eterna.
+
+
+## Juan 4:15 (id: 10043004015)
+
+15La mujer le dice: Señor, dame esta agua, para que no tenga sed, ni venga acá á sacarla.
+
+
+## Juan 4:16 (id: 10043004016)
+
+16Jesús le dice: Ve, llama á tu marido, y ven acá.
+
+
+## Juan 4:17 (id: 10043004017)
+
+17Respondió la mujer, y dijo: No tengo marido. Dícele Jesús: Bien has dicho, No tengo marido;
+
+
+## Juan 4:18 (id: 10043004018)
+
+18Porque cinco maridos has tenido: y el que ahora tienes no es tu marido; esto has dicho con verdad.
+
+
+## Juan 4:19 (id: 10043004019)
+
+19Dícele la mujer: Señor, paréceme que tú eres profeta.
+
+
+## Juan 4:20 (id: 10043004020)
+
+20Nuestros padres adoraron en este monte, y vosotros decís que en Jerusalem es el lugar donde es necesario adorar.
+
+
+## Juan 4:21 (id: 10043004021)
+
+21Dícele Jesús: Mujer, créeme, que la hora viene, cuando ni en este monte, ni en Jerusalem adoraréis al Padre.
+
+
+## Juan 4:22 (id: 10043004022)
+
+22Vosotros adoráis lo que no sabéis; nosotros adoramos lo que sabemos: porque la salud viene de los Judíos.
+
+
+## Juan 4:23 (id: 10043004023)
+
+23Mas la hora viene, y ahora es, cuando los verdaderos adoradores adorarán al Padre en espíritu y en verdad; porque también el Padre tales adoradores busca que le adoren.
+
+
+## Juan 4:24 (id: 10043004024)
+
+24Dios es Espíritu; y los que le adoran, en espíritu y en verdad es necesario que adoren.
+
+
+## Juan 4:25 (id: 10043004025)
+
+25Dícele la mujer: Sé que el Mesías ha de venir, el cual se dice el Cristo: cuando él viniere nos declarará todas las cosas.
+
+
+## Juan 4:26 (id: 10043004026)
+
+26Dícele Jesús: Yo soy, que hablo contigo.
+
+
+## Juan 4:27 (id: 10043004027)
+
+27Y en esto vinieron sus discípulos, y maravilláronse de que hablaba con mujer; mas ninguno dijo: ¿Qué preguntas? ó, ¿Qué hablas con ella?
+
+
+## Juan 4:28 (id: 10043004028)
+
+28Entonces la mujer dejó su cántaro, y fué á la ciudad, y dijo á aquellos hombres:
+
+
+## Juan 4:29 (id: 10043004029)
+
+29Venid, ved un hombre que me ha dicho todo lo que he hecho: ¿si quizás es éste el Cristo?
+
+
+## Juan 4:30 (id: 10043004030)
+
+30Entonces salieron de la ciudad, y vinieron á él.
+
+
+## Juan 4:31 (id: 10043004031)
+
+31Entre tanto los discípulos le rogaban, diciendo: Rabbí, come.
+
+
+## Juan 4:32 (id: 10043004032)
+
+32Y él les dijo: Yo tengo una comida que comer, que vosotros no sabéis.
+
+
+## Juan 4:33 (id: 10043004033)
+
+33Entonces los discípulos decían el uno al otro: ¿Si le habrá traído alguien de comer?
+
+
+## Juan 4:34 (id: 10043004034)
+
+34Díceles Jesús: Mi comida es que haga la voluntad del que me envió, y que acabe su obra.
+
+
+## Juan 4:35 (id: 10043004035)
+
+35¿No decís vosotros: Aun hay cuatro meses hasta que llegue la siega? He aquí os digo: Alzad vuestros ojos, y mirad las regiones, porque ya están blancas para la siega.
+
+
+## Juan 4:36 (id: 10043004036)
+
+36Y el que siega, recibe salario, y allega fruto para vida eterna; para que el que siembra también goce, y el que siega.
+
+
+## Juan 4:37 (id: 10043004037)
+
+37Porque en esto es el dicho verdadero: Que uno es el que siembra, y otro es el que siega.
+
+
+## Juan 4:38 (id: 10043004038)
+
+38Yo os he enviado á segar lo que vosotros no labrasteis: otros labraron, y vosotros habéis entrado en sus labores.
+
+
+## Juan 4:39 (id: 10043004039)
+
+39Y muchos de los Samaritanos de aquella ciudad creyeron en él por la palabra de la mujer, que daba testimonio, diciendo: Que me dijo todo lo que he hecho.
+
+
+## Juan 4:40 (id: 10043004040)
+
+40Viniendo pues los Samaritanos á él, rogáronle que se quedase allí: y se quedó allí dos días.
+
+
+## Juan 4:41 (id: 10043004041)
+
+41Y creyeron muchos más por la palabra de él.
+
+
+## Juan 4:42 (id: 10043004042)
+
+42Y decían á la mujer: Ya no creemos por tu dicho; porque nosotros mismos hemos oído, y sabemos que verdaderamente éste es el Salvador del mundo, el Cristo.
+
+
+## Juan 4:43 (id: 10043004043)
+
+43Y dos días después, salió de allí, y fuése á Galilea.
+
+
+## Juan 4:44 (id: 10043004044)
+
+44Porque el mismo Jesús dió testimonio de que el profeta en su tierra no tiene honra.
+
+
+## Juan 4:45 (id: 10043004045)
+
+45Y como vino á Galilea, los Galileos le recibieron, vistas todas las cosas que había hecho en Jerusalem en el día de la fiesta: porque también ellos habían ido á la fiesta.
+
+
+## Juan 4:46 (id: 10043004046)
+
+46Vino pues Jesús otra vez á Caná de Galilea, donde había hecho el vino del agua. Y había en Capernaum uno del rey, cuyo hijo estaba enfermo.
+
+
+## Juan 4:47 (id: 10043004047)
+
+47Este, como oyó que Jesús venía de Judea á Galilea, fué á él, y rogábale que descendiese, y sanase á su hijo, porque se comenzaba á morir.
+
+
+## Juan 4:48 (id: 10043004048)
+
+48Entonces Jesús le dijo: Si no viereis señales y milagros no creeréis.
+
+
+## Juan 4:49 (id: 10043004049)
+
+49El del rey le dijo: Señor, desciende antes que mi hijo muera.
+
+
+## Juan 4:50 (id: 10043004050)
+
+50Dícele Jesús: Ve, tu hijo vive. Y el hombre creyó á la palabra que Jesús le dijo, y se fué.
+
+
+## Juan 4:51 (id: 10043004051)
+
+51Y cuando ya él descendía, los siervos le salieron á recibir, y le dieron nuevas, diciendo: Tu hijo vive.
+
+
+## Juan 4:52 (id: 10043004052)
+
+52Entonces él les preguntó á qué hora comenzó á estar mejor. Y dijéronle: Ayer á las siete le dejó la fiebre.
+
+
+## Juan 4:53 (id: 10043004053)
+
+53El padre entonces entendió, que aquella hora era cuando Jesús le dijo: Tu hijo vive; y creyó él y toda su casa.
+
+
+## Juan 4:54 (id: 10043004054)
+
+54Esta segunda señal volvió Jesús á hacer, cuando vino de Judea á Galilea.
+
+
+## Juan 5:1 (id: 10043005001)
+
+1DESPUÉS de estas cosas, era un día de fiesta de los Judíos, y subió Jesús á Jerusalem.
+
+
+## Juan 5:2 (id: 10043005002)
+
+2Y hay en Jerusalem á la puerta del ganado un estanque, que en hebraico es llamado Bethesda, el cual tiene cinco portales.
+
+
+## Juan 5:3 (id: 10043005003)
+
+3En éstos yacía multitud de enfermos, ciegos, cojos, secos, que estaban esperando el movimiento del agua.
+
+
+## Juan 5:4 (id: 10043005004)
+
+4Porque un ángel descendía á cierto tiempo al estanque, y revolvía el agua; y el que primero descendía en el estanque después del movimiento del agua, era sano de cualquier enfermedad que tuviese.
+
+
+## Juan 5:5 (id: 10043005005)
+
+5Y estaba allí un hombre que había treinta y ocho años que estaba enfermo.
+
+
+## Juan 5:6 (id: 10043005006)
+
+6Como Jesús vió á éste echado, y entendió que ya había mucho tiempo, dícele: ¿Quieres ser sano?
+
+
+## Juan 5:7 (id: 10043005007)
+
+7Señor, le respondió el enfermo, no tengo hombre que me meta en el estanque cuando el agua fuere revuelta; porque entre tanto que yo vengo, otro antes de mí ha descendido.
+
+
+## Juan 5:8 (id: 10043005008)
+
+8Dícele Jesús: Levántate, toma tu lecho, y anda.
+
+
+## Juan 5:9 (id: 10043005009)
+
+9Y luego aquel hombre fué sano, y tomó su lecho, é íbase. Y era sábado aquel día.
+
+
+## Juan 5:10 (id: 10043005010)
+
+10Entonces los Judíos decían á aquel que había sido sanado: Sábado es: no te es lícito llevar tu lecho.
+
+
+## Juan 5:11 (id: 10043005011)
+
+11Respondióles: El que me sanó, él mismo me dijo: Toma tu lecho y anda.
+
+
+## Juan 5:12 (id: 10043005012)
+
+12Preguntáronle entonces: ¿Quién es el que te dijo: Toma tu lecho y anda?
+
+
+## Juan 5:13 (id: 10043005013)
+
+13Y el que había sido sanado, no sabía quién fuese; porque Jesús se había apartado de la gente que estaba en aquel lugar.
+
+
+## Juan 5:14 (id: 10043005014)
+
+14Después le halló Jesús en el templo, y díjole: He aquí, has sido sanado; no peques más, porque no te venga alguna cosa peor.
+
+
+## Juan 5:15 (id: 10043005015)
+
+15El se fué, y dió aviso á los Judíos, que Jesús era el que le había sanado.
+
+
+## Juan 5:16 (id: 10043005016)
+
+16Y por esta causa los Judíos perseguían á Jesús, y procuraban matarle, porque hacía estas cosas en sábado.
+
+
+## Juan 5:17 (id: 10043005017)
+
+17Y Jesús les respondió: Mi Padre hasta ahora obra, y yo obro.
+
+
+## Juan 5:18 (id: 10043005018)
+
+18Entonces, por tanto, más procuraban los Judíos matarle, porque no sólo quebrantaba el sábado, sino que también á su Padre llamaba Dios, haciéndose igual á Dios.
+
+
+## Juan 5:19 (id: 10043005019)
+
+19Respondió entonces Jesús, y díjoles: De cierto, de cierto os digo: No puede el Hijo hacer nada de sí mismo, sino lo que viere hacer al Padre: porque todo lo que él hace, esto también hace el Hijo juntamente.
+
+
+## Juan 5:20 (id: 10043005020)
+
+20Porque el Padre ama al Hijo, y le muestra todas las cosas que él hace; y mayores obras que éstas le mostrará, de suerte que vosotros os maravilléis.
+
+
+## Juan 5:21 (id: 10043005021)
+
+21Porque como el Padre levanta los muertos, y les da vida, así también el Hijo á los que quiere da vida.
+
+
+## Juan 5:22 (id: 10043005022)
+
+22Porque el Padre á nadie juzga, mas todo el juicio dió al Hijo;
+
+
+## Juan 5:23 (id: 10043005023)
+
+23Para que todos honren al Hijo como honran al Padre. El que no honra al Hijo, no honra al Padre que le envió.
+
+
+## Juan 5:24 (id: 10043005024)
+
+24De cierto, de cierto os digo: El que oye mi palabra, y cree al que me ha enviado, tiene vida eterna; y no vendrá á condenación, mas pasó de muerte á vida.
+
+
+## Juan 5:25 (id: 10043005025)
+
+25De cierto, de cierto os digo: Vendrá hora, y ahora es, cuando los muertos oirán la voz del Hijo de Dios: y los que oyeren vivirán.
+
+
+## Juan 5:26 (id: 10043005026)
+
+26Porque como el Padre tiene vida en sí mismo, así dió también al Hijo que tuviese vida en sí mismo:
+
+
+## Juan 5:27 (id: 10043005027)
+
+27Y también le dió poder de hacer juicio, en cuanto es el Hijo del hombre.
+
+
+## Juan 5:28 (id: 10043005028)
+
+28No os maravilléis de esto; porque vendrá hora, cuando todos los que están en los sepulcros oirán su voz;
+
+
+## Juan 5:29 (id: 10043005029)
+
+29Y los que hicieron bien, saldrán á resurrección de vida; mas los que hicieron mal, á resurrección de condenación.
+
+
+## Juan 5:30 (id: 10043005030)
+
+30No puedo yo de mí mismo hacer nada: como oigo, juzgo: y mi juicio es justo; porque no busco mi voluntad, mas la voluntad del que me envió, del Padre.
+
+
+## Juan 5:31 (id: 10043005031)
+
+31Si yo doy testimonio de mí mismo, mi testimonio no es verdadero.
+
+
+## Juan 5:32 (id: 10043005032)
+
+32Otro es el que da testimonio de mí; y sé que el testimonio que da de mí, es verdadero.
+
+
+## Juan 5:33 (id: 10043005033)
+
+33Vosotros enviasteis á Juan, y él dió testimonio á la verdad.
+
+
+## Juan 5:34 (id: 10043005034)
+
+34Empero yo no tomo el testimonio de hombre; mas digo esto, para que vosotros seáis salvos.
+
+
+## Juan 5:35 (id: 10043005035)
+
+35El era antorcha que ardía y alumbraba: y vosotros quisisteis recrearos por un poco á su luz.
+
+
+## Juan 5:36 (id: 10043005036)
+
+36Mas yo tengo mayor testimonio que el de Juan: porque las obras que el Padre me dió que cumpliese, las mismas obras que yo hago, dan testimonio de mí, que el Padre me haya enviado.
+
+
+## Juan 5:37 (id: 10043005037)
+
+37Y el que me envió, el Padre, él ha dado testimonio de mí. Ni nunca habéis oído su voz, ni habéis visto su parecer.
+
+
+## Juan 5:38 (id: 10043005038)
+
+38Ni tenéis su palabra permanente en vosotros; porque al que él envió, á éste vosotros no creéis.
+
+
+## Juan 5:39 (id: 10043005039)
+
+39Escudriñad las Escrituras, porque á vosotros os parece que en ellas tenéis la vida eterna; y ellas son las que dan testimonio de mí.
+
+
+## Juan 5:40 (id: 10043005040)
+
+40Y no queréis venir á mí, para que tengáis vida.
+
+
+## Juan 5:41 (id: 10043005041)
+
+41Gloria de los hombres no recibo.
+
+
+## Juan 5:42 (id: 10043005042)
+
+42Mas yo os conozco, que no tenéis amor de Dios en vosotros.
+
+
+## Juan 5:43 (id: 10043005043)
+
+43Yo he venido en nombre de mi Padre, y no me recibís: si otro viniere en su propio nombre, á aquél recibiréis.
+
+
+## Juan 5:44 (id: 10043005044)
+
+44¿Cómo podéis vosotros creer, pues tomáis la gloria los unos de los otros, y no buscáis la gloria que de sólo Dios viene?
+
+
+## Juan 5:45 (id: 10043005045)
+
+45No penséis que yo os tengo de acusar delante del Padre; hay quien os acusa, Moisés, en quien vosotros esperáis.
+
+
+## Juan 5:46 (id: 10043005046)
+
+46Porque si vosotros creyeseis á Moisés, creeríais á mí; porque de mí escribió él.
+
+
+## Juan 5:47 (id: 10043005047)
+
+47Y si á sus escritos no creéis, ¿cómo creeréis á mis palabras?
+
+
+## Juan 6:1 (id: 10043006001)
+
+1PASADAS estas cosas, fuése Jesús de la otra parte de la mar de Galilea, que es de Tiberias.
+
+
+## Juan 6:2 (id: 10043006002)
+
+2Y seguíale grande multitud, porque veían sus señales que hacía en los enfermos.
+
+
+## Juan 6:3 (id: 10043006003)
+
+3Y subió Jesús á un monte, y se sentó allí con sus discípulos.
+
+
+## Juan 6:4 (id: 10043006004)
+
+4Y estaba cerca la Pascua, la fiesta de los Judíos.
+
+
+## Juan 6:5 (id: 10043006005)
+
+5Y como alzó Jesús los ojos, y vió que había venido á él grande multitud, dice á Felipe: ¿De dónde compraremos pan para que coman éstos?
+
+
+## Juan 6:6 (id: 10043006006)
+
+6Mas esto decía para probarle; porque él sabía lo que había de hacer.
+
+
+## Juan 6:7 (id: 10043006007)
+
+7Respondióle Felipe: Doscientos denarios de pan no les bastarán, para que cada uno de ellos tome un poco.
+
+
+## Juan 6:8 (id: 10043006008)
+
+8Dícele uno de sus discípulos, Andrés, hermano de Simón Pedro:
+
+
+## Juan 6:9 (id: 10043006009)
+
+9Un muchacho está aquí que tiene cinco panes de cebada y dos pececillos; ¿mas qué es esto entre tantos?
+
+
+## Juan 6:10 (id: 10043006010)
+
+10Entonces Jesús dijo: Haced recostar la gente. Y había mucha hierba en aquel lugar: y recostáronse como número de cinco mil varones.
+
+
+## Juan 6:11 (id: 10043006011)
+
+11Y tomó Jesús aquellos panes, y habiendo dado gracias, repartió á los discípulos, y los discípulos á los que estaban recostados: asimismo de los peces, cuanto querían.
+
+
+## Juan 6:12 (id: 10043006012)
+
+12Y como fueron saciados, dijo á sus discípulos: Recoged los pedazos que han quedado, porque no se pierda nada.
+
+
+## Juan 6:13 (id: 10043006013)
+
+13Cogieron pues, é hinchieron doce cestas de pedazos de los cinco panes de cebada, que sobraron á los que habían comido.
+
+
+## Juan 6:14 (id: 10043006014)
+
+14Aquellos hombres entonces, como vieron la señal que Jesús había hecho, decían: Este verdaderamente es el profeta que había de venir al mundo.
+
+
+## Juan 6:15 (id: 10043006015)
+
+15Y entendiendo Jesús que habían de venir para arrebatarle, y hacerle rey, volvió á retirarse al monte, él solo.
+
+
+## Juan 6:16 (id: 10043006016)
+
+16Y como se hizo tarde, descendieron sus discípulos á la mar;
+
+
+## Juan 6:17 (id: 10043006017)
+
+17Y entrando en un barco, venían de la otra parte de la mar hacia Capernaum. Y era ya oscuro, y Jesús no había venido á ellos.
+
+
+## Juan 6:18 (id: 10043006018)
+
+18Y levantábase la mar con un gran viento que soplaba.
+
+
+## Juan 6:19 (id: 10043006019)
+
+19Y como hubieron navegado como veinticinco ó treinta estadios, ven á Jesús que andaba sobre la mar, y se acercaba al barco: y tuvieron miedo.
+
+
+## Juan 6:20 (id: 10043006020)
+
+20Mas él les dijo: Yo soy; no tengáis miedo.
+
+
+## Juan 6:21 (id: 10043006021)
+
+21Ellos entonces gustaron recibirle en el barco: y luego el barco llegó á la tierra donde iban.
+
+
+## Juan 6:22 (id: 10043006022)
+
+22El día siguiente, la gente que estaba de la otra parte de la mar, como vió que no había allí otra navecilla sino una, y que Jesús no había entrado con sus discípulos en ella, sino que sus discípulos se habían ido solos;
+
+
+## Juan 6:23 (id: 10043006023)
+
+23Y que otras navecillas habían arribado de Tiberias junto al lugar donde habían comido el pan después de haber el Señor dado gracias;
+
+
+## Juan 6:24 (id: 10043006024)
+
+24Como vió pues la gente que Jesús no estaba allí, ni sus discípulos, entraron ellos en las navecillas, y vinieron á Capernaum buscando á Jesús.
+
+
+## Juan 6:25 (id: 10043006025)
+
+25Y hallándole de la otra parte de la mar, dijéronle: Rabbí, ¿cuándo llegaste acá?
+
+
+## Juan 6:26 (id: 10043006026)
+
+26Respondióles Jesús, y dijo: De cierto, de cierto os digo, que me buscáis, no porque habéis visto las señales, sino porque comisteis el pan y os hartasteis.
+
+
+## Juan 6:27 (id: 10043006027)
+
+27Trabajad no por la comida que perece, mas por la comida que á vida eterna permanece, la cual el Hijo del hombre os dará: porque á éste señaló el Padre, que es Dios.
+
+
+## Juan 6:28 (id: 10043006028)
+
+28Y dijéronle: ¿Qué haremos para que obremos las obras de Dios?
+
+
+## Juan 6:29 (id: 10043006029)
+
+29Respondió Jesús, y díjoles: Esta es la obra de Dios, que creáis en el que él ha enviado.
+
+
+## Juan 6:30 (id: 10043006030)
+
+30Dijéronle entonces: ¿Qué señal pues haces tú, para que veamos, y te creamos? ¿Qué obras?
+
+
+## Juan 6:31 (id: 10043006031)
+
+31Nuestros padres comieron el maná en el desierto, como está escrito: Pan del cielo les dió á comer.
+
+
+## Juan 6:32 (id: 10043006032)
+
+32Y Jesús les dijo: De cierto, de cierto os digo: No os dió Moisés pan del cielo; mas mi Padre os da el verdadero pan del cielo.
+
+
+## Juan 6:33 (id: 10043006033)
+
+33Porque el pan de Dios es aquel que descendió del cielo y da vida al mundo.
+
+
+## Juan 6:34 (id: 10043006034)
+
+34Y dijéronle: Señor, danos siempre este pan.
+
+
+## Juan 6:35 (id: 10043006035)
+
+35Y Jesús les dijo: Yo soy el pan de vida: el que á mí viene, nunca tendrá hambre; y el que en mí cree, no tendrá sed jamás.
+
+
+## Juan 6:36 (id: 10043006036)
+
+36Mas os he dicho, que aunque me habéis visto, no creéis.
+
+
+## Juan 6:37 (id: 10043006037)
+
+37Todo lo que el Padre me da, vendrá á mí; y al que á mí viene, no le hecho fuera.
+
+
+## Juan 6:38 (id: 10043006038)
+
+38Porque he descendido del cielo, no para hacer mi voluntad, mas la voluntad del que me envió.
+
+
+## Juan 6:39 (id: 10043006039)
+
+39Y esta es la voluntad del que me envió, del Padre: Que todo lo que me diere, no pierda de ello, sino que lo resucite en el día postrero.
+
+
+## Juan 6:40 (id: 10043006040)
+
+40Y esta es la voluntad del que me ha enviado: Que todo aquel que ve al Hijo, y cree en él, tenga vida eterna: y yo le resucitaré en el día postrero.
+
+
+## Juan 6:41 (id: 10043006041)
+
+41Murmuraban entonces de él los Judíos, porque había dicho: Yo soy el pan que descendí del cielo.
+
+
+## Juan 6:42 (id: 10043006042)
+
+42Y decían: ¿No es éste Jesús, el hijo de José, cuyo padre y madre nosotros conocemos? ¿cómo, pues, dice éste: Del cielo he descendido?
+
+
+## Juan 6:43 (id: 10043006043)
+
+43Y Jesús respondió, y díjoles: No murmuréis entre vosotros.
+
+
+## Juan 6:44 (id: 10043006044)
+
+44Ninguno puede venir á mí, si el Padre que me envió no le trajere; y yo le resucitaré en el día postrero.
+
+
+## Juan 6:45 (id: 10043006045)
+
+45Escrito está en los profetas: Y serán todos enseñados de Dios. Así que, todo aquel que oyó del Padre, y aprendió, viene á mí.
+
+
+## Juan 6:46 (id: 10043006046)
+
+46No que alguno haya visto al Padre, sino aquel que vino de Dios, éste ha visto al Padre.
+
+
+## Juan 6:47 (id: 10043006047)
+
+47De cierto, de cierto os digo: El que cree en mí, tiene vida eterna.
+
+
+## Juan 6:48 (id: 10043006048)
+
+48Yo soy el pan de vida.
+
+
+## Juan 6:49 (id: 10043006049)
+
+49Vuestros padres comieron el maná en el desierto, y son muertos.
+
+
+## Juan 6:50 (id: 10043006050)
+
+50Este es el pan que desciende del cielo, para que el que de él comiere, no muera.
+
+
+## Juan 6:51 (id: 10043006051)
+
+51Yo soy el pan vivo que he descendido del cielo: si alguno comiere de este pan, vivirá para siempre; y el pan que yo daré es mi carne, la cual yo daré por la vida del mundo.
+
+
+## Juan 6:52 (id: 10043006052)
+
+52Entonces los Judíos contendían entre sí, diciendo: ¿Cómo puede éste darnos su carne á comer?
+
+
+## Juan 6:53 (id: 10043006053)
+
+53Y Jesús les dijo: De cierto, de cierto os digo: Si no comiereis la carne del Hijo del hombre, y bebiereis su sangre, no tendréis vida en vosotros.
+
+
+## Juan 6:54 (id: 10043006054)
+
+54El que come mi carne y bebe mi sangre, tiene vida eterna: y yo le resucitaré en el día postrero.
+
+
+## Juan 6:55 (id: 10043006055)
+
+55Porque mi carne es verdadera comida, y mi sangre es verdadera bebida.
+
+
+## Juan 6:56 (id: 10043006056)
+
+56El que come mi carne y bebe mi sangre, en mí permanece, y yo en él.
+
+
+## Juan 6:57 (id: 10043006057)
+
+57Como me envió el Padre viviente, y yo vivo por el Padre, asimismo el que me come, él también vivirá por mí.
+
+
+## Juan 6:58 (id: 10043006058)
+
+58Este es el pan que descendió del cielo: no como vuestros padres comieron el maná, y son muertos: el que come de este pan, vivirá eternamente.
+
+
+## Juan 6:59 (id: 10043006059)
+
+59Estas cosas dijo en la sinagoga, enseñando en Capernaum.
+
+
+## Juan 6:60 (id: 10043006060)
+
+60Y muchos de sus discípulos oyéndolo, dijeron: Dura es esta palabra: ¿quién la puede oir?
+
+
+## Juan 6:61 (id: 10043006061)
+
+61Y sabiendo Jesús en sí mismo que sus discípulos murmuraban de esto, díjoles: ¿Esto os escandaliza?
+
+
+## Juan 6:62 (id: 10043006062)
+
+62¿Pues qué, si viereis al Hijo del hombre que sube donde estaba primero?
+
+
+## Juan 6:63 (id: 10043006063)
+
+63El espíritu es el que da vida; la carne nada aprovecha: las palabras que yo os he hablado, son espíritu, y son vida.
+
+
+## Juan 6:64 (id: 10043006064)
+
+64Mas hay algunos de vosotros que no creen. Porque Jesús desde el principio sabía quiénes eran los que no creían, y quién le había de entregar.
+
+
+## Juan 6:65 (id: 10043006065)
+
+65Y dijo: Por eso os he dicho que ninguno puede venir á mí, si no le fuere dado del Padre.
+
+
+## Juan 6:66 (id: 10043006066)
+
+66Desde esto, muchos de sus discípulos volvieron atrás, y ya no andaban con él.
+
+
+## Juan 6:67 (id: 10043006067)
+
+67Dijo entonces Jesús á los doce: ¿Queréis vosotros iros también?
+
+
+## Juan 6:68 (id: 10043006068)
+
+68Y respondióle Simón Pedro: Señor, ¿á quién iremos? tú tienes palabras de vida eterna.
+
+
+## Juan 6:69 (id: 10043006069)
+
+69Y nosotros creemos y conocemos que tú eres el Cristo, el Hijo de Dios viviente.
+
+
+## Juan 6:70 (id: 10043006070)
+
+70Jesús le respondió: ¿No he escogido yo á vosotros doce, y uno de vosotros es diablo?
+
+
+## Juan 6:71 (id: 10043006071)
+
+71Y hablaba de Judas Iscariote, hijo de Simón, porque éste era el que le había de entregar, el cual era uno de los doce.
+
+
+## Juan 7:1 (id: 10043007001)
+
+1Y PASADAS estas cosas andaba Jesús en Galilea: que no quería andar en Judea, porque los Judíos procuraban matarle.
+
+
+## Juan 7:2 (id: 10043007002)
+
+2Y estaba cerca la fiesta de los Judíos, la de los tabernáculos.
+
+
+## Juan 7:3 (id: 10043007003)
+
+3Y dijéronle sus hermanos: Pásate de aquí, y vete á Judea, para que también tus discípulos vean las obras que haces.
+
+
+## Juan 7:4 (id: 10043007004)
+
+4Que ninguno que procura ser claro, hace algo en oculto. Si estas cosas haces, manifiéstate al mundo.
+
+
+## Juan 7:5 (id: 10043007005)
+
+5Porque ni aun sus hermanos creían en él.
+
+
+## Juan 7:6 (id: 10043007006)
+
+6Díceles entonces Jesús: Mi tiempo aun no ha venido; mas vuestro tiempo siempre está presto.
+
+
+## Juan 7:7 (id: 10043007007)
+
+7No puede el mundo aborreceros á vosotros; mas á mí me aborrece, porque yo doy testimonio de él, que sus obras son malas.
+
+
+## Juan 7:8 (id: 10043007008)
+
+8Vosotros subid á esta fiesta; yo no subo aún á esta fiesta, porque mi tiempo aun no es cumplido.
+
+
+## Juan 7:9 (id: 10043007009)
+
+9Y habiéndoles dicho esto, quedóse en Galilea.
+
+
+## Juan 7:10 (id: 10043007010)
+
+10Mas como sus hermanos hubieron subido, entonces él también subió á la fiesta, no manifiestamente, sino como en secreto.
+
+
+## Juan 7:11 (id: 10043007011)
+
+11Y buscábanle los Judíos en la fiesta, y decían: ¿Dónde está aquél?
+
+
+## Juan 7:12 (id: 10043007012)
+
+12Y había grande murmullo de él entre la gente: porque unos decían: Bueno es; y otros decían: No, antes engaña á las gentes.
+
+
+## Juan 7:13 (id: 10043007013)
+
+13Mas ninguno hablaba abiertamente de él, por miedo de los Judíos.
+
+
+## Juan 7:14 (id: 10043007014)
+
+14Y al medio de la fiesta subió Jesús al templo, y enseñaba.
+
+
+## Juan 7:15 (id: 10043007015)
+
+15Y maravillábanse los Judíos, diciendo: ¿Cómo sabe éste letras, no habiendo aprendido?
+
+
+## Juan 7:16 (id: 10043007016)
+
+16Respondióles Jesús, y dijo: Mi doctrina no es mía, sino de aquél que me envió.
+
+
+## Juan 7:17 (id: 10043007017)
+
+17El que quisiere hacer su voluntad, conocerá de la doctrina si viene de Dios, ó si yo hablo de mí mismo.
+
+
+## Juan 7:18 (id: 10043007018)
+
+18El que habla de sí mismo, su propia gloria busca; mas el que busca la gloria del que le envió, éste es verdadero, y no hay en él injusticia.
+
+
+## Juan 7:19 (id: 10043007019)
+
+19¿No os dió Moisés la ley, y ninguno de vosotros hace la ley? ¿Por qué me procuráis matar?
+
+
+## Juan 7:20 (id: 10043007020)
+
+20Respondió la gente, y dijo: Demonio tienes: ¿quién te procura matar?
+
+
+## Juan 7:21 (id: 10043007021)
+
+21Jesús respondió, y díjoles: Una obra hice, y todos os maravilláis.
+
+
+## Juan 7:22 (id: 10043007022)
+
+22Cierto, Moisés os dió la circuncisión (no porque sea de Moisés, mas de los padres); y en sábado circuncidáis al hombre.
+
+
+## Juan 7:23 (id: 10043007023)
+
+23Si recibe el hombre la circuncisión en sábado, para que la ley de Moisés no sea quebrantada, ¿os enojáis conmigo porque en sábado hice sano todo un hombre?
+
+
+## Juan 7:24 (id: 10043007024)
+
+24No juzguéis según lo que parece, mas juzgad justo juicio.
+
+
+## Juan 7:25 (id: 10043007025)
+
+25Decían entonces unos de los de Jerusalem: ¿No es éste al que buscan para matarlo?
+
+
+## Juan 7:26 (id: 10043007026)
+
+26Y he aquí, habla públicamente, y no le dicen nada; ¿si habrán entendido verdaderamente los príncipes, que éste es el Cristo?
+
+
+## Juan 7:27 (id: 10043007027)
+
+27Mas éste, sabemos de dónde es: y cuando viniere el Cristo, nadie sabrá de dónde sea.
+
+
+## Juan 7:28 (id: 10043007028)
+
+28Entonces clamaba Jesús en el templo, enseñando y diciendo: Y á mí me conocéis, y sabéis de dónde soy; y no he venido de mí mismo; mas el que me envió es verdadero, al cual vosotros no conocéis.
+
+
+## Juan 7:29 (id: 10043007029)
+
+29Yo le conozco, porque de él soy, y él me envió.
+
+
+## Juan 7:30 (id: 10043007030)
+
+30Entonces procuraban prenderle; mas ninguno puso en él mano, porque aun no había venido su hora.
+
+
+## Juan 7:31 (id: 10043007031)
+
+31Y muchos del pueblo creyeron en él, y decían: El Cristo, cuando viniere, ¿hará más señales que las que éste hace?
+
+
+## Juan 7:32 (id: 10043007032)
+
+32Los Fariseos oyeron á la gente que murmuraba de él estas cosas; y los príncipes de los sacerdotes y los Fariseos enviaron servidores que le prendiesen.
+
+
+## Juan 7:33 (id: 10043007033)
+
+33Y Jesús dijo: Aun un poco de tiempo estaré con vosotros, é iré al que me envió.
+
+
+## Juan 7:34 (id: 10043007034)
+
+34Me buscaréis, y no me hallaréis; y donde yo estaré, vosotros no podréis venir.
+
+
+## Juan 7:35 (id: 10043007035)
+
+35Entonces los Judíos dijeron entre sí: ¿A dónde se ha de ir éste que no le hallemos? ¿Se ha de ir á los esparcidos entre los Griegos, y á enseñar á los Griegos?
+
+
+## Juan 7:36 (id: 10043007036)
+
+36¿Qué dicho es éste que dijo: Me buscaréis, y no me hallaréis; y donde yo estaré, vosotros no podréis venir?
+
+
+## Juan 7:37 (id: 10043007037)
+
+37Mas en el postrer día grande de la fiesta, Jesús se ponía en pie y clamaba, diciendo: Si alguno tiene sed, venga á mí y beba.
+
+
+## Juan 7:38 (id: 10043007038)
+
+38El que cree en mí, como dice la Escritura, ríos de agua viva correrán de su vientre.
+
+
+## Juan 7:39 (id: 10043007039)
+
+39(Y esto dijo del Espíritu que habían de recibir los que creyesen en él: pues aun no había venido el Espíritu Santo; porque Jesús no estaba aún glorificado.)
+
+
+## Juan 7:40 (id: 10043007040)
+
+40Entonces algunos de la multitud, oyendo este dicho, decían: Verdaderamente éste es el profeta.
+
+
+## Juan 7:41 (id: 10043007041)
+
+41Otros decían: Este es el Cristo. Algunos empero decían: ¿De Galilea ha de venir el Cristo?
+
+
+## Juan 7:42 (id: 10043007042)
+
+42¿No dice la Escritura, que de la simiente de David, y de la aldea de Bethlehem, de donde era David, vendrá el Cristo?
+
+
+## Juan 7:43 (id: 10043007043)
+
+43Así que había disensión entre la gente acerca de él.
+
+
+## Juan 7:44 (id: 10043007044)
+
+44Y algunos de ellos querían prenderle; mas ninguno echó sobre él manos.
+
+
+## Juan 7:45 (id: 10043007045)
+
+45Y los ministriles vinieron á los principales sacerdotes y á los Fariseos; y ellos les dijeron: ¿Por qué no le trajisteis?
+
+
+## Juan 7:46 (id: 10043007046)
+
+46Los ministriles respondieron: Nunca ha hablado hombre así como este hombre.
+
+
+## Juan 7:47 (id: 10043007047)
+
+47Entonces los Fariseos les respondieron: ¿Estáis también vosotros engañados?
+
+
+## Juan 7:48 (id: 10043007048)
+
+48¿Ha creído en él alguno de los príncipes, ó de los Fariseos?
+
+
+## Juan 7:49 (id: 10043007049)
+
+49Mas estos comunales que no saben la ley, malditos son.
+
+
+## Juan 7:50 (id: 10043007050)
+
+50Díceles Nicodemo (el que vino á él de noche, el cual era uno de ellos):
+
+
+## Juan 7:51 (id: 10043007051)
+
+51¿Juzga nuestra ley á hombre, si primero no oyere de él, y entendiere lo que ha hecho?
+
+
+## Juan 7:52 (id: 10043007052)
+
+52Respondieron y dijéronle: ¿Eres tú también Galileo? Escudriña y ve que de Galilea nunca se levantó profeta.
+
+
+## Juan 7:53 (id: 10043007053)
+
+53Y fuése cada uno á su casa.
+
+
+## Juan 8:1 (id: 10043008001)
+
+1Y JESÚS se fué al monte de las Olivas.
+
+
+## Juan 8:2 (id: 10043008002)
+
+2Y por la mañana volvió al templo, y todo el pueblo vino á él: y sentado él, los enseñaba.
+
+
+## Juan 8:3 (id: 10043008003)
+
+3Entonces los escribas y los Fariseos le traen una mujer tomada en adulterio; y poniéndola en medio,
+
+
+## Juan 8:4 (id: 10043008004)
+
+4Dícenle: Maestro, esta mujer ha sido tomada en el mismo hecho, adulterando;
+
+
+## Juan 8:5 (id: 10043008005)
+
+5Y en la ley Moisés nos mandó apedrear á las tales: tú pues, ¿qué dices?
+
+
+## Juan 8:6 (id: 10043008006)
+
+6Mas esto decían tentándole, para poder acusarle. Empero Jesús, inclinado hacia abajo, escribía en tierra con el dedo.
+
+
+## Juan 8:7 (id: 10043008007)
+
+7Y como perseverasen preguntándole, enderezóse, y díjoles: El que de vosotros esté sin pecado, arroje contra ella la piedra el primero.
+
+
+## Juan 8:8 (id: 10043008008)
+
+8Y volviéndose á inclinar hacia abajo, escribía en tierra.
+
+
+## Juan 8:9 (id: 10043008009)
+
+9Oyendo, pues, ellos, redargüidos de la conciencia, salíanse uno á uno, comenzando desde los más viejos hasta los postreros: y quedó solo Jesús, y la mujer que estaba en medio.
+
+
+## Juan 8:10 (id: 10043008010)
+
+10Y enderezándose Jesús, y no viendo á nadie más que á la mujer, díjole: ¿Mujer, dónde están los que te acusaban? ¿Ninguno te ha condenado?
+
+
+## Juan 8:11 (id: 10043008011)
+
+11Y ella dijo: Señor, ninguno. Entonces Jesús le dijo: Ni yo te condeno: vete, y no peques más.
+
+
+## Juan 8:12 (id: 10043008012)
+
+12Y hablóles Jesús otra vez, diciendo: Yo soy la luz del mundo: el que me sigue, no andará en tinieblas, mas tendrá la lumbre de la vida.
+
+
+## Juan 8:13 (id: 10043008013)
+
+13Entonces los Fariseos le dijeron: Tú de ti mismo das testimonio: tu testimonio no es verdadero.
+
+
+## Juan 8:14 (id: 10043008014)
+
+14Respondió Jesús, y díjoles: Aunque yo doy testimonio de mí mismo, mi testimonio es verdadero, porque sé de dónde he venido y á dónde voy; mas vosotros no sabéis de dónde vengo, y á dónde voy.
+
+
+## Juan 8:15 (id: 10043008015)
+
+15Vosotros según la carne juzgáis; mas yo no juzgo á nadie.
+
+
+## Juan 8:16 (id: 10043008016)
+
+16Y si yo juzgo, mi juicio es verdadero; porque no soy solo, sino yo y el que me envió, el Padre.
+
+
+## Juan 8:17 (id: 10043008017)
+
+17Y en vuestra ley está escrito que el testimonio de dos hombres es verdadero.
+
+
+## Juan 8:18 (id: 10043008018)
+
+18Yo soy el que doy testimonio de mí mismo: y da testimonio de mí el que me envió, el Padre.
+
+
+## Juan 8:19 (id: 10043008019)
+
+19Y decíanle: ¿Dónde está tu Padre? Respondió Jesús: Ni á mí me conocéis, ni á mi Padre; si á mí me conocieseis, á mi Padre también conocierais.
+
+
+## Juan 8:20 (id: 10043008020)
+
+20Estas palabras habló Jesús en el lugar de las limosnas, enseñando en el templo: y nadie le prendió; porque aun no había venido su hora.
+
+
+## Juan 8:21 (id: 10043008021)
+
+21Y díjoles otra vez Jesús: Yo me voy, y me buscaréis, mas en vuestro pecado moriréis: á donde yo voy, vosotros no podéis venir.
+
+
+## Juan 8:22 (id: 10043008022)
+
+22Decían entonces los Judíos: ¿Hase de matar á sí mismo, que dice: A donde yo voy, vosotros no podéis venir?
+
+
+## Juan 8:23 (id: 10043008023)
+
+23Y decíales: Vosotros sois de abajo, yo soy de arriba; vosotros sois de este mundo, yo no soy de este mundo.
+
+
+## Juan 8:24 (id: 10043008024)
+
+24Por eso os dije que moriréis en vuestros pecados; porque si no creyereis que yo soy, en vuestros pecados moriréis.
+
+
+## Juan 8:25 (id: 10043008025)
+
+25Y decíanle: ¿Tú quién eres? Entonces Jesús les dijo: El que al principio también os he dicho.
+
+
+## Juan 8:26 (id: 10043008026)
+
+26Muchas cosas tengo que decir y juzgar de vosotros: mas el que me envió, es verdadero: y yo, lo que he oído de él, esto hablo en el mundo.
+
+
+## Juan 8:27 (id: 10043008027)
+
+27Mas no entendieron que él les hablaba del Padre.
+
+
+## Juan 8:28 (id: 10043008028)
+
+28Díjoles pues, Jesús: Cuando levantareis al Hijo del hombre, entonces entenderéis que yo soy, y que nada hago de mí mismo; mas como el Padre me enseñó, esto hablo.
+
+
+## Juan 8:29 (id: 10043008029)
+
+29Porque el que me envió, conmigo está; no me ha dejado solo el Padre; porque yo, lo que á él agrada, hago siempre.
+
+
+## Juan 8:30 (id: 10043008030)
+
+30Hablando él estas cosas, muchos creyeron en él.
+
+
+## Juan 8:31 (id: 10043008031)
+
+31Y decía Jesús á los Judíos que le habían creído: Si vosotros permaneciereis en mi palabra, seréis verdaderamente mis discípulos;
+
+
+## Juan 8:32 (id: 10043008032)
+
+32Y conoceréis la verdad, y la verdad os libertará.
+
+
+## Juan 8:33 (id: 10043008033)
+
+33Y respondiéronle: Simiente de Abraham somos, y jamás servimos á nadie: ¿cómo dices tú: Seréis libres?
+
+
+## Juan 8:34 (id: 10043008034)
+
+34Jesús les respondió: De cierto, de cierto os digo, que todo aquel que hace pecado, es siervo de pecado.
+
+
+## Juan 8:35 (id: 10043008035)
+
+35Y el siervo no queda en casa para siempre: el hijo queda para siempre.
+
+
+## Juan 8:36 (id: 10043008036)
+
+36Así que, si el Hijo os libertare, seréis verdaderamente libres.
+
+
+## Juan 8:37 (id: 10043008037)
+
+37Sé que sois simiente de Abraham, mas procuráis matarme, porque mi palabra no cabe en vosotros.
+
+
+## Juan 8:38 (id: 10043008038)
+
+38Yo hablo lo que he visto cerca del Padre; y vosotros hacéis lo que habéis oído cerca de vuestro padre.
+
+
+## Juan 8:39 (id: 10043008039)
+
+39Respondieron y dijéronle: Nuestro padre es Abraham. Díceles Jesús: Si fuerais hijos de Abraham, las obras de Abraham haríais.
+
+
+## Juan 8:40 (id: 10043008040)
+
+40Empero ahora procuráis matarme, hombre que os he hablado la verdad, la cual he oído de Dios: no hizo esto Abraham.
+
+
+## Juan 8:41 (id: 10043008041)
+
+41Vosotros hacéis las obras de vuestro padre. Dijéronle entonces: Nosotros no somos nacidos de fornicación; un padre tenemos, que es Dios.
+
+
+## Juan 8:42 (id: 10043008042)
+
+42Jesús entonces les dijo: Si vuestro padre fuera Dios, ciertamente me amaríais: porque yo de Dios he salido, y he venido; que no he venido de mí mismo, mas él me envió.
+
+
+## Juan 8:43 (id: 10043008043)
+
+43¿Por qué no reconocéis mi lenguaje? porque no podéis oir mi palabra.
+
+
+## Juan 8:44 (id: 10043008044)
+
+44Vosotros de vuestro padre el diablo sois, y los deseos de vuestro padre queréis cumplir. El, homicida ha sido desde el principio, y no permaneció en la verdad, porque no hay verdad en él. Cuando habla mentira, de suyo habla; porque es mentiroso, y padre de mentira.
+
+
+## Juan 8:45 (id: 10043008045)
+
+45Y porque yo digo verdad, no me creéis.
+
+
+## Juan 8:46 (id: 10043008046)
+
+46¿Quién de vosotros me redarguye de pecado? Pues si digo verdad, ¿por qué vosotros no me creéis?
+
+
+## Juan 8:47 (id: 10043008047)
+
+47El que es de Dios, las palabras de Dios oye: por esto no las oís vosotros, porque no sois de Dios.
+
+
+## Juan 8:48 (id: 10043008048)
+
+48Respondieron entonces los Judíos, y dijéronle: ¿No decimos bien nosotros, que tú eres Samaritano, y tienes demonio?
+
+
+## Juan 8:49 (id: 10043008049)
+
+49Respondió Jesús: Yo no tengo demonio, antes honro á mi Padre; y vosotros me habéis deshonrado.
+
+
+## Juan 8:50 (id: 10043008050)
+
+50Y no busco mi gloria: hay quien la busque, y juzgue.
+
+
+## Juan 8:51 (id: 10043008051)
+
+51De cierto, de cierto os digo, que el que guardare mi palabra, no verá muerte para siempre.
+
+
+## Juan 8:52 (id: 10043008052)
+
+52Entonces los Judíos le dijeron: Ahora conocemos que tienes demonio. Abraham murió, y los profetas, y tú dices: El que guardare mi palabra, no gustará muerte para siempre.
+
+
+## Juan 8:53 (id: 10043008053)
+
+53¿Eres tú mayor que nuestro padre Abraham, el cual murió? y los profetas murieron: ¿quién te haces á ti mismo?
+
+
+## Juan 8:54 (id: 10043008054)
+
+54Respondió Jesús: Si yo me glorifico á mí mismo, mi gloria es nada: mi Padre es el que me glorifica; el que vosotros decís que es vuestro Dios;
+
+
+## Juan 8:55 (id: 10043008055)
+
+55Y no le conocéis: mas yo le conozco; y si dijere que no le conozco, seré como vosotros mentiroso: mas le conozco, y guardo su palabra.
+
+
+## Juan 8:56 (id: 10043008056)
+
+56Abraham vuestro padre se gozó por ver mi día; y lo vió, y se gozó.
+
+
+## Juan 8:57 (id: 10043008057)
+
+57Dijéronle entonces los Judíos: Aun no tienes cincuenta años, ¿y has visto á Abraham?
+
+
+## Juan 8:58 (id: 10043008058)
+
+58Díjoles Jesús: De cierto, de cierto os digo: Antes que Abraham fuese, yo soy.
+
+
+## Juan 8:59 (id: 10043008059)
+
+59Tomaron entonces piedras para tirarle: mas Jesús se encubrió, y salió del templo; y atravesando por medio de ellos, se fué.
+
+
+## Juan 9:1 (id: 10043009001)
+
+1Y PASANDO Jesús, vió un hombre ciego desde su nacimiento.
+
+
+## Juan 9:2 (id: 10043009002)
+
+2Y preguntáronle sus discípulos, diciendo: Rabbí, ¿quién pecó, éste ó sus padres, para que naciese ciego?
+
+
+## Juan 9:3 (id: 10043009003)
+
+3Respondió Jesús: Ni éste pecó, ni sus padres: mas para que las obras de Dios se manifiesten en él.
+
+
+## Juan 9:4 (id: 10043009004)
+
+4Conviéneme obrar las obras del que me envió, entre tanto que el día dura: la noche viene, cuando nadie puede obrar.
+
+
+## Juan 9:5 (id: 10043009005)
+
+5Entre tanto que estuviere en el mundo, luz soy del mundo.
+
+
+## Juan 9:6 (id: 10043009006)
+
+6Esto dicho, escupió en tierra, é hizo lodo con la saliva, y untó con el lodo sobre los ojos del ciego,
+
+
+## Juan 9:7 (id: 10043009007)
+
+7Y díjole: Ve, lávate en el estanque de Siloé (que significa, si lo interpretares, Enviado). Y fué entonces, y lavóse, y volvió viendo.
+
+
+## Juan 9:8 (id: 10043009008)
+
+8Entonces los vecinos, y los que antes le habían visto que era ciego, decían: ¿No es éste el que se sentaba y mendigaba?
+
+
+## Juan 9:9 (id: 10043009009)
+
+9Unos decían: Este es; y otros: A él se parece. El decía: Yo soy.
+
+
+## Juan 9:10 (id: 10043009010)
+
+10Y dijéronle: ¿Cómo te fueron abiertos los ojos?
+
+
+## Juan 9:11 (id: 10043009011)
+
+11Respondió él y dijo: El hombre que se llama Jesús, hizo lodo, y me untó los ojos, y me dijo: Ve al Siloé, y lávate: y fuí, y me lavé, y recibí la vista.
+
+
+## Juan 9:12 (id: 10043009012)
+
+12Entonces le dijeron: ¿Dónde está aquél? El dijo: No sé.
+
+
+## Juan 9:13 (id: 10043009013)
+
+13Llevaron á los Fariseos al que antes había sido ciego.
+
+
+## Juan 9:14 (id: 10043009014)
+
+14Y era sábado cuando Jesús había hecho el lodo, y le había abierto los ojos.
+
+
+## Juan 9:15 (id: 10043009015)
+
+15Y volviéronle á preguntar también los Fariseos de qué manera había recibido la vista. Y él les dijo: Púsome lodo sobre los ojos, y me lavé, y veo.
+
+
+## Juan 9:16 (id: 10043009016)
+
+16Entonces unos de los Fariseos decían: Este hombre no es de Dios, que no guarda el sábado. Otros decían: ¿Cómo puede un hombre pecador hacer estas señales? Y había disensión entre ellos.
+
+
+## Juan 9:17 (id: 10043009017)
+
+17Vuelven á decir al ciego: ¿Tú, qué dices del que te abrió los ojos? Y él dijo: Que es profeta.
+
+
+## Juan 9:18 (id: 10043009018)
+
+18Mas los Judíos no creían de él, que había sido ciego, y hubiese recibido la vista, hasta que llamaron á los padres del que había recibido la vista;
+
+
+## Juan 9:19 (id: 10043009019)
+
+19Y preguntáronles, diciendo: ¿Es éste vuestro hijo, el que vosotros decís que nació ciego? ¿Cómo, pues, ve ahora?
+
+
+## Juan 9:20 (id: 10043009020)
+
+20Respondiéronles sus padres y dijeron: Sabemos que éste es nuestro hijo, y que nació ciego:
+
+
+## Juan 9:21 (id: 10043009021)
+
+21Mas cómo vea ahora, no sabemos; ó quién le haya abierto los ojos, nosotros no lo sabemos; él tiene edad, preguntadle á él; él hablará de sí.
+
+
+## Juan 9:22 (id: 10043009022)
+
+22Esto dijeron sus padres, porque tenían miedo de los Judíos: porque ya los Judíos habían resuelto que si alguno confesase ser él el Mesías, fuese fuera de la sinagoga.
+
+
+## Juan 9:23 (id: 10043009023)
+
+23Por eso dijeron sus padres: Edad tiene, preguntadle á él.
+
+
+## Juan 9:24 (id: 10043009024)
+
+24Así que, volvieron á llamar al hombre que había sido ciego, y dijéronle: Da gloria á Dios: nosotros sabemos que este hombre es pecador.
+
+
+## Juan 9:25 (id: 10043009025)
+
+25Entonces él respondió, y dijo: Si es pecador, no lo sé: una cosa sé, que habiendo yo sido ciego, ahora veo.
+
+
+## Juan 9:26 (id: 10043009026)
+
+26Y volviéronle á decir: ¿Qué te hizo? ¿Cómo te abrió los ojos?
+
+
+## Juan 9:27 (id: 10043009027)
+
+27Respondióles: Ya os lo he dicho, y no habéis atendido: ¿por qué lo queréis otra vez oir? ¿queréis también vosotros haceros sus discípulos?
+
+
+## Juan 9:28 (id: 10043009028)
+
+28Y le ultrajaron, y dijeron: Tú eres su discípulo; pero nosotros discípulos de Moisés somos.
+
+
+## Juan 9:29 (id: 10043009029)
+
+29Nosotros sabemos que á Moisés habló Dios: mas éste no sabemos de dónde es.
+
+
+## Juan 9:30 (id: 10043009030)
+
+30Respondió aquel hombre, y díjoles: Por cierto, maravillosa cosa es ésta, que vosotros no sabéis de dónde sea, y á mí me abrió los ojos.
+
+
+## Juan 9:31 (id: 10043009031)
+
+31Y sabemos que Dios no oye á los pecadores: mas si alguno es temeroso de Dios, y hace su voluntad, á éste oye.
+
+
+## Juan 9:32 (id: 10043009032)
+
+32Desde el siglo no fué oído, que abriese alguno los ojos de uno que nació ciego.
+
+
+## Juan 9:33 (id: 10043009033)
+
+33Si éste no fuera de Dios, no pudiera hacer nada.
+
+
+## Juan 9:34 (id: 10043009034)
+
+34Respondieron, y dijéronle: En pecados eres nacido todo, ¿y tú nos enseñas? Y echáronle fuera.
+
+
+## Juan 9:35 (id: 10043009035)
+
+35Oyó Jesús que le habían echado fuera; y hallándole, díjole: ¿Crees tú en el Hijo de Dios?
+
+
+## Juan 9:36 (id: 10043009036)
+
+36Respondió él, y dijo: ¿Quién es, Señor, para que crea en él?
+
+
+## Juan 9:37 (id: 10043009037)
+
+37Y díjole Jesús: Y le has visto, y el que habla contigo, él es.
+
+
+## Juan 9:38 (id: 10043009038)
+
+38Y él dice: Creo, Señor; y adoróle.
+
+
+## Juan 9:39 (id: 10043009039)
+
+39Y dijo Jesús: Yo, para juicio he venido á este mundo: para que los que no ven, vean; y los que ven, sean cegados.
+
+
+## Juan 9:40 (id: 10043009040)
+
+40Y ciertos de los Fariseos que estaban con él oyeron esto, y dijéronle: ¿Somos nosotros también ciegos?
+
+
+## Juan 9:41 (id: 10043009041)
+
+41Díjoles Jesús: Si fuerais ciegos, no tuvierais pecado: mas ahora porque decís, Vemos, por tanto vuestro pecado permanece.
+
+
+## Juan 10:1 (id: 10043010001)
+
+1DE cierto, de cierto os digo: El que no entra por la puerta en el corral de las ovejas, mas sube por otra parte, el tal es ladrón y robador.
+
+
+## Juan 10:2 (id: 10043010002)
+
+2Mas el que entra por la puerta, el pastor de las ovejas es.
+
+
+## Juan 10:3 (id: 10043010003)
+
+3A éste abre el portero, y las ovejas oyen su voz: y á sus ovejas llama por nombre, y las saca.
+
+
+## Juan 10:4 (id: 10043010004)
+
+4Y como ha sacado fuera todas las propias, va delante de ellas; y las ovejas le siguen, porque conocen su voz.
+
+
+## Juan 10:5 (id: 10043010005)
+
+5Mas al extraño no seguirán, antes huirán de él: porque no conocen la voz de los extraños.
+
+
+## Juan 10:6 (id: 10043010006)
+
+6Esta parábola les dijo Jesús; mas ellos no entendieron qué era lo que les decía.
+
+
+## Juan 10:7 (id: 10043010007)
+
+7Volvióles, pues, Jesús á decir: De cierto, de cierto os digo: Yo soy la puerta de las ovejas.
+
+
+## Juan 10:8 (id: 10043010008)
+
+8Todos los que antes de mí vinieron, ladrones son y robadores; mas no los oyeron las ovejas.
+
+
+## Juan 10:9 (id: 10043010009)
+
+9Yo soy la puerta: el que por mí entrare, será salvo; y entrará, y saldrá, y hallará pastos.
+
+
+## Juan 10:10 (id: 10043010010)
+
+10El ladrón no viene sino para hurtar, y matar, y destruir: yo he venido para que tengan vida, y para que la tengan en abundancia.
+
+
+## Juan 10:11 (id: 10043010011)
+
+11Yo soy el buen pastor: el buen pastor su vida da por las ovejas.
+
+
+## Juan 10:12 (id: 10043010012)
+
+12Mas el asalariado, y que no es el pastor, de quien no son propias las ovejas, ve al lobo que viene, y deja las ovejas, y huye, y el lobo las arrebata, y esparce las ovejas.
+
+
+## Juan 10:13 (id: 10043010013)
+
+13Así que, el asalariado, huye, porque es asalariado, y no tiene cuidado de las ovejas.
+
+
+## Juan 10:14 (id: 10043010014)
+
+14Yo soy el buen pastor; y conozco mis ovejas, y las mías me conocen.
+
+
+## Juan 10:15 (id: 10043010015)
+
+15Como el Padre me conoce, y yo conozco al Padre; y pongo mi vida por las ovejas.
+
+
+## Juan 10:16 (id: 10043010016)
+
+16También tengo otras ovejas que no son de este redil; aquéllas también me conviene traer, y oirán mi voz; y habrá un rebaño, y un pastor.
+
+
+## Juan 10:17 (id: 10043010017)
+
+17Por eso me ama el Padre, porque yo pongo mi vida, para volverla á tomar.
+
+
+## Juan 10:18 (id: 10043010018)
+
+18Nadie me la quita, mas yo la pongo de mí mismo. Tengo poder para ponerla, y tengo poder para volverla á tomar. Este mandamiento recibí de mi Padre.
+
+
+## Juan 10:19 (id: 10043010019)
+
+19Y volvió á haber disensión entre los Judíos por estas palabras.
+
+
+## Juan 10:20 (id: 10043010020)
+
+20Y muchos de ellos decían: Demonio tiene, y está fuera de sí; ¿para qué le oís?
+
+
+## Juan 10:21 (id: 10043010021)
+
+21Decían otros: Estas palabras no son de endemoniado: ¿puede el demonio abrir los ojos de los ciegos?
+
+
+## Juan 10:22 (id: 10043010022)
+
+22Y se hacía la fiesta de la dedicación en Jerusalem; y era invierno;
+
+
+## Juan 10:23 (id: 10043010023)
+
+23Y Jesús andaba en el templo por el portal de Salomón.
+
+
+## Juan 10:24 (id: 10043010024)
+
+24Y rodeáronle los Judíos y dijéronle: ¿Hasta cuándo nos has de turbar el alma? Si tú eres el Cristo, dínoslo abiertamente.
+
+
+## Juan 10:25 (id: 10043010025)
+
+25Respondióles Jesús: Os lo he dicho, y no creéis: las obras que yo hago en nombre de mi Padre, ellas dan testimonio de mí;
+
+
+## Juan 10:26 (id: 10043010026)
+
+26Mas vosotros no creéis, porque no sois de mis ovejas, como os he dicho.
+
+
+## Juan 10:27 (id: 10043010027)
+
+27Mis ovejas oyen mi voz, y yo las conozco, y me siguen;
+
+
+## Juan 10:28 (id: 10043010028)
+
+28Y yo les doy vida eterna: y no perecerán para siempre, ni nadie las arrebatará de mi mano.
+
+
+## Juan 10:29 (id: 10043010029)
+
+29Mi Padre que me las dió, mayor que todos es: y nadie las puede arrebatar de la mano de mi Padre.
+
+
+## Juan 10:30 (id: 10043010030)
+
+30Yo y el Padre una cosa somos.
+
+
+## Juan 10:31 (id: 10043010031)
+
+31Entonces volvieron á tomar piedras los Judíos para apedrearle.
+
+
+## Juan 10:32 (id: 10043010032)
+
+32Respondióles Jesús: Muchas buenas obras os he mostrado de mi Padre; ¿por cuál obra de esas me apedreáis?
+
+
+## Juan 10:33 (id: 10043010033)
+
+33Respondiéronle los Judíos, diciendo: Por buena obra no te apedreamos, sino por la blasfemia; y porque tú, siendo hombre, te haces Dios.
+
+
+## Juan 10:34 (id: 10043010034)
+
+34Respondióles Jesús: ¿No está escrito en vuestra ley: Yo dije, Dioses sois?
+
+
+## Juan 10:35 (id: 10043010035)
+
+35Si dijo, dioses, á aquellos á los cuales fué hecha palabra de Dios (y la Escritura no puede ser quebrantada);
+
+
+## Juan 10:36 (id: 10043010036)
+
+36¿A quien el Padre santificó y envió al mundo, vosotros decís: Tú blasfemas, porque dije: Hijo de Dios soy?
+
+
+## Juan 10:37 (id: 10043010037)
+
+37Si no hago obras de mi Padre, no me creáis.
+
+
+## Juan 10:38 (id: 10043010038)
+
+38Mas si las hago, aunque á mí no creáis, creed á las obras; para que conozcáis y creáis que el Padre está en mí, y yo en el Padre.
+
+
+## Juan 10:39 (id: 10043010039)
+
+39Y procuraban otra vez prenderle; mas él se salió de sus manos;
+
+
+## Juan 10:40 (id: 10043010040)
+
+40Y volvióse tras el Jordán, á aquel lugar donde primero había estado bautizando Juan; y estúvose allí.
+
+
+## Juan 10:41 (id: 10043010041)
+
+41Y muchos venían á él, y decían: Juan, á la verdad, ninguna señal hizo; mas todo lo que Juan dijo de éste, era verdad.
+
+
+## Juan 10:42 (id: 10043010042)
+
+42Y muchos creyeron allí en él.
+
+
+## Juan 11:1 (id: 10043011001)
+
+1ESTABA entonces enfermo uno llamado Lázaro, de Bethania, la aldea de María y de Marta su hermana.
+
+
+## Juan 11:2 (id: 10043011002)
+
+2(Y María, cuyo hermano Lázaro estaba enfermo, era la que ungió al Señor con ungüento, y limpió sus pies con sus cabellos.)
+
+
+## Juan 11:3 (id: 10043011003)
+
+3Enviaron, pues, sus hermanas á él, diciendo: Señor, he aquí, el que amas está enfermo.
+
+
+## Juan 11:4 (id: 10043011004)
+
+4Y oyéndolo Jesús, dijo: Esta enfermedad no es para muerte, mas por gloria de Dios, para que el Hijo de Dios sea glorificado por ella.
+
+
+## Juan 11:5 (id: 10043011005)
+
+5Y amaba Jesús á Marta, y á su hermana, y á Lázaro.
+
+
+## Juan 11:6 (id: 10043011006)
+
+6Como oyó pues que estaba enfermo, quedóse aún dos días en aquel lugar donde estaba.
+
+
+## Juan 11:7 (id: 10043011007)
+
+7Luego, después de esto, dijo á los discípulos: Vamos á Judea otra vez.
+
+
+## Juan 11:8 (id: 10043011008)
+
+8Dícenle los discípulos: Rabbí, ahora procuraban los Judíos apedrearte, ¿y otra vez vas allá?
+
+
+## Juan 11:9 (id: 10043011009)
+
+9Respondió Jesús: ¿No tiene el día doce horas? El que anduviere de día, no tropieza, porque ve la luz de este mundo.
+
+
+## Juan 11:10 (id: 10043011010)
+
+10Mas el que anduviere de noche, tropieza, porque no hay luz en él.
+
+
+## Juan 11:11 (id: 10043011011)
+
+11Dicho esto, díceles después: Lázaro nuestro amigo duerme; mas voy á despertarle del sueño.
+
+
+## Juan 11:12 (id: 10043011012)
+
+12Dijeron entonces sus discípulos: Señor, si duerme, salvo estará.
+
+
+## Juan 11:13 (id: 10043011013)
+
+13Mas esto decía Jesús de la muerte de él: y ellos pensaron que hablaba del reposar del sueño.
+
+
+## Juan 11:14 (id: 10043011014)
+
+14Entonces, pues, Jesús les dijo claramente: Lázaro es muerto;
+
+
+## Juan 11:15 (id: 10043011015)
+
+15Y huélgome por vosotros, que yo no haya estado allí, para que creáis: mas vamos á él.
+
+
+## Juan 11:16 (id: 10043011016)
+
+16Dijo entonces Tomás, el que se dice el Dídimo, á sus condiscípulos: Vamos también nosotros, para que muramos con él.
+
+
+## Juan 11:17 (id: 10043011017)
+
+17Vino pues Jesús, y halló que había ya cuatro días que estaba en el sepulcro.
+
+
+## Juan 11:18 (id: 10043011018)
+
+18Y Bethania estaba cerca de Jerusalem, como quince estadios;
+
+
+## Juan 11:19 (id: 10043011019)
+
+19Y muchos de los Judíos habían venido á Marta y á María, á consolarlas de su hermano.
+
+
+## Juan 11:20 (id: 10043011020)
+
+20Entonces Marta, como oyó que Jesús venía, salió á encontrarle; mas María se estuvo en casa.
+
+
+## Juan 11:21 (id: 10043011021)
+
+21Y Marta dijo á Jesús: Señor, si hubieses estado aquí, mi hermano no fuera muerto;
+
+
+## Juan 11:22 (id: 10043011022)
+
+22Mas también sé ahora, que todo lo que pidieres de Dios, te dará Dios.
+
+
+## Juan 11:23 (id: 10043011023)
+
+23Dícele Jesús: Resucitará tu hermano.
+
+
+## Juan 11:24 (id: 10043011024)
+
+24Marta le dice: Yo sé que resucitará en la resurrección en el día postrero.
+
+
+## Juan 11:25 (id: 10043011025)
+
+25Dícele Jesús: Yo soy la resurrección y la vida: el que cree en mí, aunque esté muerto, vivirá.
+
+
+## Juan 11:26 (id: 10043011026)
+
+26Y todo aquel que vive y cree en mí, no morirá eternamente. ¿Crees esto?
+
+
+## Juan 11:27 (id: 10043011027)
+
+27Dícele: Sí, Señor; yo he creído que tú eres el Cristo, el Hijo de Dios, que has venido al mundo.
+
+
+## Juan 11:28 (id: 10043011028)
+
+28Y esto dicho, fuése, y llamó en secreto á María su hermana, diciendo: El Maestro está aquí y te llama.
+
+
+## Juan 11:29 (id: 10043011029)
+
+29Ella, como lo oyó, levántase prestamente y viene á él.
+
+
+## Juan 11:30 (id: 10043011030)
+
+30(Que aun no había llegado Jesús á la aldea, mas estaba en aquel lugar donde Marta le había encontrado.)
+
+
+## Juan 11:31 (id: 10043011031)
+
+31Entonces los Judíos que estaban en casa con ella, y la consolaban, como vieron que María se había levantado prestamente, y había salido, siguiéronla, diciendo: Va al sepulcro á llorar allí.
+
+
+## Juan 11:32 (id: 10043011032)
+
+32Mas María, como vino donde estaba Jesús, viéndole, derribóse á sus pies, diciéndole: Señor, si hubieras estado aquí, no fuera muerto mi hermano.
+
+
+## Juan 11:33 (id: 10043011033)
+
+33Jesús entonces, como la vió llorando, y á los Judíos que habían venido juntamente con ella llorando, se conmovió en espíritu, y turbóse,
+
+
+## Juan 11:34 (id: 10043011034)
+
+34Y dijo: ¿Dónde le pusisteis? Dícenle: Señor, ven, y ve.
+
+
+## Juan 11:35 (id: 10043011035)
+
+35Y lloró Jesús.
+
+
+## Juan 11:36 (id: 10043011036)
+
+36Dijeron entonces los Judíos: Mirad cómo le amaba.
+
+
+## Juan 11:37 (id: 10043011037)
+
+37Y algunos de ellos dijeron: ¿No podía éste que abrió los ojos al ciego, hacer que éste no muriera?
+
+
+## Juan 11:38 (id: 10043011038)
+
+38Y Jesús, conmoviéndose otra vez en sí mismo, vino al sepulcro. Era una cueva, la cual tenía una piedra encima.
+
+
+## Juan 11:39 (id: 10043011039)
+
+39Dice Jesús: Quitad la piedra. Marta, la hermana del que se había muerto, le dice: Señor, hiede ya, que es de cuatro días.
+
+
+## Juan 11:40 (id: 10043011040)
+
+40Jesús le dice: ¿No te he dicho que, si creyeres, verás la gloria de Dios?
+
+
+## Juan 11:41 (id: 10043011041)
+
+41Entonces quitaron la piedra de donde el muerto había sido puesto. Y Jesús, alzando los ojos arriba, dijo: Padre, gracias te doy que me has oído.
+
+
+## Juan 11:42 (id: 10043011042)
+
+42Que yo sabía que siempre me oyes; mas por causa de la compañía que está alrededor, lo dije, para que crean que tú me has enviado.
+
+
+## Juan 11:43 (id: 10043011043)
+
+43Y habiendo dicho estas cosas, clamó á gran voz: Lázaro, ven fuera.
+
+
+## Juan 11:44 (id: 10043011044)
+
+44Y el que había estado muerto, salió, atadas las manos y los pies con vendas; y su rostro estaba envuelto en un sudario. Díceles Jesús: Desatadle, y dejadle ir.
+
+
+## Juan 11:45 (id: 10043011045)
+
+45Entonces muchos de los Judíos que habían venido á María, y habían visto lo que había hecho Jesús, creyeron en él.
+
+
+## Juan 11:46 (id: 10043011046)
+
+46Mas algunos de ellos fueron á los Fariseos, y dijéronles lo que Jesús había hecho.
+
+
+## Juan 11:47 (id: 10043011047)
+
+47Entonces los pontífices y los Fariseos juntaron concilio, y decían: ¿Qué hacemos? porque este hombre hace muchas señales.
+
+
+## Juan 11:48 (id: 10043011048)
+
+48Si le dejamos así, todos creerán en él: y vendrán los Romanos, y quitarán nuestro lugar y la nación.
+
+
+## Juan 11:49 (id: 10043011049)
+
+49Y Caifás, uno de ellos, sumo pontífice de aquel año, les dijo: Vosotros no sabéis nada;
+
+
+## Juan 11:50 (id: 10043011050)
+
+50Ni pensáis que nos conviene que un hombre muera por el pueblo, y no que toda la nación se pierda.
+
+
+## Juan 11:51 (id: 10043011051)
+
+51Mas esto no lo dijo de sí mismo; sino que, como era el sumo pontífice de aquel año, profetizó que Jesús había de morir por la nación:
+
+
+## Juan 11:52 (id: 10043011052)
+
+52Y no solamente por aquella nación, mas también para que juntase en uno los hijos de Dios que estaban derramados.
+
+
+## Juan 11:53 (id: 10043011053)
+
+53Así que, desde aquel día consultaban juntos de matarle.
+
+
+## Juan 11:54 (id: 10043011054)
+
+54Por tanto, Jesús ya no andaba manifiestamente entre los Judíos; mas fuése de allí á la tierra que está junto al desierto, á una ciudad que se llama Ephraim: y estábase allí con sus discípulos.
+
+
+## Juan 11:55 (id: 10043011055)
+
+55Y la Pascua de los Judíos estaba cerca: y muchos subieron de aquella tierra á Jerusalem antes de la Pascua, para purificarse;
+
+
+## Juan 11:56 (id: 10043011056)
+
+56Y buscaban á Jesús, y hablaban los unos con los otros estando en el templo: ¿Qué os parece, que no vendrá á la fiesta?
+
+
+## Juan 11:57 (id: 10043011057)
+
+57Y los pontífices y los Fariseos habían dado mandamiento, que si alguno supiese dónde estuviera, lo manifestase, para que le prendiesen.
+
+
+## Juan 12:1 (id: 10043012001)
+
+1Y JESÚS, seis días antes de la Pascua, vino á Bethania, donde estaba Lázaro, que había sido muerto, al cual había resucitado de los muertos.
+
+
+## Juan 12:2 (id: 10043012002)
+
+2E hiciéronle allí una cena: y Marta servía, y Lázaro era uno de los que estaban sentados á la mesa juntamente con él.
+
+
+## Juan 12:3 (id: 10043012003)
+
+3Entonces María tomó una libra de ungüento de nardo líquido de mucho precio, y ungió los pies de Jesús, y limpió sus pies con sus cabellos: y la casa se llenó del olor del ungüento.
+
+
+## Juan 12:4 (id: 10043012004)
+
+4Y dijo uno de sus discípulos, Judas Iscariote, hijo de Simón, el que le había de entregar:
+
+
+## Juan 12:5 (id: 10043012005)
+
+5¿Por qué no se ha vendido este ungüento por trescientos dineros, y se dió á los pobres?
+
+
+## Juan 12:6 (id: 10043012006)
+
+6Mas dijo esto, no por el cuidado que él tenía de los pobres; sino porque era ladrón, y tenía la bolsa, y traía lo que se echaba en ella.
+
+
+## Juan 12:7 (id: 10043012007)
+
+7Entonces Jesús dijo: Déjala: para el día de mi sepultura ha guardado esto;
+
+
+## Juan 12:8 (id: 10043012008)
+
+8Porque á los pobres siempre los tenéis con vosotros, mas á mí no siempre me tenéis.
+
+
+## Juan 12:9 (id: 10043012009)
+
+9Entonces mucha gente de los Judíos entendió que él estaba allí; y vinieron no solamente por causa de Jesús, mas también por ver á Lázaro, al cual había resucitado de los muertos.
+
+
+## Juan 12:10 (id: 10043012010)
+
+10Consultaron asimismo los príncipes de los sacerdotes, de matar también á Lázaro;
+
+
+## Juan 12:11 (id: 10043012011)
+
+11Porque muchos de los Judíos iban y creían en Jesús por causa de él.
+
+
+## Juan 12:12 (id: 10043012012)
+
+12El siguiente día, mucha gente que había venido á la fiesta, como oyeron que Jesús venía á Jerusalem,
+
+
+## Juan 12:13 (id: 10043012013)
+
+13Tomaron ramos de palmas, y salieron á recibirle, y clamaban: ¡Hosanna, Bendito el que viene en el nombre del Señor, el Rey de Israel!
+
+
+## Juan 12:14 (id: 10043012014)
+
+14Y halló Jesús un asnillo, y se sentó sobre él, como está escrito:
+
+
+## Juan 12:15 (id: 10043012015)
+
+15No temas, hija de Sión: he aquí tu Rey viene, sentado sobre un pollino de asna.
+
+
+## Juan 12:16 (id: 10043012016)
+
+16Estas cosas no las entendieron sus discípulos de primero: empero cuando Jesús fué glorificado, entonces se acordaron de que estas cosas estaban escritas de él, y que le hicieron estas cosas.
+
+
+## Juan 12:17 (id: 10043012017)
+
+17Y la gente que estaba con él, daba testimonio de cuando llamó á Lázaro del sepulcro, y le resucitó de los muertos.
+
+
+## Juan 12:18 (id: 10043012018)
+
+18Por lo cual también había venido la gente á recibirle, porque había oído que él había hecho esta señal;
+
+
+## Juan 12:19 (id: 10043012019)
+
+19Mas los Fariseos dijeron entre sí: ¿Veis que nada aprovecháis? he aquí, el mundo se va tras de él.
+
+
+## Juan 12:20 (id: 10043012020)
+
+20Y había ciertos Griegos de los que habían subido á adorar en la fiesta:
+
+
+## Juan 12:21 (id: 10043012021)
+
+21Estos pues, se llegaron á Felipe, que era de Bethsaida de Galilea, y rogáronle, diciendo: Señor, querríamos ver á Jesús.
+
+
+## Juan 12:22 (id: 10043012022)
+
+22Vino Felipe, y díjolo á Andrés: Andrés entonces, y Felipe, lo dicen á Jesús.
+
+
+## Juan 12:23 (id: 10043012023)
+
+23Entonces Jesús les respondió, diciendo: La hora viene en que el Hijo del hombre ha de ser glorificado.
+
+
+## Juan 12:24 (id: 10043012024)
+
+24De cierto, de cierto os digo, que si el grano de trigo no cae en la tierra y muere, él solo queda; mas si muriere, mucho fruto lleva.
+
+
+## Juan 12:25 (id: 10043012025)
+
+25El que ama su vida, la perderá; y el que aborrece su vida en este mundo, para vida eterna la guardará.
+
+
+## Juan 12:26 (id: 10043012026)
+
+26Si alguno me sirve, sígame: y donde yo estuviere, allí también estará mi servidor. Si alguno me sirviere, mi Padre le honrará.
+
+
+## Juan 12:27 (id: 10043012027)
+
+27Ahora está turbada mi alma; ¿y qué diré? Padre, sálvame de esta hora. Mas por esto he venido en esta hora.
+
+
+## Juan 12:28 (id: 10043012028)
+
+28Padre, glorifica tu nombre. Entonces vino una voz del cielo: Y lo he glorificado, y lo glorificaré otra vez.
+
+
+## Juan 12:29 (id: 10043012029)
+
+29Y la gente que estaba presente, y había oído, decía que había sido trueno. Otros decían: Angel le ha hablado.
+
+
+## Juan 12:30 (id: 10043012030)
+
+30Respondió Jesús, y dijo: No ha venido esta voz por mi causa, mas por causa de vosotros.
+
+
+## Juan 12:31 (id: 10043012031)
+
+31Ahora es el juicio de este mundo: ahora el príncipe de este mundo será echado fuera.
+
+
+## Juan 12:32 (id: 10043012032)
+
+32Y yo, si fuere levantado de la tierra, á todos traeré á mí mismo.
+
+
+## Juan 12:33 (id: 10043012033)
+
+33Y esto decía dando á entender de qué muerte había de morir.
+
+
+## Juan 12:34 (id: 10043012034)
+
+34Respondióle la gente: Nosotros hemos oído de la ley, que el Cristo permanece para siempre: ¿cómo pues dices tú: Conviene que el Hijo del hombre sea levantado? ¿Quién es este Hijo del hombre?
+
+
+## Juan 12:35 (id: 10043012035)
+
+35Entonces Jesús les dice: Aun por un poco estará la luz entre vosotros: andad entre tanto que tenéis luz, porque no os sorprendan las tinieblas; porque el que anda en tinieblas, no sabe dónde va.
+
+
+## Juan 12:36 (id: 10043012036)
+
+36Entre tanto que tenéis la luz, creed en la luz, para que seáis hijos de luz. Estas cosas habló Jesús, y fuése, y escondióse de ellos.
+
+
+## Juan 12:37 (id: 10043012037)
+
+37Empero habiendo hecho delante de ellos tantas señales, no creían en él.
+
+
+## Juan 12:38 (id: 10043012038)
+
+38Para que se cumpliese el dicho que dijo el profeta Isaías: ¿Señor, quién ha creído á nuestro dicho? ¿y el brazo del Señor, á quién es revelado?
+
+
+## Juan 12:39 (id: 10043012039)
+
+39Por esto no podían creer, porque otra vez dijo Isaías:
+
+
+## Juan 12:40 (id: 10043012040)
+
+40Cegó los ojos de ellos, y endureció su corazón; porque no vean con los ojos, y entiendan de corazón, y se conviertan, y yo los sane.
+
+
+## Juan 12:41 (id: 10043012041)
+
+41Estas cosas dijo Isaías cuando vió su gloria, y habló de él.
+
+
+## Juan 12:42 (id: 10043012042)
+
+42Con todo eso, aun de los príncipes, muchos creyeron en él; mas por causa de los Fariseos no lo confesaban, por no ser echados de la sinagoga.
+
+
+## Juan 12:43 (id: 10043012043)
+
+43Porque amaban más la gloria de los hombres que la gloria de Dios.
+
+
+## Juan 12:44 (id: 10043012044)
+
+44Mas Jesús clamó y dijo: El que cree en mí, no cree en mí, sino en el que me envió;
+
+
+## Juan 12:45 (id: 10043012045)
+
+45Y el que me ve, ve al que me envió.
+
+
+## Juan 12:46 (id: 10043012046)
+
+46Yo la luz he venido al mundo, para que todo aquel que cree en mí no permanezca en tinieblas.
+
+
+## Juan 12:47 (id: 10043012047)
+
+47Y el que oyere mis palabras, y no las creyere, yo no le juzgo; porque no he venido á juzgar al mundo, sino á salvar al mundo.
+
+
+## Juan 12:48 (id: 10043012048)
+
+48El que me desecha, y no recibe mis palabras, tiene quien le juzgue: la palabra que he hablado, ella le juzgará en el día postrero.
+
+
+## Juan 12:49 (id: 10043012049)
+
+49Porque yo no he hablado de mí mismo: mas el Padre que me envió, él me dió mandamiento de lo que he de decir, y de lo que he de hablar.
+
+
+## Juan 12:50 (id: 10043012050)
+
+50Y sé que su mandamiento es vida eterna: así que, lo que yo hablo, como el Padre me lo ha dicho, así hablo.
+
+
+## Juan 13:1 (id: 10043013001)
+
+1ANTES de la fiesta de la Pascua, sabiendo Jesús que su hora había venido para que pasase de este mundo al Padre, como había amado á los suyos que estaban en el mundo, amólos hasta el fin.
+
+
+## Juan 13:2 (id: 10043013002)
+
+2Y la cena acabada, como el diablo ya había metido en el corazón de Judas, hijo de Simón Iscariote, que le entregase,
+
+
+## Juan 13:3 (id: 10043013003)
+
+3Sabiendo Jesús que el Padre le había dado todas las cosas en las manos, y que había salido de Dios, y á Dios iba,
+
+
+## Juan 13:4 (id: 10043013004)
+
+4Levántase de la cena, y quítase su ropa, y tomando una toalla, ciñóse.
+
+
+## Juan 13:5 (id: 10043013005)
+
+5Luego puso agua en un lebrillo, y comenzó á lavar los pies de los discípulos, y á limpiarlos con la toalla con que estaba ceñido.
+
+
+## Juan 13:6 (id: 10043013006)
+
+6Entonces vino á Simón Pedro; y Pedro le dice: ¿Señor, tú me lavas los pies?
+
+
+## Juan 13:7 (id: 10043013007)
+
+7Respondió Jesús, y díjole: Lo que yo hago, tú no entiendes ahora; mas lo entenderás después.
+
+
+## Juan 13:8 (id: 10043013008)
+
+8Dícele Pedro: No me lavarás los pies jamás. Respondióle Jesús: Si no te lavare, no tendrás parte conmigo.
+
+
+## Juan 13:9 (id: 10043013009)
+
+9Dícele Simón Pedro: Señor, no sólo mis pies, mas aun las manos y la cabeza.
+
+
+## Juan 13:10 (id: 10043013010)
+
+10Dícele Jesús: El que está lavado, no necesita sino que lave los pies, mas está todo limpio: y vosotros limpios estáis, aunque no todos.
+
+
+## Juan 13:11 (id: 10043013011)
+
+11Porque sabía quién le había de entregar; por eso dijo: No estáis limpios todos.
+
+
+## Juan 13:12 (id: 10043013012)
+
+12Así que, después que les hubo lavado los pies, y tomado su ropa, volviéndose á sentar á la mesa, díjoles: ¿Sabéis lo que os he hecho?
+
+
+## Juan 13:13 (id: 10043013013)
+
+13Vosotros me llamáis, Maestro, y, Señor: y decís bien; porque lo soy.
+
+
+## Juan 13:14 (id: 10043013014)
+
+14Pues si yo, el Señor y el Maestro, he lavado vuestros pies, vosotros también debéis lavar los pies los unos á los otros.
+
+
+## Juan 13:15 (id: 10043013015)
+
+15Porque ejemplo os he dado, para que como yo os he hecho, vosotros también hagáis.
+
+
+## Juan 13:16 (id: 10043013016)
+
+16De cierto, de cierto os digo: El siervo no es mayor que su señor, ni el apóstol es mayor que el que le envió.
+
+
+## Juan 13:17 (id: 10043013017)
+
+17Si sabéis estas cosas, bienaventurados seréis, si las hiciereis.
+
+
+## Juan 13:18 (id: 10043013018)
+
+18No hablo de todos vosotros: yo sé los que he elegido: mas para que se cumpla la Escritura: El que come pan conmigo, levantó contra mí su calcañar.
+
+
+## Juan 13:19 (id: 10043013019)
+
+19Desde ahora os lo digo antes que se haga, para que cuando se hiciere, creáis que yo soy.
+
+
+## Juan 13:20 (id: 10043013020)
+
+20De cierto, de cierto os digo: El que recibe al que yo enviare, á mí recibe; y el que á mí recibe, recibe al que me envió.
+
+
+## Juan 13:21 (id: 10043013021)
+
+21Como hubo dicho Jesús esto, fué conmovido en el espíritu, y protestó, y dijo: De cierto, de cierto os digo, que uno de vosotros me ha de entregar.
+
+
+## Juan 13:22 (id: 10043013022)
+
+22Entonces los discípulos mirábanse los unos á los otros, dudando de quién decía.
+
+
+## Juan 13:23 (id: 10043013023)
+
+23Y uno de sus discípulos, al cual Jesús amaba, estaba recostado en el seno de Jesús.
+
+
+## Juan 13:24 (id: 10043013024)
+
+24A éste, pues, hizo señas Simón Pedro, para que preguntase quién era aquél de quien decía.
+
+
+## Juan 13:25 (id: 10043013025)
+
+25El entonces recostándose sobre el pecho de Jesús, dícele: Señor, ¿quién es?
+
+
+## Juan 13:26 (id: 10043013026)
+
+26Respondió Jesús: Aquél es, á quien yo diere el pan mojado. Y mojando el pan, diólo á Judas Iscariote, hijo de Simón.
+
+
+## Juan 13:27 (id: 10043013027)
+
+27Y tras el bocado Satanás entró en él. Entonces Jesús le dice: Lo que haces, hazlo más presto.
+
+
+## Juan 13:28 (id: 10043013028)
+
+28Mas ninguno de los que estaban á la mesa entendió á qué propósito le dijo esto.
+
+
+## Juan 13:29 (id: 10043013029)
+
+29Porque los unos pensaban, porque Judas tenía la bolsa, que Jesús le decía: Compra lo que necesitamos para la fiesta: ó, que diese algo á los pobres.
+
+
+## Juan 13:30 (id: 10043013030)
+
+30Como él pues hubo tomado el bocado, luego salió: y era ya noche.
+
+
+## Juan 13:31 (id: 10043013031)
+
+31Entonces como él salió, dijo Jesús: Ahora es glorificado el Hijo del hombre, y Dios es glorificado en él.
+
+
+## Juan 13:32 (id: 10043013032)
+
+32Si Dios es glorificado en él, Dios también le glorificará en sí mismo, y luego le glorificará.
+
+
+## Juan 13:33 (id: 10043013033)
+
+33Hijitos, aun un poco estoy con vosotros. Me buscaréis; mas, como dije á los Judíos: Donde yo voy, vosotros no podéis venir; así digo á vosotros ahora.
+
+
+## Juan 13:34 (id: 10043013034)
+
+34Un mandamiento nuevo os doy: Que os améis unos á otros: como os he amado, que también os améis los unos á los otros.
+
+
+## Juan 13:35 (id: 10043013035)
+
+35En esto conocerán todos que sois mis discípulos, si tuviereis amor los unos con los otros.
+
+
+## Juan 13:36 (id: 10043013036)
+
+36Dícele Simón Pedro: Señor, ¿adónde vas? Respondióle Jesús: Donde yo voy, no me puedes ahora seguir; mas me seguirás después.
+
+
+## Juan 13:37 (id: 10043013037)
+
+37Dícele Pedro: Señor, ¿por qué no te puedo seguir ahora? mi alma pondré por ti.
+
+
+## Juan 13:38 (id: 10043013038)
+
+38Respondióle Jesús: ¿Tu alma pondrás por mí? De cierto, de cierto te digo: No cantará el gallo, sin que me hayas negado tres veces.
+
+
+## Juan 14:1 (id: 10043014001)
+
+1NO se turbe vuestro corazón: creéis en Dios, creed también en mí.
+
+
+## Juan 14:2 (id: 10043014002)
+
+2En la casa de mi Padre muchas moradas hay: de otra manera os lo hubiera dicho: voy, pues, á preparar lugar para vosotros.
+
+
+## Juan 14:3 (id: 10043014003)
+
+3Y si me fuere, y os aparejare lugar, vendré otra vez, y os tomaré á mí mismo: para que donde yo estoy, vosotros también estéis.
+
+
+## Juan 14:4 (id: 10043014004)
+
+4Y sabéis á dónde yo voy; y sabéis el camino.
+
+
+## Juan 14:5 (id: 10043014005)
+
+5Dícele Tomás: Señor, no sabemos á dónde vas: ¿cómo, pues, podemos saber el camino?
+
+
+## Juan 14:6 (id: 10043014006)
+
+6Jesús le dice: Yo soy el camino, y la verdad, y la vida: nadie viene al Padre, sino por mí.
+
+
+## Juan 14:7 (id: 10043014007)
+
+7Si me conocieseis, también á mi Padre conocierais: y desde ahora le conocéis, y le habéis visto.
+
+
+## Juan 14:8 (id: 10043014008)
+
+8Dícele Felipe: Señor, muéstranos el Padre, y nos basta.
+
+
+## Juan 14:9 (id: 10043014009)
+
+9Jesús le dice: ¿Tanto tiempo ha que estoy con vosotros, y no me has conocido, Felipe? El que me ha visto, ha visto al Padre; ¿cómo, pues, dices tú: Muéstranos el Padre?
+
+
+## Juan 14:10 (id: 10043014010)
+
+10¿No crees que yo soy en el Padre, y el Padre en mí? Las palabras que yo os hablo, no las hablo de mí mismo: mas el Padre que está en mí, él hace las obras.
+
+
+## Juan 14:11 (id: 10043014011)
+
+11Creedme que yo soy en el Padre, y el Padre en mí: de otra manera, creedme por las mismas obras.
+
+
+## Juan 14:12 (id: 10043014012)
+
+12De cierto, de cierto os digo: El que en mí cree, las obras que yo hago también él las hará; y mayores que éstas hará; porque yo voy al Padre.
+
+
+## Juan 14:13 (id: 10043014013)
+
+13Y todo lo que pidiereis al Padre en mi nombre, esto haré, para que el Padre sea glorificado en el Hijo.
+
+
+## Juan 14:14 (id: 10043014014)
+
+14Si algo pidiereis en mi nombre, yo lo haré.
+
+
+## Juan 14:15 (id: 10043014015)
+
+15Si me amáis, guardad mis mandamientos;
+
+
+## Juan 14:16 (id: 10043014016)
+
+16Y yo rogaré al Padre, y os dará otro Consolador, para que esté con vosotros para siempre:
+
+
+## Juan 14:17 (id: 10043014017)
+
+17Al Espíritu de verdad, al cual el mundo no puede recibir, porque no le ve, ni le conoce: mas vosotros le conocéis; porque está con vosotros, y será en vosotros.
+
+
+## Juan 14:18 (id: 10043014018)
+
+18No os dejaré huérfanos: vendré á vosotros.
+
+
+## Juan 14:19 (id: 10043014019)
+
+19Aun un poquito, y el mundo no me verá más; empero vosotros me veréis; porque yo vivo, y vosotros también viviréis.
+
+
+## Juan 14:20 (id: 10043014020)
+
+20En aquel día vosotros conoceréis que yo estoy en mi Padre, y vosotros en mí, y yo en vosotros.
+
+
+## Juan 14:21 (id: 10043014021)
+
+21El que tiene mis mandamientos, y los guarda, aquél es el que me ama; y el que me ama, será amado de mi Padre, y yo le amaré, y me manifestaré á él.
+
+
+## Juan 14:22 (id: 10043014022)
+
+22Dícele Judas, no el Iscariote: Señor, ¿qué hay porque te hayas de manifestar á nosotros, y no al mundo?
+
+
+## Juan 14:23 (id: 10043014023)
+
+23Respondió Jesús, y díjole: El que me ama, mi palabra guardará; y mi Padre le amará, y vendremos á él, y haremos con él morada.
+
+
+## Juan 14:24 (id: 10043014024)
+
+24El que no me ama, no guarda mis palabras: y la palabra que habéis oído, no es mía, sino del Padre que me envió.
+
+
+## Juan 14:25 (id: 10043014025)
+
+25Estas cosas os he hablado estando con vosotros.
+
+
+## Juan 14:26 (id: 10043014026)
+
+26Mas el Consolador, el Espíritu Santo, al cual el Padre enviará en mi nombre, él os enseñará todas las cosas, y os recordará todas las cosas que os he dicho.
+
+
+## Juan 14:27 (id: 10043014027)
+
+27La paz os dejo, mi paz os doy: no como el mundo la da, yo os la doy. No se turbe vuestro corazón, ni tenga miedo.
+
+
+## Juan 14:28 (id: 10043014028)
+
+28Habéis oído cómo yo os he dicho: Voy, y vengo á vosotros. Si me amaseis, ciertamente os gozaríais, porque he dicho que voy al Padre: porque el Padre mayor es que yo.
+
+
+## Juan 14:29 (id: 10043014029)
+
+29Y ahora os lo he dicho antes que se haga; para que cuando se hiciere, creáis.
+
+
+## Juan 14:30 (id: 10043014030)
+
+30Ya no hablaré mucho con vosotros: porque viene el príncipe de este mundo; mas no tiene nada en mí.
+
+
+## Juan 14:31 (id: 10043014031)
+
+31Empero para que conozca el mundo que amo al Padre, y como el Padre me dió el mandamiento, así hago. Levantaos, vamos de aquí.
+
+
+## Juan 15:1 (id: 10043015001)
+
+1YO soy la vid verdadera, y mi Padre es el labrador.
+
+
+## Juan 15:2 (id: 10043015002)
+
+2Todo pámpano que en mí no lleva fruto, le quitará: y todo aquel que lleva fruto, le limpiará, para que lleve más fruto.
+
+
+## Juan 15:3 (id: 10043015003)
+
+3Ya vosotros sois limpios por la palabra que os he hablado.
+
+
+## Juan 15:4 (id: 10043015004)
+
+4Estad en mí, y yo en vosotros. Como el pámpano no puede llevar fruto de sí mismo, si no estuviere en la vid; así ni vosotros, si no estuviereis en mí.
+
+
+## Juan 15:5 (id: 10043015005)
+
+5Yo soy la vid, vosotros los pámpanos: el que está en mí, y yo en él, éste lleva mucho fruto; porque sin mí nada podéis hacer.
+
+
+## Juan 15:6 (id: 10043015006)
+
+6El que en mí no estuviere, será echado fuera como mal pámpano, y se secará; y los cogen, y los echan en el fuego, y arden.
+
+
+## Juan 15:7 (id: 10043015007)
+
+7Si estuviereis en mí, y mis palabras estuvieren en vosotros, pedid todo lo que quisiereis, y os será hecho.
+
+
+## Juan 15:8 (id: 10043015008)
+
+8En esto es glorificado mi Padre, en que llevéis mucho fruto, y seáis así mis discípulos.
+
+
+## Juan 15:9 (id: 10043015009)
+
+9Como el Padre me amó, también yo os he amado: estad en mi amor.
+
+
+## Juan 15:10 (id: 10043015010)
+
+10Si guardareis mis mandamientos, estaréis en mi amor; como yo también he guardado los mandamientos de mi Padre, y estoy en su amor.
+
+
+## Juan 15:11 (id: 10043015011)
+
+11Estas cosas os he hablado, para que mi gozo esté en vosotros, y vuestro gozo sea cumplido.
+
+
+## Juan 15:12 (id: 10043015012)
+
+12Este es mi mandamiento: Que os améis los unos á los otros, como yo os he amado.
+
+
+## Juan 15:13 (id: 10043015013)
+
+13Nadie tiene mayor amor que este, que ponga alguno su vida por sus amigos.
+
+
+## Juan 15:14 (id: 10043015014)
+
+14Vosotros sois mis amigos, si hiciereis las cosas que yo os mando.
+
+
+## Juan 15:15 (id: 10043015015)
+
+15Ya no os llamaré siervos, porque el siervo no sabe lo que hace su señor: mas os he llamado amigos, porque todas las cosas que oí de mi Padre, os he hecho notorias.
+
+
+## Juan 15:16 (id: 10043015016)
+
+16No me elegisteis vosotros á mí, mas yo os elegí á vosotros; y os he puesto para que vayáis y llevéis fruto, y vuestro fruto permanezca: para que todo lo que pidiereis del Padre en mi nombre, él os lo dé.
+
+
+## Juan 15:17 (id: 10043015017)
+
+17Esto os mando: Que os améis los unos á los otros.
+
+
+## Juan 15:18 (id: 10043015018)
+
+18Si el mundo os aborrece, sabed que á mí me aborreció antes que á vosotros.
+
+
+## Juan 15:19 (id: 10043015019)
+
+19Si fuerais del mundo, el mundo amaría lo suyo; mas porque no sois del mundo, antes yo os elegí del mundo, por eso os aborrece el mundo.
+
+
+## Juan 15:20 (id: 10043015020)
+
+20Acordaos de la palabra que yo os he dicho: No es el siervo mayor que su señor. Si á mí me han perseguido, también á vosotros perseguirán: si han guardado mi palabra, también guardarán la vuestra.
+
+
+## Juan 15:21 (id: 10043015021)
+
+21Mas todo esto os harán por causa de mi nombre, porque no conocen al que me ha enviado.
+
+
+## Juan 15:22 (id: 10043015022)
+
+22Si no hubiera venido, ni les hubiera hablado, no tendrían pecado, mas ahora no tienen excusa de su pecado.
+
+
+## Juan 15:23 (id: 10043015023)
+
+23El que me aborrece, también á mi Padre aborrece.
+
+
+## Juan 15:24 (id: 10043015024)
+
+24Si no hubiese hecho entre ellos obras cuales ningún otro ha hecho, no tendrían pecado; mas ahora, y las han visto, y me aborrecen á mí y á mi Padre.
+
+
+## Juan 15:25 (id: 10043015025)
+
+25Mas para que se cumpla la palabra que está escrita en su ley: Que sin causa me aborrecieron.
+
+
+## Juan 15:26 (id: 10043015026)
+
+26Empero cuando viniere el Consolador, el cual yo os enviaré del Padre, el Espíritu de verdad, el cual procede del Padre, él dará testimonio de mí.
+
+
+## Juan 15:27 (id: 10043015027)
+
+27Y vosotros daréis testimonio, porque estáis conmigo desde el principio.
+
+
+## Juan 16:1 (id: 10043016001)
+
+1ESTAS cosas os he hablado, para que no os escandalicéis.
+
+
+## Juan 16:2 (id: 10043016002)
+
+2Os echarán de las sinagogas; y aun viene la hora, cuando cualquiera que os matare, pensará que hace servicio á Dios.
+
+
+## Juan 16:3 (id: 10043016003)
+
+3Y estas cosas os harán, porque no conocen al Padre ni á mí.
+
+
+## Juan 16:4 (id: 10043016004)
+
+4Mas os he dicho esto, para que cuando aquella hora viniere, os acordéis que yo os lo había dicho. Esto empero no os lo dije al principio, porque yo estaba con vosotros.
+
+
+## Juan 16:5 (id: 10043016005)
+
+5Mas ahora voy al que me envió; y ninguno de vosotros me pregunta: ¿Adónde vas?
+
+
+## Juan 16:6 (id: 10043016006)
+
+6Antes, porque os he hablado estas cosas, tristeza ha henchido vuestro corazón.
+
+
+## Juan 16:7 (id: 10043016007)
+
+7Empero yo os digo la verdad: Os es necesario que yo vaya: porque si yo no fuese, el Consolador no vendría á vosotros; mas si yo fuere, os le enviaré.
+
+
+## Juan 16:8 (id: 10043016008)
+
+8Y cuando él viniere redargüirá al mundo de pecado, y de justicia, y de juicio:
+
+
+## Juan 16:9 (id: 10043016009)
+
+9De pecado ciertamente, por cuanto no creen en mí;
+
+
+## Juan 16:10 (id: 10043016010)
+
+10Y de justicia, por cuanto voy al Padre, y no me veréis más;
+
+
+## Juan 16:11 (id: 10043016011)
+
+11Y de juicio, por cuanto el príncipe de este mundo es juzgado.
+
+
+## Juan 16:12 (id: 10043016012)
+
+12Aun tengo muchas cosas que deciros, mas ahora no las podéis llevar.
+
+
+## Juan 16:13 (id: 10043016013)
+
+13Pero cuando viniere aquel Espíritu de verdad, él os guiará á toda verdad; porque no hablará de sí mismo, sino que hablará todo lo que oyere, y os hará saber las cosas que han de venir.
+
+
+## Juan 16:14 (id: 10043016014)
+
+14El me glorificará: porque tomará de lo mío, y os lo hará saber.
+
+
+## Juan 16:15 (id: 10043016015)
+
+15Todo lo que tiene el Padre, mío es: por eso dije que tomará de lo mío, y os lo hará saber.
+
+
+## Juan 16:16 (id: 10043016016)
+
+16Un poquito, y no me veréis; y otra vez un poquito, y me veréis: porque yo voy al Padre.
+
+
+## Juan 16:17 (id: 10043016017)
+
+17Entonces dijeron algunos de sus discípulos unos á otros: ¿Qué es esto que nos dice: Un poquito, y no me veréis; y otra vez un poquito, y me veréis: y, porque yo voy al Padre?
+
+
+## Juan 16:18 (id: 10043016018)
+
+18Decían pues: ¿Qué es esto que dice: Un poquito? No entendemos lo que habla.
+
+
+## Juan 16:19 (id: 10043016019)
+
+19Y conoció Jesús que le querían preguntar, y díjoles: ¿Preguntáis entre vosotros de esto que dije: Un poquito, y no me veréis, y otra vez un poquito, y me veréis?
+
+
+## Juan 16:20 (id: 10043016020)
+
+20De cierto, de cierto os digo, que vosotros lloraréis y lamentaréis, y el mundo se alegrará: empero aunque vosotros estaréis tristes, vuestra tristeza se tornará en gozo.
+
+
+## Juan 16:21 (id: 10043016021)
+
+21La mujer cuando pare, tiene dolor, porque es venida su hora; mas después que ha parido un niño, ya no se acuerda de la angustia, por el gozo de que haya nacido un hombre en el mundo.
+
+
+## Juan 16:22 (id: 10043016022)
+
+22También, pues, vosotros ahora ciertamente tenéis tristeza; mas otra vez os veré, y se gozará vuestro corazón, y nadie quitará de vosotros vuestro gozo.
+
+
+## Juan 16:23 (id: 10043016023)
+
+23Y aquel día no me preguntaréis nada. De cierto, de cierto os digo, que todo cuanto pidiereis al Padre en mi nombre, os lo dará.
+
+
+## Juan 16:24 (id: 10043016024)
+
+24Hasta ahora nada habéis pedido en mi nombre: pedid, y recibiréis, para que vuestro gozo sea cumplido.
+
+
+## Juan 16:25 (id: 10043016025)
+
+25Estas cosas os he hablado en proverbios: la hora viene cuando ya no os hablaré por proverbios, pero claramente os anunciaré del Padre.
+
+
+## Juan 16:26 (id: 10043016026)
+
+26Aquel día pediréis en mi nombre: y no os digo, que yo rogaré al Padre por vosotros;
+
+
+## Juan 16:27 (id: 10043016027)
+
+27Pues el mismo Padre os ama, porque vosotros me amasteis, y habéis creído que yo salí de Dios.
+
+
+## Juan 16:28 (id: 10043016028)
+
+28Salí del Padre, y he venido al mundo: otra vez dejo el mundo, y voy al Padre.
+
+
+## Juan 16:29 (id: 10043016029)
+
+29Dícenle sus discípulos: He aquí, ahora hablas claramente, y ningún proverbio dices.
+
+
+## Juan 16:30 (id: 10043016030)
+
+30Ahora entendemos que sabes todas las cosas, y no necesitas que nadie te pregunte: en esto creemos que has salido de Dios.
+
+
+## Juan 16:31 (id: 10043016031)
+
+31Respondióles Jesús: ¿Ahora creéis?
+
+
+## Juan 16:32 (id: 10043016032)
+
+32He aquí, la hora viene, y ha venido, que seréis esparcidos cada uno por su parte, y me dejaréis solo: mas no estoy solo, porque el Padre está conmigo.
+
+
+## Juan 16:33 (id: 10043016033)
+
+33Estas cosas os he hablado, para que en mí tengáis paz. En el mundo tendréis aflicción: mas confiad, yo he vencido al mundo.
+
+
+## Juan 17:1 (id: 10043017001)
+
+1ESTAS cosas habló Jesús, y levantados los ojos al cielo, dijo: Padre, la hora es llegada; glorifica á tu Hijo, para que también tu Hijo te glorifique á ti;
+
+
+## Juan 17:2 (id: 10043017002)
+
+2Como le has dado la potestad de toda carne, para que dé vida eterna á todos los que le diste.
+
+
+## Juan 17:3 (id: 10043017003)
+
+3Esta empero es la vida eterna: que te conozcan el solo Dios verdadero, y á Jesucristo, al cual has enviado.
+
+
+## Juan 17:4 (id: 10043017004)
+
+4Yo te he glorificado en la tierra: he acabado la obra que me diste que hiciese.
+
+
+## Juan 17:5 (id: 10043017005)
+
+5Ahora pues, Padre, glorifícame tú cerca de ti mismo con aquella gloria que tuve cerca de ti antes que el mundo fuese.
+
+
+## Juan 17:6 (id: 10043017006)
+
+6He manifestado tu nombre á los hombres que del mundo me diste: tuyos eran, y me los diste, y guardaron tu palabra.
+
+
+## Juan 17:7 (id: 10043017007)
+
+7Ahora han conocido que todas las cosas que me diste, son de ti;
+
+
+## Juan 17:8 (id: 10043017008)
+
+8Porque las palabras que me diste, les he dado; y ellos las recibieron, y han conocido verdaderamente que salí de ti, y han creído que tú me enviaste.
+
+
+## Juan 17:9 (id: 10043017009)
+
+9Yo ruego por ellos: no ruego por el mundo, sino por los que me diste; porque tuyos son:
+
+
+## Juan 17:10 (id: 10043017010)
+
+10Y todas mis cosas son tus cosas, y tus cosas son mis cosas: y he sido glorificado en ellas.
+
+
+## Juan 17:11 (id: 10043017011)
+
+11Y ya no estoy en el mundo; mas éstos están en el mundo, y yo á ti vengo. Padre santo, á los que me has dado, guárdalos por tu nombre, para que sean una cosa, como también nosotros.
+
+
+## Juan 17:12 (id: 10043017012)
+
+12Cuando estaba con ellos en el mundo, yo los guardaba en tu nombre; á los que me diste, yo los guardé, y ninguno de ellos se perdió, sino el hijo de perdición; para que la Escritura se cumpliese.
+
+
+## Juan 17:13 (id: 10043017013)
+
+13Mas ahora vengo á ti; y hablo esto en el mundo, para que tengan mi gozo cumplido en sí mismos.
+
+
+## Juan 17:14 (id: 10043017014)
+
+14Yo les he dado tu palabra; y el mundo los aborreció, porque no son del mundo, como tampoco yo soy del mundo.
+
+
+## Juan 17:15 (id: 10043017015)
+
+15No ruego que los quites del mundo, sino que los guardes del mal.
+
+
+## Juan 17:16 (id: 10043017016)
+
+16No son del mundo, como tampoco yo soy del mundo.
+
+
+## Juan 17:17 (id: 10043017017)
+
+17Santifícalos en tu verdad: tu palabra es verdad.
+
+
+## Juan 17:18 (id: 10043017018)
+
+18Como tú me enviaste al mundo, también los he enviado al mundo.
+
+
+## Juan 17:19 (id: 10043017019)
+
+19Y por ellos yo me santifico á mí mismo, para que también ellos sean santificados en verdad.
+
+
+## Juan 17:20 (id: 10043017020)
+
+20Mas no ruego solamente por éstos, sino también por los que han de creer en mí por la palabra de ellos.
+
+
+## Juan 17:21 (id: 10043017021)
+
+21Para que todos sean una cosa; como tú, oh Padre, en mí, y yo en ti, que también ellos sean en nosotros una cosa: para que el mundo crea que tú me enviaste.
+
+
+## Juan 17:22 (id: 10043017022)
+
+22Y yo, la gloria que me diste les he dado; para que sean una cosa, como también nosotros somos una cosa.
+
+
+## Juan 17:23 (id: 10043017023)
+
+23Yo en ellos, y tú en mí, para que sean consumadamente una cosa; que el mundo conozca que tú me enviaste, y que los has amado, como también á mí me has amado.
+
+
+## Juan 17:24 (id: 10043017024)
+
+24Padre, aquellos que me has dado, quiero que donde yo estoy, ellos estén también conmigo; para que vean mi gloria que me has dado: por cuanto me has amado desde antes de la constitución del mundo.
+
+
+## Juan 17:25 (id: 10043017025)
+
+25Padre justo, el mundo no te ha conocido, mas yo te he conocido; y éstos han conocido que tú me enviaste;
+
+
+## Juan 17:26 (id: 10043017026)
+
+26Y yo les he manifestado tu nombre, y manifestarélo aún; para que el amor con que me has amado, esté en ellos, y yo en ellos.
+
+
+## Juan 18:1 (id: 10043018001)
+
+1COMO Jesús hubo dicho estas cosas, salióse con sus discípulos tras el arroyo de Cedrón, donde estaba un huerto, en el cual entró Jesús y sus discípulos.
+
+
+## Juan 18:2 (id: 10043018002)
+
+2Y también Judas, el que le entregaba, sabía aquel lugar; porque muchas veces Jesús se juntaba allí con sus discípulos.
+
+
+## Juan 18:3 (id: 10043018003)
+
+3Judas pues tomando una compañía, y ministros de los pontífices y de los Fariseos, vino allí con linternas y antorchas, y con armas.
+
+
+## Juan 18:4 (id: 10043018004)
+
+4Empero Jesús, sabiendo todas las cosas que habían de venir sobre él, salió delante, y díjoles: ¿A quién buscáis?
+
+
+## Juan 18:5 (id: 10043018005)
+
+5Respondiéronle: A Jesús Nazareno. Díceles Jesús: Yo soy. (Y estaba también con ellos Judas, el que le entregaba.)
+
+
+## Juan 18:6 (id: 10043018006)
+
+6Y como les dijo, Yo soy, volvieron atrás, y cayeron en tierra.
+
+
+## Juan 18:7 (id: 10043018007)
+
+7Volvióles, pues, á preguntar: ¿A quién buscáis? Y ellos dijeron: A Jesús Nazareno.
+
+
+## Juan 18:8 (id: 10043018008)
+
+8Respondió Jesús: Os he dicho que yo soy: pues si á mí buscáis, dejad ir á éstos.
+
+
+## Juan 18:9 (id: 10043018009)
+
+9Para que se cumpliese la palabra que había dicho: De los que me diste, ninguno de ellos perdí.
+
+
+## Juan 18:10 (id: 10043018010)
+
+10Entonces Simón Pedro, que tenía espada, sacóla, é hirió al siervo del pontífice, y le cortó la oreja derecha. Y el siervo se llamaba Malco.
+
+
+## Juan 18:11 (id: 10043018011)
+
+11Jesús entonces dijo á Pedro: Mete tu espada en la vaina: el vaso que el Padre me ha dado, ¿no lo tengo de beber?
+
+
+## Juan 18:12 (id: 10043018012)
+
+12Entonces la compañía y el tribuno, y los ministros de los Judíos, prendieron á Jesús y le ataron,
+
+
+## Juan 18:13 (id: 10043018013)
+
+13Y lleváronle primeramente á Anás; porque era suegro de Caifás, el cual era pontífice de aquel año.
+
+
+## Juan 18:14 (id: 10043018014)
+
+14Y era Caifás el que había dado el consejo á los Judíos, que era necesario que un hombre muriese por el pueblo.
+
+
+## Juan 18:15 (id: 10043018015)
+
+15Y seguía á Jesús Simón Pedro, y otro discípulo. Y aquel discípulo era conocido del pontífice, y entró con Jesús al atrio del pontífice;
+
+
+## Juan 18:16 (id: 10043018016)
+
+16Mas Pedro estaba fuera á la puerta. Y salió aquel discípulo que era conocido del pontífice, y habló á la portera, y metió dentro á Pedro.
+
+
+## Juan 18:17 (id: 10043018017)
+
+17Entonces la criada portera dijo á Pedro: ¿No eres tú también de los discípulos de este hombre? Dice él: No soy.
+
+
+## Juan 18:18 (id: 10043018018)
+
+18Y estaban en pie los siervos y los ministros que habían allegado las ascuas; porque hacía frío, y calentábanse: y estaba también con ellos Pedro en pie, calentándose.
+
+
+## Juan 18:19 (id: 10043018019)
+
+19Y el pontífice preguntó á Jesús acerca de sus discípulos y de su doctrina.
+
+
+## Juan 18:20 (id: 10043018020)
+
+20Jesús le respondió: Yo manifiestamente he hablado al mundo: yo siempre he enseñado en la sinagoga y en el templo, donde se juntan todos los Judíos, y nada he hablado en oculto.
+
+
+## Juan 18:21 (id: 10043018021)
+
+21¿Qué me preguntas á mí? Pregunta á los que han oído, qué les haya yo hablado: he aquí, ésos saben lo que yo he dicho.
+
+
+## Juan 18:22 (id: 10043018022)
+
+22Y como él hubo dicho esto, uno de los criados que estaba allí, dió una bofetada á Jesús, diciendo: ¿Así respondes al pontífice?
+
+
+## Juan 18:23 (id: 10043018023)
+
+23Respondióle Jesús: Si he hablado mal, da testimonio del mal: y si bien, ¿por qué me hieres?
+
+
+## Juan 18:24 (id: 10043018024)
+
+24Y Anás le había enviado atado á Caifás pontífice.
+
+
+## Juan 18:25 (id: 10043018025)
+
+25Estaba pues Pedro en pie calentándose. Y dijéronle: ¿No eres tú de sus discípulos? El negó, y dijo: No soy.
+
+
+## Juan 18:26 (id: 10043018026)
+
+26Uno de los siervos del pontífice, pariente de aquél á quien Pedro había cortado la oreja, le dice: ¿No te vi yo en el huerto con él?
+
+
+## Juan 18:27 (id: 10043018027)
+
+27Y negó Pedro otra vez: y luego el gallo cantó.
+
+
+## Juan 18:28 (id: 10043018028)
+
+28Y llevaron á Jesús de Caifás al pretorio: y era por la mañana: y ellos no entraron en el pretorio por no ser contaminados, sino que comiesen la pascua.
+
+
+## Juan 18:29 (id: 10043018029)
+
+29Entonces salió Pilato á ellos fuera, y dijo: ¿Qué acusación traéis contra este hombre?
+
+
+## Juan 18:30 (id: 10043018030)
+
+30Respondieron y dijéronle: Si éste no fuera malhechor, no te le habríamos entregado.
+
+
+## Juan 18:31 (id: 10043018031)
+
+31Díceles entonces Pilato: Tomadle vosotros, y juzgadle según vuestra ley. Y los Judíos le dijeron: A nosotros no es lícito matar á nadie:
+
+
+## Juan 18:32 (id: 10043018032)
+
+32Para que se cumpliese el dicho de Jesús, que había dicho, dando á entender de qué muerte había de morir.
+
+
+## Juan 18:33 (id: 10043018033)
+
+33Así que, Pilato volvió á entrar en el pretorio, y llamó á Jesús, y díjole: ¿Eres tú el Rey de los Judíos?
+
+
+## Juan 18:34 (id: 10043018034)
+
+34Respondióle Jesús: ¿Dices tú esto de ti mismo, ó te lo han dicho otros de mí?
+
+
+## Juan 18:35 (id: 10043018035)
+
+35Pilato respondió: ¿Soy yo Judío? Tu gente, y los pontífices, te han entregado á mí: ¿qué has hecho?
+
+
+## Juan 18:36 (id: 10043018036)
+
+36Respondió Jesús: Mi reino no es de este mundo: si de este mundo fuera mi reino, mis servidores pelearían para que yo no fuera entregado á los Judíos: ahora, pues, mi reino no es de aquí.
+
+
+## Juan 18:37 (id: 10043018037)
+
+37Díjole entonces Pilato: ¿Luego rey eres tú? Respondió Jesús: Tú dices que yo soy rey. Yo para esto he nacido, y para esto he venido al mundo, para dar testimonio á la verdad. Todo aquél que es de la verdad, oye mi voz.
+
+
+## Juan 18:38 (id: 10043018038)
+
+38Dícele Pilato: ¿Qué cosa es verdad? Y como hubo dicho esto, salió otra vez á los Judíos, y díceles: Yo no hallo en él ningún crimen.
+
+
+## Juan 18:39 (id: 10043018039)
+
+39Empero vosotros tenéis costumbre, que os suelte uno en la Pascua: ¿queréis, pues, que os suelte al Rey de los Judíos?
+
+
+## Juan 18:40 (id: 10043018040)
+
+40Entonces todos dieron voces otra vez, diciendo: No á éste, sino á Barrabás. Y Barrabás era ladrón.
+
+
+## Juan 19:1 (id: 10043019001)
+
+1ASÍ que, entonces tomó Pilato á Jesús, y le azotó.
+
+
+## Juan 19:2 (id: 10043019002)
+
+2Y los soldados entretejieron de espinas una corona, y pusiéronla sobre su cabeza, y le vistieron de una ropa de grana;
+
+
+## Juan 19:3 (id: 10043019003)
+
+3Y decían: ¡Salve, Rey de los Judíos! y dábanle de bofetadas.
+
+
+## Juan 19:4 (id: 10043019004)
+
+4Entonces Pilato salió otra vez fuera, y díjoles: He aquí, os le traigo fuera, para que entendáis que ningún crimen hallo en él.
+
+
+## Juan 19:5 (id: 10043019005)
+
+5Y salió Jesús fuera, llevando la corona de espinas y la ropa de grana. Y díceles Pilato: He aquí el hombre.
+
+
+## Juan 19:6 (id: 10043019006)
+
+6Y como le vieron los príncipes de los sacerdotes, y los servidores, dieron voces diciendo: Crucifícale, crucifícale. Díceles Pilato: Tomadle vosotros, y crucificadle; porque yo no hallo en él crimen.
+
+
+## Juan 19:7 (id: 10043019007)
+
+7Respondiéronle los Judíos: Nosotros tenemos ley, y según nuestra ley debe morir, porque se hizo Hijo de Dios.
+
+
+## Juan 19:8 (id: 10043019008)
+
+8Y como Pilato oyó esta palabra, tuvo más miedo.
+
+
+## Juan 19:9 (id: 10043019009)
+
+9Y entró otra vez en el pretorio, y dijo á Jesús: ¿De dónde eres tú? Mas Jesús no le dió respuesta.
+
+
+## Juan 19:10 (id: 10043019010)
+
+10Entonces dícele Pilato: ¿A mí no me hablas? ¿no sabes que tengo potestad para crucificarte, y que tengo potestad para soltarte?
+
+
+## Juan 19:11 (id: 10043019011)
+
+11Respondió Jesús: Ninguna potestad tendrías contra mí, si no te fuese dado de arriba: por tanto, el que á ti me ha entregado, mayor pecado tiene.
+
+
+## Juan 19:12 (id: 10043019012)
+
+12Desde entonces procuraba Pilato soltarle; mas los Judíos daban voces, diciendo: Si á éste sueltas, no eres amigo de César: cualquiera que se hace rey, á César contradice.
+
+
+## Juan 19:13 (id: 10043019013)
+
+13Entonces Pilato, oyendo este dicho, llevó fuera á Jesús, y se sentó en el tribunal en el lugar que se dice Lithóstrotos, y en hebreo Gabbatha.
+
+
+## Juan 19:14 (id: 10043019014)
+
+14Y era la víspera de la Pascua, y como la hora de sexta. Entonces dijo á los Judíos: He aquí vuestro Rey.
+
+
+## Juan 19:15 (id: 10043019015)
+
+15Mas ellos dieron voces: Quita, quita, crucifícale. Díceles Pilato: ¿A vuestro Rey he de crucificar? Respondieron los pontífices: No tenemos rey sino á César.
+
+
+## Juan 19:16 (id: 10043019016)
+
+16Así que entonces lo entregó á ellos para que fuese crucificado. Y tomaron á Jesús, y le llevaron.
+
+
+## Juan 19:17 (id: 10043019017)
+
+17Y llevando su cruz, salió al lugar que se dice de la Calavera, y en hebreo, Gólgotha;
+
+
+## Juan 19:18 (id: 10043019018)
+
+18Donde le crucificaron, y con él otros dos, uno á cada lado, y Jesús en medio.
+
+
+## Juan 19:19 (id: 10043019019)
+
+19Y escribió también Pilato un título, que puso encima de la cruz. Y el escrito era: JESUS NAZARENO, REY DE LOS JUDIOS.
+
+
+## Juan 19:20 (id: 10043019020)
+
+20Y muchos de los Judíos leyeron este título: porque el lugar donde estaba crucificado Jesús era cerca de la ciudad: y estaba escrito en hebreo, en griego, y en latín.
+
+
+## Juan 19:21 (id: 10043019021)
+
+21Y decían á Pilato los pontífices de los Judíos: No escribas, Rey de los Judíos: sino, que él dijo: Rey soy de los Judíos.
+
+
+## Juan 19:22 (id: 10043019022)
+
+22Respondió Pilato: Lo que he escrito, he escrito.
+
+
+## Juan 19:23 (id: 10043019023)
+
+23Y como los soldados hubieron crucificado á Jesús, tomaron sus vestidos, é hicieron cuatro partes (para cada soldado una parte); y la túnica; mas la túnica era sin costura, toda tejida desde arriba.
+
+
+## Juan 19:24 (id: 10043019024)
+
+24Y dijeron entre ellos: No la partamos, sino echemos suertes sobre ella, de quién será; para que se cumpliese la Escritura, que dice: Partieron para sí mis vestidos, y sobre mi vestidura echaron suertes. Y los soldados hicieron esto.
+
+
+## Juan 19:25 (id: 10043019025)
+
+25Y estaban junto á la cruz de Jesús su madre, y la hermana de su madre, María mujer de Cleofas, y María Magdalena.
+
+
+## Juan 19:26 (id: 10043019026)
+
+26Y como vió Jesús á la madre, y al discípulo que él amaba, que estaba presente, dice á su madre: Mujer, he ahí tu hijo.
+
+
+## Juan 19:27 (id: 10043019027)
+
+27Después dice al discípulo: He ahí tu madre. Y desde aquella hora el discípulo la recibió consigo.
+
+
+## Juan 19:28 (id: 10043019028)
+
+28Después de esto, sabiendo Jesús que todas las cosas eran ya cumplidas, para que la Escritura se cumpliese, dijo: Sed tengo.
+
+
+## Juan 19:29 (id: 10043019029)
+
+29Y estaba allí un vaso lleno de vinagre: entonces ellos hinchieron una esponja de vinagre, y rodeada á un hisopo, se la llegaron á la boca.
+
+
+## Juan 19:30 (id: 10043019030)
+
+30Y como Jesús tomó el vinagre, dijo: Consumado es. Y habiendo inclinado la cabeza, dió el espíritu.
+
+
+## Juan 19:31 (id: 10043019031)
+
+31Entonces los Judíos, por cuanto era la víspera de la Pascua, para que los cuerpos no quedasen en la cruz en el sábado, pues era el gran día del sábado, rogaron á Pilato que se les quebrasen las piernas, y fuesen quitados.
+
+
+## Juan 19:32 (id: 10043019032)
+
+32Y vinieron los soldados, y quebraron las piernas al primero, y asimismo al otro que había sido crucificado con él.
+
+
+## Juan 19:33 (id: 10043019033)
+
+33Mas cuando vinieron á Jesús, como le vieron ya muerto, no le quebraron las piernas:
+
+
+## Juan 19:34 (id: 10043019034)
+
+34Empero uno de los soldados le abrió el costado con una lanza, y luego salió sangre y agua.
+
+
+## Juan 19:35 (id: 10043019035)
+
+35Y el que lo vió, da testimonio, y su testimonio es verdadero: y él sabe que dice verdad, para que vosotros también creáis.
+
+
+## Juan 19:36 (id: 10043019036)
+
+36Porque estas cosas fueron hechas para que se cumpliese la Escritura: Hueso no quebrantaréis de él.
+
+
+## Juan 19:37 (id: 10043019037)
+
+37Y también otra Escritura dice: Mirarán al que traspasaron.
+
+
+## Juan 19:38 (id: 10043019038)
+
+38Después de estas cosas, José de Arimatea, el cual era discípulo de Jesús, mas secreto por miedo de los Judíos, rogó á Pilato que pudiera quitar el cuerpo de Jesús: y permitióselo Pilato. Entonces vino, y quitó el cuerpo de Jesús.
+
+
+## Juan 19:39 (id: 10043019039)
+
+39Y vino también Nicodemo, el que antes había venido á Jesús de noche, trayendo un compuesto de mirra y de áloes, como cien libras.
+
+
+## Juan 19:40 (id: 10043019040)
+
+40Tomaron pues el cuerpo de Jesús, y envolviéronlo en lienzos con especias, como es costumbre de los Judíos sepultar.
+
+
+## Juan 19:41 (id: 10043019041)
+
+41Y en aquel lugar donde había sido crucificado, había un huerto; y en el huerto un sepulcro nuevo, en el cual aun no había sido puesto ninguno.
+
+
+## Juan 19:42 (id: 10043019042)
+
+42Allí, pues, por causa de la víspera de la Pascua de los Judíos, porque aquel sepulcro estaba cerca, pusieron á Jesús.
+
+
+## Juan 20:1 (id: 10043020001)
+
+1Y EL primer día de la semana, María Magdalena vino de mañana, siendo aún obscuro, al sepulcro; y vió la piedra quitada del sepulcro.
+
+
+## Juan 20:2 (id: 10043020002)
+
+2Entonces corrió, y vino á Simón Pedro, y al otro discípulo, al cual amaba Jesús, y les dice: Han llevado al Señor del sepulcro, y no sabemos dónde le han puesto.
+
+
+## Juan 20:3 (id: 10043020003)
+
+3Y salió Pedro, y el otro discípulo, y vinieron al sepulcro.
+
+
+## Juan 20:4 (id: 10043020004)
+
+4Y corrían los dos juntos; mas el otro discípulo corrió más presto que Pedro, y llegó primero al sepulcro.
+
+
+## Juan 20:5 (id: 10043020005)
+
+5Y bajándose á mirar, vió los lienzos echados; mas no entró.
+
+
+## Juan 20:6 (id: 10043020006)
+
+6Llegó luego Simón Pedro siguiéndole, y entró en el sepulcro, y vió los lienzos echados,
+
+
+## Juan 20:7 (id: 10043020007)
+
+7Y el sudario, que había estado sobre su cabeza, no puesto con los lienzos, sino envuelto en un lugar aparte.
+
+
+## Juan 20:8 (id: 10043020008)
+
+8Y entonces entró también el otro discípulo, que había venido primero al sepulcro, y vió, y creyó.
+
+
+## Juan 20:9 (id: 10043020009)
+
+9Porque aun no sabían la Escritura, que era necesario que él resucitase de los muertos.
+
+
+## Juan 20:10 (id: 10043020010)
+
+10Y volvieron los discípulos á los suyos.
+
+
+## Juan 20:11 (id: 10043020011)
+
+11Empero María estaba fuera llorando junto al sepulcro: y estando llorando, bajóse á mirar el sepulcro;
+
+
+## Juan 20:12 (id: 10043020012)
+
+12Y vió dos ángeles en ropas blancas que estaban sentados, el uno á la cabecera, y el otro á los pies, donde el cuerpo de Jesús había sido puesto.
+
+
+## Juan 20:13 (id: 10043020013)
+
+13Y dijéronle: Mujer, ¿por qué lloras? Díceles: Porque se han llevado á mi Señor, y no sé dónde le han puesto.
+
+
+## Juan 20:14 (id: 10043020014)
+
+14Y como hubo dicho esto, volvióse atrás, y vió á Jesús que estaba allí; mas no sabía que era Jesús.
+
+
+## Juan 20:15 (id: 10043020015)
+
+15Dícele Jesús: Mujer, ¿por qué lloras? ¿á quién buscas? Ella, pensando que era el hortelano, dícele: Señor, si tú lo has llevado, dime dónde lo has puesto, y yo lo llevaré.
+
+
+## Juan 20:16 (id: 10043020016)
+
+16Dícele Jesús: ¡María! Volviéndose ella, dícele: ¡Rabboni! que quiere decir, Maestro.
+
+
+## Juan 20:17 (id: 10043020017)
+
+17Dícele Jesús: No me toques: porque aun no he subido á mi Padre: mas ve á mis hermanos, y diles: Subo á mi Padre y á vuestro Padre, á mi Dios y á vuestro Dios.
+
+
+## Juan 20:18 (id: 10043020018)
+
+18Fué María Magdalena dando las nuevas á los discípulos de que había visto al Señor, y que él le había dicho estas cosas.
+
+
+## Juan 20:19 (id: 10043020019)
+
+19Y como fué tarde aquel día, el primero de la semana, y estando las puertas cerradas donde los discípulos estaban juntos por miedo de los Judíos, vino Jesús, y púsose en medio, y díjoles: Paz á vosotros.
+
+
+## Juan 20:20 (id: 10043020020)
+
+20Y como hubo dicho esto, mostróles las manos y el costado. Y los discípulos se gozaron viendo al Señor.
+
+
+## Juan 20:21 (id: 10043020021)
+
+21Entonces les dijo Jesús otra vez: Paz á vosotros; como me envió el Padre, así también yo os envío.
+
+
+## Juan 20:22 (id: 10043020022)
+
+22Y como hubo dicho esto, sopló, y díjoles: Tomad el Espíritu Santo:
+
+
+## Juan 20:23 (id: 10043020023)
+
+23A los que remitiereis los pecados, les son remitidos: á quienes los retuviereis, serán retenidos.
+
+
+## Juan 20:24 (id: 10043020024)
+
+24Empero Tomás, uno de los doce, que se dice el Dídimo, no estaba con ellos cuando Jesús vino.
+
+
+## Juan 20:25 (id: 10043020025)
+
+25Dijéronle pues los otros discípulos: Al Señor hemos visto. Y él les dijo: Si no viere en sus manos la señal de los clavos, y metiere mi dedo en el lugar de los clavos, y metiere mi mano en su costado, no creeré.
+
+
+## Juan 20:26 (id: 10043020026)
+
+26Y ocho días después, estaban otra vez sus discípulos dentro, y con ellos Tomás. Vino Jesús, las puertas cerradas, y púsose en medio, y dijo: Paz á vosotros.
+
+
+## Juan 20:27 (id: 10043020027)
+
+27Luego dice á Tomás: Mete tu dedo aquí, y ve mis manos: y alarga acá tu mano, y métela en mi costado: y no seas incrédulo, sino fiel.
+
+
+## Juan 20:28 (id: 10043020028)
+
+28Entonces Tomás respondió, y díjole: ¡Señor mío, y Dios mío!
+
+
+## Juan 20:29 (id: 10043020029)
+
+29Dícele Jesús: Porque me has visto, Tomás, creiste: bienaventurados los que no vieron y creyeron.
+
+
+## Juan 20:30 (id: 10043020030)
+
+30Y también hizo Jesús muchas otras señales en presencia de sus discípulos, que no están escritas en este libro.
+
+
+## Juan 20:31 (id: 10043020031)
+
+31Estas empero son escritas, para que creáis que Jesús es el Cristo, el Hijo de Dios; y para que creyendo, tengáis vida en su nombre.
+
+
+## Juan 21:1 (id: 10043021001)
+
+1DESPUÉS se manifestó Jesús otra vez á sus discípulos en la mar de Tiberias; y manifestóse de esta manera.
+
+
+## Juan 21:2 (id: 10043021002)
+
+2Estaban juntos Simón Pedro, y Tomás, llamado el Dídimo, y Natanael, el que era de Caná de Galilea, y los hijos de Zebedeo, y otros dos de sus discípulos.
+
+
+## Juan 21:3 (id: 10043021003)
+
+3Díceles Simón: A pescar voy. Dícenle: Vamos nosotros también contigo. Fueron, y subieron en una barca; y aquella noche no cogieron nada.
+
+
+## Juan 21:4 (id: 10043021004)
+
+4Y venida la mañana, Jesús se puso á la ribera: mas los discípulos no entendieron que era Jesús.
+
+
+## Juan 21:5 (id: 10043021005)
+
+5Y díjoles: Mozos, ¿tenéis algo de comer? Respondiéronle: No.
+
+
+## Juan 21:6 (id: 10043021006)
+
+6Y él les dice: Echad la red á la mano derecha del barco, y hallaréis. Entonces la echaron, y no la podían en ninguna manera sacar, por la multitud de los peces.
+
+
+## Juan 21:7 (id: 10043021007)
+
+7Entonces aquel discípulo, al cual amaba Jesús, dijo á Pedro: El Señor es. Y Simón Pedro, como oyó que era el Señor, ciñóse la ropa, porque estaba desnudo, y echóse á la mar.
+
+
+## Juan 21:8 (id: 10043021008)
+
+8Y los otros discípulos vinieron con el barco (porque no estaban lejos de tierra sino como doscientos codos), trayendo la red de peces.
+
+
+## Juan 21:9 (id: 10043021009)
+
+9Y como descendieron á tierra, vieron ascuas puestas, y un pez encima de ellas, y pan.
+
+
+## Juan 21:10 (id: 10043021010)
+
+10Díceles Jesús: Traed de los peces que cogisteis ahora.
+
+
+## Juan 21:11 (id: 10043021011)
+
+11Subió Simón Pedro, y trajo la red á tierra, llena de grandes peces, ciento cincuenta y tres: y siendo tantos, la red no se rompió.
+
+
+## Juan 21:12 (id: 10043021012)
+
+12Díceles Jesús: Venid, comed. Y ninguno de los discípulos osaba preguntarle: ¿Tú, quién eres? sabiendo que era el Señor.
+
+
+## Juan 21:13 (id: 10043021013)
+
+13Viene pues Jesús, y toma el pan, y les da; y asimismo del pez.
+
+
+## Juan 21:14 (id: 10043021014)
+
+14Esta era ya la tercera vez que Jesús se manifestó á sus discípulos, habiendo resucitado de los muertos.
+
+
+## Juan 21:15 (id: 10043021015)
+
+15Y cuando hubieron comido, Jesús dijo á Simón Pedro: Simón, hijo de Jonás, ¿me amas más que éstos? Dícele: Sí, Señor: tú sabes que te amo. Dícele: Apacienta mis corderos.
+
+
+## Juan 21:16 (id: 10043021016)
+
+16Vuélvele á decir la segunda vez: Simón, hijo de Jonás, ¿me amas? Respóndele: Sí, Señor: tú sabes que te amo. Dícele: Apacienta mis ovejas.
+
+
+## Juan 21:17 (id: 10043021017)
+
+17Dícele la tercera vez: Simón, hijo de Jonás, ¿me amas? Entristecióse Pedro de que le dijese la tercera vez: ¿Me amas? y dícele: Señor, tú sabes todas las cosas; tú sabes que te amo. Dícele Jesús: Apacienta mis ovejas.
+
+
+## Juan 21:18 (id: 10043021018)
+
+18De cierto, de cierto te digo: Cuando eras más mozo, te ceñías, é ibas donde querías; mas cuando ya fueres viejo, extenderás tus manos, y te ceñirá otro, y te llevará á donde no quieras.
+
+
+## Juan 21:19 (id: 10043021019)
+
+19Y esto dijo, dando á entender con qué muerte había de glorificar á Dios. Y dicho esto, dícele: Sígueme.
+
+
+## Juan 21:20 (id: 10043021020)
+
+20Volviéndose Pedro, ve á aquel discípulo al cual amaba Jesús, que seguía, el que también se había recostado á su pecho en la cena, y le había dicho: Señor, ¿quién es el que te ha de entregar?
+
+
+## Juan 21:21 (id: 10043021021)
+
+21Así que Pedro vió á éste, dice á Jesús: Señor, ¿y éste, qué?
+
+
+## Juan 21:22 (id: 10043021022)
+
+22Dícele Jesús: Si quiero que él quede hasta que yo venga, ¿qué á tí? Sígueme tú.
+
+
+## Juan 21:23 (id: 10043021023)
+
+23Salió entonces este dicho entre los hermanos, que aquel discípulo no había de morir. Mas Jesús no le dijo, No morirá; sino: Si quiero que él quede hasta que yo venga ¿qué á ti?
+
+
+## Juan 21:24 (id: 10043021024)
+
+24Este es aquel discípulo que da testimonio de estas cosas, y escribió estas cosas: y sabemos que su testimonio es verdadero.
+
+
+## Juan 21:25 (id: 10043021025)
+
+25Y hay también otras muchas cosas que hizo Jesús, que si se escribiesen cada una por sí, ni aun en el mundo pienso que cabrían los libros que se habrían de escribir. Amén.
+
+`;export{e as default};

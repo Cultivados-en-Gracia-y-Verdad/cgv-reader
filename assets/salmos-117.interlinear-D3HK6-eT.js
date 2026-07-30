@@ -1,0 +1,3 @@
+const H=`salmos 117:1	הַֽלְל֣וּ<1984 b|H1984|HVpv2mp|alabad> אֶת<853|H853|HTo|OBJ> יְ֭הוָה<3068|H3068|HNp|YHWH> כָּל<3605|H3605|HNcmsc|todo> גּוֹיִ֑ם<1471 a|H1471|HNcmpa|Gentile> שַׁ֝בְּח֗וּ/הוּ<7623 b|H7623|HVpv2mp/Sp3ms|alabad·él> כָּל<3605|H3605|HNcmsc|todo> הָ/אֻמִּֽים<d/523|H523|HTd/Ncfpa|los·pueblos>
+salmos 117:2	כִּ֥י<3588 a|H3588|HC|porque> גָ֘בַ֤ר<1396|H1396|HVqp3ms|espada> עָלֵ֨י/נוּ<5921 a|H5921|HR/Sp1cp|sobre·nosotros> חַסְדּ֗/וֹ<2617 a|H2617|HNcmsc/Sp3ms|misericordia·él> וֶֽ/אֱמֶת<c/571|H571|HC/Ncfsc|y·verdad> יְהוָ֥ה<3068|H3068|HNp|YHWH> לְ/עוֹלָ֗ם<l/5769|H5769|HR/Ncmsa|a·eterno> הַֽלְלוּ<1984 b|H1984|HVpv2mp|alabad> יָֽהּ<3050|H3050|HNp|Jah>
+`;export{H as default};
