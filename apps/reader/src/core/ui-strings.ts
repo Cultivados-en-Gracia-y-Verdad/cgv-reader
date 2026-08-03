@@ -106,7 +106,7 @@ const EN: UiStrings = {
     "Book is shared across Reader, Observer Mark, and Compiler when LBF text exists (Titus, 1 Peter). Structure / Generate still need reverse-interlinear alignment (Titus for now). Notes stay keyed to each verse.",
   loadingBook: "Loading…",
   progressHint: count =>
-    `Saved progress found in this browser (${count} item${count === 1 ? "" : "s"}) — auto-save is on.`,
+    `Saved progress found in this browser (${count} progress record${count === 1 ? "" : "s"}) — auto-save is on.`,
   recoverNotes: "Recover notes",
   downloadBackup: "Download backup",
   recoveredNotesTitle: "Saved Reader notes",
@@ -204,7 +204,7 @@ const ES: UiStrings = {
     "El libro se comparte entre Lector, Observador (Marcar) y Compilador cuando hay texto LBF (Tito, 1 Pedro). Estructura / Generar aún necesitan alineación inversa (Tito por ahora). Las notas quedan ligadas a cada versículo.",
   loadingBook: "Cargando…",
   progressHint: count =>
-    `Progreso encontrado en este navegador (${count} elemento${count === 1 ? "" : "s"} guardado${count === 1 ? "" : "s"}) — el guardado automático está activo.`,
+    `Progreso encontrado en este navegador (${count} registro${count === 1 ? "" : "s"} de progreso) — el guardado automático está activo.`,
   recoverNotes: "Recuperar notas",
   downloadBackup: "Descargar copia",
   recoveredNotesTitle: "Notas guardadas del Lector",

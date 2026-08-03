@@ -337,6 +337,8 @@ export async function startProgressAutosave(): Promise<void> {
   });
 
   emitStatus();
-  // Capture current localStorage snapshot once at boot.
-  if (countExistingProgressKeys() > 0) scheduleAutosave();
+  // Capture current localStorage at first use, but never overwrite an existing
+  // IndexedDB snapshot just because the page opened during recovery.
+  const existingBackup = await readAutosaveBackup().catch(() => null);
+  if (!existingBackup && countExistingProgressKeys() > 0) scheduleAutosave();
 }

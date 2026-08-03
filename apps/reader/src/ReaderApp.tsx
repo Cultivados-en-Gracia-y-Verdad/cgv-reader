@@ -30,6 +30,7 @@ interface SavedReaderNote {
   id: string;
   label: string;
   text: string;
+  source?: "local" | "backup";
   updatedAt?: string;
 }
 
@@ -89,14 +90,14 @@ function addNotesToRecovery(
       notes: []
     } satisfies SavedNoteGroup);
 
-  const seen = new Set(group.notes.map(note => `${note.id}|${note.label}|${note.text}`));
+  const seen = new Set(group.notes.map(note => `${note.label}|${note.text}`));
   for (const note of notes) {
-    const key = `${note.id}|${note.label}|${note.text}`;
+    const key = `${note.label}|${note.text}`;
     if (seen.has(key)) continue;
     seen.add(key);
     group.notes.push({
       ...note,
-      id: `${source}:${note.id}`
+      source
     });
   }
 
