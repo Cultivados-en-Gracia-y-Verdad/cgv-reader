@@ -5,10 +5,13 @@ import {
   downloadProgressFile,
   maybeRestoreFromAutosave,
   readCapabilities,
+  readAutosaveBackup,
+  readerBookIdFromWorkshopSlug,
   recoverGreekConfirmationsFromAutosave,
   setCapability,
   startProgressAutosave,
   workshopProgressKeys,
+  workshopStorageSlug,
   writeReaderBook,
   type CapabilityState,
   type ReaderBookId
@@ -31,7 +34,7 @@ interface SavedReaderNote {
 }
 
 interface SavedNoteGroup {
-  bookId: string;
+  bookId: ReaderBookId | null;
   bookName: string;
   notes: SavedReaderNote[];
 }
@@ -46,36 +49,100 @@ function readZoneFromHash(capabilities: CapabilityState): Zone {
   return "reader";
 }
 
-function readSavedReaderNotes(): SavedNoteGroup[] {
-  return READER_BOOKS.flatMap(book => {
-    const raw = window.localStorage.getItem(workshopProgressKeys(book.id).readerNotes);
-    if (!raw) return [];
+function parseSavedNotes(value: unknown): SavedReaderNote[] {
+  if (!Array.isArray(value)) return [];
 
-    try {
-      const parsed = JSON.parse(raw);
-      if (!Array.isArray(parsed)) return [];
+  return value
+    .filter((note): note is SavedReaderNote => {
+      return (
+        note &&
+        typeof note === "object" &&
+        typeof note.id === "string" &&
+        typeof note.label === "string" &&
+        typeof note.text === "string" &&
+        note.text.trim().length > 0
+      );
+    })
+    .map(note => ({
+      ...note,
+      text: note.text.trim()
+    }));
+}
 
-      const notes = parsed
-        .filter((note): note is SavedReaderNote => {
-          return (
-            note &&
-            typeof note === "object" &&
-            typeof note.id === "string" &&
-            typeof note.label === "string" &&
-            typeof note.text === "string" &&
-            note.text.trim().length > 0
-          );
-        })
-        .map(note => ({
-          ...note,
-          text: note.text.trim()
-        }));
+function addNotesToRecovery(
+  groups: Map<string, SavedNoteGroup>,
+  bookSlug: string,
+  rawNotes: unknown,
+  source: "local" | "backup"
+): void {
+  const notes = parseSavedNotes(rawNotes);
+  if (!notes.length) return;
 
-      return notes.length ? [{ bookId: book.id, bookName: book.displayName, notes }] : [];
-    } catch {
-      return [];
+  const bookId = readerBookIdFromWorkshopSlug(bookSlug);
+  const bookInfo = bookId ? READER_BOOKS.find(book => book.id === bookId) : null;
+  const groupKey = bookId ?? bookSlug;
+  const group =
+    groups.get(groupKey) ??
+    ({
+      bookId,
+      bookName: bookInfo?.displayName ?? bookSlug,
+      notes: []
+    } satisfies SavedNoteGroup);
+
+  const seen = new Set(group.notes.map(note => `${note.id}|${note.label}|${note.text}`));
+  for (const note of notes) {
+    const key = `${note.id}|${note.label}|${note.text}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    group.notes.push({
+      ...note,
+      id: `${source}:${note.id}`
+    });
+  }
+
+  groups.set(groupKey, group);
+}
+
+function addNotesFromJson(groups: Map<string, SavedNoteGroup>, bookSlug: string, raw: string | null): void {
+  if (!raw) return;
+  try {
+    addNotesToRecovery(groups, bookSlug, JSON.parse(raw), "local");
+  } catch {
+    /* ignore corrupt note stores */
+  }
+}
+
+async function readSavedReaderNotes(): Promise<SavedNoteGroup[]> {
+  const groups = new Map<string, SavedNoteGroup>();
+
+  for (const book of READER_BOOKS) {
+    addNotesFromJson(groups, workshopStorageSlug(book.id), window.localStorage.getItem(workshopProgressKeys(book.id).readerNotes));
+  }
+
+  for (let index = 0; index < window.localStorage.length; index += 1) {
+    const key = window.localStorage.key(index);
+    if (!key) continue;
+    const match = key?.match(/^the-reader:([^:]+):notes$/);
+    if (!match) continue;
+    addNotesFromJson(groups, match[1]!, window.localStorage.getItem(key));
+  }
+
+  try {
+    const backup = await readAutosaveBackup();
+    const data = backup?.data ?? {};
+    for (const [key, value] of Object.entries(data)) {
+      const match = key.match(/^the-reader:([^:]+):notes$/);
+      if (!match) continue;
+      addNotesToRecovery(groups, match[1], value, "backup");
     }
-  });
+  } catch {
+    /* IndexedDB can be unavailable in some browser privacy modes. */
+  }
+
+  return Array.from(groups.values()).map(group => ({
+    ...group,
+    notes: group.notes.sort((a, b) => (b.updatedAt ?? "").localeCompare(a.updatedAt ?? ""))
+  }));
 }
 
 function ReaderAppInner() {
@@ -151,13 +218,13 @@ function ReaderAppInner() {
     if (!next.compiler && zone === "compiler") openReader();
   }
 
-  function openSavedNotes() {
-    setSavedNotes(readSavedReaderNotes());
+  async function openSavedNotes() {
+    setSavedNotes(await readSavedReaderNotes());
     setShowSavedNotes(true);
   }
 
-  function openBookFromRecovery(bookId: string) {
-    writeReaderBook(bookId as ReaderBookId);
+  function openBookFromRecovery(bookId: ReaderBookId) {
+    writeReaderBook(bookId);
     openReader();
     setShowSavedNotes(false);
     setProgressHint(null);
@@ -210,7 +277,7 @@ function ReaderAppInner() {
         <p className="migration-banner" role="status">
           <span className="migration-banner-copy">{t.progressHint(progressCount)}</span>
           <span className="migration-banner-actions">
-            <button type="button" className="migration-banner-action" onClick={openSavedNotes}>
+            <button type="button" className="migration-banner-action" onClick={() => void openSavedNotes()}>
               {t.recoverNotes}
             </button>
             <button type="button" className="migration-banner-action" onClick={() => downloadProgressFile()}>
@@ -234,22 +301,27 @@ function ReaderAppInner() {
             </div>
             {savedNotes.length ? (
               <div className="reader-recovery-list">
-                {savedNotes.map(group => (
-                  <section className="reader-recovery-book" key={group.bookId}>
-                    <div className="reader-recovery-book-header">
-                      <h2>{group.bookName}</h2>
-                      <button type="button" onClick={() => openBookFromRecovery(group.bookId)}>
-                        {t.openBook(group.bookName)}
-                      </button>
-                    </div>
-                    {group.notes.map(note => (
-                      <article className="reader-recovery-note" key={note.id}>
-                        <h3>{note.label}</h3>
-                        <p>{note.text}</p>
-                      </article>
-                    ))}
-                  </section>
-                ))}
+                {savedNotes.map(group => {
+                  const bookId = group.bookId;
+                  return (
+                    <section className="reader-recovery-book" key={bookId ?? group.bookName}>
+                      <div className="reader-recovery-book-header">
+                        <h2>{group.bookName}</h2>
+                        {bookId ? (
+                          <button type="button" onClick={() => openBookFromRecovery(bookId)}>
+                            {t.openBook(group.bookName)}
+                          </button>
+                        ) : null}
+                      </div>
+                      {group.notes.map(note => (
+                        <article className="reader-recovery-note" key={note.id}>
+                          <h3>{note.label}</h3>
+                          <p>{note.text}</p>
+                        </article>
+                      ))}
+                    </section>
+                  );
+                })}
               </div>
             ) : (
               <p className="reader-recovery-empty">{t.recoveredNotesEmpty}</p>

@@ -22,6 +22,7 @@ export {
   flushAutosave,
   linkAutosaveFile,
   unlinkAutosaveFile,
+  readAutosaveBackup,
   maybeRestoreFromAutosave,
   recoverGreekConfirmationsFromAutosave,
   getAutosaveStatus,

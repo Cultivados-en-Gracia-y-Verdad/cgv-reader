@@ -218,13 +218,19 @@ export async function unlinkAutosaveFile(): Promise<void> {
   emitStatus();
 }
 
+export async function readAutosaveBackup(): Promise<ProgressBundle | null> {
+  const backup = await idbGet<ProgressBundle>(BACKUP_KEY);
+  if (!backup?.data || typeof backup.data !== "object") return null;
+  return backup;
+}
+
 /**
  * If localStorage was wiped but IndexedDB still has a bundle, restore it.
  * Returns true when a restore was applied (caller should reload).
  */
 export async function maybeRestoreFromAutosave(): Promise<boolean> {
   if (countExistingProgressKeys() > 0) return false;
-  const backup = await idbGet<ProgressBundle>(BACKUP_KEY);
+  const backup = await readAutosaveBackup();
   if (!backup?.data || typeof backup.data !== "object") return false;
   if (Object.keys(backup.data).length === 0) return false;
 
