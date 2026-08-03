@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import {
+  READER_BOOKS,
   countExistingProgressKeys,
+  downloadProgressFile,
   maybeRestoreFromAutosave,
   readCapabilities,
   recoverGreekConfirmationsFromAutosave,
   setCapability,
   startProgressAutosave,
-  type CapabilityState
+  workshopProgressKeys,
+  writeReaderBook,
+  type CapabilityState,
+  type ReaderBookId
 } from "@cgv/core";
 import CompilerShell from "./compiler/CompilerShell";
 import PreferencesPanel from "./core/PreferencesPanel";
@@ -18,6 +23,19 @@ import ReaderView from "./reader/ReaderView";
 
 type Zone = "reader" | "observer" | "compiler";
 
+interface SavedReaderNote {
+  id: string;
+  label: string;
+  text: string;
+  updatedAt?: string;
+}
+
+interface SavedNoteGroup {
+  bookId: string;
+  bookName: string;
+  notes: SavedReaderNote[];
+}
+
 const OBSERVER_HASHES = new Set(["o", "clause", "workshop", "interlinear"]);
 const COMPILER_HASH = "c";
 
@@ -28,12 +46,46 @@ function readZoneFromHash(capabilities: CapabilityState): Zone {
   return "reader";
 }
 
+function readSavedReaderNotes(): SavedNoteGroup[] {
+  return READER_BOOKS.flatMap(book => {
+    const raw = window.localStorage.getItem(workshopProgressKeys(book.id).readerNotes);
+    if (!raw) return [];
+
+    try {
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return [];
+
+      const notes = parsed
+        .filter((note): note is SavedReaderNote => {
+          return (
+            note &&
+            typeof note === "object" &&
+            typeof note.id === "string" &&
+            typeof note.label === "string" &&
+            typeof note.text === "string" &&
+            note.text.trim().length > 0
+          );
+        })
+        .map(note => ({
+          ...note,
+          text: note.text.trim()
+        }));
+
+      return notes.length ? [{ bookId: book.id, bookName: book.displayName, notes }] : [];
+    } catch {
+      return [];
+    }
+  });
+}
+
 function ReaderAppInner() {
   const { t } = useUiLanguage();
   const [capabilities, setCapabilities] = useState<CapabilityState>(() => readCapabilities());
   const [zone, setZone] = useState<Zone>(() => readZoneFromHash(readCapabilities()));
   const [progressHint, setProgressHint] = useState<string | null>(null);
   const [progressCount, setProgressCount] = useState(0);
+  const [showSavedNotes, setShowSavedNotes] = useState(false);
+  const [savedNotes, setSavedNotes] = useState<SavedNoteGroup[]>([]);
 
   useEffect(() => {
     const onHashChange = () => setZone(readZoneFromHash(capabilities));
@@ -99,6 +151,18 @@ function ReaderAppInner() {
     if (!next.compiler && zone === "compiler") openReader();
   }
 
+  function openSavedNotes() {
+    setSavedNotes(readSavedReaderNotes());
+    setShowSavedNotes(true);
+  }
+
+  function openBookFromRecovery(bookId: string) {
+    writeReaderBook(bookId as ReaderBookId);
+    openReader();
+    setShowSavedNotes(false);
+    setProgressHint(null);
+  }
+
   return (
     <>
       <div className="app-chrome" aria-label={t.chromeAria}>
@@ -144,11 +208,54 @@ function ReaderAppInner() {
 
       {progressHint && zone === "reader" ? (
         <p className="migration-banner" role="status">
-          {t.progressHint(progressCount)}
-          <button type="button" className="migration-banner-dismiss" onClick={() => setProgressHint(null)}>
-            {t.dismiss}
-          </button>
+          <span className="migration-banner-copy">{t.progressHint(progressCount)}</span>
+          <span className="migration-banner-actions">
+            <button type="button" className="migration-banner-action" onClick={openSavedNotes}>
+              {t.recoverNotes}
+            </button>
+            <button type="button" className="migration-banner-action" onClick={() => downloadProgressFile()}>
+              {t.downloadBackup}
+            </button>
+            <button type="button" className="migration-banner-dismiss" onClick={() => setProgressHint(null)}>
+              {t.dismiss}
+            </button>
+          </span>
         </p>
+      ) : null}
+
+      {showSavedNotes ? (
+        <div className="reader-note-panel reader-recovery-panel" role="dialog" aria-label={t.recoveredNotesTitle}>
+          <div className="reader-note-panel-inner reader-recovery-panel-inner">
+            <div className="reader-recovery-header">
+              <p>{t.recoveredNotesTitle}</p>
+              <button type="button" onClick={() => setShowSavedNotes(false)}>
+                {t.close}
+              </button>
+            </div>
+            {savedNotes.length ? (
+              <div className="reader-recovery-list">
+                {savedNotes.map(group => (
+                  <section className="reader-recovery-book" key={group.bookId}>
+                    <div className="reader-recovery-book-header">
+                      <h2>{group.bookName}</h2>
+                      <button type="button" onClick={() => openBookFromRecovery(group.bookId)}>
+                        {t.openBook(group.bookName)}
+                      </button>
+                    </div>
+                    {group.notes.map(note => (
+                      <article className="reader-recovery-note" key={note.id}>
+                        <h3>{note.label}</h3>
+                        <p>{note.text}</p>
+                      </article>
+                    ))}
+                  </section>
+                ))}
+              </div>
+            ) : (
+              <p className="reader-recovery-empty">{t.recoveredNotesEmpty}</p>
+            )}
+          </div>
+        </div>
       ) : null}
 
       {/* Temporary teacher unlock for local development — replace with real entitlements later. */}
