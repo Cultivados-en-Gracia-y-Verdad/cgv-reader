@@ -607,7 +607,7 @@
       "token": 15,
       "sourceSurface": "וּ/מְבִינֵ֣י",
       "greekSurface": "וּ/מְבִינֵ֣י",
-      "lbfSurface": "e entendidos",
+      "lbfSurface": "y entendidos",
       "lbfWordIndex": 22
     },
     {
@@ -746,7 +746,7 @@
       "token": 4,
       "sourceSurface": "דְּבַר",
       "greekSurface": "דְּבַר",
-      "lbfSurface": "la porción",
+      "lbfSurface": "una porción",
       "lbfWordIndex": 6
     },
     {
@@ -755,8 +755,8 @@
       "token": 5,
       "sourceSurface": "י֣וֹם",
       "greekSurface": "י֣וֹם",
-      "lbfSurface": "del día",
-      "lbfWordIndex": 8
+      "lbfSurface": "diaria",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 1,
@@ -764,8 +764,8 @@
       "token": 6,
       "sourceSurface": "בְּ/יוֹמ֗/וֹ",
       "greekSurface": "בְּ/יוֹמ֗/וֹ",
-      "lbfSurface": "en su día",
-      "lbfWordIndex": 11
+      "lbfSurface": "diaria",
+      "lbfWordIndex": 7
     },
     {
       "chapter": 1,
@@ -774,7 +774,7 @@
       "sourceSurface": "מִ/פַּת",
       "greekSurface": "מִ/פַּת",
       "lbfSurface": "de los",
-      "lbfWordIndex": 13
+      "lbfWordIndex": 9
     },
     {
       "chapter": 1,
@@ -783,7 +783,7 @@
       "sourceSurface": "בַּ֤ג",
       "greekSurface": "בַּ֤ג",
       "lbfSurface": "manjares",
-      "lbfWordIndex": 14
+      "lbfWordIndex": 10
     },
     {
       "chapter": 1,
@@ -792,7 +792,7 @@
       "sourceSurface": "הַ/מֶּ֨לֶךְ֙",
       "greekSurface": "הַ/מֶּ֨לֶךְ֙",
       "lbfSurface": "del rey",
-      "lbfWordIndex": 16
+      "lbfWordIndex": 12
     },
     {
       "chapter": 1,
@@ -801,7 +801,7 @@
       "sourceSurface": "וּ/מִ/יֵּ֣ין",
       "greekSurface": "וּ/מִ/יֵּ֣ין",
       "lbfSurface": "y del vino",
-      "lbfWordIndex": 19
+      "lbfWordIndex": 15
     },
     {
       "chapter": 1,
@@ -810,7 +810,7 @@
       "sourceSurface": "מִשְׁתָּ֔י/ו",
       "greekSurface": "מִשְׁתָּ֔י/ו",
       "lbfSurface": "de su beber",
-      "lbfWordIndex": 22
+      "lbfWordIndex": 18
     },
     {
       "chapter": 1,
@@ -818,8 +818,8 @@
       "token": 12,
       "sourceSurface": "וּֽ/לְ/גַדְּלָ֖/ם",
       "greekSurface": "וּֽ/לְ/גַדְּלָ֖/ם",
-      "lbfSurface": "y para criarlos",
-      "lbfWordIndex": 25
+      "lbfSurface": "y para educarlos",
+      "lbfWordIndex": 21
     },
     {
       "chapter": 1,
@@ -828,7 +828,7 @@
       "sourceSurface": "שָׁנִ֣ים",
       "greekSurface": "שָׁנִ֣ים",
       "lbfSurface": "años",
-      "lbfWordIndex": 27
+      "lbfWordIndex": 23
     },
     {
       "chapter": 1,
@@ -837,7 +837,7 @@
       "sourceSurface": "שָׁל֑וֹשׁ",
       "greekSurface": "שָׁל֑וֹשׁ",
       "lbfSurface": "tres",
-      "lbfWordIndex": 26
+      "lbfWordIndex": 22
     },
     {
       "chapter": 1,
@@ -846,7 +846,7 @@
       "sourceSurface": "וּ/מִ֨/קְצָתָ֔/ם",
       "greekSurface": "וּ/מִ֨/קְצָתָ֔/ם",
       "lbfSurface": "y al cabo de ellos",
-      "lbfWordIndex": 32
+      "lbfWordIndex": 28
     },
     {
       "chapter": 1,
@@ -855,7 +855,7 @@
       "sourceSurface": "יַֽעַמְד֖וּ",
       "greekSurface": "יַֽעַמְד֖וּ",
       "lbfSurface": "estarían",
-      "lbfWordIndex": 33
+      "lbfWordIndex": 29
     },
     {
       "chapter": 1,
@@ -864,7 +864,7 @@
       "sourceSurface": "לִ/פְנֵ֥י",
       "greekSurface": "לִ/פְנֵ֥י",
       "lbfSurface": "delante",
-      "lbfWordIndex": 34
+      "lbfWordIndex": 30
     },
     {
       "chapter": 1,
@@ -873,7 +873,7 @@
       "sourceSurface": "הַ/מֶּֽלֶךְ",
       "greekSurface": "הַ/מֶּֽלֶךְ",
       "lbfSurface": "del rey",
-      "lbfWordIndex": 36
+      "lbfWordIndex": 32
     },
     {
       "chapter": 1,
@@ -1195,7 +1195,7 @@
       "token": 12,
       "sourceSurface": "וַ/יְבַקֵּשׁ֙",
       "greekSurface": "וַ/יְבַקֵּשׁ֙",
-      "lbfSurface": "y buscó",
+      "lbfSurface": "y recurrió",
       "lbfWordIndex": 23
     },
     {
@@ -1204,7 +1204,7 @@
       "token": 13,
       "sourceSurface": "מִ/שַּׂ֣ר",
       "greekSurface": "מִ/שַּׂ֣ר",
-      "lbfSurface": "del jefe",
+      "lbfSurface": "al jefe",
       "lbfWordIndex": 25
     },
     {

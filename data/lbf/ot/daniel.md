@@ -19,11 +19,11 @@ Y el rey dijo a Aspenaz, jefe de sus eunucos, que trajera de los hijos de Israel
 
 ### 1:4
 
-jóvenes en los cuales no hubiera ninguna mancha, y de buena apariencia, e inteligentes en toda sabiduría, y conocedores de conocimiento, e entendidos en ciencia, y que tuvieran fuerza en ellos para estar en el palacio del rey, y para enseñarles la escritura y la lengua de los caldeos.
+jóvenes en los cuales no hubiera ninguna mancha, y de buena apariencia, e inteligentes en toda sabiduría, y conocedores de conocimiento, y entendidos en ciencia, y que tuvieran fuerza en ellos para estar en el palacio del rey, y para enseñarles la escritura y la lengua de los caldeos.
 
 ### 1:5
 
-Y el rey les asignó la porción del día en su día de los manjares del rey y del vino de su beber, y para criarlos tres años, y al cabo de ellos estarían delante del rey.
+Y el rey les asignó una porción diaria de los manjares del rey y del vino de su beber, y para educarlos tres años, y al cabo de ellos estarían delante del rey.
 
 ### 1:6
 
@@ -35,7 +35,7 @@ Y el jefe de los eunucos les puso nombres: puso a Daniel Beltsasar, y a Ananías
 
 ### 1:8
 
-Y Daniel puso en su corazón que no se contaminaría con los manjares del rey ni con el vino de su beber; y buscó del jefe de los eunucos que no se contaminara.
+Y Daniel puso en su corazón que no se contaminaría con los manjares del rey ni con el vino de su beber; y recurrió al jefe de los eunucos que no se contaminara.
 
 ### 1:9
 
