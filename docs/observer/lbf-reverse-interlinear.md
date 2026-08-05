@@ -113,38 +113,40 @@ python3 scripts/compile-lbf-alignment-1juan.py
 
 `data/lbf/nt/1juan.alignment.json` is the Structure map. Re-run after link edits.
 
-## Daniel (OT — Reader text + ch.1 alignment pilot)
+## Daniel (OT — hand alignment production)
 
-First OT LBF book in Reader. Canon: `herramientas/Biblia-LBF/translation/ot/daniel.md`.
+Canon: `herramientas/Biblia-LBF/translation/ot/daniel.md`.  
 Staging: `data/lbf/ot/daniel.md`.
 
 | Layer | Status |
 |-------|--------|
-| Reader LBF | Full-book draft (chs 1–12); revise verse-by-verse vs OSHB |
-| BLE / SPNBES / RV1909 | Available in Reader prefs (no NBLA OT pack) |
-| OSHB spine | `cgv-translator/translations/oshb-spine/daniel/daniel-oshb-spine.json` (`h27…` ids) |
-| Reverse links | Full-book gloss seed (`daniel-reverse-links.json`); hand-refine pending |
-| Alignment | `data/lbf/ot/daniel.alignment.json` — **6035/6035** (Protestant refs; gloss-seed draft) |
-| Observer Mark | Enabled — OSHB spine via `daniel.tokens.jsonl` (MT→Prot remap) |
-| Observer Structure | Enabled — LBF reverse-interlinear; finite detection via OSHB morph |
+| Reader LBF | Full-book Spanish (chs 1–12), OSHB faithfulness pass, Latin American *ustedes* |
+| OSHB spine | `cgv-data/interlinears/OT/daniel.tokens.jsonl` (MT→Prot remap in Reader/workbench) |
+| Hand align | `data/lbf/ot/daniel.align.<n>.json` (n=1–12) — editable source of truth |
+| Book merge | `data/lbf/ot/daniel.align.json` — regenerate with hand compile `--also-merge` |
+| Production map | `data/lbf/ot/daniel.alignment.json` — Reader Structure consumer |
+| Observer Mark / Structure | Enabled — OSHB morph + LBF reverse-interlinear |
 
 Verse numbering: OSHB spine uses **MT**; LBF/alignment/Observer display use **Protestant**. Remap: MT 3:31–33→4:1–3; MT 4:n→4:(n+3); MT 6:1→5:31; MT 6:n(n≥2)→6:(n−1).
 
-### Daniel compile pipeline
+### Daniel maintenance (hand path — do not gloss-seed)
+
+Edit Spanish in staging (or Biblia-LBF, then sync). Edit chapter hand files. Then:
 
 ```bash
-python3 scripts/build-daniel-oshb-spine.py
-python3 scripts/seed-daniel-reverse-links.py          # all chapters
-python3 scripts/compile-lbf-alignment-daniel.py
+python3 scripts/lbf-align-workbench.py check <ch>          # after chapter edits
+python3 scripts/compile-lbf-alignment-daniel-hand.py --also-merge
+python3 scripts/verify-lbf-text.py
+python3 scripts/fill-daniel-mark-progress.py --repair      # refresh Observer workshop fill
 ```
 
-Fix reverse links, then recompile. Do not hand-patch `daniel.alignment.json` for linked verses.
+**Do not** run `seed-daniel-reverse-links.py` or `compile-lbf-alignment-daniel.py` for production — the gloss-seed compile refuses unless `--force-gloss-seed` is passed.
 
-Author in Biblia-LBF; sync staging intentionally.
+Author in Biblia-LBF; keep staging in sync intentionally.
 
 ## Open follow-ups
 
 1. Finish 1 Pedro / Judas / 1 Juan reverse links to Tito’s hand-quality bar (see ADR-0001 checklist).
 2. Promote LBF Structure books together into `cgv-data`; cut Reader over from staging.
 3. Plan TR1894 Greek spine switch when multi-book LBF work demands it.
-4. Hand-refine Daniel reverse links (esp. Aramaic 2:4–7); tune OSHB finite/participle Mark bricks.
+4. Daniel Hebrew participles: host picks in Observer (`hebrewParticiplesNeedHostPick` in fill notes).

@@ -1,7 +1,7 @@
 # Daniel
 
-> La Biblia Fiel — Daniel (borrador preliminar).
-> Fuente: hebreo / arameo (OSHB). Borrador completo chs. 1–12; revisar verso a verso contra el texto fuente.
+> La Biblia Fiel — Daniel.
+> Fuente: hebreo / arameo (OSHB). Texto y alineación mano a mano chs. 1–12 (español latinoamericano).
 
 ## Capítulo 1
 
@@ -11,7 +11,7 @@ En el año tercero del reino de Joacim, rey de Judá, vino Nabucodonosor, rey de
 
 ### 1:2
 
-Y el Señor entregó en su mano a Joacim, rey de Judá, y parte de los utensilios de la casa de Dios; y los llevó a la tierra de Sinar, a la casa de su dios, y los utensilios llevó a la casa del tesoro de su dios.
+Y el Señor dio en su mano a Joacim, rey de Judá, y parte de los utensilios de la casa de Dios; y los llevó a la tierra de Sinar, a la casa de su dios, y los utensilios llevó a la casa del tesoro de su dios.
 
 ### 1:3
 
@@ -43,7 +43,7 @@ Y Dios dio a Daniel misericordia y compasiones delante del jefe de los eunucos.
 
 ### 1:10
 
-Y el jefe de los eunucos dijo a Daniel: Temo a mi señor el rey, que ha asignado vuestra comida y vuestra bebida; ¿por qué ha de ver vuestros rostros más tristes que los de los jóvenes que son como vosotros? Así pondréis en peligro mi cabeza ante el rey.
+Y el jefe de los eunucos dijo a Daniel: Yo temo a mi señor el rey, que ha asignado su comida y su bebida; ¿por qué ha de ver sus rostros más tristes que los de los jóvenes que son como ustedes? Y pondrán en peligro mi cabeza ante el rey.
 
 ### 1:11
 
@@ -51,11 +51,11 @@ Y Daniel dijo al mayordomo a quien el jefe de los eunucos había encargado de Da
 
 ### 1:12
 
-Prueba, por favor, a tus siervos diez días, y que nos den de las legumbres, y comamos, y agua, y bebamos.
+Prueba, por favor, a tus siervos diez días, y que nos den de las legumbres y comamos, y agua y bebamos.
 
 ### 1:13
 
-Luego se vean delante de ti nuestras apariencias y la apariencia de los jóvenes que comen los manjares del rey; y según veas, haz con tus siervos.
+Y se vean delante de ti nuestras apariencias y la apariencia de los jóvenes que comen los manjares del rey; y según veas, haz con tus siervos.
 
 ### 1:14
 
@@ -97,7 +97,7 @@ Y en el segundo año del reino de Nabucodonosor, soñó Nabucodonosor sueños, y
 
 ### 2:2
 
-Y mandó el rey llamar magos, astrólogos, y encantadores, y caldeos, para que declarasen al rey sus sueños. Vinieron pues, y se presentaron delante del rey.
+Y dijo el rey llamar magos, astrólogos, y encantadores, y caldeos, para que declarasen al rey sus sueños. Y vinieron, y se presentaron delante del rey.
 
 ### 2:3
 
@@ -109,11 +109,11 @@ Entonces hablaron los caldeos al rey en arameo: Rey, para siempre vive: di el su
 
 ### 2:5
 
-Respondió el rey y dijo a los caldeos: El negocio se me fue: si no me mostráis el sueño y su interpretación, seréis hechos cuartos, y vuestras casas serán puestas por muladares.
+Respondió el rey y dijo a los caldeos: El negocio se me fue: si no me muestran el sueño y su interpretación, serán hechos cuartos, y sus casas serán puestas por muladares.
 
 ### 2:6
 
-Y si mostrareis el sueño y su interpretación, recibiréis de mí dones y mercedes y grande honra: por tanto, mostradme el sueño y su interpretación.
+Y si mostraren el sueño y su interpretación, recibirán de mí dones y mercedes y grande honra: por tanto, muéstrenme el sueño y su interpretación.
 
 ### 2:7
 
@@ -121,19 +121,19 @@ Respondieron la segunda vez, y dijeron: Diga el rey el sueño a sus siervos, y m
 
 ### 2:8
 
-El rey respondió, y dijo: Yo conozco ciertamente que vosotros ponéis dilaciones, porque veis que el negocio se me ha ido.
+El rey respondió, y dijo: Yo conozco ciertamente que ustedes ponen dilaciones, porque ven que el negocio se me ha ido.
 
 ### 2:9
 
-Si no me mostráis el sueño, una sola sentencia será de vosotros. Ciertamente preparáis respuesta mentirosa y perversa que decir delante de mí, entre tanto que se muda el tiempo: por tanto, decidme el sueño, para que yo entienda que me podéis mostrar su interpretación.
+Si no me muestran el sueño, una sola sentencia será de ustedes. Ciertamente preparan respuesta mentirosa y perversa que decir delante de mí, entre tanto que se muda el tiempo: por tanto, díganme el sueño, para que yo entienda que me pueden mostrar su interpretación.
 
 ### 2:10
 
-Los caldeos respondieron delante del rey, y dijeron: No hay hombre sobre la tierra que pueda declarar el negocio del rey: demás de esto, ningún rey, príncipe, ni señor, preguntó cosa semejante a ningún mago, ni astrólogo, ni Caldeo.
+Los caldeos respondieron delante del rey, y dijeron: No hay hombre sobre la tierra que pueda declarar el negocio del rey: por cuanto ningún rey, príncipe, ni señor, preguntó cosa semejante a ningún mago, ni astrólogo, ni caldeo.
 
 ### 2:11
 
-Finalmente, el negocio que el rey demanda, es singular, ni hay quien lo pueda declarar delante del rey, salvo los dioses cuya morada no es con la carne.
+Y el negocio que el rey demanda, es singular, ni hay quien lo pueda declarar delante del rey, salvo los dioses cuya morada no es con la carne.
 
 ### 2:12
 
@@ -141,7 +141,7 @@ Por esto el rey con ira y con grande enojo, mandó que mataran a todos los sabio
 
 ### 2:13
 
-Y se publico el mandamiento, y los sabios eran llevados a la muerte; y buscaron a Daniel y a sus compañeros para matarlos.
+Y se publicó el mandamiento, y los sabios eran llevados a la muerte; y buscaron a Daniel y a sus compañeros para matarlos.
 
 ### 2:14
 
@@ -157,7 +157,7 @@ Y Daniel entró, y pidió al rey que le diese tiempo, y que él mostraría al re
 
 ### 2:17
 
-Se Fue luego Daniel a su casa, y declaró el negocio a Ananías, Misael, y Azarías, sus compañeros,
+Se fue luego Daniel a su casa, y declaró el negocio a Ananías, Misael, y Azarías, sus compañeros,
 
 ### 2:18
 
@@ -173,11 +173,11 @@ Y Daniel habló, y dijo: Sea bendito el nombre de Dios de siglo hasta siglo: por
 
 ### 2:21
 
-Y él es el que muda los tiempos y las oportunidades: quita reyes, y pone reyes: da la sabiduría a los sabios, y la ciencia a los entendidos:
+Y él es el que muda los tiempos y las sazones: quita reyes, y pone reyes: da la sabiduría a los sabios, y la ciencia a los entendidos:
 
 ### 2:22
 
-El revela lo profundo y lo escondido: conoce lo que está en tinieblas, y la luz mora con él.
+Él revela lo profundo y lo escondido: conoce lo que está en tinieblas, y la luz mora con él.
 
 ### 2:23
 
@@ -189,7 +189,7 @@ Después de esto Daniel entró a Arioch, al cual el rey había puesto para matar
 
 ### 2:25
 
-Entonces Arioch llevó prestamente a Daniel delante del rey, y le dijo así: Un varón de los trasportados de Judá he hallado, el cual declarará al rey la interpretación.
+Entonces Arioch llevó prestamente a Daniel delante del rey, y le dijo así: Un varón de los transportados de Judá he hallado, el cual declarará al rey la interpretación.
 
 ### 2:26
 
@@ -225,15 +225,15 @@ Sus piernas de hierro; sus pies, en parte de hierro, y en parte de barro cocido.
 
 ### 2:34
 
-Estabas mirando, hasta que una piedra fue cortada, no con mano, la cual hirió a la imagen en sus pies de hierro y de barro cocido, y los desmenuzó.
+Estabas mirando, hasta que una piedra fue cortada, no con manos, la cual hirió a la imagen en sus pies de hierro y de barro cocido, y los desmenuzó.
 
 ### 2:35
 
-Entonces fue también desmenuzado el hierro, el barro cocido, el metal, la plata y el oro, y se tornaron como tamo de las eras del verano: y os levantol el viento, y nunca más se les halló lugar. Mas la piedra que hirió a la imagen, fue hecha un gran monte, que hinchió toda la tierra.
+Entonces fue desmenuzado juntamente el hierro, el barro cocido, el metal, la plata y el oro, y se tornaron como paja de las eras del verano: y los levantó el viento, y nunca más se les halló lugar. Mas la piedra que hirió a la imagen, fue hecha un gran monte, que llenó toda la tierra.
 
 ### 2:36
 
-Este es el sueño: la interpretación de él diremos también en presencia del rey.
+Este es el sueño: la interpretación de él diremos en presencia del rey.
 
 ### 2:37
 
@@ -261,7 +261,7 @@ Y por ser los dedos de los pies en parte de hierro, y en parte de barro cocido, 
 
 ### 2:43
 
-Cuanto a aquello que viste, el hierro mezclado con tiesto de barro, se mezclaran con simiente humana, mas no se pegarán el uno con el otro, como el hierro no se mistura con el tiesto.
+Cuanto a aquello que viste, el hierro mezclado con tiesto de barro, se mezclarán con simiente humana, mas no se pegarán el uno con el otro, como el hierro no se mezcla con el tiesto.
 
 ### 2:44
 
@@ -277,7 +277,7 @@ Entonces el rey Nabucodonosor cayó sobre su rostro, y se humilló a Daniel, y m
 
 ### 2:47
 
-El rey habló a Daniel, y dijo: Ciertamente que el Dios vuestro es Dios de dioses, y el Señor de los reyes, y el descubridor de los misterios, pues pudiste revelar este secreto.
+El rey habló a Daniel, y dijo: Ciertamente que el Dios de ustedes es Dios de dioses, y el Señor de los reyes, y el descubridor de los misterios, pues pudiste revelar este secreto.
 
 ### 2:48
 
@@ -291,7 +291,7 @@ Y Daniel solicitó del rey, y él puso sobre los negocios de la provincia de Bab
 
 ### 3:1
 
-El rey Nabucodonosor hizo una imagen de oro, la altura de la cual era de sesenta codos, su anchura de seis codos: la levanto en el campo de Dura, en la provincia de Babel.
+El rey Nabucodonosor hizo una imagen de oro, la altura de la cual era de sesenta codos, su anchura de seis codos: la levantó en la llanura de Dura, en la provincia de Babel.
 
 ### 3:2
 
@@ -299,15 +299,15 @@ Y envió el rey Nabucodonosor a juntar los grandes, los asistentes y capitanes, 
 
 ### 3:3
 
-Fueron pues reunidos los grandes, los asistentes y capitanes, los oidores, receptores, los del consejo, los presidentes, y todos los gobernadores de las provincias, a la dedicación de la imagen que el rey Nabucodonosor había levantado: y estaban en pie delante de la imagen que había levantado el rey Nabucodonosor.
+Entonces fueron reunidos los grandes, los asistentes y capitanes, los oidores, receptores, los del consejo, los presidentes, y todos los gobernadores de las provincias, a la dedicación de la imagen que el rey Nabucodonosor había levantado: y estaban en pie delante de la imagen que había levantado el rey Nabucodonosor.
 
 ### 3:4
 
-Y el pregonero pregonaba en alta voz: se Manda a vosotros, oh pueblos, naciones, y lenguas,
+Y el pregonero pregonaba en alta voz: se manda a ustedes, oh pueblos, naciones, y lenguas,
 
 ### 3:5
 
-Al oír el sonido del cuerno, de la flauta, de la cítara, del arpa, del salterio, de la zampoña y de todo género de música, os postraréis y adoraréis la imagen de oro que el rey Nabucodonosor ha levantado:
+Al oír el sonido del cuerno, de la flauta, de la cítara, del arpa, del salterio, de la zampoña y de todo género de música, se postrarán y adorarán la imagen de oro que el rey Nabucodonosor ha levantado:
 
 ### 3:6
 
@@ -319,11 +319,11 @@ Por lo cual, al oír todos los pueblos el sonido del cuerno, de la flauta, de la
 
 ### 3:8
 
-Por esto en el mismo tiempo algunos varones caldeos se llegaron, y denunciaron de los os judi,
+Por esto en el mismo tiempo algunos varones caldeos se llegaron, y acusaron a los judíos,
 
 ### 3:9
 
-Hablando y diciendo al rey Nabucodonosor: Rey, para siempre vive.
+Respondieron y dijeron al rey Nabucodonosor: Rey, para siempre vive.
 
 ### 3:10
 
@@ -335,39 +335,39 @@ Y el que no se postrara y adorara, fuera echado dentro de un horno de fuego ardi
 
 ### 3:12
 
-Hay unos varones os judi, los cuales pusiste tú sobre los negocios de la provincia de Babel; Sadrac, Mesac, y Abed-nego: estos varones, oh rey, no han hecho cuenta de ti; no adoran tus dioses, no adoran la imagen de oro que tú levantaste.
+Hay unos varones judíos, los cuales pusiste tú sobre los negocios de la provincia de Babel; Sadrac, Mesac, y Abed-nego: estos varones, oh rey, no han hecho cuenta de ti; no sirven a tus dioses, no adoran la imagen de oro que tú levantaste.
 
 ### 3:13
 
-Entonces Nabucodonosor dijo con ira y con enojo que trajesen a Sadrac, Mesac, y Abed-nego. Al punto fueron os traid estos varones delante del rey.
+Entonces Nabucodonosor dijo con ira y con enojo que trajesen a Sadrac, Mesac, y Abed-nego. Al punto fueron traídos estos varones delante del rey.
 
 ### 3:14
 
-Habló Nabucodonosor, y les dijo: ¿Es verdad Sadrac, Mesac, y Abed-nego, que vosotros no honráis a mi dios, ni adoráis la imagen de oro que he levantado?
+Respondió Nabucodonosor, y les dijo: ¿Es verdad Sadrac, Mesac, y Abed-nego, que ustedes no sirven a mi dios, ni adoran la imagen de oro que he levantado?
 
 ### 3:15
 
-Ahora pues, ¿estáis prestos para que al oír el sonido del cuerno, de la flauta, de la cítara, del arpa, del salterio, de la zampoña y de todo género de música, os postréis, y adoréis la imagen que he hecho? Porque si no la adoréis, en la misma hora seréis echados en medio de un horno de fuego ardiendo: ¿y qué dios será aquel que os libre de mis manos?
+Ahora pues, ¿están prestos para que al oír el sonido del cuerno, de la flauta, de la cítara, del arpa, del salterio, de la zampoña y de todo género de música, se postren, y adoren la imagen que he hecho? Porque si no la adoran, en la misma hora serán echados en medio de un horno de fuego ardiendo: ¿y qué dios será aquel que los libre de mis manos?
 
 ### 3:16
 
-Sadrac, Mesac, y Abed-nego respondieron y dijeron al rey Nabucodonosor: No cuidamos de responderte sobre este negocio.
+Sadrac, Mesac, y Abed-nego respondieron y dijeron al rey Nabucodonosor: No tenemos necesidad de responderte sobre este negocio.
 
 ### 3:17
 
-He aquí nuestro Dios a quien honramos, puede librarnos del horno de fuego ardiendo; y de tu mano, oh rey, nos librará.
+Si nuestro Dios a quien servimos puede librarnos del horno de fuego ardiendo; y de tu mano, oh rey, nos librará.
 
 ### 3:18
 
-Y si no, sepas, oh rey, que tu dios no adoraremos, ni tampoco honraremos la imagen que has levantado.
+Y si no, sepas, oh rey, que a tu dios no serviremos, ni adoraremos la imagen de oro que has levantado.
 
 ### 3:19
 
-Entonces Nabucodonosor fue lleno de ira, y se demudó la figura de su rostro sobre Sadrac, Mesac, y Abed-nego: así habló, y ordenó que el horno se encendiese siete veces tanto de lo que cada vez solía.
+Entonces Nabucodonosor fue lleno de ira, y se demudó la figura de su rostro sobre Sadrac, Mesac, y Abed-nego: respondió y dijo que el horno se encendiese siete veces tanto de lo que cada vez solía.
 
 ### 3:20
 
-Y mandó a hombres muy vigorosos que tenía en su ejército, que atasen a Sadrac, Mesac, y Abed-nego, para echarlos en el horno de fuego ardiendo.
+Y dijo a hombres muy vigorosos que tenía en su ejército, que atasen a Sadrac, Mesac, y Abed-nego, para echarlos en el horno de fuego ardiendo.
 
 ### 3:21
 
@@ -375,7 +375,7 @@ Entonces estos varones fueron atados con sus mantos, y sus calzas, y sus turbant
 
 ### 3:22
 
-Y porque la palabra del rey daba prisa, y había procurado que se encendiese mucho, la llama del fuego mató a aquellos que habían alzado a Sadrac, Mesac, y Abed-nego.
+Y porque la palabra del rey daba prisa, y el horno estaba muy encendido, la llama del fuego mató a aquellos que habían alzado a Sadrac, Mesac, y Abed-nego.
 
 ### 3:23
 
@@ -383,7 +383,7 @@ Y estos tres varones, Sadrac, Mesac, y Abed-nego, cayeron atados dentro del horn
 
 ### 3:24
 
-Entonces el rey Nabucodonosor se espantó, y se levantó apriesa, y habló, y dijo a los de su consejo: ¿No echaron tres varones atados dentro del fuego? Ellos respondieron y dijeron al rey: Es verdad, oh rey.
+Entonces el rey Nabucodonosor se espantó, y se levantó aprisa, y respondió, y dijo a los de su consejo: ¿No echaron tres varones atados dentro del fuego? Ellos respondieron y dijeron al rey: Es verdad, oh rey.
 
 ### 3:25
 
@@ -391,7 +391,7 @@ Respondió él y dijo: He aquí que yo veo cuatro varones sueltos, que se pasean
 
 ### 3:26
 
-Entonces Nabucodonosor se acercó a la puerta del horno de fuego ardiendo, y habló y dijo: Sadrac, Mesac, y Abed-nego, siervos del alto Dios, salid y venid. Entonces Sadrac, Mesac, y Abed-nego, salieron de en medio del fuego.
+Entonces Nabucodonosor se acercó a la puerta del horno de fuego ardiendo, y respondió y dijo: Sadrac, Mesac, y Abed-nego, siervos del Dios altísimo, salid y venid. Entonces Sadrac, Mesac, y Abed-nego, salieron de en medio del fuego.
 
 ### 3:27
 
@@ -399,7 +399,7 @@ Y se juntaron los grandes, los gobernadores, los capitanes, y los del consejo de
 
 ### 3:28
 
-Nabucodonosor habló y dijo: Bendito el Dios de ellos, de Sadrac, Mesac, y Abed-nego, que envió su ángel, y libró sus siervos que esperaron en él, y el mandamiento del rey mudaron, y entregaron sus cuerpos antes que sirviesen ni adoraran otro dios que su Dios.
+Nabucodonosor respondió y dijo: Bendito el Dios de ellos, de Sadrac, Mesac, y Abed-nego, que envió su ángel, y libró sus siervos que confiaron en él, y el mandamiento del rey mudaron, y entregaron sus cuerpos antes que sirviesen ni adoraran otro dios que su Dios.
 
 ### 3:29
 
@@ -407,17 +407,17 @@ Por mí pues se pone decreto, que todo pueblo, nación, o lengua, que dijera bla
 
 ### 3:30
 
-Entonces el rey engrandeció a Sadrac, Mesac, y Abed-nego en la provincia de Babel.
+Entonces el rey hizo prosperar a Sadrac, Mesac, y Abed-nego en la provincia de Babel.
 
 ## Capítulo 4
 
 ### 4:1
 
-Nabucodonosor rey, a todos los pueblos, naciones, y lenguas, que moran en toda la tierra: Paz os sea multiplicada:
+Nabucodonosor rey, a todos los pueblos, naciones, y lenguas, que moran en toda la tierra: Paz les sea multiplicada:
 
 ### 4:2
 
-Las señales y milagros que el alto Dios ha hecho conmigo, conviene que yo las publique.
+Las señales y milagros que el Dios altísimo ha hecho conmigo, me ha parecido bien declararlas.
 
 ### 4:3
 
@@ -433,11 +433,11 @@ Vi un sueño que me espantó, y las imaginaciones y visiones de mi cabeza me tur
 
 ### 4:6
 
-Por lo cual yo puse mandamiento para hacer venir delante de mí todos los sabios de Babel, que me mostrasen la interpretación del sueño.
+Y de mi parte puse mandamiento para hacer venir delante de mí todos los sabios de Babel, que me mostrasen la interpretación del sueño.
 
 ### 4:7
 
-Y vinieron magos, astrólogos, caldeos, y adivinos: y dije el sueño delante de ellos, mas nunca me mostraron su interpretación;
+Entonces vinieron magos, astrólogos, caldeos, y adivinos: y dije el sueño delante de ellos, y no me mostraron su interpretación;
 
 ### 4:8
 
@@ -449,15 +449,15 @@ Beltsasar, príncipe de los magos, ya que he entendido que hay en ti espíritu d
 
 ### 4:10
 
-Aquestas las visiones de mi cabeza en mi cama: me Parecia que veía un árbol en medio de la tierra, cuya altura era grande.
+Estas las visiones de mi cabeza en mi cama: me parecía que veía un árbol en medio de la tierra, cuya altura era grande.
 
 ### 4:11
 
-Crecía este árbol, y se hacia fuerte, y su altura llegaba hasta el cielo, y su vista hasta el cabo de toda la tierra.
+Crecía este árbol, y se hacía fuerte, y su altura llegaba hasta el cielo, y su vista hasta el cabo de toda la tierra.
 
 ### 4:12
 
-Su copa era hermosa, y su fruto en abundancia, y para todos había en él mantenimiento. Debajo de él se ponían a la sombra las bestias del campo, y en sus ramas hacían morada las aves del cielo, y se mantenia de él toda carne.
+Su copa era hermosa, y su fruto en abundancia, y para todos había en él mantenimiento. Debajo de él se ponían a la sombra las bestias del campo, y en sus ramas hacían morada las aves del cielo, y se mantenía de él toda carne.
 
 ### 4:13
 
@@ -465,11 +465,11 @@ Veía en las visiones de mi cabeza en mi cama, y he aquí que un vigilante y san
 
 ### 4:14
 
-Y clamaba fuertemente y decía así: Cortad el árbol, y desmochad sus ramas, derribad su copa, y derramad su fruto: se vayan las bestias que están debajo de él, y las aves de sus ramas.
+Y clamaba fuertemente y decía así: Corten el árbol, y desmochen sus ramas, derriben su copa, y derramen su fruto: se vayan las bestias que están debajo de él, y las aves de sus ramas.
 
 ### 4:15
 
-Mas la cepa de sus raíces dejaréis en la tierra, y con atadura de hierro y de metal entre la hierba del campo; y sea mojado con el rocío del cielo, y su parte con las bestias en la hierba de la tierra.
+Mas la cepa de sus raíces dejen en la tierra, y con atadura de hierro y de bronce entre la hierba del campo; y sea mojado con el rocío del cielo, y su parte con las bestias en la hierba de la tierra.
 
 ### 4:16
 
@@ -485,7 +485,7 @@ Yo el rey Nabucodonosor he visto este sueño. Tú pues, Beltsasar, dirás la int
 
 ### 4:19
 
-Entonces Daniel, cuyo nombre era Beltsasar, estuvo callando casi una hora, y sus pensamientos lo espantaban: El rey habló, y dijo: Beltsasar, el sueño ni su interpretación no te espante. Respondió Beltsasar, y dijo: Señor mío, el sueño sea para tus enemigos, y su interpretación para los que mal te quieren.
+Entonces Daniel, cuyo nombre era Beltsasar, estuvo callando casi una hora, y sus pensamientos lo espantaban: El rey respondió, y dijo: Beltsasar, el sueño ni su interpretación no te espante. Respondió Beltsasar, y dijo: Señor mío, el sueño sea para tus enemigos, y su interpretación para los que mal te quieren.
 
 ### 4:20
 
@@ -501,7 +501,7 @@ Tú mismo eres, oh rey, que creciste, y te hiciste fuerte, pues creció tu grand
 
 ### 4:23
 
-Y cuanto a lo que vio el rey, un vigilante y santo que descendía del cielo, y decía: Cortad el árbol y destruidlo: mas la cepa de sus raíces dejaréis en la tierra, y con atadura de hierro y de metal en la hierba del campo; y sea mojado con el rocío del cielo, y su parte sea con las bestias del campo, hasta que pasen sobre él siete tiempos:
+Y cuanto a lo que vio el rey, un vigilante y santo que descendía del cielo, y decía: Corten el árbol y destrúyanlo: mas la cepa de sus raíces dejen en la tierra, y con atadura de hierro y de bronce en la hierba del campo; y sea mojado con el rocío del cielo, y su parte sea con las bestias del campo, hasta que pasen sobre él siete tiempos:
 
 ### 4:24
 
@@ -509,7 +509,7 @@ Esta es la interpretación, oh rey, y la sentencia del Altísimo, que ha venido 
 
 ### 4:25
 
-Que te echarán de entre los hombres, y con las bestias del campo será tu morada, y con hierba del campo te apacentarán como a los bueyes, y con rocío del cielo serás bañado; y siete tiempos pasarán sobre ti, hasta que entiendas que el Altísimo se enseñorea en el reino de los hombres, y que a quien él quisiera lo dará.
+Que te echarán de entre los hombres, y con las bestias del campo será tu morada, y con hierba del campo te apacentarán como a los bueyes, y con rocío del cielo serás bañado; y siete tiempos pasarán sobre ti, hasta que entiendas que el Altísimo se enseñorea en el reino de los hombres, y que a quien él quiere lo dará.
 
 ### 4:26
 
@@ -521,23 +521,23 @@ Por tanto, oh rey, aprueba mi consejo, y redime tus pecados con justicia, y tus 
 
 ### 4:28
 
-Todo aquesto vino sobre el rey Nabucodonosor.
+Todo esto vino sobre el rey Nabucodonosor.
 
 ### 4:29
 
-A cabo de doce meses, se andando paseando sobre el palacio del reino de Babel,
+A cabo de doce meses, andaba paseando sobre el palacio del reino de Babel,
 
 ### 4:30
 
-Habló el rey, y dijo: ¿No es ésta la gran Babel, que yo edifiqué para casa del reino, con la fuerza de mi poder, y para gloria de mi grandeza?
+Respondió el rey, y dijo: ¿No es ésta la gran Babel, que yo edifiqué para casa del reino, con la fuerza de mi poder, y para gloria de mi grandeza?
 
 ### 4:31
 
-Aun estaba la palabra en la boca del rey, cuando cae una voz del cielo: A ti dicen, rey Nabucodonosor; el reino es traspasado de ti:
+Aún estaba la palabra en la boca del rey, cuando cayó una voz del cielo: A ti dicen, rey Nabucodonosor; el reino es traspasado de ti:
 
 ### 4:32
 
-Y de entre los hombres te echan, y con las bestias del campo será tu morada, y como a los bueyes te apacentarán: y siete tiempos pasarán sobre ti, hasta que conozcas que el Altísimo se enseñorea en el reino de los hombres, y a quien él quisiera lo da.
+Y de entre los hombres te echan, y con las bestias del campo será tu morada, y como a los bueyes te apacentarán: y siete tiempos pasarán sobre ti, hasta que conozcas que el Altísimo se enseñorea en el reino de los hombres, y a quien él quiere lo da.
 
 ### 4:33
 
@@ -545,15 +545,15 @@ En la misma hora se cumplió la palabra sobre Nabucodonosor, y fue echado de ent
 
 ### 4:34
 
-Mas al fin del tiempo yo Nabucodonosor alcé mis ojos al cielo, y mi sentido me fue vuelto; y bendije al Altísimo, y alabé y glorifiqué al que vive para siempre; porque su señorío es sempiterno, y su reino por todas las edades.
+Mas al fin del tiempo yo Nabucodonosor alcé mis ojos al cielo, y mi sentido me fue vuelto; y bendije al Altísimo, y alabé y glorifiqué al que vive para siempre; porque su señorío es sempiterno, y su reino de generación y generación.
 
 ### 4:35
 
-Y todos los moradores de la tierra por nada son contados: y en el ejército del cielo, y en los habitantes de la tierra, hace según su voluntad: ni hay quien estorbe su mano, y le diga: ¿Qué haces?
+Y todos los moradores de la tierra por nada son contados: y en el ejército del cielo, y en los habitantes de la tierra, hace según su voluntad: ni hay quien estorbe su mano, y le diga: ¿Qué hiciste?
 
 ### 4:36
 
-En el mismo tiempo mi sentido me fue vuelto, y la majestad de mi reino, mi dignidad y mi grandeza volvieron a mí, y mis gobernadores y mis grandes me buscaron; y fuí restituido a mi reino, y mayor grandeza me fue añadida.
+En el mismo tiempo mi sentido me fue vuelto, y la majestad de mi reino, mi dignidad y mi grandeza volvieron a mí, y mis gobernadores y mis grandes me buscaron; y fui restituido a mi reino, y mayor grandeza me fue añadida.
 
 ### 4:37
 
@@ -567,15 +567,15 @@ El rey Belsasar hizo un gran banquete a mil de sus príncipes, y en presencia de
 
 ### 5:2
 
-Belsasar, con el gusto del vino, mandó que trajesen los vasos de oro y de plata que Nabucodonosor su padre había traído del templo de Jerusalén; para que bebiesen con ellos el rey y sus príncipes, sus mujeres y sus concubinas.
+Belsasar, con el gusto del vino, dijo que trajesen los vasos de oro y de plata que Nabucodonosor su padre había traído del templo de Jerusalén; para que bebiesen con ellos el rey y sus príncipes, sus mujeres y sus concubinas.
 
 ### 5:3
 
-Entonces fueron os traid los vasos de oro que habían traído del templo de la casa de Dios que estaba en Jerusalén, y bebieron con ellos el rey y sus príncipes, sus mujeres y sus concubinas.
+Entonces fueron traídos los vasos de oro que habían traído del templo de la casa de Dios que estaba en Jerusalén, y bebieron con ellos el rey y sus príncipes, sus mujeres y sus concubinas.
 
 ### 5:4
 
-Bebieron vino, y alabaron a los dioses de oro y de plata, de metal, de hierro, de madera, y de piedra.
+Bebieron vino, y alabaron a los dioses de oro y de plata, de bronce, de hierro, de madera, y de piedra.
 
 ### 5:5
 
@@ -587,7 +587,7 @@ Entonces el rey se demudó de su color, y sus pensamientos lo turbaron, y se des
 
 ### 5:7
 
-El rey clamó en alta voz que hicieran venir magos, caldeos, y adivinos. Habló el rey, y dijo a los sabios de Babel: Cualquiera que leyere esta escritura, y me mostrare su interpretación, será vestido de púrpura, y tendrá collar de oro a su cuello; y en el reino se enseñoreará el tercero.
+El rey clamó en alta voz que hicieran venir magos, caldeos, y adivinos. Respondió el rey, y dijo a los sabios de Babel: Cualquiera que leyere esta escritura, y me mostrare su interpretación, será vestido de púrpura, y tendrá collar de oro a su cuello; y en el reino se enseñoreará el tercero.
 
 ### 5:8
 
@@ -599,7 +599,7 @@ Entonces el rey Belsasar fue muy turbado, y se le mudaron sus colores y se alter
 
 ### 5:10
 
-La reina, por las palabras del rey y de sus príncipes, entró a la sala del banquete. Y habló la reina, y dijo: Rey, para siempre vive, no te asombren tus pensamientos, ni tus colores se demuden:
+La reina, por las palabras del rey y de sus príncipes, entró a la sala del banquete. Y respondió la reina, y dijo: Rey, para siempre vive, no te asombren tus pensamientos, ni tus colores se demuden:
 
 ### 5:11
 
@@ -607,23 +607,23 @@ En tu reino hay un varón, en el cual mora el espíritu de los dioses santos; y 
 
 ### 5:12
 
-Por cuanto fue hallado en él mayor espíritu, y ciencia, y entendimiento, interpretando sueños, y declarando preguntas, y deshaciendo dudas, es a saber, en Daniel; al cual el rey puso por nombre Beltsasar. se Llame pues ahora a Daniel, y él mostrará la interpretación.
+Por cuanto fue hallado en él mayor espíritu, y ciencia, y entendimiento, interpretando sueños, y declarando preguntas, y deshaciendo dudas, es a saber, en Daniel; al cual el rey puso por nombre Beltsasar. Llámese pues ahora a Daniel, y él mostrará la interpretación.
 
 ### 5:13
 
-Entonces Daniel fue traído delante del rey. Y habló el rey, y dijo a Daniel: ¿Eres tú aquel Daniel de los hijos de la cautividad de Judá, que mi padre trajo de Judea?
+Entonces Daniel fue traído delante del rey. Y respondió el rey, y dijo a Daniel: ¿Eres tú aquel Daniel de los hijos de la cautividad de Judá, que mi padre trajo de Judea?
 
 ### 5:14
 
-Yo he oído de ti que el espíritu de los dioses santos está en ti, y que en ti se halló luz, y entendimiento y mayor sabiduría.
+Yo he oído de ti que el espíritu de los dioses está en ti, y que en ti se halló luz, y entendimiento y mayor sabiduría.
 
 ### 5:15
 
-Y ahora fueron os traid delante de mí, sabios, astrólogos, que leyesen esta escritura, y me mostrasen su interpretación: pero no han podido mostrar la interpretación del negocio.
+Y ahora fueron traídos delante de mí, sabios, astrólogos, que leyesen esta escritura, y me mostrasen su interpretación: pero no han podido mostrar la interpretación del negocio.
 
 ### 5:16
 
-Yo pues he oído de ti que puedes declarar las dudas, y desatar dificultades. Si ahora pudieres leer esta escritura, y mostrarme su interpretación, serás vestido de púrpura, y collar de oro tendrás en tu cuello, y en el reino serás el tercer señor.
+Y yo he oído de ti que puedes declarar las dudas, y desatar dificultades. Si ahora pudieras leer esta escritura, y mostrarme su interpretación, serás vestido de púrpura, y collar de oro tendrás en tu cuello, y en el reino serás el tercer señor.
 
 ### 5:17
 
@@ -631,11 +631,11 @@ Entonces Daniel respondió, y dijo delante del rey: Tus dones sean para ti, y tu
 
 ### 5:18
 
-El altísimo Dios, oh rey, dió a Nabucodonosor tu padre el reino, y la grandeza, y la gloria, y la honra:
+El Dios altísimo, oh rey, dio a Nabucodonosor tu padre el reino, y la grandeza, y la gloria, y la honra:
 
 ### 5:19
 
-Y por la grandeza que le dió, todos los pueblos, naciones, y lenguas, temblaban y temían delante de él. Los que él quería mataba, y daba vida a los que quería: engrandecía a los que quería, y a los que quería humillaba.
+Y por la grandeza que le dio, todos los pueblos, naciones, y lenguas, temblaban y temían delante de él. Los que él quería mataba, y daba vida a los que quería: engrandecía a los que quería, y a los que quería humillaba.
 
 ### 5:20
 
@@ -643,7 +643,7 @@ Mas cuando su corazón se ensoberbeció, y su espíritu se endureció en altivez
 
 ### 5:21
 
-Y fue echado de entre los hijos de los hombres; y su corazón fue puesto con las bestias, y con los asnos monteses fue su morada. Hierba le hicieron comer, como a buey, y su cuerpo fue bañado con el rocío del cielo, hasta que conoció que el altísimo Dios se enseñorea del reino de los hombres, y que pondrá sobre él al que quisiera.
+Y fue echado de entre los hijos de los hombres; y su corazón fue puesto con las bestias, y con los asnos monteses fue su morada. Hierba le hicieron comer, como a buey, y su cuerpo fue bañado con el rocío del cielo, hasta que conoció que el Dios altísimo se enseñorea del reino de los hombres, y que pondrá sobre él al que quiere.
 
 ### 5:22
 
@@ -651,7 +651,7 @@ Y tú, su hijo Belsasar, no has humillado tu corazón, sabiendo todo esto:
 
 ### 5:23
 
-Antes contra el Señor del cielo te has ensoberbecido, e hiciste traer delante de ti los vasos de su casa, y tú y tus príncipes, tus mujeres y tus concubinas, bebisteis vino en ellos: demás de esto, a dioses de plata y de oro, de metal, de hierro, de madera, y de piedra, que ni ven, ni oyen, ni saben, diste alabanza: y al Dios en cuya mano está tu vida, y cuyos son todos tus caminos, nunca honraste.
+Antes contra el Señor del cielo te has ensoberbecido, e hiciste traer delante de ti los vasos de su casa, y tú y tus príncipes, tus mujeres y tus concubinas, bebieron vino en ellos: por cuanto, a dioses de plata y de oro, de bronce, de hierro, de madera, y de piedra, que ni ven, ni oyen, ni saben, diste alabanza: y al Dios en cuya mano está tu vida, y cuyos son todos tus caminos, nunca honraste.
 
 ### 5:24
 
@@ -663,7 +663,7 @@ Y la escritura que esculpió es: MENE, MENE, TEKEL, UFARSIN.
 
 ### 5:26
 
-La interpretación del negocio es: MENE: Contó Dios tu reino, y halo rematado.
+La interpretación del negocio es: MENE: Contó Dios tu reino, y lo ha rematado.
 
 ### 5:27
 
@@ -671,11 +671,11 @@ TEKEL: Pesado has sido en balanza, y fuiste hallado falto.
 
 ### 5:28
 
-PERES: Tu reino fue rompido, y es dado a medos y persas.
+PERES: Tu reino fue dividido, y es dado a medos y persas.
 
 ### 5:29
 
-Entonces, lo mandando Belsasar, vistieron a Daniel de púrpura, y en su cuello fue puesto un collar de oro, y pregonaron de él que fuera el tercer señor en el reino.
+Entonces dijo Belsasar, y vistieron a Daniel de púrpura, y en su cuello fue puesto un collar de oro, y pregonaron de él que fuera el tercer señor en el reino.
 
 ### 5:30
 
@@ -683,7 +683,7 @@ La misma noche fue muerto Belsasar, rey de los caldeos.
 
 ### 5:31
 
-Y Darío de Media tomó el reino, siendo de sesenta y dos años.
+Y Darío de Media tomó el reino, como de sesenta y dos años.
 
 ## Capítulo 6
 
@@ -697,7 +697,7 @@ Y sobre ellos tres presidentes, de los cuales Daniel era el uno, a quienes estos
 
 ### 6:3
 
-Pero el mismo Daniel era superior a estos gobernadores y presidentes, porque había en él más abundancia de espíritu: y el rey pensaba de ponerlo sobre todo el reino.
+Entonces Daniel era superior a estos presidentes y gobernadores, porque había en él más abundancia de espíritu: y el rey pensaba de ponerlo sobre todo el reino.
 
 ### 6:4
 
@@ -721,11 +721,11 @@ Ahora, oh rey, confirma el edicto, y firma la escritura, para que no se pueda mu
 
 ### 6:9
 
-Firmó pues el rey Darío la escritura y el edicto.
+Entonces firmó el rey Darío la escritura y el edicto.
 
 ### 6:10
 
-Y Daniel, cuando supo que la escritura estaba firmada, se entro en su casa, y abiertas las ventanas de su cámara que estaban hacia Jerusalén, se hincaba de rodillas tres veces al día, y oraba, y confesaba delante de su Dios, como lo solía hacer antes.
+Y Daniel, cuando supo que la escritura estaba firmada, se entró en su casa, y abiertas las ventanas de su cámara que estaban hacia Jerusalén, se hincaba de rodillas tres veces al día, y oraba, y confesaba delante de su Dios, como lo solía hacer antes.
 
 ### 6:11
 
@@ -733,23 +733,23 @@ Entonces se juntaron aquellos hombres, y hallaron a Daniel orando y rogando dela
 
 ### 6:12
 
-Se Llegaron luego, y hablaron delante del rey acerca del edicto real: ¿No has confirmado edicto que cualquiera que pidiere a cualquier dios ú hombre en el espacio de treinta días, excepto a ti, oh rey, fuera echado en el foso de los leones? Respondió el rey y dijo: Verdad es, conforme a la ley de Media y de Persia, la cual no se abroga.
+Entonces se acercaron, y dijeron delante del rey acerca del edicto real: ¿No has confirmado edicto que cualquiera que pidiere a cualquier dios ú hombre en el espacio de treinta días, excepto a ti, oh rey, fuera echado en el foso de los leones? Respondió el rey y dijo: Verdad es, conforme a la ley de Media y de Persia, la cual no se abroga.
 
 ### 6:13
 
-Entonces respondieron y dijeron delante del rey: Daniel que es de los hijos de la cautividad de los os judi, no ha hecho cuenta de ti, oh rey, ni del edicto que confirmaste; antes tres veces al día hace su petición.
+Entonces respondieron y dijeron delante del rey: Daniel que es de los hijos de la cautividad de los judíos, no ha hecho cuenta de ti, oh rey, ni del edicto que confirmaste; antes tres veces al día hace su petición.
 
 ### 6:14
 
-El rey entonces, oyendo el negocio, le peso en gran manera, y sobre Daniel puso cuidado para librarlo; y hasta puestas del sol trabajó para librarle.
+El rey entonces, oyendo el negocio, le pesó en gran manera, y sobre Daniel puso cuidado para librarlo; y hasta puestas del sol trabajó para librarle.
 
 ### 6:15
 
-Empero aquellos hombres se reunieron cerca del rey, y dijeron al rey: Sepas, oh rey, que es ley de Media y de Persia, que ningún decreto ú ordenanza que el rey confirmare pueda mudarse.
+Entonces aquellos hombres se reunieron cerca del rey, y dijeron al rey: Sepas, oh rey, que es ley de Media y de Persia, que ningún decreto ú ordenanza que el rey confirmare pueda mudarse.
 
 ### 6:16
 
-Entonces el rey mandó, y trajeron a Daniel, y le echaron en el foso de los leones. Y hablando el rey dijo a Daniel: El Dios tuyo, a quien tú continuamente sirves, él te libre.
+Entonces el rey dijo, y trajeron a Daniel, y le echaron en el foso de los leones. Y respondió el rey y dijo a Daniel: El Dios tuyo, a quien tú continuamente sirves, él te libre.
 
 ### 6:17
 
@@ -757,39 +757,39 @@ Y fue traída una piedra, y puesta sobre la puerta del foso, la cual selló el r
 
 ### 6:18
 
-Se Fue luego el rey a su palacio, y se acosto ayuno; ni instrumentos de música fueron os traid delante de él, y se le fue el sueño.
+Entonces se fue el rey a su palacio, y se acostó ayuno; ni instrumentos de música fueron traídos delante de él, y se le fue el sueño.
 
 ### 6:19
 
-El rey, por tanto, se levantó muy de mañana, y fue apriesa al foso de los leones:
+El rey, por tanto, se levantó muy de mañana, y fue aprisa al foso de los leones:
 
 ### 6:20
 
-Y se llegando cerca del foso llamó a voces a Daniel con voz triste: y hablando el rey dijo a Daniel: Daniel, siervo del Dios viviente, el Dios tuyo, a quien tú continuamente sirves ¿te ha podido librar de los leones?
+Y llegándose cerca del foso llamó a voces a Daniel con voz triste: y respondió el rey y dijo a Daniel: Daniel, siervo del Dios viviente, el Dios tuyo, a quien tú continuamente sirves ¿te ha podido librar de los leones?
 
 ### 6:21
 
-Entonces habló Daniel con el rey: oh rey, para siempre vive.
+Entonces Daniel habló con el rey: oh rey, para siempre vive.
 
 ### 6:22
 
-El Dios mío envió su ángel, el cual cerró la boca de los leones, para que no me hicieran mal: porque delante de él se halló en mí justicia: y aun delante de ti, oh rey, yo no he hecho lo que no debiese.
+El Dios mío envió su ángel, el cual cerró la boca de los leones, para que no me hicieran mal: porque delante de él se halló en mí justicia: y aun delante de ti, oh rey, yo no he hecho ningún daño.
 
 ### 6:23
 
-Entonces se alegró el rey en gran manera a causa de él, y mandó sacar a Daniel del foso: y fue Daniel sacado del foso, y ninguna lesión se halló en él, porque creyó en su Dios.
+Entonces se alegró el rey en gran manera a causa de él, y dijo que sacaran a Daniel del foso: y fue Daniel sacado del foso, y ninguna lesión se halló en él, porque creyó en su Dios.
 
 ### 6:24
 
-Y lo mandando el rey fueron os traid aquellos hombres que habían acusado a Daniel, y fueron echados en el foso de los leones, ellos, sus hijos, y sus mujeres; y aun no habían llegado al suelo del foso, cuando los leones se apoderaron de ellos, y quebrantaron todos sus huesos.
+Y dijo el rey, y fueron traídos aquellos hombres que habían acusado a Daniel, y fueron echados en el foso de los leones, ellos, sus hijos, y sus mujeres; y aun no habían llegado al suelo del foso, cuando los leones se apoderaron de ellos, y quebrantaron todos sus huesos.
 
 ### 6:25
 
-Entonces el rey Darío escribió a todos los pueblos, naciones, y lenguas, que habitan en toda la tierra: Paz os sea multiplicada:
+Entonces el rey Darío escribió a todos los pueblos, naciones, y lenguas, que habitan en toda la tierra: Paz les sea multiplicada:
 
 ### 6:26
 
-De parte mía es puesta ordenanza, que en todo el señorío de mi reino todos teman y tiemblen de la presencia del Dios de Daniel: porque él es el Dios viviente y permanente por todos los siglos, y su reino tal que no será deshecho, y su señorío hasta el fin.
+De parte mía es puesta ordenanza, que en todo el señorío de mi reino todos teman y tiemblen de la presencia del Dios de Daniel: porque él es el Dios viviente y permanente para siempre, y su reino tal que no será deshecho, y su señorío hasta el fin.
 
 ### 6:27
 
@@ -803,11 +803,11 @@ Y este Daniel fue prosperado durante el reino de Darío, y durante el reino de C
 
 ### 7:1
 
-En el primer año de Belsasar rey de Babel, vio Daniel un sueño y visiones de su cabeza en su cama: luego escribió el sueño, y notó la suma de los negocios.
+En el primer año de Belsasar rey de Babel, vio Daniel un sueño y visiones de su cabeza en su cama: entonces escribió el sueño, y dijo la suma de los negocios.
 
 ### 7:2
 
-Habló Daniel y dijo: Veía yo en mi visión de noche, y he aquí que los cuatro vientos del cielo combatían en la gran mar.
+Respondió Daniel y dijo: Veía yo en mi visión de noche, y he aquí que los cuatro vientos del cielo combatían en la gran mar.
 
 ### 7:3
 
@@ -819,11 +819,11 @@ La primera era como león, y tenía alas de águila. Yo estaba mirando hasta tan
 
 ### 7:5
 
-Y he aquí otra segunda bestia, semejante a un oso, la cual se puso al un lado, y tenía en su boca tres costillas entre sus dientes; y le fue dicho así: te Levanta, traga carne mucha.
+Y he aquí otra segunda bestia, semejante a un oso, la cual se puso al un lado, y tenía en su boca tres costillas entre sus dientes; y le fue dicho así: Levántate, traga carne mucha.
 
 ### 7:6
 
-Después de esto yo miraba, y he aquí otra, semejante a un tigre, y tenía cuatro alas de ave en sus espaldas: tenía también esta bestia cuatro cabezas; y le fue dada potestad.
+Después de esto yo miraba, y he aquí otra, semejante a un leopardo, y tenía cuatro alas de ave en sus costados: tenía también esta bestia cuatro cabezas; y le fue dada potestad.
 
 ### 7:7
 
@@ -855,7 +855,7 @@ Miraba yo en la visión de la noche, y he aquí en las nubes del cielo como un h
 
 ### 7:14
 
-Y le fue dado señorío, y gloria, y reino; y todos los pueblos, naciones y lenguas le sirvieron; su señorío, señorío eterno, que no será transitorio, y su reino que no se corromperá.
+Y le fue dado señorío, y gloria, y reino; y todos los pueblos, naciones y lenguas le sirvieron; su señorío, señorío eterno, que no será quitado, y su reino que no se corromperá.
 
 ### 7:15
 
@@ -863,7 +863,7 @@ Mi espíritu fue turbado, yo Daniel, en medio de mi cuerpo, y las visiones de mi
 
 ### 7:16
 
-Me Llegue a uno de los que asistían, y le pregunte la verdad acerca de todo esto. Y me hablo, y me declaro la interpretación de las cosas.
+Me llegué a uno de los que asistían, y le pregunté la verdad acerca de todo esto. Y me habló, y me declaró la interpretación de las cosas.
 
 ### 7:17
 
@@ -875,7 +875,7 @@ Después tomarán el reino los santos del Altísimo, y poseerán el reino hasta 
 
 ### 7:19
 
-Entonces tuve deseo de saber la verdad acerca de la cuarta bestia, que tan diferente era de todas las otras, espantosa en gran manera, que tenía dientes de hierro, y sus uñas de metal, que devoraba y desmenuzaba, y las sobras hollaba con sus pies:
+Entonces tuve deseo de saber la verdad acerca de la cuarta bestia, que tan diferente era de todas las otras, espantosa en gran manera, que tenía dientes de hierro, y sus uñas de bronce, que devoraba y desmenuzaba, y las sobras hollaba con sus pies:
 
 ### 7:20
 
@@ -887,15 +887,15 @@ Y veía yo que este cuerno hacía guerra contra los santos, y los vencía,
 
 ### 7:22
 
-Hasta tanto que vino el Anciano de días, y se dió el juicio a los santos del Altísimo; y vino el tiempo, y los santos poseyeron el reino.
+Hasta tanto que vino el Anciano de días, y se dio el juicio a los santos del Altísimo; y vino el tiempo, y los santos poseyeron el reino.
 
 ### 7:23
 
-Dijo así: La cuarta bestia será un cuarto reino en la tierra, el cual será más grande que todos los otros reinos, y a toda la tierra devorará, y la hollará, y la despedazará.
+Dijo así: La cuarta bestia será un cuarto reino en la tierra, el cual será diferente de todos los otros reinos, y a toda la tierra devorará, y la hollará, y la despedazará.
 
 ### 7:24
 
-Y los diez cuernos significan que de aquel reino se levantarán diez reyes; y tras ellos se levantará otro, el cual será mayor que los primeros, y a tres reyes derribará.
+Y los diez cuernos: de aquel reino se levantarán diez reyes; y tras ellos se levantará otro, el cual será diferente de los primeros, y a tres reyes derribará.
 
 ### 7:25
 
@@ -903,25 +903,25 @@ Y hablará palabras contra el Altísimo, y a los santos del Altísimo quebrantar
 
 ### 7:26
 
-Empero se sentará el juez, y le quitaran su señorío, para que sea destruido y arruinado hasta el extremo;
+Y el juicio se sentará, y le quitarán su señorío, para que sea destruido y arruinado hasta el extremo;
 
 ### 7:27
 
-Y que el reino, y el señorío, y la majestad de los reinos debajo de todo el cielo, sea dado al pueblo de los santos del Altísimo; cuyo reino es reino eterno, y todos los os señori le servirán y obedecerán.
+Y que el reino, y el señorío, y la majestad de los reinos debajo de todo el cielo, sea dado al pueblo de los santos del Altísimo; cuyo reino es reino eterno, y todos los señoríos le servirán y obedecerán.
 
 ### 7:28
 
-Hasta aquí fue el fin de la plática. Yo Daniel, mucho me turbaron mis pensamientos, y mi rostro se me mudó: mas guardé en mi corazón el negocio.
+Hasta aquí fue el fin de la palabra. Yo Daniel, mucho me turbaron mis pensamientos, y mi rostro se me mudó: mas guardé en mi corazón el negocio.
 
 ## Capítulo 8
 
 ### 8:1
 
-En el año tercero del reino del rey Belsasar, me apareció una visión a mí, Daniel, después de aquella que me había aparecido antes.
+En el año tercero del reino del rey Belsasar, me apareció una visión a mí, Daniel, después de aquella que me había aparecido al principio.
 
 ### 8:2
 
-Vi en visión, (y aconteció cuando vi, que yo estaba en Susán, que es cabecera del reino en la provincia de Persia;) vi pues en visión, estando junto al río Ulai,
+Vi en visión, (y aconteció cuando vi, que yo estaba en Susán, el palacio que está en la provincia de Elam;) vi pues en visión, estando junto al río Ulai,
 
 ### 8:3
 
@@ -929,7 +929,7 @@ Y alcé mis ojos, y miré, y he aquí un carnero que estaba delante del río, el
 
 ### 8:4
 
-Vi que el carnero hería con los cuernos al poniente, al norte, y al mediodía, y que ninguna bestia podía parar delante de él, ni había quien escapase de su mano: y hacía conforme a su voluntad, y se engrandecia.
+Vi que el carnero hería con los cuernos al poniente, al norte, y al mediodía, y que ninguna bestia podía parar delante de él, ni había quien escapase de su mano: y hacía conforme a su voluntad, y se engrandecía.
 
 ### 8:5
 
@@ -941,15 +941,15 @@ Y vino hasta el carnero que tenía los dos cuernos, al cual había yo visto que 
 
 ### 8:7
 
-Y vilo que llegó junto al carnero, y se levantó contra él, e lo hirio, y quebró sus dos cuernos, porque en el carnero no había fuerzas para parar delante de él: lo derribo por tanto en tierra, y lo hollo; ni hubo quien librase al carnero de su mano.
+Y lo vi que llegó junto al carnero, y se levantó contra él, y lo hirió, y quebró sus dos cuernos, porque en el carnero no había fuerzas para parar delante de él: lo derribó por tanto en tierra, y lo holló; ni hubo quien librase al carnero de su mano.
 
 ### 8:8
 
-Y se engrandeció en gran manera el macho de cabrío; y estando en su mayor fuerza, aquel gran cuerno fue quebrado, y en su lugar subieron otros cuatro maravillosos hacia los cuatro vientos del cielo.
+Y se engrandeció en gran manera el macho de cabrío; y estando en su mayor fuerza, aquel gran cuerno fue quebrado, y en su lugar subieron otros cuatro notables hacia los cuatro vientos del cielo.
 
 ### 8:9
 
-Y del uno de ellos salió un cuerno pequeño, el cual creció mucho al mediodía, y al oriente, y hacia la tierra deseable.
+Y del uno de ellos salió un cuerno pequeño, el cual creció mucho al mediodía, y al oriente, y hacia la tierra hermosa.
 
 ### 8:10
 
@@ -957,7 +957,7 @@ Y se engrandeció hasta el ejército del cielo; y parte del ejército y de las e
 
 ### 8:11
 
-Aun contra el príncipe de la fortaleza se engrandeció, y por él fue quitado el continuo sacrificio, y el lugar de su santuario fue echado por tierra.
+Aun contra el príncipe del ejército se engrandeció, y por él fue quitado el continuo sacrificio, y el lugar de su santuario fue echado por tierra.
 
 ### 8:12
 
@@ -981,15 +981,15 @@ Y oí una voz de hombre entre las riberas de Ulai, que gritó y dijo: Gabriel, e
 
 ### 8:17
 
-Vino luego cerca de donde yo estaba; y con su venida me asombré, y caí sobre mi rostro. Empero él me dijo: Entiende, hijo del hombre, porque al tiempo se cumplirá la visión.
+Vino luego cerca de donde yo estaba; y con su venida me asombré, y caí sobre mi rostro. Y él me dijo: Entiende, hijo del hombre, porque la visión es para el tiempo del fin.
 
 ### 8:18
 
-Y estando él hablando conmigo, caí dormido en tierra sobre mi rostro: y él me tocó, e me hizo estar en pie.
+Y estando él hablando conmigo, caí dormido en tierra sobre mi rostro: y él me tocó, y me hizo estar en pie.
 
 ### 8:19
 
-Y dijo: He aquí yo te enseñaré lo que ha de venir en el fin de la ira: porque al tiempo se cumplirá:
+Y dijo: He aquí yo te enseñaré lo que ha de venir en el fin de la ira: porque es para el tiempo del fin:
 
 ### 8:20
 
@@ -1001,11 +1001,11 @@ Y el macho cabrío es el rey de Javán: y el cuerno grande que tenía entre sus 
 
 ### 8:22
 
-Y que fue quebrado y sucedieron cuatro en su lugar, significa que cuatro reinos sucederán de la nación, mas no en la fortaleza de él.
+Y que fue quebrado y sucedieron cuatro en su lugar: cuatro reinos sucederán de la nación, mas no en la fuerza de él.
 
 ### 8:23
 
-Y al cabo del imperio de os est, cuando se cumplirán los prevaricadores, se levantara un rey altivo de rostro, y entendido en dudas.
+Y al cabo del imperio de estos, cuando se cumplirán los prevaricadores, se levantará un rey altivo de rostro, y entendido en enigmas.
 
 ### 8:24
 
@@ -1021,13 +1021,13 @@ Y la visión de la tarde y la mañana que está dicha, es verdadera: y tú guard
 
 ### 8:27
 
-Y yo Daniel fuí quebrantado, y estuve enfermo algunos días: y cuando convalecí, hice el negocio del rey; mas estaba espantado acerca de la visión, y no había quien la entendiese.
+Y yo Daniel fui quebrantado, y estuve enfermo algunos días: y cuando convalecí, hice el negocio del rey; mas estaba espantado acerca de la visión, y no había quien la entendiese.
 
 ## Capítulo 9
 
 ### 9:1
 
-En el año primero de Darío hijo de Assuero, de la nación de los medos, el cual fue puesto por rey sobre el reino de los caldeos;
+En el año primero de Darío hijo de Asuero, de la simiente de los medos, el cual fue puesto por rey sobre el reino de los caldeos;
 
 ### 9:2
 
@@ -1035,11 +1035,11 @@ En el año primero de su reino, yo Daniel miré atentamente en los libros el nú
 
 ### 9:3
 
-Y volví mi rostro al Señor Dios, le buscando en oración y ruego, en ayuno, y cilicio, y ceniza.
+Y puse mi rostro al Señor Dios, para buscarle en oración y ruego, en ayuno, y cilicio, y ceniza.
 
 ### 9:4
 
-Y oré a Jehová mi Dios, y confesé, y dije: Ahora Señor, Dios grande, digno de ser temido, que guardas el pacto y la misericordia con los que te aman y guardan tus mandamientos;
+Y oré a Jehová mi Dios, y confesé, y dije: Ah, Señor, Dios grande, digno de ser temido, que guardas el pacto y la misericordia con los que te aman y guardan tus mandamientos;
 
 ### 9:5
 
@@ -1047,7 +1047,7 @@ Hemos pecado, hemos hecho iniquidad, hemos obrado impíamente, y hemos sido rebe
 
 ### 9:6
 
-No hemos obedecido a tus siervos los profetas, que en tu nombre hablaron a nuestros reyes, y a nuestros príncipes, a nuestros padres, y a todo el pueblo de la tierra.
+Y no hemos obedecido a tus siervos los profetas, que en tu nombre hablaron a nuestros reyes, y a nuestros príncipes, a nuestros padres, y a todo el pueblo de la tierra.
 
 ### 9:7
 
@@ -1059,7 +1059,7 @@ Oh Jehová, nuestra es la confusión de rostro, de nuestros reyes, de nuestros p
 
 ### 9:9
 
-De Jehová nuestro Dios es el tener misericordia, y el perdonar, aunque contra él nos hemos rebelado;
+Del Señor nuestro Dios es el tener misericordia, y el perdonar, porque contra él nos hemos rebelado;
 
 ### 9:10
 
@@ -1067,7 +1067,7 @@ Y no obedecimos a la voz de Jehová nuestro Dios, para andar en sus leyes, las c
 
 ### 9:11
 
-Y todo Israel traspasó tu ley se apartando para no oir tu voz: por lo cual ha fluido sobre nosotros la maldición, y el juramento que está escrito en la ley de Moisés, siervo de Dios; porque contra él pecamos.
+Y todo Israel traspasó tu ley apartándose para no oír tu voz: por lo cual ha fluido sobre nosotros la maldición, y el juramento que está escrito en la ley de Moisés, siervo de Dios; porque contra él pecamos.
 
 ### 9:12
 
@@ -1075,7 +1075,7 @@ Y él ha verificado su palabra que habló sobre nosotros, y sobre nuestros juece
 
 ### 9:13
 
-Según está escrito en la ley de Moisés, todo aqueste mal vino sobre nosotros: y no hemos rogado a la faz de Jehová nuestro Dios, para convertirnos de nuestras maldades, y entender tu verdad.
+Según está escrito en la ley de Moisés, todo este mal vino sobre nosotros: y no hemos rogado a la faz de Jehová nuestro Dios, para convertirnos de nuestras maldades, y entender tu verdad.
 
 ### 9:14
 
@@ -1095,7 +1095,7 @@ Ahora pues, Dios nuestro, oye la oración de tu siervo, y sus ruegos, y haz que 
 
 ### 9:18
 
-Inclina, oh Dios mío, tu oído, y oye; abre tus ojos, y mira nuestros asolamientos, y la ciudad sobre la cual es llamado tu nombre: porque no derramamos nuestros ruegos ante tu acatamiento confiados en nuestras justicias, sino en tus muchas miseraciones.
+Inclina, oh Dios mío, tu oído, y oye; abre tus ojos, y mira nuestros asolamientos, y la ciudad sobre la cual es llamado tu nombre: porque no derramamos nuestros ruegos delante de ti confiados en nuestras justicias, sino en tus muchas miseraciones.
 
 ### 9:19
 
@@ -1111,11 +1111,11 @@ Aun estaba hablando en oración, y aquel varón Gabriel, al cual había visto en
 
 ### 9:22
 
-E me hizo entender, y habló conmigo, y dijo: Daniel, ahora he salido para hacerte entender la interpretación.
+Y me hizo entender, y habló conmigo, y dijo: Daniel, ahora he salido para hacerte entender el entendimiento.
 
 ### 9:23
 
-Al principio de tus ruegos salió la palabra, y yo he venido para la enseñarte, porque tú eres varón de deseos. Entiende pues la palabra, y entiende la visión.
+Al principio de tus ruegos salió la palabra, y yo he venido para enseñártela, porque tú eres varón de deseos. Entiende pues la palabra, y entiende la visión.
 
 ### 9:24
 
@@ -1123,7 +1123,7 @@ Setenta semanas están determinadas sobre tu pueblo y sobre tu santa ciudad, par
 
 ### 9:25
 
-Sepas pues y entiendas, que desde la salida de la palabra para restaurar y edificar a Jerusalén hasta el Mesías Príncipe, habrá siete semanas, y sesenta y dos semanas; se tornara a edificar la plaza y el muro en tiempos angustiosos.
+Sepas pues y entiendas, que desde la salida de la palabra para restaurar y edificar a Jerusalén hasta el Mesías Príncipe, habrá siete semanas, y sesenta y dos semanas; se tornará a edificar la plaza y el foso en tiempos angustiosos.
 
 ### 9:26
 
@@ -1131,17 +1131,17 @@ Y después de las sesenta y dos semanas se quitará la vida al Mesías, y no por
 
 ### 9:27
 
-Y en otra semana confirmará el pacto a muchos, y a la mitad de la semana hará cesar el sacrificio y la ofrenda: después con la muchedumbre de las abominaciones será el desolar, y esto hasta una entera consumación; y se derramara la ya determinada sobre el pueblo asolado.
+Y durante una semana confirmará el pacto a muchos, y a la mitad de la semana hará cesar el sacrificio y la ofrenda: después con la muchedumbre de las abominaciones será el desolar, y esto hasta una entera consumación; y se derramará la ya determinada sobre el pueblo asolado.
 
 ## Capítulo 10
 
 ### 10:1
 
-En el tercer año de Ciro rey de Persia, fue revelada palabra a Daniel, cuyo nombre era Beltsasar; y la palabra era verdadera, mas el tiempo fijado era largo: él empero comprendió la palabra, y tuvo inteligencia en la visión.
+En el tercer año de Ciro rey de Persia, fue revelada palabra a Daniel, cuyo nombre era Beltsasar; y la palabra era verdadera, y el conflicto era grande: y él comprendió la palabra, y tuvo inteligencia en la visión.
 
 ### 10:2
 
-En aquellos días yo Daniel me contristé por espacio de tres semanas.
+En aquellos días yo Daniel estaba de duelo tres semanas de días.
 
 ### 10:3
 
@@ -1153,11 +1153,11 @@ Y a los veinte y cuatro días del mes primero estaba yo a la orilla del gran rí
 
 ### 10:5
 
-Y alzando mis ojos miré, y he aquí un varón vestido de lienzos, y ceñidos sus lomos de oro de Uphaz:
+Y alzando mis ojos miré, y he aquí un varón vestido de lienzos, y ceñidos sus lomos de oro de Ufaz:
 
 ### 10:6
 
-Y su cuerpo era como piedra de Tarsis, y su rostro parecía un relámpago, y sus ojos como antorchas de fuego, y sus brazos y sus pies como de color de metal resplandeciente, y la voz de sus palabras como la voz de ejército.
+Y su cuerpo era como piedra de Tarsis, y su rostro parecía un relámpago, y sus ojos como antorchas de fuego, y sus brazos y sus pies como de color de bronce bruñido, y la voz de sus palabras como la voz de muchedumbre.
 
 ### 10:7
 
@@ -1165,23 +1165,23 @@ Y sólo yo, Daniel, vi aquella visión, y no la vieron los hombres que estaban c
 
 ### 10:8
 
-Quedé pues yo solo, y vi esta gran visión, y no quedó en mí esfuerzo; antes mi fuerza se me trocó en desmayo, sin retener vigor alguno.
+Quedé pues yo solo, y vi esta gran visión, y no quedó en mí esfuerzo; antes mi esplendor se me trocó en ruina, sin retener vigor alguno.
 
 ### 10:9
 
-Empero oí la voz de sus palabras: y oyendo la voz de sus palabras, estaba yo adormecido sobre mi rostro, y mi rostro en tierra.
+Y oí la voz de sus palabras: y oyendo la voz de sus palabras, estaba yo adormecido sobre mi rostro, y mi rostro en tierra.
 
 ### 10:10
 
-Y, he aquí, una mano me tocó, e hizo que me moviese sobre mis rodillas, y sobre las palmas de mis manos.
+Y, he aquí, una mano me tocó, y hizo que me moviese sobre mis rodillas, y sobre las palmas de mis manos.
 
 ### 10:11
 
-Y me dijo: Daniel, varón de deseos, está atento a las palabras que te hablaré, y te levanta sobre tus pies; porque a ti he sido enviado ahora. Y estando hablando conmigo esto, yo estaba temblando.
+Y me dijo: Daniel, varón de deseos, entiende las palabras que te hablaré, y levántate sobre tus pies; porque ahora he sido enviado a ti. Y estando hablando conmigo esto, yo estaba temblando.
 
 ### 10:12
 
-Y me dijo: Daniel, no temas: porque desde el primer día que diste tu corazón a entender, y a afligirte en la presencia de tu Dios, fueron oídas tus palabras; y a causa de tus palabras yo soy venido.
+Y me dijo: Daniel, no temas: porque desde el primer día que diste tu corazón a entender, y a afligirte en la presencia de tu Dios, fueron oídas tus palabras; y a causa de tus palabras yo he venido.
 
 ### 10:13
 
@@ -1189,11 +1189,11 @@ Mas el príncipe del reino de Persia se puso contra mí veintiún días: y he aq
 
 ### 10:14
 
-Soy pues venido para hacerte saber lo que ha de venir a tu pueblo en los postreros días; porque la visión es aún para días.
+He venido pues para hacerte saber lo que ha de venir a tu pueblo en los postreros días; porque la visión es aún para días.
 
 ### 10:15
 
-Y estando hablando conmigo semejantes palabras, puse mis ojos en tierra, y enmudecí.
+Y estando hablando conmigo semejantes palabras, puse mi rostro en tierra, y enmudecí.
 
 ### 10:16
 
@@ -1209,21 +1209,21 @@ Y aquella como semejanza de hombre me tocó otra vez, y me confortó;
 
 ### 10:19
 
-Y me dijo: Varón de deseos, no temas: paz a ti; ten buen ánimo, y te alienta. Y hablando él conmigo cobré yo vigor, y dije: Hable mi señor, porque me has fortalecido.
+Y me dijo: Varón de deseos, no temas: paz a ti; esfuérzate, y esfuérzate. Y hablando él conmigo cobré yo vigor, y dije: Hable mi señor, porque me has fortalecido.
 
 ### 10:20
 
-Y dijo: ¿Sabes por qué he venido a ti? Porque luego tengo de volver para pelear con el príncipe de los persas; y en saliendo yo, luego viene el príncipe de Grecia.
+Y dijo: ¿Sabes por qué he venido a ti? Porque luego tengo de volver para pelear con el príncipe de los persas; y en saliendo yo, luego viene el príncipe de Javán.
 
 ### 10:21
 
-Empero yo te declararé lo que está escrito en la escritura de verdad: y ninguno hay que se esfuerce conmigo en estas cosas, sino Miguel vuestro príncipe.
+Mas yo te declararé lo que está escrito en la escritura de verdad: y ninguno hay que se esfuerce conmigo en estas cosas, sino Miguel el príncipe de ustedes.
 
 ## Capítulo 11
 
 ### 11:1
 
-Y en el año primero de Darío el de Media, yo estuve para animarlo y fortalecerlo.
+Y en el año primero de Darío el de Media, yo estuve para fortalecerlo y serle fortaleza.
 
 ### 11:2
 
@@ -1231,7 +1231,7 @@ Y ahora yo te mostraré la verdad. He aquí que aun habrá tres reyes en Persia,
 
 ### 11:3
 
-Se Levantara luego un rey valiente, el cual se enseñoreará sobre gran dominio, y hará su voluntad.
+Se levantará luego un rey valiente, el cual se enseñoreará sobre gran dominio, y hará su voluntad.
 
 ### 11:4
 
@@ -1239,11 +1239,11 @@ Pero cuando estará enseñoreado, será quebrantado su reino, y repartido por lo
 
 ### 11:5
 
-Y se hara fuerte el rey del mediodía: mas uno de los príncipes de aquél le sobrepujará, y se hará poderoso; su señorío será grande señorío.
+Y se hará fuerte el rey del mediodía: mas uno de los príncipes de aquél le sobrepujará, y se hará poderoso; su señorío será grande señorío.
 
 ### 11:6
 
-Y al cabo de años se concertarán, y la hija del rey del mediodía vendrá al rey del norte para hacer los conciertos. Empero ella no podrá retener la fuerza del brazo: ni permanecerá él, ni su brazo; porque será entregada ella, y los que la habían traído, asimismo su hijo, y los que estaban de parte de ella en aquel tiempo.
+Y al cabo de años se concertarán, y la hija del rey del mediodía vendrá al rey del norte para hacer los conciertos. Mas ella no podrá retener la fuerza del brazo: ni permanecerá él, ni su brazo; porque será entregada ella, y los que la habían traído, asimismo el que la engendró, y los que estaban de parte de ella en aquel tiempo.
 
 ### 11:7
 
@@ -1259,7 +1259,7 @@ Así entrará en el reino el rey del mediodía, y volverá a su tierra.
 
 ### 11:10
 
-Mas los hijos de aquél se airarán, y reunirán multitud de grandes ejércitos: y vendrá a gran prisa, e inundará, y pasará, y tornará, y llegará con ira hasta su fortaleza.
+Mas los hijos de aquél moverán guerra, y reunirán multitud de grandes ejércitos: y vendrá a gran prisa, y inundará, y pasará, y tornará, y llegará con ira hasta su fortaleza.
 
 ### 11:11
 
@@ -1267,7 +1267,7 @@ Por lo cual se enfurecerá el rey del mediodía, y saldrá, y peleará con el mi
 
 ### 11:12
 
-Y la multitud se ensoberbecerá, se elevara su corazón, y derribará muchos millares; mas no prevalecerá.
+Y la multitud se ensoberbecerá, se elevará su corazón, y derribará muchos millares; mas no prevalecerá.
 
 ### 11:13
 
@@ -1275,19 +1275,19 @@ Y el rey del norte volverá a poner en campo mayor multitud que primero, y a cab
 
 ### 11:14
 
-Y en aquellos tiempos se levantarán muchos contra el rey del mediodía; e hijos de disipadores de tu pueblo se levantarán para confirmar la profecía, y caerán.
+Y en aquellos tiempos se levantarán muchos contra el rey del mediodía; e hijos de violentos de tu pueblo se levantarán para confirmar la profecía, y caerán.
 
 ### 11:15
 
-Vendrá pues el rey del norte, y fundará baluartes, y tomará la ciudad fuerte; y los brazos del mediodía no podrán permanecer, ni su pueblo escogido, ni habrá fortaleza que pueda resistir.
+Vendrá pues el rey del norte, y echará terraplén, y tomará la ciudad fuerte; y los brazos del mediodía no podrán permanecer, ni su pueblo escogido, ni habrá fortaleza que pueda resistir.
 
 ### 11:16
 
-Y el que vendrá contra él, hará a su voluntad, ni habrá quien se le pueda parar delante; y estará en la tierra deseable, la cual será consumida en su poder.
+Y el que vendrá contra él, hará a su voluntad, ni habrá quien se le pueda parar delante; y estará en la tierra hermosa, la cual será consumida en su poder.
 
 ### 11:17
 
-Pondrá luego su rostro para venir con el poder de todo su reino; y hará con aquél cosas rectas, y le dara una hija de mujeres para trastornarla: mas no estará ni será por él.
+Pondrá luego su rostro para venir con el poder de todo su reino; y hará con aquél cosas rectas, y le dará una hija de mujeres para trastornarla: mas no estará ni será por él.
 
 ### 11:18
 
@@ -1295,7 +1295,7 @@ Volverá después su rostro a las islas, y tomará muchas; mas un príncipe le h
 
 ### 11:19
 
-Luego volverá su rostro a las fortalezas de su tierra: mas tropezará y caerá, y no parecerá más.
+Luego volverá su rostro a las fortalezas de su tierra: mas tropezará y caerá, y no será hallado.
 
 ### 11:20
 
@@ -1303,7 +1303,7 @@ Entonces sucederá en su silla uno que hará pasar exactor por la gloria del rei
 
 ### 11:21
 
-Y sucederá en su lugar un vil, al cual no darán la honra del reino: vendrá empero con paz, y tomará el reino con halagos.
+Y sucederá en su lugar un vil, al cual no darán la honra del reino: mas vendrá en paz, y tomará el reino con halagos.
 
 ### 11:22
 
@@ -1311,7 +1311,7 @@ Y con los brazos de inundación serán inundados delante de él, y serán quebra
 
 ### 11:23
 
-Y después de los conciertos con él, él hará engaño, y subirá, y saldrá vencedor con poca gente.
+Y después de los conciertos con él, él hará engaño, y subirá, y se hará fuerte con poca gente.
 
 ### 11:24
 
@@ -1323,15 +1323,15 @@ Y despertará sus fuerzas y su corazón contra el rey del mediodía con grande e
 
 ### 11:26
 
-Aun los que comerán su pan, le quebrantarán; y su ejército será destruido, y caerán muchos muertos.
+Aun los que comerán su pan, le quebrantarán; y su ejército será inundado, y caerán muchos muertos.
 
 ### 11:27
 
-Y el corazón de estos dos reyes será para hacer mal, y en una misma mesa tratarán mentira: mas no servirá de nada, porque el plazo aun no es llegado.
+Y el corazón de estos dos reyes será para hacer mal, y en una misma mesa tratarán mentira: mas no servirá de nada, porque aún el fin es para el tiempo señalado.
 
 ### 11:28
 
-Y se volvera a su tierra con grande riqueza, y su corazón será contra el pacto santo: hará pues, y se volvera a su tierra.
+Y se volverá a su tierra con grande riqueza, y su corazón será contra el pacto santo: hará pues, y se volverá a su tierra.
 
 ### 11:29
 
@@ -1347,7 +1347,7 @@ Y serán puestos brazos de su parte; y contaminarán el santuario de fortaleza, 
 
 ### 11:32
 
-Y con lisonjas hará pecar a los violadores del pacto: mas el pueblo que conoce a su Dios, se esforzará, y hará.
+Y a los violadores del pacto corromperá con lisonjas: mas el pueblo que conoce a su Dios, se esforzará, y hará.
 
 ### 11:33
 
@@ -1371,19 +1371,19 @@ Y del Dios de sus padres no se cuidará, ni del amor de las mujeres: ni se cuida
 
 ### 11:38
 
-Mas honrará en su lugar al dios Mauzim, dios que sus padres no conocieron: lo honrara con oro, y plata, y piedras preciosas, y con cosas de gran precio.
+Mas honrará en su lugar al dios de las fortalezas, dios que sus padres no conocieron: lo honrará con oro, y plata, y piedras preciosas, y con cosas de gran precio.
 
 ### 11:39
 
-Y con el dios ajeno que conocerá, hará a los baluartes de Mauzim crecer en gloria: y os haral enseñorear sobre muchos, y por interés repartirá la tierra.
+Y con el dios ajeno que conocerá, hará a las fortalezas crecer en gloria: y los hará enseñorear sobre muchos, y por interés repartirá la tierra.
 
 ### 11:40
 
-Empero al cabo del tiempo el rey del mediodía se acorneará con él; y el rey del norte levantará contra él como tempestad, con carros y gente de a caballo, y muchos os navi; y entrará por las tierras, e inundará, y pasará.
+Mas al cabo del tiempo el rey del mediodía se acorneará con él; y el rey del norte levantará contra él como tempestad, con carros y gente de a caballo, y muchos navíos; y entrará por las tierras, y inundará, y pasará.
 
 ### 11:41
 
-Y vendrá a la tierra deseable, y muchas provincias caerán; mas éstas escaparán de su mano: Edom, y Moab, y lo primero de los hijos de Ammón.
+Y vendrá a la tierra hermosa, y muchas provincias caerán; mas éstas escaparán de su mano: Edom, y Moab, y lo primero de los hijos de Ammón.
 
 ### 11:42
 
@@ -1391,33 +1391,33 @@ Asimismo extenderá su mano a las otras tierras, y no escapará el país de Egip
 
 ### 11:43
 
-Y se apoderará de los tesoros de oro y plata, y de todas las cosas preciosas de Egipto, de Libia, y Etiopía por donde pasará.
+Y se apoderará de los tesoros de oro y plata, y de todas las cosas preciosas de Egipto; y libios y etíopes estarán en sus pasos.
 
 ### 11:44
 
-Mas nuevas de oriente y del norte lo espantarán; y saldrá con grande ira para destruir y matar muchos.
+Mas nuevas de oriente y del norte lo espantarán; y saldrá con grande ira para destruir y acabar del todo a muchos.
 
 ### 11:45
 
-Y plantará las tiendas de su palacio entre los mares, en el monte deseable del santuario; y vendrá hasta su fin, y no tendrá quien le ayude.
+Y plantará las tiendas de su palacio entre los mares, en el monte hermoso del santuario; y vendrá hasta su fin, y no tendrá quien le ayude.
 
 ## Capítulo 12
 
 ### 12:1
 
-Y en aquel tiempo se levantará Miguel, el gran príncipe que está por los hijos de tu pueblo; y será tiempo de angustia, cual nunca fue después que hubo gente hasta entonces: mas en aquel tiempo será libertado tu pueblo, todos los que se hallaran escritos en el libro.
+Y en aquel tiempo se levantará Miguel, el gran príncipe que está sobre los hijos de tu pueblo; y será tiempo de angustia, cual nunca fue después que hubo gente hasta entonces: mas en aquel tiempo será libertado tu pueblo, todos los que se hallaren escritos en el libro.
 
 ### 12:2
 
-Y muchos de los que duermen en el polvo de la tierra serán despertados, unos para vida eterna, y otros para vergüenza y confusión perpetua.
+Y muchos de los que duermen en el polvo de la tierra serán despertados, unos para vida eterna, y otros para vergüenza y horror perpetuo.
 
 ### 12:3
 
-Y los entendidos resplandecerán como el resplandor del firmamento; y los que enseñan a justicia la multitud, como las estrellas a perpetua eternidad.
+Y los entendidos resplandecerán como el resplandor del firmamento; y los que justifican a muchos, como las estrellas a perpetua eternidad.
 
 ### 12:4
 
-Tú empero Daniel, cierra las palabras y sella el libro hasta el tiempo del fin: pasarán muchos, y se multiplicara la ciencia.
+Mas tú, Daniel, cierra las palabras y sella el libro hasta el tiempo del fin: irán de aquí para allá muchos, y se multiplicará la ciencia.
 
 ### 12:5
 
@@ -1429,23 +1429,23 @@ Y dijo uno al varón vestido de lienzos, que estaba sobre las aguas del río: ¿
 
 ### 12:7
 
-Y oía al varón vestido de lienzos, que estaba sobre las aguas del río, el cual alzó su diestra y su siniestra al cielo, y juró por el Viviente en los siglos, que será por tiempo, tiempos, y la mitad. Y cuando se acabare el esparcimiento del escuadrón del pueblo santo, todas estas cosas serán cumplidas.
+Y oí al varón vestido de lienzos, que estaba sobre las aguas del río, el cual alzó su diestra y su siniestra al cielo, y juró por el Viviente en los siglos, que será por tiempo, tiempos, y la mitad. Y cuando se acabare el quebrantamiento del poder del pueblo santo, todas estas cosas serán cumplidas.
 
 ### 12:8
 
-Y yo oí, mas no entendí. Y dije: Señor mío, ¿qué será el cumplimiento de estas cosas?
+Y yo oí, mas no entendí. Y dije: Señor mío, ¿qué será el fin de estas cosas?
 
 ### 12:9
 
-Y dijo: Anda, Daniel, que estas palabras están cerradas y selladas hasta el tiempo del cumplimiento.
+Y dijo: Anda, Daniel, que estas palabras están cerradas y selladas hasta el tiempo del fin.
 
 ### 12:10
 
-Muchos serán limpios, y emblanquecidos, y purificados; mas los os impi obrarán impíamente, y ninguno de los os impi entenderá, pero entenderán los entendidos.
+Muchos serán limpios, y emblanquecidos, y purificados; mas los impíos obrarán impíamente, y ninguno de los impíos entenderá, pero entenderán los entendidos.
 
 ### 12:11
 
-Y desde el tiempo que fuere quitado el continuo sacrificio hasta la abominación espantosa, habrá mil doscientos y noventa días.
+Y desde el tiempo que fuere quitado el continuo sacrificio hasta que sea puesta la abominación asoladora, habrá mil doscientos y noventa días.
 
 ### 12:12
 

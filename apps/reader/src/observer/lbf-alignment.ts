@@ -16,7 +16,10 @@ export interface LbfAlignmentRecord {
   greekSurface: string;
   lbfSurface: string;
   lbfWordIndex: number;
+  /** Discontinuous Spanish indices when word order differs (OT hand-align). */
+  lbfWordIndexes?: number[];
 }
+
 
 interface RawAlignmentFile {
   records: LbfAlignmentRecord[];
@@ -28,6 +31,7 @@ const cacheByBook = new Map<
     raw: string;
     byVerse: Map<string, Map<number, number>>;
     surfacesByVerse: Map<string, Map<number, string>>;
+    indexesByVerse: Map<string, Map<number, number[]>>;
   }
 >();
 
@@ -39,18 +43,29 @@ function ensureCaches(bookId: ReaderBookId = getWorkshopBookId()): void {
   const data = JSON.parse(raw) as RawAlignmentFile;
   const byVerse = new Map<string, Map<number, number>>();
   const surfaces = new Map<string, Map<number, string>>();
+  const indexes = new Map<string, Map<number, number[]>>();
 
   for (const record of data.records ?? []) {
     const key = `${record.chapter}:${record.verse}`;
     const indexMap = byVerse.get(key) ?? new Map<number, number>();
     const surfaceMap = surfaces.get(key) ?? new Map<number, string>();
+    const multiMap = indexes.get(key) ?? new Map<number, number[]>();
     indexMap.set(record.token, record.lbfWordIndex);
     surfaceMap.set(record.token, record.lbfSurface);
+    if (record.lbfWordIndexes?.length) {
+      multiMap.set(record.token, [...record.lbfWordIndexes]);
+    }
     byVerse.set(key, indexMap);
     surfaces.set(key, surfaceMap);
+    indexes.set(key, multiMap);
   }
 
-  cacheByBook.set(bookId, { raw, byVerse, surfacesByVerse: surfaces });
+  cacheByBook.set(bookId, {
+    raw,
+    byVerse,
+    surfacesByVerse: surfaces,
+    indexesByVerse: indexes
+  });
 }
 
 /** token number → LBF word index for one verse */
@@ -71,6 +86,16 @@ export function loadLbfTokenSurfaces(
 ): Map<number, string> {
   ensureCaches(bookId);
   return cacheByBook.get(bookId)!.surfacesByVerse.get(`${chapter}:${verse}`) ?? new Map();
+}
+
+/** token number → all Spanish word indexes (discontinuous-aware). */
+export function loadLbfTokenWordIndexes(
+  chapter: number,
+  verse: number,
+  bookId: ReaderBookId = getWorkshopBookId()
+): Map<number, number[]> {
+  ensureCaches(bookId);
+  return cacheByBook.get(bookId)!.indexesByVerse.get(`${chapter}:${verse}`) ?? new Map();
 }
 
 export function findWordIndexBySurface(

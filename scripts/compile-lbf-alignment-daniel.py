@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Compile Reader OSHB→LBF alignment for Daniel from translator reverse links.
+"""DEPRECATED for Daniel production — use compile-lbf-alignment-daniel-hand.py.
 
-Source of truth: herramientas/cgv-translator/.../oshb-spine/daniel/daniel-reverse-links.json
-Spine: daniel-oshb-spine.json (sourceTokenId → w / oshbIndex)
+This script rebuilds ``daniel.alignment.json`` from the gloss-seed reverse-links
+pipeline. Running it would overwrite the hand alignment. Kept only for
+historical / emergency recovery.
 
-Pilot: chapter 1 links. Re-run after reverse-link edits.
-Do not hand-edit daniel.alignment.json for verses already linked.
+Production path:
+    python3 scripts/compile-lbf-alignment-daniel-hand.py --also-merge
 """
 
 from __future__ import annotations
@@ -205,4 +206,15 @@ def main() -> None:
 
 
 if __name__ == "__main__":
+    import sys
+
+    if "--force-gloss-seed" not in sys.argv:
+        print(
+            "REFUSING: gloss-seed compile would overwrite hand alignment.\n"
+            "Use:  python3 scripts/compile-lbf-alignment-daniel-hand.py --also-merge\n"
+            "Or pass --force-gloss-seed to run this legacy pipeline anyway.",
+            file=sys.stderr,
+        )
+        raise SystemExit(2)
+    sys.argv = [a for a in sys.argv if a != "--force-gloss-seed"]
     main()

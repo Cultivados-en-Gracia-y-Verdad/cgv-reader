@@ -7,7 +7,12 @@ import {
 } from "@cgv/core";
 import type { FrameType } from "./clause-signals";
 import { loadLbfRaw, loadMorphRawSync, loadTokensRawSync } from "./book-assets";
-import { loadLbfTokenSurfaces, loadLbfTokenWordMap, resolveLbfPhraseWordIndex } from "./lbf-alignment";
+import {
+  loadLbfTokenSurfaces,
+  loadLbfTokenWordIndexes,
+  loadLbfTokenWordMap,
+  resolveLbfPhraseWordIndex
+} from "./lbf-alignment";
 import { EMPTY_H3_FLOW_STATE, sanitizeH3FlowState, type H3FlowState } from "./h3-flow";
 import {
   isAlignmentStyleId,
@@ -15,6 +20,7 @@ import {
   isOshbInfinitive,
   isOshbParticiple,
   mtToProtestant,
+  oshbParticipleFeatures,
   otTokenId
 } from "./oshb";
 import { getWorkshopBookId } from "./workshop-book";
@@ -91,6 +97,8 @@ export interface SpanishWord {
   participleCase?: string;
   participleNumber?: string;
   participleGender?: string;
+  /** OSHB / Hebrew participle — no Greek case; student picks the host. */
+  oshbParticiple?: boolean;
   /** Only meaningful when participleCase is "G" — is the preceding Greek token a preposition? */
   participlePrecededByPreposition?: boolean;
   /** Greek alignment id when this word carries an infinitive (mood N) — mechanical morph lookup. */
@@ -150,7 +158,8 @@ export interface GreekClauseRange {
   greekEndTokenId: string;
 }
 
-const WORD_PATTERN = /[\wáéíóúüñÁÉÍÓÚÜÑ]+|[^\s\wáéíóúüñÁÉÍÓÚÜÑ]+/gu;
+/** Keep hyphenated names (Abed-nego) as one word — matches LBF hand-align TOKEN_RE. */
+const WORD_PATTERN = /[A-Za-záéíóúüñÁÉÍÓÚÜÑ][\wáéíóúüñÁÉÍÓÚÜÑ'’\-]*|[^\s\wáéíóúüñÁÉÍÓÚÜÑ]+/gu;
 const DEPENDENT_INTRODUCER_SURFACES = new Set([
   "ἵνα",
   "ὅτι",
@@ -520,6 +529,9 @@ export function findNominalClauseCandidates(
   claimedGreekTokenIds: Set<string>,
   bookId: ReaderBookId = getWorkshopBookId()
 ): NominalClauseCandidate[] {
+  // Brick 1B is MorphGNT case (N/V). OSHB has no Greek case — do not flag Hebrew/Aramaic runs.
+  if (readerBookHasOshb(bookId)) return [];
+
   const nominalHeadIds = readNominalClauseHeadIds(bookId);
   const tokens = parseTokenAlignments(bookId).sort(
     (a, b) => a.chapter - b.chapter || a.verse - b.verse || a.token - b.token
@@ -675,11 +687,9 @@ export function describeParticipleReading(
   const number = (word.participleNumber && PARTICIPLE_NUMBER[word.participleNumber]) || null;
   const gender = (word.participleGender && PARTICIPLE_GENDER[word.participleGender]) || null;
 
-  const formParts = [
-    aspect,
-    voice,
-    [grammaticalCase, number, gender].filter(Boolean).join(" ")
-  ].filter(Boolean);
+  const formParts = word.oshbParticiple
+    ? ["Hebrew participle", [number, gender].filter(Boolean).join(" ")].filter(Boolean)
+    : [aspect, voice, [grammaticalCase, number, gender].filter(Boolean).join(" ")].filter(Boolean);
   const formLine = formParts.length ? formParts.join(" · ") : "participle form";
 
   const key = participleCngKey(word);
@@ -697,6 +707,8 @@ export function describeParticipleReading(
   let hangLine: string;
   if (hangNoun) {
     hangLine = hangNoun.text;
+  } else if (word.oshbParticiple) {
+    hangLine = "Hebrew participle — pick who they ride with";
   } else if (word.participleCase === "N") {
     hangLine = "subject case — pick who they ride with";
   } else if (word.participleCase === "A") {
@@ -743,8 +755,8 @@ export function groupParticiplesByNounHost(
   for (const word of participles) {
     const reading = describeParticipleReading(word, nearbyWords);
 
-    // Nominative: subject host is a judgment call, not morphology.
-    if (word.participleCase === "N") {
+    // Nominative / OSHB: subject host is a judgment call, not morphology.
+    if (word.oshbParticiple || word.participleCase === "N") {
       if (manualSubjectHost.length) manualNominatives.push({ word, reading });
       else needsPickNominatives.push({ word, reading });
       continue;
@@ -1307,27 +1319,40 @@ export function loadClauseVerses(bookId: ReaderBookId = getWorkshopBookId()): Sp
     word.participleId = alignment.id;
     word.participleSurface = stripGreekPunctuation(alignment.greekSurface);
     word.participleLemma = alignment.greekLemma;
-    word.participleTense = alignment.greekMorph[3];
-    word.participleVoice = alignment.greekMorph[4];
-    word.participleCase = alignment.greekMorph[6];
-    word.participleNumber = alignment.greekMorph[7];
-    word.participleGender = alignment.greekMorph[8];
-    // Keep the participle morph on the Spanish word so agreementKey can also
-    // fall back to greekMorph when case slots are missing.
-    word.greekMorph = alignment.greekMorph;
 
-    // Genitive-absolute check needs Greek word order (Spanish word order
-    // doesn't preserve it) — look at the immediately preceding Greek token
-    // in the same verse for a governing preposition (MorphGNT part-of-speech
-    // "P").
-    if (word.participleCase === "G") {
-      const precedingToken = allTokenAlignments.find(
-        candidate =>
-          candidate.chapter === alignment.chapter &&
-          candidate.verse === alignment.verse &&
-          candidate.token === alignment.token - 1
-      );
-      word.participlePrecededByPreposition = precedingToken?.greekMorph.startsWith("P") ?? false;
+    if (isOshbParticiple(alignment.greekMorph)) {
+      // Hebrew has no Greek case; force the manual-host path (same as nominative).
+      const feat = oshbParticipleFeatures(alignment.greekMorph);
+      word.oshbParticiple = true;
+      word.participleTense = undefined;
+      word.participleVoice = undefined;
+      word.participleCase = "N";
+      word.participleNumber = feat?.number ?? undefined;
+      word.participleGender = feat?.gender ?? undefined;
+      word.greekMorph = alignment.greekMorph;
+    } else {
+      word.participleTense = alignment.greekMorph[3];
+      word.participleVoice = alignment.greekMorph[4];
+      word.participleCase = alignment.greekMorph[6];
+      word.participleNumber = alignment.greekMorph[7];
+      word.participleGender = alignment.greekMorph[8];
+      // Keep the participle morph on the Spanish word so agreementKey can also
+      // fall back to greekMorph when case slots are missing.
+      word.greekMorph = alignment.greekMorph;
+
+      // Genitive-absolute check needs Greek word order (Spanish word order
+      // doesn't preserve it) — look at the immediately preceding Greek token
+      // in the same verse for a governing preposition (MorphGNT part-of-speech
+      // "P").
+      if (word.participleCase === "G") {
+        const precedingToken = allTokenAlignments.find(
+          candidate =>
+            candidate.chapter === alignment.chapter &&
+            candidate.verse === alignment.verse &&
+            candidate.token === alignment.token - 1
+        );
+        word.participlePrecededByPreposition = precedingToken?.greekMorph.startsWith("P") ?? false;
+      }
     }
   }
 
@@ -1561,8 +1586,14 @@ export function deriveSpanishSpanFromGreekRange(
   bookId: ReaderBookId = getWorkshopBookId()
 ): string[] {
   const tokenToWord = buildVerseTokenWordMap(chapter, verse, verseWords, bookId);
+  const multi = loadLbfTokenWordIndexes(chapter, verse, bookId);
   const wordIndexes = new Set<number>();
   for (let token = startToken; token <= endToken; token += 1) {
+    const many = multi.get(token);
+    if (many?.length) {
+      for (const index of many) wordIndexes.add(index);
+      continue;
+    }
     const wordIndex = tokenToWord.get(token);
     if (wordIndex !== undefined) wordIndexes.add(wordIndex);
   }

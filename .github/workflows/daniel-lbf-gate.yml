@@ -1,0 +1,52 @@
+name: Daniel LBF gate
+
+on:
+  push:
+    paths:
+      - "data/lbf/ot/daniel.md"
+      - "data/lbf/ot/daniel.align.*.json"
+      - "data/lbf/ot/daniel.align.json"
+      - "data/lbf/ot/daniel.alignment.json"
+      - "scripts/lbf-align-workbench.py"
+      - "scripts/verify-lbf-text.py"
+      - "scripts/compile-lbf-alignment-daniel-hand.py"
+  pull_request:
+    paths:
+      - "data/lbf/ot/daniel.md"
+      - "data/lbf/ot/daniel.align.*.json"
+      - "data/lbf/ot/daniel.align.json"
+      - "data/lbf/ot/daniel.alignment.json"
+      - "scripts/lbf-align-workbench.py"
+      - "scripts/verify-lbf-text.py"
+      - "scripts/compile-lbf-alignment-daniel-hand.py"
+  workflow_dispatch:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkout cgv-data (OSHB tokens)
+        uses: actions/checkout@v4
+        with:
+          repository: Cultivados-en-Gracia-y-Verdad/cgv-data
+          path: cgv-data
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Workbench check chapters 1–12
+        run: |
+          for ch in $(seq 1 12); do
+            python3 scripts/lbf-align-workbench.py check "$ch"
+          done
+
+      - name: verify-lbf-text hard gate
+        run: python3 scripts/verify-lbf-text.py
+
+      - name: Hand → production compile is current
+        run: |
+          python3 scripts/compile-lbf-alignment-daniel-hand.py --also-merge
+          git diff --exit-code -- data/lbf/ot/daniel.alignment.json data/lbf/ot/daniel.align.json
