@@ -149,4 +149,4 @@ Author in Biblia-LBF; keep staging in sync intentionally.
 1. Finish 1 Pedro / Judas / 1 Juan reverse links to Tito’s hand-quality bar (see ADR-0001 checklist).
 2. Promote LBF Structure books together into `cgv-data`; cut Reader over from staging.
 3. Plan TR1894 Greek spine switch when multi-book LBF work demands it.
-4. Daniel Hebrew participles: host picks in Observer (`hebrewParticiplesNeedHostPick` in fill notes).
+4. Daniel Hebrew participles: seed hosts with `scripts/fill-daniel-participle-hosts.py` (workshop may still refine a few unresolved / implied-subject cases — see `hebrewParticiplesNeedHostPick` in fill notes).
