@@ -1,4 +1,12 @@
-import { useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type MouseEvent,
+  type ReactNode
+} from "react";
 import {
   auditGreekSpanConsistency,
   deriveGreekClauseRange,
@@ -66,7 +74,7 @@ import {
 import { loadLbfTokenSurfaces } from "./lbf-alignment";
 import { describeMorph, ensureVerseInterlinear, getVerseInterlinear } from "./o-data";
 import { TokenDetailAnchor } from "./TokenDetailPopover";
-import { getReaderBookInfo, workshopProgressKeys, type ReaderBookId } from "@cgv/core";
+import { getReaderBookInfo, readerBookHasOshb, workshopProgressKeys, type ReaderBookId } from "@cgv/core";
 import {
   applyCoordinateInheritance,
   deriveOutline,
@@ -90,6 +98,8 @@ import {
 import { buildH3UnitSignals } from "./h2-movements";
 import { buildBookMovementReport } from "./book-movement";
 import {
+  extractPertinentDefinitionPassage,
+  extractPertinentDefinitionText,
   investigateBookDefinition,
   type DefinitionInvestigation
 } from "./book-definitions";
@@ -136,6 +146,28 @@ const FALLBACK_CLAUSE_CHOICES: ClauseChoiceOption[] = [
     lean: "available"
   }
 ];
+
+/** Highlight tracked surfaces inside a definition collage line (evidence only). */
+function highlightDefinitionSurfaces(text: string, surfaces: string[]): ReactNode[] {
+  const needles = [...new Set(surfaces.map(s => s.trim()).filter(Boolean))].sort(
+    (a, b) => b.length - a.length
+  );
+  if (!text || !needles.length) return [text];
+  const pattern = new RegExp(
+    `(${needles.map(n => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`,
+    "giu"
+  );
+  const parts = text.split(pattern);
+  return parts.map((part, index) => {
+    const hit = needles.some(n => n.toLowerCase() === part.toLowerCase());
+    if (!hit) return <span key={`t${index}`}>{part}</span>;
+    return (
+      <mark key={`m${index}`} className="clause-definitions-mark">
+        {part}
+      </mark>
+    );
+  });
+}
 
 // Structure = Passage + Clause Workspace as one continuous view (START-HERE Step 4).
 type ClauseReviewState = "Unreviewed" | "Reviewed" | "Attached" | "Not sure";
@@ -2335,8 +2367,11 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       reference: `${bookInfo.displayName} ${v.chapter}:${v.verse}`,
       text: v.text
     }));
-    return buildBookMovementReport(bookMovementClauses, { verses: movementVerses });
-  }, [bookInfo.displayName, bookMovementClauses, verses]);
+    return buildBookMovementReport(bookMovementClauses, {
+      verses: movementVerses,
+      discourseProfile: readerBookHasOshb(bookId) ? "narrative" : "letter"
+    });
+  }, [bookId, bookInfo.displayName, bookMovementClauses, verses]);
 
   const convergenceReport = useMemo(
     () =>
@@ -2464,6 +2499,18 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     [bookInfo.displayName, verses]
   );
 
+  /** Structure clause spans by verse — preferred source for definition collage text. */
+  const structureSpansByVerse = useMemo(() => {
+    const map: Record<string, string[]> = {};
+    for (const row of savedClauseRows) {
+      if (!row.spanText.trim()) continue;
+      const verseKey = `${row.finiteVerb.chapter}:${row.finiteVerb.verse}`;
+      const list = map[verseKey] ?? (map[verseKey] = []);
+      if (!list.includes(row.spanText)) list.push(row.spanText);
+    }
+    return map;
+  }, [savedClauseRows]);
+
   const persistBookDefinitions = useCallback(
     (next: BookDefinitionsState) => {
       setBookDefinitions(next);
@@ -2482,7 +2529,10 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       const seed = seedRaw.trim();
       if (!seed) return;
       const writingPurposeTexts = bookMovementReport.writingPurposes.map(h => h.spanText);
-      const investigation = investigateBookDefinition(seed, movementVerses, { writingPurposeTexts });
+      const investigation = investigateBookDefinition(seed, movementVerses, {
+        writingPurposeTexts,
+        structureSpansByVerse
+      });
       setDefinitionInvestigation(investigation);
       setDefinitionSeedDraft(seed);
       setStructureMode("definitions");
@@ -2511,7 +2561,8 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       bookDefinitions.terms,
       bookMovementReport.writingPurposes,
       movementVerses,
-      persistBookDefinitions
+      persistBookDefinitions,
+      structureSpansByVerse
     ]
   );
 
@@ -2530,12 +2581,23 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   const confirmDefinitionHit = useCallback(
     (proposal: { id: string; verseKey: string; kind: BookDefinitionHit["kind"]; snippet: string }) => {
       updateActiveDefinitionTerm(term => {
+        const full =
+          verseTextByKey.get(proposal.verseKey) ||
+          wordsByVerse
+            .get(proposal.verseKey)
+            ?.map(w => w.text)
+            .join(" ") ||
+          proposal.snippet;
+        const snippet =
+          extractPertinentDefinitionText(full, [term.seed, ...term.relatedConfirmed], {
+            structureSpans: structureSpansByVerse[proposal.verseKey]
+          }) || proposal.snippet;
         const existing = term.hits.find(h => h.id === proposal.id);
         if (existing) {
           return {
             ...term,
             hits: term.hits.map(h =>
-              h.id === proposal.id ? { ...h, confirmed: true, kind: proposal.kind, snippet: proposal.snippet } : h
+              h.id === proposal.id ? { ...h, confirmed: true, kind: proposal.kind, snippet } : h
             )
           };
         }
@@ -2547,7 +2609,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
               id: proposal.id,
               verseKey: proposal.verseKey,
               kind: proposal.kind,
-              snippet: proposal.snippet,
+              snippet,
               confirmed: true
             }
           ]
@@ -2555,7 +2617,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       });
       setSelectedDefinitionHitId(proposal.id);
     },
-    [updateActiveDefinitionTerm]
+    [structureSpansByVerse, updateActiveDefinitionTerm, verseTextByKey, wordsByVerse]
   );
 
   const dismissDefinitionHit = useCallback(
@@ -2629,6 +2691,10 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   /** Evidence inventory only — never a composed sense. */
   const definitionEvidenceSumUp = useMemo(() => {
     if (!activeDefinitionTerm) return null;
+    const surfaces = [
+      activeDefinitionTerm.seed,
+      ...activeDefinitionTerm.relatedConfirmed
+    ];
     const confirmed = [...activeDefinitionTerm.hits]
       .filter(h => h.confirmed)
       .sort((a, b) => {
@@ -2642,18 +2708,32 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     }
     return {
       seed: activeDefinitionTerm.seed,
+      surfaces,
       confirmedCount: confirmed.length,
       byKind,
       related: activeDefinitionTerm.relatedConfirmed,
       verses: confirmed.map(h => h.verseKey),
-      lines: confirmed.map(h => ({
-        verseKey: h.verseKey,
-        kind: h.kind,
-        snippet: h.snippet,
-        note: h.note
-      }))
+      lines: confirmed.map(h => {
+        const full =
+          verseTextByKey.get(h.verseKey) ||
+          wordsByVerse
+            .get(h.verseKey)
+            ?.map(w => w.text)
+            .join(" ") ||
+          h.snippet;
+        const passage = extractPertinentDefinitionPassage(full, surfaces, {
+          structureSpans: structureSpansByVerse[h.verseKey]
+        });
+        return {
+          verseKey: h.verseKey,
+          kind: h.kind,
+          snippet: passage.text || h.snippet,
+          source: passage.source,
+          note: h.note
+        };
+      })
     };
-  }, [activeDefinitionTerm]);
+  }, [activeDefinitionTerm, structureSpansByVerse, verseTextByKey, wordsByVerse]);
 
   const persistBookThread = useCallback(
     (next: BookThreadState) => {
@@ -2825,7 +2905,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   );
 
   const renderSkeletonNode = useCallback(
-    (node: SkeletonNode) => {
+    (node: SkeletonNode, depth = 0) => {
       const tagLabel =
         node.relation === "describes"
           ? "Relative clause"
@@ -2850,6 +2930,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
         <div
           className={[
             "clause-tree-node-wrap",
+            depth > 0 ? "clause-tree-node-wrap--dependent" : "",
             sequenceEntry?.isRecipientRunMember ? "clause-tree-node-wrap--recipient-run" : "",
             sequenceEntry?.isRecipientRunStart ? "clause-tree-node-wrap--recipient-run-start" : "",
             sequenceEntry?.isRecipientRunEnd ? "clause-tree-node-wrap--recipient-run-end" : ""
@@ -2869,18 +2950,28 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
               .join(" ")}
             onClick={() => openClauseFromSkeleton(node.finiteVerbId)}
           >
-            {tagLabel ? <span className="clause-tree-tag">{tagLabel}</span> : null}
-            {sequenceEntry ? (
-              <span className="sequence-item-tags">
-                {sequenceEntry.isReason ? <span className="sequence-tag sequence-tag--reason">Reason</span> : null}
-                {sequenceEntry.isStatement ? <span className="sequence-tag sequence-tag--statement">Statement</span> : null}
-                {sequenceEntry.isImperative ? <span className="sequence-tag sequence-tag--imperative">Imperative</span> : null}
-                {sequenceEntry.isImperative && sequenceEntry.recipient ? (
-                  <span className="sequence-tag sequence-tag--recipient">{sequenceEntry.recipient}</span>
-                ) : null}
-                {sequenceEntry.isPurpose ? <span className="sequence-tag sequence-tag--purpose">Purpose</span> : null}
+            <span className="clause-tree-meta">
+              <span className="clause-tree-ref">{node.reference}</span>
+              <span className="clause-tree-id" title="Clause id">
+                {node.finiteVerbId}
               </span>
-            ) : null}
+              {tagLabel ? <span className="clause-tree-tag">{tagLabel}</span> : null}
+              {sequenceEntry ? (
+                <span className="sequence-item-tags">
+                  {sequenceEntry.isReason ? <span className="sequence-tag sequence-tag--reason">Reason</span> : null}
+                  {sequenceEntry.isStatement ? (
+                    <span className="sequence-tag sequence-tag--statement">Statement</span>
+                  ) : null}
+                  {sequenceEntry.isImperative ? (
+                    <span className="sequence-tag sequence-tag--imperative">Imperative</span>
+                  ) : null}
+                  {sequenceEntry.isImperative && sequenceEntry.recipient ? (
+                    <span className="sequence-tag sequence-tag--recipient">{sequenceEntry.recipient}</span>
+                  ) : null}
+                  {sequenceEntry.isPurpose ? <span className="sequence-tag sequence-tag--purpose">Purpose</span> : null}
+                </span>
+              ) : null}
+            </span>
             <span className="clause-tree-text">
               {row ? renderClauseWords(row.selectedWords, node.finiteVerbId) : node.spanText || node.reference}
             </span>
@@ -2905,7 +2996,9 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
             </div>
           ) : null}
           {node.children.length ? (
-            <div className="clause-tree-children">{node.children.map(renderSkeletonNode)}</div>
+            <div className="clause-tree-children">
+              {node.children.map(child => renderSkeletonNode(child, depth + 1))}
+            </div>
           ) : null}
         </div>
       );
@@ -3089,7 +3182,16 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
               onClick={() => {
                 setSkeletonOpen(true);
                 setSkeletonMaximized(true);
-                window.setTimeout(() => window.print(), 80);
+                window.setTimeout(() => {
+                  document
+                    .querySelectorAll<HTMLDetailsElement>(".clause-skeleton-tree-details")
+                    .forEach(el => {
+                      el.open = true;
+                    });
+                  // Let maximize + open details finish layout before print —
+                  // printing too early produced overlapping/stacked lines.
+                  window.setTimeout(() => window.print(), 60);
+                }, 100);
               }}
             >
               Print skeleton
@@ -3542,7 +3644,8 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
           {structureMode === "definitions" ? (
             <div className="clause-definitions-view" aria-label="Book definitions">
               <p className="clause-section-note clause-definitions-view-intro">
-                Gather what this letter means by a word from its own use. Proposals are candidates —
+                Gather what this letter means by a word from its own use. Confirm passages; the
+                pertinent lines collect under Author&apos;s use so you can see the dossier together —
                 never a finished glossary sense.
               </p>
               <div className="clause-definitions-view-grid">
@@ -3626,19 +3729,24 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                       </h3>
 
                       {definitionEvidenceSumUp ? (
-                        <details className="clause-definitions-sumup">
-                          <summary>
-                            Investigation sum-up
+                        <section
+                          className="clause-definitions-collage"
+                          aria-label="Author use collage"
+                        >
+                          <h4 className="clause-movement-dashboard-section-title">
+                            Author&apos;s use
                             <span className="clause-book-movement-count">
                               {definitionEvidenceSumUp.confirmedCount}
                             </span>
-                          </summary>
+                          </h4>
                           <p className="clause-section-note">
-                            Evidence from your confirmed dossier — not a definition.
+                            Pertinent text from confirmed passages (Structure clause spans when the
+                            word sits in a saved span; otherwise the verse sentence), gathered in
+                            reading order — evidence, not a finished sense.
                           </p>
                           {definitionEvidenceSumUp.confirmedCount === 0 ? (
                             <p className="clause-output-empty">
-                              Confirm hits to build a sum-up.
+                              Confirm hits to gather the author&apos;s use here.
                             </p>
                           ) : (
                             <>
@@ -3668,35 +3776,63 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                               <p className="clause-definitions-sumup-chain">
                                 {definitionEvidenceSumUp.verses.join(" → ")}
                               </p>
-                              <ul className="clause-book-movement-list">
+                              <ol className="clause-definitions-collage-list">
                                 {definitionEvidenceSumUp.lines.map(line => (
-                                  <li key={`${line.verseKey}:${line.kind}:${line.snippet}`}>
-                                    <button
-                                      type="button"
-                                      className="clause-audit-ref clause-audit-ref--link"
-                                      onClick={() => {
-                                        const hit = activeDefinitionTerm.hits.find(
-                                          h =>
-                                            h.confirmed &&
-                                            h.verseKey === line.verseKey &&
-                                            h.snippet === line.snippet
-                                        );
-                                        if (hit) setSelectedDefinitionHitId(hit.id);
-                                      }}
-                                    >
-                                      {line.verseKey}
-                                    </button>
-                                    <span className="clause-definitions-hit-kind">{line.kind}</span>
-                                    <span className="clause-book-movement-meta">
-                                      {line.snippet}
-                                      {line.note ? ` — ${line.note}` : ""}
-                                    </span>
+                                  <li
+                                    key={`${line.verseKey}:${line.kind}:${line.snippet}`}
+                                    className={
+                                      selectedDefinitionHitId &&
+                                      activeDefinitionTerm.hits.some(
+                                        h =>
+                                          h.id === selectedDefinitionHitId &&
+                                          h.verseKey === line.verseKey
+                                      )
+                                        ? "clause-definitions-collage-line clause-definitions-collage-line--selected"
+                                        : "clause-definitions-collage-line"
+                                    }
+                                  >
+                                    <div className="clause-definitions-collage-meta">
+                                      <button
+                                        type="button"
+                                        className="clause-audit-ref clause-audit-ref--link"
+                                        onClick={() => {
+                                          const hit = activeDefinitionTerm.hits.find(
+                                            h => h.confirmed && h.verseKey === line.verseKey
+                                          );
+                                          if (hit) setSelectedDefinitionHitId(hit.id);
+                                        }}
+                                      >
+                                        {line.verseKey}
+                                      </button>
+                                      <span className="clause-definitions-hit-kind">
+                                        {line.kind}
+                                      </span>
+                                      <span
+                                        className="clause-definitions-hit-kind clause-definitions-source"
+                                        title={
+                                          line.source === "structure"
+                                            ? "From Structure clause span"
+                                            : "From verse text (no matching Structure span)"
+                                        }
+                                      >
+                                        {line.source === "structure" ? "clause" : "verse"}
+                                      </span>
+                                    </div>
+                                    <p className="clause-definitions-collage-text">
+                                      {highlightDefinitionSurfaces(
+                                        line.snippet,
+                                        definitionEvidenceSumUp.surfaces
+                                      )}
+                                    </p>
+                                    {line.note ? (
+                                      <p className="clause-definitions-collage-note">{line.note}</p>
+                                    ) : null}
                                   </li>
                                 ))}
-                              </ul>
+                              </ol>
                             </>
                           )}
-                        </details>
+                        </section>
                       ) : null}
 
                       <section aria-label="Related surfaces">
@@ -3900,20 +4036,57 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                     <p className="clause-output-empty">Select a hit to read the verse.</p>
                   )}
 
+                  {activeDefinitionTerm &&
+                  definitionEvidenceSumUp &&
+                  definitionEvidenceSumUp.confirmedCount > 0 ? (
+                    <div className="clause-definitions-collage clause-definitions-collage--compact">
+                      <span className="clause-movement-dashboard-section-title">
+                        Gathered use
+                      </span>
+                      <ol className="clause-definitions-collage-list">
+                        {definitionEvidenceSumUp.lines.map(line => (
+                          <li
+                            key={`side:${line.verseKey}:${line.kind}`}
+                            className="clause-definitions-collage-line"
+                          >
+                            <button
+                              type="button"
+                              className="clause-audit-ref clause-audit-ref--link"
+                              onClick={() => {
+                                const hit = activeDefinitionTerm.hits.find(
+                                  h => h.confirmed && h.verseKey === line.verseKey
+                                );
+                                if (hit) setSelectedDefinitionHitId(hit.id);
+                              }}
+                            >
+                              {line.verseKey}
+                            </button>
+                            <p className="clause-definitions-collage-text">
+                              {highlightDefinitionSurfaces(
+                                line.snippet,
+                                definitionEvidenceSumUp.surfaces
+                              )}
+                            </p>
+                          </li>
+                        ))}
+                      </ol>
+                    </div>
+                  ) : null}
+
                   {activeDefinitionTerm ? (
                     <label className="clause-definitions-working">
                       <span className="clause-movement-dashboard-section-title">
                         Working definition
                       </span>
                       <p className="clause-section-note">
-                        What John means by {activeDefinitionTerm.seed} in this letter — your prose
-                        only.
+                        What this letter means by {activeDefinitionTerm.seed} — write from the
+                        gathered use above; your prose only.
                       </p>
                       <textarea
                         className="clause-definitions-working-text"
                         rows={8}
                         value={activeDefinitionTerm.workingDefinition}
-                        placeholder="Write from the confirmed dossier — do not paste a lexicon sense."
+                        placeholder="Write from the gathered passages — do not paste a lexicon sense."
                         onChange={event => {
                           const workingDefinition = event.target.value;
                           updateActiveDefinitionTerm(term => ({
@@ -5812,8 +5985,9 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
             <details className="clause-skeleton-tree-details">
               <summary>Clause tree (grammar nest)</summary>
               <p className="clause-section-note">
-                How clauses attach — relative, content, frame. Read the book in H3 flow above;
-                open this when you need the nest.
+                How clauses attach — relative, content, frame. Each row shows its verse
+                reference and clause id. Nesting (left rail) is dependence depth. Read the
+                book in H3 flow above; open this when you need the nest.
               </p>
               {sequenceEntryByFiniteVerbId.size ? (
                 <dl className="sequence-legend">
@@ -5843,7 +6017,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                 </dl>
               ) : null}
               {skeleton.roots.length ? (
-                <div className="clause-tree">{skeleton.roots.map(renderSkeletonNode)}</div>
+                <div className="clause-tree">{skeleton.roots.map(node => renderSkeletonNode(node))}</div>
               ) : (
                 <p className="clause-output-empty">
                   Nothing placed yet. Classify a clause as Independent, or as content/frame pointing

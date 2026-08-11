@@ -1,6 +1,6 @@
 import type { ReaderBookId } from "@cgv/core";
 import { getWorkshopBookId } from "./workshop-book";
-import { loadLbfAlignmentRaw } from "./book-assets";
+import { loadLbfAlignmentRaw, loadLbfRaw } from "./book-assets";
 
 /**
  * Greek (MorphGNT/BLE token number) → LBF Spanish word index.
@@ -18,11 +18,43 @@ export interface LbfAlignmentRecord {
   lbfWordIndex: number;
   /** Discontinuous Spanish indices when word order differs (OT hand-align). */
   lbfWordIndexes?: number[];
+  /** Canonical source-token id when loaded from an OSHB reverse-link artifact. */
+  sourceTokenId?: string;
+  /** Canonical Spanish alignment-unit id when loaded from an OSHB reverse-link artifact. */
+  unitId?: string;
+  charStart?: number;
+  charEnd?: number;
 }
 
+export interface LbfSourceTokenUnit {
+  sourceTokenId: string;
+  unitId: string;
+  surface: string;
+  charStart: number;
+  charEnd: number;
+  lbfWordIndex: number;
+  lbfWordIndexes: number[];
+}
 
 interface RawAlignmentFile {
   records: LbfAlignmentRecord[];
+}
+
+interface ReverseLinkUnit {
+  unitId?: string;
+  surface: string;
+  charStart: number;
+  charEnd: number;
+  sourceTokenIds: string[];
+}
+
+interface ReverseLinkRecord {
+  reference: string;
+  units: ReverseLinkUnit[];
+}
+
+interface ReverseLinkFile {
+  links: ReverseLinkRecord[];
 }
 
 const cacheByBook = new Map<
@@ -32,6 +64,7 @@ const cacheByBook = new Map<
     byVerse: Map<string, Map<number, number>>;
     surfacesByVerse: Map<string, Map<number, string>>;
     indexesByVerse: Map<string, Map<number, number[]>>;
+    sourceUnitsByVerse: Map<string, Map<string, LbfSourceTokenUnit[]>>;
   }
 >();
 
@@ -40,12 +73,15 @@ function ensureCaches(bookId: ReaderBookId = getWorkshopBookId()): void {
   const cached = cacheByBook.get(bookId);
   if (cached && cached.raw === raw) return;
 
-  const data = JSON.parse(raw) as RawAlignmentFile;
+  const parsed = JSON.parse(raw) as RawAlignmentFile | ReverseLinkFile | (RawAlignmentFile & ReverseLinkFile);
+  const hasReverseLinks = "links" in parsed && Array.isArray(parsed.links);
+  const records = hasReverseLinks ? reverseLinksToRecords(parsed, bookId) : "records" in parsed ? parsed.records ?? [] : [];
   const byVerse = new Map<string, Map<number, number>>();
   const surfaces = new Map<string, Map<number, string>>();
   const indexes = new Map<string, Map<number, number[]>>();
+  const sourceUnits = hasReverseLinks ? reverseLinksToSourceUnits(parsed, bookId) : recordsToSourceUnits(records);
 
-  for (const record of data.records ?? []) {
+  for (const record of records) {
     const key = `${record.chapter}:${record.verse}`;
     const indexMap = byVerse.get(key) ?? new Map<number, number>();
     const surfaceMap = surfaces.get(key) ?? new Map<number, string>();
@@ -60,12 +96,216 @@ function ensureCaches(bookId: ReaderBookId = getWorkshopBookId()): void {
     indexes.set(key, multiMap);
   }
 
+  if (hasReverseLinks) {
+    applyReverseLinkUnitSurfaces(sourceUnits, byVerse, surfaces, indexes);
+  }
+
   cacheByBook.set(bookId, {
     raw,
     byVerse,
     surfacesByVerse: surfaces,
-    indexesByVerse: indexes
+    indexesByVerse: indexes,
+    sourceUnitsByVerse: sourceUnits
   });
+}
+
+function applyReverseLinkUnitSurfaces(
+  sourceUnits: Map<string, Map<string, LbfSourceTokenUnit[]>>,
+  byVerse: Map<string, Map<number, number>>,
+  surfaces: Map<string, Map<number, string>>,
+  indexes: Map<string, Map<number, number[]>>
+): void {
+  for (const [verseKey, tokenUnits] of sourceUnits) {
+    const indexMap = byVerse.get(verseKey) ?? new Map<number, number>();
+    const surfaceMap = surfaces.get(verseKey) ?? new Map<number, string>();
+    const multiMap = indexes.get(verseKey) ?? new Map<number, number[]>();
+
+    for (const [sourceTokenId, units] of tokenUnits) {
+      const parsed = tokenFromSourceTokenId(sourceTokenId);
+      if (!parsed || !units.length) continue;
+      const orderedUnits = [...units].sort((a, b) => a.charStart - b.charStart || a.charEnd - b.charEnd);
+      const indexesForToken = Array.from(
+        new Set(orderedUnits.flatMap(unit => (unit.lbfWordIndexes.length ? unit.lbfWordIndexes : [unit.lbfWordIndex])))
+      ).sort((a, b) => a - b);
+      const surface = Array.from(new Set(orderedUnits.map(unit => unit.surface))).join(" / ");
+      indexMap.set(parsed.token, orderedUnits[orderedUnits.length - 1]!.lbfWordIndex);
+      surfaceMap.set(parsed.token, surface);
+      if (indexesForToken.length) multiMap.set(parsed.token, indexesForToken);
+    }
+
+    byVerse.set(verseKey, indexMap);
+    surfaces.set(verseKey, surfaceMap);
+    indexes.set(verseKey, multiMap);
+  }
+}
+
+function reverseLinksToRecords(data: ReverseLinkFile, bookId: ReaderBookId): LbfAlignmentRecord[] {
+  const lbf = loadLbfVerses(bookId);
+  const records = new Map<string, LbfAlignmentRecord>();
+
+  for (const link of data.links ?? []) {
+    const ref = link.reference.match(/(\d+):(\d+)$/);
+    if (!ref) continue;
+    const chapter = Number(ref[1]);
+    const verse = Number(ref[2]);
+    const text = lbf.get(`${chapter}:${verse}`);
+    if (!text) continue;
+    const words = wordsWithSpans(text);
+
+    for (const unit of link.units ?? []) {
+      const overlapping = words.filter(word => word.start < unit.charEnd && word.end > unit.charStart);
+      const anchorWords = overlapping.length ? overlapping : findUnitWords(words, unit.surface);
+      if (!anchorWords.length) continue;
+      const anchor = preferFirstWord(anchorWords[0]?.text ?? "") ? anchorWords[0]!.index : anchorWords[anchorWords.length - 1]!.index;
+
+      for (const sourceTokenId of unit.sourceTokenIds ?? []) {
+        const token = tokenFromSourceTokenId(sourceTokenId);
+        if (!token || token.chapter !== chapter || token.verse !== verse) continue;
+        records.set(`${chapter}:${verse}:${token.token}`, {
+          chapter,
+          verse,
+          token: token.token,
+          greekSurface: sourceTokenId,
+          lbfSurface: unit.surface,
+          lbfWordIndex: anchor,
+          sourceTokenId,
+          unitId: unit.unitId,
+          charStart: unit.charStart,
+          charEnd: unit.charEnd
+        });
+      }
+    }
+  }
+
+  return Array.from(records.values()).sort((a, b) => a.chapter - b.chapter || a.verse - b.verse || a.token - b.token);
+}
+
+function reverseLinksToSourceUnits(data: ReverseLinkFile, bookId: ReaderBookId): Map<string, Map<string, LbfSourceTokenUnit[]>> {
+  const lbf = loadLbfVerses(bookId);
+  const byVerse = new Map<string, Map<string, LbfSourceTokenUnit[]>>();
+
+  for (const link of data.links ?? []) {
+    const ref = link.reference.match(/(\d+):(\d+)$/);
+    if (!ref) continue;
+    const chapter = Number(ref[1]);
+    const verse = Number(ref[2]);
+    const text = lbf.get(`${chapter}:${verse}`);
+    if (!text) continue;
+    const words = wordsWithSpans(text);
+    const verseKey = `${chapter}:${verse}`;
+    const tokenUnits = byVerse.get(verseKey) ?? new Map<string, LbfSourceTokenUnit[]>();
+
+    for (const unit of link.units ?? []) {
+      const overlapping = words.filter(word => word.start < unit.charEnd && word.end > unit.charStart);
+      const anchorWords = overlapping.length ? overlapping : findUnitWords(words, unit.surface);
+      if (!anchorWords.length) continue;
+      const anchor = preferFirstWord(anchorWords[0]?.text ?? "") ? anchorWords[0]!.index : anchorWords[anchorWords.length - 1]!.index;
+      const wordIndexes = anchorWords.map(word => word.index);
+
+      for (const sourceTokenId of unit.sourceTokenIds ?? []) {
+        const token = tokenFromSourceTokenId(sourceTokenId);
+        if (!token || token.chapter !== chapter || token.verse !== verse) continue;
+        const entries = tokenUnits.get(sourceTokenId) ?? [];
+        entries.push({
+          sourceTokenId,
+          unitId: unit.unitId ?? "",
+          surface: unit.surface,
+          charStart: unit.charStart,
+          charEnd: unit.charEnd,
+          lbfWordIndex: anchor,
+          lbfWordIndexes: wordIndexes
+        });
+        tokenUnits.set(sourceTokenId, entries);
+      }
+    }
+
+    byVerse.set(verseKey, tokenUnits);
+  }
+
+  return byVerse;
+}
+
+function recordsToSourceUnits(records: LbfAlignmentRecord[]): Map<string, Map<string, LbfSourceTokenUnit[]>> {
+  const byVerse = new Map<string, Map<string, LbfSourceTokenUnit[]>>();
+  for (const record of records) {
+    const sourceTokenId = record.sourceTokenId ?? record.greekSurface;
+    const key = `${record.chapter}:${record.verse}`;
+    const tokenUnits = byVerse.get(key) ?? new Map<string, LbfSourceTokenUnit[]>();
+    const entries = tokenUnits.get(sourceTokenId) ?? [];
+    entries.push({
+      sourceTokenId,
+      unitId: record.unitId ?? "",
+      surface: record.lbfSurface,
+      charStart: record.charStart ?? -1,
+      charEnd: record.charEnd ?? -1,
+      lbfWordIndex: record.lbfWordIndex,
+      lbfWordIndexes: record.lbfWordIndexes ?? [record.lbfWordIndex]
+    });
+    tokenUnits.set(sourceTokenId, entries);
+    byVerse.set(key, tokenUnits);
+  }
+  return byVerse;
+}
+
+function loadLbfVerses(bookId: ReaderBookId): Map<string, string> {
+  const map = new Map<string, string>();
+  for (const line of loadLbfRaw(bookId).replace(/\r\n/g, "\n").split("\n")) {
+    const match = line.match(/^\s*.+?\s+(\d+):(\d+)\s+(.+?)\s*$/);
+    if (match) {
+      map.set(`${Number(match[1])}:${Number(match[2])}`, match[3].trim());
+    }
+  }
+  return map;
+}
+
+function wordsWithSpans(text: string): Array<{ text: string; start: number; end: number; index: number }> {
+  const out: Array<{ text: string; start: number; end: number; index: number }> = [];
+  const pattern = /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ][\wÁÉÍÓÚÜÑáéíóúüñ'’\-]*/gu;
+  for (const match of text.matchAll(pattern)) {
+    out.push({
+      text: match[0],
+      start: match.index ?? 0,
+      end: (match.index ?? 0) + match[0].length,
+      index: out.length
+    });
+  }
+  return out;
+}
+
+function findUnitWords(
+  words: Array<{ text: string; start: number; end: number; index: number }>,
+  surface: string
+): Array<{ text: string; start: number; end: number; index: number }> {
+  const parts = surface.match(/[A-Za-zÁÉÍÓÚÜÑáéíóúüñ][\wÁÉÍÓÚÜÑáéíóúüñ'’\-]*/gu)?.map(normalizeSpanish) ?? [];
+  if (!parts.length) return [];
+  for (let i = 0; i <= words.length - parts.length; i += 1) {
+    const window = words.slice(i, i + parts.length).map(word => normalizeSpanish(word.text));
+    if (window.every((part, index) => part === parts[index])) return words.slice(i, i + parts.length);
+  }
+  return [];
+}
+
+function tokenFromSourceTokenId(id: string): { chapter: number; verse: number; token: number } | null {
+  const match = id.match(/^h\d{2}(\d{3})(\d{3})(\d{3})$/);
+  if (!match) return null;
+  const mtChapter = Number(match[1]);
+  const mtVerse = Number(match[2]);
+  const mapped = mtToProtestant(mtChapter, mtVerse);
+  return { chapter: mapped.chapter, verse: mapped.verse, token: Number(match[3]) };
+}
+
+function mtToProtestant(chapter: number, verse: number): { chapter: number; verse: number } {
+  if (chapter === 3 && verse >= 31) return { chapter: 4, verse: verse - 30 };
+  if (chapter === 4) return { chapter: 4, verse: verse + 3 };
+  if (chapter === 6 && verse === 1) return { chapter: 5, verse: 31 };
+  if (chapter === 6 && verse >= 2) return { chapter: 6, verse: verse - 1 };
+  return { chapter, verse };
+}
+
+function preferFirstWord(text: string): boolean {
+  return /^(esta|estan|estoy|estamos|esteis|es|son|soy|somos|sois|sea|sean|ser|sera|seran|fue|fueron|fui|era|eran|hay|habra|vino|vinieron|dijo|dijeron|dio|hubo|habia|puso|busco|estuvo|estuvieron|sono|soño|respondio|mando|envio|llamo)$/u.test(
+    normalizeSpanish(text)
+  );
 }
 
 /** token number → LBF word index for one verse */
@@ -96,6 +336,16 @@ export function loadLbfTokenWordIndexes(
 ): Map<number, number[]> {
   ensureCaches(bookId);
   return cacheByBook.get(bookId)!.indexesByVerse.get(`${chapter}:${verse}`) ?? new Map();
+}
+
+/** sourceTokenId → canonical Spanish alignment unit(s) for one verse. */
+export function loadLbfSourceTokenUnits(
+  chapter: number,
+  verse: number,
+  bookId: ReaderBookId = getWorkshopBookId()
+): Map<string, LbfSourceTokenUnit[]> {
+  ensureCaches(bookId);
+  return cacheByBook.get(bookId)!.sourceUnitsByVerse.get(`${chapter}:${verse}`) ?? new Map();
 }
 
 export function findWordIndexBySurface(

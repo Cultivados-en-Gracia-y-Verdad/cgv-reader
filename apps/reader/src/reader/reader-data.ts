@@ -257,8 +257,9 @@ function parseRv1909Content(displayName: string, content: string): BibleVerse[] 
 }
 
 /**
- * Suite LBF markdown:
- * `### 1:1` then body text until the next heading.
+ * LBF markdown:
+ * - cgv-data: `Daniel 1:1 …`
+ * - legacy local: `### 1:1` then body text until the next heading.
  */
 function parseLbfContent(displayName: string, content: string): BibleVerse[] {
   const verses: BibleVerse[] = [];
@@ -280,6 +281,18 @@ function parseLbfContent(displayName: string, content: string): BibleVerse[] {
   }
 
   for (const line of lines) {
+    const lineVerse = line.match(/^\s*.+?\s+(\d+):(\d+)\s+(.+?)\s*$/);
+    if (lineVerse) {
+      flush();
+      verses.push({
+        book: displayName,
+        chapter: Number(lineVerse[1]),
+        verse: Number(lineVerse[2]),
+        text: lineVerse[3].trim()
+      });
+      continue;
+    }
+
     const heading = line.match(/^###\s+(\d+):(\d+)\s*$/);
     if (heading) {
       flush();

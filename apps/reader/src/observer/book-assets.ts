@@ -9,7 +9,16 @@ import {
 
 /** Eager so Reader / Mark can load LBF sync when the book has text. */
 const lbfMdFiles = import.meta.glob(
-  ["@cgv-lbf/nt/*.md", "@cgv-lbf/ot/*.md"],
+  ["@cgv-data/bibles/LBF/*.lbf.md"],
+  {
+    query: "?raw",
+    import: "default",
+    eager: true
+  }
+) as Record<string, string>;
+
+const canonicalLbfAlignmentFiles = import.meta.glob(
+  ["@cgv-data/bibles/LBF/alignments/*.alignment.json"],
   {
     query: "?raw",
     import: "default",
@@ -193,8 +202,7 @@ export async function loadInterlinearRaw(bookId: ReaderBookId): Promise<string> 
 }
 
 function lbfMarkdownPath(bookId: ReaderBookId): string {
-  const folder = getReaderBookInfo(bookId).testament === "ot" ? "ot" : "nt";
-  const endsWith = `/${folder}/${bookId}.md`;
+  const endsWith = `/${bookId}.lbf.md`;
   const key = Object.keys(lbfMdFiles).find(path => path.endsWith(endsWith));
   if (!key) {
     throw new Error(`Missing LBF markdown for ${getReaderBookInfo(bookId).displayName}`);
@@ -213,6 +221,11 @@ export function loadLbfAlignmentRaw(bookId: ReaderBookId): string {
   // Alignment is Structure-only until a book has `*.alignment.json` and Structure is enabled.
   if (!readerBookHasLbfStructure(bookId)) {
     return JSON.stringify({ records: [] });
+  }
+  const canonicalEndsWith = `/alignments/${bookId}.alignment.json`;
+  const canonicalKey = Object.keys(canonicalLbfAlignmentFiles).find(path => path.endsWith(canonicalEndsWith));
+  if (canonicalKey) {
+    return canonicalLbfAlignmentFiles[canonicalKey];
   }
   const folder = getReaderBookInfo(bookId).testament === "ot" ? "ot" : "nt";
   const endsWith = `/${folder}/${bookId}.alignment.json`;

@@ -5,7 +5,9 @@ import {
   flushAutosave,
   linkAutosaveFile,
   readProgressFile,
+  readerBookIdFromWorkshopSlug,
   subscribeAutosaveStatus,
+  writeReaderBook,
   type AutosaveStatus
 } from "@cgv/core";
 import { useUiLanguage } from "./UiLanguageContext";
@@ -44,6 +46,13 @@ export default function ProgressControls() {
       if (!confirmed) return;
 
       const summary = applyProgressBundle(bundle);
+      // Switch workshop book to the file's book so Generate/Observer match what was loaded
+      // (otherwise Daniel progress can sit in storage while UI stays on 1 Juan).
+      const record = bundle as { book?: unknown };
+      if (typeof record.book === "string") {
+        const bookId = readerBookIdFromWorkshopSlug(record.book);
+        if (bookId) writeReaderBook(bookId);
+      }
       window.alert(t.loadDone(summary.restoredCount));
       window.location.reload();
     } catch (error) {

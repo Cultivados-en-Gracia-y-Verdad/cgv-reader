@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ChangeEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type ChangeEvent } from "react";
 import {
   COMPILER_BIBLE_VERSIONS,
   getReaderBookInfo,
@@ -23,8 +23,11 @@ import {
 } from "./compiler-gathering";
 import {
   applyMetaToMarkdown,
+  bookLabelFor,
   createDefaultManualMeta,
+  exportSlugFromMeta,
   readManualMeta,
+  resolveMetaForGenerate,
   writeManualMeta,
   type ManualMeta
 } from "./compiler-meta";
@@ -51,11 +54,13 @@ export default function CompilerShell() {
   } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [warningsDismissed, setWarningsDismissed] = useState(false);
-  const [meta, setMeta] = useState<ManualMeta>(() => readManualMeta());
+  const [meta, setMeta] = useState<ManualMeta>(() => readManualMeta(readReaderBook()));
   const [selectedLine, setSelectedLine] = useState<number | null>(null);
   const [toolTab, setToolTab] = useState<ToolTab>("search");
   const [bibleVersion, setBibleVersion] = useState<BibleVersionId>(() => readCompilerBibleVersion());
   const [generating, setGenerating] = useState(false);
+  /** Blocks writing the previous book's form into the new book's storage on switch. */
+  const metaOwnerBookIdRef = useRef(bookId);
 
   // Sync before children/generate read getWorkshopBookId() (same as Observer).
   setWorkshopBookId(bookId);
@@ -67,17 +72,30 @@ export default function CompilerShell() {
     });
   }, []);
 
+  // YAML form is per workshop book — load that book's meta when the book changes.
   useEffect(() => {
-    writeManualMeta(meta);
-  }, [meta]);
+    metaOwnerBookIdRef.current = bookId;
+    setMeta(readManualMeta(bookId));
+    setBaseMarkdown(null);
+    setSummary(null);
+    setError(null);
+    setSelectedLine(null);
+  }, [bookId]);
+
+  useEffect(() => {
+    // Skip one frame of stale meta after a book switch (owner ref already updated).
+    if (metaOwnerBookIdRef.current !== bookId) return;
+    writeManualMeta({ ...meta, book: bookLabelFor(bookId) }, bookId);
+  }, [meta, bookId]);
 
   useEffect(() => subscribeCompilerBibleVersion(setBibleVersion), []);
 
   useEffect(() => {
     if (!baseMarkdown) return;
-    setBaseMarkdown(current => (current ? applyMetaToMarkdown(current, meta) : current));
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- meta-driven rewrite of base only
-  }, [meta]);
+    const synced = { ...meta, book: bookLabelFor(bookId) };
+    setBaseMarkdown(current => (current ? applyMetaToMarkdown(current, synced) : current));
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- meta/book-driven rewrite of YAML only
+  }, [meta, bookId]);
 
   const exportMarkdown = useMemo(() => {
     if (!baseMarkdown) return null;
@@ -90,7 +108,8 @@ export default function CompilerShell() {
   );
 
   function updateMetaField<K extends keyof ManualMeta>(key: K, value: ManualMeta[K]) {
-    setMeta(current => ({ ...current, [key]: value }));
+    if (key === "book") return; // book is owned by the workshop selection
+    setMeta(current => ({ ...current, [key]: value, book: bookLabelFor(bookId) }));
   }
 
   function handleMetaInput(key: keyof ManualMeta) {
@@ -120,11 +139,15 @@ export default function CompilerShell() {
         }
       }
 
+      const generatedMeta = resolveMetaForGenerate(meta, bookId);
       const result = generateManualSkeleton({
-        meta,
+        meta: generatedMeta,
+        bookId,
         readingTextsByVerse: bibleVersion === "LBF" ? undefined : readingTextsByVerse
       });
+      // Set markdown first, then meta — meta effect rewrites YAML with the same book label.
       setBaseMarkdown(result.markdown);
+      setMeta(generatedMeta);
       // Rematch durable pins by anchor line text (do not wipe gathering work).
       const remapped = remapAttachmentsToMarkdown(result.markdown, readCompilerAttachments());
       writeCompilerAttachments(remapped);
@@ -160,12 +183,8 @@ export default function CompilerShell() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    const slug = (meta.title || meta.book || bookId)
-      .trim()
-      .toLowerCase()
-      .replace(/[^\p{L}\p{N}]+/gu, "-")
-      .replace(/^-|-$/g, "");
-    link.download = `${slug || bookId}-manual-skeleton.md`;
+    const slug = exportSlugFromMeta({ ...meta, book: bookLabelFor(bookId) }, bookId) || bookId;
+    link.download = `${slug}-manual-skeleton.md`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -173,7 +192,7 @@ export default function CompilerShell() {
   }
 
   function handleResetMeta() {
-    setMeta(createDefaultManualMeta());
+    setMeta(createDefaultManualMeta(bookId));
   }
 
   function handleAttachmentsChange(next: CompilerAttachment[]) {
@@ -325,9 +344,12 @@ export default function CompilerShell() {
               <h2>{t.yaml}</h2>
               <p className="compiler-tool-note">{t.yamlNote}</p>
               <div className="compiler-yaml-grid">
+                <label className="compiler-tool-field">
+                  <span>book</span>
+                  <input type="text" value={bookLabelFor(bookId)} readOnly disabled autoComplete="off" />
+                </label>
                 {(
                   [
-                    ["book", "book"],
                     ["title", "title"],
                     ["subtitle", "subtitle"],
                     ["author", "author"],

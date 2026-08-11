@@ -20,10 +20,12 @@
 //
 // HARD RULE: `-` and `+` never carry non-Scripture. Evidence lines such as
 // `Actores principales: …` / `Actores dominantes…` / `Tono observado: …` /
-// `Trayectoria de propósito…` / `Hilo de taller…` always start with `*`.
+// `Trayectoria de propósito…` / `Hilo de taller…` / `Contrastes…` /
+// `Convergencia…` / `Costuras de presión…` always start with `*`.
 
 import {
   getReaderBookInfo,
+  readerBookHasOshb,
   workshopProgressKeys,
   type ReaderBookId
 } from "@cgv/core";
@@ -34,10 +36,13 @@ import {
   formatClauseSpan,
   getClauseBeginningTokens,
   loadClauseVerses,
+  readBookDefinitions,
+  readBookThread,
   readClauseActors,
   readClauseAssignments,
   readClauseObservations,
-  readBookThread,
+  readContrastObservations,
+  readH3FlowState,
   readMarkedAlignmentIds,
   readNominalClauseHeadIds,
   readParticipleSubjectHosts,
@@ -46,6 +51,8 @@ import {
 } from "../observer/clause-data";
 import { loadLbfTokenSurfaces } from "../observer/lbf-alignment";
 import { buildBookMovementReport } from "../observer/book-movement";
+import { buildConvergenceReport } from "../observer/convergence-engine";
+import { reconcileH3FlowState } from "../observer/h3-flow";
 import {
   detectClauseSignal,
   detectLeadingCoordinator,
@@ -80,7 +87,7 @@ function isParticipleGreekMorph(morph: string | undefined): boolean {
   return Boolean(morph && morph.startsWith("V-") && morph.length > 5 && morph[5] === "P");
 }
 import { getWorkshopBookId } from "../observer/workshop-book";
-import { createDefaultManualMeta, formatYamlFrontmatter, type ManualMeta } from "./compiler-meta";
+import { formatYamlFrontmatter, resolveMetaForGenerate, type ManualMeta } from "./compiler-meta";
 import { readReaderNotes, readerNoteCommentLines, verseKeysFromNoteTarget } from "./compiler-gathering";
 
 interface GenderInfo {
@@ -153,27 +160,33 @@ function starSlides(indent: string, explanations: string[]): string[] {
 
 /**
  * HARD marker discipline:
- * - `-` / `+` = Scripture only (body must open with italics `*…*`)
- * - Evidence / meta (Actores…, Tono…) must start with `*`
+ * - `-` / `+` = Scripture only in the outline (body must open with italics `*…*`)
+ * - Evidence / meta slides (Actores…, Tono…) must start with `*`
+ * - `#` / `##` / `###` headings and `{…}` comments are not evidence slides
+ * - Appendix inventory bullets may use `- *lead* — …` (same pattern as ## Actores)
  */
 function markerDisciplineWarnings(markdown: string): string[] {
   const out: string[] = [];
   const lines = markdown.split("\n");
+  const evidenceLead =
+    /^(Actores principales|Actores dominantes|Tono observado|Trayectoria de propósito|Hilo de taller \(hipótesis|Contrastes observados:|Convergencia \(taller\)|Costuras de presión:|Inicios H2 \(taller\)|Definiciones investigadas:|Palabras que regresan:)/i;
+
   for (let i = 0; i < lines.length; i += 1) {
     const line = lines[i];
     const trimmed = line.trim();
     if (!trimmed) continue;
+    if (/^#{1,6}\s/.test(trimmed) || /^\{/.test(trimmed)) continue;
 
-    if (/Actores principales|Actores dominantes|Tono observado/i.test(trimmed) && !/^\*/.test(trimmed)) {
+    if (evidenceLead.test(trimmed) && !/^\*/.test(trimmed)) {
       out.push(
-        `Marker discipline L${i + 1}: Actores/Tono must start with * (never + or -) — got: ${trimmed.slice(0, 100)}`
+        `Marker discipline L${i + 1}: Observer evidence must start with * (never + or -) — got: ${trimmed.slice(0, 100)}`
       );
     }
 
     const scriptureMarker = trimmed.match(/^([-+])\s+(.*)$/);
     if (scriptureMarker) {
       const body = scriptureMarker[2];
-      // Scripture outline lines wrap the span in *…*.
+      // Scripture outline / appendix inventory: body opens with italics *…*
       if (body && !body.startsWith("*")) {
         out.push(
           `Marker discipline L${i + 1}: '${scriptureMarker[1]}' is reserved for Scripture only — got: ${trimmed.slice(0, 100)}`
@@ -182,6 +195,13 @@ function markerDisciplineWarnings(markdown: string): string[] {
     }
   }
   return out;
+}
+
+/** Appendix / inventory bullet that satisfies `- *lead*…` marker discipline. */
+function inventoryBullet(lead: string, detail?: string): string {
+  const head = scripture(lead.trim() || "—");
+  const rest = detail?.trim();
+  return rest ? `- ${head} — ${rest}` : `- ${head}`;
 }
 
 /** Each plain comment on its own slide — keeps presentation slides short. */
@@ -697,6 +717,12 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     const clause = clauseById.get(finiteVerbId);
     const finiteWord = finiteVerbWordById.get(finiteVerbId);
     if (!assignment?.selectedSpan.length || !clause || !finiteWord) {
+      return { prefixWordIds: [], claimText: full };
+    }
+    // OT / OSHB: Brick-4 Hebrew participles are dense and often misaligned onto
+    // Spanish nouns. Peeling the claim at the finite leaves stub H4s («fortaleza»,
+    // «interpretación»). Keep the full span; Greek scaffolding peel is NT-only.
+    if (readerBookHasOshb(bookId)) {
       return { prefixWordIds: [], claimText: full };
     }
     const ids = assignment.selectedSpan;
@@ -1550,6 +1576,11 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
    * «como…, tenemos comunión…» on the protasis lines.
    */
   function displaySpanText(finiteVerbId: string, fallback: string): string {
+    // OT/OSHB spans are hand-coded precisely — NT apodosis-bleed trimming does
+    // not apply and actively truncates correct Hebrew dependent spans.
+    if (readerBookHasOshb(bookId)) {
+      return spanTextFor(finiteVerbId) || fallback;
+    }
     const ids = assignments[finiteVerbId]?.selectedSpan ?? [];
     if (!ids.length) return fallback;
     const minKeepIndexByVerse = new Map<string, number>();
@@ -2189,9 +2220,306 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     warnings.push("No clause actors observed yet — Actor concentration / flow omitted from Generate.");
   }
 
-  // H1/H2 evidence: the TODOs stay human-assigned, but the writer names them
-  // from observed data — dominant actors, mood mix, writing-purpose trajectory,
-  // and student Thread as workshop hypothesis (never as titles).
+  // Movement / workshop layers (definitions, thread, contrasts, pressure, convergence,
+  // repeated words). Evidence stays counts / Scripture / student labels only — never
+  // auto H1/H2 titles or composed themes.
+  function verseKeyFromFiniteId(finiteVerbId: string): string {
+    const parts = finiteVerbId.split(":");
+    return parts.length >= 2 ? `${parts[0]}:${parts[1]}` : finiteVerbId;
+  }
+
+  const purposeTextByParent = new Map<string, string[]>();
+  for (const [childId, observation] of Object.entries(augmentedObservations)) {
+    if (observation.tellsWhenOrIf !== "yes" || observation.frameType !== "purpose") continue;
+    const parentId = observation.whenIfParentClauseId;
+    if (!parentId) continue;
+    const childText = spanTextFor(childId).trim();
+    if (!childText) continue;
+    const bucket = purposeTextByParent.get(parentId) ?? [];
+    bucket.push(childText);
+    purposeTextByParent.set(parentId, bucket);
+  }
+
+  const movementClauses = workingRoots
+    .filter(root => !skeleton.cycleBrokenIds.has(root.finiteVerbId))
+    .map((root, order) => {
+      const verseKey = verseKeyFromFiniteId(root.finiteVerbId);
+      const rootText = spanTextFor(root.finiteVerbId).trim();
+      const purposeBits = purposeTextByParent.get(root.finiteVerbId) ?? [];
+      const spanText = [rootText, ...purposeBits].filter(Boolean).join(" ");
+      return {
+        finiteVerbId: root.finiteVerbId,
+        reference: `${bookDisplayName} ${verseKey}`,
+        spanText,
+        order
+      };
+    });
+
+  const movementVerses = verses.map(v => ({
+    verseKey: `${v.chapter}:${v.verse}`,
+    reference: `${bookDisplayName} ${v.chapter}:${v.verse}`,
+    text: v.text
+  }));
+  const movementReport = buildBookMovementReport(movementClauses, {
+    verses: movementVerses,
+    discourseProfile: readerBookHasOshb(bookId) ? "narrative" : "letter"
+  });
+
+  const h3Ids = movementClauses.map(c => c.finiteVerbId);
+  const h3Flow = reconcileH3FlowState(readH3FlowState(bookId), h3Ids);
+  const contrastState = readContrastObservations(bookId);
+  const bookDefinitions = readBookDefinitions(bookId);
+  const namedThread = readBookThread(bookId).steps.filter(step => step.label.trim());
+
+  const reasonHits = Object.entries(augmentedObservations)
+    .filter(
+      (entry): entry is [string, typeof entry[1] & { whenIfParentClauseId: string }] => {
+        const obs = entry[1];
+        return (
+          obs.tellsWhenOrIf === "yes" &&
+          obs.frameType === "reason" &&
+          typeof obs.whenIfParentClauseId === "string" &&
+          Boolean(obs.whenIfParentClauseId)
+        );
+      }
+    )
+    .map(([finiteVerbId, obs]) => ({
+      finiteVerbId,
+      rootId: obs.whenIfParentClauseId,
+      reference: `${bookDisplayName} ${verseKeyFromFiniteId(finiteVerbId)}`,
+      spanText: spanTextFor(finiteVerbId).trim()
+    }))
+    .filter(hit => hit.spanText);
+
+  const convergenceReport = buildConvergenceReport(movementClauses, movementReport, {
+    imperativeH3Ids: [...commandMarkIds].filter(id => h3Ids.includes(id)),
+    pressureAfterH3Ids: h3Flow.pressureAfter,
+    reasonHits,
+    contrastHits: contrastState.items
+  });
+
+  function clauseRef(finiteVerbId: string): string {
+    const parts = finiteVerbId.split(":");
+    return parts.length >= 3 ? `${parts[0]}:${parts[1]}:${parts[2]}` : finiteVerbId;
+  }
+
+  // --- Movimiento appendices (after Actores, before grammar appendices) ---
+  {
+    const moveBlock: string[] = [];
+    let hasMove = false;
+
+    if (movementReport.repeatedWords.length) {
+      hasMove = true;
+      moveBlock.push("## Movimiento");
+      moveBlock.push("");
+      moveBlock.push("### Palabras que regresan");
+      moveBlock.push("");
+      for (const row of movementReport.repeatedWords.slice(0, 40)) {
+        const chain = row.verses
+          .slice(0, 12)
+          .map(v => (v.isReturn ? `${v.verseKey}↩` : v.verseKey))
+          .join(" · ");
+        const more = row.verses.length > 12 ? " · …" : "";
+        moveBlock.push(inventoryBullet(row.display, `${row.count} · ${chain}${more}`));
+        moveBlock.push("");
+      }
+    }
+
+    if (movementReport.formulasByFamily.some(f => f.hits.length)) {
+      if (!hasMove) {
+        moveBlock.push("## Movimiento");
+        moveBlock.push("");
+        hasMove = true;
+      }
+      moveBlock.push("### Fórmulas que regresan");
+      moveBlock.push("");
+      for (const family of movementReport.formulasByFamily) {
+        if (!family.hits.length) continue;
+        const refs = family.hits
+          .slice(0, 10)
+          .map(h => verseKeyFromFiniteId(h.finiteVerbId))
+          .join(" · ");
+        moveBlock.push(inventoryBullet(family.familyLabel, `${family.hits.length} · ${refs}`));
+        moveBlock.push("");
+      }
+    }
+
+    if (movementReport.discourseResets.length) {
+      if (!hasMove) {
+        moveBlock.push("## Movimiento");
+        moveBlock.push("");
+        hasMove = true;
+      }
+      moveBlock.push("### Posibles reinicios de discurso");
+      moveBlock.push("");
+      for (const hit of movementReport.discourseResets.slice(0, 20)) {
+        moveBlock.push(
+          inventoryBullet(
+            verseKeyFromFiniteId(hit.finiteVerbId),
+            `${hit.kind}${hit.label ? `: ${hit.label}` : ""}`
+          )
+        );
+        moveBlock.push("");
+      }
+    }
+
+    if (movementReport.candidateBoundaries.length) {
+      if (!hasMove) {
+        moveBlock.push("## Movimiento");
+        moveBlock.push("");
+        hasMove = true;
+      }
+      moveBlock.push("### Costuras candidatas (≥3 señales)");
+      moveBlock.push("");
+      for (const seam of movementReport.candidateBoundaries.slice(0, 15)) {
+        moveBlock.push(
+          inventoryBullet(
+            `after ${clauseRef(seam.afterH3Id)}`,
+            `${seam.signalKinds.join(", ")} (${seam.strength})`
+          )
+        );
+        moveBlock.push("");
+      }
+    }
+
+    if (hasMove) sections.push(moveBlock.join("\n"));
+  }
+
+  if (convergenceReport.hotspots.length || convergenceReport.verses.some(v => v.score > 0)) {
+    const convBlock: string[] = [];
+    convBlock.push("## Convergencia");
+    convBlock.push("");
+    convBlock.push(
+      "{Puntos donde varias señales coinciden — evidencia para nombrar H2, no un título automático.}"
+    );
+    convBlock.push("");
+    const rows = (convergenceReport.hotspots.length
+      ? convergenceReport.hotspots
+      : convergenceReport.verses.filter(v => v.score > 0).sort((a, b) => b.score - a.score)
+    ).slice(0, 20);
+    for (const hit of rows) {
+      const phase = hit.phase ? ` · ${hit.phase}` : "";
+      const kinds = [...new Set(hit.evidence.map(e => e.kind))].slice(0, 6).join(", ");
+      convBlock.push(
+        inventoryBullet(hit.verseKey, `score ${hit.score}${phase}${kinds ? ` · ${kinds}` : ""}`)
+      );
+      convBlock.push("");
+    }
+    sections.push(convBlock.join("\n"));
+  }
+
+  if (contrastState.items.length || h3Flow.pressureAfter.length) {
+    const tensionBlock: string[] = [];
+    tensionBlock.push("## Tensión");
+    tensionBlock.push("");
+    if (contrastState.items.length) {
+      tensionBlock.push("### Contrastes observados");
+      tensionBlock.push("");
+      for (const item of contrastState.items) {
+        const note = item.note?.trim() ? ` — ${item.note.trim()}` : "";
+        tensionBlock.push(
+          inventoryBullet(
+            item.verseKey,
+            `${scripture(item.poleA)} / ${scripture(item.poleB)}${note}`
+          )
+        );
+        tensionBlock.push("");
+      }
+    }
+    if (h3Flow.pressureAfter.length) {
+      tensionBlock.push("### Costuras de presión (taller)");
+      tensionBlock.push("");
+      for (const id of h3Flow.pressureAfter) {
+        tensionBlock.push(inventoryBullet(`after ${clauseRef(id)}`));
+        tensionBlock.push("");
+      }
+    }
+    sections.push(tensionBlock.join("\n"));
+  }
+
+  if (h3Flow.breaksAfter.length) {
+    const flowBlock: string[] = [];
+    flowBlock.push("## Desarrollos H2 (taller)");
+    flowBlock.push("");
+    flowBlock.push(
+      "{Inicios colocados por el estudiante — hipótesis de desarrollo continuo, no títulos H1/H2.}"
+    );
+    flowBlock.push("");
+    for (const afterId of h3Flow.breaksAfter) {
+      const nextIdx = movementClauses.findIndex(
+        (_c, i) => i > 0 && movementClauses[i - 1]?.finiteVerbId === afterId
+      );
+      const next = nextIdx >= 0 ? movementClauses[nextIdx] : undefined;
+      const startId = next?.finiteVerbId;
+      // Labels may be keyed by the break id (fill scripts) or by the first H3 of the new H2.
+      const label =
+        (startId ? h3Flow.labels[startId]?.trim() : "") ||
+        h3Flow.labels[afterId]?.trim() ||
+        "";
+      const labelBit = label ? ` · ${label}` : "";
+      const arrow = startId ? ` → ${clauseRef(startId)}` : "";
+      flowBlock.push(inventoryBullet(`after ${clauseRef(afterId)}${arrow}${labelBit}`));
+      flowBlock.push("");
+    }
+    sections.push(flowBlock.join("\n"));
+  }
+
+  const confirmedDefs = bookDefinitions.terms.filter(
+    term => term.hits.some(h => h.confirmed) || term.workingDefinition.trim()
+  );
+  if (confirmedDefs.length) {
+    const defBlock: string[] = [];
+    defBlock.push("## Definiciones (taller)");
+    defBlock.push("");
+    defBlock.push(
+      "{Uso del autor en este libro — dossier del estudiante; no léxico ni sentido compuesto por la app.}"
+    );
+    defBlock.push("");
+    for (const term of confirmedDefs) {
+      defBlock.push(`### ${scripture(term.seed)}`);
+      defBlock.push("");
+      if (term.relatedConfirmed.length) {
+        defBlock.push(
+          inventoryBullet(
+            "Relacionados",
+            term.relatedConfirmed.map(s => scripture(s)).join(" · ")
+          )
+        );
+        defBlock.push("");
+      }
+      const confirmedHits = term.hits.filter(h => h.confirmed);
+      if (confirmedHits.length) {
+        for (const hit of confirmedHits.slice(0, 12)) {
+          const note = hit.note?.trim() ? ` — ${hit.note.trim()}` : "";
+          defBlock.push(inventoryBullet(hit.verseKey, `(${hit.kind})${note}`));
+          defBlock.push("");
+        }
+      }
+      if (term.workingDefinition.trim()) {
+        defBlock.push(`* Definición de trabajo: ${term.workingDefinition.trim()}`);
+        defBlock.push("");
+      }
+    }
+    sections.push(defBlock.join("\n"));
+  }
+
+  if (namedThread.length) {
+    const threadBlock: string[] = [];
+    threadBlock.push("## Hilo de taller");
+    threadBlock.push("");
+    threadBlock.push(
+      "{Cadena nombrada por el estudiante — hipótesis de movimiento; no es título H1/H2.}"
+    );
+    threadBlock.push("");
+    for (const step of namedThread) {
+      const evidence = step.evidence?.trim() ? ` — ${step.evidence.trim()}` : "";
+      threadBlock.push(inventoryBullet(step.verseKey, `${step.label.trim()}${evidence}`));
+      threadBlock.push("");
+    }
+    sections.push(threadBlock.join("\n"));
+  }
+
+  // H1/H2 evidence: TODOs stay human-assigned; writer names developments from observations.
   {
     const evidenceLines: string[] = [];
     if (concentrationCounts.size) {
@@ -2209,53 +2537,58 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       );
     }
 
-    // Writing-purpose detectors need the ἵνα / "para que" text. That usually
-    // lives on a purpose-frame child, not inside the root's own selectedSpan —
-    // join direct purpose dependents so 1:3 / 2:1 / 5:13 show in the trajectory.
-    const purposeTextByParent = new Map<string, string[]>();
-    for (const [childId, observation] of Object.entries(augmentedObservations)) {
-      if (observation.tellsWhenOrIf !== "yes" || observation.frameType !== "purpose") continue;
-      const parentId = observation.whenIfParentClauseId;
-      if (!parentId) continue;
-      const childText = spanTextFor(childId).trim();
-      if (!childText) continue;
-      const bucket = purposeTextByParent.get(parentId) ?? [];
-      bucket.push(childText);
-      purposeTextByParent.set(parentId, bucket);
-    }
-    const movementClauses = workingRoots
-      .filter(root => !skeleton.cycleBrokenIds.has(root.finiteVerbId))
-      .map((root, order) => {
-        const parts = root.finiteVerbId.split(":");
-        const verseKey = parts.length >= 2 ? `${parts[0]}:${parts[1]}` : root.finiteVerbId;
-        const rootText = spanTextFor(root.finiteVerbId).trim();
-        const purposeBits = purposeTextByParent.get(root.finiteVerbId) ?? [];
-        const spanText = [rootText, ...purposeBits].filter(Boolean).join(" ");
-        return {
-          finiteVerbId: root.finiteVerbId,
-          reference: `${bookDisplayName} ${verseKey}`,
-          spanText,
-          order
-        };
-      });
-    const writingPurposes = buildBookMovementReport(movementClauses).writingPurposes;
-    if (writingPurposes.length) {
-      const traj = writingPurposes.map(hit => {
-        const parts = hit.finiteVerbId.split(":");
-        const verseKey = parts.length >= 2 ? `${parts[0]}:${parts[1]}` : hit.reference;
+    if (movementReport.writingPurposes.length) {
+      const traj = movementReport.writingPurposes.map(hit => {
+        const verseKey = verseKeyFromFiniteId(hit.finiteVerbId);
         return `${verseKey} ${hit.trajectory}`;
       });
       evidenceLines.push(`Trayectoria de propósito de escritura: ${traj.join(" · ")}.`);
     }
 
-    const namedThread = readBookThread(bookId).steps.filter(step => step.label.trim());
     if (namedThread.length) {
-      const chain = namedThread
-        .map(step => `${step.verseKey} ${step.label.trim()}`)
-        .join(" ↓ ");
+      const chain = namedThread.map(step => `${step.verseKey} ${step.label.trim()}`).join(" ↓ ");
       evidenceLines.push(
         `Hilo de taller (hipótesis de movimiento — no es título H1/H2): ${chain}`
       );
+    }
+
+    if (h3Flow.breaksAfter.length) {
+      const seams = h3Flow.breaksAfter.map(id => verseKeyFromFiniteId(id)).join(" · ");
+      evidenceLines.push(`Inicios H2 (taller): after ${seams}.`);
+    }
+
+    if (h3Flow.pressureAfter.length) {
+      const seams = h3Flow.pressureAfter.map(id => verseKeyFromFiniteId(id)).join(" · ");
+      evidenceLines.push(`Costuras de presión: after ${seams}.`);
+    }
+
+    if (contrastState.items.length) {
+      const bits = contrastState.items
+        .slice(0, 12)
+        .map(item => `${item.verseKey} ${scripture(item.poleA)} / ${scripture(item.poleB)}`);
+      evidenceLines.push(`Contrastes observados: ${bits.join(" · ")}.`);
+    }
+
+    const hotspots = convergenceReport.hotspots.slice(0, 8);
+    if (hotspots.length) {
+      const bits = hotspots.map(h => {
+        const phase = h.phase ? ` ${h.phase}` : "";
+        return `${h.verseKey}${phase} (${h.score})`;
+      });
+      evidenceLines.push(`Convergencia (taller): ${bits.join(" · ")}.`);
+    }
+
+    if (confirmedDefs.length) {
+      const seeds = confirmedDefs.map(t => scripture(t.seed)).join(" · ");
+      evidenceLines.push(`Definiciones investigadas: ${seeds}.`);
+    }
+
+    if (movementReport.repeatedWords.length) {
+      const topWords = movementReport.repeatedWords
+        .slice(0, 8)
+        .map(w => `${scripture(w.display)} (${w.count})`)
+        .join(" · ");
+      evidenceLines.push(`Palabras que regresan: ${topWords}.`);
     }
 
     if (evidenceLines.length) {
@@ -2271,7 +2604,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
 
   sections.push(MANUAL_APPENDICES.trimEnd());
 
-  const yaml = formatYamlFrontmatter(meta ?? createDefaultManualMeta());
+  const yaml = formatYamlFrontmatter(resolveMetaForGenerate(meta, bookId));
   // H1/H2 = context only (same slide). Blank line before first H3 begins the outline.
   const markdown = [yaml, "", "# TODO: contexto", "## TODO: unidad", "", ...sections].join("\n");
   warnings.push(...markerDisciplineWarnings(markdown));

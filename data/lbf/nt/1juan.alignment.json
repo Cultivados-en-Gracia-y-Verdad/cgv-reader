@@ -2,8 +2,8 @@
   "meta": {
     "book": "1juan",
     "spanish": "LBF",
-    "greekSpine": "MorphGNT/BLE",
-    "note": "Compiled from translator reverse-links.json via TR spine morphIndex. TR-only tokens skipped. Morph-only gaps patched where Spanish is clear. Hand overrides retarget known bad finite anchors. Re-run compile-lbf-alignment-1juan.py after link edits.",
+    "greekSpine": "MorphGNT",
+    "note": "Greek surfaces read directly from clean MorphGNT (83-1Jn-morphgnt.txt) — no BLE text or BLE-derived data anywhere in this file. Token positions and which LBF words they map to still come from translator reverse-links.json via TR spine morphIndex (that spine is a token-position bridge only; TR-only tokens, i.e. readings absent from the critical text such as the Comma Johanneum at 5:7-8, are skipped and never enter this alignment). Morph-only gaps patched where Spanish is clear. Hand overrides retarget known bad finite anchors. Re-run compile-lbf-alignment-1juan.py after link edits.",
     "coverage": "2117/2137",
     "alignedTokens": 2117,
     "totalTokens": 2137,

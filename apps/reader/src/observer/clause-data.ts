@@ -51,6 +51,20 @@ function parseLbfContent(content: string, displayName: string): BibleVerse[] {
   }
 
   for (const line of lines) {
+    const lineVerse = line.match(/^\s*.+?\s+(\d+):(\d+)\s+(.+?)\s*$/);
+    if (lineVerse) {
+      flush();
+      verses.push({
+        book: displayName,
+        chapter: Number(lineVerse[1]),
+        verse: Number(lineVerse[2]),
+        text: lineVerse[3].trim()
+      });
+      chapter = null;
+      verse = null;
+      continue;
+    }
+
     const chapterHeader = line.match(/^##\s+Capítulo\s+(\d+)/i);
     if (chapterHeader) {
       flush();

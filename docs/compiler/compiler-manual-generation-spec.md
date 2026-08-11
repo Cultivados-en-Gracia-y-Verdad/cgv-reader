@@ -339,6 +339,15 @@ warning when no actors are observed.
 The `# TODO: contexto` / `## TODO: unidad` headings stay human-assigned. Generate
 emits mechanical evidence so the writer can name developments from observations:
 
+**H4 packaging gate before Arquitecto (HARD).** Generate output is not “ready for Arquitecto”
+because YAML is complete or clause-row counts look right. Truncated H4 claims (`…y la`,
+`…que no se`) and adjacent H4s that repeat ≥3 words are packaging defects in `selectedSpan`.
+Arquitecto Step 0 must run `scripts/verify-skeleton-h4-packaging.py` on the skeleton MD
+(with the book’s LBF source when available) and **stop with Bloqueado** on FAIL. Soft-labelling
+truncation as upstream debt and continuing is how weeks of naming and commentary lock onto
+broken Scripture surfaces. Fix spans in Observer (or a deliberate re-cut) and re-Generate;
+do not proceed to H2/H1 naming on a FAIL.
+
 - Before the first H3 — a book-level evidence block, opened by a
   `{…}` comment line (curly braces = generator comment, never italics):
   `{Evidencia de Observador para nombrar desarrollo mayor (H1) y desarrollo continuo (H2) — no es comentario.}`
@@ -349,14 +358,30 @@ emits mechanical evidence so the writer can name developments from observations:
     (from Observer writing-purpose detectors on H3-root spans — verse + trajectory text only)
   - `* Hilo de taller (hipótesis de movimiento — no es título H1/H2): 1:3 Fellowship ↓ … ↓ 5:13 Know`
     (from student-named book thread; labels only; never paste as H1/H2 titles)
+  - `* Inicios H2 (taller): after 2:17 · …` (student `h3-flow` breaks — never auto titles)
+  - `* Costuras de presión: after 1:10 · …` (student pressure seams)
+  - `* Contrastes observados: 1:5 *luz* / *tinieblas* · …`
+  - `* Convergencia (taller): 2:1 opens (12) · …` (engine hotspots — score/phase only)
+  - `* Definiciones investigadas: *luz* · *comunión* · …`
+  - `* Palabras que regresan: *sueño* (25) · …`
 - After each H3 unit claim — `* Actores principales: *criados* (2) · *Dios* (1)`
   counting observed subjects across the unit's root + dependents.
+- After the outline (when data exists), workshop appendices before grammar A–C:
+  - `## Actores` — concentration + flow (SVO)
+  - `## Movimiento` — repeated words, formulas, discourse resets, candidate seams
+  - `## Convergencia` — ranked verse hotspots
+  - `## Tensión` — student contrasts + pressure seams
+  - `## Desarrollos H2 (taller)` — student-placed H2 starts (+ optional labels)
+  - `## Definiciones (taller)` — confirmed hits + working definition prose (student)
+  - `## Hilo de taller` — named chain with evidence captions
 - End of Generate — Apéndices A (conectores), B (formas verbales), C (estructura) with the
   markdown footnote definitions cited by body `*` notes.
 
 Evidence lines are Observer `*` slides — counts, Scripture words, stored trajectories, and
 student workshop labels only; never new interpretation. H3 flow (user-led H2 starts):
 `docs/observer/h3-flow-spec.md`. Book thread: `docs/observer/book-threads-spec.md`.
+Convergence: `docs/observer/convergence-engine-spec.md`. Movement inventory:
+`docs/observer/book-movement-spec.md`.
 
 ## Not part of this pass
 

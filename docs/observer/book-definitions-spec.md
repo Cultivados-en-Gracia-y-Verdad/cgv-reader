@@ -29,7 +29,14 @@ Book definitions are a **prerequisite layer** before confident Movement / H2 nam
 3. **Confirm / dismiss** — student builds a dossier; software never names the sense.
 4. **Working definition** — blank student prose: what this author means in *this* letter.
 5. **Reuse** — glossary of investigated terms; Movement may link when a verse is in a confirmed hit (no auto gloss).
-6. **Investigation sum-up** (optional UI) — evidence inventory from the confirmed dossier (counts by kind, related surfaces, verse chain, snippets). Never a composed sense.
+6. **Author’s use collage** — for confirmed hits, pull the *pertinent* stretch of each
+   passage in this order:
+   1. **Structure clause span** that carries the seed / related surface (prefer equative
+      / “andar|estar en …” signal, then tighter span);
+   2. else short verse whole / sentence / window from LBF verse text.
+   List them in reading order with surfaces highlighted; badge `clause` vs `verse`.
+   Mirror a compact “Gathered use” next to the working-definition box. Counts by kind +
+   verse chain stay as inventory chrome. Never a composed sense.
 
 ---
 
@@ -72,5 +79,6 @@ Derived proposals are not stored until the student confirms or dismisses into th
 - Auto-composed definition paragraphs
 - Cross-book or Gospel sense banks
 - Greek-lemma clustering (v1 is LBF Spanish)
-- Compiler slide emit of definitions (later)
+- Compiler slide emit of definitions (Generate appendix `## Definiciones (taller)` —
+  confirmed hits + student working definition; never auto-composed lexicon sense)
 - Theme titles or section names from a term

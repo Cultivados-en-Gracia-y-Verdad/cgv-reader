@@ -23,9 +23,9 @@ PHRASES = HERR / "1john-phrases-tr.json"
 LBF_MD = ROOT / "data/lbf/nt/1juan.md"
 OUT = ROOT / "data/lbf/nt/1juan.alignment.json"
 CGV_DATA = ROOT.parent / "cgv-data"
+MORPHGNT = CGV_DATA / "morphology" / "MorphGNT" / "83-1Jn-morphgnt.txt"
 
 WORD_PATTERN = re.compile(r"[\wáéíóúüñÁÉÍÓÚÜÑ]+|[^\s\wáéíóúüñÁÉÍÓÚÜÑ]+", re.UNICODE)
-INTERLINEAR_TOKEN_PATTERN = re.compile(r"(\S+?)<([^|<>]+)\|([^|<>]+)\|([^|<>]+)\|([^<>]+)>")
 
 
 def norm(value: str) -> str:
@@ -71,19 +71,24 @@ def load_lbf_verses() -> dict[tuple[int, int], str]:
     return verses
 
 
-def load_ble_surfaces() -> dict[tuple[int, int], list[str]]:
+def load_morphgnt_surfaces() -> dict[tuple[int, int], list[str]]:
+    """Greek surface forms straight from clean MorphGNT (SBLGNT), in verse-token
+    order — the same source Titus's Observer/Compiler pipeline aligns against.
+    Replaces the old load_ble_surfaces(): BLE's interlinear surfaces happened to
+    share MorphGNT's own token order and count (both files have exactly 2137
+    tokens for 1 John), so it was usable as a positional stand-in, but it was
+    still a BLE-sourced string. This reads the real text directly — no BLE
+    trace left in what compiles into 1juan.alignment.json."""
     out: dict[tuple[int, int], list[str]] = {}
-    for path in sorted((CGV_DATA / "interlinears/NT").glob("1juan-*.interlinear.txt")):
-        for line in path.read_text().splitlines():
-            match = re.match(r"^1juan\s+(\d+):(\d+)\t", line, re.I)
-            if not match:
-                continue
-            chapter, verse = int(match.group(1)), int(match.group(2))
-            tab = line.find("\t")
-            surfaces = []
-            for token_match in INTERLINEAR_TOKEN_PATTERN.finditer(line[tab + 1 :]):
-                surfaces.append(token_match.group(1))
-            out[(chapter, verse)] = surfaces
+    for line in MORPHGNT.read_text().splitlines():
+        if not line.strip():
+            continue
+        parts = line.split()
+        if len(parts) < 4:
+            continue
+        reference, surface = parts[0], parts[3]
+        chapter, verse = int(reference[2:4]), int(reference[4:6])
+        out.setdefault((chapter, verse), []).append(surface)
     return out
 
 
@@ -174,7 +179,7 @@ def main() -> None:
             )
 
     lbf = load_lbf_verses()
-    ble = load_ble_surfaces()
+    greek_surfaces = load_morphgnt_surfaces()
     records: dict[tuple[int, int, int], dict] = {}
     warnings: list[str] = []
     tr_only_skipped = 0
@@ -229,7 +234,7 @@ def main() -> None:
                     except ValueError as err:
                         warnings.append(f"{chapter}:{verse}: combined TR-only prefix failed: {err}")
                     pending_tr_only.clear()
-                surfaces = ble.get((chapter, verse), [])
+                surfaces = greek_surfaces.get((chapter, verse), [])
                 for morph_index in morph_tokens:
                     greek = surfaces[morph_index - 1] if 0 < morph_index <= len(surfaces) else "?"
                     records[(chapter, verse, morph_index)] = {
@@ -287,7 +292,7 @@ def main() -> None:
             except ValueError as err:
                 warnings.append(f"{chapter}:{verse}: morph-only patch failed: {err}")
                 continue
-        surfaces = ble.get((chapter, verse), [])
+        surfaces = greek_surfaces.get((chapter, verse), [])
         greek = surfaces[morph_index - 1] if 0 < morph_index <= len(surfaces) else "?"
         records[key] = {
             "chapter": chapter,
@@ -529,7 +534,7 @@ def main() -> None:
                 f"{chapter}:{verse}: hand override index {word_index} out of range"
             )
             continue
-        surfaces = ble.get((chapter, verse), [])
+        surfaces = greek_surfaces.get((chapter, verse), [])
         greek = surfaces[morph_index - 1] if 0 < morph_index <= len(surfaces) else "?"
         prev = records.get(key)
         records[key] = {
@@ -543,17 +548,21 @@ def main() -> None:
         hand_overrides_applied += 1
 
     out_records = sorted(records.values(), key=lambda r: (r["chapter"], r["verse"], r["token"]))
-    total = sum(len(v) for v in ble.values())
+    total = sum(len(v) for v in greek_surfaces.values())
     payload = {
         "meta": {
             "book": "1juan",
             "spanish": "LBF",
-            "greekSpine": "MorphGNT/BLE",
+            "greekSpine": "MorphGNT",
             "note": (
-                "Compiled from translator reverse-links.json via TR spine morphIndex. "
-                "TR-only tokens skipped. Morph-only gaps patched where Spanish is clear. "
-                "Hand overrides retarget known bad finite anchors. "
-                "Re-run compile-lbf-alignment-1juan.py after link edits."
+                "Greek surfaces read directly from clean MorphGNT (83-1Jn-morphgnt.txt) — "
+                "no BLE text or BLE-derived data anywhere in this file. Token positions and "
+                "which LBF words they map to still come from translator reverse-links.json "
+                "via TR spine morphIndex (that spine is a token-position bridge only; "
+                "TR-only tokens, i.e. readings absent from the critical text such as the "
+                "Comma Johanneum at 5:7-8, are skipped and never enter this alignment). "
+                "Morph-only gaps patched where Spanish is clear. Hand overrides retarget "
+                "known bad finite anchors. Re-run compile-lbf-alignment-1juan.py after link edits."
             ),
             "coverage": f"{len(out_records)}/{total}",
             "alignedTokens": len(out_records),

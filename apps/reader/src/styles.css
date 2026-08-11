@@ -3432,12 +3432,12 @@ button.interlinear-token--pickable:focus-visible {
 
 .clause-tree {
   display: grid;
-  gap: 0.6rem;
+  gap: 0.85rem;
 }
 
 .clause-tree-node-wrap {
   display: grid;
-  gap: 0.3rem;
+  gap: 0.35rem;
 }
 
 /* A run of consecutive same-recipient root clauses (Titus 2's older men/
@@ -3461,17 +3461,20 @@ button.interlinear-token--pickable:focus-visible {
 }
 
 .clause-tree-node {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
   width: 100%;
   border: 1px solid transparent;
   border-radius: 6px;
-  padding: 0.35rem 0.5rem;
+  padding: 0.4rem 0.55rem;
   background: transparent;
   color: var(--reader-text);
   font: inherit;
   font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
   font-size: 0.98rem;
-  line-height: 1.4;
+  line-height: 1.45;
   text-align: left;
   cursor: pointer;
 }
@@ -3495,9 +3498,32 @@ button.interlinear-token--pickable:focus-visible {
   font-style: italic;
 }
 
+.clause-tree-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.45rem;
+  width: 100%;
+}
+
+.clause-tree-ref {
+  color: #9c4a3a;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.clause-tree-id {
+  color: #82796d;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
 .clause-tree-tag {
   display: inline-block;
-  margin-right: 0.4rem;
   border-radius: 4px;
   padding: 0.02rem 0.4rem;
   background: rgba(207, 229, 231, 0.55);
@@ -3510,12 +3536,23 @@ button.interlinear-token--pickable:focus-visible {
   vertical-align: middle;
 }
 
+.clause-tree-text {
+  display: block;
+  width: 100%;
+  margin: 0;
+  line-height: 1.45;
+}
+
 .clause-tree-children {
   display: grid;
-  gap: 0.3rem;
-  margin-left: 1.05rem;
-  padding-left: 0.85rem;
-  border-left: 1.5px solid var(--reader-border);
+  gap: 0.45rem;
+  margin-left: 0.35rem;
+  padding-left: 1.35rem;
+  border-left: 2.5px solid color-mix(in srgb, var(--reader-accent) 42%, var(--reader-border));
+}
+
+.clause-tree-node-wrap--dependent > .clause-tree-node {
+  background: color-mix(in srgb, var(--reader-accent) 5%, transparent);
 }
 
 /* Participle layer — a plum/violet underline, deliberately distinct from the
@@ -4042,7 +4079,6 @@ button.interlinear-token--pickable:focus-visible {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
-  margin-right: 0.4rem;
   vertical-align: middle;
 }
 
@@ -4416,26 +4452,83 @@ button.interlinear-token--pickable:focus-visible {
   gap: 0.25rem;
 }
 
-.clause-definitions-sumup {
-  margin: 0.35rem 0 0.85rem;
-  padding: 0.45rem 0.55rem 0.55rem;
-  border: 1px solid #e8e2d6;
+.clause-definitions-collage {
+  margin: 0.35rem 0 1rem;
+  padding: 0.65rem 0.75rem 0.8rem;
+  border: 1px solid #d8d0c2;
   border-radius: 2px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(251, 250, 246, 0.7));
+}
+
+.clause-definitions-collage .clause-movement-dashboard-section-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  margin: 0 0 0.25rem;
+}
+
+.clause-definitions-collage--compact {
+  margin-top: 0.85rem;
+  padding: 0.55rem 0.65rem 0.7rem;
+  max-height: min(38vh, 20rem);
+  overflow: auto;
+}
+
+.clause-definitions-collage-list {
+  list-style: none;
+  margin: 0.55rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.clause-definitions-collage-line {
+  margin: 0;
+  padding: 0.45rem 0.5rem 0.5rem;
+  border-left: 3px solid #c9bfa8;
   background: rgba(255, 255, 255, 0.55);
 }
 
-.clause-definitions-sumup > summary {
-  cursor: pointer;
-  color: #3d5c63;
-  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  list-style-position: outside;
+.clause-definitions-collage-line--selected {
+  border-left-color: #3d5c63;
+  background: rgba(61, 92, 99, 0.08);
 }
 
-.clause-definitions-sumup > summary .clause-book-movement-count {
-  margin-left: 0.4rem;
+.clause-definitions-collage-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.55rem;
+  align-items: baseline;
+  margin-bottom: 0.2rem;
+}
+
+.clause-definitions-collage-text {
+  margin: 0;
+  color: #1f2a2e;
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.02rem;
+  line-height: 1.55;
+}
+
+.clause-definitions-collage-note {
+  margin: 0.3rem 0 0;
+  color: #5c554c;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.clause-definitions-mark {
+  padding: 0 0.1em;
+  border-radius: 1px;
+  background: rgba(184, 140, 60, 0.28);
+  color: inherit;
+}
+
+.clause-definitions-source {
+  opacity: 0.72;
+  font-weight: 600;
 }
 
 .clause-definitions-sumup-counts {
@@ -5381,6 +5474,9 @@ button.interlinear-token--pickable:focus-visible {
   .clause-h3-flow-pressure,
   .clause-h3-flow-remove,
   .clause-h3-flow-h2-name-label,
+  .clause-h3-flow-boundary:not(.clause-h3-flow-boundary--placed),
+  .app-chrome,
+  .app-chrome-left,
   .structure-toolbar,
   .structure-audits,
   .structure-passage {
@@ -5388,7 +5484,7 @@ button.interlinear-token--pickable:focus-visible {
   }
 
   .clause-builder {
-    padding: 0.5in 0.4in;
+    padding: 0.45in 0.4in;
     max-width: none;
   }
 
@@ -5398,15 +5494,20 @@ button.interlinear-token--pickable:focus-visible {
   }
 
   .clause-skeleton-popup {
-    position: static;
-    display: block;
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    z-index: auto;
   }
 
   .clause-skeleton-panel,
   .clause-skeleton-popup--maximized .clause-skeleton-panel {
-    position: static;
-    inset: auto;
-    width: auto;
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    width: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
     border: none;
     border-radius: 0;
     box-shadow: none;
@@ -5419,20 +5520,95 @@ button.interlinear-token--pickable:focus-visible {
   }
 
   .clause-skeleton-body {
-    overflow: visible;
+    overflow: visible !important;
+    max-height: none !important;
     padding: 0;
   }
 
-  .clause-tree-node-wrap,
-  .clause-outline-item,
-  .clause-parked-item,
-  .clause-verbless-item,
-  .clause-telos-item {
+  /* Force-open the grammar nest so Print skeleton includes dependence. */
+  .clause-skeleton-tree-details {
+    border-top-color: #cfc6b8;
+  }
+
+  .clause-skeleton-tree-details > summary {
+    list-style: none;
+  }
+
+  .clause-skeleton-tree-details > *:not(summary) {
+    display: block !important;
+  }
+
+  .clause-h3-flow-row {
+    display: block;
+    grid-template-columns: none;
+  }
+
+  .clause-h3-flow-subject {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.4rem;
+    margin-top: 0.15rem;
+    text-align: left;
+  }
+
+  .clause-h3-flow-boundary {
+    min-height: 0;
+    padding: 0.1rem 0;
+  }
+
+  .clause-tree-node,
+  .clause-parked-item-main,
+  .clause-outline-item {
     break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Do NOT avoid-page on nested children — deep trees taller than a page
+     used to stack/overlap lines in WebKit/Blink print. Let nests flow. */
+  .clause-tree-node-wrap,
+  .clause-tree-children {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .clause-tree-node {
+    display: flex !important;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+    border: none;
+    padding: 0.15rem 0;
+    background: transparent !important;
+    box-shadow: none;
+  }
+
+  .clause-tree-meta,
+  .clause-tree-text,
+  .clause-actor-triple,
+  .clause-marker-line {
+    display: block;
+    width: 100%;
+    position: static !important;
+    float: none !important;
+  }
+
+  .clause-tree-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.4rem;
   }
 
   .clause-tree-children {
-    break-inside: avoid-page;
+    margin-left: 0.2rem;
+    padding-left: 1.1rem;
+    border-left: 2px solid #8a9a7a;
+  }
+
+  .clause-tree-ref,
+  .clause-h3-flow-ref,
+  .clause-parked-ref {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
 
@@ -6630,6 +6806,23 @@ html[data-theme="dark"] :is(
 ) {
   background: #342d1e;
   color: #e5cd96;
+}
+
+html[data-theme="dark"] .clause-tree-ref,
+html[data-theme="dark"] .clause-parked-ref {
+  color: #e8a090;
+}
+
+html[data-theme="dark"] .clause-tree-id {
+  color: #a89f90;
+}
+
+html[data-theme="dark"] .clause-tree-children {
+  border-left-color: color-mix(in srgb, var(--reader-accent) 55%, #6a6358);
+}
+
+html[data-theme="dark"] .clause-tree-node-wrap--dependent > .clause-tree-node {
+  background: color-mix(in srgb, var(--reader-accent) 10%, transparent);
 }
 
 html[data-theme="dark"] :is(

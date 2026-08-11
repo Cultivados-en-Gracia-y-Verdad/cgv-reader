@@ -35,7 +35,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TOKENS = ROOT.parent / "cgv-data" / "interlinears" / "OT" / "daniel.tokens.jsonl"
 ALIGN = ROOT / "data" / "lbf" / "ot" / "daniel.alignment.json"
-LBF_MD = ROOT / "data" / "lbf" / "ot" / "daniel.md"
+LBF_MD = ROOT.parent / "cgv-data" / "bibles" / "LBF" / "daniel.lbf.md"
 DEFAULT_OUT = ROOT / "data" / "lbf" / "ot" / "daniel-progress-filled.json"
 
 # Keep hyphenated names (Abed-nego) as one word — matches hand-align / Reader.
@@ -203,14 +203,16 @@ def verb_type(morph: str) -> str | None:
 
 def is_finite(morph: str) -> bool:
     t = verb_type(morph)
-    if not t or t in {"r", "c", "a"}:
+    # r/s = participles (active/passive); c/a = infinitives
+    if not t or t in {"r", "s", "c", "a"}:
         return False
     core = verb_core(morph)
     return bool(core and re.search(r"[123]", core[3:]))
 
 
 def is_participle(morph: str) -> bool:
-    return verb_type(morph) == "r"
+    # MorphHB: r = active participle, s = passive participle
+    return verb_type(morph) in {"r", "s"}
 
 
 def is_imperative(morph: str) -> bool:
@@ -251,6 +253,15 @@ def load_lbf_verses() -> dict[tuple[int, int], list[str]]:
         buffer = []
 
     for line in content.splitlines():
+        line_verse = re.match(r"^.+?\s+(\d+):(\d+)\s+(.+?)\s*$", line)
+        if line_verse:
+            flush()
+            chapter = int(line_verse.group(1))
+            verse = int(line_verse.group(2))
+            verses[(chapter, verse)] = tokenize(line_verse.group(3))
+            chapter = verse = None
+            continue
+
         ch = re.match(r"^##\s+Capítulo\s+(\d+)", line, re.I)
         if ch:
             flush()
@@ -284,6 +295,15 @@ def load_lbf_verse_text() -> dict[str, str]:
         buffer = []
 
     for line in content.splitlines():
+        line_verse = re.match(r"^.+?\s+(\d+):(\d+)\s+(.+?)\s*$", line)
+        if line_verse:
+            flush()
+            chapter = int(line_verse.group(1))
+            verse = int(line_verse.group(2))
+            out[f"{chapter}:{verse}"] = line_verse.group(3).strip()
+            chapter = verse = None
+            continue
+
         ch = re.match(r"^##\s+Capítulo\s+(\d+)", line, re.I)
         if ch:
             flush()
@@ -1043,10 +1063,12 @@ def main() -> None:
             span = [f"{ch}:{vs}:{wi}" for wi in range(start, end + 1)]
             verb_word = f"{ch}:{vs}:{verb_idx}"
 
-            subj_idxs = pick_subject(words, verb_idx, start, end, morph)
+            subj_idxs = pick_subject(words, verb_idx, 0, len(words) - 1, morph)
             obj_idxs = pick_object(words, verb_idx, end, subj_idxs)
             span_set = set(range(start, end + 1))
-            subj_idxs = [j for j in subj_idxs if j in span_set and j != verb_idx]
+            # Subjects may sit outside the clause fragment (VS «Respondió el rey»).
+            # Objects stay inside the clause span to avoid swallowing the next unit.
+            subj_idxs = [j for j in subj_idxs if j != verb_idx]
             obj_idxs = [
                 j for j in obj_idxs if j in span_set and j != verb_idx and j not in subj_idxs
             ]

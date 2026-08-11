@@ -340,15 +340,25 @@ function signalsAtClause(
   return kinds;
 }
 
+export type BookMovementOptions = {
+  verses?: MovementVerseText[];
+  /**
+   * Letter-profile resets (Hijitos, Y ahora, última hora…) are for epistles.
+   * Narrative / OT books skip them — too many false hits on Spanish connectives.
+   */
+  discourseProfile?: "letter" | "narrative";
+};
+
 /**
  * Build the book-movement report from H3 (outline root) clauses in book order.
  * Pass `verses` for the repeated-words inventory (LBF Spanish verse texts).
  */
 export function buildBookMovementReport(
   clauses: BookMovementClause[],
-  options?: { verses?: MovementVerseText[] }
+  options?: BookMovementOptions
 ): BookMovementReport {
   const ordered = [...clauses].sort((a, b) => a.order - b.order);
+  const discourseProfile = options?.discourseProfile ?? "letter";
 
   const writingPurposes: WritingPurposeHit[] = [];
   for (const clause of ordered) {
@@ -371,9 +381,11 @@ export function buildBookMovementReport(
   }
 
   const discourseResets: DiscourseResetHit[] = [];
-  for (const clause of ordered) {
-    const hit = detectDiscourseReset(clause);
-    if (hit) discourseResets.push(hit);
+  if (discourseProfile === "letter") {
+    for (const clause of ordered) {
+      const hit = detectDiscourseReset(clause);
+      if (hit) discourseResets.push(hit);
+    }
   }
 
   const formulas: FormulaHit[] = [];

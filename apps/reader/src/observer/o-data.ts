@@ -374,6 +374,20 @@ function parseLbfAsBibleVerses(bookId: ReaderBookId): BibleVerse[] {
   };
 
   for (const line of raw.split("\n")) {
+    const lineVerse = line.match(/^\s*.+?\s+(\d+):(\d+)\s+(.+?)\s*$/);
+    if (lineVerse) {
+      flush();
+      verses.push({
+        book: getReaderBookInfo(bookId).displayName,
+        chapter: Number(lineVerse[1]),
+        verse: Number(lineVerse[2]),
+        text: lineVerse[3].trim()
+      });
+      chapter = 0;
+      verse = 0;
+      continue;
+    }
+
     const ch = line.match(/^##\s+Capítulo\s+(\d+)/i);
     if (ch) {
       flush();

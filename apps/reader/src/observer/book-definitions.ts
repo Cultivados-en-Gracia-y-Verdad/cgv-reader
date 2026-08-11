@@ -95,6 +95,8 @@ function verseMentions(foldedVerse: string, term: string): boolean {
 /**
  * Investigate a seed surface against book verse texts.
  * writingPurposeTexts: optional Spanish snippets already tagged as writing-purpose.
+ * structureSpansByVerse: Observer Structure clause spans keyed by verseKey — preferred
+ * for pertinent snippets when a span carries the seed / related surface.
  */
 export function investigateBookDefinition(
   seed: string,
@@ -102,11 +104,13 @@ export function investigateBookDefinition(
   options?: {
     writingPurposeTexts?: string[];
     maxHits?: number;
+    structureSpansByVerse?: Record<string, string[]>;
   }
 ): DefinitionInvestigation {
   const seedDisplay = seed.trim();
   const seedFolded = fold(seedDisplay);
   const maxHits = options?.maxHits ?? 40;
+  const structureSpansByVerse = options?.structureSpansByVerse ?? {};
   if (!seedFolded || seedFolded.length < 2) {
     return { seed: seedDisplay, seedFolded, related: [], hits: [] };
   }
@@ -210,8 +214,11 @@ export function investigateBookDefinition(
       rank = 1;
     }
 
-    // Snippet: prefer clause-ish slice around the seed
-    const snippet = buildSnippet(verse.text, seedDisplay, mentioned.map(m => surfaceCounts.get(m)?.display ?? m));
+    // Prefer Structure clause spans; else sentence/clause from the verse text.
+    const surfaces = mentioned.map(m => surfaceCounts.get(m)?.display ?? m);
+    const snippet = extractPertinentDefinitionText(verse.text, [seedDisplay, ...surfaces], {
+      structureSpans: structureSpansByVerse[verse.verseKey]
+    });
 
     hits.push({
       id: `hit:${verse.verseKey}:${kind}:${seedFolded}`,
@@ -238,23 +245,164 @@ export function investigateBookDefinition(
   };
 }
 
-function buildSnippet(text: string, seed: string, alts: string[]): string {
-  const lower = text;
-  const needles = [seed, ...alts].filter(Boolean);
-  let idx = -1;
-  let found = "";
-  for (const n of needles) {
-    const i = lower.toLowerCase().indexOf(n.toLowerCase());
-    if (i >= 0 && (idx < 0 || i < idx)) {
-      idx = i;
-      found = n;
+export type PertinentDefinitionExtract = {
+  text: string;
+  /** structure = Observer clause span; verse = punctuation/window fallback. */
+  source: "structure" | "verse";
+};
+
+/**
+ * Pull the pertinent stretch for a definition dossier.
+ * Prefer a Structure clause span that carries a tracked surface; else the verse
+ * sentence/clause. Evidence only — never a composed sense.
+ */
+export function extractPertinentDefinitionText(
+  verseText: string,
+  surfaces: string[],
+  options?: {
+    structureSpans?: string[];
+  }
+): string {
+  return extractPertinentDefinitionPassage(verseText, surfaces, options).text;
+}
+
+export function extractPertinentDefinitionPassage(
+  verseText: string,
+  surfaces: string[],
+  options?: {
+    structureSpans?: string[];
+  }
+): PertinentDefinitionExtract {
+  const text = verseText.trim().replace(/\s+/g, " ");
+  const needles = surfaces.map(s => s.trim()).filter(Boolean);
+
+  const fromStructure = pickStructureSpan(options?.structureSpans ?? [], needles);
+  if (fromStructure) {
+    return { text: fromStructure, source: "structure" };
+  }
+
+  if (!text) return { text: "", source: "verse" };
+
+  const hit = findSurfaceIndex(text, needles);
+
+  // Short verses: keep the whole line so equatives/contrasts stay readable.
+  if (text.length <= 160) return { text, source: "verse" };
+
+  if (hit) {
+    const sentence = sentenceContaining(text, hit.index, hit.length);
+    if (sentence && sentence.length >= hit.length + 4) {
+      return { text: markEllipsis(text, sentence), source: "verse" };
     }
   }
-  if (idx < 0) return text.trim().slice(0, 120);
-  const start = Math.max(0, idx - 40);
-  const end = Math.min(text.length, idx + found.length + 50);
+
+  // Fallback: wider window around the first surface (or start of verse).
+  if (!hit) {
+    return {
+      text: text.slice(0, 140).trim() + (text.length > 140 ? "…" : ""),
+      source: "verse"
+    };
+  }
+  const start = Math.max(0, hit.index - 55);
+  const end = Math.min(text.length, hit.index + hit.length + 70);
   let snippet = text.slice(start, end).trim();
   if (start > 0) snippet = `…${snippet}`;
   if (end < text.length) snippet = `${snippet}…`;
-  return snippet;
+  return { text: snippet, source: "verse" };
+}
+
+/**
+ * Among Structure spans for a verse, pick the one that best carries the seed:
+ * must mention a surface; prefer equative/en-phrase signal; then tighter span.
+ */
+function pickStructureSpan(spans: string[], needles: string[]): string | null {
+  if (!spans.length || !needles.length) return null;
+  const foldedNeedles = needles.map(fold).filter(n => n.length >= 2);
+  if (!foldedNeedles.length) return null;
+
+  type Candidate = { text: string; rank: number; length: number; order: number };
+  const candidates: Candidate[] = [];
+
+  for (let order = 0; order < spans.length; order++) {
+    const raw = spans[order]?.trim().replace(/\s+/g, " ") ?? "";
+    if (!raw || raw.length < 4) continue;
+    const folded = fold(raw);
+    const mentioned = foldedNeedles.filter(n => verseMentions(folded, n));
+    if (!mentioned.length) continue;
+
+    let rank = 1;
+    if (mentioned.some(t => windowHasEquative(folded, t) || windowHasEnPhrase(folded, t))) {
+      rank = 5;
+    } else if (mentioned.length > 1) {
+      rank = 3;
+    } else {
+      rank = 2;
+    }
+    candidates.push({ text: raw, rank, length: raw.length, order });
+  }
+
+  if (!candidates.length) return null;
+  candidates.sort((a, b) => {
+    if (b.rank !== a.rank) return b.rank - a.rank;
+    // Prefer the tighter clause once the definitional signal is equal.
+    if (a.length !== b.length) return a.length - b.length;
+    return a.order - b.order;
+  });
+  return candidates[0]!.text;
+}
+
+function findSurfaceIndex(
+  text: string,
+  needles: string[]
+): { index: number; length: number } | null {
+  const lower = text.toLowerCase();
+  let best: { index: number; length: number } | null = null;
+  for (const n of needles) {
+    const i = lower.indexOf(n.toLowerCase());
+    if (i >= 0 && (!best || i < best.index)) {
+      best = { index: i, length: n.length };
+    }
+  }
+  return best;
+}
+
+/** Prefer punctuation-bounded sentence; else a comma/colon clause if long enough. */
+function sentenceContaining(text: string, index: number, length: number): string | null {
+  const enders = /[.!?;¿¡]/u;
+  let start = 0;
+  for (let i = index - 1; i >= 0; i--) {
+    if (enders.test(text[i]!)) {
+      start = i + 1;
+      break;
+    }
+  }
+  let end = text.length;
+  for (let i = index + length; i < text.length; i++) {
+    if (enders.test(text[i]!)) {
+      end = i + 1;
+      break;
+    }
+  }
+  let sentence = text.slice(start, end).trim();
+  // If the "sentence" is still huge, try a tighter clause around commas/colons.
+  if (sentence.length > 220) {
+    const local = text.slice(Math.max(0, index - 90), Math.min(text.length, index + length + 100));
+    const clauseMatch = local.match(
+      /(?:^|[,:—–-]\s*)([^,.—–-]{12,}?(?:\b(?:es|son|está|estan|anda|andamos|anden)\b[^,.—–-]{0,80})?[^,.—–-]{0,40})/iu
+    );
+    if (clauseMatch?.[1]) {
+      sentence = clauseMatch[1].trim();
+    } else {
+      sentence = local.trim();
+    }
+  }
+  return sentence || null;
+}
+
+function markEllipsis(full: string, slice: string): string {
+  const idx = full.indexOf(slice);
+  if (idx < 0) return slice;
+  let out = slice;
+  if (idx > 0) out = `…${out}`;
+  if (idx + slice.length < full.length) out = `${out}…`;
+  return out;
 }

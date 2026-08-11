@@ -158,7 +158,8 @@ def verb_core(morph: str) -> str | None:
 
 def is_participle(morph: str) -> bool:
     core = verb_core(morph)
-    return bool(core and len(core) >= 3 and core[2] == "r")
+    # MorphHB: r = active participle, s = passive participle
+    return bool(core and len(core) >= 3 and core[2] in ("r", "s"))
 
 
 def participle_gn(morph: str) -> tuple[str | None, str | None]:
@@ -192,10 +193,10 @@ def noun_gn(morph: str) -> tuple[str | None, str | None] | None:
                 body = body[1:]
             if body[:1].isdigit():
                 body = body[1:]
-            if body[:1] in "mfbc":
+            if body and body[0] in "mfbc":
                 gender = {"m": "M", "f": "F", "b": "C", "c": "C"}[body[0]]
                 body = body[1:]
-            if body[:1] in "spd":
+            if body and body[0] in "spd":
                 number = "S" if body[0] == "s" else "P"
         else:
             # Ncmsa / Aafpa / … optional noun class c/g/p before gender
