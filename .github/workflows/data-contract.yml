@@ -1,0 +1,34 @@
+name: Data contract
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  boundary-check:
+    name: Boundary check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check data contract
+        run: python3 scripts/check-data-contract.py
+
+      - name: Report (always)
+        if: always()
+        run: python3 scripts/check-data-contract.py --json > data-contract-report.json || true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: data-contract-report
+          path: data-contract-report.json
+          if-no-files-found: ignore
