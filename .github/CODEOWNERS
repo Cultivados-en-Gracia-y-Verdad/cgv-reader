@@ -1,0 +1,27 @@
+# Ownership for cgv-reader, a read-only consumer application.
+#
+# REPLACE every @OWNER_* placeholder below with a real GitHub user or team.
+# A team must be written as @org/team-name and must have write access.
+
+*                                   @OWNER_GITHUB_USERNAME
+
+# Normative rules and the safeguards themselves.
+/DATA_CONTRACT.md                   @OWNER_GITHUB_USERNAME @CGV_DATA_STEWARD
+/AGENTS.md                          @OWNER_GITHUB_USERNAME @CGV_DATA_STEWARD
+/WORKFLOW.md                        @OWNER_GITHUB_USERNAME
+/scripts/check-data-contract.py     @OWNER_GITHUB_USERNAME @CGV_DATA_STEWARD
+/.github/                           @OWNER_GITHUB_USERNAME
+/.data-contract-baseline.json       @OWNER_GITHUB_USERNAME @CGV_DATA_STEWARD
+
+# Canonical data that should not be here at all. Every one of these paths is a
+# baselined violation; review is required so the list shrinks rather than grows.
+/data/lbf/                          @OWNER_GITHUB_USERNAME @CGV_DATA_STEWARD
+/scripts/                           @OWNER_GITHUB_USERNAME
+
+# The dataset pin: changing which published version ships is a release decision.
+/dataset-pin.json                   @OWNER_GITHUB_USERNAME @CGV_DATA_STEWARD
+
+# Application code.
+/apps/                              @OWNER_GITHUB_USERNAME
+/packages/                          @OWNER_GITHUB_USERNAME
+/vendor/                            @OWNER_GITHUB_USERNAME
