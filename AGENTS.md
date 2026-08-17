@@ -1,4 +1,19 @@
+
+
 # CGV — agent entry point
+
+Read `DATA_CONTRACT.md` before changing any data, import, export,
+alignment, translation, approval, or dataset-loading code.
+
+If a request conflicts with `DATA_CONTRACT.md`, stop and explain the conflict.
+Do not work around it.
+
+Never move, copy, regenerate, synchronize, or delete canonical data unless
+the task explicitly names the source repository, destination repository,
+migration phase, and validation procedure.
+
+When uncertain which copy is authoritative, stop. Do not choose by timestamp,
+file size, apparent completeness, or Git history alone.
 
 Loaded on every agent call. Kept deliberately small; the standards live in linked files.
 
@@ -37,3 +52,8 @@ python3 scripts/run-manual-checks.py --manual <manual.md> --lbf <source.md> --bo
 python3 scripts/check-authority.py --before <a.md> --after <b.md> --agent <agent>
 python3 scripts/release-gate.py --manifest manifests/<libro>.json
 ```
+
+- This is a consumer application.
+- Never add or modify canonical LBF text or alignment.
+- Never add Scripture repair, alignment generation, or publishing scripts.
+- Read Scripture only through the shared version-aware cgv-data loader.
