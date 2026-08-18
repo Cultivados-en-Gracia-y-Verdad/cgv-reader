@@ -26,7 +26,22 @@ ROOT = Path(__file__).resolve().parents[1]
 CGV_DATA = ROOT.parent / "cgv-data"
 
 LBF = CGV_DATA / "bibles" / "LBF" / "daniel.lbf.md"
-CANONICAL_ALIGNMENT = CGV_DATA / "bibles" / "LBF" / "alignments" / "daniel.alignment.json"
+# The published Biblia-LBF release is the canonical alignment. The old
+# cgv-data/bibles/LBF/alignments/ path no longer exists, and the last output
+# built from it flattened 270 of 357 verses to one whole-verse surface per
+# token — every Hebrew word then rendered its own row carrying the entire
+# Spanish verse. Prefer the release; keep the legacy path only as a fallback.
+_RELEASE_ALIGNMENT = (
+    ROOT.parent
+    / "Biblia-LBF"
+    / "releases"
+    / "daniel"
+    / "1.0.0"
+    / "LBF-daniel-1.0.0-1533cdd52bdb"
+    / "daniel.alignment.json"
+)
+_LEGACY_ALIGNMENT = CGV_DATA / "bibles" / "LBF" / "alignments" / "daniel.alignment.json"
+CANONICAL_ALIGNMENT = _RELEASE_ALIGNMENT if _RELEASE_ALIGNMENT.exists() else _LEGACY_ALIGNMENT
 TOKENS = CGV_DATA / "interlinears" / "OT" / "daniel.tokens.jsonl"
 
 READER_ALIGNMENT = ROOT / "data" / "lbf" / "ot" / "daniel.alignment.json"

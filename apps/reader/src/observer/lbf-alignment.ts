@@ -1,6 +1,7 @@
 import type { ReaderBookId } from "@cgv/core";
 import { getWorkshopBookId } from "./workshop-book";
 import { loadLbfAlignmentRaw, loadLbfRaw } from "./book-assets";
+import { mtToProtestant } from "./oshb";
 
 /**
  * Greek (MorphGNT/BLE token number) → LBF Spanish word index.
@@ -97,7 +98,7 @@ function ensureCaches(bookId: ReaderBookId = getWorkshopBookId()): void {
   }
 
   if (hasReverseLinks) {
-    applyReverseLinkUnitSurfaces(sourceUnits, byVerse, surfaces, indexes);
+    applyReverseLinkUnitSurfaces(bookId, sourceUnits, byVerse, surfaces, indexes);
   }
 
   cacheByBook.set(bookId, {
@@ -110,6 +111,7 @@ function ensureCaches(bookId: ReaderBookId = getWorkshopBookId()): void {
 }
 
 function applyReverseLinkUnitSurfaces(
+  bookId: ReaderBookId,
   sourceUnits: Map<string, Map<string, LbfSourceTokenUnit[]>>,
   byVerse: Map<string, Map<number, number>>,
   surfaces: Map<string, Map<number, string>>,
@@ -121,7 +123,7 @@ function applyReverseLinkUnitSurfaces(
     const multiMap = indexes.get(verseKey) ?? new Map<number, number[]>();
 
     for (const [sourceTokenId, units] of tokenUnits) {
-      const parsed = tokenFromSourceTokenId(sourceTokenId);
+      const parsed = tokenFromSourceTokenId(bookId, sourceTokenId);
       if (!parsed || !units.length) continue;
       const orderedUnits = [...units].sort((a, b) => a.charStart - b.charStart || a.charEnd - b.charEnd);
       const indexesForToken = Array.from(
@@ -159,7 +161,7 @@ function reverseLinksToRecords(data: ReverseLinkFile, bookId: ReaderBookId): Lbf
       const anchor = preferFirstWord(anchorWords[0]?.text ?? "") ? anchorWords[0]!.index : anchorWords[anchorWords.length - 1]!.index;
 
       for (const sourceTokenId of unit.sourceTokenIds ?? []) {
-        const token = tokenFromSourceTokenId(sourceTokenId);
+        const token = tokenFromSourceTokenId(bookId, sourceTokenId);
         if (!token || token.chapter !== chapter || token.verse !== verse) continue;
         records.set(`${chapter}:${verse}:${token.token}`, {
           chapter,
@@ -203,7 +205,7 @@ function reverseLinksToSourceUnits(data: ReverseLinkFile, bookId: ReaderBookId):
       const wordIndexes = anchorWords.map(word => word.index);
 
       for (const sourceTokenId of unit.sourceTokenIds ?? []) {
-        const token = tokenFromSourceTokenId(sourceTokenId);
+        const token = tokenFromSourceTokenId(bookId, sourceTokenId);
         if (!token || token.chapter !== chapter || token.verse !== verse) continue;
         const entries = tokenUnits.get(sourceTokenId) ?? [];
         entries.push({
@@ -285,21 +287,16 @@ function findUnitWords(
   return [];
 }
 
-function tokenFromSourceTokenId(id: string): { chapter: number; verse: number; token: number } | null {
+function tokenFromSourceTokenId(
+  bookId: ReaderBookId,
+  id: string
+): { chapter: number; verse: number; token: number } | null {
   const match = id.match(/^h\d{2}(\d{3})(\d{3})(\d{3})$/);
   if (!match) return null;
   const mtChapter = Number(match[1]);
   const mtVerse = Number(match[2]);
-  const mapped = mtToProtestant(mtChapter, mtVerse);
+  const mapped = mtToProtestant(bookId, mtChapter, mtVerse);
   return { chapter: mapped.chapter, verse: mapped.verse, token: Number(match[3]) };
-}
-
-function mtToProtestant(chapter: number, verse: number): { chapter: number; verse: number } {
-  if (chapter === 3 && verse >= 31) return { chapter: 4, verse: verse - 30 };
-  if (chapter === 4) return { chapter: 4, verse: verse + 3 };
-  if (chapter === 6 && verse === 1) return { chapter: 5, verse: 31 };
-  if (chapter === 6 && verse >= 2) return { chapter: 6, verse: verse - 1 };
-  return { chapter, verse };
 }
 
 function preferFirstWord(text: string): boolean {

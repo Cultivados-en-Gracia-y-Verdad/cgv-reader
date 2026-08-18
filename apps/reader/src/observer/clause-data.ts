@@ -221,7 +221,7 @@ function buildGreekIdToAlignmentIdMap(bookId: ReaderBookId = getWorkshopBookId()
 
   if (readerBookHasOshb(bookId)) {
     for (const row of parseTokenRows(bookId)) {
-      const { chapter, verse } = mtToProtestant(row.ch, row.vs);
+      const { chapter, verse } = mtToProtestant(bookId, row.ch, row.vs);
       const id = otTokenId(chapter, verse, row.tok);
       map.set(id, id);
     }
@@ -430,7 +430,7 @@ function parseFiniteAlignments(bookId: ReaderBookId = getWorkshopBookId()): Fini
   const oshb = readerBookHasOshb(bookId);
   return parseTokenRows(bookId)
     .map(row => {
-      const { chapter, verse } = oshb ? mtToProtestant(row.ch, row.vs) : { chapter: row.ch, verse: row.vs };
+      const { chapter, verse } = oshb ? mtToProtestant(bookId, row.ch, row.vs) : { chapter: row.ch, verse: row.vs };
       return { ...row, ch: chapter, vs: verse };
     })
     .filter(row => {
@@ -454,7 +454,7 @@ function parseFiniteAlignments(bookId: ReaderBookId = getWorkshopBookId()): Fini
 function parseTokenAlignments(bookId: ReaderBookId = getWorkshopBookId()): FiniteAlignment[] {
   const oshb = readerBookHasOshb(bookId);
   return parseTokenRows(bookId).map(row => {
-    const { chapter, verse } = oshb ? mtToProtestant(row.ch, row.vs) : { chapter: row.ch, verse: row.vs };
+    const { chapter, verse } = oshb ? mtToProtestant(bookId, row.ch, row.vs) : { chapter: row.ch, verse: row.vs };
     return {
       id: finiteAlignmentId(chapter, verse, row.tok),
       chapter,

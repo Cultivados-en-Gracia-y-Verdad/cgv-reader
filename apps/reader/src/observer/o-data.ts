@@ -138,7 +138,7 @@ function parseInterlinearVerseLine(
   let chapter = Number(match[1]);
   let verse = Number(match[2]);
   if (readerBookHasOshb(bookId)) {
-    const remapped = mtToProtestant(chapter, verse);
+    const remapped = mtToProtestant(bookId, chapter, verse);
     chapter = remapped.chapter;
     verse = remapped.verse;
   }
@@ -207,7 +207,7 @@ function parseOshbTokensToGreek(
     const w = typeof row.w === "number" ? row.w : typeof row.tok === "number" ? row.tok : null;
     if (w === null || typeof row.surface !== "string" || typeof row.morph !== "string") continue;
 
-    const { chapter, verse } = mtToProtestant(row.ch, row.vs);
+    const { chapter, verse } = mtToProtestant(bookId, row.ch, row.vs);
     const morph = row.morph;
     const lemma = typeof row.lemma === "string" ? row.lemma : "";
     const sourceMorph = oshbToSourceMorph(morph);
@@ -239,9 +239,12 @@ function parseOshbTokensToGreek(
   return verses;
 }
 
-function remapOshbAlignmentTokens(tokens: AlignmentToken[]): AlignmentToken[] {
+function remapOshbAlignmentTokens(
+  bookId: ReaderBookId,
+  tokens: AlignmentToken[]
+): AlignmentToken[] {
   return tokens.map(token => {
-    const { chapter, verse } = mtToProtestant(token.chapter, token.verse);
+    const { chapter, verse } = mtToProtestant(bookId, token.chapter, token.verse);
     if (chapter === token.chapter && verse === token.verse) return token;
     return {
       ...token,
@@ -280,6 +283,7 @@ export async function loadBookData(bookId: ReaderBookId): Promise<BookMorphData>
       }
 
       const alignment = remapOshbAlignmentTokens(
+        bookId,
         tokensRaw
           .replace(/\r\n/g, "\n")
           .split("\n")

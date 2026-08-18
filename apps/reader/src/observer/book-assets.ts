@@ -73,7 +73,8 @@ const tokenFilesEager = import.meta.glob(
     "@cgv-data/interlinears/NT/1pedro.tokens.jsonl",
     "@cgv-data/interlinears/NT/judas.tokens.jsonl",
     "@cgv-data/interlinears/NT/1juan.tokens.jsonl",
-    "@cgv-data/interlinears/OT/daniel.tokens.jsonl"
+    "@cgv-data/interlinears/OT/daniel.tokens.jsonl",
+    "@cgv-data/interlinears/OT/zacarias.tokens.jsonl"
   ],
   {
     query: "?raw",

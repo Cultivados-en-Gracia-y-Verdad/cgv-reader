@@ -33,7 +33,8 @@ export type ReaderBookId =
   | "3juan"
   | "judas"
   | "apocalipsis"
-  | "daniel";
+  | "daniel"
+  | "zacarias";
 
 export interface ReaderBookInfo {
   id: ReaderBookId;
@@ -74,7 +75,8 @@ export const READER_BOOKS: ReaderBookInfo[] = [
   { id: "3juan", displayName: "3 Juan", rv1909: "64", testament: "nt" },
   { id: "judas", displayName: "Judas", rv1909: "65", testament: "nt" },
   { id: "apocalipsis", displayName: "Apocalipsis", rv1909: "66", testament: "nt" },
-  { id: "daniel", displayName: "Daniel", rv1909: "27", testament: "ot" }
+  { id: "daniel", displayName: "Daniel", rv1909: "27", testament: "ot" },
+  { id: "zacarias", displayName: "Zacarías", rv1909: "38", testament: "ot" }
 ];
 
 export const DEFAULT_READER_BOOK: ReaderBookId = "tito";
@@ -117,7 +119,14 @@ export function subscribeReaderBook(listener: (bookId: ReaderBookId) => void): (
 }
 
 /** Books with LBF reading text under `data/lbf/{nt|ot}/{id}.md`. */
-const LBF_TEXT_BOOKS = new Set<ReaderBookId>(["tito", "1pedro", "judas", "1juan", "daniel"]);
+const LBF_TEXT_BOOKS = new Set<ReaderBookId>([
+  "tito",
+  "1pedro",
+  "judas",
+  "1juan",
+  "daniel",
+  "zacarias"
+]);
 
 /** LBF available as a Reader bible version. */
 export function readerBookHasLbf(bookId: ReaderBookId): boolean {
@@ -128,6 +137,11 @@ export function readerBookHasLbf(bookId: ReaderBookId): boolean {
  * Observer Structure / Compiler need reverse-interlinear alignment, not just
  * reading text. NT: MorphGNT + `data/lbf/nt/*.alignment.json`.
  * OT: OSHB tokens + `data/lbf/ot/*.alignment.json` (Daniel pilot).
+ *
+ * Zacarías is absent until its alignment ships in an approved release. The hand
+ * alignment in Biblia-LBF is complete (211/211 phrases seeded-hand, every verse
+ * reconstructs), but release 1.0.0 shipped the machine draft instead, so there
+ * is nothing published for the Reader to consume yet.
  */
 export function readerBookHasLbfStructure(bookId: ReaderBookId): boolean {
   return (
@@ -144,9 +158,9 @@ export function readerBookHasMorphGnt(bookId: ReaderBookId): boolean {
   return Boolean(MORPHGNT_STEM_BY_BOOK[bookId]);
 }
 
-/** OSHB/WLC Mark spine (OT pilot). */
+/** OSHB/WLC Mark spine (OT). */
 export function readerBookHasOshb(bookId: ReaderBookId): boolean {
-  return bookId === "daniel";
+  return bookId === "daniel" || bookId === "zacarias";
 }
 
 /** Observer Mark can load a source-language spine for this book. */
@@ -158,8 +172,12 @@ export function readerBookHasObserverMark(bookId: ReaderBookId): boolean {
 export function readerBookHasBibleVersion(bookId: ReaderBookId, version: BibleVersionId): boolean {
   if (version === "LBF") return readerBookHasLbf(bookId);
   if (bookId === "daniel") {
-    // No NBLA OT pack yet; BLE / SPNBES / RV1909 are available (LBF via readerBookHasLbf).
+    // No NBLA pack for Daniel; BLE / SPNBES / RV1909 are available (LBF via readerBookHasLbf).
     return version === "BLE" || version === "SPNBES" || version === "RV1909";
+  }
+  if (bookId === "zacarias") {
+    // Zacarías has all four: NBLA / BLE / SPNBES / RV1909 (LBF via readerBookHasLbf).
+    return true;
   }
   return true;
 }
@@ -208,8 +226,9 @@ export const MORPHGNT_STEM_BY_BOOK: Record<ReaderBookId, string> = {
   "3juan": "85-3Jn",
   judas: "86-Jud",
   apocalipsis: "87-Re",
-  /** OT — no MorphGNT; Observer Structure not enabled yet. */
-  daniel: ""
+  /** OT — no MorphGNT; the Mark spine is OSHB. */
+  daniel: "",
+  zacarias: ""
 };
 
 export interface WorkshopProgressKeys {

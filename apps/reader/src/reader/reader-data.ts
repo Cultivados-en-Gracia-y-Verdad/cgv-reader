@@ -53,7 +53,8 @@ const nblaFiles = import.meta.glob(
     "@cgv-data/bibles/NBLA/2juan.nbla.md",
     "@cgv-data/bibles/NBLA/3juan.nbla.md",
     "@cgv-data/bibles/NBLA/judas.nbla.md",
-    "@cgv-data/bibles/NBLA/apocalipsis.nbla.md"
+    "@cgv-data/bibles/NBLA/apocalipsis.nbla.md",
+    "@cgv-data/bibles/NBLA/zacarias.nbla.md"
   ],
   { query: "?raw", import: "default" }
 ) as Record<string, () => Promise<string>>;
@@ -87,7 +88,8 @@ const bleFiles = import.meta.glob(
     "@cgv-data/bibles/BLE/3juan.ble.md",
     "@cgv-data/bibles/BLE/judas.ble.md",
     "@cgv-data/bibles/BLE/apocalipsis.ble.md",
-    "@cgv-data/bibles/BLE/daniel.ble.md"
+    "@cgv-data/bibles/BLE/daniel.ble.md",
+    "@cgv-data/bibles/BLE/zacarias.ble.md"
   ],
   { query: "?raw", import: "default" }
 ) as Record<string, () => Promise<string>>;
@@ -121,7 +123,8 @@ const spnbesFiles = import.meta.glob(
     "@cgv-data/bibles/SPNBES/3juan.txt",
     "@cgv-data/bibles/SPNBES/judas.txt",
     "@cgv-data/bibles/SPNBES/apocalipsis.txt",
-    "@cgv-data/bibles/SPNBES/daniel.txt"
+    "@cgv-data/bibles/SPNBES/daniel.txt",
+    "@cgv-data/bibles/SPNBES/zacarias.txt"
   ],
   { query: "?raw", import: "default" }
 ) as Record<string, () => Promise<string>>;
@@ -155,7 +158,8 @@ const rv1909Files = import.meta.glob(
     "@cgv-data/bibles/RV1909/md/64.content.md",
     "@cgv-data/bibles/RV1909/md/65.content.md",
     "@cgv-data/bibles/RV1909/md/66.content.md",
-    "@cgv-data/bibles/RV1909/md/27.content.md"
+    "@cgv-data/bibles/RV1909/md/27.content.md",
+    "@cgv-data/bibles/RV1909/md/38.content.md"
   ],
   { query: "?raw", import: "default" }
 ) as Record<string, () => Promise<string>>;

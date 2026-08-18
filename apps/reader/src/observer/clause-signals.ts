@@ -55,7 +55,7 @@ function findEmbeddedAntecedent(
 export function detectRelativeOfConnection(
   beginningTokens: ClauseBeginningToken[]
 ): { relative: ClauseBeginningToken; antecedent: ClauseBeginningToken } | null {
-  const relative = findLeadingToken(beginningTokens, token => token.morph.startsWith(RELATIVE_PRONOUN_PREFIX));
+  const relative = findLeadingToken(beginningTokens, isRelativeToken);
   if (!relative) return null;
   const antecedent = findEmbeddedAntecedent(beginningTokens, relative);
   return antecedent ? { relative, antecedent } : null;
@@ -128,6 +128,105 @@ function stripAccentless(lemma: string): string {
 // independent grammatical claim of its own.
 export const PLAIN_COORDINATORS = new Set(["καί", "δέ", "ἤ"]);
 
+// ---------------------------------------------------------------------------
+// Hebrew / Aramaic (OSHB / WLC)
+//
+// The Greek tables above are keyed by lemma text and MorphGNT tags, so nothing
+// in them can ever match an OT token: a Hebrew token carries its raw OSHB morph
+// ("HTr", "HC", "HR/Ncmsa") and a Strong's-style lemma ("834 a", "k/834 d").
+// Without this section every Hebrew finite verb reads as an unmarked root and
+// the student gets no signal at all — which is exactly what happened on Daniel.
+//
+// Same discipline as the Greek side:
+//   - only a conjunction/particle reading may subordinate a verb. עַד and
+//     לְמַעַן are tagged HR (preposition) here; a bare preposition governs a
+//     substantive, so it is NOT treated as a subordinator, just as ὡς tagged P
+//     is not.
+//   - כִּי is the Hebrew ὅτι. It spans because / that / when / if and the word
+//     alone never settles which, so it is surfaced as a judgment call and is
+//     never resolved in code.
+// ---------------------------------------------------------------------------
+
+const HEBREW_MORPH_PREFIX = /^[HA]/;
+
+function isHebrewToken(token: ClauseBeginningToken): boolean {
+  return HEBREW_MORPH_PREFIX.test(token.morph);
+}
+
+/** Head Strong's number of an OSHB lemma: "k/834 d" -> "834". */
+function hebrewStrongs(lemma: string): string | null {
+  const numbers = lemma.match(/\d+/g);
+  return numbers ? numbers[numbers.length - 1] : null;
+}
+
+/** True when the lemma carries a כ prefix: "k/834 d" (כַּאֲשֶׁר, "when/as"). */
+function hasKafPrefix(lemma: string): boolean {
+  return /(^|\W)k\//.test(lemma);
+}
+
+/** Morph segment types, e.g. "HR/Tr" -> ["R", "Tr"]. */
+function hebrewMorphSegments(morph: string): string[] {
+  return morph.replace(HEBREW_MORPH_PREFIX, "").split("/");
+}
+
+/** A particle or conjunction segment can open a clause; a bare R cannot. */
+function hebrewCanSubordinate(morph: string): boolean {
+  return hebrewMorphSegments(morph).some(segment => /^[CT]/.test(segment));
+}
+
+function isHebrewRelativeMorph(morph: string): boolean {
+  return hebrewMorphSegments(morph).some(segment => segment.startsWith("Tr"));
+}
+
+const HEBREW_FRAME_PARTICLES: Record<string, FrameType> = {
+  "518": "condition",  // אִם
+  "4616": "purpose",   // לְמַעַן
+  "6435": "purpose",   // פֶּן  (negative purpose, "lest")
+  "3282": "reason"     // יַעַן
+};
+
+const HEBREW_RELATIVE_STRONGS = new Set(["834", "7945"]);
+
+const HEBREW_AMBIGUOUS_STRONGS: Record<string, string> = {
+  "3588":
+    "כִּי can introduce the content of what was said or thought (\u201cthat\u2026\u201d), a reason " +
+    "(\u201cbecause\u2026\u201d), a time frame (\u201cwhen\u2026\u201d) or a condition " +
+    "(\u201cif\u2026\u201d), and the word alone never settles which"
+};
+
+/** Relative pronoun in either script. */
+function isRelativeToken(token: ClauseBeginningToken): boolean {
+  if (!isHebrewToken(token)) return token.morph.startsWith(RELATIVE_PRONOUN_PREFIX);
+  const strongs = hebrewStrongs(token.lemma);
+  if (!strongs || !HEBREW_RELATIVE_STRONGS.has(strongs)) return false;
+  // כַּאֲשֶׁר is a time frame, not a relative on a noun — handled below.
+  if (hasKafPrefix(token.lemma)) return false;
+  return isHebrewRelativeMorph(token.morph);
+}
+
+/** Frame type for a leading particle in either script, or undefined. */
+function frameTypeOfToken(token: ClauseBeginningToken): FrameType | undefined {
+  if (!isHebrewToken(token)) return FRAME_PARTICLES[stripAccentless(token.lemma)];
+  const strongs = hebrewStrongs(token.lemma);
+  if (!strongs) return undefined;
+  if (HEBREW_RELATIVE_STRONGS.has(strongs) && hasKafPrefix(token.lemma)) return "time";
+  if (!hebrewCanSubordinate(token.morph)) return undefined;
+  return HEBREW_FRAME_PARTICLES[strongs];
+}
+
+/** Explanation when the leading particle is genuinely ambiguous, else undefined. */
+function ambiguousNoteForToken(token: ClauseBeginningToken): string | undefined {
+  if (!isHebrewToken(token)) return AMBIGUOUS_PARTICLES[stripAccentless(token.lemma)];
+  const strongs = hebrewStrongs(token.lemma);
+  if (!strongs || !hebrewCanSubordinate(token.morph)) return undefined;
+  return HEBREW_AMBIGUOUS_STRONGS[strongs];
+}
+
+/** Display form of a token's lemma: Greek prints the lemma, Hebrew the surface. */
+function markerLabel(token: ClauseBeginningToken): string {
+  return isHebrewToken(token) ? token.greek : stripAccentless(token.lemma);
+}
+
 function clauseOrderKey(clause: ClauseSignalInput): number {
   return clause.chapter * 1000 + clause.verse;
 }
@@ -194,6 +293,7 @@ function findLeadingToken(
  * it can open a clause. Only the conjunction can subordinate a verb.
  */
 function isFrameParticle(token: ClauseBeginningToken): boolean {
+  if (isHebrewToken(token)) return Boolean(frameTypeOfToken(token));
   if (!FRAME_PARTICLES[stripAccentless(token.lemma)]) return false;
   return !token.morph.startsWith("P");
 }
@@ -216,7 +316,7 @@ function isImperativeMorph(morph: string): boolean {
 export function detectRelativeOverImperative(
   clause: ClauseSignalInput
 ): { relative: ClauseBeginningToken; verb: ClauseBeginningToken } | null {
-  const relative = findLeadingToken(clause.beginningTokens, token => token.morph.startsWith(RELATIVE_PRONOUN_PREFIX));
+  const relative = findLeadingToken(clause.beginningTokens, isRelativeToken);
   if (!relative) return null;
   const verb = clause.beginningTokens.find(token => token.id === clause.finiteVerbId);
   if (!verb || !isImperativeMorph(verb.morph)) return null;
@@ -234,11 +334,7 @@ export function detectClauseSignal(
   clause: ClauseSignalInput,
   allClauses: ClauseSignalInput[]
 ): ClauseSignal {
-  const relative = findLeadingToken(
-    clause.beginningTokens,
-    token => token.morph.startsWith(RELATIVE_PRONOUN_PREFIX),
-    clause.finiteVerbId
-  );
+  const relative = findLeadingToken(clause.beginningTokens, isRelativeToken, clause.finiteVerbId);
   if (relative) {
     const overImperative = detectRelativeOverImperative(clause);
     if (overImperative) {
@@ -274,8 +370,8 @@ export function detectClauseSignal(
 
   const frameToken = findLeadingToken(clause.beginningTokens, isFrameParticle, clause.finiteVerbId);
   if (frameToken) {
-    const frameLemma = stripAccentless(frameToken.lemma);
-    const frameType = FRAME_PARTICLES[frameLemma];
+    const frameLemma = markerLabel(frameToken);
+    const frameType = frameTypeOfToken(frameToken) as FrameType;
     const target = nearestPrecedingClauseId(clause, allClauses);
     if (target) {
       return {
@@ -285,14 +381,16 @@ export function detectClauseSignal(
         target,
         reason:
           `Opens with “${frameToken.greek}” (${frameLemma}) — that maps straight to a ${frameType} clause, ` +
-          `the same particle table a Greek grammar would use (ἵνα/ὅπως → purpose, γάρ/διότι → reason, and so on).`
+          (isHebrewToken(frameToken)
+            ? `the same particle table a Hebrew grammar would use (אִם → condition, לְמַעַן/פֶן → purpose, יַעַן → reason, כַּאֲשֶׁר → time).`
+            : `the same particle table a Greek grammar would use (ἵνα/ὅπως → purpose, γάρ/διότι → reason, and so on).`)
       };
     }
   }
 
   const ambiguousToken = findLeadingToken(
     clause.beginningTokens,
-    token => Boolean(AMBIGUOUS_PARTICLES[stripAccentless(token.lemma)]),
+    token => Boolean(ambiguousNoteForToken(token)),
     clause.finiteVerbId
   );
   if (ambiguousToken) {
@@ -537,7 +635,7 @@ export function buildClauseChoiceGuidance(
 ): ClauseChoiceGuidance {
   const tokens = clause.beginningTokens;
   const verbId = clause.finiteVerbId;
-  const relative = findLeadingToken(tokens, token => token.morph.startsWith(RELATIVE_PRONOUN_PREFIX), verbId);
+  const relative = findLeadingToken(tokens, isRelativeToken, verbId);
   const connection = detectRelativeOfConnection(tokens);
   const frameToken = findLeadingToken(tokens, isFrameParticle, verbId);
   const ambiguousToken = findLeadingToken(tokens, token => Boolean(AMBIGUOUS_PARTICLES[stripAccentless(token.lemma)]), verbId);
@@ -619,8 +717,8 @@ export function buildClauseChoiceGuidance(
 
   let frameEvidence: string;
   if (frameToken) {
-    const frameLemma = stripAccentless(frameToken.lemma);
-    const frameType = FRAME_PARTICLES[frameLemma];
+    const frameLemma = markerLabel(frameToken);
+    const frameType = frameTypeOfToken(frameToken) as FrameType;
     frameEvidence = `Opens with “${frameToken.greek}” (${frameLemma}) → ${frameType}.`;
   } else if (otiToken || (ambiguousToken && stripAccentless(ambiguousToken.lemma) === "ὅτι")) {
     const token = otiToken ?? ambiguousToken!;
@@ -758,7 +856,7 @@ export function findLeadingMarkerToken(
   beginningTokens: ClauseBeginningToken[],
   finiteVerbId?: string
 ): LeadingMarker {
-  const relative = findLeadingToken(beginningTokens, token => token.morph.startsWith(RELATIVE_PRONOUN_PREFIX), finiteVerbId);
+  const relative = findLeadingToken(beginningTokens, isRelativeToken, finiteVerbId);
   if (relative) return { kind: "relative", token: relative };
 
   const frameToken = findLeadingToken(beginningTokens, isFrameParticle, finiteVerbId);
@@ -836,7 +934,7 @@ export function detectClauseMarker(
   // beginningTokens[0] would silently miss almost every relational connector.
   const relative = findLeadingToken(
     beginningTokens,
-    token => token.morph.startsWith(RELATIVE_PRONOUN_PREFIX),
+    isRelativeToken,
     finiteVerbId
   );
   if (relation !== "root" && relative && !findEmbeddedAntecedent(beginningTokens, relative)) {

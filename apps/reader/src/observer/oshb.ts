@@ -1,18 +1,44 @@
+import type { ReaderBookId } from "@cgv/core";
+
 /**
- * OSHB (WLC) helpers for Daniel Observer — MT verse remap + morph → Mark tags.
+ * OSHB (WLC) helpers for the OT Observer — MT verse remap + morph → Mark tags.
  *
  * MorphHB verb core after stripping language/prefixes: V + stem + type + PNG…
  * types: p perfect, i imperfect, w wayyiqtol, v imperative, j jussive,
  *        r participle active, s participle passive, c inf. construct, a inf. absolute
  */
 
-/** Map OSHB/MT Daniel refs to Protestant/LBF verse numbers. */
-export function mtToProtestant(ch: number, vs: number): { chapter: number; verse: number } {
-  if (ch === 3 && vs >= 31) return { chapter: 4, verse: vs - 30 };
-  if (ch === 4) return { chapter: 4, verse: vs + 3 };
-  if (ch === 6 && vs === 1) return { chapter: 5, verse: 31 };
-  if (ch === 6 && vs >= 2) return { chapter: 6, verse: vs - 1 };
-  return { chapter: ch, verse: vs };
+/**
+ * Map OSHB/MT refs to Protestant/LBF verse numbers.
+ *
+ * The offsets are per book and must never be shared: Daniel's rules applied to
+ * Zechariah would misplace every verse from 1:18 onward. A book with no entry
+ * here numbers identically in both traditions and passes through unchanged.
+ */
+type VerseRemap = (ch: number, vs: number) => { chapter: number; verse: number } | null;
+
+const VERSE_REMAP: Partial<Record<ReaderBookId, VerseRemap>> = {
+  daniel: (ch, vs) => {
+    if (ch === 3 && vs >= 31) return { chapter: 4, verse: vs - 30 };
+    if (ch === 4) return { chapter: 4, verse: vs + 3 };
+    if (ch === 6 && vs === 1) return { chapter: 5, verse: 31 };
+    if (ch === 6 && vs >= 2) return { chapter: 6, verse: vs - 1 };
+    return null;
+  },
+  // MT Zechariah 2:1-4 is Protestant 1:18-21; MT 2:5-17 is Protestant 2:1-13.
+  zacarias: (ch, vs) => {
+    if (ch === 2 && vs <= 4) return { chapter: 1, verse: vs + 17 };
+    if (ch === 2 && vs >= 5) return { chapter: 2, verse: vs - 4 };
+    return null;
+  }
+};
+
+export function mtToProtestant(
+  bookId: ReaderBookId,
+  ch: number,
+  vs: number
+): { chapter: number; verse: number } {
+  return VERSE_REMAP[bookId]?.(ch, vs) ?? { chapter: ch, verse: vs };
 }
 
 function verbCore(morph: string): string | null {
