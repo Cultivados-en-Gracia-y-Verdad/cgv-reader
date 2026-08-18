@@ -118,7 +118,7 @@ export function subscribeReaderBook(listener: (bookId: ReaderBookId) => void): (
   };
 }
 
-/** Books with LBF reading text under `data/lbf/{nt|ot}/{id}.md`. */
+/** Books with published LBF reading text in cgv-data (`bibles/LBF/{id}.lbf.md`). */
 const LBF_TEXT_BOOKS = new Set<ReaderBookId>([
   "tito",
   "1pedro",
@@ -134,14 +134,13 @@ export function readerBookHasLbf(bookId: ReaderBookId): boolean {
 }
 
 /**
- * Observer Structure / Compiler need reverse-interlinear alignment, not just
- * reading text. NT: MorphGNT + `data/lbf/nt/*.alignment.json`.
- * OT: OSHB tokens + `data/lbf/ot/*.alignment.json` (Daniel pilot).
+ * Observer Structure / Compiler need published reverse-interlinear alignment.
+ * Consume cgv-data first (`bibles/LBF/alignments/{id}.alignment.json`), then
+ * the local Reader fallback (`data/lbf/{nt|ot}/*.alignment.json`).
  *
- * Zacarías is absent until its alignment ships in an approved release. The hand
- * alignment in Biblia-LBF is complete (211/211 phrases seeded-hand, every verse
- * reconstructs), but release 1.0.0 shipped the machine draft instead, so there
- * is nothing published for the Reader to consume yet.
+ * Zacarías: signed LBF + hand alignment are published in cgv-data.
+ * Daniel still uses the local OT fallback until its alignment is published
+ * under `bibles/LBF/alignments/`.
  */
 export function readerBookHasLbfStructure(bookId: ReaderBookId): boolean {
   return (
@@ -149,7 +148,8 @@ export function readerBookHasLbfStructure(bookId: ReaderBookId): boolean {
     bookId === "1pedro" ||
     bookId === "judas" ||
     bookId === "1juan" ||
-    bookId === "daniel"
+    bookId === "daniel" ||
+    bookId === "zacarias"
   );
 }
 

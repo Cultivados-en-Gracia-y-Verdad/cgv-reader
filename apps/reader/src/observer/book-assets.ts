@@ -219,7 +219,7 @@ export function loadLbfRaw(bookId: ReaderBookId): string {
 }
 
 export function loadLbfAlignmentRaw(bookId: ReaderBookId): string {
-  // Alignment is Structure-only until a book has `*.alignment.json` and Structure is enabled.
+  // Alignment is Structure-only. Prefer published cgv-data, then local fallback.
   if (!readerBookHasLbfStructure(bookId)) {
     return JSON.stringify({ records: [] });
   }

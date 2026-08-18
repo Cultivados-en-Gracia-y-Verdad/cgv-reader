@@ -26,8 +26,8 @@ function readLayerFromHash(): WorkshopLayer {
  * Passage + skeleton/review canvas (START-HERE Step 4). Participles appear
  * as read-only satellites beside their host clause — no separate views page.
  *
- * Book follows the shared Reader preference so Mark loads the selected NT
- * book. Structure still needs LBF reverse-interlinear alignment (Tito, 1 Pedro).
+ * Book follows the shared Reader preference. Structure needs published LBF
+ * reverse-interlinear alignment from cgv-data (or the local fallback).
  */
 export default function ObserverShell() {
   const { t } = useUiLanguage();
