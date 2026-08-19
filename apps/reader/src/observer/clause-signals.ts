@@ -1,6 +1,8 @@
 import type { ClauseBeginningToken } from "./clause-data";
 
-export type FrameType = "time" | "reason" | "condition" | "purpose";
+export type FrameType = "time" | "reason" | "condition" | "purpose" | "result";
+
+export const FRAME_TYPES: FrameType[] = ["time", "reason", "condition", "purpose", "result"];
 
 export interface ClauseSignalInput {
   finiteVerbId: string;
@@ -72,7 +74,8 @@ export const FRAME_PARTICLES: Record<string, FrameType> = {
   "ἐάν": "condition",
   "ὅτε": "time",
   "ὡς": "time",
-  "ἐπεί": "time"
+  "ἐπεί": "time",
+  "ὥστε": "result"
 };
 
 // ὅτι genuinely introduces both content clauses ("that") and reason clauses
@@ -838,7 +841,8 @@ const FRAME_TYPE_SUBTYPE_ES: Record<FrameType, string> = {
   purpose: "propósito",
   reason: "razón/fundamento",
   condition: "condición",
-  time: "tiempo"
+  time: "tiempo",
+  result: "resultado"
 };
 
 export type LeadingMarker =
@@ -860,9 +864,20 @@ export function findLeadingMarkerToken(
   if (relative) return { kind: "relative", token: relative };
 
   const frameToken = findLeadingToken(beginningTokens, isFrameParticle, finiteVerbId);
-  if (frameToken) return { kind: "frame", token: frameToken, frameType: FRAME_PARTICLES[stripAccentless(frameToken.lemma)] };
+  if (frameToken) {
+    const frameType = isHebrewToken(frameToken)
+      ? frameTypeOfToken(frameToken)
+      : FRAME_PARTICLES[stripAccentless(frameToken.lemma)];
+    if (frameType) return { kind: "frame", token: frameToken, frameType };
+  }
 
-  const contentToken = findLeadingToken(beginningTokens, token => stripAccentless(token.lemma) === "ὅτι", finiteVerbId);
+  const contentToken = findLeadingToken(
+    beginningTokens,
+    token =>
+      stripAccentless(token.lemma) === "ὅτι" ||
+      (isHebrewToken(token) && hebrewStrongs(token.lemma) === "3588" && hebrewCanSubordinate(token.morph)),
+    finiteVerbId
+  );
   if (contentToken) return { kind: "content", token: contentToken };
 
   const coordToken = findLeadingToken(beginningTokens, token => PLAIN_COORDINATORS.has(stripAccentless(token.lemma)), finiteVerbId);

@@ -65,6 +65,10 @@ import {
   type LeadingMarker
 } from "../observer/clause-signals";
 import {
+  hoistOutlineH4s,
+  standingForClause
+} from "../observer/clause-outline";
+import {
   applyCoordinateInheritance,
   deriveSkeleton,
   resolveClause,
@@ -343,24 +347,30 @@ function subordinatingLine(
   const word = labeledWord(spanish, greek);
   if (!word) return "";
   if (isContent) {
-    return `${word}[^hoti] introduce el contenido.`;
+    const fn = /[א-ת]/.test(greek ?? "") ? "ki" : "hoti";
+    return `${word}[^${fn}] introduce el contenido.`;
   }
   if (isDescribes) {
     const noun = describedNounText ? scripture(describedNounText) : "alguien o algo mencionado antes";
     return `${word}[^rel]: describe a ${noun}.`;
   }
   const parent = parentVerbText?.trim() ? scripture(parentVerbText.trim()) : null;
+  const hebrew = /[א-ת]/.test(greek ?? "");
   switch (frameType) {
     case "purpose":
       return parent
-        ? `${word}[^hina] introduce el propósito de ${parent}.`
-        : `${word}[^hina] introduce el propósito.`;
+        ? `${word}[^${hebrew ? "lemaan" : "hina"}] introduce el propósito de ${parent}.`
+        : `${word}[^${hebrew ? "lemaan" : "hina"}] introduce el propósito.`;
     case "reason":
-      return `${word}[^${footnoteKeyForGreek(greek, "gar")}] introduce la razón.`;
+      return `${word}[^${hebrew ? "yaan" : footnoteKeyForGreek(greek, "gar")}] introduce la razón.`;
     case "condition":
-      return `${word}[^${footnoteKeyForGreek(greek, "ei")}] introduce una condición.`;
+      return `${word}[^${hebrew ? "im" : footnoteKeyForGreek(greek, "ei")}] introduce una condición.`;
     case "time":
-      return `${word}[^${footnoteKeyForGreek(greek, "hos")}] marca el momento.`;
+      return `${word}[^${hebrew ? "kaasher" : footnoteKeyForGreek(greek, "hos")}] marca el momento.`;
+    case "result":
+      return parent
+        ? `${word}[^${hebrew ? "ki" : "hoste"}] introduce el resultado de ${parent}.`
+        : `${word}[^${hebrew ? "ki" : "hoste"}] introduce el resultado.`;
     default:
       // No connector comment when none is visible — silence, not a generic note.
       return "";
@@ -446,7 +456,17 @@ function describesPhraseLine(noun: string): string {
 }
 
 /** Generic explanations live once, at the end — body notes only cite them. */
-const MANUAL_APPENDICES = `## Apéndice A — Conectores griegos
+const APPENDIX_B_C = `## Apéndice B — Formas verbales
+
+[^part]: **Participio**. Forma verbal que no actúa como el verbo principal. Añade acción o detalle ligado a un nombre o a la afirmación cercana (a menudo se parece a «-ando / -iendo» o a un adjetivo hecho de un verbo).
+[^inf]: **Infinitivo**. Nombra una acción sin ser el verbo principal. Completa el «qué» de un verbo cercano (debe, pide, quiere, puede…).
+
+## Apéndice C — Observando la estructura
+
+[^rel]: **Cláusula relativa**. No es el verbo principal de la sección; cuelga de un nombre (o persona o cosa) ya mencionado y añade detalle sobre ese anfitrión.
+`;
+
+const APPENDIX_A_GREEK = `## Apéndice A — Conectores griegos
 
 [^kai]: **καί**. Une esta cláusula con la anterior. Solo suma: añade otra idea a la misma línea. No da razón ni contraste.
 [^de]: **δέ**. Continúa el desarrollo. A veces solo avanza («y…»); a veces marca un leve contraste («pero…»). Sigue conectada a lo anterior.
@@ -461,16 +481,58 @@ const MANUAL_APPENDICES = `## Apéndice A — Conectores griegos
 [^hos]: **ὡς**. Marca el momento o la manera relacionada con la frase anterior — a menudo el «cuándo» o el «como».
 [^hote]: **ὅτε**. Marca el momento — el «cuándo».
 [^conn]: Conector relacional. Une esta cláusula con lo anterior.
-
-## Apéndice B — Formas verbales
-
-[^part]: **Participio**. Forma verbal que no actúa como el verbo principal. Añade acción o detalle ligado a un nombre o a la afirmación cercana (a menudo se parece a «-ando / -iendo» o a un adjetivo hecho de un verbo).
-[^inf]: **Infinitivo**. Nombra una acción sin ser el verbo principal. Completa el «qué» de un verbo cercano (debe, pide, quiere, puede…).
-
-## Apéndice C — Observando la estructura
-
-[^rel]: **Cláusula relativa**. No es el verbo principal de la sección; cuelga de un nombre (o persona o cosa) ya mencionado y añade detalle sobre ese anfitrión.
 `;
+
+const APPENDIX_A_HEBREW = `## Apéndice A — Conectores hebreos
+
+[^waw]: **ו**. Une esta cláusula con la anterior. Solo suma: añade otra idea a la misma línea. No da razón ni contraste.
+[^ki]: **כִּי**. Puede introducir el contenido (lo que se dice o se piensa), la razón (el «por qué»), un tiempo («cuando…») o una condición («si…»), según el contexto.
+[^im]: **אִם**. Introduce una condición: lo que sigue depende de que se cumpla esa condición.
+[^lemaan]: **לְמַעַן**. Introduce el propósito — el «para qué» de la acción gobernante.
+[^pen]: **פֶּן**. Introduce un propósito negativo («no sea que…»).
+[^yaan]: **יַעַן**. Introduce la razón — el fundamento de lo que se acaba de decir.
+[^kaasher]: **כַּאֲשֶׁר**. Marca el momento o la manera — a menudo el «cuando» o el «como».
+[^conn]: Conector relacional. Une esta cláusula con lo anterior.
+`;
+
+function manualAppendices(oshb: boolean): string {
+  return `${oshb ? APPENDIX_A_HEBREW : APPENDIX_A_GREEK}\n${APPENDIX_B_C}`;
+}
+
+const WORKSHOP_LABELS: Record<string, string> = {
+  opens: "abre",
+  intensifies: "se intensifica",
+  resolves: "resuelve",
+  "repeated-word": "palabra repetida",
+  "repeated-word-return": "regreso de palabra",
+  "vocab-return": "vocabulario que regresa",
+  "vocab-convergence": "convergencia de vocabulario",
+  imperative: "mandato",
+  reason: "razón",
+  formula: "fórmula",
+  "writing-purpose": "propósito de escritura",
+  "writing-formula": "fórmula de escritura",
+  "discourse-reset": "reinicio de discurso",
+  contrast: "contraste",
+  "student-contrast": "contraste observado",
+  assurance: "seguridad",
+  "student-pressure": "presión",
+  field: "campo",
+  vocative: "vocativo",
+  writing: "escritura",
+  message: "mensaje",
+  time: "tiempo",
+  redirect: "redirección"
+};
+
+function workshopLabel(key: string): string {
+  const trimmed = key.trim();
+  if (trimmed.startsWith("field:") || trimmed.startsWith("formula:")) {
+    const [kind, rest] = trimmed.split(":");
+    return `${workshopLabel(kind ?? "")}: ${rest ?? ""}`.trim();
+  }
+  return WORKSHOP_LABELS[trimmed] ?? trimmed;
+}
 
 interface CompilerClause {
   finiteVerbId: string;
@@ -963,6 +1025,27 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     rootsAfterDemote.push(root);
   }
 
+  // H4 ≠ Observer root. Commands and quoted main clauses stand even when Q2
+  // is yes. Same function Observer Outline uses — no testament switch.
+  const beginningTokensById = new Map(clauses.map(clause => [clause.finiteVerbId, clause.beginningTokens]));
+  const outlineContext = { commandIds: commandMarkIds, beginningTokensById };
+  function outlineStandingOf(id: string): "h4" | "dependent" {
+    const info = clauseSpanInfoById.get(id);
+    const resolved = info
+      ? resolveClause(info, augmentedObservations[id], clauseSpanInfos)
+      : { relation: null, parked: false };
+    return standingForClause(
+      id,
+      resolved.relation,
+      "parked" in resolved ? resolved.parked : false,
+      augmentedObservations[id]?.outlineStanding,
+      outlineContext
+    ).standing;
+  }
+  const rootsAfterHoist = hoistOutlineH4s(rootsAfterDemote, outlineStandingOf).sort(
+    (a, b) => (clauseById.get(a.finiteVerbId)?.order ?? 0) - (clauseById.get(b.finiteVerbId)?.order ?? 0)
+  );
+
   const clauseActors = readClauseActors(bookId);
   function actorSpanText(ids: string[]): string {
     if (!ids.length) return "";
@@ -1017,6 +1100,18 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       : `${scripture(subject)} → ${scripture(verb)}`;
   }
 
+  /** Verb → object only — Flujo already names the subject in the H4. */
+  function actorPredicateScripture(finiteVerbId: string): string {
+    const stored = clauseActors[finiteVerbId];
+    const subject = actorSpanText(stored?.subjectSpan ?? []);
+    const verb = actorSpanText(
+      stored?.verbSpan?.length ? stored.verbSpan : defaultVerbSpan(finiteVerbId)
+    );
+    const object = actorSpanText(stored?.objectSpan ?? []);
+    if (!formatActorTriple(subject, verb, object)) return "";
+    return object ? `${scripture(verb)} → ${scripture(object)}` : `${scripture(verb)}`;
+  }
+
   // Participle emission: same-verse clause attachment only (mechanical).
   // No student classification — every Brick-4-marked participle is emitted.
   const wordIdToClauseId = new Map<string, string>();
@@ -1067,7 +1162,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     }
   }
 
-  /** Manual nominative subject-host span text (clause id or verse key). */
+  /** Manual nominative subject-host span text (participle id, then clause / verse). */
   function subjectHostText(hostKey: string | null): string | null {
     if (!hostKey) return null;
     const ids = participleSubjectHosts[hostKey] ?? [];
@@ -1086,9 +1181,13 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   function resolveParticipleNounHost(
     word: SpanishWord,
     nearby: SpanishWord[],
-    subjectHostKey: string | null
+    fallbackKey: string | null
   ): string | null {
-    if (word.participleCase === "N") return subjectHostText(subjectHostKey);
+    if (word.oshbParticiple || word.participleCase === "N") {
+      return (
+        subjectHostText(word.participleId ?? null) ?? subjectHostText(fallbackKey)
+      );
+    }
     const reading = describeParticipleReading(word, nearby);
     return reading.hangNoun?.text?.trim() || null;
   }
@@ -1108,8 +1207,9 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       : verseKey
         ? (participlesByVerseKey.get(verseKey) ?? [])
         : [];
-    // Same keys O uses for subject-host picks: clause id, or verse for orphans.
-    const subjectHostKey = finiteVerbId ?? verseKey;
+    // Prefer the participle-id host. Clause / verse keys are fallback only —
+    // one clause can hold two participles on different nouns.
+    const fallbackKey = finiteVerbId ?? verseKey;
     const seen = new Set<string>();
     const notes: ParticipleNote[] = [];
     for (const participleId of ids) {
@@ -1121,7 +1221,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       const hostId = participleClauseAssignment.get(participleId);
       const hostSpanish = hostId ? finiteVerbWordById.get(hostId)?.text ?? null : null;
       const nearby = wordsByVerse.get(`${word.chapter}:${word.verse}`) ?? [];
-      const nounHost = resolveParticipleNounHost(word, nearby, subjectHostKey);
+      const nounHost = resolveParticipleNounHost(word, nearby, fallbackKey);
       notes.push({
         nounHost,
         explanation: participleLine(word, nearby, hostSpanish, nounHost)
@@ -1338,6 +1438,10 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       const parentId = augmentedObservations[node.finiteVerbId]?.whenIfParentClauseId;
       if (parentId) parentVerbText = finiteVerbWordById.get(parentId)?.text ?? null;
     }
+    if (isContent) {
+      const parentId = augmentedObservations[node.finiteVerbId]?.expressedParentClauseId;
+      if (parentId) parentVerbText = finiteVerbWordById.get(parentId)?.text ?? null;
+    }
 
     // Common truncation (Tito 3:5:8): Spanish span is "hicimos…" but the
     // relative ἃ / "que" sits one token before the saved Greek start. Peek
@@ -1363,6 +1467,54 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     }
 
     if (marker.kind === "none") {
+      // Hebrew speech after *diciendo*, prefixed waw, and asyndeton oracles
+      // often have no particle in the leading window. Q already settled the
+      // relation — print that, do not send the student to a Greek range.
+      if (readerBookHasOshb(bookId)) {
+        if (isDescribes) {
+          return {
+            antecedentText: describedNounText,
+            explanations: describedNounText ? [describesPhraseLine(scripture(describedNounText))] : []
+          };
+        }
+        if (isContent) {
+          const parent = parentVerbText?.trim();
+          return {
+            antecedentText: null,
+            explanations: [
+              parent
+                ? `Es el contenido de ${scripture(parent)}.`
+                : "Es el contenido de lo que se dijo."
+            ]
+          };
+        }
+        if (node.relation === "frame") {
+          const parent = parentVerbText?.trim() ? scripture(parentVerbText.trim()) : null;
+          switch (node.frameType) {
+            case "purpose":
+              return {
+                antecedentText: null,
+                explanations: [
+                  parent ? `Introduce el propósito de ${parent}.` : "Introduce el propósito."
+                ]
+              };
+            case "reason":
+              return { antecedentText: null, explanations: ["Introduce la razón."] };
+            case "condition":
+              return { antecedentText: null, explanations: ["Introduce una condición."] };
+            case "time":
+              return { antecedentText: null, explanations: ["Marca el momento."] };
+            case "result":
+              return {
+                antecedentText: null,
+                explanations: [parent ? `Introduce el resultado de ${parent}.` : "Introduce el resultado."]
+              };
+            default:
+              return { antecedentText: null, explanations: [] };
+          }
+        }
+        return { antecedentText: describedNounText, explanations: [] };
+      }
       // Real case in the data (Tito 2:14:13): O already resolved this as a
       // dependent clause (relation/frameType answered directly, not
       // inherited), but its own leading window doesn't carry a recognized
@@ -1679,6 +1831,15 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     const rawSpan = displaySpanText(node.finiteVerbId, node.spanText || clause.finiteVerbText);
     const spanText = applyProtasisMarker(node.finiteVerbId, rawSpan);
     lines.push(...slide(`${indent}- ${scripture(spanText)}`));
+    if (nominalHeadIds.has(node.finiteVerbId)) {
+      lines.push(
+        ...starSlides(indent, [
+          readerBookHasOshb(bookId)
+            ? "Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse."
+            : "Cláusula nominal: en griego esta cláusula no tiene verbo; el español lo suple para poder leerse."
+        ])
+      );
+    }
     const dependentActor = actorTripleScripture(node.finiteVerbId);
     if (dependentActor) lines.push(...starSlides(indent, [dependentActor]));
     lines.push(...commentSlides(takeReaderNoteComments(clause.chapter, clause.verse, indent)));
@@ -1755,8 +1916,8 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     flushRun();
   }
 
-  // Roots after provisional promotion + demotion of subordinated "roots".
-  const roots = rootsAfterDemote;
+  // Roots after demotion of false independents, then hoist of outline H4s.
+  const roots = rootsAfterHoist;
 
   /**
    * Dependents attached in O to a root but falling *after the next root* in
@@ -2128,7 +2289,9 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
         if (nominalHeadIds.has(root.finiteVerbId)) {
           block.push(
             ...starSlides("", [
-              "Cláusula nominal: en griego esta cláusula no tiene verbo; el español lo suple para poder leerse."
+              readerBookHasOshb(bookId)
+                ? "Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse."
+                : "Cláusula nominal: en griego esta cláusula no tiene verbo; el español lo suple para poder leerse."
             ])
           );
         }
@@ -2174,14 +2337,14 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     const stored = clauseActors[info.finiteVerbId];
     const subject = actorSpanText(stored?.subjectSpan ?? []);
     if (!subject) continue;
-    const tripleScripture = actorTripleScripture(info.finiteVerbId);
-    if (!tripleScripture) continue;
+    const predicateScripture = actorPredicateScripture(info.finiteVerbId);
+    if (!predicateScripture) continue;
     const key = subject.toLowerCase();
     const conc = concentrationCounts.get(key) ?? { label: subject, count: 0 };
     conc.count += 1;
     concentrationCounts.set(key, conc);
     const flow = flowByActor.get(key) ?? { label: subject, actions: [] };
-    flow.actions.push({ triple: tripleScripture, order: info.order });
+    flow.actions.push({ triple: predicateScripture, order: info.order });
     flowByActor.set(key, flow);
   }
 
@@ -2356,7 +2519,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
         moveBlock.push(
           inventoryBullet(
             verseKeyFromFiniteId(hit.finiteVerbId),
-            `${hit.kind}${hit.label ? `: ${hit.label}` : ""}`
+            `${workshopLabel(hit.kind)}${hit.label ? `: ${hit.label}` : ""}`
           )
         );
         moveBlock.push("");
@@ -2374,8 +2537,8 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       for (const seam of movementReport.candidateBoundaries.slice(0, 15)) {
         moveBlock.push(
           inventoryBullet(
-            `after ${clauseRef(seam.afterH3Id)}`,
-            `${seam.signalKinds.join(", ")} (${seam.strength})`
+            `después de ${clauseRef(seam.afterH3Id)}`,
+            `${seam.signalKinds.map(workshopLabel).join(", ")} (${seam.strength})`
           )
         );
         moveBlock.push("");
@@ -2398,10 +2561,10 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       : convergenceReport.verses.filter(v => v.score > 0).sort((a, b) => b.score - a.score)
     ).slice(0, 20);
     for (const hit of rows) {
-      const phase = hit.phase ? ` · ${hit.phase}` : "";
-      const kinds = [...new Set(hit.evidence.map(e => e.kind))].slice(0, 6).join(", ");
+      const phase = hit.phase ? ` · ${workshopLabel(hit.phase)}` : "";
+      const kinds = [...new Set(hit.evidence.map(e => workshopLabel(e.kind)))].slice(0, 6).join(", ");
       convBlock.push(
-        inventoryBullet(hit.verseKey, `score ${hit.score}${phase}${kinds ? ` · ${kinds}` : ""}`)
+        inventoryBullet(hit.verseKey, `puntos ${hit.score}${phase}${kinds ? ` · ${kinds}` : ""}`)
       );
       convBlock.push("");
     }
@@ -2430,7 +2593,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       tensionBlock.push("### Costuras de presión (taller)");
       tensionBlock.push("");
       for (const id of h3Flow.pressureAfter) {
-        tensionBlock.push(inventoryBullet(`after ${clauseRef(id)}`));
+        tensionBlock.push(inventoryBullet(`después de ${clauseRef(id)}`));
         tensionBlock.push("");
       }
     }
@@ -2458,7 +2621,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
         "";
       const labelBit = label ? ` · ${label}` : "";
       const arrow = startId ? ` → ${clauseRef(startId)}` : "";
-      flowBlock.push(inventoryBullet(`after ${clauseRef(afterId)}${arrow}${labelBit}`));
+      flowBlock.push(inventoryBullet(`después de ${clauseRef(afterId)}${arrow}${labelBit}`));
       flowBlock.push("");
     }
     sections.push(flowBlock.join("\n"));
@@ -2554,12 +2717,12 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
 
     if (h3Flow.breaksAfter.length) {
       const seams = h3Flow.breaksAfter.map(id => verseKeyFromFiniteId(id)).join(" · ");
-      evidenceLines.push(`Inicios H2 (taller): after ${seams}.`);
+      evidenceLines.push(`Inicios H2 (taller): después de ${seams}.`);
     }
 
     if (h3Flow.pressureAfter.length) {
       const seams = h3Flow.pressureAfter.map(id => verseKeyFromFiniteId(id)).join(" · ");
-      evidenceLines.push(`Costuras de presión: after ${seams}.`);
+      evidenceLines.push(`Costuras de presión: después de ${seams}.`);
     }
 
     if (contrastState.items.length) {
@@ -2572,7 +2735,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     const hotspots = convergenceReport.hotspots.slice(0, 8);
     if (hotspots.length) {
       const bits = hotspots.map(h => {
-        const phase = h.phase ? ` ${h.phase}` : "";
+        const phase = h.phase ? ` ${workshopLabel(h.phase)}` : "";
         return `${h.verseKey}${phase} (${h.score})`;
       });
       evidenceLines.push(`Convergencia (taller): ${bits.join(" · ")}.`);
@@ -2602,7 +2765,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     }
   }
 
-  sections.push(MANUAL_APPENDICES.trimEnd());
+  sections.push(manualAppendices(readerBookHasOshb(bookId)).trimEnd());
 
   const yaml = formatYamlFrontmatter(resolveMetaForGenerate(meta, bookId));
   // H1/H2 = context only (same slide). Blank line before first H3 begins the outline.

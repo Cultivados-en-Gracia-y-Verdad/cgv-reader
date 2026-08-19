@@ -25,6 +25,7 @@ import {
   writeClauseAssignments,
   writeClauseObservations,
   groupParticiplesByNounHost,
+  formatActorPredicate,
   formatActorTriple,
   readBookDefinitions,
   readBookThread,
@@ -64,6 +65,7 @@ import {
   detectLeadingFrameType,
   detectRelativeOfConnection,
   isLikelyContentParent,
+  FRAME_TYPES,
   type ClauseChoiceKind,
   type ClauseChoiceOption,
   type ClauseMarker,
@@ -71,6 +73,11 @@ import {
   type ClauseSignalInput,
   type FrameType
 } from "./clause-signals";
+import {
+  outlineStandingReason,
+  standingForClause,
+  type OutlineStandingResult
+} from "./clause-outline";
 import { loadLbfTokenSurfaces } from "./lbf-alignment";
 import { describeMorph, ensureVerseInterlinear, getVerseInterlinear } from "./o-data";
 import { TokenDetailAnchor } from "./TokenDetailPopover";
@@ -434,8 +441,9 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   const [contrastDraftNote, setContrastDraftNote] = useState("");
   const [nounAnchorId, setNounAnchorId] = useState<string | null>(null);
   const [subjectHostAnchorId, setSubjectHostAnchorId] = useState<string | null>(null);
-  /** clauseId or verseKey currently picking a nominative subject host for. */
+  /** participleId / clauseId / verseKey currently picking a nominative subject host for. */
   const [pickingSubjectHostKey, setPickingSubjectHostKey] = useState<string | null>(null);
+  const pickingSubjectHostKeysRef = useRef<string[]>([]);
   /** Active clause SVO field being tapped in the passage. */
   const [pickingActorField, setPickingActorField] = useState<"subject" | "verb" | "object" | null>(null);
   const [actorAnchorId, setActorAnchorId] = useState<string | null>(null);
@@ -870,9 +878,47 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     [clauseSpanInfos, observations, coordinateContinuationIds]
   );
 
+  const commandMarkIds = useMemo(
+    () => new Set(readMarkedAlignmentIds(progressKeys.commandMarks, bookId)),
+    [bookId, progressKeys]
+  );
+
+  const outlineContext = useMemo(
+    () => ({
+      commandIds: commandMarkIds,
+      beginningTokensById: new Map(
+        clauseSignalInputs.map(input => [input.finiteVerbId, input.beginningTokens])
+      )
+    }),
+    [clauseSignalInputs, commandMarkIds]
+  );
+
   const skeleton = useMemo(() => deriveSkeleton(clauseSpanInfos, augmentedObservations), [clauseSpanInfos, augmentedObservations]);
-  const outline = useMemo(() => deriveOutline(clauseSpanInfos, augmentedObservations), [clauseSpanInfos, augmentedObservations]);
-  const telos = useMemo(() => deriveTelos(clauseSpanInfos, augmentedObservations), [clauseSpanInfos, augmentedObservations]);
+  const outline = useMemo(
+    () => deriveOutline(clauseSpanInfos, augmentedObservations, outlineContext),
+    [clauseSpanInfos, augmentedObservations, outlineContext]
+  );
+  const telos = useMemo(
+    () => deriveTelos(clauseSpanInfos, augmentedObservations, outlineContext),
+    [clauseSpanInfos, augmentedObservations, outlineContext]
+  );
+  const outlineStandingById = useMemo(() => {
+    const map = new Map<string, OutlineStandingResult>();
+    for (const clause of clauseSpanInfos) {
+      const resolved = resolveClause(clause, augmentedObservations[clause.finiteVerbId], clauseSpanInfos);
+      map.set(
+        clause.finiteVerbId,
+        standingForClause(
+          clause.finiteVerbId,
+          resolved.relation,
+          resolved.parked,
+          augmentedObservations[clause.finiteVerbId]?.outlineStanding,
+          outlineContext
+        )
+      );
+    }
+    return map;
+  }, [augmentedObservations, clauseSpanInfos, outlineContext]);
 
   // Word ids inside Independent (root) clause spans — used when picking a
   // relative's noun so host material stands out in the chapter text.
@@ -974,14 +1020,18 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       if (resolved.parked) return "Relative (needs a home)";
       if (resolved.relation === "root") return "Independent";
       if (resolved.relation === "describes") return "Relative clause";
-      if (resolved.relation === "content") return "Content clause";
+      if (resolved.relation === "content") {
+        return outlineStandingById.get(finiteVerbId)?.standing === "h4"
+          ? "Content clause · H4"
+          : "Content clause";
+      }
       if (resolved.relation === "frame") {
         return resolved.frameType ? `${capitalize(resolved.frameType)} clause` : "Adverbial clause";
       }
       if (coordinateContinuationIds.has(finiteVerbId)) return "Continues previous";
       return reviewState;
     },
-    [augmentedObservations, clauseSpanInfos, coordinateContinuationIds, getClauseReviewState]
+    [augmentedObservations, clauseSpanInfos, coordinateContinuationIds, getClauseReviewState, outlineStandingById]
   );
 
   // Noun pickers (relative clauses / attributive participles) need the host
@@ -1205,16 +1255,32 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       const sourceVerse = participles[0].verse;
       const nearby =
         verses.find(v => v.chapter === sourceChapter && v.verse === sourceVerse)?.words ?? [];
+      const hostsByParticipleId = Object.fromEntries(
+        participles
+          .filter(word => word.participleId)
+          .map(word => [
+            word.participleId!,
+            (participleSubjectHosts[word.participleId!] ?? [])
+              .map(id => wordById.get(id))
+              .filter((host): host is SpanishWord => Boolean(host))
+          ])
+      );
       const groups = groupParticiplesByNounHost(
         participles,
         nearby,
         (participleSubjectHosts[clauseId] ?? [])
           .map(id => wordById.get(id))
-          .filter((word): word is SpanishWord => Boolean(word))
+          .filter((word): word is SpanishWord => Boolean(word)),
+        hostsByParticipleId
       );
       const relevant =
         pickingSubjectHostKey === clauseId ||
-        groups.some(group => group.needsHostPick || group.isManualHost);
+        groups.some(
+          group =>
+            group.needsHostPick ||
+            group.isManualHost ||
+            (group.hostKeys ?? []).includes(pickingSubjectHostKey ?? "")
+        );
       if (!relevant) continue;
       const row = finiteVerbIdToRow.get(clauseId);
       entries.push({
@@ -1741,6 +1807,59 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     [activeBeginningVerbId, bookId]
   );
 
+  const renderOutlineStandingPanel = (finiteVerbId: string | undefined) => {
+    if (!finiteVerbId) return null;
+    const result = outlineStandingById.get(finiteVerbId);
+    if (!result) return null;
+    const current = observations[finiteVerbId]?.outlineStanding;
+    return (
+      <div className="clause-outline-standing">
+        <p className="clause-observation-term">
+          Outline: {result.standing === "h4" ? "H4" : "nested"}
+        </p>
+        <p className="clause-tutor-note">{outlineStandingReason(result.source)}</p>
+        <p className="clause-tutor-note">
+          Q1–Q3 stay as you answered them. Do not change Q2 to force a heading.
+        </p>
+        <div className="clause-step-actions">
+          <button
+            type="button"
+            className={["clause-outline-standing-btn", !current ? "clause-outline-standing-btn--active" : ""]
+              .filter(Boolean)
+              .join(" ")}
+            onClick={() => updateActiveObservation({ outlineStanding: undefined })}
+          >
+            Auto
+          </button>
+          <button
+            type="button"
+            className={[
+              "clause-outline-standing-btn",
+              current === "h4" ? "clause-outline-standing-btn--active" : ""
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            onClick={() => updateActiveObservation({ outlineStanding: "h4" })}
+          >
+            Stand as H4
+          </button>
+          <button
+            type="button"
+            className={[
+              "clause-outline-standing-btn",
+              current === "dependent" ? "clause-outline-standing-btn--active" : ""
+            ]
+              .filter(Boolean)
+              .join(" ")}
+            onClick={() => updateActiveObservation({ outlineStanding: "dependent" })}
+          >
+            Keep nested
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   // Confirming a clause moves focus to the next one automatically — a real
   // navigation, not a no-op, even though nothing on screen used to say so
   // (clause-review-focus-bug-and-interaction-model.md item 1: this was
@@ -1879,12 +1998,16 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
     [participleSubjectHosts, wordById]
   );
 
-  const updateSubjectHostSpan = useCallback(
-    (hostKey: string, span: string[]) => {
+  const updateSubjectHostSpans = useCallback(
+    (hostKeys: string[], span: string[]) => {
+      const keys = hostKeys.filter(Boolean);
+      if (!keys.length) return;
       setParticipleSubjectHosts(current => {
         const next = { ...current };
-        if (span.length) next[hostKey] = span;
-        else delete next[hostKey];
+        for (const hostKey of keys) {
+          if (span.length) next[hostKey] = span;
+          else delete next[hostKey];
+        }
         writeParticipleSubjectHosts(next, bookId);
         return next;
       });
@@ -1894,28 +2017,38 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
 
   const selectSubjectHostWord = useCallback(
     (hostKey: string, word: SpanishWord, event: MouseEvent<HTMLButtonElement>) => {
+      const keys = pickingSubjectHostKeysRef.current.length
+        ? pickingSubjectHostKeysRef.current
+        : [hostKey];
       if (event.shiftKey && subjectHostAnchorId) {
         const anchor = wordById.get(subjectHostAnchorId);
         if (anchor) {
           const span = spanFromRange(anchor, word);
           if (span) {
-            updateSubjectHostSpan(hostKey, span);
+            updateSubjectHostSpans(keys, span);
             setPickingSubjectHostKey(null);
+            pickingSubjectHostKeysRef.current = [];
           }
           return;
         }
       }
       setSubjectHostAnchorId(word.id);
-      updateSubjectHostSpan(hostKey, [word.id]);
+      updateSubjectHostSpans(keys, [word.id]);
       setPickingSubjectHostKey(null);
+      pickingSubjectHostKeysRef.current = [];
     },
-    [subjectHostAnchorId, updateSubjectHostSpan, wordById]
+    [subjectHostAnchorId, updateSubjectHostSpans, wordById]
   );
 
   const beginSubjectHostPick = useCallback(
-    (hostKey: string, options?: { force?: boolean }) => {
+    (hostKey: string, options?: { force?: boolean; hostKeys?: string[] }) => {
       const nextKey =
         !options?.force && pickingSubjectHostKey === hostKey ? null : hostKey;
+      pickingSubjectHostKeysRef.current = nextKey
+        ? options?.hostKeys?.length
+          ? options.hostKeys
+          : [hostKey]
+        : [];
       setPickingSubjectHostKey(nextKey);
       setPickingActorField(null);
       setActorAnchorId(null);
@@ -2003,15 +2136,25 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   const renderParticipleNounGroups = useCallback(
     (participles: SpanishWord[], nearbyWords: SpanishWord[], hostKey: string) => {
       if (!participles.length) return null;
+      const hostsByParticipleId = Object.fromEntries(
+        participles
+          .filter(word => word.participleId)
+          .map(word => [word.participleId!, manualSubjectHostWords(word.participleId)])
+      );
       const groups = groupParticiplesByNounHost(
         participles,
         nearbyWords,
-        manualSubjectHostWords(hostKey)
+        manualSubjectHostWords(hostKey),
+        hostsByParticipleId
       );
-      const picking = pickingSubjectHostKey === hostKey;
+      const source = participles[0];
       return (
         <div className="clause-participle-noun-groups" aria-label="What hangs on the host">
-          {groups.map(group => (
+          {groups.map(group => {
+            const groupKeys = group.hostKeys?.length ? group.hostKeys : [hostKey];
+            const pickKey = groupKeys[0] ?? hostKey;
+            const picking = groupKeys.includes(pickingSubjectHostKey ?? "");
+            return (
             <div
               className={[
                 "clause-participle-noun-group",
@@ -2023,6 +2166,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                 .filter(Boolean)
                 .join(" ")}
               key={group.noun?.id ?? `${group.hostLabel}:${group.items[0]?.word.participleId ?? ""}`}
+              data-subject-host-key={pickKey}
             >
               <div className="clause-participle-noun-host">
                 {group.needsHostPick ? (
@@ -2035,7 +2179,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                     }
                     onClick={event => {
                       event.stopPropagation();
-                      beginSubjectHostPick(hostKey);
+                      beginSubjectHostPick(pickKey, { hostKeys: groupKeys });
                     }}
                   >
                     {picking ? "Tap a word in the list below →" : group.hostLabel}
@@ -2049,8 +2193,8 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                         className="clause-participle-host-clear"
                         onClick={event => {
                           event.stopPropagation();
-                          updateSubjectHostSpan(hostKey, []);
-                          beginSubjectHostPick(hostKey, { force: true });
+                          updateSubjectHostSpans(groupKeys, []);
+                          beginSubjectHostPick(pickKey, { force: true, hostKeys: groupKeys });
                         }}
                       >
                         Change
@@ -2072,8 +2216,12 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                   </li>
                 ))}
               </ul>
+              {source && picking
+                ? renderSubjectHostChapterPicker(pickKey, source.chapter, source.verse)
+                : null}
             </div>
-          ))}
+            );
+          })}
         </div>
       );
     },
@@ -2081,7 +2229,8 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       beginSubjectHostPick,
       manualSubjectHostWords,
       pickingSubjectHostKey,
-      updateSubjectHostSpan
+      renderSubjectHostChapterPicker,
+      updateSubjectHostSpans
     ]
   );
 
@@ -2279,15 +2428,14 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       const actor = actorObservationFor(info.finiteVerbId);
       const subject = spanTextFromIds(actor.subjectSpan);
       if (!subject) continue;
-      const triple = formatActorTriple(
-        subject,
-        spanTextFromIds(actor.verbSpan),
-        spanTextFromIds(actor.objectSpan)
-      );
-      if (!triple) continue;
+      const verb = spanTextFromIds(actor.verbSpan);
+      const object = spanTextFromIds(actor.objectSpan);
+      if (!formatActorTriple(subject, verb, object)) continue;
+      const predicate = formatActorPredicate(verb, object);
+      if (!predicate) continue;
       const key = subject.toLowerCase();
       const group = byActor.get(key) ?? { label: subject, actions: [] };
-      group.actions.push({ triple, order: info.order });
+      group.actions.push({ triple: predicate, order: info.order });
       byActor.set(key, group);
     }
     return Array.from(byActor.values())
@@ -2956,6 +3104,11 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                 {node.finiteVerbId}
               </span>
               {tagLabel ? <span className="clause-tree-tag">{tagLabel}</span> : null}
+              {outlineStandingById.get(node.finiteVerbId)?.standing === "h4" &&
+              node.relation &&
+              node.relation !== "root" ? (
+                <span className="clause-tree-tag clause-tree-tag--h4">H4</span>
+              ) : null}
               {sequenceEntry ? (
                 <span className="sequence-item-tags">
                   {sequenceEntry.isReason ? <span className="sequence-tag sequence-tag--reason">Reason</span> : null}
@@ -3012,6 +3165,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       participleWordsByClauseId,
       renderClauseWords,
       renderParticipleNounGroups,
+      outlineStandingById,
       sequenceEntryByFiniteVerbId,
       wordsInVerse
     ]
@@ -3174,7 +3328,9 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
               }}
             >
               Skeleton
-              {skeleton.roots.length ? ` (${skeleton.roots.length})` : ""}
+              {skeleton.roots.length
+                ? ` (${skeleton.roots.length} roots · ${outline.length} H4)`
+                : ""}
             </button>
             <button
               type="button"
@@ -4294,7 +4450,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
               </div>
               <p className="clause-section-note">
                 Span is saved, but the clause shape is still open — Independent, relative, content, or
-                adverbial (time / reason / condition / purpose). Open one to finish it.
+                adverbial (time / reason / condition / purpose / result). Open one to finish it.
               </p>
               <ul className="clause-audit-list">
                 {unreviewedClauseRows.map(row => (
@@ -4980,7 +5136,8 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                   ) : activeObservation.isWhatWasExpressed === "yes" ? (
                     <div className="clause-parent-picker">
                       <p className="clause-observation-term">Content clause</p>
-                      <p>Select the clause this is the content of.</p>
+                      <p>Select the clause this is the content of. That is grammar — not the heading.</p>
+                      {renderOutlineStandingPanel(activeBeginningVerbId ?? undefined)}
                       {unassignedSameVerseNotice}
                       <div className="clause-parent-list">
                         {nearbyParentClauseRows.map(row => (
@@ -5028,7 +5185,26 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                       <p className="clause-observation-term">
                         {activeEffectiveFrameType ? `${capitalize(activeEffectiveFrameType)} clause` : "Adverbial clause"}
                       </p>
-                      <p>Select the clause this explains — its time, reason, condition, or purpose.</p>
+                      <p>Select the clause this explains — its time, reason, condition, purpose, or result.</p>
+                      <div className="clause-frame-type-row" role="group" aria-label="Frame type">
+                        {FRAME_TYPES.map(type => (
+                          <button
+                            type="button"
+                            key={type}
+                            className={[
+                              "clause-outline-standing-btn",
+                              (activeObservation.frameType ?? activeEffectiveFrameType) === type
+                                ? "clause-outline-standing-btn--active"
+                                : ""
+                            ]
+                              .filter(Boolean)
+                              .join(" ")}
+                            onClick={() => updateActiveObservation({ frameType: type })}
+                          >
+                            {capitalize(type)}
+                          </button>
+                        ))}
+                      </div>
                       {unassignedSameVerseNotice}
                       <div className="clause-parent-list">
                         {nearbyParentClauseRows.map(row => (
@@ -5077,6 +5253,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                         Opens with a bare coordinator and shares the previous clause&apos;s dependency — not an
                         independent root, even if Q1–Q3 would all read &quot;no&quot; on their own.
                       </p>
+                      {renderOutlineStandingPanel(activeBeginningVerbId ?? undefined)}
                       <div className="clause-step-actions">
                         <button type="button" className="clause-reconsider" onClick={() => setForceChoices(true)}>
                           Not this — reconsider
@@ -5092,6 +5269,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                     <div className="clause-parent-picker">
                       <p className="clause-observation-term">Independent clause</p>
                       <p className="clause-tutor-note">Currently: stands on its own.</p>
+                      {renderOutlineStandingPanel(activeBeginningVerbId ?? undefined)}
                       {/*
                         "All three no" is a real answer, but the Greek can flatly
                         contradict it — a clause opening with ἵνα/ὡς/ἐάν is not
@@ -5346,7 +5524,8 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                 <h2 id="skeleton-popup-heading">Skeleton</h2>
                 {skeleton.roots.length ? (
                   <span className="clause-skeleton-count">
-                    {skeleton.roots.length} root{skeleton.roots.length === 1 ? "" : "s"}
+                    {skeleton.roots.length} grammatical root{skeleton.roots.length === 1 ? "" : "s"}
+                    {outline.length ? ` · ${outline.length} outline H4` : ""}
                   </span>
                 ) : null}
               </div>
@@ -5960,7 +6139,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
             <div className="clause-actor-flow">
               <h3>C. Actor flow</h3>
               <p className="clause-section-note">
-                Full actor lines gathered under each subject — sujeto → verbo → objeto when observed.
+                Actions gathered under each subject — verbo → objeto. The heading is the subject.
               </p>
               {actorFlow.length ? (
                 <div className="clause-actor-flow-list">
@@ -5982,12 +6161,48 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
               )}
             </div>
 
+            <details className="clause-skeleton-tree-details" open>
+              <summary>Outline H4s ({outline.length})</summary>
+              <p className="clause-section-note">
+                Manual trunk — what Generate will print as ####. Grammar can still be
+                “content of said.” An H4 badge on a nested row in the tree below is the
+                same decision. Use Auto / Stand as H4 / Keep nested on the clause card
+                if the auto call is wrong. Do not change Q2 to force a heading.
+              </p>
+              {outline.length ? (
+                <ol className="clause-outline-h4-list">
+                  {outline.map(clause => {
+                    const standing = outlineStandingById.get(clause.finiteVerbId);
+                    return (
+                      <li key={clause.finiteVerbId}>
+                        <button
+                          type="button"
+                          className="clause-outline-h4-item"
+                          onClick={() => openClauseFromSkeleton(clause.finiteVerbId)}
+                        >
+                          <span className="clause-tree-ref">{clause.reference}</span>
+                          <span className="clause-tree-id">{clause.finiteVerbId}</span>
+                          {standing && standing.source !== "root" ? (
+                            <span className="clause-tree-tag clause-tree-tag--h4">{standing.source}</span>
+                          ) : null}
+                          <span className="clause-outline-h4-text">{clause.spanText || "(no span)"}</span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ol>
+              ) : (
+                <p className="clause-output-empty">No outline H4s yet — finish Q1–Q3 and mood marks.</p>
+              )}
+            </details>
+
             <details className="clause-skeleton-tree-details">
               <summary>Clause tree (grammar nest)</summary>
               <p className="clause-section-note">
                 How clauses attach — relative, content, frame. Each row shows its verse
-                reference and clause id. Nesting (left rail) is dependence depth. Read the
-                book in H3 flow above; open this when you need the nest.
+                reference and clause id. Nesting (left rail) is dependence depth. An H4
+                badge means the clause still hangs here grammatically but stands in the
+                outline above.
               </p>
               {sequenceEntryByFiniteVerbId.size ? (
                 <dl className="sequence-legend">
@@ -6049,16 +6264,9 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                       <span>{verse.reference}</span>
                       {verse.text}
                     </p>
-                    {verse.participles.length ? (
-                      <>
-                        {renderParticipleNounGroups(verse.participles, verse.words, hostKey)}
-                        {renderSubjectHostChapterPicker(
-                          hostKey,
-                          verse.participles[0].chapter,
-                          verse.participles[0].verse
-                        )}
-                      </>
-                    ) : null}
+                    {verse.participles.length
+                      ? renderParticipleNounGroups(verse.participles, verse.words, hostKey)
+                      : null}
                   </div>
                   );
                 })}
@@ -6085,11 +6293,6 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                       {verse.text}
                     </p>
                     {renderParticipleNounGroups(verse.participles, verse.words, verse.key)}
-                    {renderSubjectHostChapterPicker(
-                      verse.key,
-                      verse.participles[0].chapter,
-                      verse.participles[0].verse
-                    )}
                   </div>
                 ))}
               </div>
@@ -6113,7 +6316,6 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                       {entry.text}
                     </p>
                     {renderParticipleNounGroups(entry.participles, entry.words, entry.key)}
-                    {renderSubjectHostChapterPicker(entry.key, entry.sourceChapter, entry.sourceVerse)}
                   </div>
                 ))}
               </div>

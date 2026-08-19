@@ -60,11 +60,13 @@ Keyed by `finiteVerbId`:
   expressedParentClauseId?: string,
   tellsWhenOrIf?: "yes" | "no" | "unsure",
   whenIfParentClauseId?: string,
-  frameType?: "time" | "reason" | "condition" | "purpose"
+  frameType?: "time" | "reason" | "condition" | "purpose" | "result";
+  outlineStanding?: "h4" | "dependent"
 }
 ```
 
 All-no → root. First yes wins (`clause-tree.ts` `resolveClause`).
+`outlineStanding` is optional. Omit = Auto (command or quoted main clause → H4; complement / Q3 frame stays nested). Never change Q2 to force an H4.
 
 ### Actors — `…:{s}:clause-actors:v1`
 
@@ -74,7 +76,16 @@ All-no → root. First yes wins (`clause-tree.ts` `resolveClause`).
 
 ### Participle hosts — `…:{s}:participle-subjects:v1`
 
-`Record<participleId, string[]>` — Spanish host word ids.
+`Record<string, string[]>` — Spanish host word ids.
+
+**`participleId` is the authority.** Compiler and Observer read it first. One participle → one noun. Never union two nouns onto a clause or verse key.
+
+| Key | When | What the value is |
+|---|---|---|
+| `participleId` (`ch:vs:w`) | always, for each Brick-4 participle | noun they ride with |
+| clause id / verse key | fallback only (older files) | one noun, never a smash of two |
+
+Hebrew: every participle needs this pick. A compile that still says *sin anfitrión* means that participle’s own key is empty.
 
 ### Participle sort — `…:{s}:participles:v1`
 

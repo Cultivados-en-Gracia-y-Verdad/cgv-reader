@@ -1,4 +1,10 @@
 import type { FrameType } from "./clause-signals";
+import {
+  hoistOutlineH4s,
+  standingForClause,
+  type OutlineStandingContext,
+  type OutlineStandingOverride
+} from "./clause-outline";
 
 export type ClauseRelation = "describes" | "content" | "frame" | "root";
 
@@ -19,6 +25,8 @@ export interface ClauseObservationLike {
   tellsWhenOrIf?: "yes" | "no" | "unsure";
   whenIfParentClauseId?: string;
   frameType?: FrameType;
+  /** Omit = auto from resolveOutlineStanding. Never a substitute for Q2. */
+  outlineStanding?: OutlineStandingOverride;
 }
 
 export interface ResolvedClause {
@@ -344,13 +352,41 @@ export function deriveSkeleton(
   return { roots, parked, cycleBrokenIds };
 }
 
-/** Outline = root clauses only, book order — what's left if you strip everything indented out of the skeleton. */
+/**
+ * Outline = H4 trunk, book order.
+ * Grammatical roots plus Q2 commands / quoted main clauses (see clause-outline.ts).
+ * Without `context`, falls back to Q1–Q3 roots only (tests / callers that have not
+ * wired mood + leading tokens yet).
+ */
 export function deriveOutline(
   clauses: ClauseSpanInfo[],
-  observations: Record<string, ClauseObservationLike>
+  observations: Record<string, ClauseObservationLike>,
+  context?: OutlineStandingContext
 ): ClauseSpanInfo[] {
-  return clauses
-    .filter(clause => resolveClause(clause, observations[clause.finiteVerbId], clauses).relation === "root")
+  if (!context) {
+    return clauses
+      .filter(clause => resolveClause(clause, observations[clause.finiteVerbId], clauses).relation === "root")
+      .sort(byOrder);
+  }
+  const byId = new Map(clauses.map(clause => [clause.finiteVerbId, clause]));
+  const { roots } = deriveSkeleton(clauses, observations);
+  const standingOf = (id: string): "h4" | "dependent" => {
+    const clause = byId.get(id);
+    const resolved = clause
+      ? resolveClause(clause, observations[id], clauses)
+      : { relation: null, parked: false };
+    return standingForClause(
+      id,
+      resolved.relation,
+      resolved.parked,
+      observations[id]?.outlineStanding,
+      context
+    ).standing;
+  };
+  const hoisted = hoistOutlineH4s(roots, standingOf);
+  return hoisted
+    .map(node => byId.get(node.finiteVerbId))
+    .filter((clause): clause is ClauseSpanInfo => Boolean(clause))
     .sort(byOrder);
 }
 
@@ -374,7 +410,8 @@ export function deriveOutline(
  */
 export function deriveTelos(
   clauses: ClauseSpanInfo[],
-  observations: Record<string, ClauseObservationLike>
+  observations: Record<string, ClauseObservationLike>,
+  context?: OutlineStandingContext
 ): TelosCandidate | null {
   const byId = new Map(clauses.map(clause => [clause.finiteVerbId, clause]));
 
@@ -396,7 +433,7 @@ export function deriveTelos(
     .filter(entry => entry.resolved.parentClauseId === anchorParentId)
     .map(entry => entry.clause);
 
-  const outline = deriveOutline(clauses, observations);
+  const outline = deriveOutline(clauses, observations, context);
   return {
     purposeClauses,
     lastOutlineClause: outline.length ? outline[outline.length - 1] : null

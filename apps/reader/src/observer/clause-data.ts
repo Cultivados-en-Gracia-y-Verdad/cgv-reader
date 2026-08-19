@@ -5,7 +5,8 @@ import {
   workshopProgressKeys,
   type ReaderBookId
 } from "@cgv/core";
-import type { FrameType } from "./clause-signals";
+import { FRAME_TYPES, type FrameType } from "./clause-signals";
+import type { OutlineStandingOverride } from "./clause-outline";
 import { loadLbfRaw, loadMorphRawSync, loadTokensRawSync } from "./book-assets";
 import {
   loadLbfTokenSurfaces,
@@ -664,6 +665,8 @@ export interface ParticipleNounGroup {
   needsHostPick?: boolean;
   /** True when hostLabel came from a saved manual subject pick. */
   isManualHost?: boolean;
+  /** participle-subjects:v1 keys this group's pick writes (usually participle ids). */
+  hostKeys?: string[];
   items: { word: SpanishWord; reading: ParticipleReading }[];
 }
 
@@ -754,25 +757,54 @@ export function describeParticipleReading(
  * Nominative subject hosts are **never** auto-filled from CNG agreement —
  * that falsely locks onto distant chapter nouns (e.g. 1:8 visto → 1:10
  * «profetas»). Nominatives use the manual pick / "Who do they ride with?" path.
+ * Each participle keeps its own host — two nouns in one clause do not smash.
  */
 export function groupParticiplesByNounHost(
   participles: SpanishWord[],
   nearbyWords: SpanishWord[],
-  manualSubjectHost: SpanishWord[] = []
+  manualSubjectHost: SpanishWord[] = [],
+  hostsByParticipleId: Record<string, SpanishWord[]> = {}
 ): ParticipleNounGroup[] {
   const byNounId = new Map<string, ParticipleNounGroup>();
   const byRoleLabel = new Map<string, ParticipleNounGroup>();
-  const manualNominatives: { word: SpanishWord; reading: ParticipleReading }[] = [];
-  const needsPickNominatives: { word: SpanishWord; reading: ParticipleReading }[] = [];
-  const manualLabel = manualSubjectHost.map(w => w.text).join(" ").trim();
+  const byManualSpan = new Map<string, ParticipleNounGroup>();
+  const needsPickGroups: ParticipleNounGroup[] = [];
 
   for (const word of participles) {
     const reading = describeParticipleReading(word, nearbyWords);
 
     // Nominative / OSHB: subject host is a judgment call, not morphology.
     if (word.oshbParticiple || word.participleCase === "N") {
-      if (manualSubjectHost.length) manualNominatives.push({ word, reading });
-      else needsPickNominatives.push({ word, reading });
+      const participleId = word.participleId ?? "";
+      const own = participleId ? hostsByParticipleId[participleId] ?? [] : [];
+      const host = own.length ? own : manualSubjectHost;
+      const hostKeys = participleId ? [participleId] : [];
+      if (!host.length) {
+        needsPickGroups.push({
+          noun: null,
+          hostLabel: "Who do they ride with?",
+          needsHostPick: true,
+          hostKeys,
+          items: [{ word, reading }]
+        });
+        continue;
+      }
+      const spanKey = host.map(item => item.id).join("|");
+      let group = byManualSpan.get(spanKey);
+      if (!group) {
+        group = {
+          noun: host[0] ?? null,
+          hostLabel: host.map(item => item.text).join(" ").trim() || "subject",
+          isManualHost: true,
+          hostKeys: [],
+          items: []
+        };
+        byManualSpan.set(spanKey, group);
+      }
+      group.items.push({ word, reading });
+      for (const key of hostKeys) {
+        if (!group.hostKeys?.includes(key)) group.hostKeys?.push(key);
+      }
       continue;
     }
 
@@ -806,23 +838,13 @@ export function groupParticiplesByNounHost(
     group.items.sort((a, b) => a.word.index - b.word.index);
   }
 
-  const extras: ParticipleNounGroup[] = [];
-  if (manualNominatives.length) {
-    extras.push({
-      noun: manualSubjectHost[0] ?? null,
-      hostLabel: manualLabel || "subject",
-      isManualHost: true,
-      items: manualNominatives.sort((a, b) => a.word.index - b.word.index)
-    });
-  }
-  if (needsPickNominatives.length) {
-    extras.push({
-      noun: null,
-      hostLabel: "Who do they ride with?",
-      needsHostPick: true,
-      items: needsPickNominatives.sort((a, b) => a.word.index - b.word.index)
-    });
-  }
+  const extras: ParticipleNounGroup[] = [
+    ...Array.from(byManualSpan.values()).map(group => {
+      group.items.sort((a, b) => a.word.index - b.word.index);
+      return group;
+    }),
+    ...needsPickGroups
+  ];
 
   const roleGroups = Array.from(byRoleLabel.values());
   for (const group of roleGroups) {
@@ -1154,6 +1176,14 @@ export function formatActorTriple(subject: string, verb: string, object = ""): s
   const o = object.trim();
   if (!s || !v) return "";
   return o ? `${s} → ${v} → ${o}` : `${s} → ${v}`;
+}
+
+/** Verb → object only — used when the subject is already the group heading. */
+export function formatActorPredicate(verb: string, object = ""): string {
+  const v = verb.trim();
+  const o = object.trim();
+  if (!v) return "";
+  return o ? `${v} → ${o}` : v;
 }
 
 /**
@@ -1819,6 +1849,7 @@ export interface ClauseObservation {
   tellsWhenOrIf?: ObservationAnswer;
   whenIfParentClauseId?: string;
   frameType?: FrameType;
+  outlineStanding?: OutlineStandingOverride;
 }
 
 export type ClauseObservations = Record<string, ClauseObservation>;
@@ -1843,8 +1874,9 @@ export function readClauseObservations(bookId: ReaderBookId = getWorkshopBookId(
         tellsWhenOrIf?: unknown;
         whenIfParentClauseId?: unknown;
         frameType?: unknown;
+        outlineStanding?: unknown;
       };
-      const validFrameTypes = new Set(["time", "reason", "condition", "purpose"]);
+      const validFrameTypes = new Set<string>(FRAME_TYPES);
       observations[finiteVerbId] = {
         ...(record.describesNoun === "yes" || record.describesNoun === "no" || record.describesNoun === "unsure"
           ? { describesNoun: record.describesNoun }
@@ -1866,6 +1898,9 @@ export function readClauseObservations(bookId: ReaderBookId = getWorkshopBookId(
           : {}),
         ...(typeof record.frameType === "string" && validFrameTypes.has(record.frameType)
           ? { frameType: record.frameType as FrameType }
+          : {}),
+        ...(record.outlineStanding === "h4" || record.outlineStanding === "dependent"
+          ? { outlineStanding: record.outlineStanding }
           : {})
       };
     }

@@ -11,4 +11,4 @@ description: >-
 
 # Jason (AI progress-JSON filler)
 
-Project copy. Follow `~/.cursor/skills/cgv-jason/SKILL.md` in full (Brick 1B hunt, one clause per pass).
+Project copy. Follow `~/.cursor/skills/cgv-jason/SKILL.md` in full (Brick 1B hunt, one clause per pass, participle hosts on clause/verse keys).
