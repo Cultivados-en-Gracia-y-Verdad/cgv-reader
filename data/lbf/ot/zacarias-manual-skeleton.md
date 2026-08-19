@@ -3806,117 +3806,161 @@ En aquellos días asirán diez hombres de todas las lenguas la orla de un hombre
 ### Zacarías 9:6:4 — Cortaré la soberbia de los filisteos
 
 #### *y cortaré la soberbia de los filisteos*
+> El *yo* vuelve al verbo. <u>Cortaré</u> la soberbia de los filisteos. Primera vez *filisteos*: Ascalón, Gaza, Ecrón, Asdod ahora se cuentan juntos. Primera *soberbia*. El verbo es futuro.
 
 ### Zacarías 9:7:1 — Quitaré su sangre de su boca
 
 #### *Y quitaré su sangre de su boca, y sus abominaciones de entre sus dientes*
+> El cortar no va solo. <u>Quitaré</u> su sangre de su boca, y sus abominaciones de entre sus dientes. Verso nuevo. El *su* es de los filisteos. Primera *sangre*, primera *abominaciones*. El verbo es futuro. Qué son esas abominaciones, esta línea no lo define.
 
 ### Zacarías 9:7:7 — Quedará para nuestro Dios
 
 * Actores principales: *él* (1)
+> El actor es <u>él</u>. No Tiro. No Gaza. El renglón no lo nombra.
 
 #### *y quedará también él para nuestro Dios*
+> Tras quitar sangre y abominaciones, <u>quedará también él</u> para nuestro Dios. El *también* junta a este *él* con alguien que ya quedó. Primera *nuestro Dios*. En Zacarías 8:23 Dios *está* con ustedes. Aquí alguien *quedará para* nuestro Dios. El verbo es futuro.
 
 * *él* → *quedará* → *para nuestro Dios*
+> Quien quedará: <u>él</u>. Lo alcanzado es *para nuestro Dios*. Quién es ese *él*, esta línea no lo suelta.
 
 ### Zacarías 9:7:11 — Como un jefe en Judá
 
 #### *y será como un jefe en Judá*
+> El *quedará* se mueve. <u>Será</u> como un jefe en Judá. Primera *jefe*. El *como* mide; no dice que *es* jefe. En Judá —no en Gaza. El *él* sigue sin nombre.
 
 ### Zacarías 9:7:14 — Ecrón como el jebuseo
 
 * Actores principales: *Ecrón* (1)
+> Vuelve <u>Ecrón</u>. En Zacarías 9:5 su esperanza fue avergonzada. Ahora el conteo la pone otra vez.
 
 #### *y Ecrón como el jebuseo*
+> Otro *como*. <u>Ecrón</u> como el jebuseo. Primera *jebuseo*. El *él* era como jefe en Judá; ahora Ecrón se mide con otro nombre. El hebreo no pone un verbo de acción.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *Ecrón* → *Ecrón* → *como el jebuseo*
+> Lo que hay es <u>Ecrón</u>. Lo alcanzado es *como el jebuseo*. El verbo del medio es del español. Quién es el jebuseo, esta línea no lo cuenta.
 
 ### Zacarías 9:8:1 — Acamparé por mi casa
 
 #### *Y acamparé por mi casa una guarnición, de quien pasa y de quien vuelve*
+> El *yo* vuelve. <u>Acamparé</u> por mi casa una guarnición, de quien pasa y de quien vuelve. Primera *acamparé*. Primera *guarnición*. En Zacarías 1:16 era *mi casa* edificada. En Zacarías 7:14 la tierra asolada no tenía quien pasa ni quien vuelve. Aquí la guarnición se mide con esos mismos.
 
 + *quien*
-  * *pasa* (מֵ/עֹבֵ֣ר)[^part]
-  * *y* (וּ/מִ/שָּׁ֔ב)[^part]
+  * ↳ *pasa* (מֵ/עֹבֵ֣ר)[^P]
+  * ↳ *y* (וּ/מִ/שָּׁ֔ב)[^P]
 
 ### Zacarías 9:8:7 — No pasará más un opresor
 
 * Actores principales: *un opresor* (1)
+> El actor no es la casa. Es <u>un opresor</u>. Primera vez.
 
 #### *y no pasará más sobre ellos un opresor*
+> La guarnición se llena. <u>No pasará más</u> sobre ellos un opresor. En Zacarías 7:10 se mandó *no opriman*. Aquí el que oprime *no pasará más*. El *ellos* no se nombra. El *más* está en el renglón.
 
 * *un opresor* → *pasará*
+> Quien no pasará: <u>un opresor</u>. La flecha dice *pasará*; el *no* y el *más* van en el renglón.
 
 + *opresor*
-  * *opresor* (נֹגֵ֑שׂ)[^part]
+  * ↳ *opresor* (נֹגֵ֑שׂ)[^P]
 
 - *porque ahora he visto con mis ojos*
+  > El *porque* da el ahora. <u>He visto</u> con mis ojos. En Zacarías 8:6 *mis ojos* eran pregunta. Aquí el ver ya está hecho. Qué vio, esta línea no lo nombra.
 
 * *porque* (כִּ֥י)[^yaan] introduce la razón.
+
+### En síntesis
+
+Carga de la palabra de Jehová en Hadrac; Damasco su reposo; también Hamat, Tiro y Sidón.
+
+Tiro se edificó fortaleza y amontonó plata y oro; he aquí el Señor la desposeerá, herirá en el mar su poderío, y ella en el fuego será consumida.
+
+Ascalón verá y temerá; Gaza se retorcerá; Ecrón, su esperanza avergonzada; perecerá el rey de Gaza; Ascalón no será habitada; habitará un bastardo en Asdod.
+
+Cortaré la soberbia de los filisteos, quitaré su sangre y sus abominaciones; quedará también él para nuestro Dios, como un jefe en Judá, y Ecrón como el jebuseo.
+
+Acamparé por mi casa una guarnición; no pasará más un opresor sobre ellos, porque ahora he visto con mis ojos.
 
 ## Zacarías 9:9–17 Tu rey pobre sobre un asno
 
 ### Zacarías 9:9:1 — Alégrate, hija de Sión
 
 #### *Alégrate mucho, hija de Sión*
+> Tras *he visto con mis ojos*, un mandato. <u>Alégrate mucho</u>, hija de Sión. En Zacarías 2:10 ya se pidió *alégrate* a la misma hija. Aquí se añade *mucho*. Por qué, esta línea no lo suelta.
 
 ### Zacarías 9:9:5 — Da voces, hija de Jerusalén
 
 #### *da voces, hija de Jerusalén*
+> El *alégrate* no va solo. <u>Da voces</u>, hija de Jerusalén. En Zacarías 2:10 la hija era Sión. Aquí la segunda hija es Jerusalén. Primera *da voces*. Por qué, esta línea no lo suelta.
 
 ### Zacarías 9:9:14 — Pobre y cabalgando sobre un asno
 
 * Actores principales: *él* (1)
+> El actor es <u>él</u>. No la hija. El que da la razón del alegrarse se cuenta como *él*. El renglón no le da nombre.
 
 #### *justo y salvo es él, pobre y cabalgando sobre un asno, y sobre un pollino hijo de asnas*
+> Ahí está el porqué. <u>Justo y salvo es él</u>, pobre y cabalgando sobre un asno, y sobre un pollino hijo de asnas. En Zacarías 6:12 era *el hombre*, Renuevo. Aquí es *él*, y va pobre sobre un asno. En Zacarías 1:8 un hombre cabalgaba un caballo rojo. El *es* es del español. Primera *pobre*. Primera *asno*.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *él* → *es*
+> Quien es: <u>él</u>. La flecha se queda en *es*. Justo y salvo, pobre, cabalgando: van en el renglón.
 
 + *él*
-  * *salvo* (וְ/נוֹשָׁ֖ע)[^part]
-  * *cabalgando* (וְ/רֹכֵ֣ב)[^part]
+  * ↳ *salvo* (וְ/נוֹשָׁ֖ע)[^P]
+  * ↳ *cabalgando* (וְ/רֹכֵ֣ב)[^P]
+    > Dos marcas cuelgan de *él*. Está <u>salvo</u>, y está cabalgando. En Zacarías 8:7 el *yo* salvaba. Aquí *él* lleva el salvo. El caballo de Zacarías 1:8 no se nombra.
 
 ### Zacarías 9:10:1 — Cortaré el carro de Efraín
 
 #### *Y cortaré el carro de Efraín y el caballo de Jerusalén*
+> El *yo* vuelve. <u>Cortaré</u> el carro de Efraín y el caballo de Jerusalén. En Zacarías 9:6 cortaba la soberbia de los filisteos. Aquí el corte es carro y caballo. Primera *Efraín*. Primera *carro*. El *él* iba sobre un asno; el caballo de Jerusalén se corta. El verbo es futuro.
 
 ### Zacarías 9:10:6 — Cortado el arco de guerra
 
 * Actores principales: *el arco de guerra* (1)
+> El actor ya no es el *yo*. Es <u>el arco de guerra</u>. Primera vez. El conteo pone el arma al frente.
 
 #### *y será cortado el arco de guerra*
+> El cortar sigue, y cambia de voz. <u>Será cortado</u> el arco de guerra. El *yo* no se escribe en este verbo. Primera *guerra* en este corte.
 
 * *el arco de guerra* → *será cortado*
+> Lo que será cortado: <u>el arco de guerra</u>. La flecha se queda en *será cortado*. Quién corta, esta línea no lo vuelve a nombrar.
 
 ### Zacarías 9:10:9 — Hablará paz a las naciones
 
 #### *y hablará paz a las naciones*
+> Tras el arco cortado, <u>hablará paz</u> a las naciones. El sujeto no se escribe: sigue el *él* del asno. En Zacarías 8:16 la paz se juzgaba en las puertas. Aquí se *habla* a las naciones. El verbo es futuro.
 
 ### Zacarías 9:10:12 — Su señorío de mar a mar
 
 * Actores principales: *su señorío* (1)
+> El actor ya no es *él*. Es <u>su señorío</u>. Primera vez. El *su* es del que habla paz.
 
 #### *y su señorío será de mar a mar, y desde el río hasta los confines de la tierra*
+> La paz no cierra el alcance. <u>Su señorío</u> será de mar a mar, y desde el río hasta los confines de la tierra. En Zacarías 9:4 el mar era donde se hería el poderío de Tiro. Aquí el mar mide el señorío, dos veces. Primera *señorío*. Primera *el río*. El *será* es del español.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *su señorío* → *será* → *de mar a mar, y desde el río hasta los confines de la tierra*
+> Lo que será: <u>su señorío</u>. Lo alcanzado es de mar a mar, y desde el río hasta los confines de la tierra. El pobre del asno no se vuelve a nombrar.
 
 ### Zacarías 9:11:5 — Presos sueltos del pozo
 
 * Actores principales: *agua* (1)
+> El conteo no pone a los presos. Pone <u>agua</u>. Y el renglón dice que no la hay.
 
 #### *También tú, por la sangre de tu pacto, he soltado a tus presos del pozo*
+> Tras el señorío, el *tú* entra. <u>También tú</u>, por la sangre de tu pacto: he soltado a tus presos del pozo. El *también* junta a este *tú* con el tramo anterior. Primera *pacto*. En Zacarías 9:7 la sangre se quitaba de la boca. Aquí la sangre es *de tu pacto*. El soltar ya está hecho.
 
 - *no hay agua en él*
+  > El pozo se describe. <u>No hay agua</u> en él. El actor del conteo es *agua*, y se niega. Primera *pozo*.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *agua* → *hay*
+> Lo que no hay: <u>agua</u>. La flecha dice *hay*; el *no* va en el renglón. El *él* es el pozo.
 
 + *pozo*
   * Describe a *pozo*.
@@ -3924,471 +3968,630 @@ En aquellos días asirán diez hombres de todas las lenguas la orla de un hombre
 ### Zacarías 9:12:1 — Vuélvanse a la fortaleza
 
 #### *Vuélvanse a la fortaleza, presos de la esperanza*
+> Los presos sueltos reciben mandato. <u>Vuélvanse</u> a la fortaleza, presos de la esperanza. En Zacarías 1:3 el *Vuélvanse* era *a mí*. Aquí el rumbo es *la fortaleza*. En Zacarías 9:3 Tiro se edificó fortaleza. En Zacarías 9:5 la esperanza de Ecrón fue avergonzada. Estos presos son *de la esperanza*.
 
 - *también hoy anuncio: el doble te devolveré*
+  > El *también* cae sobre *hoy*. <u>Anuncio</u>: el doble te devolveré. El *te* es singular. Primera *doble*. El devolver es futuro.
 
 * Introduce la razón.
 
 + *anuncio*
-  * *anuncio* (מַגִּ֥יד)[^part]
+  * ↳ *anuncio* (מַגִּ֥יד)[^P]
 
   - *Porque he tensado para mí a Judá*
+    > El *Porque* nombra lo ya hecho. <u>He tensado</u> para mí a Judá. Judá como arco. El verbo ya está hecho.
 
   * *Porque* (כִּֽי)[^yaan] introduce la razón.
 
   - *arco llené a Efraín*
+    > <u>Llené</u> a Efraín de arco. En Zacarías 9:10 el arco de guerra *será cortado*. Aquí Efraín se llena de arco. El verbo ya está hecho.
 
   * Introduce la razón.
 
   - *y despertaré a tus hijos, Sión, contra tus hijos, Grecia*
+    > El futuro vuelve. <u>Despertaré</u> a tus hijos, Sión, contra tus hijos, Grecia. Primera *Grecia*. Dos *tus hijos*, dos madres. Sión se nombra.
 
   * Introduce la razón.
 
   - *y te pondré como espada de valiente*
+    > Y <u>te pondré</u> como espada de valiente. El *te* sigue. Primera *espada*. El *como* mide.
 
   * Introduce la razón.
 
 ### Zacarías 9:14:3 — Jehová será visto sobre ellos
 
 * Actores principales: *Jehová* (1)
+> El actor es <u>Jehová</u>. El nombre corto. No *el Señor*. No *de los ejércitos*.
 
 #### *Y Jehová será visto sobre ellos*
+> Verso nuevo. <u>Jehová será visto</u> sobre ellos. En Zacarías 9:8 *he visto* con mis ojos. Aquí él es el visto. El *ellos* no se nombra. El verbo es futuro.
 
 * *Jehová* → *será visto*
+> Quien será visto: <u>Jehová</u>. La flecha se queda en *será visto*. Sobre ellos.
 
 ### Zacarías 9:14:4 — Su saeta como el relámpago
 
 * Actores principales: *su saeta* (1)
+> El actor ya no es Jehová por el nombre. Es <u>su saeta</u>. Primera vez. El *su* es del que será visto.
 
 #### *y su saeta saldrá como el relámpago*
+> El ver no queda quieto. <u>Su saeta saldrá</u> como el relámpago. Primera *saeta*. Primera *relámpago*. El *como* mide. El verbo es futuro.
 
 * *su saeta* → *saldrá*
+> Lo que saldrá: <u>su saeta</u>. La flecha se queda en *saldrá*. El relámpago está en el renglón.
 
 ### Zacarías 9:14:10 — El Señor tocará el cuerno
 
 * Actores principales: *el Señor Jehová* (1)
+> El actor se nombra otra vez, más largo: <u>el Señor Jehová</u>. En Zacarías 9:4 era *el Señor*.
 
 #### *y el Señor Jehová tocará el cuerno*
+> La saeta no va sola. <u>El Señor Jehová tocará</u> el cuerno. En Zacarías 1:18–21 los cuernos dispersaban. Aquí el cuerno se toca. Primera *tocará*. El verbo es futuro.
 
 * *el Señor Jehová* → *tocará* → *el cuerno*
+> Quien tocará es <u>el Señor Jehová</u>. Lo alcanzado es *el cuerno*. Un cuerno, no cuatro.
 
 ### Zacarías 9:14:11 — Irá con torbellinos del sur
 
 #### *e irá con torbellinos del sur*
+> El tocar no cierra. <u>Irá</u> con torbellinos del sur. En Zacarías 7:14 el torbellino *lanzaba* a ellos. Aquí él *va* con torbellinos. En Zacarías 6:6 los manchados salían hacia la tierra del sur. El verbo es futuro.
 
 ### Zacarías 9:15:3 — Jehová los protegerá
 
 * Actores principales: *Jehová de los ejércitos* (1)
+> El actor es <u>Jehová de los ejércitos</u>. El nombre largo vuelve. En Zacarías 9:14 era Jehová, luego el Señor Jehová.
 
 #### *Jehová de los ejércitos los protegerá*
+> Verso nuevo. <u>Jehová de los ejércitos los protegerá</u>. Primera *protegerá*. El *los* es el *ellos* de sobre quienes será visto. El verbo es futuro.
 
 * *Jehová de los ejércitos* → *protegerá* → *los*
+> Quien protegerá es <u>Jehová de los ejércitos</u>. Lo alcanzado es *los*. El torbellino no se nombra en este slot.
 
 ### Zacarías 9:15:5 — Devorarán
 
 #### *y devorarán*
+> El *los* del proteger ahora actúa. <u>Devorarán</u>. Primera vez. Qué devoran, esta línea no lo nombra. El verbo es futuro.
 
 ### Zacarías 9:15:6 — Someterán las piedras de honda
 
 #### *y someterán las piedras de honda*
+> El devorar no va solo. <u>Someterán</u> las piedras de honda. Primera *honda*. En Zacarías 3:9 y Zacarías 4:7 ya hubo piedra. Estas son *de honda*. El verbo es futuro.
 
 ### Zacarías 9:15:9 — Beberán
 
 #### *y beberán*
+> Tras someter, <u>beberán</u>. En Zacarías 7:6 *ustedes* comen y beben. Aquí el verbo es de *ellos*, y es futuro. Qué beben, esta línea no lo nombra.
 
 ### Zacarías 9:15:10 — Estruendo como vino
 
 #### *harán estruendo como vino*
+> El beber se mide. <u>Harán estruendo</u> como vino. Primera *estruendo*. Primera *vino*. El *como* no dice que beben vino: mide el ruido. El verbo es futuro.
 
 ### Zacarías 9:15:13 — Se llenarán como el tazón
 
 #### *y se llenarán como el tazón, como las esquinas del altar*
+> El estruendo no cierra. <u>Se llenarán</u> como el tazón, como las esquinas del altar. En Zacarías 4:2 el tazón estaba sobre el candelabro. Aquí el tazón mide un llenarse. Primera *altar*. Dos *como*. El verbo es futuro.
 
 ### Zacarías 9:16:1 — Los salvará como rebaño
 
 * Actores principales: *el mosto* (1) · *El trigo* (1) · *Jehová su Dios* (1) · *piedras de diadema* (1) · *su bondad* (1) · *su hermosura* (1)
+> El conteo se ensancha. Al frente <u>Jehová su Dios</u>. Primera vez *su Dios* con Jehová. Luego piedras, bondad, hermosura, trigo, mosto. El rebaño no está en el conteo.
 
 #### *Y los salvará Jehová su Dios en aquel día como rebaño de su pueblo*
+> Verso nuevo. <u>Los salvará</u> Jehová su Dios en aquel día como rebaño de su pueblo. En Zacarías 8:7 el *yo* salvaba a mi pueblo. En Zacarías 9:9 *él* era salvo. Aquí Jehová *su Dios* salva *los*, como rebaño. Primera *rebaño*. El verbo es futuro.
 
 * *Jehová su Dios* → *salvará* → *los*
+> Quien salvará es <u>Jehová su Dios</u>. Lo alcanzado es *los*. El *como rebaño de su pueblo* está en el renglón.
 
 - *porque piedras de diadema ondeando sobre su tierra*
+  > El *porque* pone algo sobre la tierra. <u>Piedras de diadema</u> ondeando sobre su tierra. En Zacarías 6:11 las coronas eran de plata y oro. Estas piedras ondean. Primera *diadema*.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *piedras de diadema* → *piedras*
+> Lo que hay: <u>piedras de diadema</u>. La flecha se queda en *piedras*.
 
 * *porque* (כִּ֚י)[^yaan] introduce la razón.
 
 + *piedras*
-  * *ondeando* (מִֽתְנוֹסְס֖וֹת)[^part]
+  * ↳ *ondeando* (מִֽתְנוֹסְס֖וֹת)[^P]
+    > Las piedras no están quietas. <u>Ondeando</u> sobre su tierra.
 
 - *Porque ¡qué su bondad*
+  > Otro *Porque*, ahora pregunta. <u>Qué</u> su bondad. Primera *bondad*. El *su* no se nombra otra vez.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *su bondad* → *bondad* → *qué*
+> Lo que se pregunta es <u>su bondad</u>. El *qué* está en el tercer slot.
 
 * *Porque ¡* (כִּ֥י)[^yaan] introduce la razón.
 
 - *y qué su hermosura*
+  > Y <u>qué</u> su hermosura. Primera *hermosura*. Dos *qué*, dos posesiones.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *su hermosura* → *hermosura* → *qué*
+> Lo que se pregunta ahora: <u>su hermosura</u>. Mismo *qué*.
 
 * Introduce la razón.
 
 - *El trigo a los jóvenes*
+  > <u>El trigo</u> a los jóvenes. Primera *trigo*. Primera *jóvenes*. El hebreo no pone un verbo de dar.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *El trigo* → *trigo* → *a los jóvenes*
+> Lo que hay: <u>el trigo</u>. Lo alcanzado es *a los jóvenes*.
 
 * Introduce la razón.
 
 - *y el mosto hará fructificar a las doncellas*
+  > Y el <u>mosto</u> hará fructificar a las doncellas. Primera *mosto*. Primera *doncellas*. En Zacarías 8:11 la vid daba su fruto. Aquí el mosto hace fructificar. El verbo es futuro.
 
 * *el mosto* → *hará fructificar* → *a las doncellas*
+> Quien hará fructificar: <u>el mosto</u>. Lo alcanzado es *a las doncellas*.
 
 * Introduce la razón.
+
+### En síntesis
+
+Alégrate mucho, hija de Sión; da voces, hija de Jerusalén: justo y salvo es él, pobre, cabalgando sobre un asno.
+
+Cortaré el carro de Efraín y el caballo de Jerusalén; será cortado el arco de guerra; hablará paz a las naciones; su señorío será de mar a mar.
+
+También tú, por la sangre de tu pacto: he soltado a tus presos del pozo sin agua.
+
+Vuélvanse a la fortaleza, presos de la esperanza; el doble te devolveré; Judá tensado, Efraín lleno de arco; despertaré a Sión contra Grecia.
+
+Jehová será visto; su saeta como el relámpago; el Señor Jehová tocará el cuerno e irá con torbellinos del sur; Jehová de los ejércitos los protegerá.
+
+Los salvará como rebaño; piedras de diadema ondeando; qué su bondad, qué su hermosura; el trigo a los jóvenes, el mosto a las doncellas.
 
 ## Zacarías 10:1–12 Judá fortalecido y traído
 
 ### Zacarías 10:1:1 — Pidan lluvia a Jehová
 
 * Actores principales: *Jehová* (1) · *los adivinos* (1) · *los terafines* (1) · *sueños de la vanidad* (1)
+> Cuatro nombres. Al frente <u>Jehová</u>. Luego terafines, adivinos, sueños de la vanidad. El que da la lluvia se cuenta primero.
 
 #### *Pidan de Jehová lluvia en tiempo de lluvia tardía*
+> Tras trigo y mosto, un mandato. <u>Pidan</u> de Jehová lluvia en tiempo de lluvia tardía. Primera *lluvia*. De quién: de Jehová. El tiempo se nombra.
 
 - *Jehová hace relámpagos*
+  > El *pidan* se sostiene. <u>Jehová hace</u> relámpagos. En Zacarías 9:14 la saeta era *como* el relámpago. Aquí Jehová *hace* relámpagos.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *Jehová* → *hace* → *relámpagos*
+> Quien hace: <u>Jehová</u>. Lo alcanzado es *relámpagos*.
 
 * Introduce la razón.
 
 + *Jehová*
-  * *hace* (עֹשֶׂ֣ה)[^part]
+  * ↳ *hace* (עֹשֶׂ֣ה)[^P]
 
 - *y lluvia de aguacero dará a ellos, a un hombre hierba en el campo*
+  > Y <u>dará</u> lluvia de aguacero a ellos, a un hombre hierba en el campo. El dar es futuro. *Un hombre* recibe hierba. En Zacarías 1:8 y Zacarías 6:12 ya hubo *un hombre*.
 
 * Introduce la razón.
 
 - *Porque los terafines hablaron iniquidad*
+  > El *Porque* mira a otras bocas. <u>Los terafines</u> hablaron iniquidad. Primera *terafines*. Primera *iniquidad*. El verbo es pasado.
 
 * *los terafines* → *hablaron* → *iniquidad*
+> Quienes hablaron: <u>los terafines</u>. Lo alcanzado es *iniquidad*.
 
 * *Porque* (כִּ֧י)[^yaan] introduce la razón.
 
 - *y los adivinos vieron mentira*
+  > Y los <u>adivinos</u> vieron mentira. En Zacarías 8:17 no se amaba juramento de mentira. Aquí la mentira se *vio*. Primera *adivinos*.
 
 * *los adivinos* → *vieron* → *mentira*
+> Quienes vieron: <u>los adivinos</u>. Lo alcanzado es *mentira*.
 
 * Introduce la razón.
 
 + *adivinos*
-  * *adivinos* (וְ/הַ/קּֽוֹסְמִים֙)[^part]
+  * ↳ *adivinos* (וְ/הַ/קּֽוֹסְמִים֙)[^P]
 
 - *y sueños de la vanidad hablan*
+  > Y <u>sueños de la vanidad</u> hablan. El tiempo cambia: hablan. Primera *sueños*. Primera *vanidad*.
 
 * *sueños de la vanidad* → *hablan*
+> Quienes hablan: <u>sueños de la vanidad</u>. La flecha se queda en *hablan*.
 
 * Introduce la razón.
 
 - *vanidad consuelan*
+  > <u>Vanidad</u> consuelan. El consuelo no es de Jehová. Primera *consuelan*.
 
 * Introduce la razón.
 
 ### Zacarías 10:2:15 — Partieron como rebaño
 
 #### *por eso partieron como rebaño*
+> El consuelo de vanidad tiene resultado. <u>Por eso partieron</u> como rebaño. En Zacarías 9:16 los salvará *como rebaño*. Aquí el *como rebaño* es de los que *partieron*. El verbo es pasado. A dónde, esta línea no lo pone.
 
 ### Zacarías 10:2:18 — Son afligidos
 
 * Actores principales: *pastor* (1)
+> El conteo no pone a los que partieron. Pone <u>pastor</u>. Y el renglón dice que no lo hay.
 
 #### *son afligidos*
+> El partir no cierra. <u>Son afligidos</u>. Primera *afligidos*. Quiénes, el sujeto no se escribe otra vez. El verbo es presente.
 
 - *porque no hay pastor*
+  > El *porque* da la falta. <u>No hay pastor</u>. Primera *pastor*. El rebaño partió sin él.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *pastor* → *hay*
+> Lo que no hay: <u>pastor</u>. La flecha dice *hay*; el *no* va en el renglón.
 
 * *porque* (כִּֽי)[^yaan] introduce la razón.
 
 + *pastor*
-  * *pastor* (רֹעֶֽה)[^part]
+  * ↳ *pastor* (רֹעֶֽה)[^P]
 
 ### Zacarías 10:3:3 — Ira sobre los pastores
 
 * Actores principales: *mi ira* (1)
+> El actor es <u>mi ira</u>. No el pastor que no hay. La ira se cuenta como cosa que se enciende.
 
 #### *Sobre los pastores se encendió mi ira*
+> No hay pastor, y ahora hay <u>pastores</u>. Sobre ellos se encendió mi ira. En Zacarías 1:2 la ira era contra los padres. En Zacarías 7:12 hubo gran ira. Aquí se *enciende*, y el *mi* es de quien habla. El verbo ya está hecho.
 
 * *mi ira* → *se encendió*
+> Lo que se encendió: <u>mi ira</u>. La flecha se queda en *se encendió*. Sobre los pastores.
 
 + *pastores*
-  * *pastores* (הָֽ/רֹעִים֙)[^part]
+  * ↳ *pastores* (הָֽ/רֹעִים֙)[^P]
 
 ### Zacarías 10:3:7 — Visitaré a los machos cabríos
 
 #### *y sobre los machos cabríos visitaré*
+> La ira ya se encendió. Ahora el *yo* <u>visitaré</u> sobre los machos cabríos. Primera *visitaré*. Primera *machos cabríos*. El verbo es futuro. Qué es ese visitar, esta línea no lo define.
 
 ### Zacarías 10:4:2 — De él la esquina
 
 * Actores principales: *él* (1)
+> El actor es <u>él</u>. El renglón no lo nombra. No es el *yo* que visita.
 
 #### *De él la esquina*
+> Verso nuevo. <u>De él</u> la esquina. Primera *esquina*. En Zacarías 9:15 las esquinas eran del altar. Aquí sale *de él*. El hebreo no pone un verbo de acción. Quién es *él*, esta línea no lo suelta.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *él* → *esquina* → *la esquina*
+> De quién: <u>él</u>. Lo alcanzado es *la esquina*. El verbo del medio es del español.
 
 ### Zacarías 10:4:4 — De él la estaca
 
 * Actores principales: *él* (1)
+> Sigue <u>él</u>. El conteo no cambia de nombre.
 
 #### *de él la estaca*
+> El *de él* se repite. <u>De él</u> la estaca. Primera *estaca*. No la esquina: otra cosa que sale de él.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *él* → *estaca* → *la estaca*
+> De quién: <u>él</u>. Lo alcanzado es *la estaca*. El verbo del medio es del español.
 
 ### Zacarías 10:4:6 — De él el arco de guerra
 
 * Actores principales: *él* (1)
+> Sigue <u>él</u>. Tercera vez el mismo nombre.
 
 #### *de él el arco de guerra*
+> El *de él* otra vez. <u>De él</u> el arco de guerra. En Zacarías 9:10 el arco de guerra *será cortado*. Aquí sale *de él*. El texto no iguala los dos arcos.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *él* → *arco* → *el arco de guerra*
+> De quién: <u>él</u>. Lo alcanzado es *el arco de guerra*. El verbo del medio es del español.
 
 ### Zacarías 10:4:9 — De él saldrá todo opresor
 
 #### *de él saldrá todo opresor juntamente*
+> El *de él* ahora tiene verbo. <u>Saldrá</u> todo opresor juntamente. En Zacarías 9:8 no pasará *más* un opresor. Aquí *todo* opresor sale *de él*. El texto no iguala los dos. El verbo es futuro.
 
 + *opresor*
-  * *opresor* (נוֹגֵ֖שׂ)[^part]
+  * ↳ *opresor* (נוֹגֵ֖שׂ)[^P]
 
 ### Zacarías 10:5:1 — Como valientes en la batalla
 
 #### *Y serán como valientes, pisando en el lodo de las calles en la batalla*
+> Verso nuevo. <u>Serán</u> como valientes, pisando en el lodo de las calles en la batalla. En Zacarías 9:13 *tú* eras como espada de valiente. Aquí *ellos* son como valientes. En Zacarías 9:3 el oro fino era *como lodo de las calles*. Aquí se pisa ese lodo, en la batalla. Primera *batalla*. El verbo es futuro.
 
 + *valientes*
-  * *pisando* (בּוֹסִ֨ים)[^part]
+  * ↳ *pisando* (בּוֹסִ֨ים)[^P]
+    > No solo serán. Están <u>pisando</u> en el lodo. Cuelga de *valientes*.
 
 ### Zacarías 10:5:7 — Pelearán
 
 * Actores principales: *Jehová* (1)
+> El actor del conteo es <u>Jehová</u>. No los valientes. El que está con ellos.
 
 #### *y pelearán*
+> El pisar se mueve. <u>Pelearán</u>. Primera vez. El verbo es futuro.
 
 - *porque Jehová está con ellos*
+  > El *porque* da la compañía. <u>Jehová está</u> con ellos. En Zacarías 8:23 *Dios está* con ustedes. Aquí el nombre es Jehová, y es *con ellos*. El *está* es del español.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *Jehová* → *está* → *con ellos*
+> Quien está: <u>Jehová</u>. Lo alcanzado es *con ellos*.
 
 * *porque* (כִּ֥י)[^yaan] introduce la razón.
 
 ### Zacarías 10:5:11 — Secarán a los que cabalgan
 
 #### *y secarán a los que cabalgan caballos*
+> El pelear se llena. <u>Secarán</u> a los que cabalgan caballos. Primera *secarán*. En Zacarías 9:9 *él* cabalgaba un asno. En Zacarías 9:10 el caballo de Jerusalén se cortaba. Aquí se secan los que cabalgan caballos. El verbo es futuro.
 
 + *cabalgan*
-  * *cabalgan* (רֹכְבֵ֥י)[^part]
+  * ↳ *cabalgan* (רֹכְבֵ֥י)[^P]
 
 ### Zacarías 10:6:1 — Fortaleceré la casa de Judá
 
 #### *Y fortaleceré la casa de Judá*
+> El *yo* vuelve al verbo. <u>Fortaleceré</u> la casa de Judá. Primera *fortaleceré*. En Zacarías 8:15 el bien propuesto iba a Jerusalén y a la casa de Judá. Aquí la casa se fortalece. El verbo es futuro.
 
 ### Zacarías 10:6:8 — Salvaré la casa de José
 
 #### *y la casa de José salvaré*
+> El fortalecer no va solo. <u>Salvaré</u> la casa de José. Primera *José*. En Zacarías 8:7 el *yo* salvaba a mi pueblo. En Zacarías 9:16 Jehová su Dios salvaba *los* como rebaño. Aquí la casa tiene nombre: José. El verbo es futuro.
 
 ### Zacarías 10:6:9 — Los haré volver
 
 * Actores principales: *yo* (1)
+> El actor se cuenta otra vez: <u>yo</u>. El de fortalecer y salvar.
 
 #### *y los haré volver*
+> El salvar se mueve. <u>Los haré volver</u>. En Zacarías 10:2 *partieron* como rebaño. Aquí el *yo* los hace volver. El *los* es las dos casas. El verbo es futuro.
 
 - *porque me apiadé de ellos*
+  > El *porque* mira atrás. <u>Me apiadé</u> de ellos. Primera *apiadé*. En Zacarías 1:16 el volverse era *con compasiones*. Aquí el apiadarse ya está hecho.
 
 * *porque* (כִּ֣י)[^yaan] introduce la razón.
 
 - *y serán*
+  > Y <u>serán</u>. Qué serán, el *como* está debajo.
 
 * Introduce la razón.
 
   - *como que no los deseché*
+    > El *como* mide. <u>No los deseché</u>. Primera *deseché*. Este *como* no es un reloj: se empareja con el *serán*.
 
   * *como que* (כַּ/אֲשֶׁ֣ר)[^kaasher] marca el momento.
 
 - *porque yo soy Jehová su Dios*
+  > Otro *porque*. <u>Yo soy</u> Jehová su Dios. En Zacarías 9:16 Jehová su Dios *salvará*. Aquí el *yo* lo dice: *soy*. El *soy* es del español.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *yo* → *soy* → *Jehová su Dios*
+> Quien es: <u>yo</u>. Lo alcanzado es *Jehová su Dios*.
 
 * *porque* (כִּ֗י)[^yaan] introduce la razón.
 
 - *y les responderé*
+  > Y <u>les responderé</u>. Primera *responderé*. En Zacarías 1:13 se hablaban palabras buenas. Aquí el verbo es futuro, y es *a ellos*.
 
 * Introduce la razón.
 
 ### Zacarías 10:7:1 — Efraín como valiente
 
 #### *Y serán como valiente Efraín*
+> Verso nuevo. <u>Serán</u> como valiente Efraín. En Zacarías 10:5 *ellos* eran como valientes, plural. Aquí el *como* es *valiente*, uno, y el nombre es Efraín. En Zacarías 9:10 el carro de Efraín se cortaba. El verbo es futuro.
 
 ### Zacarías 10:7:4 — Su corazón como vino
 
 * Actores principales: *su corazón* (1)
+> El actor es <u>su corazón</u>. El de Efraín. El conteo pone el adentro.
 
 #### *y se alegrará su corazón como vino*
+> El *serán* se mueve adentro. <u>Se alegrará</u> su corazón como vino. En Zacarías 2:10 se mandó *alégrate*. Aquí el corazón *se alegra*. En Zacarías 9:15 el estruendo era *como vino*. En Zacarías 7:12 el corazón era como diamante. El verbo es futuro.
 
 * *su corazón* → *alegrará*
+> Lo que se alegrará: <u>su corazón</u>. La flecha se queda en *alegrará*. El *como vino* está en el renglón.
 
 ### Zacarías 10:7:9 — Sus hijos verán
 
 * Actores principales: *sus hijos* (1)
+> El actor ya no es el corazón. Son <u>sus hijos</u>. Los de Efraín. En Zacarías 9:13 los hijos eran de Sión y de Grecia.
 
 #### *y sus hijos verán*
+> El alegrarse del corazón no va solo. <u>Sus hijos verán</u>. En Zacarías 9:5 Ascalón *verá* y temerá. Aquí los hijos ven. Qué ven, esta línea no lo nombra. El verbo es futuro.
 
 * *sus hijos* → *verán*
+> Quienes verán: <u>sus hijos</u>. La flecha se queda en *verán*. El objeto no está en este slot.
 
 ### Zacarías 10:7:10 — Se alegrarán
 
 #### *y se alegrarán*
+> El ver no queda quieto. <u>Se alegrarán</u>. En Zacarías 10:7 el corazón de Efraín *se alegrará*. Aquí el verbo es plural: los hijos. El verbo es futuro.
 
 ### Zacarías 10:7:11 — Su corazón en Jehová
 
 * Actores principales: *su corazón* (1)
+> Vuelve <u>su corazón</u>. El de Efraín otra vez.
 
 #### *se gozará su corazón en Jehová*
+> El alegrarse de los hijos no cierra. <u>Se gozará</u> su corazón en Jehová. En el renglón de arriba el corazón se alegraba *como vino*. Aquí el gozo es *en Jehová*. Primera *gozará*. El verbo es futuro.
 
 * *su corazón* → *gozará*
+> Lo que se gozará: <u>su corazón</u>. La flecha se queda en *gozará*. El rumbo es *en Jehová*.
 
 ### Zacarías 10:8:1 — Silbaré a ellos
 
 #### *Silbaré a ellos*
+> El *yo* vuelve. <u>Silbaré</u> a ellos. Primera *silbaré*. En Zacarías 10:6 les *responderé*. Aquí el verbo es otro, y es a ellos. El verbo es futuro. Qué sigue al silbido, esta línea no lo suelta.
 
 ### Zacarías 10:8:3 — Los reuniré
 
 #### *y los reuniré*
+> El silbar se llena. <u>Los reuniré</u>. En Zacarías 10:6 los *haré volver*. Aquí el verbo es *reuniré*. El *los* sigue. El verbo es futuro.
 
 - *porque los redimí*
+  > El *porque* mira atrás. <u>Los redimí</u>. Primera *redimí*. El verbo ya está hecho.
 
 * *porque* (כִּ֣י)[^yaan] introduce la razón.
 
 - *y se multiplicarán*
+  > Y <u>se multiplicarán</u>. Primera vez. El verbo es futuro.
 
 * Introduce la razón.
 
   - *como se multiplicaron*
+    > El *como* mide. <u>Se multiplicaron</u>. El futuro se mide con un pasado. Este *como* no es un reloj.
 
   * Marca el momento.
 
 ### Zacarías 10:9:1 — Los sembraré en los pueblos
 
 #### *Y los sembraré en los pueblos*
+> Verso nuevo. <u>Los sembraré</u> en los pueblos. Primera *sembraré*. En Zacarías 8:11 había *siembra de paz*. En Zacarías 10:8 los *reuniré*. Aquí el *yo* los siembra, y el rumbo es *los pueblos*. El verbo es futuro.
 
 ### Zacarías 10:9:4 — Se acordarán de mí
 
 #### *y en las lejanías se acordarán de mí*
+> El sembrar no los pierde. <u>En las lejanías se acordarán</u> de mí. Primera *lejanías*. Primera *acordarán*. En Zacarías 6:15 los que están lejos *vendrán*. Aquí, lejos, se acuerdan. El *mí* es de quien siembra. El verbo es futuro.
 
 ### Zacarías 10:9:5 — Vivirán con sus hijos
 
 #### *y vivirán con sus hijos*
+> El acordarse no va solo. <u>Vivirán</u> con sus hijos. En Zacarías 10:7 los hijos de Efraín *verán*. Aquí se vive *con* los hijos. En Zacarías 1:5 se preguntó si los profetas vivirán. El verbo es futuro. Dónde, las lejanías siguen cerca.
 
 ### Zacarías 10:9:8 — Volverán
 
 #### *y volverán*
+> Tras vivir en las lejanías, <u>volverán</u>. En Zacarías 10:2 *partieron*. En Zacarías 10:6 el *yo* los *hará volver*. Aquí el verbo es de ellos. A dónde, esta línea no lo pone. El verbo es futuro.
 
 ### Zacarías 10:10:1 — De Egipto los haré volver
 
 #### *Y los haré volver de la tierra de Egipto*
+> El rumbo del volver se nombra. <u>Los haré volver</u> de la tierra de Egipto. En Zacarías 10:6 el *haré volver* no decía de dónde. Primera *Egipto*. El *yo* vuelve al verbo. El verbo es futuro.
 
 ### Zacarías 10:10:5 — De Asiria los reuniré
 
 #### *y de Asiria los reuniré*
+> El volver no va solo. <u>De Asiria los reuniré</u>. En Zacarías 10:8 el reunir no decía de dónde. Primera *Asiria*. Egipto y Asiria: dos tierras, dos verbos. El verbo es futuro.
 
 ### Zacarías 10:10:10 — A Galaad y al Líbano
 
 #### *y a la tierra de Galaad y al Líbano los traeré*
+> El de dónde se vuelve a dónde. <u>Los traeré</u> a la tierra de Galaad y al Líbano. Primera *Galaad*. Primera *Líbano*. En Zacarías 8:8 el *traeré* no ponía rumbo. Aquí hay dos tierras. El verbo es futuro.
 
 ### Zacarías 10:10:12 — No será hallado para ellos
 
 #### *y no será hallado para ellos*
+> El traer no cierra. <u>No será hallado</u> para ellos. Primera *hallado*. Qué no se halla, esta línea no lo nombra. El verbo es futuro. El *ellos* son los traídos.
 
 ### Zacarías 10:11:1 — Pasará en el mar, angustia
 
 #### *Y pasará en el mar, angustia*
+> Verso nuevo. <u>Pasará</u> en el mar, angustia. Primera *angustia*. En Zacarías 9:4 se hería *en el mar*. En Zacarías 9:10 el señorío era de mar a mar. El sujeto no se escribe. El verbo es futuro.
 
 ### Zacarías 10:11:4 — Herirá las olas
 
 #### *y herirá en el mar olas*
+> El pasar se llena. <u>Herirá</u> en el mar olas. En Zacarías 9:4 hería en el mar *su poderío*. Aquí lo herido son *olas*. Primera *olas*. El sujeto sigue sin escribirse. El verbo es futuro.
 
 ### Zacarías 10:11:7 — Se secarán las profundidades del Nilo
 
 #### *y secarán todas las profundidades del Nilo*
+> El herir no va solo. <u>Secarán</u> todas las profundidades del Nilo. En Zacarías 10:5 *ellos* secaban a los que cabalgan. Aquí se secan profundidades. Primera *Nilo*. Primera *profundidades*. En Zacarías 10:10 los hacían volver *de Egipto*. El verbo es futuro.
 
 ### Zacarías 10:11:11 — Abatida la soberbia de Asiria
 
 * Actores principales: *la soberbia de Asiria* (1)
+> El actor es <u>la soberbia de Asiria</u>. En Zacarías 9:6 se cortaba la soberbia de los filisteos. Aquí la soberbia tiene tierra: Asiria.
 
 #### *y será abatida la soberbia de Asiria*
+> El secar el Nilo no cierra. <u>Será abatida</u> la soberbia de Asiria. En Zacarías 10:10 de Asiria los *reuniré*. Aquí la soberbia de esa tierra cae. Primera *abatida*. El verbo es futuro.
 
 * *la soberbia de Asiria* → *será abatida*
+> Lo que será abatido: <u>la soberbia de Asiria</u>. La flecha se queda en *será abatida*. Quién abate, esta línea no lo nombra.
 
 ### Zacarías 10:11:16 — El cetro de Egipto se apartará
 
 * Actores principales: *el cetro de Egipto* (1)
+> El actor ya no es la soberbia. Es <u>el cetro de Egipto</u>. Primera *cetro*.
 
 #### *y el cetro de Egipto se apartará*
+> Asiria cae; Egipto se mueve. <u>El cetro de Egipto se apartará</u>. En Zacarías 10:10 los hacían volver *de Egipto*. Aquí el cetro de esa tierra se aparta. El verbo es futuro.
 
 * *el cetro de Egipto* → *apartará*
+> Lo que se apartará: <u>el cetro de Egipto</u>. La flecha se queda en *apartará*. De quién se aparta, esta línea no lo nombra.
 
 ### Zacarías 10:12:1 — Los fortaleceré en Jehová
 
 #### *Y los fortaleceré en Jehová*
+> Verso nuevo. <u>Los fortaleceré</u> en Jehová. En Zacarías 10:6 fortalecía *la casa de Judá*. Aquí el objeto es *los*, y el rumbo es *en Jehová*. El *yo* vuelve. El verbo es futuro.
 
 ### Zacarías 10:12:4 — En su nombre andarán
 
 #### *y en su nombre andarán, declara Jehová*
+> El fortalecer no cierra. <u>En su nombre andarán</u>, declara Jehová. Primera *andarán*. En Zacarías 10:7 el corazón se gozaba *en Jehová*. Aquí se anda *en su nombre*. Declara Jehová. El verbo es futuro.
+
+### En síntesis
+
+Pidan lluvia a Jehová; terafines, adivinos y sueños de vanidad hablaron; por eso partieron como rebaño y son afligidos, porque no hay pastor.
+
+Sobre los pastores se encendió mi ira; visitaré a los machos cabríos; de él la esquina, la estaca, el arco; saldrá todo opresor; serán valientes y pelearán, porque Jehová está con ellos.
+
+Fortaleceré a Judá, salvaré a José, los haré volver: me apiadé, no los deseché; yo soy Jehová su Dios, y les responderé.
+
+Efraín como valiente; su corazón como vino; sus hijos verán y se alegrarán; se gozará su corazón en Jehová.
+
+Silbaré, los reuniré —los redimí—; los sembraré en los pueblos; en las lejanías se acordarán, vivirán con sus hijos y volverán.
+
+De Egipto y de Asiria; a Galaad y al Líbano; pasará el mar, secará el Nilo; cae la soberbia de Asiria, se aparta el cetro de Egipto; los fortaleceré en Jehová, y en su nombre andarán.
 
 ## Zacarías 11:1–17 El rebaño de la matanza
 
 ### Zacarías 11:1:1 — Abre, Líbano, tus puertas
 
 #### *Abre, Líbano, tus puertas*
+> Tras andar en su nombre, un mandato a una tierra. <u>Abre</u>, Líbano, tus puertas. En Zacarías 10:10 los traían *al Líbano*. Aquí el Líbano debe abrir. En Zacarías 8:16 se juzgaba en *sus puertas*. Estas puertas son del Líbano. Qué entra, esta línea no lo suelta.
 
 ### Zacarías 11:1:4 — Fuego en tus cedros
 
 * Actores principales: *fuego* (1)
+> El actor no es el Líbano. Es <u>fuego</u>. El que entra.
 
 #### *y coma fuego en tus cedros*
+> Ahí está qué entra. <u>Coma</u> fuego en tus cedros. En Zacarías 9:4 *ella* era consumida en el fuego. Aquí el fuego *come*, y el *tus* es del Líbano. Primera *cedros*. El verbo es mandato, como el *Abre*.
 
 * *fuego* → *coma*
+> Quien come: <u>fuego</u>. La flecha se queda en *coma*. En tus cedros.
 
 ### Zacarías 11:2:1 — Aúlla, ciprés
 
 * Actores principales: *el cedro* (1) · *magníficos* (1)
+> Dos actores. <u>El cedro</u> —el de *tus cedros*—. Y *magníficos*. El ciprés recibe el mandato; el conteo mira al que cayó.
 
 #### *Aúlla, ciprés*
+> Otro mandato. <u>Aúlla</u>, ciprés. Primera *aúlla*. Primera *ciprés*. El Líbano abría; el ciprés aúlla.
 
 - *porque cayó el cedro*
+  > El *porque* da lo visto. <u>Cayó</u> el cedro. El fuego comía; ahora el cedro *cayó*. El verbo ya está hecho.
 
 * *el cedro* → *cayó*
+> Quien cayó: <u>el cedro</u>. La flecha se queda en *cayó*.
 
 * *porque* (כִּֽי)[^yaan] introduce la razón.
 
   - *que magníficos fueron devastados*
+    > El *que* describe. <u>Magníficos</u> fueron devastados. Primera *magníficos*. Primera *devastados*. El verbo ya está hecho.
 
   * *magníficos* → *fueron devastados*
+  > Quienes fueron devastados: <u>magníficos</u>.
 
   + *el cedro*
     * *que* (אֲשֶׁ֥ר)[^rel]: describe a *el cedro*.
@@ -4396,242 +4599,307 @@ En aquellos días asirán diez hombres de todas las lenguas la orla de un hombre
 ### Zacarías 11:2:9 — Aúllen, encinas de Basán
 
 * Actores principales: *el bosque fortificado* (1)
+> El actor no son las encinas. Es <u>el bosque fortificado</u>. El que bajó.
 
 #### *Aúllen, encinas de Basán*
+> El aullar se ensancha. <u>Aúllen</u>, encinas de Basán. Plural. Primera *encinas*. Primera *Basán*. El ciprés aullaba solo.
 
 - *porque bajó el bosque fortificado*
+  > El *porque* da lo visto. <u>Bajó</u> el bosque fortificado. El cedro *cayó*; el bosque *bajó*. Primera *bosque*. En Zacarías 9:3 Tiro se edificó *fortaleza*. Aquí el bosque está *fortificado*. El verbo ya está hecho.
 
 * *el bosque fortificado* → *bajó*
+> Quien bajó: <u>el bosque fortificado</u>. La flecha se queda en *bajó*.
 
 * *porque* (כִּ֥י)[^yaan] introduce la razón.
 
 + *bosque*
-  * *fortificado* (ה/בצור)[^part]
+  * ↳ *fortificado* (ה/בצור)[^P]
 
 ### Zacarías 11:3:1 — Voz de aullido de los pastores
 
 * Actores principales: *su manto* (1) · *Voz de aullido de los pastores* (1)
+> Dos actores. <u>Voz de aullido de los pastores</u>. Y *su manto*. El ciprés aullaba; ahora la voz es de pastores.
 
 #### *Voz de aullido de los pastores*
+> El aullar tiene boca humana. <u>Voz de aullido</u> de los pastores. En Zacarías 10:3 la ira se encendió sobre los pastores. Aquí aúllan. El hebreo no pone un verbo de acción.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *Voz de aullido de los pastores* → *Voz*
+> Lo que hay: <u>Voz de aullido de los pastores</u>. La flecha se queda en *Voz*.
 
 + *pastores*
-  * *pastores* (הָ/רֹעִ֔ים)[^part]
+  * ↳ *pastores* (הָ/רֹעִ֔ים)[^P]
 
 - *porque fue devastado su manto*
+  > El *porque* da lo visto. <u>Fue devastado</u> su manto. Primera *manto*. Los magníficos *fueron devastados*. Ahora el manto. El *su* es de los pastores. El verbo ya está hecho.
 
 * *su manto* → *fue devastado*
+> Lo que fue devastado: <u>su manto</u>.
 
 * *porque* (כִּ֥י)[^yaan] introduce la razón.
 
 ### Zacarías 11:3:7 — Rugido de leoncillos
 
 * Actores principales: *la soberbia del Jordán* (1) · *voz de rugido de leoncillos* (1)
+> Dos actores. <u>Voz de rugido de leoncillos</u>. Y *la soberbia del Jordán*. Los pastores aullaban; los leoncillos rugen.
 
 #### *voz de rugido de leoncillos*
+> El aullido era de pastores. Ahora <u>voz de rugido</u> de leoncillos. El Líbano, Basán, el Jordán: el paisaje se estrecha hacia el río. El hebreo otra vez no pone un verbo de acción.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *voz de rugido de leoncillos* → *voz*
+> Lo que hay: <u>voz de rugido de leoncillos</u>. La flecha se queda en *voz*.
 
 - *porque fue devastada la soberbia del Jordán*
+  > El *porque* otra vez da lo visto. <u>Fue devastada</u> la soberbia del Jordán. El manto de los pastores; ahora la soberbia del río. El verbo ya está hecho.
 
 * *la soberbia del Jordán* → *fue devastada*
+> Lo que fue devastada: <u>la soberbia del Jordán</u>. Primera *Jordán*. La soberbia ya fue de filisteos y de Asiria. Ahora es del río.
 
 * *porque* (כִּ֥י)[^yaan] introduce la razón.
 
 ### Zacarías 11:4:2 — Así dice Jehová mi Dios
 
 * Actores principales: *Jehová mi Dios* (1)
+> Un actor. <u>Jehová mi Dios</u>. Primera vez que el libro lo nombra así. Tras el aullido y el rugido, esta boca se abre.
 
 #### *Así dice Jehová mi Dios*
+> No es Jehová de los ejércitos. No es el nombre corto de Zacarías 8:3. <u>Así dice</u> Jehová *mi* Dios. El *mi* es nuevo. Tras Líbano, Basán y el Jordán, la fórmula entra con posesión.
 
 * *Jehová mi Dios* → *dice*
+> Quien dice: <u>Jehová mi Dios</u>. El verbo es *dice*. Qué manda, no está en esta línea.
 
 ### Zacarías 11:4:5 — Apacienta el rebaño de la matanza
 
 * Actores principales: *Cuyos compradores* (1) · *sus vendedores* (1)
+> Dos actores. <u>Cuyos compradores</u>. Y *sus vendedores*. El mandato *Apacienta* no nombra a quién. El rebaño sí: de la matanza.
 
 #### *Apacienta el rebaño de la matanza*
+> Lo que Jehová mi Dios dice: <u>Apacienta</u> el rebaño de la matanza. En Zacarías 9:16 los salvará *como rebaño*. En Zacarías 10:2 partieron *como rebaño*. Aquí el rebaño es de la matanza. Primera *matanza*. Primera *apacienta*. A quién se lo dice, esta línea no lo nombra.
 
 - *Cuyos compradores las matarán*
+  > El *Cuyos* describe el rebaño. <u>Las matarán</u> sus compradores. Primera *compradores*. El *las* es el rebaño. El verbo es futuro. Compran y matan.
 
 * *Cuyos compradores* → *matarán* → *las*
+> Quienes matarán: <u>Cuyos compradores</u>. Lo alcanzado: *las*.
 
 + *el rebaño de la matanza*
   * *Cuyos* (אֲשֶׁ֨ר)[^rel]: describe a *el rebaño de la matanza*.
 
 + *compradores*
-  * *compradores* (קֹנֵי/הֶ֤ן)[^part]
+  * ↳ *compradores* (קֹנֵי/הֶ֤ן)[^P]
 
 - *y no serán culpables*
+  > Tras matar, <u>no serán culpables</u>. El texto no abre juicio aquí. El *no* es de ellos.
 
 + *el rebaño de la matanza*
   * Describe a *el rebaño de la matanza*.
 
 - *y sus vendedores dirá*
+  > El otro lado del trato. <u>Dirá</u> sus vendedores. Primera *vendedores*. El verbo es singular; los vendedores son plural. Qué dirá, esta línea no lo pone.
 
 * *sus vendedores* → *dirá*
+> Quien dirá: <u>sus vendedores</u>. El verbo no concuerda en número. El texto lo deja así.
 
 + *el rebaño de la matanza*
   * Describe a *el rebaño de la matanza*.
 
 + *vendedores*
-  * *vendedores* (וּ/מֹכְרֵי/הֶ֣ן)[^part]
+  * ↳ *vendedores* (וּ/מֹכְרֵי/הֶ֣ן)[^P]
 
 ### Zacarías 11:5:9 — Bendito Jehová
 
 * Actores principales: *Jehová* (1)
+> Un actor. <u>Jehová</u>. No *Jehová mi Dios*. El nombre corto. Quien lo bendice, el *dirá* de los vendedores ya lo puso.
 
 #### *Bendito Jehová*
+> Eso es lo que dirá. <u>Bendito</u> Jehová. Primera *Bendito*. Los compradores matan y no son culpables; los vendedores bendicen. El hebreo no pone un verbo de acción.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *Jehová* → *Bendito*
+> Quien es bendito: <u>Jehová</u>. No hay verbo finito. El español pone *es*.
 
 + *Bendito*
-  * *Bendito* (בָּר֥וּךְ)[^part]
+  * ↳ *Bendito* (בָּר֥וּךְ)[^P]
 
 ### Zacarías 11:5:10 — Me enriqueceré
 
 * Actores principales: *sus pastores* (1)
+> Un actor. <u>Sus pastores</u>. El *me* del enriquecer no entra en el conteo. Los pastores aullaban; ahora se nombran sobre *ellas*.
 
 #### *y me enriqueceré*
+> El *Bendito* no cierra la boca. <u>Me enriqueceré</u>. Primera *enriqueceré*. El *me* es el que bendice. Bendice y se enriquece.
 
 - *y sus pastores no se apiadará sobre ellas*
+  > Tras el enriquecer, <u>no se apiadará</u> sus pastores sobre ellas. En Zacarías 10:6 el *yo* ya se apiadó. Aquí los pastores *no*. El verbo es singular; los pastores son plural. El *ellas* es el rebaño.
 
 + *el rebaño de la matanza*
   * Describe a *el rebaño de la matanza*.
 
 + *pastores*
-  * *pastores* (וְ/רֹ֣עֵי/הֶ֔ם)[^part]
+  * ↳ *pastores* (וְ/רֹ֣עֵי/הֶ֔ם)[^P]
 
 ### Zacarías 11:6:3 — No me apiadaré más
 
 #### *Porque no me apiadaré más de los habitantes de la tierra, declara Jehová*
+> El *Porque* ya no es de los vendedores. <u>No me apiadaré más</u> de los habitantes de la tierra, declara Jehová. En Zacarías 10:6 el *yo* ya se apiadó. Los pastores *no se apiadará* sobre el rebaño. Ahora el *no* es de él, y el objeto no es *ellas*: es los habitantes de la tierra. El *más* mira atrás del apiadarse que ya hubo. El nombre es corto: *declara Jehová*.
 
 + *habitantes*
-  * *habitantes* (יֹשְׁבֵ֥י)[^part]
+  * ↳ *habitantes* (יֹשְׁבֵ֥י)[^P]
 
 ### Zacarías 11:6:11 — Hago hallar al hombre
 
 * Actores principales: *yo* (1)
+> Un actor. <u>Yo</u>. El que no se apiadará más. Ahora hace hallar.
 
 #### *y he aquí yo hago hallar al hombre, un hombre en mano de su prójimo y en mano de su rey*
+> Tras el *más*, <u>he aquí</u> yo hago hallar al hombre, un hombre en mano de su prójimo y en mano de su rey. En Zacarías 8:7 el *he aquí yo* salvaba a mi pueblo. Aquí hace hallar. El hombre se dice dos veces. En Zacarías 8:10 el *yo* soltó a cada uno *contra* su prójimo. Aquí está *en mano* — del prójimo y del rey. Primera *rey* de este tramo. El hebreo no pone un verbo finito.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *yo* → *hago hallar* → *al hombre, un hombre en mano de su prójimo y en mano de su rey*
+> Quien hace hallar: <u>yo</u>. Lo alcanzado: *al hombre, un hombre* en mano de su prójimo y de su rey.
 
 + *yo*
-  * *hallar* (מַמְצִ֣יא)[^part]
+  * ↳ *hallar* (מַמְצִ֣יא)[^P]
+    > El *hallar* cuelga del *yo*. <u>Hago hallar</u>: no es un hallar ya hecho.
 
 ### Zacarías 11:6:20 — Aplastarán la tierra
 
 #### *y aplastarán la tierra*
+> El hallar no cierra. <u>Aplastarán</u> la tierra. Primera *aplastarán*. Quiénes, esta línea no los nombra. El verbo es plural: el hombre estaba en dos manos. En Zacarías 7:14 la tierra fue asolada. En Zacarías 8:12 dará su producto. Aquí la aplastan.
 
 ### Zacarías 11:6:24 — No libraré de su mano
 
 #### *y no libraré de su mano*
+> El aplastar no cierra. <u>No libraré</u> de su mano. Primera *libraré*. En Zacarías 8:7 el *yo* salvaba a mi pueblo. En Zacarías 10:6 salvará la casa de José. Aquí el *yo* *no* libra. El hombre estaba en dos manos; ahora es *su mano*, una. De quién es, esta línea no lo escribe.
 
 ### Zacarías 11:7:1 — Apacenté el rebaño de la matanza
 
 #### *Y apacenté el rebaño de la matanza, por tanto los pobres del rebaño*
+> El *no libraré* no cierra el tramo. <u>Apacenté</u> el rebaño de la matanza, por tanto los pobres del rebaño. En Zacarías 11:4 el mandato era *Apacienta*. Aquí el verbo ya está hecho, en *yo*. Quién es ese *yo*, esta línea no lo nombra. Primera *pobres*. El *por tanto* los pone junto al rebaño de la matanza. Qué se hace con ellos, no está en esta línea.
 
 ### Zacarías 11:7:8 — Tomé dos cayados
 
 #### *Y tomé para mí dos cayados*
+> El apacentar no se queda en el rebaño. <u>Tomé</u> para mí dos cayados. Primera *cayados*. En Zacarías 8:4 un hombre tenía *su bastón* en su mano. Aquí son dos, y el *yo* los toma *para mí*. Cómo se llaman, esta línea no lo pone.
 
 ### Zacarías 11:7:13 — Agrado
 
 #### *al uno llamé Agrado*
+> Los dos cayados no quedan sin nombre. <u>Llamé</u> al uno Agrado. Primera *Agrado*. Primera *llamé*. El *uno* es de los dos. Cuál, esta línea no lo distingue.
 
 ### Zacarías 11:7:16 — Cuerdas
 
 #### *y al uno llamé Cuerdas*
+> El *llamé* se repite. <u>Llamé</u> al uno Cuerdas. Primera *Cuerdas*. No dice *al otro*: otra vez *al uno*. Agrado y Cuerdas. Los dos cayados ya tienen nombre.
 
 ### Zacarías 11:7:18 — Apacenté el rebaño
 
 #### *y apacenté el rebaño*
+> Tras los nombres, el verbo vuelve. <u>Apacenté</u> el rebaño. En Zacarías 11:7 era el rebaño *de la matanza*, y *por tanto los pobres*. Aquí es *el rebaño*, sin esos dos. El *yo* otra vez ya lo hizo.
 
 ### Zacarías 11:8:1 — Desaparecieron tres pastores
 
 #### *Y hice desaparecer a los tres pastores en un mes*
+> El apacentar no cierra. <u>Hice desaparecer</u> a los tres pastores en un mes. Primera *hice desaparecer*. Primera *tres* de pastores. En Zacarías 10:2 no hay pastor. En Zacarías 10:3 la ira se encendió sobre los pastores. En Zacarías 11:3 aullaban. Aquí el *yo* los hace desaparecer, y son *los* tres. En un mes. Quiénes son por nombre, esta línea no lo pone.
 
 + *pastores*
-  * *pastores* (הָ/רֹעִ֖ים)[^part]
+  * ↳ *pastores* (הָ/רֹעִ֖ים)[^P]
 
 ### Zacarías 11:8:7 — Se acortó mi alma
 
 * Actores principales: *mi alma* (1)
+> El actor ya no es el *yo* que hizo desaparecer. Es <u>mi alma</u>. Primera *alma*. El *mi* es del que apacentó.
 
 #### *y se acortó mi alma en ellos*
+> Tras el mes, <u>se acortó</u> mi alma en ellos. Primera *se acortó*. El *ellos* no se vuelve a nombrar. El verbo ya está hecho. El acortar es del alma, no de la mano.
 
 * *mi alma* → *se acortó*
+> Quien se acortó: <u>mi alma</u>. La flecha se queda ahí. El *en ellos* está en el renglón.
 
 ### Zacarías 11:8:12 — El alma de ellos aborreció
 
 * Actores principales: *el alma de ellos* (1)
+> El actor ya no es *mi alma*. Es <u>el alma de ellos</u>. El *ellos* del *en ellos* ahora tiene alma.
 
 #### *y también el alma de ellos aborreció en mí*
+> El *también* los pone juntos. <u>Aborreció</u> el alma de ellos en mí. En Zacarías 8:17 él *aborreció* todas estas. Aquí el aborrecer es de *ellos*, y el rumbo es *en mí*. Mi alma se acortó *en ellos*; la de ellos aborreció *en mí*. El verbo ya está hecho.
 
 * *el alma de ellos* → *aborreció*
+> Quien aborreció: <u>el alma de ellos</u>. La flecha se queda ahí. El *en mí* está en el renglón.
 
 ### Zacarías 11:9:1 — El profeta habla
 
 #### *Y dije*
+> Tras las dos almas, <u>dije</u>. El *yo* que apacentó y hizo desaparecer abre la boca. No pregunta *qué son*. Qué dijo, esta línea no lo pone.
 
 ### Zacarías 11:9:3 — No apacentaré a ustedes
 
 #### *No apacentaré a ustedes*
+> Eso es lo que dijo. <u>No apacentaré</u> a ustedes. En Zacarías 11:4 el mandato era *Apacienta*. En Zacarías 11:7 *apacenté*, dos veces. Aquí el mismo verbo va al futuro, con *No*. Primera *ustedes* de este rebaño. Quiénes son, esta línea no los nombra.
 
 ### Zacarías 11:9:6 — La que muere morirá
 
 * Actores principales: *la que muere* (1)
+> El actor ya no es *ustedes*. Es <u>la que muere</u>. Femenino, una. Primera *muere*.
 
 #### *la que muere morirá*
+> El *No apacentaré* se llena. <u>Morirá</u> la que muere. El nombre ya es la muerte; el verbo la cumple. El *yo* no mata en esta línea. El verbo es futuro.
 
 * *la que muere* → *morirá*
+> Quien morirá: <u>la que muere</u>. La flecha se queda en *morirá*.
 
 + *muere*
-  * *muere* (הַ/מֵּתָ֣ה)[^part]
+  * ↳ *muere* (הַ/מֵּתָ֣ה)[^P]
+    > Quien actúa ya se nombra por lo que hace: <u>muere</u>. El morir del verbo finito no es otro sujeto.
 
 ### Zacarías 11:9:8 — La que desaparece desaparecerá
 
 * Actores principales: *la que desaparece* (1)
+> El actor cambia de nombre. Ya no es *la que muere*. Es <u>la que desaparece</u>. Otra vez femenino, una.
 
 #### *y la que desaparece desaparecerá*
+> El *No apacentaré* sigue. <u>Desaparecerá</u> la que desaparece. En Zacarías 11:8 el *yo* *hice desaparecer* a los tres pastores. Aquí el *yo* no está en el verbo. Ella desaparece, y desaparecerá. El verbo es futuro.
 
 * *la que desaparece* → *desaparecerá*
+> Quien desaparecerá: <u>la que desaparece</u>. La flecha se queda en *desaparecerá*.
 
 + *desaparece*
-  * *desaparece* (וְ/הַ/נִּכְחֶ֨דֶת֙)[^part]
+  * ↳ *desaparece* (וְ/הַ/נִּכְחֶ֨דֶת֙)[^P]
 
 ### Zacarías 11:9:10 — Comerán la carne de su compañera
 
 * Actores principales: *las que quedan* (1)
+> El actor ya no es una. Son <u>las que quedan</u>. Plural. Tras la que muere y la que desaparece, estas quedan. Primera *quedan*.
 
 #### *y las que quedan comerán cada una la carne de su compañera*
+> El *No apacentaré* no se queda en morir y desaparecer. <u>Comerán</u> cada una la carne de su compañera. Primera *comerán* de carne. Primera *compañera*. En Zacarías 8:16 el *cada uno* hablaba verdad con su prójimo. Aquí *cada una* come la carne de la suya. El *yo* no come. El verbo es futuro.
 
 * *las que quedan* → *comerán* → *la carne de su compañera*
+> Quienes comerán: <u>las que quedan</u>. Lo alcanzado: *la carne de su compañera*.
 
 + *quedan*
-  * *quedan* (וְ/הַ֨/נִּשְׁאָר֔וֹת)[^part]
+  * ↳ *quedan* (וְ/הַ֨/נִּשְׁאָר֔וֹת)[^P]
+    > Quienes actúan se nombran por lo que son: <u>quedan</u>. No *remanente* de Zacarías 8:6. Estas quedan.
 
 ### Zacarías 11:10:1 — Tomé Agrado
 
 #### *Y tomé mi cayado, Agrado*
+> El *dije* no cierra el tramo. <u>Tomé</u> mi cayado, Agrado. En Zacarías 11:7 tomó *dos* cayados *para mí*. Aquí es *mi* cayado, uno, y el nombre va pegado: Agrado. Cuerdas no se nombra. El verbo otra vez ya está hecho.
 
 ### Zacarías 11:10:6 — Lo corté
 
 #### *y lo corté, para romper mi pacto*
+> El tomar no se queda en la mano. <u>Lo corté</u>, para romper mi pacto. El *lo* es Agrado. Primera *romper*. En Zacarías 9:11 el pacto era *tu pacto*, y por su sangre soltó presos. Aquí es *mi pacto*, y el corte es para romperlo. El *para* nombra el fin; el romper no se cuenta hecho en esta línea.
 
-* Infinitivo[^inf] *romper* (לְ/הָפֵיר֙): completa a *corté* (וָ/אֶגְדַּ֖ע).
+* ↳ *romper* (לְ/הָפֵיר֙)[^I]
 
 - *que corté con todos los pueblos*
+  > El *que* describe el pacto. <u>Corté</u> con todos los pueblos. Mismo *corté*. El cayado, y el pacto. Primera *pueblos* de este pacto. En Zacarías 8:20 vendrán pueblos. Aquí el pacto ya se cortó con todos ellos.
 
 + *mi pacto*
   * *que* (אֲשֶׁ֥ר)[^rel]: describe a *mi pacto*.
@@ -4639,66 +4907,83 @@ En aquellos días asirán diez hombres de todas las lenguas la orla de un hombre
 ### Zacarías 11:11:1 — Fue rota en aquel día
 
 #### *Y fue rota en aquel día*
+> El *para romper* no queda colgado. <u>Fue rota</u> en aquel día. El verbo es femenino: no es el cayado del *lo corté*. El pacto. *Aquel día* no se fecha. En Zacarías 3:10 *aquel día* era llamar al prójimo. Aquí es la rotura.
 
 ### Zacarías 11:11:4 — Conocieron los pobres del rebaño
 
 * Actores principales: *él* (1) · *los pobres del rebaño* (1)
+> Dos actores. <u>Los pobres del rebaño</u>. Y *él*. En Zacarías 11:7 los pobres se nombraron junto al rebaño de la matanza. Ahora conocen. El *él* entra más abajo.
 
 #### *y conocieron así los pobres del rebaño, los que me guardan*
+> Tras la rotura, <u>conocieron</u> así los pobres del rebaño, los que me guardan. Primera *conocieron*. Primera *guardan*. El *así* no se explica. En Zacarías 4:9 *sabrás que* Jehová me envió. Aquí no es envío: conocieron. Qué conocieron, está debajo.
 
 * *los pobres del rebaño* → *conocieron*
+> Quienes conocieron: <u>los pobres del rebaño</u>. La flecha se queda en *conocieron*. El *así* y los que me guardan están en el renglón.
 
 + *los pobres del rebaño*
-  * *guardan* (הַ/שֹּׁמְרִ֣ים)[^part]
+  * ↳ *guardan* (הַ/שֹּׁמְרִ֣ים)[^P]
+    > Quienes conocen se nombran otra vez: <u>me guardan</u>. El *me* es del que cortó.
 
 - *que palabra de Jehová es él*
+  > El *que* da lo conocido. <u>Palabra de Jehová</u> es él. No *me envió*. El *él* no se nombra. El hebreo no pone un verbo finito.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *él* → *es* → *palabra de Jehová*
+> Quien es: <u>él</u>. Lo alcanzado: *palabra de Jehová*. El *es* es del español.
 
 * *que* (כִּ֥י)[^ki] introduce el contenido.
 
 ### Zacarías 11:12:1 — Dije a ellos
 
 #### *Y dije a ellos*
+> Tras el conocer, <u>dije</u> a ellos. En Zacarías 11:9 era *Y dije*, sin destinario. Aquí hay *a ellos*. Quiénes son, esta línea no los nombra. Qué dijo, no está en esta línea.
 
 ### Zacarías 11:12:6 — Den mi salario
 
 - *Si es bueno en los ojos de ustedes… ⤵*
+  > Eso es lo que dijo a ellos. El *Si* no afirma que lo sea. <u>Es bueno</u> en los ojos de ustedes. En Zacarías 8:6 el *Si* era maravilloso a los ojos del remanente. Aquí es *bueno*, y los ojos son *de ustedes*. El *ustedes* de Zacarías 11:9 vuelve. El hebreo no pone un verbo finito.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *Si* (אִם)[^im] introduce una condición.
 
 #### *den mi salario*
+> Si es bueno, <u>den</u> mi salario. Primera *salario*. En Zacarías 8:10 no hubo *paga*. Aquí hay salario, y es *mío*. El mandato es de ellos hacia él.
 
 ### Zacarías 11:12:10 — Si no, cesen
 
 #### *y si no, cesen*
+> El *Si* tiene otra puerta. <u>Cesen</u>. Primera *cesen*. Si no es bueno en sus ojos, no den: cesen. El *yo* no cobra a la fuerza. Qué cesan, el verbo no añade objeto.
 
 * *y si* (וְ/אִם)[^conn] une esta cláusula con la anterior.
 
 ### Zacarías 11:12:11 — Treinta de plata
 
 #### *Y pesaron mi salario: treinta de plata*
+> No cesaron. <u>Pesaron</u> mi salario: treinta de plata. Primera *pesaron*. Primera *treinta*. En Zacarías 6:11 la plata era para coronas. En Zacarías 9:3 Tiro la amontonó como polvo. Aquí es salario, y tiene número. El *Si* de sus ojos ya eligió: dieron.
 
 ### Zacarías 11:13:1 — Jehová me dijo
 
 * Actores principales: *Jehová* (1)
+> Un actor. <u>Jehová</u>. El nombre corto. Tras los treinta, esta boca se abre hacia *mí*.
 
 #### *Y dijo Jehová a mí*
+> No es *Así dice Jehová mi Dios* de Zacarías 11:4. <u>Dijo</u> Jehová a mí. En Zacarías 8:1 la palabra vino *a mí*. Aquí *dijo*, y el destinario es *a mí*. Qué mandó, no está en esta línea.
 
 * *Jehová* → *dijo*
+> Quien dijo: <u>Jehová</u>. La flecha se queda en *dijo*. El *a mí* está en el renglón.
 
 ### Zacarías 11:13:4 — Arrójalo al alfarero
 
 #### *Arrójalo al alfarero, esplendor del precio*
+> Eso es lo que dijo. <u>Arrójalo</u> al alfarero, esplendor del precio. Primera *arrójalo*. Primera *alfarero*. El *lo* es el salario. No *den*: arroja. El precio se llama *esplendor*. El alfarero no se había nombrado.
 
 + *alfarero*
-  * *alfarero* (הַ/יּוֹצֵ֔ר)[^part]
+  * ↳ *alfarero* (הַ/יּוֹצֵ֔ר)[^P]
 
 - *que fui estimado de sobre ellos*
+  > El *que* describe el esplendor. <u>Fui estimado</u> de sobre ellos. Primera *estimado*. El *yo* es el estimado. El *ellos* del salario. El verbo ya está hecho.
 
 + *esplendor del precio*
   * *que* (אֲשֶׁ֥ר)[^rel]: describe a *esplendor del precio*.
@@ -4706,129 +4991,175 @@ En aquellos días asirán diez hombres de todas las lenguas la orla de un hombre
 ### Zacarías 11:13:12 — Tomé la plata
 
 #### *Y tomé treinta la plata*
+> El mandato no se cumple en el oír. <u>Tomé</u> treinta la plata. En Zacarías 11:7 y Zacarías 11:10 el *tomé* era de cayados. Aquí es de la plata. El número del salario vuelve: treinta.
 
 ### Zacarías 11:13:15 — Lo arrojé al alfarero
 
 #### *y lo arrojé casa de Jehová, al alfarero*
+> El tomar no se queda en la mano. <u>Lo arrojé</u> casa de Jehová, al alfarero. El mandato era *Arrójalo al alfarero*. Aquí se cumple, y se añade un lugar: casa de Jehová. En Zacarías 8:9 la casa se cimentaba. Aquí se arroja el salario. El *lo* es la plata.
 
 + *alfarero*
-  * *alfarero* (הַ/יּוֹצֵֽר)[^part]
+  * ↳ *alfarero* (הַ/יּוֹצֵֽר)[^P]
 
 ### Zacarías 11:14:1 — Corté las Cuerdas
 
 #### *Y corté mi cayado, el segundo, las Cuerdas, para romper la hermandad entre Judá y entre Israel*
+> Tras la plata, el otro cayado. <u>Corté</u> mi cayado, el segundo, las Cuerdas, para romper la hermandad entre Judá y entre Israel. En Zacarías 11:10 cortó Agrado *para romper mi pacto*. Aquí es el segundo, y el fin no es el pacto: es *la hermandad*. Primera *hermandad*. Primera *el segundo*. En Zacarías 8:13 las dos casas eran Judá e Israel. El *entre* se dice dos veces. El *para* nombra el fin; el romper no se cuenta hecho en esta línea.
 
-* Infinitivo[^inf] *romper* (לְ/הָפֵר֙): completa a *corté* (וָֽ/אֶגְדַּע֙).
+* ↳ *romper* (לְ/הָפֵר֙)[^I]
 
 ### Zacarías 11:15:1 — Jehová me dijo
 
 * Actores principales: *Jehová* (1)
+> Un actor. <u>Jehová</u>. Tras el segundo corte, la boca se abre otra vez hacia *mí*.
 
 #### *Y dijo Jehová a mí*
+> Misma fórmula de Zacarías 11:13. <u>Dijo</u> Jehová a mí. Allí era tras los treinta. Aquí es tras las Cuerdas. Qué mandó ahora, no está en esta línea.
 
 * *Jehová* → *dijo*
+> Quien dijo: <u>Jehová</u>. La flecha se queda en *dijo*. El *a mí* está en el renglón.
 
 ### Zacarías 11:15:5 — Instrumento de pastor necio
 
 * Actores principales: *yo* (1)
+> Un actor. <u>Yo</u>. El que dijo a mí. Ahora levanta. El *toma* no entra en el conteo.
 
 #### *Aún toma para ti instrumento de pastor necio*
+> Eso es lo que dijo ahora. <u>Aún</u> toma para ti instrumento de pastor necio. En Zacarías 8:4 el *Aún* era sentarse en las plazas. Aquí es tomar. Primera *instrumento*. Primera *necio*. En Zacarías 11:7 tomó cayados *para mí*. Aquí el mandato es *para ti*, y no es cayado: es instrumento de pastor necio. El *tú* no se nombra.
 
 + *pastor*
-  * *pastor* (רֹעֶ֥ה)[^part]
+  * ↳ *pastor* (רֹעֶ֥ה)[^P]
 
 - *Porque he aquí yo levanto un pastor en la tierra*
+  > El *Porque* da el porqué del tomar. <u>He aquí</u> yo levanto un pastor en la tierra. En Zacarías 8:7 el *he aquí yo* salvaba a mi pueblo. En Zacarías 11:6 hacía hallar al hombre. Aquí levanta *un* pastor. En Zacarías 10:2 no hay pastor. En Zacarías 11:8 hizo desaparecer a *los tres*. Este es uno, y es *en la tierra*. El hebreo no pone un verbo finito.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *yo* → *levanto* → *un pastor en la tierra*
+> Quien levanta: <u>yo</u>. Lo alcanzado: *un pastor en la tierra*.
 
 * *Porque* (כִּ֣י)[^yaan] introduce la razón.
 
 + *yo*
-  * *levanto* (מֵקִ֨ים)[^part]
+  * ↳ *levanto* (מֵקִ֨ים)[^P]
+    > El *levanto* cuelga del *yo*. <u>Levanto</u>: no es un levantar ya hecho.
 
 + *pastor*
-  * *pastor* (רֹעֶ֜ה)[^part]
+  * ↳ *pastor* (רֹעֶ֜ה)[^P]
 
 - *las desaparecidas no visitará*
+  > El *Porque* se llena con lo que ese pastor *no* hará. <u>No visitará</u> las desaparecidas. En Zacarías 11:9 la que desaparece desaparecerá. Aquí son *desaparecidas*, plural, y nadie las visita. Primera *visitará*.
 
 * Introduce la razón.
 
 + *desaparecidas*
-  * *desaparecidas* (הַ/נִּכְחָד֤וֹת)[^part]
+  * ↳ *desaparecidas* (הַ/נִּכְחָד֤וֹת)[^P]
 
 - *el muchacho no buscará*
+  > Tampoco <u>buscará</u> el muchacho. Primera *muchacho*. Primera *buscará*. El *no* sigue.
 
 * Introduce la razón.
 
 - *y la quebrada no sanará*
+  > Tampoco <u>sanará</u> la quebrada. Primera *quebrada*. Primera *sanará*. Tercer *no*.
 
 * Introduce la razón.
 
 + *quebrada*
-  * *quebrada* (וְ/הַ/נִּשְׁבֶּ֖רֶת)[^part]
+  * ↳ *quebrada* (וְ/הַ/נִּשְׁבֶּ֖רֶת)[^P]
 
 - *la que está en pie no sustentará*
+  > Tampoco <u>sustentará</u> a la que está en pie. Primera *sustentará*. El tramo ha tenido gente de pie. Esta está en pie, y no la sostiene. Cuatro *no*.
 
 * Introduce la razón.
 
 + *la que está en pie*
-  * *está* (הַ/נִּצָּבָה֙)[^part]
+  * ↳ *está* (הַ/נִּצָּבָה֙)[^P]
 
 - *y la carne de la gorda comerá*
+  > Tras los *no*, el verbo cambia de signo. <u>Comerá</u> la carne de la gorda. En Zacarías 11:9 las que quedan comían la carne de su compañera. Aquí come el pastor. Primera *gorda*.
 
 * Introduce la razón.
 
 - *y las pezuñas de ellas despedazará*
+  > El comer no cierra. <u>Despedazará</u> las pezuñas de ellas. Primera *pezuñas*. Primera *despedazará*. El *ellas* es el rebaño.
 
 * Introduce la razón.
 
 ### Zacarías 11:17:3 — Ay, pastor de la nada
 
 * Actores principales: *pastor de la nada, dejador del rebaño* (1)
+> Un actor. <u>Pastor de la nada, dejador del rebaño</u>. El que levantó un pastor ahora oye un *Ay*. El conteo no dice *necio*: dice *de la nada*, y *dejador*.
 
 #### *Ay, pastor de la nada, dejador del rebaño*
+> En Zacarías 2:6 el *Ay* era doble, y mandaba huir. Aquí es uno. <u>Ay</u>, pastor de la nada, dejador del rebaño. Primera *nada* de un pastor. Primera *dejador*. El que no visita, no busca, no sana, no sustenta, come y despedaza: ahora se nombra por lo que deja. El hebreo no pone un verbo de acción.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *pastor de la nada, dejador del rebaño* → *nada*
+> Lo que hay: <u>pastor de la nada, dejador del rebaño</u>. La flecha se queda en *nada*.
 
 + *pastor*
-  * *pastor* (רֹעִ֤י)[^part]
+  * ↳ *pastor* (רֹעִ֤י)[^P]
 
 + *dejador*
-  * *dejador* (עֹזְבִ֣י)[^part]
+  * ↳ *dejador* (עֹזְבִ֣י)[^P]
+    > El segundo nombre es lo que hace: <u>dejador</u> del rebaño. No *apacenté*. Deja.
 
 ### Zacarías 11:17:6 — Espada sobre su brazo
 
 * Actores principales: *Espada* (1)
+> El actor ya no es el pastor. Es <u>Espada</u>. Primera *Espada* al frente. En Zacarías 9:13 el *tú* era *como* espada. Aquí la espada es el actor.
 
 #### *Espada sobre su brazo y sobre el ojo de su derecha*
+> Tras el *Ay*, <u>Espada</u> sobre su brazo y sobre el ojo de su derecha. Primera *brazo*. Primera *ojo de su derecha*. El *su* es del dejador. Dos lugares, un arma. El hebreo no pone un verbo de acción.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *Espada* → *Espada* → *sobre su brazo y sobre el ojo de su derecha*
+> Lo que hay: <u>Espada</u>. Lo alcanzado: *sobre su brazo y sobre el ojo de su derecha*. El segundo slot repite *Espada*.
 
 ### Zacarías 11:17:14 — Su brazo se secará
 
 * Actores principales: *su brazo* (1)
+> El actor ya no es la Espada. Es <u>su brazo</u>. El *sobre* se mueve: ahora el brazo mismo actúa, secándose.
 
 #### *su brazo secándose se secará*
+> La espada estaba *sobre* su brazo. Ahora <u>se secará</u>. Primera *se secará*. El verbo se dice dos veces: *secándose se secará*. El *su* sigue siendo del dejador.
 
 * *su brazo* → *se secará*
+> Quien se secará: <u>su brazo</u>. La flecha se queda en *se secará*.
 
-* Infinitivo[^inf] *secándose* (יָב֣וֹשׁ): completa a *secará* (תִּיבָ֔שׁ).
+* ↳ *secándose* (יָב֣וֹשׁ)[^I]
+  > El secar no va solo. <u>Secándose</u> se secará. El infinitivo carga el verbo.
 
 ### Zacarías 11:17:18 — Su ojo se oscurecerá
 
 * Actores principales: *el ojo de su derecha* (1)
+> El actor ya no es el brazo. Es <u>el ojo de su derecha</u>. El segundo lugar de la Espada ahora se nombra solo.
 
 #### *y el ojo de su derecha oscureciéndose se oscurecerá*
+> La espada estaba también *sobre* el ojo de su derecha. Ahora <u>se oscurecerá</u>. Primera *se oscurecerá*. El brazo se seca; el ojo se oscurece. Otra vez el verbo se dobla: *oscureciéndose se oscurecerá*. El *su* no cambia.
 
 * *el ojo de su derecha* → *se oscurecerá*
+> Quien se oscurecerá: <u>el ojo de su derecha</u>. La flecha se queda en *se oscurecerá*.
 
-* Infinitivo[^inf] *oscureciéndose* (כָּהֹ֥ה): completa a *oscurecerá* (תִכְהֶֽה).
+* ↳ *oscureciéndose* (כָּהֹ֥ה)[^I]
+  > El oscurecer no va solo. <u>Oscureciéndose</u> se oscurecerá. El infinitivo carga el verbo.
+
+### En síntesis
+
+Líbano abre; el fuego come los cedros; aúllan ciprés y encinas; voz de aullido de los pastores, rugido de leoncillos: el manto y la soberbia del Jordán ya fueron devastados.
+
+Jehová mi Dios: apacienta el rebaño de la matanza; los compradores matan y no son culpables; los vendedores bendicen y se enriquecen; los pastores no se apiadan; yo no me apiadaré más; el hombre en dos manos; aplastarán; no libraré.
+
+Apacenté; tomé Agrado y Cuerdas; hice desaparecer a los tres en un mes; mi alma se acortó, la de ellos aborreció; no apacentaré a ustedes: la que muere morirá, las que quedan comerán.
+
+Corté Agrado para romper mi pacto; fue rota en aquel día; los pobres del rebaño conocieron: palabra de Jehová es él; pesaron treinta de plata; lo arrojé casa de Jehová, al alfarero.
+
+Corté las Cuerdas para romper la hermandad entre Judá y entre Israel.
+
+Aún toma instrumento de pastor necio: yo levanto un pastor que no visitará y comerá; ay, pastor de la nada; espada sobre su brazo y sobre el ojo de su derecha; el brazo se secará, el ojo se oscurecerá.
 
 # ZACARÍAS 12:1–14:21 AQUEL DÍA HASTA QUE JEHOVÁ SEA REY
 
@@ -4837,44 +5168,56 @@ En aquellos días asirán diez hombres de todas las lenguas la orla de un hombre
 ### Zacarías 12:1:1 — Carga sobre Israel
 
 * Actores principales: *Carga de la palabra de Jehová* (1)
+> Tras el ojo oscurecido, el actor ya no es la Espada. Es <u>Carga de la palabra de Jehová</u>. La carga de Zacarías 9:1 vuelve. El tramo otra vez no abre con *vino a mí*.
 
 #### *Carga de la palabra de Jehová sobre Israel*
+> No es *en la tierra de Hadrac*. <u>Carga</u> de la palabra de Jehová *sobre Israel*. En Zacarías 11:14 cortó las Cuerdas para romper la hermandad entre Judá y entre Israel. Aquí la carga se posa *sobre Israel*. El hebreo no pone un verbo de acción.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *Carga de la palabra de Jehová* → *Carga* → *sobre Israel*
+> Lo que hay es <u>Carga de la palabra de Jehová</u>. Lo alcanzado es *sobre Israel*. El *Carga* del medio es del español. Qué hace esa carga, esta línea no lo dice.
 
 ### Zacarías 12:1:7 — El que extiende los cielos
 
 * Actores principales: *Jehová* (1)
+> El actor ya no es la carga. Es <u>Jehová</u>. El nombre corto. Quien declara se nombra por lo que hace.
 
 #### *Declara Jehová, el que extiende los cielos y funda la tierra, y forma el espíritu del hombre en su interior*
+> La carga no se queda sin boca. <u>Declara</u> Jehová, el que extiende los cielos y funda la tierra, y forma el espíritu del hombre en su interior. En Zacarías 8:12 los cielos *darán* rocío; la tierra *dará* producto. Aquí él *extiende* y *funda*. Primera *extiende*. Primera *funda* de la tierra. Primera *forma*. Primera *espíritu del hombre*. El *declara* no suelta aún el dicho. El hebreo no pone un verbo finito.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *Jehová* → *Declara*
+> Quien declara: <u>Jehová</u>. La flecha se queda en *Declara*. Los tres oficios están en el renglón.
 
 + *Jehová*
-  * *extiende* (נֹטֶ֤ה)[^part]
-  * *funda* (וְ/יֹסֵ֣ד)[^part]
-  * *forma* (וְ/יֹצֵ֥ר)[^part]
+  * ↳ *extiende* (נֹטֶ֤ה)[^P]
+  * ↳ *funda* (וְ/יֹסֵ֣ד)[^P]
+  * ↳ *forma* (וְ/יֹצֵ֥ר)[^P]
+    > Tres hechos cuelgan de él. <u>Forma</u> el espíritu del hombre en su interior. Cielos, tierra, y el adentro del hombre.
 
 ### Zacarías 12:2:2 — Jerusalén cuenco de vértigo
 
 * Actores principales: *yo* (1)
+> El actor ya no se cuenta como *Jehová*. Es <u>yo</u>. El que declara ahora pone.
 
 #### *He aquí yo pongo a Jerusalén cuenco de vértigo para todos los pueblos en derredor*
+> Eso es lo que declara. <u>He aquí</u> yo pongo a Jerusalén cuenco de vértigo para todos los pueblos en derredor. En Zacarías 8:7 el *he aquí yo* salvaba a mi pueblo. En Zacarías 11:6 hacía hallar al hombre. Aquí pone a Jerusalén. Primera *cuenco*. Primera *vértigo*. En Zacarías 8:20 los pueblos *vendrán*. Aquí son *todos los pueblos en derredor*, y Jerusalén es el cuenco. El hebreo no pone un verbo finito.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *yo* → *pongo* → *a Jerusalén cuenco de vértigo*
+> Quien pone: <u>yo</u>. Lo alcanzado: *a Jerusalén cuenco de vértigo*. El *para todos los pueblos en derredor* está en el renglón.
 
 + *yo*
-  * *pongo* (שָׂ֣ם)[^part]
+  * ↳ *pongo* (שָׂ֣ם)[^P]
+    > El *pongo* cuelga del *yo*. <u>Pongo</u>: no es un poner ya hecho.
 
 ### Zacarías 12:2:14 — También sobre Judá en el asedio
 
 #### *y también sobre Judá será en el asedio sobre Jerusalén*
+> El cuenco no se queda en los pueblos. <u>También</u> sobre Judá será en el asedio sobre Jerusalén. Primera *asedio*. El *también* junta a Judá con lo puesto. En Zacarías 8:15 el bien era a Jerusalén y a la casa de Judá. Aquí el *sobre* se dice dos veces: sobre Judá, sobre Jerusalén. Qué será sobre Judá, el renglón no lo nombra aparte del asedio.
 
 ### Zacarías 12:3:4 — Piedra de carga
 
