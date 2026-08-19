@@ -124,6 +124,7 @@ const LBF_TEXT_BOOKS = new Set<ReaderBookId>([
   "1pedro",
   "judas",
   "1juan",
+  "filipenses",
   "daniel",
   "zacarias"
 ]);
@@ -148,6 +149,7 @@ export function readerBookHasLbfStructure(bookId: ReaderBookId): boolean {
     bookId === "1pedro" ||
     bookId === "judas" ||
     bookId === "1juan" ||
+    bookId === "filipenses" ||
     bookId === "daniel" ||
     bookId === "zacarias"
   );
