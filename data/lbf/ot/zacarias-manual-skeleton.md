@@ -5222,160 +5222,220 @@ Aún toma instrumento de pastor necio: yo levanto un pastor que no visitará y c
 ### Zacarías 12:3:4 — Piedra de carga
 
 - *Y será en aquel día*
+  > El asedio no cierra el tiempo. <u>Y será</u> en aquel día. En Zacarías 11:11 *aquel día* era la rotura del pacto. Aquí el *será* abre el día. Qué será, está debajo.
 
 * Marca el momento.
 
 #### *pondré a Jerusalén piedra de carga para todos los pueblos*
+> Ahí está el *será*. <u>Pondré</u> a Jerusalén piedra de carga para todos los pueblos. En Zacarías 12:2 era *pongo* cuenco de vértigo. Aquí *pondré*, y es *piedra de carga*. Primera *piedra de carga*. Mismos pueblos. En Zacarías 3:9 la piedra tenía siete ojos. El texto no las iguala.
 
 ### Zacarías 12:3:14 — Los que la cargan serán rasguñados
 
 * Actores principales: *todos los que la cargan* (1)
+> El actor ya no es el *yo* que pone. Son <u>todos los que la cargan</u>. La piedra de carga ahora tiene cargadores. El *la* es Jerusalén.
 
 #### *todos los que la cargan, rasguñando serán rasguñados*
+> La carga no se queda quieta. <u>Serán rasguñados</u> todos los que la cargan. Primera *rasguñados*. El verbo se dobla: *rasguñando serán rasguñados*. En Zacarías 11:17 el brazo *secándose se secará*. Aquí el rasguño cae sobre los que cargan.
 
 * *todos los que la cargan* → *serán rasguñados*
+> Quienes serán rasguñados: <u>todos los que la cargan</u>. La flecha se queda en *serán rasguñados*.
 
-* Infinitivo[^inf] *rasguñando* (שָׂר֣וֹט): completa a *serán* (יִשָּׂרֵ֑טוּ).
+* ↳ *rasguñando* (שָׂר֣וֹט)[^I]
+  > El rasguñar no va solo. <u>Rasguñando</u> serán rasguñados. El infinitivo carga el verbo.
 
 + *los que la cargan*
-  * *cargan* (עֹמְסֶ֖י/הָ)[^part]
+  * ↳ *cargan* (עֹמְסֶ֖י/הָ)[^P]
+    > Quienes actúan se nombran por lo que hacen: <u>cargan</u>. El *la* sigue siendo ella.
 
 ### Zacarías 12:3:15 — Se reunirán las naciones
 
 * Actores principales: *todas las naciones de la tierra* (1)
+> El actor ya no son los que cargan. Son <u>todas las naciones de la tierra</u>. Primera vez el conteo las nombra así.
 
 #### *y se reunirán sobre ella todas las naciones de la tierra*
+> El rasguño no cierra el tramo. <u>Se reunirán</u> sobre ella todas las naciones de la tierra. En Zacarías 8:22 vendrán muchos pueblos y naciones poderosas a Jerusalén *a buscar*. Aquí *todas las naciones de la tierra*, y el rumbo es *sobre ella*. El *ella* es Jerusalén. El verbo es futuro.
 
 * *todas las naciones de la tierra* → *se reunirán*
+> Quienes se reunirán: <u>todas las naciones de la tierra</u>. La flecha se queda en *se reunirán*. El *sobre ella* está en el renglón.
 
 ### Zacarías 12:4:5 — Heriré a todo caballo
 
 #### *En aquel día, declara Jehová, heriré a todo caballo con el estupor, y a su jinete con la locura*
+> El reunirse no cierra el día. <u>Heriré</u> a todo caballo con el estupor, y a su jinete con la locura. En aquel día, declara Jehová. El nombre es corto. Primera *heriré*. Primera *estupor*. Primera *locura*. Primera *jinete*. En Zacarías 9:10 cortaba el caballo de Jerusalén. Aquí es *todo* caballo, y el golpe es dos: el caballo, el que lo monta.
 
 + *jinete*
-  * *y* (וְ/רֹכְב֖/וֹ)[^part]
+  * ↳ *y* (וְ/רֹכְב֖/וֹ)[^P]
 
 ### Zacarías 12:4:14 — Abriré mis ojos sobre Judá
 
 #### *y sobre la casa de Judá abriré mis ojos*
+> El herir no se queda en el caballo. <u>Abriré</u> mis ojos sobre la casa de Judá. Primera *abriré* de ojos. En Zacarías 8:6 *mis ojos* eran pregunta. En Zacarías 9:8 *he visto* con mis ojos. Aquí el ver se abre, y el rumbo es la casa de Judá. En Zacarías 12:2 el *también* era sobre Judá en el asedio. Ahora los ojos.
 
 ### Zacarías 12:4:20 — Heriré con ceguera
 
 #### *y a todo caballo de los pueblos heriré con la ceguera*
+> El *heriré* vuelve. <u>Heriré</u> con la ceguera a todo caballo de los pueblos. En Zacarías 12:4 el primer golpe era estupor, y era *todo caballo*. Aquí el caballo es *de los pueblos*, y el golpe es *ceguera*. Primera *ceguera*. Sobre Judá abre los ojos; a estos caballos, ceguera.
 
 ### Zacarías 12:5:1 — Dirán los jefes de Judá
 
 * Actores principales: *los jefes de Judá* (1)
+> El actor ya no es el *yo* que hiere. Son <u>los jefes de Judá</u>. Primera *jefes*. Sobre esa casa abrió los ojos.
 
 #### *Y dirán los jefes de Judá en su corazón*
+> Tras la ceguera de los caballos, <u>dirán</u> los jefes de Judá en su corazón. En Zacarías 7:10 y Zacarías 8:17 el corazón era donde *no piensen* el mal. Aquí el corazón *dice*. Qué dicen, esta línea no lo pone.
 
 * *los jefes de Judá* → *dirán*
+> Quienes dirán: <u>los jefes de Judá</u>. La flecha se queda en *dirán*. El *en su corazón* está en el renglón.
 
 ### Zacarías 12:5:5 — Fortaleza son los habitantes
 
 * Actores principales: *los habitantes de Jerusalén* (1)
+> El actor ya no son los jefes. Son <u>los habitantes de Jerusalén</u>. En Zacarías 11:6 él no se apiadará de los habitantes de *la tierra*. Estos son de Jerusalén.
 
 #### *Fortaleza para mí son los habitantes de Jerusalén en Jehová de los ejércitos, su Dios*
+> Eso es lo que dirán en el corazón. <u>Fortaleza</u> para mí son los habitantes de Jerusalén en Jehová de los ejércitos, su Dios. Primera *Fortaleza*. El *mí* es de los jefes. El nombre largo vuelve, y *su Dios*. En Zacarías 8:23 *Dios está con ustedes*. Aquí la fortaleza se nombra *en* él. El hebreo no pone un verbo finito.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *los habitantes de Jerusalén* → *son* → *Fortaleza para mí*
+> Quienes son: <u>los habitantes de Jerusalén</u>. Lo alcanzado: *Fortaleza para mí*. El *son* es del español. El *en Jehová* está en el renglón.
 
 + *habitantes*
-  * *habitantes* (יֹשְׁבֵ֣י)[^part]
+  * ↳ *habitantes* (יֹשְׁבֵ֣י)[^P]
 
 ### Zacarías 12:6:3 — Los jefes como brasero de fuego
 
 #### *En aquel día pondré a los jefes de Judá como brasero de fuego en leños, y como antorcha de fuego en gavilla*
+> El *dirán* no cierra el día. <u>Pondré</u> a los jefes de Judá como brasero de fuego en leños, y como antorcha de fuego en gavilla. En aquel día. En Zacarías 12:2 ponía a Jerusalén cuenco; en Zacarías 12:3, piedra. Aquí pone a los *jefes*, y el *como* es fuego, dos veces. Primera *brasero*. Primera *antorcha*. Primera *leños*. Primera *gavilla*. En Zacarías 2:5 el fuego era muro *para* Jerusalén. Aquí el fuego está *en* leños y *en* gavilla.
 
 ### Zacarías 12:6:13 — Comerán a los pueblos
 
 #### *y comerán sobre la derecha y sobre la izquierda a todos los pueblos en derredor*
+> El fuego no se queda en la imagen. <u>Comerán</u> sobre la derecha y sobre la izquierda a todos los pueblos en derredor. Quiénes, esta línea no los nombra. El verbo es plural. En Zacarías 12:2 Jerusalén era cuenco *para todos los pueblos en derredor*. Aquí esos pueblos son lo comido. En Zacarías 11:9 las que quedan comían la carne de su compañera. En Zacarías 11:1 el fuego *comía* los cedros. Primera *derecha* y *izquierda* de este tramo.
 
 ### Zacarías 12:6:22 — Habitará Jerusalén
 
 * Actores principales: *Jerusalén* (1)
+> El actor ya no son los que comen. Es <u>Jerusalén</u>. El cuenco, la piedra, ahora habita.
 
 #### *y habitará Jerusalén aún debajo de ella, en Jerusalén*
+> Tras el comer, <u>habitará</u> Jerusalén aún debajo de ella, en Jerusalén. En Zacarías 8:3 el *yo* habitaba *en medio* de Jerusalén. Aquí habita *ella*, y el nombre se dice dos veces. El *aún* de Zacarías 8:4 era sentarse en las plazas. Aquí es habitar *debajo de ella*. El *debajo* no se explica.
 
 * *Jerusalén* → *habitará*
+> Quien habitará: <u>Jerusalén</u>. La flecha se queda en *habitará*. El *aún debajo de ella, en Jerusalén* está en el renglón.
 
 ### Zacarías 12:7:1 — Salvará las tiendas de Judá primero
 
 * Actores principales: *Jehová* (1) · *la hermosura de la casa de David y la hermosura del habitante de Jerusalén* (1)
+> Dos actores. <u>Jehová</u>. Y *la hermosura* —de la casa de David y del habitante de Jerusalén—. Primera *David*. El que habita no entra solo: entra su hermosura.
 
 #### *Y salvará Jehová las tiendas de Judá primero*
+> El habitar no cierra. <u>Salvará</u> Jehová las tiendas de Judá primero. En Zacarías 8:7 el *yo* salvaba a mi pueblo. En Zacarías 9:16 Jehová su Dios salvaba *los* como rebaño. Aquí el que salva se nombra *Jehová*, y lo primero son *las tiendas de Judá*. Primera *tiendas*. Primera *primero* de un salvar.
 
 * *Jehová* → *salvará* → *las tiendas de Judá*
+> Quien salvará: <u>Jehová</u>. Lo alcanzado: *las tiendas de Judá*. El *primero* está en el renglón.
 
 - *para que no se engrandeza la hermosura de la casa de David y la hermosura del habitante de Jerusalén sobre Judá*
+  > El *para que* da el fin del *primero*. <u>No se engrandeza</u> la hermosura —dos hermosuras— sobre Judá. En Zacarías 9:17 *qué su hermosura*. Aquí la hermosura es de David y del habitante, y el riesgo es *sobre Judá*. El verbo no afirma que ya se engrandece.
 
 * *la hermosura de la casa de David y la hermosura del habitante de Jerusalén* → *se engrandeza*
+> Quien no debe engrandecerse: <u>la hermosura de la casa de David y la hermosura del habitante de Jerusalén</u>. La flecha se queda en *se engrandeza*. El *sobre Judá* está en el renglón.
 
 * Introduce el propósito de *salvará*.
 
 + *habitante*
-  * *habitante* (יֹשֵׁ֥ב)[^part]
+  * ↳ *habitante* (יֹשֵׁ֥ב)[^P]
 
 ### Zacarías 12:8:3 — Escudará al habitante
 
 * Actores principales: *Jehová* (1)
+> Un actor. <u>Jehová</u>. El que salvó las tiendas primero. Ahora escuda.
 
 #### *En aquel día escudará Jehová en favor del habitante de Jerusalén*
+> El *primero* de Judá no cierra el día. <u>Escudará</u> Jehová en favor del habitante de Jerusalén. En aquel día. Primera *escudará*. En Zacarías 9:15 Jehová de los ejércitos *los protegerá*. Aquí el nombre es corto, y el favor es del habitante —el de la hermosura que no debía engrandecerse sobre Judá. El verbo es futuro.
 
 * *Jehová* → *escudará*
+> Quien escudará: <u>Jehová</u>. La flecha se queda en *escudará*. El *en favor del habitante* está en el renglón.
 
 + *habitante*
-  * *habitante* (יוֹשֵׁ֣ב)[^part]
+  * ↳ *habitante* (יוֹשֵׁ֣ב)[^P]
 
 ### Zacarías 12:8:8 — El que tropieza como David
 
 * Actores principales: *el que tropieza entre ellos* (1)
+> El actor ya no es Jehová. Es <u>el que tropieza entre ellos</u>. Primera *tropieza*. El *ellos* no se nombra.
 
 #### *y será el que tropieza entre ellos, en aquel día, como David*
+> El escudar no cierra el día. <u>Será</u> el que tropieza entre ellos, en aquel día, como David. David acaba de nombrarse por la hermosura que no debía engrandecerse. Aquí el que tropieza *será como* él. El verbo es futuro.
 
 * *el que tropieza entre ellos* → *será*
+> Quien será: <u>el que tropieza entre ellos</u>. La flecha se queda en *será*. El *como David* está en el renglón.
 
 + *tropieza*
-  * *tropieza* (הַ/נִּכְשָׁ֥ל)[^part]
+  * ↳ *tropieza* (הַ/נִּכְשָׁ֥ל)[^P]
+    > Quien actúa se nombra por lo que hace: <u>tropieza</u>. Entre ellos.
 
 ### Zacarías 12:8:14 — La casa de David como Dios
 
 * Actores principales: *la casa de David* (1)
+> El actor ya no es el que tropieza. Es <u>la casa de David</u>. La hermosura de Zacarías 12:7 ahora es la casa misma.
 
 #### *y la casa de David como Dios, como el ángel de Jehová delante de ellos*
+> El que tropieza *será como* David. Ahora la casa: <u>como Dios</u>, como el ángel de Jehová delante de ellos. Dos *como*. El texto no los iguala. En Zacarías 1:11 el ángel de Jehová oía el informe. En Zacarías 3:1 Josué estaba delante del ángel. Aquí la casa está *como* él, delante de ellos. El hebreo no pone un verbo finito.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *la casa de David* → *casa* → *como Dios, como el ángel de Jehová delante de ellos*
+> Lo que hay: <u>la casa de David</u>. Lo alcanzado: *como Dios, como el ángel de Jehová delante de ellos*. El segundo slot repite *casa*.
 
 ### Zacarías 12:9:4 — Buscaré destruir a las naciones
 
 - *Y será en aquel día*
+  > El *como Dios* no cierra el día. <u>Y será</u> en aquel día. En Zacarías 12:3 el *será* ponía la piedra. Aquí el *será* abre otra vez. Qué será, está debajo.
 
 * Marca el momento.
 
 #### *buscaré destruir a todas las naciones que vienen sobre Jerusalén*
+> Ahí está el *será*. <u>Buscaré</u> destruir a todas las naciones que vienen sobre Jerusalén. Primera *buscaré*. Primera *destruir*. En Zacarías 11:16 el pastor *no buscará* al muchacho. Aquí el *yo* busca, y el fin es destruir. En Zacarías 12:3 se reunirán *sobre ella* todas las naciones de la tierra. Aquí *vienen sobre Jerusalén*. El buscar no se cuenta ya cumplido.
 
-* Infinitivo[^inf] *destruir* (לְ/הַשְׁמִיד֙): completa a *buscaré* (אֲבַקֵּ֗שׁ).
+* ↳ *destruir* (לְ/הַשְׁמִיד֙)[^I]
+  > Lo que busca: <u>destruir</u>. El infinitivo cuelga del *buscaré*.
 
 + *todas las naciones*
-  * *vienen* (הַ/בָּאִ֖ים)[^part]
+  * ↳ *vienen* (הַ/בָּאִ֖ים)[^P]
+    > Las naciones se nombran por lo que hacen: <u>vienen</u> sobre Jerusalén.
+
+### En síntesis
+
+Carga de la palabra de Jehová sobre Israel; declara Jehová, el que extiende los cielos, funda la tierra y forma el espíritu del hombre.
+
+He aquí yo pongo a Jerusalén cuenco de vértigo para todos los pueblos en derredor; también sobre Judá será en el asedio.
+
+En aquel día pondré piedra de carga; los que la cargan serán rasguñados; se reunirán sobre ella todas las naciones de la tierra.
+
+Heriré a todo caballo con estupor y al jinete con locura; sobre Judá abriré mis ojos; a todo caballo de los pueblos, ceguera.
+
+Dirán los jefes: fortaleza para mí son los habitantes en Jehová de los ejércitos; los pondré como brasero y antorcha; comerán a los pueblos; habitará Jerusalén.
+
+Salvará las tiendas de Judá primero, para que no se engrandezca la hermosura; escudará al habitante; el que tropieza como David; la casa de David como Dios; buscaré destruir a las naciones que vienen sobre Jerusalén.
 
 ## Zacarías 12:10–13:6 Mirarán y habrá un manantial
 
 ### Zacarías 12:10:1 — Derramaré espíritu de gracia
 
 #### *Y derramaré sobre la casa de David y sobre el habitante de Jerusalén espíritu de gracia y de súplicas*
+> El *buscaré destruir* no cierra el tramo. <u>Derramaré</u> sobre la casa de David y sobre el habitante de Jerusalén espíritu de gracia y de súplicas. Primera *derramaré*. Primera *gracia*. Primera *súplicas*. En Zacarías 12:7 esas dos hermosuras no debían engrandecerse sobre Judá. Aquí el *yo* derrama *sobre* las dos. En Zacarías 12:1 él *forma* el espíritu del hombre. Aquí derrama *espíritu de gracia y de súplicas*. El verbo es futuro.
 
 + *habitante*
-  * *habitante* (יוֹשֵׁ֣ב)[^part]
+  * ↳ *habitante* (יוֹשֵׁ֣ב)[^P]
 
 ### Zacarías 12:10:11 — Mirarán a mí
 
 #### *y mirarán a mí*
+> El derramar no se queda en el espíritu. <u>Mirarán</u> a mí. Primera *mirarán*. Quiénes, esta línea no los nombra. El *mí* es el que derrama. A quién miran, el *quien* está debajo.
 
 - *a quien traspasaron*
+  > El *quien* describe al *mí*. <u>Traspasaron</u>. Primera *traspasaron*. El verbo ya está hecho. Quiénes traspasaron, esta línea no los nombra. El mirar es futuro; el traspasar, pasado.
 
 + *a mí*
   * *quien* (אֲשֶׁר)[^rel]: describe a *a mí*.
@@ -5383,174 +5443,227 @@ Aún toma instrumento de pastor necio: yo levanto un pastor que no visitará y c
 ### Zacarías 12:10:16 — Lamentarán sobre él
 
 #### *y lamentarán sobre él como lamento sobre el único, y amargándose sobre él como amargarse sobre el primogénito*
+> El mirar era *a mí*. Ahora <u>lamentarán</u> sobre *él*. Primera *lamentarán*. El texto no iguala el *mí* y el *él*. Dos *como*: como lamento sobre el único, como amargarse sobre el primogénito. Primera *único*. Primera *primogénito*. El *sobre él* se dice dos veces.
 
-* Infinitivo[^inf] *amargándose* (וְ/הָמֵ֥ר): completa a *lamentarán* (וְ/סָפְד֣וּ).
+* ↳ *amargándose* (וְ/הָמֵ֥ר)[^I]
+  > El lamento no va solo. <u>Amargándose</u> sobre él. El infinitivo carga el verbo.
 
-* Infinitivo[^inf] *amargarse* (כְּ/הָמֵ֥ר): completa a *lamentarán* (וְ/סָפְד֣וּ).
+* ↳ *amargarse* (כְּ/הָמֵ֥ר)[^I]
+  > El segundo *como* mide con <u>amargarse</u> sobre el primogénito. Mismo verbo, otro infinitivo.
 
 ### Zacarías 12:11:3 — Grande el lamento en Jerusalén
 
 * Actores principales: *el lamento* (1)
+> El actor ya no son ellos. Es <u>el lamento</u>. El que acababan de hacer ahora se cuenta solo.
 
 #### *En aquel día será grande el lamento en Jerusalén, como el lamento de Hadad-rimón en el valle de Meguidón*
+> El *lamentarán* se mide. <u>Será grande</u> el lamento en Jerusalén, en aquel día. Como el lamento de Hadad-rimón en el valle de Meguidón. Primera *Hadad-rimón*. Primera *Meguidón*. El *como* ya midió con el único y el primogénito. Ahora mide con un lamento de un valle. El texto no cuenta esa historia. El verbo es futuro.
 
 * *el lamento* → *será grande*
+> Lo que será grande: <u>el lamento</u>. La flecha se queda en *será grande*. El *en Jerusalén* y el *como* están en el renglón.
 
 ### Zacarías 12:12:1 — Lamentará la tierra, familias aparte
 
 * Actores principales: *la tierra* (1)
+> El actor ya no es el lamento. Es <u>la tierra</u>. En Zacarías 7:14 la tierra fue asolada. En Zacarías 8:12 dará su producto. Aquí lamenta.
 
 #### *Y lamentará la tierra, familias familias aparte; la familia de la casa de David aparte, y sus mujeres aparte; la familia de la casa de Natán aparte, y sus mujeres aparte*
+> El grande no se queda en Jerusalén. <u>Lamentará</u> la tierra, familias familias aparte. Primera *familias* así. La casa de David —la del espíritu derramado— lamenta *aparte*. Y *sus mujeres aparte*. Primera *Natán*. Primera *mujeres* de este lamento. El *aparte* se dice cuatro veces en el renglón. El texto no junta las casas.
 
 * *la tierra* → *lamentará*
+> Quien lamentará: <u>la tierra</u>. La flecha se queda en *lamentará*. Las familias y el *aparte* están en el renglón.
 
 ### Zacarías 12:13:1 — Leví y el simeíta aparte
 
 * Actores principales: *La familia de la casa de Leví* (1)
+> El actor ya no es la tierra. Es <u>la familia de la casa de Leví</u>. Primera *Leví*. El simeíta está en el renglón; el conteo nombra a Leví.
 
 #### *La familia de la casa de Leví aparte, y sus mujeres aparte; la familia del simeíta aparte, y sus mujeres aparte*
+> El *aparte* sigue. <u>La familia</u> de la casa de Leví aparte, y sus mujeres aparte; la familia del simeíta aparte, y sus mujeres aparte. Primera *simeíta*. David y Natán eran *casa de*. El simeíta no. El hebreo no pone un verbo de acción. El lamento no se vuelve a nombrar.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *La familia de la casa de Leví* → *familia*
+> Lo que hay: <u>la familia de la casa de Leví</u>. La flecha se queda en *familia*. El *aparte* y el simeíta están en el renglón.
 
 ### Zacarías 12:14:2 — Todas las familias que quedan
 
 * Actores principales: *Todas las familias que quedan* (1)
+> El actor ya no es una casa. Son <u>todas las familias que quedan</u>. Tras David, Natán, Leví y el simeíta, estas quedan.
 
 #### *Todas las familias que quedan, familias familias aparte, y sus mujeres aparte*
+> El *aparte* no se cierra en cuatro nombres. <u>Todas las familias que quedan</u>, familias familias aparte, y sus mujeres aparte. En Zacarías 11:9 *las que quedan* comían. Aquí *quedan* y lamentan *aparte*. El hebreo no pone un verbo de acción.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *Todas las familias que quedan* → *familias*
+> Lo que hay: <u>todas las familias que quedan</u>. La flecha se queda en *familias*. El *aparte* está en el renglón.
 
 + *Todas las familias*
-  * *quedan* (הַ/נִּשְׁאָר֔וֹת)[^part]
+  * ↳ *quedan* (הַ/נִּשְׁאָר֔וֹת)[^P]
+    > Quienes se nombran, se nombran por lo que son: <u>quedan</u>. No *remanente* de Zacarías 8:6.
 
 ### Zacarías 13:1:3 — Un manantial abierto
 
 * Actores principales: *un manantial abierto* (1)
+> El actor ya no son las familias. Es <u>un manantial abierto</u>. Primera *manantial*. Tras el lamento *aparte*, esto se abre.
 
 #### *En aquel día habrá un manantial abierto para la casa de David y para los habitantes de Jerusalén, para pecado y para impureza*
+> El *aparte* no cierra el día. <u>Habrá</u> un manantial abierto, en aquel día. Para la casa de David y para los habitantes de Jerusalén —las dos del derramar, ahora *habitantes*, plural. En Zacarías 12:10 era *el habitante*. Primera *pecado*. Primera *impureza*. En Zacarías 3:9 quitará la iniquidad de aquella tierra en un día. Aquí el manantial es *para* pecado e impureza. El verbo es futuro.
 
 * *un manantial abierto* → *habrá*
+> Lo que habrá: <u>un manantial abierto</u>. La flecha se queda en *habrá*. El *para* está en el renglón, dos veces.
 
 + *manantial*
-  * *abierto* (נִפְתָּ֔ח)[^part]
+  * ↳ *abierto* (נִפְתָּ֔ח)[^P]
+    > El manantial se nombra ya <u>abierto</u>. El *habrá* es del día.
 
 + *habitantes*
-  * *y* (וּ/לְ/יֹשְׁבֵ֣י)[^part]
+  * ↳ *y* (וּ/לְ/יֹשְׁבֵ֣י)[^P]
 
 ### Zacarías 13:2:7 — Cortaré los nombres de los ídolos
 
 - *Y será en aquel día*
+  > El manantial no cierra el día. <u>Y será</u> en aquel día. En Zacarías 13:1 el *habrá* era el manantial. Aquí el *será* abre otra vez. Qué será, está debajo.
 
 * Marca el momento.
 
 #### *declara Jehová de los ejércitos: cortaré los nombres de los ídolos de la tierra*
+> Ahí está el *será*. <u>Cortaré</u> los nombres de los ídolos de la tierra, declara Jehová de los ejércitos. El nombre largo vuelve. Primera *ídolos*. En Zacarías 10:2 los terafines hablaron iniquidad. Aquí se cortan *los nombres*. En Zacarías 9:6 cortaba la soberbia. El verbo es futuro.
 
 ### Zacarías 13:2:14 — No serán recordados más
 
 #### *y no serán recordados más*
+> El corte de los nombres no cierra. <u>No serán recordados</u> más. Primera *recordados*. El *ellos* no se vuelve a escribir: son los nombres. El *más* mira atrás del cortar. El verbo es futuro.
 
 ### Zacarías 13:2:22 — Haré pasar a los profetas
 
 #### *y también a los profetas y el espíritu de la inmundicia haré pasar de la tierra*
+> El *no serán recordados* no cierra. <u>También</u> a los profetas y el espíritu de la inmundicia haré pasar de la tierra. El *también* junta a los ídolos con estos dos. En Zacarías 1:5 se preguntó si los profetas vivirán. En Zacarías 8:9 la boca de los profetas se oía. Aquí los profetas se hacen pasar. En Zacarías 12:10 derramaba *espíritu de gracia*. Aquí *espíritu de la inmundicia*. En Zacarías 3:4 *he hecho pasar* la iniquidad de sobre ti. Aquí *haré pasar* de la tierra. Primera *inmundicia* de un espíritu. El verbo es futuro.
 
 ### Zacarías 13:3:6 — Le dirán su padre y su madre
 
 * Actores principales: *su padre y su madre* (1) · *un hombre* (1)
+> Dos actores. <u>Su padre y su madre</u>. Y *un hombre*. Primera *padre* y *madre*. El *su* es del que profetiza.
 
 - *Y será*
+  > El hacer pasar no cierra. <u>Y será</u>. Qué será, el *cuando* está debajo.
 
 * Marca el momento.
 
 - *cuando profetice un hombre aún*
+  > El *cuando* pone el caso. <u>Profetice</u> un hombre aún. Primera *profetice* de un hombre. En Zacarías 13:2 los profetas se hacen pasar. Aquí *aún* hay quien profetiza. El *aún* de Zacarías 11:15 era tomar. Aquí es profetizar.
 
 * *un hombre* → *profetice*
+> Quien profetice: <u>un hombre</u>. La flecha se queda en *profetice*. El *aún* está en el renglón.
 
 * *cuando* (כִּֽי)[^kaasher] marca el momento.
 
 #### *y le dirán su padre y su madre, sus engendradores*
+> Ahí está el *será*. <u>Le dirán</u> su padre y su madre, sus engendradores. Primera *engendradores*. El *le* es el hombre. Qué dirán, esta línea no lo pone.
 
 * *su padre y su madre* → *dirán*
+> Quienes dirán: <u>su padre y su madre</u>. La flecha se queda en *dirán*. El *le* está en el renglón.
 
 + *engendradores*
-  * *engendradores* (יֹֽלְדָי/ו֙)[^part]
+  * ↳ *engendradores* (יֹֽלְדָי/ו֙)[^P]
+    > Se nombran otra vez por lo que son: <u>engendradores</u>. El *su* sigue.
 
 ### Zacarías 13:3:12 — No vivirás
 
 #### *No vivirás*
+> Eso es lo que le dirán. <u>No vivirás</u>. En Zacarías 1:5 se preguntó si los profetas *vivirán* para siempre. Aquí el *no* es de los engendradores al que aún profetiza.
 
 - *porque mentira hablaste en el nombre de Jehová*
+  > El *porque* da lo dicho. <u>Hablaste</u> mentira en el nombre de Jehová. En Zacarías 5:4 se juraba *en mi nombre para mentira*. En Zacarías 10:2 los adivinos *vieron* mentira. Aquí se *habla*, y el nombre es *de Jehová*. El verbo ya está hecho.
 
 * *porque* (כִּ֛י)[^yaan] introduce la razón.
 
 ### Zacarías 13:3:18 — Lo traspasarán sus padres
 
 * Actores principales: *su padre y su madre* (1)
+> El actor sigue: <u>su padre y su madre</u>. No solo dijeron. Ahora traspasan.
 
 #### *y lo traspasarán su padre y su madre, sus engendradores, en su profetizar*
+> El *No vivirás* no se queda en la boca. <u>Lo traspasarán</u> su padre y su madre, sus engendradores, en su profetizar. En Zacarías 12:10 *traspasaron* —pasado, y el *quien* no se nombraba. Aquí el verbo es futuro, y quienes traspasan tienen nombre. El texto no iguala los dos traspasar. El *lo* es el hombre.
 
 * *su padre y su madre* → *traspasarán* → *lo*
+> Quienes traspasarán: <u>su padre y su madre</u>. Lo alcanzado: *lo*.
 
-* Infinitivo[^inf] *profetizar* (בְּ/הִנָּבְאֽ/וֹ): completa a *traspasarán* (וּ/דְקָרֻ֜/הוּ).
+* ↳ *profetizar* (בְּ/הִנָּבְאֽ/וֹ)[^I]
+  > El traspasar no espera a que pare. <u>En su profetizar</u>. El infinitivo cuelga del *traspasarán*.
 
 + *engendradores*
-  * *engendradores* (יֹלְדָ֖י/ו)[^part]
+  * ↳ *engendradores* (יֹלְדָ֖י/ו)[^P]
 
 ### Zacarías 13:4:4 — Se avergonzarán los profetas
 
 * Actores principales: *los profetas* (1)
+> El actor ya no son el padre y la madre. Son <u>los profetas</u>. En Zacarías 13:2 se hacen pasar. Aquí se avergüenzan.
 
 - *Y será en aquel día*
+  > El traspasar no cierra el día. <u>Y será</u> en aquel día. Qué será, está debajo.
 
 * Marca el momento.
 
 #### *se avergonzarán los profetas, cada uno de su visión, en su profetizar*
+> Ahí está el *será*. <u>Se avergonzarán</u> los profetas, cada uno de su visión, en su profetizar. Primera *avergonzarán*. Primera *visión*. En Zacarías 13:3 el hombre era *un hombre*. Aquí son *los profetas*, y el *cada uno* los parte. El *en su profetizar* ya se oyó: allí se traspasaba; aquí se avergüenzan.
 
 * *los profetas* → *se avergonzarán*
+> Quienes se avergonzarán: <u>los profetas</u>. La flecha se queda en *se avergonzarán*. El *cada uno de su visión* está en el renglón.
 
-* Infinitivo[^inf] *profetizar* (בְּ/הִנָּֽבְאֹת֑/וֹ): completa a *avergonzarán* (יֵבֹ֧שׁוּ).
+* ↳ *profetizar* (בְּ/הִנָּֽבְאֹת֑/וֹ)[^I]
+  > La vergüenza no espera a que paren. <u>En su profetizar</u>. El infinitivo cuelga del *se avergonzarán*.
 
 ### Zacarías 13:4:10 — No vestirán manto de pelo
 
 #### *y no vestirán manto de pelo para mentir*
+> La vergüenza no se queda en la visión. <u>No vestirán</u> manto de pelo para mentir. Primera *manto de pelo*. En Zacarías 11:3 el manto de los pastores *fue devastado*. Aquí el manto no se viste. En Zacarías 3:4 *vestiré* de gala. Aquí el *no* es de ellos. En Zacarías 13:3 *mentira hablaste*. Aquí el fin del vestir es *para mentir*.
 
-* Infinitivo[^inf] *mentir* (כַּחֵֽשׁ): completa a *vestirán* (יִלְבְּשׁ֛וּ).
+* ↳ *mentir* (כַּחֵֽשׁ)[^I]
+  > El no vestir tiene fin. <u>Para mentir</u>. El infinitivo cuelga del *vestirán*.
 
 ### Zacarías 13:5:1 — Y dirá
 
 #### *Y dirá*
+> El no vestir no cierra la boca. <u>Dirá</u>. Quién, esta línea no lo nombra. En Zacarías 11:9 el *yo* *dije*. Aquí el verbo es futuro, y el sujeto no se escribe. Qué dirá, no está en esta línea.
 
 ### Zacarías 13:5:3 — No soy profeta
 
 #### *No soy profeta*
+> Eso es lo que dirá. <u>No soy</u> profeta. En Zacarías 13:2 los profetas se hacen pasar. En Zacarías 13:3 un hombre *aún* profetiza. Aquí la boca niega el oficio. El hebreo no pone un verbo finito. El *soy* es del español.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 ### Zacarías 13:5:5 — Trabajo la tierra
 
 * Actores principales: *un hombre* (1) · *yo* (1)
+> Dos actores. <u>Yo</u>. Y *un hombre*. El que niega ser profeta se cuenta; el que lo adquirió también.
 
 #### *hombre que trabaja la tierra soy yo*
+> El *No soy* se llena con otro oficio. <u>Hombre</u> que trabaja la tierra soy yo. Primera *trabaja la tierra*. No profeta: labrador. El hebreo no pone un verbo finito. El *soy* es del español.
 
 * Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse.
 
 * *yo* → *soy* → *hombre que trabaja la tierra*
+> Quien es: <u>yo</u>. Lo alcanzado: *hombre que trabaja la tierra*. El *soy* es del español.
 
 + *hombre*
-  * *trabaja* (עֹבֵ֤ד)[^part]
+  * ↳ *trabaja* (עֹבֵ֤ד)[^P]
+    > El hombre se nombra por lo que hace: <u>trabaja</u> la tierra.
 
 - *porque un hombre me adquirió desde mi juventud*
+  > El *porque* da el porqué del oficio. <u>Me adquirió</u> un hombre desde mi juventud. Primera *adquirió*. Primera *juventud*. El *un hombre* no es el *yo*. El verbo ya está hecho.
 
 * *un hombre* → *adquirió* → *me*
+> Quien adquirió: <u>un hombre</u>. Lo alcanzado: *me*. El *desde mi juventud* está en el renglón.
 
 * *porque* (כִּ֥י)[^yaan] introduce la razón.
 
 ### Zacarías 13:6:1 — Le dirá
 
 #### *Y le dirá*
+> El *dirá* del labrador no cierra. <u>Le dirá</u>. En Zacarías 13:5 era *Y dirá*, sin destinario. Aquí hay *le*. Quién le habla, esta línea no lo nombra. Qué le dice, no está en esta línea.
 
 ### Zacarías 13:6:4 — ¿Qué son estas heridas?
 
