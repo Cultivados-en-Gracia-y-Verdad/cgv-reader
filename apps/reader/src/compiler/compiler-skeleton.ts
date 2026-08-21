@@ -34,6 +34,7 @@ import {
   formatActorTriple,
   findNominalClauseCandidates,
   formatClauseSpan,
+  formatClauseSpanAcrossVerses,
   getClauseBeginningTokens,
   loadClauseVerses,
   readBookDefinitions,
@@ -706,12 +707,13 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
 
   function spanTextFor(finiteVerbId: string): string {
     const assignment = assignments[finiteVerbId];
-    const clause = clauseById.get(finiteVerbId);
-    if (!assignment || !clause) return "";
-    const verseKey = `${clause.chapter}:${clause.verse}`;
-    const verseWords = wordsByVerse.get(verseKey) ?? [];
-    const verseText = verseTextByKey.get(verseKey) ?? "";
-    return formatClauseSpan(assignment.selectedSpan, verseWords, verseText);
+    if (!assignment?.selectedSpan.length) return "";
+    return formatClauseSpanAcrossVerses(
+      assignment.selectedSpan,
+      wordById,
+      wordsByVerse,
+      verseTextByKey
+    );
   }
 
   // A described-noun span (Q1) can point at a completely different verse
@@ -720,10 +722,8 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   // OWN first word, never assumed to match the describing clause's verse.
   function spanTextAtItsOwnVerse(span: string[] | undefined): string | null {
     if (!span?.length) return null;
-    const firstWord = wordById.get(span[0]);
-    if (!firstWord) return null;
-    const verseKey = `${firstWord.chapter}:${firstWord.verse}`;
-    return formatClauseSpan(span, wordsByVerse.get(verseKey) ?? [], verseTextByKey.get(verseKey) ?? "");
+    if (!wordById.get(span[0])) return null;
+    return formatClauseSpanAcrossVerses(span, wordById, wordsByVerse, verseTextByKey);
   }
 
   const clauseSignalInputs: ClauseSignalInput[] = clauses.map(clause => ({
@@ -1049,13 +1049,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   const clauseActors = readClauseActors(bookId);
   function actorSpanText(ids: string[]): string {
     if (!ids.length) return "";
-    const first = wordById.get(ids[0]);
-    if (!first) return "";
-    return formatClauseSpan(
-      ids,
-      wordsByVerse.get(`${first.chapter}:${first.verse}`) ?? [],
-      verseTextByKey.get(`${first.chapter}:${first.verse}`) ?? ""
-    ).trim();
+    return formatClauseSpanAcrossVerses(ids, wordById, wordsByVerse, verseTextByKey);
   }
   function defaultVerbSpan(finiteVerbId: string): string[] {
     const word = finiteVerbWordById.get(finiteVerbId);
@@ -2049,19 +2043,30 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
 
   function flushOrphansBefore(order: number, currentRootId: string): Orphan[] {
     const collected: Orphan[] = [];
+    const currentOrder = clauseById.get(currentRootId)?.order ?? Infinity;
     while (orphanCursor < orphans.length && orphans[orphanCursor].order < order) {
       const orphan = orphans[orphanCursor];
       orphanCursor += 1;
       if (orphan.kind === "parked") {
         const owner = whenIfOwnerId(orphan.node.finiteVerbId);
         if (owner && rootIdSet.has(owner) && owner !== currentRootId) {
-          const bucket = reservedOrphansByRoot.get(owner) ?? [];
-          bucket.push(orphan);
-          reservedOrphansByRoot.set(owner, bucket);
+          const ownerOrder = clauseById.get(owner)?.order ?? 0;
+          // Packaging D: hold a frame for its whenIf owner only while that
+          // owner is still ahead. If the owner already closed (Q3 reason
+          // after an intervening H4 — Zacarías 8:14:3 under 8:13:16, with
+          // 8:13:17 in between), reserving drops the Scripture.
+          if (ownerOrder >= currentOrder) {
+            const bucket = reservedOrphansByRoot.get(owner) ?? [];
+            bucket.push(orphan);
+            reservedOrphansByRoot.set(owner, bucket);
+            warnings.push(
+              `${orphan.node.reference} (${orphan.node.finiteVerbId}): condition/frame owned by ${owner} — held for that H3 unit instead of trailing under ${currentRootId}.`
+            );
+            continue;
+          }
           warnings.push(
-            `${orphan.node.reference} (${orphan.node.finiteVerbId}): condition/frame owned by ${owner} — held for that H3 unit instead of trailing under ${currentRootId}.`
+            `${orphan.node.reference} (${orphan.node.finiteVerbId}): frame owned by ${owner} but that H3 already closed — emitted in reading order under ${currentRootId}.`
           );
-          continue;
         }
       }
       collected.push(orphan);
@@ -2316,6 +2321,15 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   }
 
   const leftoverOrphans = orphans.slice(orphanCursor);
+  for (const [ownerId, bucket] of reservedOrphansByRoot) {
+    if (!bucket.length) continue;
+    leftoverOrphans.push(...bucket);
+    warnings.push(
+      `${bucket.length} condition/frame item(s) reserved for ${ownerId} after that H3 closed — recovered in "Pendiente de colocación" so Scripture is not dropped.`
+    );
+  }
+  reservedOrphansByRoot.clear();
+  leftoverOrphans.sort((a, b) => a.order - b.order);
   if (leftoverOrphans.length) {
     const block: string[] = [];
     block.push("### Pendiente de colocación");

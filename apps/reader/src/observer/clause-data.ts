@@ -1468,6 +1468,42 @@ export function formatClauseSpan(
   return selected.map(word => word.text).join(" ");
 }
 
+/**
+ * Format a selectedSpan that may cross verse boundaries.
+ * `formatClauseSpan` looks ids up in one verse's word list — a 7:2 finite
+ * whose span continues in 7:3 would otherwise print only 7:2.
+ */
+export function formatClauseSpanAcrossVerses(
+  selectedSpan: string[],
+  wordById: ReadonlyMap<string, SpanishWord>,
+  wordsByVerse: ReadonlyMap<string, SpanishWord[]>,
+  verseTextByKey: ReadonlyMap<string, string>
+): string {
+  const parts: string[] = [];
+  let runIds: string[] = [];
+  let runKey = "";
+  const flush = () => {
+    if (!runIds.length) return;
+    const text = formatClauseSpan(
+      runIds,
+      wordsByVerse.get(runKey) ?? [],
+      verseTextByKey.get(runKey)
+    ).trim();
+    if (text) parts.push(text);
+    runIds = [];
+  };
+  for (const id of selectedSpan) {
+    const word = wordById.get(id);
+    if (!word) continue;
+    const key = `${word.chapter}:${word.verse}`;
+    if (runKey && key !== runKey) flush();
+    runKey = key;
+    runIds.push(id);
+  }
+  flush();
+  return parts.join(" ").trim();
+}
+
 export function getClauseBeginningTokens(
   range: GreekClauseRange | null
 ): ClauseBeginningToken[] {
