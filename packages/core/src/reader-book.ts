@@ -118,41 +118,32 @@ export function subscribeReaderBook(listener: (bookId: ReaderBookId) => void): (
   };
 }
 
-/** Books with published LBF reading text in cgv-data (`bibles/LBF/{id}.lbf.md`). */
-const LBF_TEXT_BOOKS = new Set<ReaderBookId>([
-  "tito",
-  "1pedro",
-  "judas",
-  "1juan",
-  "filipenses",
-  "daniel",
-  "zacarias"
-]);
+type BookPresence = (bookId: ReaderBookId) => boolean;
 
-/** LBF available as a Reader bible version. */
+let publishedLbfText: BookPresence | null = null;
+let publishedLbfStructure: BookPresence | null = null;
+
+/**
+ * The Reader registers these from the cgv-data globs (`.lbf.md` / alignment JSON).
+ * Until then both predicates are false — no handwritten book lists.
+ */
+export function registerPublishedLbfAssets(text: BookPresence, structure: BookPresence): void {
+  publishedLbfText = text;
+  publishedLbfStructure = structure;
+}
+
+/** LBF available as a Reader bible version — true when `{id}.lbf.md` is published. */
 export function readerBookHasLbf(bookId: ReaderBookId): boolean {
-  return LBF_TEXT_BOOKS.has(bookId);
+  return publishedLbfText ? publishedLbfText(bookId) : false;
 }
 
 /**
- * Observer Structure / Compiler need published reverse-interlinear alignment.
- * Consume cgv-data first (`bibles/LBF/alignments/{id}.alignment.json`), then
- * the local Reader fallback (`data/lbf/{nt|ot}/*.alignment.json`).
- *
- * Zacarías: signed LBF + hand alignment are published in cgv-data.
- * Daniel still uses the local OT fallback until its alignment is published
- * under `bibles/LBF/alignments/`.
+ * Observer Structure / Compiler — true when reverse-interlinear alignment is
+ * present in cgv-data (`bibles/LBF/alignments/{id}.alignment.json`) or the
+ * local Reader fallback (`data/lbf/{nt|ot}/*.alignment.json`).
  */
 export function readerBookHasLbfStructure(bookId: ReaderBookId): boolean {
-  return (
-    bookId === "tito" ||
-    bookId === "1pedro" ||
-    bookId === "judas" ||
-    bookId === "1juan" ||
-    bookId === "filipenses" ||
-    bookId === "daniel" ||
-    bookId === "zacarias"
-  );
+  return publishedLbfStructure ? publishedLbfStructure(bookId) : false;
 }
 
 /** MorphGNT Mark layer (NT). */

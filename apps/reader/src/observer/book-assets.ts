@@ -1,9 +1,8 @@
 import {
   MORPHGNT_STEM_BY_BOOK,
   getReaderBookInfo,
-  readerBookHasLbf,
-  readerBookHasLbfStructure,
   readerBookHasOshb,
+  registerPublishedLbfAssets,
   type ReaderBookId
 } from "@cgv/core";
 
@@ -50,7 +49,8 @@ const morphFilesEager = import.meta.glob(
     "@cgv-data/morphology/MorphGNT/77-Tit-morphgnt.txt",
     "@cgv-data/morphology/MorphGNT/81-1Pe-morphgnt.txt",
     "@cgv-data/morphology/MorphGNT/86-Jud-morphgnt.txt",
-    "@cgv-data/morphology/MorphGNT/83-1Jn-morphgnt.txt"
+    "@cgv-data/morphology/MorphGNT/83-1Jn-morphgnt.txt",
+    "@cgv-data/morphology/MorphGNT/87-Re-morphgnt.txt"
   ],
   {
     query: "?raw",
@@ -73,6 +73,7 @@ const tokenFilesEager = import.meta.glob(
     "@cgv-data/interlinears/NT/1pedro.tokens.jsonl",
     "@cgv-data/interlinears/NT/judas.tokens.jsonl",
     "@cgv-data/interlinears/NT/1juan.tokens.jsonl",
+    "@cgv-data/interlinears/NT/apocalipsis.tokens.jsonl",
     "@cgv-data/interlinears/OT/daniel.tokens.jsonl",
     "@cgv-data/interlinears/OT/zacarias.tokens.jsonl"
   ],
@@ -127,11 +128,67 @@ const nblaFiles = import.meta.glob(
   { query: "?raw", import: "default" }
 ) as Record<string, () => Promise<string>>;
 
+function globKey(files: Record<string, unknown>, endsWith: string): string | undefined {
+  return Object.keys(files).find(path => path.endsWith(endsWith));
+}
+
+function publishedLbfExists(bookId: ReaderBookId): boolean {
+  return Boolean(globKey(lbfMdFiles, `/${bookId}.lbf.md`));
+}
+
+function publishedAlignmentExists(bookId: ReaderBookId): boolean {
+  if (globKey(canonicalLbfAlignmentFiles, `/alignments/${bookId}.alignment.json`)) return true;
+  const folder = getReaderBookInfo(bookId).testament === "ot" ? "ot" : "nt";
+  return Boolean(globKey(lbfAlignmentFiles, `/${folder}/${bookId}.alignment.json`));
+}
+
+registerPublishedLbfAssets(publishedLbfExists, publishedAlignmentExists);
+
+const morphCache = new Map<ReaderBookId, string>();
+const tokenCache = new Map<ReaderBookId, string>();
+const sourceLoads = new Map<ReaderBookId, Promise<void>>();
+
+function eagerMorph(bookId: ReaderBookId): string | undefined {
+  const stem = MORPHGNT_STEM_BY_BOOK[bookId];
+  if (!stem) return undefined;
+  const key = globKey(morphFilesEager, `/${stem}-morphgnt.txt`);
+  return key ? morphFilesEager[key] : undefined;
+}
+
+function eagerTokens(bookId: ReaderBookId): string | undefined {
+  const key = globKey(tokenFilesEager, `/${bookId}.tokens.jsonl`);
+  return key ? tokenFilesEager[key] : undefined;
+}
+
+/** Warm MorphGNT + tokens for Structure. Eager copies if bundled; else lazy glob. */
+export async function ensureWorkshopSources(bookId: ReaderBookId): Promise<void> {
+  if (readerBookHasOshb(bookId) && (eagerTokens(bookId) || tokenCache.has(bookId))) return;
+  if (!readerBookHasOshb(bookId) && (eagerMorph(bookId) || morphCache.has(bookId)) && (eagerTokens(bookId) || tokenCache.has(bookId))) {
+    return;
+  }
+  const pending = sourceLoads.get(bookId);
+  if (pending) return pending;
+  const load = (async () => {
+    if (!readerBookHasOshb(bookId) && !eagerMorph(bookId) && !morphCache.has(bookId)) {
+      morphCache.set(bookId, await loadMorphRaw(bookId));
+    }
+    if (!eagerTokens(bookId) && !tokenCache.has(bookId)) {
+      tokenCache.set(bookId, await loadTokensRaw(bookId));
+    }
+  })();
+  sourceLoads.set(bookId, load);
+  try {
+    await load;
+  } finally {
+    sourceLoads.delete(bookId);
+  }
+}
+
 async function loadByEndsWith(
   files: Record<string, () => Promise<string>>,
   endsWith: string
 ): Promise<string> {
-  const key = Object.keys(files).find(path => path.endsWith(endsWith));
+  const key = globKey(files, endsWith);
   if (!key) throw new Error(`Missing asset ending with ${endsWith}`);
   return files[key]();
 }
@@ -151,20 +208,13 @@ export function loadMorphRawSync(bookId: ReaderBookId): string {
     // Structure maps OT progress ids without MorphGNT lines.
     return "";
   }
-  const stem = MORPHGNT_STEM_BY_BOOK[bookId];
-  if (!stem) {
-    throw new Error(
-      `Sync MorphGNT is only bundled for LBF Structure books; missing ${getReaderBookInfo(bookId).displayName}`
-    );
-  }
-  const endsWith = `/${stem}-morphgnt.txt`;
-  const key = Object.keys(morphFilesEager).find(path => path.endsWith(endsWith));
-  if (!key) {
-    throw new Error(
-      `Sync MorphGNT is only bundled for LBF Structure books; missing ${getReaderBookInfo(bookId).displayName}`
-    );
-  }
-  return morphFilesEager[key];
+  const eager = eagerMorph(bookId);
+  if (eager !== undefined) return eager;
+  const cached = morphCache.get(bookId);
+  if (cached !== undefined) return cached;
+  throw new Error(
+    `MorphGNT for ${getReaderBookInfo(bookId).displayName} is not loaded yet. Call ensureWorkshopSources first.`
+  );
 }
 
 export async function loadTokensRaw(bookId: ReaderBookId): Promise<string> {
@@ -172,14 +222,13 @@ export async function loadTokensRaw(bookId: ReaderBookId): Promise<string> {
 }
 
 export function loadTokensRawSync(bookId: ReaderBookId): string {
-  const endsWith = `/${bookId}.tokens.jsonl`;
-  const key = Object.keys(tokenFilesEager).find(path => path.endsWith(endsWith));
-  if (!key) {
-    throw new Error(
-      `Sync tokens are only bundled for LBF Structure books; missing ${getReaderBookInfo(bookId).displayName}`
-    );
-  }
-  return tokenFilesEager[key];
+  const eager = eagerTokens(bookId);
+  if (eager !== undefined) return eager;
+  const cached = tokenCache.get(bookId);
+  if (cached !== undefined) return cached;
+  throw new Error(
+    `Tokens for ${getReaderBookInfo(bookId).displayName} are not loaded yet. Call ensureWorkshopSources first.`
+  );
 }
 
 export async function loadNblaRaw(bookId: ReaderBookId): Promise<string> {
@@ -212,25 +261,20 @@ function lbfMarkdownPath(bookId: ReaderBookId): string {
 }
 
 export function loadLbfRaw(bookId: ReaderBookId): string {
-  if (!readerBookHasLbf(bookId)) {
+  if (!publishedLbfExists(bookId)) {
     throw new Error(`LBF is not available for ${getReaderBookInfo(bookId).displayName} yet.`);
   }
   return lbfMdFiles[lbfMarkdownPath(bookId)];
 }
 
 export function loadLbfAlignmentRaw(bookId: ReaderBookId): string {
-  // Alignment is Structure-only. Prefer published cgv-data, then local fallback.
-  if (!readerBookHasLbfStructure(bookId)) {
-    return JSON.stringify({ records: [] });
-  }
-  const canonicalEndsWith = `/alignments/${bookId}.alignment.json`;
-  const canonicalKey = Object.keys(canonicalLbfAlignmentFiles).find(path => path.endsWith(canonicalEndsWith));
+  // Prefer published cgv-data, then local fallback. Empty file if neither exists.
+  const canonicalKey = globKey(canonicalLbfAlignmentFiles, `/alignments/${bookId}.alignment.json`);
   if (canonicalKey) {
     return canonicalLbfAlignmentFiles[canonicalKey];
   }
   const folder = getReaderBookInfo(bookId).testament === "ot" ? "ot" : "nt";
-  const endsWith = `/${folder}/${bookId}.alignment.json`;
-  const key = Object.keys(lbfAlignmentFiles).find(path => path.endsWith(endsWith));
+  const key = globKey(lbfAlignmentFiles, `/${folder}/${bookId}.alignment.json`);
   if (!key) {
     return JSON.stringify({ records: [] });
   }

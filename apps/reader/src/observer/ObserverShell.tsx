@@ -8,6 +8,7 @@ import {
   type ReaderBookId
 } from "@cgv/core";
 import { useUiLanguage } from "../core/UiLanguageContext";
+import { ensureWorkshopSources } from "./book-assets";
 import OPrototype from "./OPrototype";
 import SpanishClauseBuilder from "./SpanishClauseBuilder";
 import { setWorkshopBookId } from "./workshop-book";
@@ -36,6 +37,8 @@ export default function ObserverShell() {
   const bookInfo = getReaderBookInfo(bookId);
   const hasLbfStructure = readerBookHasLbfStructure(bookId);
   const hasMarkSpine = readerBookHasObserverMark(bookId);
+  const [sourcesReady, setSourcesReady] = useState(false);
+  const [sourcesError, setSourcesError] = useState<string | null>(null);
 
   // Keep the module workshop book aligned before children render. Structure
   // helpers still read getWorkshopBookId() in places; a useEffect sync would
@@ -55,6 +58,28 @@ export default function ObserverShell() {
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
+
+  useEffect(() => {
+    if (!hasLbfStructure || layer !== "structure") {
+      setSourcesReady(false);
+      setSourcesError(null);
+      return;
+    }
+    let live = true;
+    setSourcesReady(false);
+    setSourcesError(null);
+    ensureWorkshopSources(bookId).then(
+      () => {
+        if (live) setSourcesReady(true);
+      },
+      (error: unknown) => {
+        if (live) setSourcesError(error instanceof Error ? error.message : String(error));
+      }
+    );
+    return () => {
+      live = false;
+    };
+  }, [bookId, hasLbfStructure, layer]);
 
   function openLayer(next: WorkshopLayer) {
     window.location.hash = next === "structure" ? "clause" : "workshop";
@@ -92,7 +117,17 @@ export default function ObserverShell() {
       <div className="workshop-stage">
         {layer === "structure" ? (
           hasLbfStructure ? (
-            <SpanishClauseBuilder key={bookId} bookId={bookId} />
+            sourcesError ? (
+              <p className="workshop-lbf-gate" role="status">
+                {sourcesError}
+              </p>
+            ) : sourcesReady ? (
+              <SpanishClauseBuilder key={bookId} bookId={bookId} />
+            ) : (
+              <p className="workshop-lbf-gate" role="status">
+                {t.loadingBook}
+              </p>
+            )
           ) : (
             <p className="workshop-lbf-gate" role="status">
               {t.structureNeedsLbf(bookInfo.displayName)}

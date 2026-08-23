@@ -12,6 +12,7 @@ import {
   type ReaderBookId
 } from "@cgv/core";
 import { useUiLanguage } from "../core/UiLanguageContext";
+import { ensureWorkshopSources } from "../observer/book-assets";
 import { setWorkshopBookId } from "../observer/workshop-book";
 import { loadReaderBook } from "../reader/reader-data";
 import {
@@ -131,6 +132,7 @@ export default function CompilerShell() {
     setGenerating(true);
     setError(null);
     try {
+      await ensureWorkshopSources(bookId);
       const readingTextsByVerse = new Map<string, string>();
       if (bibleVersion !== "LBF") {
         const book = await loadReaderBook(bookId, bibleVersion);

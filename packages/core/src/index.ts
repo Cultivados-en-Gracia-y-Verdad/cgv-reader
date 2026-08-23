@@ -76,6 +76,7 @@ export {
   readReaderBook,
   writeReaderBook,
   subscribeReaderBook,
+  registerPublishedLbfAssets,
   readerBookHasLbf,
   readerBookHasLbfStructure,
   readerBookHasMorphGnt,
