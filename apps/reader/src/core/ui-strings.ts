@@ -17,14 +17,14 @@ export interface UiStrings {
   prefBook: string;
   prefBible: string;
   prefBibleNote: string;
+  prefRecovery: string;
+  prefRecoveryNote: string;
   loadingBook: string;
-  progressHint: (count: number) => string;
   recoverNotes: string;
   downloadBackup: string;
   recoveredNotesTitle: string;
   recoveredNotesEmpty: string;
   openBook: (book: string) => string;
-  dismiss: string;
   lockCompiler: string;
   unlockCompiler: string;
 
@@ -104,15 +104,14 @@ const EN: UiStrings = {
   prefBible: "Bible text (Reader)",
   prefBibleNote:
     "Book is shared across Reader, Observer Mark, and Compiler when LBF text exists (Titus, 1 Peter). Structure / Generate still need reverse-interlinear alignment (Titus for now). Notes stay keyed to each verse.",
+  prefRecovery: "Notes and backup",
+  prefRecoveryNote: "Review notes saved in this browser or download a copy of your current progress.",
   loadingBook: "Loading…",
-  progressHint: count =>
-    `Saved progress found in this browser (${count} progress record${count === 1 ? "" : "s"}) — auto-save is on.`,
   recoverNotes: "Recover notes",
   downloadBackup: "Download backup",
   recoveredNotesTitle: "Saved Reader notes",
   recoveredNotesEmpty: "No Reader notes were found in this browser storage.",
   openBook: book => `Open ${book}`,
-  dismiss: "Dismiss",
   lockCompiler: "Lock Compiler",
   unlockCompiler: "Unlock Compiler (teachers)",
 
@@ -202,15 +201,14 @@ const ES: UiStrings = {
   prefBible: "Texto bíblico (Lector)",
   prefBibleNote:
     "El libro se comparte entre Lector, Observador (Marcar) y Compilador cuando hay texto LBF (Tito, 1 Pedro). Estructura / Generar aún necesitan alineación inversa (Tito por ahora). Las notas quedan ligadas a cada versículo.",
+  prefRecovery: "Notas y respaldo",
+  prefRecoveryNote: "Revise las notas guardadas en este navegador o descargue una copia del progreso actual.",
   loadingBook: "Cargando…",
-  progressHint: count =>
-    `Progreso encontrado en este navegador (${count} registro${count === 1 ? "" : "s"} de progreso) — el guardado automático está activo.`,
   recoverNotes: "Recuperar notas",
   downloadBackup: "Descargar copia",
   recoveredNotesTitle: "Notas guardadas del Lector",
   recoveredNotesEmpty: "No se encontraron notas del Lector en el almacenamiento de este navegador.",
   openBook: book => `Abrir ${book}`,
-  dismiss: "Cerrar",
   lockCompiler: "Bloquear Compilador",
   unlockCompiler: "Desbloquear Compilador (maestros)",
 

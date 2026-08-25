@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   READER_BOOKS,
-  countExistingProgressKeys,
   downloadProgressFile,
-  maybeRestoreFromAutosave,
   readCapabilities,
   readAutosaveBackup,
   readerBookIdFromWorkshopSlug,
@@ -150,8 +148,6 @@ function ReaderAppInner() {
   const { t } = useUiLanguage();
   const [capabilities, setCapabilities] = useState<CapabilityState>(() => readCapabilities());
   const [zone, setZone] = useState<Zone>(() => readZoneFromHash(readCapabilities()));
-  const [progressHint, setProgressHint] = useState<string | null>(null);
-  const [progressCount, setProgressCount] = useState(0);
   const [showSavedNotes, setShowSavedNotes] = useState(false);
   const [savedNotes, setSavedNotes] = useState<SavedNoteGroup[]>([]);
 
@@ -165,13 +161,6 @@ function ReaderAppInner() {
     let cancelled = false;
 
     void (async () => {
-      const restored = await maybeRestoreFromAutosave();
-      if (cancelled) return;
-      if (restored) {
-        window.location.reload();
-        return;
-      }
-
       const recoveredConfirmations = await recoverGreekConfirmationsFromAutosave();
       if (cancelled) return;
       if (recoveredConfirmations > 0) {
@@ -180,13 +169,6 @@ function ReaderAppInner() {
       }
 
       await startProgressAutosave();
-      if (cancelled) return;
-
-      const count = countExistingProgressKeys();
-      if (count > 0) {
-        setProgressCount(count);
-        setProgressHint("show");
-      }
     })();
 
     return () => {
@@ -228,14 +210,13 @@ function ReaderAppInner() {
     writeReaderBook(bookId);
     openReader();
     setShowSavedNotes(false);
-    setProgressHint(null);
   }
 
   return (
     <>
       <div className="app-chrome" aria-label={t.chromeAria}>
         <div className="app-chrome-left">
-          <PreferencesPanel />
+          <PreferencesPanel onRecoverNotes={openSavedNotes} onDownloadBackup={downloadProgressFile} />
         </div>
         <div className="zone-toggle" role="tablist" aria-label={t.zonesAria}>
           <button
@@ -273,23 +254,6 @@ function ReaderAppInner() {
 
         {(zone === "observer" || zone === "compiler") && <ProgressControls />}
       </div>
-
-      {progressHint && zone === "reader" ? (
-        <p className="migration-banner" role="status">
-          <span className="migration-banner-copy">{t.progressHint(progressCount)}</span>
-          <span className="migration-banner-actions">
-            <button type="button" className="migration-banner-action" onClick={() => void openSavedNotes()}>
-              {t.recoverNotes}
-            </button>
-            <button type="button" className="migration-banner-action" onClick={() => downloadProgressFile()}>
-              {t.downloadBackup}
-            </button>
-            <button type="button" className="migration-banner-dismiss" onClick={() => setProgressHint(null)}>
-              {t.dismiss}
-            </button>
-          </span>
-        </p>
-      ) : null}
 
       {showSavedNotes ? (
         <div className="reader-note-panel reader-recovery-panel" role="dialog" aria-label={t.recoveredNotesTitle}>

@@ -6335,55 +6335,6 @@ div.compiler-search-hit {
   color: #fff;
 }
 
-.migration-banner {
-  position: fixed;
-  top: 3.6rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 7;
-  max-width: min(36rem, calc(100vw - 2rem));
-  margin: 0;
-  padding: 0.65rem 0.85rem;
-  border: 1px solid var(--reader-border);
-  border-radius: 0.55rem;
-  background: rgba(255, 253, 250, 0.96);
-  color: var(--reader-note-text);
-  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  font-size: 0.82rem;
-  line-height: 1.4;
-  box-shadow: 0 2px 10px var(--reader-shadow);
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-}
-
-.migration-banner-copy {
-  flex: 1 1 auto;
-}
-
-.migration-banner-actions {
-  display: inline-flex;
-  flex: 0 0 auto;
-  gap: 0.75rem;
-  align-items: center;
-}
-
-.migration-banner-action,
-.migration-banner-dismiss {
-  border: 0;
-  background: transparent;
-  color: var(--reader-accent);
-  font: inherit;
-  font-weight: 650;
-  cursor: pointer;
-  white-space: nowrap;
-  padding: 0;
-}
-
-.migration-banner-action {
-  color: var(--reader-text);
-}
-
 .reader-recovery-panel {
   z-index: 12;
 }
@@ -6649,6 +6600,56 @@ div.compiler-search-hit {
   line-height: 1.35;
 }
 
+.prefs-recovery {
+  display: grid;
+  gap: 0.45rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--reader-border);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+}
+
+.prefs-recovery h2,
+.prefs-recovery p {
+  margin: 0;
+}
+
+.prefs-recovery h2 {
+  color: var(--reader-text);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.prefs-recovery p {
+  color: var(--reader-soft);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.prefs-recovery-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.prefs-recovery-actions button {
+  border: 1px solid var(--reader-border);
+  border-radius: 999px;
+  padding: 0.48rem 0.78rem;
+  background: var(--reader-note-bg);
+  color: var(--reader-note-text);
+  font: inherit;
+  font-size: 0.84rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.prefs-recovery-actions button:hover,
+.prefs-recovery-actions button:focus-visible {
+  border-color: var(--reader-accent);
+  color: var(--reader-accent);
+  outline: none;
+}
+
 /* ——— Dark appearance — semantic surfaces across Reader / Observer / Compiler ——— */
 
 html[data-theme="dark"] :is(input, select, textarea) {
@@ -6666,7 +6667,6 @@ html[data-theme="dark"] :is(
   .progress-btn,
   .reader-note-panel-inner,
   .zone-toggle,
-  .migration-banner,
   .teacher-unlock,
   .workshop-layers,
   .prefs-toggle,
@@ -7066,16 +7066,6 @@ html[data-theme="dark"] :is(
     left: 0.55rem;
     right: 0.55rem;
     width: auto;
-  }
-
-  .migration-banner {
-    top: auto;
-    bottom: 3.6rem;
-    left: 0.75rem;
-    right: 0.75rem;
-    transform: none;
-    max-width: none;
-    flex-direction: column;
   }
 
   .teacher-unlock {

@@ -15,11 +15,16 @@ import {
 import { useTheme, type ThemePreference } from "./ThemeContext";
 import { useUiLanguage } from "./UiLanguageContext";
 
+interface PreferencesPanelProps {
+  onRecoverNotes: () => Promise<void>;
+  onDownloadBackup: () => void;
+}
+
 /**
  * Preferences: interface language + Reader book + Bible version.
  * Bible version / book only change Reader text — never Observer's LBF/MorphGNT stack.
  */
-export default function PreferencesPanel() {
+export default function PreferencesPanel({ onRecoverNotes, onDownloadBackup }: PreferencesPanelProps) {
   const { t, language, setLanguage } = useUiLanguage();
   const { preference: theme, setPreference: setTheme } = useTheme();
   const [open, setOpen] = useState(false);
@@ -72,6 +77,16 @@ export default function PreferencesPanel() {
   function handleBibleChange(next: BibleVersionId) {
     writeBibleVersion(next);
     setBibleVersion(next);
+  }
+
+  function handleRecoverNotes() {
+    setOpen(false);
+    void onRecoverNotes();
+  }
+
+  function handleDownloadBackup() {
+    setOpen(false);
+    onDownloadBackup();
   }
 
   return (
@@ -145,6 +160,18 @@ export default function PreferencesPanel() {
             </select>
           </label>
           <p className="prefs-note">{t.prefBibleNote}</p>
+          <section className="prefs-recovery" aria-labelledby={`${panelId}-recovery`}>
+            <h2 id={`${panelId}-recovery`}>{t.prefRecovery}</h2>
+            <p>{t.prefRecoveryNote}</p>
+            <div className="prefs-recovery-actions">
+              <button type="button" onClick={handleRecoverNotes}>
+                {t.recoverNotes}
+              </button>
+              <button type="button" onClick={handleDownloadBackup}>
+                {t.downloadBackup}
+              </button>
+            </div>
+          </section>
         </div>
       ) : null}
     </div>
