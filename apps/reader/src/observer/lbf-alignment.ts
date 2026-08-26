@@ -291,12 +291,19 @@ function tokenFromSourceTokenId(
   bookId: ReaderBookId,
   id: string
 ): { chapter: number; verse: number; token: number } | null {
-  const match = id.match(/^h\d{2}(\d{3})(\d{3})(\d{3})$/);
-  if (!match) return null;
-  const mtChapter = Number(match[1]);
-  const mtVerse = Number(match[2]);
-  const mapped = mtToProtestant(bookId, mtChapter, mtVerse);
-  return { chapter: mapped.chapter, verse: mapped.verse, token: Number(match[3]) };
+  // OSHB: h01CCC VV WWW. NT reverse-links: n66CCC VV WWW (Revelation = 66).
+  // Only `h` was parsed, so every Apocalipsis unit dropped and Structure
+  // never stamped a finiteVerbId — empty tree / actors / H4s.
+  const hebrew = id.match(/^h\d{2}(\d{3})(\d{3})(\d{3})$/);
+  if (hebrew) {
+    const mapped = mtToProtestant(bookId, Number(hebrew[1]), Number(hebrew[2]));
+    return { chapter: mapped.chapter, verse: mapped.verse, token: Number(hebrew[3]) };
+  }
+  const greek = id.match(/^n\d{2}(\d{3})(\d{3})(\d{3})$/);
+  if (greek) {
+    return { chapter: Number(greek[1]), verse: Number(greek[2]), token: Number(greek[3]) };
+  }
+  return null;
 }
 
 function preferFirstWord(text: string): boolean {

@@ -19,12 +19,23 @@ Loaded on every agent call. Kept deliberately small; the standards live in linke
 
 ## Read before acting
 
-1. **[`WORKFLOW.md`](WORKFLOW.md)** — the universal production standard. Authority, markers,
-   hierarchy, content rules, verification gates, release. Never book-specific.
-2. **`specs/{libro}.md`** — the specification for the book you are working on.
-3. **`manifests/{libro}.json`** — its machine-readable contract.
+This repo owns the **Reader, Observer and Compiler applications** and nothing else. It is a
+read-only consumer of published `cgv-data` datasets.
 
-If a rule you need is not in one of those three, it is not a rule yet. Ask; do not invent it.
+The production method lives in another repo and is not duplicated here:
+
+```
+herramientas/CGV-curriculo/DOCUMENT_MAP.md   who owns which rule — read first
+herramientas/CGV-curriculo/WORKFLOW.md       order, ownership, artifact chain
+herramientas/CGV-curriculo/STATE_MODEL.md    gates, findings, release
+herramientas/CGV-curriculo/MANUAL_STANDARD.md  markers, hierarchy, clearance
+```
+
+Book-specific artifacts — spec, blocks, state, skeleton, architecture, manual, reports — live
+with the course in `curriculo/{NN.Curso}/`. **Never write a stage output into this repo.**
+
+Read `DATA_CONTRACT.md` before changing any data, import, export, alignment, translation,
+approval, or dataset-loading code. If a request conflicts with it, stop and explain the conflict.
 
 ## The four things that matter most
 

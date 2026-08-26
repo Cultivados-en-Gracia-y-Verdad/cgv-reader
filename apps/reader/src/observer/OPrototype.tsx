@@ -9,6 +9,11 @@ import {
   type GreekVerse,
   type VerseInterlinearToken
 } from "./o-data";
+import {
+  buildAlignmentToTokenIdMap,
+  normalizeObserverMarkIds,
+  tokenAlignmentId
+} from "./mark-ids";
 import { TokenDetailAnchor } from "./TokenDetailPopover";
 import { getWorkshopBookId } from "./workshop-book";
 
@@ -210,6 +215,10 @@ function setsMatch(a: Set<string>, b: Set<string>): boolean {
     if (!b.has(id)) return false;
   }
   return true;
+}
+
+function tokenIsMarked(marked: Set<string>, token: GreekToken): boolean {
+  return marked.has(token.id) || marked.has(tokenAlignmentId(token));
 }
 
 // setsMatch already handles this correctly on its own: when groundTruth is
@@ -421,13 +430,63 @@ function OPrototypeLoaded({
     const index = new Map<string, GreekToken>();
     for (const [, verses] of data.greek) {
       for (const verse of verses) {
-        for (const token of verse.tokens) {
+        verse.tokens.forEach((token, position) => {
           index.set(token.id, token);
-        }
+          index.set(tokenAlignmentId(token), token);
+          // Jason marks are chapter:verse:token (1-based). If token.token was
+          // never stamped, still resolve the nth token in the verse.
+          index.set(`${verse.chapter}:${verse.verse}:${position + 1}`, token);
+        });
       }
     }
     return index;
   }, [data.greek]);
+  const morphTokenIds = useMemo(() => {
+    const ids = new Set<string>();
+    for (const [, verses] of data.greek) {
+      for (const verse of verses) {
+        for (const token of verse.tokens) ids.add(token.id);
+      }
+    }
+    return ids;
+  }, [data.greek]);
+  const alignmentToTokenId = useMemo(
+    () => buildAlignmentToTokenIdMap(data.greek.flatMap(([, verses]) => verses.flatMap(verse => verse.tokens))),
+    [data.greek]
+  );
+
+  // Jason writes chapter:verse:token. NT token.id is the MorphGNT line id.
+  // Remap so chips, highlights, toggles, and Brick ✓ all use the same ids.
+  useEffect(() => {
+    const remapSet = (current: Set<string>) => {
+      const next = normalizeObserverMarkIds(current, morphTokenIds, alignmentToTokenId);
+      return setsMatch(current, next) ? current : next;
+    };
+    setFiniteMarkedIds(remapSet);
+    setNominalHeadIds(remapSet);
+    setCommandMarkedIds(remapSet);
+    setStatementMarkedIds(remapSet);
+    setSubjunctiveMarkedIds(remapSet);
+    setOptativeMarkedIds(remapSet);
+    setParticipleMarkedIds(remapSet);
+    setCommandRecipientGroups(current => {
+      let changed = false;
+      const next = current.map(group => {
+        const tokenIds = group.tokenIds.map(id => alignmentToTokenId.get(id) ?? id);
+        if (tokenIds.some((id, index) => id !== group.tokenIds[index])) {
+          changed = true;
+          return { ...group, tokenIds };
+        }
+        return group;
+      });
+      return changed ? next : current;
+    });
+    setDraftGroupTokenIds(current => {
+      const next = current.map(id => alignmentToTokenId.get(id) ?? id);
+      return next.every((id, index) => id === current[index]) ? current : next;
+    });
+  }, [alignmentToTokenId, morphTokenIds]);
+
   const [activeVerse, setActiveVerse] = useState<GreekVerse | null>(
     () => data.greek[0]?.[1][0] ?? null
   );
@@ -469,22 +528,26 @@ function OPrototypeLoaded({
     [nominalHeadIds]
   );
 
-  const brick1Confirmed = brickConfirmed(finiteMarkedIds, groundTruth.finiteIds);
-  const brick2Confirmed = brickConfirmed(withoutNominalHeads(commandMarkedIds), groundTruth.byMood.imperative);
-  const brick2cConfirmed = brickConfirmed(withoutNominalHeads(statementMarkedIds), groundTruth.byMood.indicative);
-  const brick3Confirmed = brickConfirmed(withoutNominalHeads(subjunctiveMarkedIds), groundTruth.byMood.subjunctive);
-  const brick3cConfirmed = brickConfirmed(withoutNominalHeads(optativeMarkedIds), groundTruth.byMood.optative);
-  const brick4Confirmed = brickConfirmed(participleMarkedIds, groundTruth.participleIds);
+  const remapMarks = useCallback(
+    (marked: Set<string>) => normalizeObserverMarkIds(marked, morphTokenIds, alignmentToTokenId),
+    [alignmentToTokenId, morphTokenIds]
+  );
+  const brick1Confirmed = brickConfirmed(remapMarks(finiteMarkedIds), groundTruth.finiteIds);
+  const brick2Confirmed = brickConfirmed(remapMarks(withoutNominalHeads(commandMarkedIds)), groundTruth.byMood.imperative);
+  const brick2cConfirmed = brickConfirmed(remapMarks(withoutNominalHeads(statementMarkedIds)), groundTruth.byMood.indicative);
+  const brick3Confirmed = brickConfirmed(remapMarks(withoutNominalHeads(subjunctiveMarkedIds)), groundTruth.byMood.subjunctive);
+  const brick3cConfirmed = brickConfirmed(remapMarks(withoutNominalHeads(optativeMarkedIds)), groundTruth.byMood.optative);
+  const brick4Confirmed = brickConfirmed(remapMarks(participleMarkedIds), groundTruth.participleIds);
 
   // Marks that are not participles in the Greek — these alone will block the ✓
   // even when every real participle is already found (infinitives are the usual mix-up).
   const participleExtraIds = useMemo(() => {
     const extras: string[] = [];
-    for (const id of participleMarkedIds) {
+    for (const id of remapMarks(participleMarkedIds)) {
       if (!groundTruth.participleIds.has(id)) extras.push(id);
     }
     return extras;
-  }, [groundTruth.participleIds, participleMarkedIds]);
+  }, [groundTruth.participleIds, participleMarkedIds, remapMarks]);
 
   // Mood is mutually exclusive — toggleToken below already prevents a NEW
   // conflict (assigning a mood clears the other three), but that guard only
@@ -494,7 +557,10 @@ function OPrototypeLoaded({
   // titus-audit-corrections.md item 1).
   const moodConflictIds = useMemo(() => {
     const counts = new Map<string, number>();
-    const bump = (id: string) => counts.set(id, (counts.get(id) ?? 0) + 1);
+    const bump = (id: string) => {
+      const resolved = alignmentToTokenId.get(id) ?? id;
+      counts.set(resolved, (counts.get(resolved) ?? 0) + 1);
+    };
     commandMarkedIds.forEach(bump);
     statementMarkedIds.forEach(bump);
     subjunctiveMarkedIds.forEach(bump);
@@ -502,7 +568,7 @@ function OPrototypeLoaded({
     return Array.from(counts.entries())
       .filter(([, count]) => count > 1)
       .map(([id]) => id);
-  }, [commandMarkedIds, optativeMarkedIds, statementMarkedIds, subjunctiveMarkedIds]);
+  }, [alignmentToTokenId, commandMarkedIds, optativeMarkedIds, statementMarkedIds, subjunctiveMarkedIds]);
 
   useEffect(() => {
     window.localStorage.setItem(keys.finiteMarks, JSON.stringify(Array.from(finiteMarkedIds)));
@@ -579,7 +645,7 @@ function OPrototypeLoaded({
     for (const [, verses] of data.greek) {
       for (const verse of verses) {
         for (const token of verse.tokens) {
-          if (commandMarkedIds.has(token.id)) ordered.push(token);
+          if (tokenIsMarked(commandMarkedIds, token)) ordered.push(token);
         }
       }
     }
@@ -642,10 +708,16 @@ function OPrototypeLoaded({
   }, [commandRecipientGroups, recipientLens]);
 
   const selectedTokens = useMemo(() => {
-    return Array.from(activeMarkedIds)
-      .map(id => tokenById.get(id))
-      .filter((token): token is GreekToken => Boolean(token));
-  }, [activeMarkedIds, tokenById]);
+    const seen = new Set<string>();
+    const tokens: GreekToken[] = [];
+    for (const id of activeMarkedIds) {
+      const token = tokenById.get(id) ?? tokenById.get(alignmentToTokenId.get(id) ?? "");
+      if (!token || seen.has(token.id)) continue;
+      seen.add(token.id);
+      tokens.push(token);
+    }
+    return tokens;
+  }, [activeMarkedIds, alignmentToTokenId, tokenById]);
 
   const draftGroupTokens = useMemo(() => {
     return draftGroupTokenIds
@@ -919,19 +991,23 @@ function OPrototypeLoaded({
 
   const toggleToken = useCallback((token: GreekToken, verse: GreekVerse) => {
     setActiveVerse(verse);
+    const alignmentId = tokenAlignmentId(token);
     const updateMarks = (current: Set<string>) => {
       const next = new Set(current);
-      if (next.has(token.id)) {
+      const marked = next.has(token.id) || next.has(alignmentId);
+      if (marked) {
         next.delete(token.id);
+        next.delete(alignmentId);
       } else {
         next.add(token.id);
       }
       return next;
     };
     const discardMark = (current: Set<string>) => {
-      if (!current.has(token.id)) return current;
+      if (!current.has(token.id) && !current.has(alignmentId)) return current;
       const next = new Set(current);
       next.delete(token.id);
+      next.delete(alignmentId);
       return next;
     };
 
@@ -943,7 +1019,7 @@ function OPrototypeLoaded({
       // Independent of finite-verb marking — participles are a separate
       // grammatical category, not a mood of an already-marked finite verb.
       setParticipleMarkedIds(updateMarks);
-    } else if (finiteMarkedIds.has(token.id) || nominalHeadIds.has(token.id)) {
+    } else if (tokenIsMarked(finiteMarkedIds, token) || tokenIsMarked(nominalHeadIds, token)) {
       // A finite verb has exactly one mood — marking it here must clear any
       // mark left over from the other three mood bricks, or a verb could
       // silently sit in two moods at once with nothing in the UI showing it.
@@ -976,7 +1052,7 @@ function OPrototypeLoaded({
 
   const selectCommandGroupToken = useCallback((token: GreekToken, verse: GreekVerse) => {
     setActiveVerse(verse);
-    if (!commandMarkedIds.has(token.id)) return;
+    if (!tokenIsMarked(commandMarkedIds, token)) return;
 
     setDraftGroupTokenIds(current => {
       if (!current.length) return [token.id];
@@ -1054,7 +1130,7 @@ function OPrototypeLoaded({
   const getTokenMarkClassName = useCallback(
     (token: GreekToken) => {
       if (participation === "finite") {
-        if (finiteMarkedIds.has(token.id)) return "greek-token--finite-marked";
+        if (tokenIsMarked(finiteMarkedIds, token)) return "greek-token--finite-marked";
         if (signalOshbFiniteCandidates && groundTruth.finiteIds.has(token.id)) {
           return "greek-token--finite-candidate";
         }
@@ -1063,20 +1139,23 @@ function OPrototypeLoaded({
       }
 
       if (participation === "nominal") {
-        return nominalHeadIds.has(token.id) ? "greek-token--nominal-marked" : "";
+        return tokenIsMarked(nominalHeadIds, token) ? "greek-token--nominal-marked" : "";
       }
 
       if (participation === "command-recipients") {
         return [
-          commandMarkedIds.has(token.id) ? "greek-token--command-marked" : "",
-          groupedTokenIds.has(token.id) ? "greek-token--recipient-grouped" : "",
-          draftGroupTokenIds.includes(token.id) ? "greek-token--recipient-draft" : ""
+          tokenIsMarked(commandMarkedIds, token) ? "greek-token--command-marked" : "",
+          tokenIsMarked(groupedTokenIds, token) ? "greek-token--recipient-grouped" : "",
+          draftGroupTokenIds.includes(token.id) ||
+          draftGroupTokenIds.includes(tokenAlignmentId(token))
+            ? "greek-token--recipient-draft"
+            : ""
         ].filter(Boolean).join(" ");
       }
 
       if (participation === "mood-commands") {
-        if (commandMarkedIds.has(token.id)) return "greek-token--command-marked";
-        const moodEligible = finiteMarkedIds.has(token.id) || nominalHeadIds.has(token.id);
+        if (tokenIsMarked(commandMarkedIds, token)) return "greek-token--command-marked";
+        const moodEligible = tokenIsMarked(finiteMarkedIds, token) || tokenIsMarked(nominalHeadIds, token);
         if (!moodEligible) {
           return signalOshbFiniteCandidates ? "greek-token--oshb-non-candidate" : "";
         }
@@ -1090,22 +1169,22 @@ function OPrototypeLoaded({
       }
 
       if (participation === "mood-statements") {
-        if (!finiteMarkedIds.has(token.id) && !nominalHeadIds.has(token.id)) {
+        if (!tokenIsMarked(finiteMarkedIds, token) && !tokenIsMarked(nominalHeadIds, token)) {
           return signalOshbFiniteCandidates ? "greek-token--oshb-non-candidate" : "";
         }
         if (statementLens === "Statements only") {
-          if (statementMarkedIds.has(token.id)) return "greek-token--statement-marked";
+          if (tokenIsMarked(statementMarkedIds, token)) return "greek-token--statement-marked";
           if (signalOshbFiniteCandidates && groundTruth.byMood.indicative.has(token.id)) {
             return "greek-token--statement-candidate";
           }
           return signalOshbFiniteCandidates ? "greek-token--oshb-non-candidate" : "";
         }
         if (statementLens === "Commands only") {
-          return commandMarkedIds.has(token.id) ? "greek-token--command-marked" : "";
+          return tokenIsMarked(commandMarkedIds, token) ? "greek-token--command-marked" : "";
         }
         // All finite verbs
-        if (commandMarkedIds.has(token.id)) return "greek-token--command-marked";
-        if (statementMarkedIds.has(token.id)) return "greek-token--statement-marked";
+        if (tokenIsMarked(commandMarkedIds, token)) return "greek-token--command-marked";
+        if (tokenIsMarked(statementMarkedIds, token)) return "greek-token--statement-marked";
         if (signalOshbFiniteCandidates) {
           return groundTruth.byMood.indicative.has(token.id)
             ? "greek-token--statement-candidate"
@@ -1115,33 +1194,33 @@ function OPrototypeLoaded({
       }
 
       if (participation === "mood-subjunctive") {
-        if (!finiteMarkedIds.has(token.id)) return "";
+        if (!tokenIsMarked(finiteMarkedIds, token)) return "";
         return [
           "greek-token--finite-candidate",
-          commandMarkedIds.has(token.id) ? "greek-token--command-marked" : "",
-          statementMarkedIds.has(token.id) ? "greek-token--statement-marked" : "",
-          subjunctiveMarkedIds.has(token.id) ? "greek-token--subjunctive-marked" : ""
+          tokenIsMarked(commandMarkedIds, token) ? "greek-token--command-marked" : "",
+          tokenIsMarked(statementMarkedIds, token) ? "greek-token--statement-marked" : "",
+          tokenIsMarked(subjunctiveMarkedIds, token) ? "greek-token--subjunctive-marked" : ""
         ].filter(Boolean).join(" ");
       }
 
       if (participation === "mood-optative") {
-        if (!finiteMarkedIds.has(token.id)) return "";
+        if (!tokenIsMarked(finiteMarkedIds, token)) return "";
         return [
           "greek-token--finite-candidate",
-          commandMarkedIds.has(token.id) ? "greek-token--command-marked" : "",
-          statementMarkedIds.has(token.id) ? "greek-token--statement-marked" : "",
-          subjunctiveMarkedIds.has(token.id) ? "greek-token--subjunctive-marked" : "",
-          optativeMarkedIds.has(token.id) ? "greek-token--optative-marked" : ""
+          tokenIsMarked(commandMarkedIds, token) ? "greek-token--command-marked" : "",
+          tokenIsMarked(statementMarkedIds, token) ? "greek-token--statement-marked" : "",
+          tokenIsMarked(subjunctiveMarkedIds, token) ? "greek-token--subjunctive-marked" : "",
+          tokenIsMarked(optativeMarkedIds, token) ? "greek-token--optative-marked" : ""
         ].filter(Boolean).join(" ");
       }
 
       if (participation === "participles") {
-        return participleMarkedIds.has(token.id) ? "greek-token--participle-marked" : "";
+        return tokenIsMarked(participleMarkedIds, token) ? "greek-token--participle-marked" : "";
       }
 
       return [
-        finiteMarkedIds.has(token.id) ? "greek-token--finite-candidate" : "",
-        commandMarkedIds.has(token.id) ? "greek-token--command-marked" : ""
+        tokenIsMarked(finiteMarkedIds, token) ? "greek-token--finite-candidate" : "",
+        tokenIsMarked(commandMarkedIds, token) ? "greek-token--command-marked" : ""
       ].filter(Boolean).join(" ");
     },
     [
@@ -1314,12 +1393,12 @@ function OPrototypeLoaded({
                           <GreekTokenButton
                             disabled={
                               (isFiniteMoodParticipation(participation) &&
-                                !finiteMarkedIds.has(token.id) &&
-                                !nominalHeadIds.has(token.id)) ||
-                              (participation === "command-recipients" && !commandMarkedIds.has(token.id))
+                                !tokenIsMarked(finiteMarkedIds, token) &&
+                                !tokenIsMarked(nominalHeadIds, token)) ||
+                              (participation === "command-recipients" && !tokenIsMarked(commandMarkedIds, token))
                             }
                             key={token.id}
-                            isPressed={activeMarkedIds.has(token.id)}
+                            isPressed={tokenIsMarked(activeMarkedIds, token)}
                             markClassName={getTokenMarkClassName(token)}
                             onToggle={participation === "command-recipients" ? selectCommandGroupToken : toggleToken}
                             token={token}
