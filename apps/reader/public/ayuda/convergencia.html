@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cómo leer la franja de convergencia — CGV Reader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --ground:#F4F5F2; --surface:#FBFBF9; --surface-alt:#ECEEE9;
+    --ink:#171A19; --ink-soft:#454B48; --ink-mute:#6C736E;
+    --rule:#D7DBD4; --rule-soft:#E4E7E1;
+    --accent:#2C6A5E; --accent-soft:#DCEAE5;
+    --flag:#9C4426; --flag-soft:#F3E2DA;
+    --ok:#46662F; --ok-soft:#E3EBD8; --bar:#4A6068;
+    --serif:"Spectral",Georgia,"Times New Roman",serif;
+    --sans:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:#121513; --surface:#191D1B; --surface-alt:#212724;
+      --ink:#E7EAE5; --ink-soft:#B4BCB6; --ink-mute:#838C86;
+      --rule:#2E3532; --rule-soft:#242A27;
+      --accent:#6FB6A4; --accent-soft:#1E332E;
+      --flag:#D3866A; --flag-soft:#33231C;
+      --ok:#9CBE7E; --ok-soft:#232C1C; --bar:#7F98A1;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:#121513; --surface:#191D1B; --surface-alt:#212724;
+    --ink:#E7EAE5; --ink-soft:#B4BCB6; --ink-mute:#838C86;
+    --rule:#2E3532; --rule-soft:#242A27;
+    --accent:#6FB6A4; --accent-soft:#1E332E;
+    --flag:#D3866A; --flag-soft:#33231C;
+    --ok:#9CBE7E; --ok-soft:#232C1C; --bar:#7F98A1;
+  }
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:16.5px;line-height:1.62;margin:0;padding:0 24px 96px;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:812px;margin:0 auto}
+  header.mast{padding:64px 0 28px;border-bottom:2px solid var(--ink);display:flex;flex-direction:column;gap:15px}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:0}
+  h1{font-family:var(--serif);font-weight:700;font-size:clamp(2.1rem,5.4vw,3.2rem);line-height:1.05;letter-spacing:-.02em;margin:0;text-wrap:balance}
+  .entrada{font-family:var(--serif);font-size:1.16rem;line-height:1.5;color:var(--ink-soft);margin:0;max-width:60ch}
+  section{padding-top:50px}
+  h2{font-family:var(--serif);font-size:1.65rem;font-weight:600;letter-spacing:-.012em;line-height:1.2;margin:0 0 6px;text-wrap:balance}
+  .nota{font-size:14.5px;color:var(--ink-mute);margin:0 0 24px;max-width:66ch}
+  h3{font-family:var(--sans);font-size:1rem;font-weight:600;margin:0 0 6px}
+  p{margin:0 0 14px;max-width:68ch} p:last-child{margin-bottom:0}
+  code{font-family:var(--mono);font-size:.855em;background:var(--surface-alt);padding:1px 5px;border-radius:3px;color:var(--ink-soft)}
+  .tesis{background:var(--surface);border:1px solid var(--rule);border-left:3px solid var(--accent);padding:24px 26px;margin-top:34px}
+  .tesis p{font-family:var(--serif);font-size:1.08rem;line-height:1.55;margin:0 0 12px} .tesis p:last-child{margin:0}
+  .par{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:8px}
+  .par>div{padding:18px 20px;background:var(--surface);border:1px solid var(--rule-soft)}
+  .par .si{border-left:3px solid var(--ok)} .par .no{border-left:3px solid var(--flag)}
+  .par h3{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;margin-bottom:10px}
+  .par .si h3{color:var(--ok)} .par .no h3{color:var(--flag)}
+  .par ul{margin:0;padding-left:17px;font-size:14.5px;color:var(--ink-soft)}
+  .par li{margin-bottom:6px} .par li:last-child{margin:0}
+  .anat{display:flex;flex-direction:column;gap:2px;margin-bottom:10px}
+  .fila{display:grid;grid-template-columns:112px 1fr;gap:18px;padding:14px 16px;background:var(--surface);border:1px solid var(--rule-soft)}
+  .fila .term{font-family:var(--mono);font-size:12px;color:var(--accent);font-weight:500}
+  .fila .def{font-size:14.5px;color:var(--ink-soft)} .fila .def b{color:var(--ink);font-weight:600}
+  .scroll{overflow-x:auto;margin-bottom:10px}
+  table{border-collapse:collapse;width:100%;min-width:520px;font-size:14.5px}
+  th{text-align:left;font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink-mute);font-weight:500;padding:0 14px 9px 0;border-bottom:1px solid var(--ink)}
+  td{padding:11px 14px 11px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top;color:var(--ink-soft)}
+  td:first-child{color:var(--ink)}
+  td.pts{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;padding-right:20px;white-space:nowrap;color:var(--ink)}
+  tr.tuyo td:first-child::after{content:" ·";color:var(--accent)}
+  .barras{display:flex;flex-direction:column;gap:5px;background:var(--surface);border:1px solid var(--rule-soft);padding:20px;margin-bottom:12px}
+  .brow{display:grid;grid-template-columns:56px 1fr 120px;align-items:center;gap:14px}
+  .brow .ref{font-family:var(--mono);font-size:12.5px;font-weight:500;font-variant-numeric:tabular-nums}
+  .brow .pista{height:11px;background:var(--surface-alt)} .brow .relleno{height:11px;background:var(--bar);display:block}
+  .brow .fase{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;text-align:right}
+  .fase.abre{color:var(--flag)} .fase.int{color:var(--ink-mute)} .fase.res{color:var(--ok)}
+  .esc{display:flex;flex-direction:column;gap:2px;margin-bottom:12px}
+  .paso{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:baseline;padding:13px 16px;background:var(--surface);border:1px solid var(--rule-soft)}
+  .paso .n{font-family:var(--mono);font-size:11px;color:var(--ink-mute)}
+  .paso .cond{font-family:var(--mono);font-size:12.5px;color:var(--ink-soft);line-height:1.5}
+  .paso .sal{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  .paso.o{border-left:3px solid var(--flag)} .paso.o .sal{color:var(--flag)}
+  .paso.i{border-left:3px solid var(--bar)} .paso.i .sal{color:var(--ink-soft)}
+  .paso.r{border-left:3px solid var(--ok)} .paso.r .sal{color:var(--ok)}
+  .paso.x{border-left:3px solid var(--rule)} .paso.x .sal{color:var(--ink-mute)}
+  .aviso{background:var(--flag-soft);border:1px solid var(--flag);border-left:3px solid var(--flag);padding:20px 22px;margin-bottom:10px}
+  .aviso h3{color:var(--flag);font-family:var(--serif);font-size:1.08rem;margin-bottom:8px}
+  .aviso p{font-size:15px}
+  .proc{display:flex;flex-direction:column;gap:2px}
+  .pp{display:grid;grid-template-columns:34px 1fr;gap:16px;padding:16px 18px;background:var(--surface);border:1px solid var(--rule-soft)}
+  .pp .num{font-family:var(--serif);font-size:1.3rem;font-weight:700;color:var(--accent);line-height:1.2}
+  .pp h3{font-family:var(--serif);font-size:1.05rem;font-weight:600;margin-bottom:5px}
+  .pp p{font-size:14.5px;color:var(--ink-soft);margin:0}
+  footer{margin-top:58px;padding-top:20px;border-top:1px solid var(--rule);font-family:var(--mono);font-size:11.5px;color:var(--ink-mute);line-height:1.7}
+  @media (max-width:600px){
+    body{padding:0 18px 72px} .par{grid-template-columns:1fr}
+    .fila{grid-template-columns:1fr;gap:4px}
+    .brow{grid-template-columns:48px 1fr} .brow .fase{grid-column:1/-1;text-align:left}
+    .paso{grid-template-columns:1fr;gap:6px}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <p class="eyebrow">CGV Reader · Vista de Movimiento</p>
+  <h1>Cómo leer la franja de convergencia</h1>
+  <p class="entrada">Ordena los versículos según cuántas <em>clases distintas</em> de señal caen sobre uno solo. Eso no es lo mismo que dónde gira el libro, ni lo mismo que qué importa más.</p>
+</header>
+
+<div class="tesis">
+  <p>La especificación del motor dice su tarea en una línea: <em>¿dónde se acumulan varias señales de movimiento, y la presión abre, se intensifica o resuelve?</em></p>
+  <p>Y dice también su límite: <strong>el estudiante sigue colocando el H2. El motor solo ordena los lugares que vale la pena mirar. Nunca dice: <em>este es el H2</em>.</strong></p>
+</div>
+
+<section>
+  <h2>Qué responde y qué no</h2>
+  <p class="nota">Casi todas las malas lecturas vienen de hacerle las preguntas de la segunda columna.</p>
+  <div class="par">
+    <div class="si">
+      <h3>Responde</h3>
+      <ul>
+        <li>¿Dónde caen juntas varias <em>clases distintas</em> de señal?</li>
+        <li>¿Qué versículos conviene leer de cerca primero?</li>
+        <li>¿Lo que ocurre aquí empieza algo, continúa algo o aterriza algo?</li>
+        <li>¿Dónde marqué yo mismo presión o contraste?</li>
+      </ul>
+    </div>
+    <div class="no">
+      <h3>No responde</h3>
+      <ul>
+        <li>Cuál versículo es el más importante.</li>
+        <li>Dónde va el límite del H2.</li>
+        <li>Cuál es el versículo clave del libro.</li>
+        <li>Si un versículo con barra corta importa poco.</li>
+        <li>Nada comparable con otro libro: la escala es de este libro.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Las cuatro cifras</h2>
+  <p class="nota">Cada una se calcula distinto. Confundirlas es el error de siempre.</p>
+  <div class="anat">
+    <div class="fila"><span class="term">puntos</span><span class="def">La suma de los pesos de cada señal distinta hallada <b>en ese versículo</b>. Se agrupa por versículo (<code>cap:vers</code>), nunca por cláusula.</span></div>
+    <div class="fila"><span class="term">barra</span><span class="def"><code>redondear(puntos ÷ puntaje mayor × 10)</code>, con mínimo 1 si hay algún punto. <b>Es relativa al versículo más alto de este libro</b>: un solo versículo muy alto acorta todas las demás barras, y dos libros no se comparan entre sí.</span></div>
+    <div class="fila"><span class="term">foco</span><span class="def">Versículo cuyos puntos llegan al umbral — <b>6 por omisión</b>. Los focos se destacan en la franja. Lo que queda debajo igual tiene barra; solo no se resalta.</span></div>
+    <div class="fila"><span class="term">fase</span><span class="def"><code>abre</code> · <code>se intensifica</code> · <code>resuelve</code>, o ninguna. <b>Solo se calcula desde 4 puntos</b>: un versículo puede tener barra visible y ninguna fase.</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Las doce señales</h2>
+  <p class="nota">Los puntos de un versículo son estas señales, sumadas. Las filas marcadas con · vienen de <em>sus</em> marcas, no del texto.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th style="width:42%">Señal</th><th class="pts" style="width:14%">Puntos</th><th>Qué la dispara</th></tr></thead>
+      <tbody>
+        <tr><td>Propósito de escritura</td><td class="pts">5</td><td>El autor dice por qué escribe <em>él</em>: <em>escribo / anunciamos</em> + <em>para que</em></td></tr>
+        <tr><td>Fórmula de escritura</td><td class="pts">5</td><td><em>les escribo</em>, <em>he escrito</em></td></tr>
+        <tr><td>Reinicio de discurso</td><td class="pts">4</td><td>Vocativo, cambio de destinatario, mandato que redirige, <em>y ahora</em></td></tr>
+        <tr><td>Vocabulario que regresa</td><td class="pts">3</td><td>Reaparece un campo semántico</td></tr>
+        <tr><td>Convergencia de vocabulario</td><td class="pts">3</td><td>Dos o más campos caen juntos</td></tr>
+        <tr><td>Regreso de palabra</td><td class="pts">3</td><td>Vuelve una palabra de contenido</td></tr>
+        <tr><td>Mandato</td><td class="pts">3</td><td>Un H3 de este versículo es imperativo</td></tr>
+        <tr class="tuyo"><td>Presión</td><td class="pts">3</td><td>Usted marcó presión hacia este versículo</td></tr>
+        <tr><td>Razón</td><td class="pts">3</td><td>Una cláusula de razón fundamenta un H3</td></tr>
+        <tr class="tuyo"><td>Contraste observado</td><td class="pts">3</td><td>Usted marcó aquí un par en contraste</td></tr>
+        <tr><td>Seguridad</td><td class="pts">2</td><td><em>sabemos</em>, <em>conocemos</em></td></tr>
+        <tr><td>Fórmula</td><td class="pts">2</td><td>Vuelve una familia de fórmulas</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Dos de las doce son suyas. Si marca presión en una costura, la barra sube. La franja le devuelve, en parte, su propia lectura. Eso sirve —muestra dónde se agrupan sus marcas— siempre que no lo tome después como confirmación independiente.</p>
+</section>
+
+<section>
+  <h2>Cómo se decide la fase</h2>
+  <p class="nota">Una escalera estricta: gana la primera condición que se cumple. Léala una vez y las etiquetas dejan de ser un misterio.</p>
+  <div class="esc">
+    <div class="paso x"><span class="n">0</span><span class="cond">menos de 4 puntos</span><span class="sal">sin fase</span></div>
+    <div class="paso r"><span class="n">1</span><span class="cond">propósito de resolución · <em>o</em> · seguridad + propósito de escritura</span><span class="sal">resuelve</span></div>
+    <div class="paso r"><span class="n">2</span><span class="cond">seguridad + vocabulario que regresa + <em>sin</em> reinicio</span><span class="sal">resuelve</span></div>
+    <div class="paso o"><span class="n">3</span><span class="cond">alguna señal de regreso (vocabulario · palabra · presión · razón)<br>y además reinicio <em>o</em> propósito de escritura <em>o</em> contraste</span><span class="sal">abre</span></div>
+    <div class="paso i"><span class="n">4</span><span class="cond">alguna señal de regreso, sin ninguna de esas</span><span class="sal">se intensifica</span></div>
+    <div class="paso o"><span class="n">5</span><span class="cond">reinicio · propósito de escritura · contraste · mandato — sin señal de regreso</span><span class="sal">abre</span></div>
+    <div class="paso x"><span class="n">6</span><span class="cond">cualquier otro caso</span><span class="sal">sin fase</span></div>
+  </div>
+  <p><strong><code>se intensifica</code> es lo que queda cuando nada más se cumple; no mide calor.</strong> Quiere decir: algo regresó aquí, y nada marcó un comienzo nuevo. Una fila larga de <code>SE INTENSIFICA</code> es el motor diciendo <em>el material sigue volviendo y nadie ha abierto nada nuevo</em>: eso es justamente la forma de un ciclo, y por eso merece atención.</p>
+</section>
+
+<section>
+  <h2>Una franja leída bien</h2>
+  <p class="nota">Forma ilustrativa; no son datos medidos.</p>
+  <div class="barras">
+    <div class="brow"><span class="ref">1:17</span><span class="pista"><span class="relleno" style="width:82%"></span></span><span class="fase abre">abre</span></div>
+    <div class="brow"><span class="ref">1:18</span><span class="pista"><span class="relleno" style="width:26%"></span></span><span class="fase int">se intensifica</span></div>
+    <div class="brow"><span class="ref">1:19</span><span class="pista"><span class="relleno" style="width:17%"></span></span><span class="fase int">se intensifica</span></div>
+    <div class="brow"><span class="ref">1:20</span><span class="pista"><span class="relleno" style="width:30%"></span></span><span class="fase int">se intensifica</span></div>
+  </div>
+  <p>Léalo así: <em>en 1:17 cayeron juntas cuatro o cinco clases distintas de señal; en 1:19 cayeron una o dos.</em> Nada más. Un versículo que hace una sola cosa con toda claridad siempre pierde frente a uno que hace cuatro cosas a la vez, porque la medida premia la convergencia de clases.</p>
+  <p><strong>Una medida de convergencia no puede señalar el versículo clave de un libro</strong>, porque los versículos clave suelen ser precisamente los que hacen una sola cosa. No da una respuesta equivocada: no da ninguna.</p>
+  <p>Para saber qué se disparó de verdad, lea la línea que el Compilador escribe por cada foco: <code>puntos {n} · {clases}</code>. Ahí están las señales por nombre. La barra solo las suma.</p>
+</section>
+
+<section>
+  <h2>Cinco maneras de leerla mal</h2>
+  <div class="aviso"><h3>1 · Tomar la altura como importancia</h3><p>La altura es cuántas clases convergieron. Un versículo decisivo que hace una sola cosa saca poco puntaje por diseño.</p></div>
+  <div class="aviso"><h3>2 · Comparar barras entre libros</h3><p>Cada barra se mide contra el máximo de su propio libro. En un libro de señales débiles, la barra más alta igual llega a 10. La escala no tiene valor absoluto.</p></div>
+  <div class="aviso"><h3>3 · Olvidar que los detectores se hicieron para 1 Juan</h3><p>Propósito de escritura, vocativos (<em>Hijitos</em>, <em>Amados</em>) y seguridad (<em>en esto sabemos</em>) son rasgos de carta. En Apocalipsis <em>Escribe</em> es un mandato <em>a</em> Juan, no Juan declarando su propósito, y el detector de mayor peso no distingue una cosa de la otra. Fuera de una carta, una barra corta puede ser desajuste de género y no observación.</p></div>
+  <div class="aviso"><h3>4 · Leer sus propias marcas como confirmación</h3><p>Presión y contraste valen 3 puntos cada una y salen de usted. Un grupo que usted mismo creó no es evidencia independiente del límite que ya sospechaba.</p></div>
+  <div class="aviso"><h3>5 · Dejar que coloque el H2</h3><p>La especificación le prohíbe nombrar secciones, y el umbral es una invitación a mirar, no un límite. El H2 es un juicio sobre una línea de pensamiento que todavía corre; la franja no puede verla.</p></div>
+</section>
+
+<section>
+  <h2>Un procedimiento que funciona</h2>
+  <p class="nota">Primero la evidencia, después la lectura. Ninguna de las dos es la puerta por sí sola.</p>
+  <div class="proc">
+    <div class="pp"><span class="num">1</span><div><h3>Lea el libro entero antes de la franja</h3><p>Si el gráfico es su primera pasada, sus picos se le van a volver el bosquejo, los merezcan o no.</p></div></div>
+    <div class="pp"><span class="num">2</span><div><h3>Tome los focos como lista de lectura</h3><p>Seis o más quiere decir que varias clases cayeron juntas. Vaya a ver esos versículos. Eso es todo lo que promete.</p></div></div>
+    <div class="pp"><span class="num">3</span><div><h3>Abra la evidencia, no el puntaje</h3><p>El tablero del versículo agrupa las señales reales. Un 9 armado con tres marcas suyas y un regreso de vocabulario es un hecho distinto de un 9 armado con una fórmula de escritura y un reinicio.</p></div></div>
+    <div class="pp"><span class="num">4</span><div><h3>Pregunte qué vio el detector, y si acertó</h3><p>Sobre todo fuera de una carta. Un detector que se dispara está haciendo una afirmación sobre el texto, y usted puede comprobarla en el texto.</p></div></div>
+    <div class="pp"><span class="num">5</span><div><h3>Lea las fases como secuencia, no como etiquetas</h3><p>¿Dónde empieza y dónde termina una fila de <code>se intensifica</code>? Una fila larga sin cortes es un ciclo. Un <code>resuelve</code> es un aterrizaje posible. Esa forma dice más que cualquier barra suelta.</p></div></div>
+    <div class="pp"><span class="num">6</span><div><h3>Vuelva al texto y decida</h3><p>El límite está donde termina una línea de pensamiento, no donde las barras son altas. Si la franja y la lectura no coinciden, manda la lectura, y vale la pena dejar registrada la discrepancia.</p></div></div>
+  </div>
+</section>
+
+<footer>
+  Motor: <code>apps/reader/src/observer/convergence-engine.ts</code> — pesos, escalera de fases, fórmula de la barra y umbral de foco leídos del código.<br>
+  Especificación: <code>docs/observer/convergence-engine-spec.md</code>, construida sobre <code>docs/observer/book-movement-spec.md</code>, que declara que sus detectores se derivaron de 1 Juan.
+</footer>
+
+</div>
+</body>
+</html>
