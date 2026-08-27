@@ -67,8 +67,16 @@ import {
 } from "../observer/clause-signals";
 import {
   hoistOutlineH4s,
+  partitionRootsByOutlineStanding,
   standingForClause
 } from "../observer/clause-outline";
+import {
+  isParticipleGreekMorph,
+  prefixWordIsFiniteHost,
+  prefixWordIsParticipleScaffold,
+  prefixRepeatsFiniteSurface,
+  shouldPeelLeadingScaffolding
+} from "./claim-peel";
 import {
   applyCoordinateInheritance,
   deriveSkeleton,
@@ -88,9 +96,6 @@ function collectSkeletonIds(node: SkeletonNode): string[] {
   return [node.finiteVerbId, ...node.children.flatMap(collectSkeletonIds)];
 }
 
-function isParticipleGreekMorph(morph: string | undefined): boolean {
-  return Boolean(morph && morph.startsWith("V-") && morph.length > 5 && morph[5] === "P");
-}
 import { getWorkshopBookId } from "../observer/workshop-book";
 import { formatYamlFrontmatter, resolveMetaForGenerate, type ManualMeta } from "./compiler-meta";
 import { readReaderNotes, readerNoteCommentLines, verseKeysFromNoteTarget } from "./compiler-gathering";
@@ -621,7 +626,11 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   const finiteVerbs = verses.flatMap(verse => verse.words.filter(word => word.finiteVerbId));
   const finiteVerbWordById = new Map<string, SpanishWord>();
   for (const word of finiteVerbs) {
-    if (word.finiteVerbId) finiteVerbWordById.set(word.finiteVerbId, word);
+    // First Spanish host wins. Two Cayós tagged with the same ἔπεσεν must not
+    // move the cut to the second word and peel the first into a stub `+`.
+    if (word.finiteVerbId && !finiteVerbWordById.has(word.finiteVerbId)) {
+      finiteVerbWordById.set(word.finiteVerbId, word);
+    }
   }
 
   const moodReviewedVerbIds = new Set<string>();
@@ -769,9 +778,9 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
 
   /**
    * H3/H4 claim = full independent-clause span by default (Version A).
-   * Only peel leading words into `+` when the prefix contains a marked / morph
-   * participle (heavy scaffolding such as ἐραυνῶντες…). Short openings like
-   * «Y este» stay inside the claim: `#### *Y este es el mensaje*`.
+   * Only peel leading words into `+` when the prefix is real participle
+   * scaffolding (ἐραυνῶντες…). Never peel 1B heads, a prefix that already
+   * holds a finite (*Cayó*, cayó), or a leftover 1–2 word stub.
    */
   function splitClaimAtFinite(finiteVerbId: string): { prefixWordIds: string[]; claimText: string } {
     const full = spanTextFor(finiteVerbId);
@@ -803,16 +812,48 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     if (cut <= 0) return { prefixWordIds: [], claimText: full };
 
     const prefixWordIds = ids.slice(0, cut);
-    const prefixHasParticiple = prefixWordIds.some(id => {
-      if (participleMarkedAlignmentIds.has(id)) return true;
+    const claimIds = ids.slice(cut);
+    const prefixHasParticipleScaffold = prefixWordIds.some(id => {
       const word = wordById.get(id);
-      return isParticipleGreekMorph(word?.greekMorph);
+      return prefixWordIsParticipleScaffold({
+        markedAsParticiple: participleMarkedAlignmentIds.has(id),
+        greekMorph: word?.greekMorph,
+        wordHasOwnFinite: Boolean(word?.finiteVerbId)
+      });
     });
-    if (!prefixHasParticiple) {
+    const prefixContainsFinite =
+      prefixWordIds.some(id => {
+        const word = wordById.get(id);
+        if (!word) return false;
+        if (
+          prefixWordIsFiniteHost({
+            greekMorph: word.greekMorph,
+            finiteVerbId: word.finiteVerbId,
+            currentFiniteVerbId: finiteVerbId
+          })
+        ) {
+          return true;
+        }
+        for (const [otherId, host] of finiteVerbWordById) {
+          if (otherId !== finiteVerbId && host.id === word.id) return true;
+        }
+        return false;
+      }) ||
+      prefixRepeatsFiniteSurface(
+        prefixWordIds.map(id => wordById.get(id)?.text ?? ""),
+        finiteWord.text
+      );
+    if (
+      !shouldPeelLeadingScaffolding({
+        isNominalHead: nominalHeadIds.has(finiteVerbId),
+        prefixWordCount: prefixWordIds.length,
+        claimWordCount: claimIds.length,
+        prefixHasParticipleScaffold,
+        prefixContainsFinite
+      })
+    ) {
       return { prefixWordIds: [], claimText: full };
     }
-
-    const claimIds = ids.slice(cut);
     // Prefer same-verse formatting; fall back to full span text from cut onward
     // by rebuilding from word texts when the span crosses verses.
     const claimParts: string[] = [];
@@ -1000,9 +1041,27 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     );
   }
 
+  // H4 ≠ Observer root. Commands and quoted main clauses stand even when Q2
+  // is yes. Same function Observer Outline uses — no testament switch.
+  const beginningTokensById = new Map(clauses.map(clause => [clause.finiteVerbId, clause.beginningTokens]));
+  const outlineContext = { commandIds: commandMarkIds, beginningTokensById };
+  function outlineStandingOf(id: string): "h4" | "dependent" {
+    const info = clauseSpanInfoById.get(id);
+    const resolved = info
+      ? resolveClause(info, augmentedObservations[id], clauseSpanInfos)
+      : { relation: null, parked: false };
+    return standingForClause(
+      id,
+      resolved.relation,
+      "parked" in resolved ? resolved.parked : false,
+      augmentedObservations[id]?.outlineStanding,
+      outlineContext
+    ).standing;
+  }
+
   // Demote false independents → parked-style orphans under the surrounding root unit.
   const demotedParked: ParkedClause[] = [];
-  const rootsAfterDemote: SkeletonNode[] = [];
+  const rootsAfterGrammarDemote: SkeletonNode[] = [];
   for (const root of workingRoots) {
     const clause = clauseById.get(root.finiteVerbId);
     const why = clause ? rootDemoteReason(clause) : null;
@@ -1022,27 +1081,26 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     }
     const suspicion = clause ? rootSuspicionReason(clause) : null;
     if (suspicion) warnings.push(`${root.reference} (${root.finiteVerbId}): ${suspicion}`);
-    rootsAfterDemote.push(root);
+    rootsAfterGrammarDemote.push(root);
   }
 
-  // H4 ≠ Observer root. Commands and quoted main clauses stand even when Q2
-  // is yes. Same function Observer Outline uses — no testament switch.
-  const beginningTokensById = new Map(clauses.map(clause => [clause.finiteVerbId, clause.beginningTokens]));
-  const outlineContext = { commandIds: commandMarkIds, beginningTokensById };
-  function outlineStandingOf(id: string): "h4" | "dependent" {
-    const info = clauseSpanInfoById.get(id);
-    const resolved = info
-      ? resolveClause(info, augmentedObservations[id], clauseSpanInfos)
-      : { relation: null, parked: false };
-    return standingForClause(
-      id,
-      resolved.relation,
-      "parked" in resolved ? resolved.parked : false,
-      augmentedObservations[id]?.outlineStanding,
-      outlineContext
-    ).standing;
+  // Keep nested is a no-op in hoistOutlineH4s for incoming roots. Park them.
+  const { units: standingUnits, nested: standingNested } = partitionRootsByOutlineStanding(
+    rootsAfterGrammarDemote,
+    outlineStandingOf
+  );
+  for (const root of standingNested) {
+    warnings.push(
+      `${root.reference} (${root.finiteVerbId}): Keep nested — operator standing is dependent; emitted under the surrounding unit, not as an H4.`
+    );
+    demotedParked.push({
+      ...root,
+      describedNounSpan: [],
+      relation: root.relation
+    });
   }
-  const rootsAfterHoist = hoistOutlineH4s(rootsAfterDemote, outlineStandingOf).sort(
+
+  const rootsAfterHoist = hoistOutlineH4s(standingUnits, outlineStandingOf).sort(
     (a, b) => (clauseById.get(a.finiteVerbId)?.order ?? 0) - (clauseById.get(b.finiteVerbId)?.order ?? 0)
   );
 
@@ -1720,6 +1778,10 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
    * apodosis — drop shared tokens and cut at the climbed apodosis span *start*,
    * then drop post-comma orphans so we don’t print «Si confesamos…, él» or
    * «como…, tenemos comunión…» on the protasis lines.
+   *
+   * Do not drop post-comma words when there is no apodosis cut: a coordinated
+   * protasis («adora a la bestia y a su imagen, y recibe una marca…») uses a
+   * comma inside the condition, not as the apodosis boundary.
    */
   function displaySpanText(finiteVerbId: string, fallback: string): string {
     // OT/OSHB spans are hand-coded precisely — NT apodosis-bleed trimming does
@@ -1754,7 +1816,9 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       if (cutAt !== undefined && word.index >= cutAt) return false;
       return true;
     });
-    useIds = dropWordsAfterClauseComma(finiteVerbId, useIds);
+    if (clipCutAtFiniteIds(finiteVerbId).length) {
+      useIds = dropWordsAfterClauseComma(finiteVerbId, useIds);
+    }
     if (!useIds.length) useIds = ids;
     const parts: string[] = [];
     let runIds: string[] = [];

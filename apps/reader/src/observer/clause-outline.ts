@@ -1,5 +1,11 @@
 import { findLeadingMarkerToken, type LeadingMarker } from "./clause-signals";
 import type { ClauseRelation } from "./clause-tree";
+import {
+  hoistOutlineH4s,
+  partitionRootsByOutlineStanding
+} from "./outline-hoist";
+
+export { hoistOutlineH4s, partitionRootsByOutlineStanding };
 
 type BeginningTokens = Parameters<typeof findLeadingMarkerToken>[0];
 
@@ -96,32 +102,4 @@ export function standingForClause(
     leadingKind: leadingKindOf(beginningTokens, finiteVerbId),
     override
   });
-}
-
-/**
- * Lift outline-H4 dependents out of the grammatical tree so they become
- * sibling units. Incoming roots stay units. Children that remain dependent
- * travel with the unit that still owns them.
- */
-export function hoistOutlineH4s<T extends { finiteVerbId: string; children: T[] }>(
-  roots: T[],
-  standingOf: (id: string) => OutlineStanding
-): T[] {
-  const lifted: T[] = [];
-
-  function hoistChildren(node: T): T {
-    const keep: T[] = [];
-    for (const child of node.children) {
-      const processed = hoistChildren(child);
-      if (standingOf(processed.finiteVerbId) === "h4") {
-        lifted.push(processed);
-      } else {
-        keep.push(processed);
-      }
-    }
-    return { ...node, children: keep };
-  }
-
-  const keptRoots = roots.map(hoistChildren);
-  return [...keptRoots, ...lifted];
 }

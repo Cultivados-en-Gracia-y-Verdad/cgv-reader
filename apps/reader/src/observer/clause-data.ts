@@ -1683,6 +1683,20 @@ export function deriveSpanishSpanFromGreekRange(
   let high = Math.max(...wordIndexes);
   ({ low, high } = expandAlignedPhrases(low, high, verseWords, chapter, verse, startToken, endToken, bookId));
 
+  // Clamp to the verse. A word index past the last word is not a word: the Compiler drops
+  // it silently, so the damage is invisible until a gate counts it — and when EVERY index
+  // in a span lands past the end, the H4 renders empty with nothing to show anyone.
+  //
+  // Apocalipsis carried 17 such spans (2 of them wholly out of range: 4:8:35, 14:13:32).
+  // The token→word maps and expandAlignedPhrases can each reach past the last word; nothing
+  // downstream can distinguish a surplus index from a real one, so the bound belongs here,
+  // at the only place these ids are minted.
+  const lastIndex = verseWords.length - 1;
+  if (lastIndex < 0) return [];
+  low = Math.max(0, low);
+  high = Math.min(high, lastIndex);
+  if (high < low) return [];
+
   const ids: string[] = [];
   for (let index = low; index <= high; index += 1) {
     ids.push(wordId(chapter, verse, index));

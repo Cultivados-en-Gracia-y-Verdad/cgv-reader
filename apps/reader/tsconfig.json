@@ -20,5 +20,6 @@
       "@cgv-data/*": ["../../../cgv-data/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": ["src/**/*.test.ts"]
 }

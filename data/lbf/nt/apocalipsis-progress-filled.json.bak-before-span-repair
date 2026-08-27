@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "book": "apocalipsis",
-  "exportedAt": "2026-08-26T17:39:00Z",
+  "exportedAt": "2026-08-26T18:17:00Z",
   "data": {
     "the-reader:apocalipsis:notes": [],
     "o-prototype:apocalipsis:finite-verb-marks": [
@@ -1092,6 +1092,26 @@
       "6:6:11",
       "6:6:16",
       "6:8:12",
+      "7:5:5",
+      "7:5:11",
+      "7:5:16",
+      "7:6:5",
+      "7:6:10",
+      "7:6:15",
+      "7:7:5",
+      "7:7:10",
+      "7:7:15",
+      "7:8:5",
+      "7:8:10",
+      "7:8:15",
+      "7:9:34",
+      "7:10:7",
+      "7:12:4",
+      "9:7:6",
+      "9:7:18",
+      "9:10:14",
+      "9:11:9",
+      "13:4:17",
       "13:18:21",
       "13:22:11",
       "13:31:9",
@@ -1105,10 +1125,14 @@
       "17:9:3",
       "17:14:22",
       "18:8:20",
+      "18:10:11",
+      "18:16:2",
       "18:18:11",
+      "18:19:14",
       "19:1:15",
       "19:2:2",
       "19:9:5",
+      "19:12:3",
       "19:12:12",
       "20:5:14",
       "20:6:1",
@@ -1118,9 +1142,23 @@
       "21:8:21",
       "21:11:9",
       "21:13:3",
+      "21:14:3",
       "21:16:8",
       "21:18:7",
       "21:18:11",
+      "21:19:2",
+      "21:19:12",
+      "21:19:17",
+      "21:19:20",
+      "21:19:23",
+      "21:20:2",
+      "21:20:5",
+      "21:20:8",
+      "21:20:11",
+      "21:20:14",
+      "21:20:17",
+      "21:20:20",
+      "21:20:23",
       "21:21:6",
       "21:21:21",
       "21:23:24",
@@ -1515,12 +1553,27 @@
       "7:2:14",
       "7:2:21",
       "7:4:2",
+      "7:5:5",
+      "7:5:11",
+      "7:5:16",
+      "7:6:5",
+      "7:6:10",
+      "7:6:15",
+      "7:7:5",
+      "7:7:10",
+      "7:7:15",
+      "7:8:5",
+      "7:8:10",
+      "7:8:15",
       "7:9:3",
       "7:9:12",
+      "7:9:34",
       "7:10:2",
+      "7:10:7",
       "7:11:5",
       "7:11:17",
       "7:11:26",
+      "7:12:4",
       "7:13:2",
       "7:13:17",
       "7:13:20",
@@ -1593,11 +1646,15 @@
       "9:6:14",
       "9:6:17",
       "9:6:20",
+      "9:7:6",
+      "9:7:18",
       "9:8:2",
       "9:8:13",
       "9:9:2",
       "9:10:2",
+      "9:10:14",
       "9:11:1",
+      "9:11:9",
       "9:11:18",
       "9:12:5",
       "9:12:7",
@@ -1817,6 +1874,7 @@
       "15:2:2",
       "13:4:6",
       "13:4:12",
+      "13:4:17",
       "13:4:22",
       "13:7:13",
       "13:11:10",
@@ -1970,6 +2028,7 @@
       "18:8:20",
       "18:9:2",
       "18:9:4",
+      "18:10:11",
       "18:10:25",
       "18:11:6",
       "18:11:8",
@@ -1978,6 +2037,7 @@
       "18:14:19",
       "18:14:27",
       "18:15:10",
+      "18:16:2",
       "18:17:4",
       "18:17:23",
       "18:17:26",
@@ -1985,6 +2045,7 @@
       "18:18:11",
       "18:19:2",
       "18:19:9",
+      "18:19:14",
       "18:19:22",
       "18:19:38",
       "18:20:15",
@@ -2023,6 +2084,7 @@
       "19:11:2",
       "19:11:22",
       "19:11:24",
+      "19:12:3",
       "19:12:12",
       "19:12:19",
       "19:13:7",
@@ -2118,6 +2180,7 @@
       "21:11:9",
       "21:12:19",
       "21:13:3",
+      "21:14:3",
       "21:15:6",
       "21:16:5",
       "21:16:8",
@@ -2127,6 +2190,19 @@
       "21:17:13",
       "21:18:7",
       "21:18:11",
+      "21:19:2",
+      "21:19:12",
+      "21:19:17",
+      "21:19:20",
+      "21:19:23",
+      "21:20:2",
+      "21:20:5",
+      "21:20:8",
+      "21:20:11",
+      "21:20:14",
+      "21:20:17",
+      "21:20:20",
+      "21:20:23",
       "21:21:6",
       "21:21:12",
       "21:21:21",
@@ -2388,7 +2464,12 @@
       "7:3:1",
       "7:4:6",
       "7:4:11",
+      "7:5:6",
+      "7:8:16",
+      "7:9:22",
+      "7:9:30",
       "7:10:5",
+      "7:10:12",
       "7:12:1",
       "7:13:7",
       "7:13:11",
@@ -2405,6 +2486,7 @@
       "8:13:17",
       "8:13:31",
       "9:1:12",
+      "9:7:8",
       "9:14:1",
       "9:14:6",
       "9:14:14",
@@ -2556,6 +2638,8 @@
       "18:15:5",
       "18:15:17",
       "18:15:19",
+      "18:16:9",
+      "18:16:16",
       "18:17:16",
       "18:18:3",
       "18:18:9",
@@ -2619,7 +2703,9 @@
       "21:9:24",
       "21:10:19",
       "21:11:15",
+      "21:14:6",
       "21:15:3",
+      "21:19:10",
       "21:27:10",
       "21:27:17",
       "22:1:10",
@@ -8790,6 +8876,198 @@
         "greekEndTokenId": "7:4:16",
         "greekConfirmedAt": "2026-08-22T12:52:00.000Z"
       },
+      "7:5:5": {
+        "finiteVerbId": "7:5:5",
+        "selectedSpan": [
+          "7:5:0",
+          "7:5:1",
+          "7:5:2",
+          "7:5:3",
+          "7:5:4",
+          "7:5:5",
+          "7:5:6",
+          "7:5:7"
+        ],
+        "greekStartTokenId": "7:5:1",
+        "greekEndTokenId": "7:5:6",
+        "greekConfirmedAt": "2026-08-26T17:40:00Z"
+      },
+      "7:5:11": {
+        "finiteVerbId": "7:5:11",
+        "selectedSpan": [
+          "7:5:8",
+          "7:5:9",
+          "7:5:10",
+          "7:5:11",
+          "7:5:12",
+          "7:5:13",
+          "7:5:14",
+          "7:5:15"
+        ],
+        "greekStartTokenId": "7:5:7",
+        "greekEndTokenId": "7:5:11",
+        "greekConfirmedAt": "2026-08-26T17:41:00Z"
+      },
+      "7:5:16": {
+        "finiteVerbId": "7:5:16",
+        "selectedSpan": [
+          "7:5:16",
+          "7:5:17",
+          "7:5:18",
+          "7:5:19",
+          "7:5:20",
+          "7:5:21",
+          "7:5:22",
+          "7:5:23"
+        ],
+        "greekStartTokenId": "7:5:12",
+        "greekEndTokenId": "7:5:16",
+        "greekConfirmedAt": "2026-08-26T17:42:00Z"
+      },
+      "7:6:5": {
+        "finiteVerbId": "7:6:5",
+        "selectedSpan": [
+          "7:6:0",
+          "7:6:1",
+          "7:6:2",
+          "7:6:3",
+          "7:6:4",
+          "7:6:5",
+          "7:6:6",
+          "7:6:7"
+        ],
+        "greekStartTokenId": "7:6:1",
+        "greekEndTokenId": "7:6:5",
+        "greekConfirmedAt": "2026-08-26T17:43:00Z"
+      },
+      "7:6:10": {
+        "finiteVerbId": "7:6:10",
+        "selectedSpan": [
+          "7:6:8",
+          "7:6:9",
+          "7:6:10",
+          "7:6:11",
+          "7:6:12",
+          "7:6:13",
+          "7:6:14",
+          "7:6:15"
+        ],
+        "greekStartTokenId": "7:6:6",
+        "greekEndTokenId": "7:6:10",
+        "greekConfirmedAt": "2026-08-26T17:44:00Z"
+      },
+      "7:6:15": {
+        "finiteVerbId": "7:6:15",
+        "selectedSpan": [
+          "7:6:16",
+          "7:6:17",
+          "7:6:18",
+          "7:6:19",
+          "7:6:20",
+          "7:6:21",
+          "7:6:22",
+          "7:6:23"
+        ],
+        "greekStartTokenId": "7:6:11",
+        "greekEndTokenId": "7:6:15",
+        "greekConfirmedAt": "2026-08-26T17:45:00Z"
+      },
+      "7:7:5": {
+        "finiteVerbId": "7:7:5",
+        "selectedSpan": [
+          "7:7:0",
+          "7:7:1",
+          "7:7:2",
+          "7:7:3",
+          "7:7:4",
+          "7:7:5",
+          "7:7:6",
+          "7:7:7"
+        ],
+        "greekStartTokenId": "7:7:1",
+        "greekEndTokenId": "7:7:5",
+        "greekConfirmedAt": "2026-08-26T17:46:00Z"
+      },
+      "7:7:10": {
+        "finiteVerbId": "7:7:10",
+        "selectedSpan": [
+          "7:7:8",
+          "7:7:9",
+          "7:7:10",
+          "7:7:11",
+          "7:7:12",
+          "7:7:13",
+          "7:7:14",
+          "7:7:15"
+        ],
+        "greekStartTokenId": "7:7:6",
+        "greekEndTokenId": "7:7:10",
+        "greekConfirmedAt": "2026-08-26T17:47:00Z"
+      },
+      "7:7:15": {
+        "finiteVerbId": "7:7:15",
+        "selectedSpan": [
+          "7:7:16",
+          "7:7:17",
+          "7:7:18",
+          "7:7:19",
+          "7:7:20",
+          "7:7:21",
+          "7:7:22",
+          "7:7:23"
+        ],
+        "greekStartTokenId": "7:7:11",
+        "greekEndTokenId": "7:7:15",
+        "greekConfirmedAt": "2026-08-26T17:48:00Z"
+      },
+      "7:8:5": {
+        "finiteVerbId": "7:8:5",
+        "selectedSpan": [
+          "7:8:0",
+          "7:8:1",
+          "7:8:2",
+          "7:8:3",
+          "7:8:4",
+          "7:8:5",
+          "7:8:6",
+          "7:8:7"
+        ],
+        "greekStartTokenId": "7:8:1",
+        "greekEndTokenId": "7:8:5",
+        "greekConfirmedAt": "2026-08-26T17:49:00Z"
+      },
+      "7:8:10": {
+        "finiteVerbId": "7:8:10",
+        "selectedSpan": [
+          "7:8:8",
+          "7:8:9",
+          "7:8:10",
+          "7:8:11",
+          "7:8:12",
+          "7:8:13",
+          "7:8:14",
+          "7:8:15"
+        ],
+        "greekStartTokenId": "7:8:6",
+        "greekEndTokenId": "7:8:10",
+        "greekConfirmedAt": "2026-08-26T17:50:00Z"
+      },
+      "7:8:15": {
+        "finiteVerbId": "7:8:15",
+        "selectedSpan": [
+          "7:8:16",
+          "7:8:17",
+          "7:8:18",
+          "7:8:19",
+          "7:8:20",
+          "7:8:21",
+          "7:8:22",
+          "7:8:23"
+        ],
+        "greekStartTokenId": "7:8:11",
+        "greekEndTokenId": "7:8:16",
+        "greekConfirmedAt": "2026-08-26T17:51:00Z"
+      },
       "7:9:3": {
         "finiteVerbId": "7:9:3",
         "selectedSpan": [
@@ -8820,6 +9098,20 @@
         "greekEndTokenId": "7:9:12",
         "greekConfirmedAt": "2026-08-22T12:56:00.000Z"
       },
+      "7:9:34": {
+        "finiteVerbId": "7:9:34",
+        "selectedSpan": [
+          "7:9:34",
+          "7:9:35",
+          "7:9:36",
+          "7:9:37",
+          "7:9:38",
+          "7:9:39"
+        ],
+        "greekStartTokenId": "7:9:34",
+        "greekEndTokenId": "7:9:38",
+        "greekConfirmedAt": "2026-08-26T17:52:00Z"
+      },
       "7:10:2": {
         "finiteVerbId": "7:10:2",
         "selectedSpan": [
@@ -8833,6 +9125,29 @@
         "greekStartTokenId": "7:10:1",
         "greekEndTokenId": "7:10:5",
         "greekConfirmedAt": "2026-08-22T12:58:00.000Z"
+      },
+      "7:10:7": {
+        "finiteVerbId": "7:10:7",
+        "selectedSpan": [
+          "7:10:6",
+          "7:10:7",
+          "7:10:8",
+          "7:10:9",
+          "7:10:10",
+          "7:10:11",
+          "7:10:12",
+          "7:10:13",
+          "7:10:14",
+          "7:10:15",
+          "7:10:16",
+          "7:10:17",
+          "7:10:18",
+          "7:10:19",
+          "7:10:20"
+        ],
+        "greekStartTokenId": "7:10:6",
+        "greekEndTokenId": "7:10:18",
+        "greekConfirmedAt": "2026-08-26T17:53:00Z"
       },
       "7:11:5": {
         "finiteVerbId": "7:11:5",
@@ -8889,6 +9204,39 @@
         "greekStartTokenId": "7:11:25",
         "greekEndTokenId": "7:12:1",
         "greekConfirmedAt": "2026-08-22T13:04:00.000Z"
+      },
+      "7:12:4": {
+        "finiteVerbId": "7:12:4",
+        "selectedSpan": [
+          "7:12:2",
+          "7:12:3",
+          "7:12:4",
+          "7:12:5",
+          "7:12:6",
+          "7:12:7",
+          "7:12:8",
+          "7:12:9",
+          "7:12:10",
+          "7:12:11",
+          "7:12:12",
+          "7:12:13",
+          "7:12:14",
+          "7:12:15",
+          "7:12:16",
+          "7:12:17",
+          "7:12:18",
+          "7:12:19",
+          "7:12:20",
+          "7:12:21",
+          "7:12:22",
+          "7:12:23",
+          "7:12:24",
+          "7:12:25",
+          "7:12:26"
+        ],
+        "greekStartTokenId": "7:12:3",
+        "greekEndTokenId": "7:12:30",
+        "greekConfirmedAt": "2026-08-26T17:54:00Z"
       },
       "7:13:2": {
         "finiteVerbId": "7:13:2",
@@ -10185,6 +10533,48 @@
         "greekEndTokenId": "9:6:24",
         "greekConfirmedAt": "2026-08-22T15:40:00.000Z"
       },
+      "9:7:6": {
+        "finiteVerbId": "9:7:6",
+        "selectedSpan": [
+          "9:7:0",
+          "9:7:1",
+          "9:7:2",
+          "9:7:3",
+          "9:7:4",
+          "9:7:5",
+          "9:7:6",
+          "9:7:7",
+          "9:7:8",
+          "9:7:9",
+          "9:7:10",
+          "9:7:11",
+          "9:7:12",
+          "9:7:13"
+        ],
+        "greekStartTokenId": "9:7:1",
+        "greekEndTokenId": "9:7:10",
+        "greekConfirmedAt": "2026-08-26T17:55:00Z"
+      },
+      "9:7:18": {
+        "finiteVerbId": "9:7:18",
+        "selectedSpan": [
+          "9:7:14",
+          "9:7:15",
+          "9:7:16",
+          "9:7:17",
+          "9:7:18",
+          "9:7:19",
+          "9:7:20",
+          "9:7:21",
+          "9:7:22",
+          "9:7:23",
+          "9:7:24",
+          "9:7:25"
+        ],
+        "greekStartTokenId": "9:7:11",
+        "greekEndTokenId": "9:7:19",
+        "greekConfirmedAt": "2026-08-26T17:56:00Z"
+      },
       "9:8:2": {
         "finiteVerbId": "9:8:2",
         "selectedSpan": [
@@ -10249,6 +10639,30 @@
         "greekEndTokenId": "9:10:7",
         "greekConfirmedAt": "2026-08-22T15:48:00.000Z"
       },
+      "9:10:14": {
+        "finiteVerbId": "9:10:14",
+        "selectedSpan": [
+          "9:10:9",
+          "9:10:10",
+          "9:10:11",
+          "9:10:12",
+          "9:10:13",
+          "9:10:14",
+          "9:10:15",
+          "9:10:16",
+          "9:10:17",
+          "9:10:18",
+          "9:10:19",
+          "9:10:20",
+          "9:10:21",
+          "9:10:22",
+          "9:10:23",
+          "9:10:24"
+        ],
+        "greekStartTokenId": "9:10:8",
+        "greekEndTokenId": "9:10:20",
+        "greekConfirmedAt": "2026-08-26T17:57:00Z"
+      },
       "9:11:1": {
         "finiteVerbId": "9:11:1",
         "selectedSpan": [
@@ -10266,6 +10680,22 @@
         "greekStartTokenId": "9:11:1",
         "greekEndTokenId": "9:11:8",
         "greekConfirmedAt": "2026-08-22T15:50:00.000Z"
+      },
+      "9:11:9": {
+        "finiteVerbId": "9:11:9",
+        "selectedSpan": [
+          "9:11:10",
+          "9:11:11",
+          "9:11:12",
+          "9:11:13",
+          "9:11:14",
+          "9:11:15",
+          "9:11:16",
+          "9:11:17"
+        ],
+        "greekStartTokenId": "9:11:9",
+        "greekEndTokenId": "9:11:12",
+        "greekConfirmedAt": "2026-08-26T17:58:00Z"
       },
       "9:11:18": {
         "finiteVerbId": "9:11:18",
@@ -13744,6 +14174,20 @@
         "greekEndTokenId": "13:4:14",
         "greekConfirmedAt": "2026-08-24T13:44:20Z"
       },
+      "13:4:17": {
+        "finiteVerbId": "13:4:17",
+        "selectedSpan": [
+          "13:4:16",
+          "13:4:17",
+          "13:4:18",
+          "13:4:19",
+          "13:4:20",
+          "13:4:21"
+        ],
+        "greekStartTokenId": "13:4:16",
+        "greekEndTokenId": "13:4:19",
+        "greekConfirmedAt": "2026-08-26T17:59:00Z"
+      },
       "13:4:22": {
         "finiteVerbId": "13:4:22",
         "selectedSpan": [
@@ -16576,6 +17020,21 @@
         "greekEndTokenId": "18:9:23",
         "greekConfirmedAt": "2026-08-25T14:33:20Z"
       },
+      "18:10:11": {
+        "finiteVerbId": "18:10:11",
+        "selectedSpan": [
+          "18:10:10",
+          "18:10:11",
+          "18:10:12",
+          "18:10:13",
+          "18:10:14",
+          "18:10:15",
+          "18:10:16"
+        ],
+        "greekStartTokenId": "18:10:11",
+        "greekEndTokenId": "18:10:21",
+        "greekConfirmedAt": "2026-08-26T18:00:00Z"
+      },
       "18:10:25": {
         "finiteVerbId": "18:10:25",
         "selectedSpan": [
@@ -16719,6 +17178,33 @@
         "greekEndTokenId": "18:15:19",
         "greekConfirmedAt": "2026-08-25T14:39:31Z"
       },
+      "18:16:2": {
+        "finiteVerbId": "18:16:2",
+        "selectedSpan": [
+          "18:16:2",
+          "18:16:3",
+          "18:16:4",
+          "18:16:5",
+          "18:16:6",
+          "18:16:7",
+          "18:16:8",
+          "18:16:9",
+          "18:16:10",
+          "18:16:11",
+          "18:16:12",
+          "18:16:13",
+          "18:16:14",
+          "18:16:15",
+          "18:16:16",
+          "18:16:17",
+          "18:16:18",
+          "18:16:19",
+          "18:16:20"
+        ],
+        "greekStartTokenId": "18:16:2",
+        "greekEndTokenId": "18:16:22",
+        "greekConfirmedAt": "2026-08-26T18:01:00Z"
+      },
       "18:17:4": {
         "finiteVerbId": "18:17:4",
         "selectedSpan": [
@@ -16839,6 +17325,18 @@
         "greekStartTokenId": "18:19:8",
         "greekEndTokenId": "18:19:13",
         "greekConfirmedAt": "2026-08-25T14:44:42Z"
+      },
+      "18:19:14": {
+        "finiteVerbId": "18:19:14",
+        "selectedSpan": [
+          "18:19:13",
+          "18:19:14",
+          "18:19:15",
+          "18:19:16"
+        ],
+        "greekStartTokenId": "18:19:14",
+        "greekEndTokenId": "18:19:19",
+        "greekConfirmedAt": "2026-08-26T18:02:00Z"
       },
       "18:19:22": {
         "finiteVerbId": "18:19:22",
@@ -17718,6 +18216,21 @@
         "greekStartTokenId": "19:11:23",
         "greekEndTokenId": "19:11:24",
         "greekConfirmedAt": "2026-08-25T15:33:00Z"
+      },
+      "19:12:3": {
+        "finiteVerbId": "19:12:3",
+        "selectedSpan": [
+          "19:12:0",
+          "19:12:1",
+          "19:12:2",
+          "19:12:3",
+          "19:12:4",
+          "19:12:5",
+          "19:12:6"
+        ],
+        "greekStartTokenId": "19:12:1",
+        "greekEndTokenId": "19:12:6",
+        "greekConfirmedAt": "2026-08-26T18:03:00Z"
       },
       "19:12:12": {
         "finiteVerbId": "19:12:12",
@@ -19573,6 +20086,33 @@
         "greekEndTokenId": "21:13:19",
         "greekConfirmedAt": "2026-08-25T17:38:41Z"
       },
+      "21:14:3": {
+        "finiteVerbId": "21:14:3",
+        "selectedSpan": [
+          "21:14:0",
+          "21:14:1",
+          "21:14:2",
+          "21:14:3",
+          "21:14:4",
+          "21:14:5",
+          "21:14:6",
+          "21:14:7",
+          "21:14:8",
+          "21:14:9",
+          "21:14:10",
+          "21:14:11",
+          "21:14:12",
+          "21:14:13",
+          "21:14:14",
+          "21:14:15",
+          "21:14:16",
+          "21:14:17",
+          "21:14:18"
+        ],
+        "greekStartTokenId": "21:14:1",
+        "greekEndTokenId": "21:14:18",
+        "greekConfirmedAt": "2026-08-26T18:04:00Z"
+      },
       "21:15:6": {
         "finiteVerbId": "21:15:6",
         "selectedSpan": [
@@ -19741,6 +20281,161 @@
         "greekStartTokenId": "21:18:8",
         "greekEndTokenId": "21:18:15",
         "greekConfirmedAt": "2026-08-24T19:30:00Z"
+      },
+      "21:19:2": {
+        "finiteVerbId": "21:19:2",
+        "selectedSpan": [
+          "21:19:0",
+          "21:19:1",
+          "21:19:2",
+          "21:19:3",
+          "21:19:4",
+          "21:19:5",
+          "21:19:6",
+          "21:19:7",
+          "21:19:8",
+          "21:19:9",
+          "21:19:10",
+          "21:19:11",
+          "21:19:12",
+          "21:19:13"
+        ],
+        "greekStartTokenId": "21:19:1",
+        "greekEndTokenId": "21:19:10",
+        "greekConfirmedAt": "2026-08-26T18:05:00Z"
+      },
+      "21:19:12": {
+        "finiteVerbId": "21:19:12",
+        "selectedSpan": [
+          "21:19:14",
+          "21:19:15",
+          "21:19:16",
+          "21:19:17"
+        ],
+        "greekStartTokenId": "21:19:11",
+        "greekEndTokenId": "21:19:15",
+        "greekConfirmedAt": "2026-08-26T18:06:00Z"
+      },
+      "21:19:17": {
+        "finiteVerbId": "21:19:17",
+        "selectedSpan": [
+          "21:19:18",
+          "21:19:19",
+          "21:19:20"
+        ],
+        "greekStartTokenId": "21:19:16",
+        "greekEndTokenId": "21:19:18",
+        "greekConfirmedAt": "2026-08-26T18:07:00Z"
+      },
+      "21:19:20": {
+        "finiteVerbId": "21:19:20",
+        "selectedSpan": [
+          "21:19:21",
+          "21:19:22",
+          "21:19:23"
+        ],
+        "greekStartTokenId": "21:19:19",
+        "greekEndTokenId": "21:19:21",
+        "greekConfirmedAt": "2026-08-26T18:08:00Z"
+      },
+      "21:19:23": {
+        "finiteVerbId": "21:19:23",
+        "selectedSpan": [
+          "21:19:24",
+          "21:19:25",
+          "21:19:26"
+        ],
+        "greekStartTokenId": "21:19:22",
+        "greekEndTokenId": "21:19:24",
+        "greekConfirmedAt": "2026-08-26T18:09:00Z"
+      },
+      "21:20:2": {
+        "finiteVerbId": "21:20:2",
+        "selectedSpan": [
+          "21:20:0",
+          "21:20:1",
+          "21:20:2"
+        ],
+        "greekStartTokenId": "21:20:1",
+        "greekEndTokenId": "21:20:3",
+        "greekConfirmedAt": "2026-08-26T18:10:00Z"
+      },
+      "21:20:5": {
+        "finiteVerbId": "21:20:5",
+        "selectedSpan": [
+          "21:20:3",
+          "21:20:4",
+          "21:20:5"
+        ],
+        "greekStartTokenId": "21:20:4",
+        "greekEndTokenId": "21:20:6",
+        "greekConfirmedAt": "2026-08-26T18:11:00Z"
+      },
+      "21:20:8": {
+        "finiteVerbId": "21:20:8",
+        "selectedSpan": [
+          "21:20:6",
+          "21:20:7",
+          "21:20:8"
+        ],
+        "greekStartTokenId": "21:20:7",
+        "greekEndTokenId": "21:20:9",
+        "greekConfirmedAt": "2026-08-26T18:12:00Z"
+      },
+      "21:20:11": {
+        "finiteVerbId": "21:20:11",
+        "selectedSpan": [
+          "21:20:9",
+          "21:20:10",
+          "21:20:11"
+        ],
+        "greekStartTokenId": "21:20:10",
+        "greekEndTokenId": "21:20:12",
+        "greekConfirmedAt": "2026-08-26T18:13:00Z"
+      },
+      "21:20:14": {
+        "finiteVerbId": "21:20:14",
+        "selectedSpan": [
+          "21:20:12",
+          "21:20:13",
+          "21:20:14"
+        ],
+        "greekStartTokenId": "21:20:13",
+        "greekEndTokenId": "21:20:15",
+        "greekConfirmedAt": "2026-08-26T18:14:00Z"
+      },
+      "21:20:17": {
+        "finiteVerbId": "21:20:17",
+        "selectedSpan": [
+          "21:20:15",
+          "21:20:16",
+          "21:20:17"
+        ],
+        "greekStartTokenId": "21:20:16",
+        "greekEndTokenId": "21:20:18",
+        "greekConfirmedAt": "2026-08-26T18:15:00Z"
+      },
+      "21:20:20": {
+        "finiteVerbId": "21:20:20",
+        "selectedSpan": [
+          "21:20:18",
+          "21:20:19",
+          "21:20:20"
+        ],
+        "greekStartTokenId": "21:20:19",
+        "greekEndTokenId": "21:20:21",
+        "greekConfirmedAt": "2026-08-26T18:16:00Z"
+      },
+      "21:20:23": {
+        "finiteVerbId": "21:20:23",
+        "selectedSpan": [
+          "21:20:21",
+          "21:20:22",
+          "21:20:23"
+        ],
+        "greekStartTokenId": "21:20:22",
+        "greekEndTokenId": "21:20:24",
+        "greekConfirmedAt": "2026-08-26T18:17:00Z"
       },
       "21:21:6": {
         "finiteVerbId": "21:21:6",
@@ -25184,6 +25879,102 @@
         "expressedParentClauseId": "",
         "whenIfParentClauseId": ""
       },
+      "7:5:5": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:4:2",
+        "whenIfParentClauseId": ""
+      },
+      "7:5:11": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:4:2",
+        "whenIfParentClauseId": ""
+      },
+      "7:5:16": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:4:2",
+        "whenIfParentClauseId": ""
+      },
+      "7:6:5": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:4:2",
+        "whenIfParentClauseId": ""
+      },
+      "7:6:10": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:4:2",
+        "whenIfParentClauseId": ""
+      },
+      "7:6:15": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:4:2",
+        "whenIfParentClauseId": ""
+      },
+      "7:7:5": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:4:2",
+        "whenIfParentClauseId": ""
+      },
+      "7:7:10": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:4:2",
+        "whenIfParentClauseId": ""
+      },
+      "7:7:15": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:4:2",
+        "whenIfParentClauseId": ""
+      },
+      "7:8:5": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:4:2",
+        "whenIfParentClauseId": ""
+      },
+      "7:8:10": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:4:2",
+        "whenIfParentClauseId": ""
+      },
+      "7:8:15": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:4:2",
+        "whenIfParentClauseId": ""
+      },
       "7:9:3": {
         "describesNoun": "no",
         "isWhatWasExpressed": "no",
@@ -25202,12 +25993,28 @@
         "expressedParentClauseId": "",
         "whenIfParentClauseId": ""
       },
+      "7:9:34": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:9:3",
+        "whenIfParentClauseId": ""
+      },
       "7:10:2": {
         "describesNoun": "no",
         "isWhatWasExpressed": "no",
         "tellsWhenOrIf": "no",
         "describedNounSpan": [],
         "expressedParentClauseId": "",
+        "whenIfParentClauseId": ""
+      },
+      "7:10:7": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:10:2",
         "whenIfParentClauseId": ""
       },
       "7:11:5": {
@@ -25232,6 +26039,14 @@
         "tellsWhenOrIf": "no",
         "describedNounSpan": [],
         "expressedParentClauseId": "",
+        "whenIfParentClauseId": ""
+      },
+      "7:12:4": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "7:11:26",
         "whenIfParentClauseId": ""
       },
       "7:13:2": {
@@ -25873,6 +26688,22 @@
         "expressedParentClauseId": "",
         "whenIfParentClauseId": ""
       },
+      "9:7:6": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": ""
+      },
+      "9:7:18": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": ""
+      },
       "9:8:2": {
         "describesNoun": "no",
         "isWhatWasExpressed": "no",
@@ -25905,7 +26736,23 @@
         "expressedParentClauseId": "",
         "whenIfParentClauseId": ""
       },
+      "9:10:14": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": ""
+      },
       "9:11:1": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": ""
+      },
+      "9:11:9": {
         "describesNoun": "no",
         "isWhatWasExpressed": "no",
         "tellsWhenOrIf": "no",
@@ -27726,6 +28573,14 @@
         "whenIfParentClauseId": "",
         "frameType": ""
       },
+      "13:4:17": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "13:4:12",
+        "whenIfParentClauseId": ""
+      },
       "13:4:22": {
         "describesNoun": "no",
         "isWhatWasExpressed": "yes",
@@ -29309,6 +30164,15 @@
         "whenIfParentClauseId": "18:9:4",
         "frameType": "time"
       },
+      "18:10:11": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "18:9:4",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
       "18:10:25": {
         "describesNoun": "no",
         "isWhatWasExpressed": "no",
@@ -29381,6 +30245,15 @@
         "whenIfParentClauseId": "",
         "frameType": ""
       },
+      "18:16:2": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "18:15:10",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
       "18:17:4": {
         "describesNoun": "no",
         "isWhatWasExpressed": "no",
@@ -29444,6 +30317,15 @@
         "tellsWhenOrIf": "no",
         "describedNounSpan": [],
         "expressedParentClauseId": "18:4:2",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "18:19:14": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "yes",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "18:19:9",
         "whenIfParentClauseId": "",
         "frameType": ""
       },
@@ -29912,6 +30794,15 @@
         "frameType": ""
       },
       "19:11:24": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "19:12:3": {
         "describesNoun": "no",
         "isWhatWasExpressed": "no",
         "tellsWhenOrIf": "no",
@@ -30860,6 +31751,15 @@
         "whenIfParentClauseId": "",
         "frameType": ""
       },
+      "21:14:3": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
       "21:15:6": {
         "describesNoun": "no",
         "isWhatWasExpressed": "no",
@@ -30944,6 +31844,123 @@
         "frameType": ""
       },
       "21:18:11": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "21:19:2": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "21:19:12": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "21:19:17": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "21:19:20": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "21:19:23": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "21:20:2": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "21:20:5": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "21:20:8": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "21:20:11": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "21:20:14": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "21:20:17": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "21:20:20": {
+        "describesNoun": "no",
+        "isWhatWasExpressed": "no",
+        "tellsWhenOrIf": "no",
+        "describedNounSpan": [],
+        "expressedParentClauseId": "",
+        "whenIfParentClauseId": "",
+        "frameType": ""
+      },
+      "21:20:23": {
         "describesNoun": "no",
         "isWhatWasExpressed": "no",
         "tellsWhenOrIf": "no",
@@ -37394,6 +38411,186 @@
           "7:4:6"
         ]
       },
+      "7:5:5": {
+        "subjectSpan": [
+          "7:5:5",
+          "7:5:6",
+          "7:5:7"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:5:0",
+          "7:5:1",
+          "7:5:2",
+          "7:5:3",
+          "7:5:4"
+        ]
+      },
+      "7:5:11": {
+        "subjectSpan": [
+          "7:5:13",
+          "7:5:14",
+          "7:5:15"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:5:8",
+          "7:5:9",
+          "7:5:10",
+          "7:5:11",
+          "7:5:12"
+        ]
+      },
+      "7:5:16": {
+        "subjectSpan": [
+          "7:5:21",
+          "7:5:22",
+          "7:5:23"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:5:16",
+          "7:5:17",
+          "7:5:18",
+          "7:5:19",
+          "7:5:20"
+        ]
+      },
+      "7:6:5": {
+        "subjectSpan": [
+          "7:6:5",
+          "7:6:6",
+          "7:6:7"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:6:0",
+          "7:6:1",
+          "7:6:2",
+          "7:6:3",
+          "7:6:4"
+        ]
+      },
+      "7:6:10": {
+        "subjectSpan": [
+          "7:6:13",
+          "7:6:14",
+          "7:6:15"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:6:8",
+          "7:6:9",
+          "7:6:10",
+          "7:6:11",
+          "7:6:12"
+        ]
+      },
+      "7:6:15": {
+        "subjectSpan": [
+          "7:6:21",
+          "7:6:22",
+          "7:6:23"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:6:16",
+          "7:6:17",
+          "7:6:18",
+          "7:6:19",
+          "7:6:20"
+        ]
+      },
+      "7:7:5": {
+        "subjectSpan": [
+          "7:7:5",
+          "7:7:6",
+          "7:7:7"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:7:0",
+          "7:7:1",
+          "7:7:2",
+          "7:7:3",
+          "7:7:4"
+        ]
+      },
+      "7:7:10": {
+        "subjectSpan": [
+          "7:7:13",
+          "7:7:14",
+          "7:7:15"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:7:8",
+          "7:7:9",
+          "7:7:10",
+          "7:7:11",
+          "7:7:12"
+        ]
+      },
+      "7:7:15": {
+        "subjectSpan": [
+          "7:7:21",
+          "7:7:22",
+          "7:7:23"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:7:16",
+          "7:7:17",
+          "7:7:18",
+          "7:7:19",
+          "7:7:20"
+        ]
+      },
+      "7:8:5": {
+        "subjectSpan": [
+          "7:8:5",
+          "7:8:6",
+          "7:8:7"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:8:0",
+          "7:8:1",
+          "7:8:2",
+          "7:8:3",
+          "7:8:4"
+        ]
+      },
+      "7:8:10": {
+        "subjectSpan": [
+          "7:8:13",
+          "7:8:14",
+          "7:8:15"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:8:8",
+          "7:8:9",
+          "7:8:10",
+          "7:8:11",
+          "7:8:12"
+        ]
+      },
+      "7:8:15": {
+        "subjectSpan": [
+          "7:8:21",
+          "7:8:22",
+          "7:8:23"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:8:16",
+          "7:8:17",
+          "7:8:18",
+          "7:8:19",
+          "7:8:20"
+        ]
+      },
       "7:9:3": {
         "subjectSpan": [
           "1:9:0",
@@ -37419,6 +38616,17 @@
           "7:9:13"
         ]
       },
+      "7:9:34": {
+        "subjectSpan": [
+          "7:9:36"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:9:37",
+          "7:9:38",
+          "7:9:39"
+        ]
+      },
       "7:10:2": {
         "subjectSpan": [
           "7:9:7",
@@ -37429,6 +38637,28 @@
           "7:10:1"
         ],
         "objectSpan": []
+      },
+      "7:10:7": {
+        "subjectSpan": [
+          "7:10:6",
+          "7:10:7"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:10:8",
+          "7:10:9",
+          "7:10:10",
+          "7:10:11",
+          "7:10:12",
+          "7:10:13",
+          "7:10:14",
+          "7:10:15",
+          "7:10:16",
+          "7:10:17",
+          "7:10:18",
+          "7:10:19",
+          "7:10:20"
+        ]
       },
       "7:11:5": {
         "subjectSpan": [
@@ -37464,6 +38694,37 @@
           "7:11:28"
         ],
         "objectSpan": []
+      },
+      "7:12:4": {
+        "subjectSpan": [
+          "7:12:2",
+          "7:12:3",
+          "7:12:4",
+          "7:12:5",
+          "7:12:6",
+          "7:12:7",
+          "7:12:8",
+          "7:12:9",
+          "7:12:10",
+          "7:12:11",
+          "7:12:12",
+          "7:12:13",
+          "7:12:14",
+          "7:12:15",
+          "7:12:16"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "7:12:18",
+          "7:12:19",
+          "7:12:20",
+          "7:12:21",
+          "7:12:22",
+          "7:12:23",
+          "7:12:24",
+          "7:12:25",
+          "7:12:26"
+        ]
       },
       "7:13:2": {
         "subjectSpan": [
@@ -38472,6 +39733,38 @@
         ],
         "objectSpan": []
       },
+      "9:7:6": {
+        "subjectSpan": [
+          "9:7:1",
+          "9:7:2",
+          "9:7:3",
+          "9:7:4",
+          "9:7:5"
+        ],
+        "verbSpan": [
+          "9:7:7"
+        ],
+        "objectSpan": [
+          "9:7:8",
+          "9:7:9",
+          "9:7:10",
+          "9:7:11",
+          "9:7:12",
+          "9:7:13"
+        ]
+      },
+      "9:7:18": {
+        "subjectSpan": [
+          "9:7:22"
+        ],
+        "verbSpan": [
+          "9:7:23"
+        ],
+        "objectSpan": [
+          "9:7:24",
+          "9:7:25"
+        ]
+      },
       "9:8:2": {
         "subjectSpan": [
           "9:3:4"
@@ -38521,6 +39814,28 @@
           "9:10:8"
         ]
       },
+      "9:10:14": {
+        "subjectSpan": [
+          "9:10:15",
+          "9:10:16"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "9:10:9",
+          "9:10:10",
+          "9:10:11",
+          "9:10:12",
+          "9:10:13",
+          "9:10:17",
+          "9:10:18",
+          "9:10:19",
+          "9:10:20",
+          "9:10:21",
+          "9:10:22",
+          "9:10:23",
+          "9:10:24"
+        ]
+      },
       "9:11:1": {
         "subjectSpan": [
           "9:3:4"
@@ -38535,6 +39850,20 @@
           "9:11:7",
           "9:11:8",
           "9:11:9"
+        ]
+      },
+      "9:11:9": {
+        "subjectSpan": [
+          "9:11:10",
+          "9:11:11",
+          "9:11:12",
+          "9:11:13"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "9:11:14",
+          "9:11:15",
+          "9:11:17"
         ]
       },
       "9:11:18": {
@@ -41514,6 +42843,19 @@
           "13:4:14"
         ]
       },
+      "13:4:17": {
+        "subjectSpan": [
+          "13:4:16"
+        ],
+        "verbSpan": [
+          "13:4:18"
+        ],
+        "objectSpan": [
+          "13:4:19",
+          "13:4:20",
+          "13:4:21"
+        ]
+      },
       "13:4:22": {
         "subjectSpan": [
           "13:4:22"
@@ -43601,6 +44943,20 @@
           "18:9:31"
         ]
       },
+      "18:10:11": {
+        "subjectSpan": [
+          "18:10:12",
+          "18:10:13",
+          "18:10:14",
+          "18:10:15",
+          "18:10:16"
+        ],
+        "verbSpan": [
+          "18:10:10",
+          "18:10:11"
+        ],
+        "objectSpan": []
+      },
       "18:10:25": {
         "subjectSpan": [
           "18:10:23",
@@ -43703,6 +45059,32 @@
           "18:15:11",
           "18:15:12",
           "18:15:13"
+        ],
+        "objectSpan": []
+      },
+      "18:16:2": {
+        "subjectSpan": [
+          "18:16:4",
+          "18:16:5",
+          "18:16:6",
+          "18:16:7",
+          "18:16:8",
+          "18:16:9",
+          "18:16:10",
+          "18:16:11",
+          "18:16:12",
+          "18:16:13",
+          "18:16:14",
+          "18:16:15",
+          "18:16:16",
+          "18:16:17",
+          "18:16:18",
+          "18:16:19",
+          "18:16:20"
+        ],
+        "verbSpan": [
+          "18:16:2",
+          "18:16:3"
         ],
         "objectSpan": []
       },
@@ -43830,6 +45212,17 @@
         ],
         "verbSpan": [
           "18:19:7"
+        ],
+        "objectSpan": []
+      },
+      "18:19:14": {
+        "subjectSpan": [
+          "18:19:15",
+          "18:19:16"
+        ],
+        "verbSpan": [
+          "18:19:13",
+          "18:19:14"
         ],
         "objectSpan": []
       },
@@ -44555,6 +45948,18 @@
           "19:11:27"
         ],
         "objectSpan": []
+      },
+      "19:12:3": {
+        "subjectSpan": [
+          "19:12:1",
+          "19:12:2"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "19:12:4",
+          "19:12:5",
+          "19:12:6"
+        ]
       },
       "19:12:12": {
         "subjectSpan": [
@@ -45946,6 +47351,30 @@
         "verbSpan": [],
         "objectSpan": []
       },
+      "21:14:3": {
+        "subjectSpan": [
+          "21:14:1",
+          "21:14:2",
+          "21:14:3",
+          "21:14:4",
+          "21:14:5"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "21:14:7",
+          "21:14:8",
+          "21:14:9",
+          "21:14:10",
+          "21:14:11",
+          "21:14:12",
+          "21:14:13",
+          "21:14:14",
+          "21:14:15",
+          "21:14:16",
+          "21:14:17",
+          "21:14:18"
+        ]
+      },
       "21:15:6": {
         "subjectSpan": [
           "21:15:1",
@@ -46092,6 +47521,145 @@
           "21:18:15",
           "21:18:16",
           "21:18:17"
+        ]
+      },
+      "21:19:2": {
+        "subjectSpan": [
+          "21:19:1",
+          "21:19:2",
+          "21:19:3",
+          "21:19:4",
+          "21:19:5",
+          "21:19:6",
+          "21:19:7"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "21:19:10",
+          "21:19:11",
+          "21:19:12",
+          "21:19:13"
+        ]
+      },
+      "21:19:12": {
+        "subjectSpan": [
+          "21:19:14",
+          "21:19:15",
+          "21:19:16"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "21:19:17"
+        ]
+      },
+      "21:19:17": {
+        "subjectSpan": [
+          "21:19:18",
+          "21:19:19"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "21:19:20"
+        ]
+      },
+      "21:19:20": {
+        "subjectSpan": [
+          "21:19:21",
+          "21:19:22"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "21:19:23"
+        ]
+      },
+      "21:19:23": {
+        "subjectSpan": [
+          "21:19:24",
+          "21:19:25"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "21:19:26"
+        ]
+      },
+      "21:20:2": {
+        "subjectSpan": [
+          "21:20:0",
+          "21:20:1"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "21:20:2"
+        ]
+      },
+      "21:20:5": {
+        "subjectSpan": [
+          "21:20:3",
+          "21:20:4"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "21:20:5"
+        ]
+      },
+      "21:20:8": {
+        "subjectSpan": [
+          "21:20:6",
+          "21:20:7"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "21:20:8"
+        ]
+      },
+      "21:20:11": {
+        "subjectSpan": [
+          "21:20:9",
+          "21:20:10"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "21:20:11"
+        ]
+      },
+      "21:20:14": {
+        "subjectSpan": [
+          "21:20:12",
+          "21:20:13"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "21:20:14"
+        ]
+      },
+      "21:20:17": {
+        "subjectSpan": [
+          "21:20:15",
+          "21:20:16"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "21:20:17"
+        ]
+      },
+      "21:20:20": {
+        "subjectSpan": [
+          "21:20:18",
+          "21:20:19"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "21:20:20"
+        ]
+      },
+      "21:20:23": {
+        "subjectSpan": [
+          "21:20:21",
+          "21:20:22"
+        ],
+        "verbSpan": [],
+        "objectSpan": [
+          "21:20:23"
         ]
       },
       "21:21:6": {
@@ -49124,6 +50692,46 @@
         "ridingClauseId": "7:4:2",
         "semanticRelation": "accompanying"
       },
+      "7:5:6": {
+        "agreesWithNoun": "yes",
+        "describedNounSpan": [
+          "7:5:6"
+        ],
+        "standsAlone": "no",
+        "ridesFiniteVerb": "no",
+        "ridingClauseId": "7:5:5",
+        "semanticRelation": "accompanying"
+      },
+      "7:8:16": {
+        "agreesWithNoun": "yes",
+        "describedNounSpan": [
+          "7:8:22"
+        ],
+        "standsAlone": "no",
+        "ridesFiniteVerb": "no",
+        "ridingClauseId": "7:8:15",
+        "semanticRelation": "accompanying"
+      },
+      "7:9:22": {
+        "agreesWithNoun": "yes",
+        "describedNounSpan": [
+          "7:9:9"
+        ],
+        "standsAlone": "no",
+        "ridesFiniteVerb": "no",
+        "ridingClauseId": "7:9:3",
+        "semanticRelation": "accompanying"
+      },
+      "7:9:30": {
+        "agreesWithNoun": "yes",
+        "describedNounSpan": [
+          "7:9:9"
+        ],
+        "standsAlone": "no",
+        "ridesFiniteVerb": "no",
+        "ridingClauseId": "7:9:3",
+        "semanticRelation": "accompanying"
+      },
       "7:10:5": {
         "agreesWithNoun": "yes",
         "describedNounSpan": [
@@ -49132,6 +50740,16 @@
         "standsAlone": "no",
         "ridesFiniteVerb": "no",
         "ridingClauseId": "7:10:2",
+        "semanticRelation": "accompanying"
+      },
+      "7:10:12": {
+        "agreesWithNoun": "yes",
+        "describedNounSpan": [
+          "7:10:10"
+        ],
+        "standsAlone": "no",
+        "ridesFiniteVerb": "no",
+        "ridingClauseId": "7:10:7",
         "semanticRelation": "accompanying"
       },
       "7:12:1": {
@@ -49292,6 +50910,16 @@
         "standsAlone": "no",
         "ridesFiniteVerb": "no",
         "ridingClauseId": "9:1:7",
+        "semanticRelation": "accompanying"
+      },
+      "9:7:8": {
+        "agreesWithNoun": "yes",
+        "describedNounSpan": [
+          "9:7:9"
+        ],
+        "standsAlone": "no",
+        "ridesFiniteVerb": "no",
+        "ridingClauseId": "9:7:6",
         "semanticRelation": "accompanying"
       },
       "9:14:1": {
@@ -50507,6 +52135,26 @@
         "ridingClauseId": "18:15:10",
         "semanticRelation": "accompanying"
       },
+      "18:16:9": {
+        "agreesWithNoun": "yes",
+        "describedNounSpan": [
+          "18:16:5"
+        ],
+        "standsAlone": "no",
+        "ridesFiniteVerb": "no",
+        "ridingClauseId": "18:16:2",
+        "semanticRelation": "accompanying"
+      },
+      "18:16:16": {
+        "agreesWithNoun": "yes",
+        "describedNounSpan": [
+          "18:16:5"
+        ],
+        "standsAlone": "no",
+        "ridesFiniteVerb": "no",
+        "ridingClauseId": "18:16:2",
+        "semanticRelation": "accompanying"
+      },
       "18:17:16": {
         "agreesWithNoun": "yes",
         "describedNounSpan": [
@@ -51069,12 +52717,32 @@
         "ridingClauseId": "21:11:9",
         "semanticRelation": "accompanying"
       },
+      "21:14:6": {
+        "agreesWithNoun": "yes",
+        "describedNounSpan": [
+          "21:14:2"
+        ],
+        "standsAlone": "no",
+        "ridesFiniteVerb": "no",
+        "ridingClauseId": "21:14:3",
+        "semanticRelation": "accompanying"
+      },
       "21:15:3": {
         "agreesWithNoun": "no",
         "describedNounSpan": [],
         "standsAlone": "yes",
         "ridesFiniteVerb": "no",
         "ridingClauseId": "21:15:6",
+        "semanticRelation": "accompanying"
+      },
+      "21:19:10": {
+        "agreesWithNoun": "yes",
+        "describedNounSpan": [
+          "21:19:2"
+        ],
+        "standsAlone": "no",
+        "ridesFiniteVerb": "no",
+        "ridingClauseId": "21:19:2",
         "semanticRelation": "accompanying"
       },
       "21:27:10": {
@@ -51925,8 +53593,23 @@
       "7:4:11": [
         "7:4:11"
       ],
+      "7:5:6": [
+        "7:5:6"
+      ],
+      "7:8:16": [
+        "7:8:22"
+      ],
+      "7:9:22": [
+        "7:9:9"
+      ],
+      "7:9:30": [
+        "7:9:9"
+      ],
       "7:10:5": [
         "7:9:9"
+      ],
+      "7:10:12": [
+        "7:10:10"
       ],
       "7:12:1": [
         "7:11:3"
@@ -51975,6 +53658,9 @@
       ],
       "9:1:12": [
         "9:1:10"
+      ],
+      "9:7:8": [
+        "9:7:9"
       ],
       "9:14:1": [
         "9:13:10"
@@ -52342,6 +54028,12 @@
       "18:15:19": [
         "18:15:1"
       ],
+      "18:16:9": [
+        "18:16:5"
+      ],
+      "18:16:16": [
+        "18:16:5"
+      ],
       "18:17:16": [
         "18:17:15"
       ],
@@ -52483,7 +54175,13 @@
       "21:11:15": [
         "21:11:15"
       ],
+      "21:14:6": [
+        "21:14:2"
+      ],
       "21:15:3": [],
+      "21:19:10": [
+        "21:19:2"
+      ],
       "21:27:10": [],
       "21:27:17": [],
       "22:1:10": [

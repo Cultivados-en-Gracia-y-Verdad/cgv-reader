@@ -5,6 +5,7 @@ import {
   type OutlineStandingContext,
   type OutlineStandingOverride
 } from "./clause-outline";
+import { mergeInheritedObservation } from "./observation-inherit";
 
 export type ClauseRelation = "describes" | "content" | "frame" | "root";
 
@@ -196,21 +197,21 @@ export function applyCoordinateInheritance(
     if (previousResolved.parentClauseId === clause.finiteVerbId) continue;
 
     if (previousResolved.relation === "describes") {
-      augmented[clause.finiteVerbId] = {
+      augmented[clause.finiteVerbId] = mergeInheritedObservation(augmented[clause.finiteVerbId], {
         describesNoun: "yes",
         describedNounSpan: previousResolved.describedNounSpan
-      };
+      });
     } else if (previousResolved.relation === "content" && previousResolved.parentClauseId) {
-      augmented[clause.finiteVerbId] = {
+      augmented[clause.finiteVerbId] = mergeInheritedObservation(augmented[clause.finiteVerbId], {
         isWhatWasExpressed: "yes",
         expressedParentClauseId: previousResolved.parentClauseId
-      };
+      });
     } else if (previousResolved.relation === "frame" && previousResolved.parentClauseId) {
-      augmented[clause.finiteVerbId] = {
+      augmented[clause.finiteVerbId] = mergeInheritedObservation(augmented[clause.finiteVerbId], {
         tellsWhenOrIf: "yes",
         whenIfParentClauseId: previousResolved.parentClauseId,
         frameType: previousResolved.frameType
-      };
+      });
     }
   }
 

@@ -76,7 +76,9 @@ A verbless stretch that **predicates alone** is a clause. Mark its **head** on B
 
 **Judgment:** read it aloud alone — statement or command, or only a leftover NP / apposition? Soft → **Dudas**, do not mark.
 
-On every finite pass, **hunt** leftover predicating stretches in the verse and list 1B candidates. Build one only when it is the named unit.
+First pass is **reading order**: after a finite, a same-verse hard 1B is the default next unit. Do not park it on “skip unless named.”
+
+When the hard-1B hunt is empty, **stop**. Bare `proceed` does not start actor leftovers (empty subject, impersonal, unspecified 3pl) or soft leftovers. Wait for a named id.
 
 ---
 
@@ -93,6 +95,6 @@ Do not take the next verse “while you’re here.”
 ## When invoked
 
 1. Announce as Jason. Say you are filling Observer JSON, not replacing Observer.
-2. Confirm book, progress file, and the single clause id (finite or 1B head). If they named a chapter, pick **one** unwalked finite — or one flagged 1B head — and say which.
+2. Read the workshop list. Confirm the single clause id (finite or 1B head). If they did not name an id, take the list’s default next unit. If the list says the hard-1B hunt is empty, stop — do not start actor leftovers on `proceed`. If they named a chapter, pick **one** unwalked finite — or one flagged 1B head — and say which.
 3. Dump the verse: LBF words with ids, source tokens, existing rows for this id.
 4. Walk and write that clause. Short report. Stop.
