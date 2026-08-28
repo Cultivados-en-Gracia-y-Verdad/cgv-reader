@@ -1,40 +1,12 @@
 // Reader book selection. Observer Structure stays NT MorphGNT until OT spine exists.
 
 import type { BibleVersionId } from "./bible-version";
+import { GENERATED_READER_BOOKS } from "./reader-books.generated";
 
 export const READER_BOOK_KEY = "the-reader:selected-book";
 
-/** File / token slug used across cgv-data (lowercase, no spaces). */
-export type ReaderBookId =
-  | "mateo"
-  | "marcos"
-  | "lucas"
-  | "juan"
-  | "hechos"
-  | "romanos"
-  | "1corintios"
-  | "2corintios"
-  | "galatas"
-  | "efesios"
-  | "filipenses"
-  | "colosenses"
-  | "1tesalonicenses"
-  | "2tesalonicenses"
-  | "1timoteo"
-  | "2timoteo"
-  | "tito"
-  | "filemon"
-  | "hebreos"
-  | "santiago"
-  | "1pedro"
-  | "2pedro"
-  | "1juan"
-  | "2juan"
-  | "3juan"
-  | "judas"
-  | "apocalipsis"
-  | "daniel"
-  | "zacarias";
+/** File / token slug used across the selected cgv-data dataset. */
+export type ReaderBookId = (typeof GENERATED_READER_BOOKS)[number]["id"];
 
 export interface ReaderBookInfo {
   id: ReaderBookId;
@@ -44,40 +16,16 @@ export interface ReaderBookInfo {
   rv1909: string;
   /** Testament for LBF path / morph spine selection. */
   testament: "ot" | "nt";
+  /** Bible texts actually present in the selected cgv-data dataset. */
+  versions: readonly BibleVersionId[];
+  /** MorphGNT filename stem for NT books; empty for OT books. */
+  morphGntStem: string;
+  /** Whether the selected dataset publishes an OSHB token spine. */
+  hasOshb: boolean;
 }
 
-/** Reader books (NT + OT drafts as they gain LBF / bible text). */
-export const READER_BOOKS: ReaderBookInfo[] = [
-  { id: "mateo", displayName: "Mateo", rv1909: "40", testament: "nt" },
-  { id: "marcos", displayName: "Marcos", rv1909: "41", testament: "nt" },
-  { id: "lucas", displayName: "Lucas", rv1909: "42", testament: "nt" },
-  { id: "juan", displayName: "Juan", rv1909: "43", testament: "nt" },
-  { id: "hechos", displayName: "Hechos", rv1909: "44", testament: "nt" },
-  { id: "romanos", displayName: "Romanos", rv1909: "45", testament: "nt" },
-  { id: "1corintios", displayName: "1 Corintios", rv1909: "46", testament: "nt" },
-  { id: "2corintios", displayName: "2 Corintios", rv1909: "47", testament: "nt" },
-  { id: "galatas", displayName: "Gálatas", rv1909: "48", testament: "nt" },
-  { id: "efesios", displayName: "Efesios", rv1909: "49", testament: "nt" },
-  { id: "filipenses", displayName: "Filipenses", rv1909: "50", testament: "nt" },
-  { id: "colosenses", displayName: "Colosenses", rv1909: "51", testament: "nt" },
-  { id: "1tesalonicenses", displayName: "1 Tesalonicenses", rv1909: "52", testament: "nt" },
-  { id: "2tesalonicenses", displayName: "2 Tesalonicenses", rv1909: "53", testament: "nt" },
-  { id: "1timoteo", displayName: "1 Timoteo", rv1909: "54", testament: "nt" },
-  { id: "2timoteo", displayName: "2 Timoteo", rv1909: "55", testament: "nt" },
-  { id: "tito", displayName: "Tito", rv1909: "56", testament: "nt" },
-  { id: "filemon", displayName: "Filemón", rv1909: "57", testament: "nt" },
-  { id: "hebreos", displayName: "Hebreos", rv1909: "58", testament: "nt" },
-  { id: "santiago", displayName: "Santiago", rv1909: "59", testament: "nt" },
-  { id: "1pedro", displayName: "1 Pedro", rv1909: "60", testament: "nt" },
-  { id: "2pedro", displayName: "2 Pedro", rv1909: "61", testament: "nt" },
-  { id: "1juan", displayName: "1 Juan", rv1909: "62", testament: "nt" },
-  { id: "2juan", displayName: "2 Juan", rv1909: "63", testament: "nt" },
-  { id: "3juan", displayName: "3 Juan", rv1909: "64", testament: "nt" },
-  { id: "judas", displayName: "Judas", rv1909: "65", testament: "nt" },
-  { id: "apocalipsis", displayName: "Apocalipsis", rv1909: "66", testament: "nt" },
-  { id: "daniel", displayName: "Daniel", rv1909: "27", testament: "ot" },
-  { id: "zacarias", displayName: "Zacarías", rv1909: "38", testament: "ot" }
-];
+/** Whole NT plus OT books with published LBF text, generated in canonical order. */
+export const READER_BOOKS: readonly ReaderBookInfo[] = GENERATED_READER_BOOKS;
 
 export const DEFAULT_READER_BOOK: ReaderBookId = "tito";
 
@@ -153,7 +101,7 @@ export function readerBookHasMorphGnt(bookId: ReaderBookId): boolean {
 
 /** OSHB/WLC Mark spine (OT). */
 export function readerBookHasOshb(bookId: ReaderBookId): boolean {
-  return bookId === "daniel" || bookId === "zacarias";
+  return getReaderBookInfo(bookId).hasOshb;
 }
 
 /** Observer Mark can load a source-language spine for this book. */
@@ -164,15 +112,7 @@ export function readerBookHasObserverMark(bookId: ReaderBookId): boolean {
 /** Bible versions present in cgv-data for this book (Reader prefs). */
 export function readerBookHasBibleVersion(bookId: ReaderBookId, version: BibleVersionId): boolean {
   if (version === "LBF") return readerBookHasLbf(bookId);
-  if (bookId === "daniel") {
-    // No NBLA pack for Daniel; BLE / SPNBES / RV1909 are available (LBF via readerBookHasLbf).
-    return version === "BLE" || version === "SPNBES" || version === "RV1909";
-  }
-  if (bookId === "zacarias") {
-    // Zacarías has all four: NBLA / BLE / SPNBES / RV1909 (LBF via readerBookHasLbf).
-    return true;
-  }
-  return true;
+  return getReaderBookInfo(bookId).versions.includes(version);
 }
 
 /**
@@ -191,38 +131,9 @@ export function readerBookIdFromWorkshopSlug(slug: string): ReaderBookId | null 
 }
 
 /** MorphGNT filename stem under morphology/MorphGNT/ (e.g. `77-Tit`). */
-export const MORPHGNT_STEM_BY_BOOK: Record<ReaderBookId, string> = {
-  mateo: "61-Mt",
-  marcos: "62-Mk",
-  lucas: "63-Lk",
-  juan: "64-Jn",
-  hechos: "65-Ac",
-  romanos: "66-Ro",
-  "1corintios": "67-1Co",
-  "2corintios": "68-2Co",
-  galatas: "69-Ga",
-  efesios: "70-Eph",
-  filipenses: "71-Php",
-  colosenses: "72-Col",
-  "1tesalonicenses": "73-1Th",
-  "2tesalonicenses": "74-2Th",
-  "1timoteo": "75-1Ti",
-  "2timoteo": "76-2Ti",
-  tito: "77-Tit",
-  filemon: "78-Phm",
-  hebreos: "79-Heb",
-  santiago: "80-Jas",
-  "1pedro": "81-1Pe",
-  "2pedro": "82-2Pe",
-  "1juan": "83-1Jn",
-  "2juan": "84-2Jn",
-  "3juan": "85-3Jn",
-  judas: "86-Jud",
-  apocalipsis: "87-Re",
-  /** OT — no MorphGNT; the Mark spine is OSHB. */
-  daniel: "",
-  zacarias: ""
-};
+export const MORPHGNT_STEM_BY_BOOK = Object.fromEntries(
+  READER_BOOKS.map(book => [book.id, book.morphGntStem])
+) as Record<ReaderBookId, string>;
 
 export interface WorkshopProgressKeys {
   finiteMarks: string;

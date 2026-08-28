@@ -5,6 +5,7 @@ import {
   registerPublishedLbfAssets,
   type ReaderBookId
 } from "@cgv/core";
+import { nblaFiles } from "../core/reader-assets.generated";
 
 /** Eager so Reader / Mark can load LBF sync when the book has text. */
 const lbfMdFiles = import.meta.glob(
@@ -93,39 +94,6 @@ const interlinearFiles = import.meta.glob(
     query: "?raw",
     import: "default"
   }
-) as Record<string, () => Promise<string>>;
-
-const nblaFiles = import.meta.glob(
-  [
-    "@cgv-data/bibles/NBLA/mateo.nbla.md",
-    "@cgv-data/bibles/NBLA/marcos.nbla.md",
-    "@cgv-data/bibles/NBLA/lucas.nbla.md",
-    "@cgv-data/bibles/NBLA/juan.nbla.md",
-    "@cgv-data/bibles/NBLA/hechos.nbla.md",
-    "@cgv-data/bibles/NBLA/romanos.nbla.md",
-    "@cgv-data/bibles/NBLA/1corintios.nbla.md",
-    "@cgv-data/bibles/NBLA/2corintios.nbla.md",
-    "@cgv-data/bibles/NBLA/galatas.nbla.md",
-    "@cgv-data/bibles/NBLA/efesios.nbla.md",
-    "@cgv-data/bibles/NBLA/filipenses.nbla.md",
-    "@cgv-data/bibles/NBLA/colosenses.nbla.md",
-    "@cgv-data/bibles/NBLA/1tesalonicenses.nbla.md",
-    "@cgv-data/bibles/NBLA/2tesalonicenses.nbla.md",
-    "@cgv-data/bibles/NBLA/1timoteo.nbla.md",
-    "@cgv-data/bibles/NBLA/2timoteo.nbla.md",
-    "@cgv-data/bibles/NBLA/tito.nbla.md",
-    "@cgv-data/bibles/NBLA/filemon.nbla.md",
-    "@cgv-data/bibles/NBLA/hebreos.nbla.md",
-    "@cgv-data/bibles/NBLA/santiago.nbla.md",
-    "@cgv-data/bibles/NBLA/1pedro.nbla.md",
-    "@cgv-data/bibles/NBLA/2pedro.nbla.md",
-    "@cgv-data/bibles/NBLA/1juan.nbla.md",
-    "@cgv-data/bibles/NBLA/2juan.nbla.md",
-    "@cgv-data/bibles/NBLA/3juan.nbla.md",
-    "@cgv-data/bibles/NBLA/judas.nbla.md",
-    "@cgv-data/bibles/NBLA/apocalipsis.nbla.md"
-  ],
-  { query: "?raw", import: "default" }
 ) as Record<string, () => Promise<string>>;
 
 function globKey(files: Record<string, unknown>, endsWith: string): string | undefined {

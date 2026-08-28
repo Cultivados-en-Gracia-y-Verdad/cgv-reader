@@ -3,7 +3,14 @@ name: Deploy Reader to GitHub Pages
 on:
   push:
     branches: [main]
+  repository_dispatch:
+    types: [cgv-data-published]
   workflow_dispatch:
+    inputs:
+      cgv_data_commit:
+        description: "Immutable cgv-data commit (40-character SHA); defaults to the pinned version"
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -21,11 +28,26 @@ jobs:
       - name: Checkout cgv-reader
         uses: actions/checkout@v4
 
+      - name: Resolve immutable cgv-data version
+        id: cgv-data-version
+        env:
+          DISPATCH_COMMIT: ${{ github.event.client_payload.cgv_data_commit }}
+          MANUAL_COMMIT: ${{ inputs.cgv_data_commit }}
+        run: |
+          node -e '
+            const fs = require("node:fs");
+            const pinned = JSON.parse(fs.readFileSync("config/cgv-data-version.json", "utf8"));
+            const commit = process.env.DISPATCH_COMMIT || process.env.MANUAL_COMMIT || pinned.commit;
+            if (!/^[0-9a-f]{40}$/i.test(commit)) throw new Error("cgv_data_commit must be a full immutable Git SHA");
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `commit=${commit}\n`);
+          '
+
       - name: Checkout cgv-data (Bible / morph / interlinear)
         uses: actions/checkout@v4
         with:
           repository: Cultivados-en-Gracia-y-Verdad/cgv-data
           path: cgv-data
+          ref: ${{ steps.cgv-data-version.outputs.commit }}
 
       - name: Setup Node
         uses: actions/setup-node@v4

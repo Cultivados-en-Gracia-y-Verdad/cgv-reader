@@ -1,6 +1,7 @@
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import {
   BIBLE_VERSIONS,
+  CGV_DATASET_PROVENANCE,
   READER_BOOKS,
   readBibleVersion,
   readReaderBook,
@@ -160,6 +161,9 @@ export default function PreferencesPanel({ onRecoverNotes, onDownloadBackup }: P
             </select>
           </label>
           <p className="prefs-note">{t.prefBibleNote}</p>
+          <p className="prefs-note" title={CGV_DATASET_PROVENANCE.gitCommit}>
+            Dataset: {CGV_DATASET_PROVENANCE.id} @ {CGV_DATASET_PROVENANCE.gitCommit.slice(0, 12)}
+          </p>
           <section className="prefs-recovery" aria-labelledby={`${panelId}-recovery`}>
             <h2 id={`${panelId}-recovery`}>{t.prefRecovery}</h2>
             <p>{t.prefRecoveryNote}</p>

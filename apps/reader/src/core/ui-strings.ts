@@ -103,7 +103,7 @@ const EN: UiStrings = {
   prefBook: "Book",
   prefBible: "Bible text (Reader)",
   prefBibleNote:
-    "Book is shared across Reader, Observer Mark, and Compiler when LBF text exists (Titus, 1 Peter). Structure / Generate still need reverse-interlinear alignment (Titus for now). Notes stay keyed to each verse.",
+    "Book selection is shared across Reader, Observer, and Compiler. Structure / Generate require a published LBF reverse-interlinear alignment. Notes stay keyed to each verse.",
   prefRecovery: "Notes and backup",
   prefRecoveryNote: "Review notes saved in this browser or download a copy of your current progress.",
   loadingBook: "Loading…",
@@ -125,7 +125,7 @@ const EN: UiStrings = {
   structureNeedsLbf: book =>
     `Structure needs published LBF reverse-interlinear alignment. ${book} does not have an alignment file in cgv-data yet.`,
   markNeedsMorphGnt: book =>
-    `Mark needs a source-language spine for ${book}. Switch to a book with MorphGNT (NT) or OSHB (Daniel) wired.`,
+    `Mark needs a source-language spine for ${book}. Switch to a book with MorphGNT (NT) or a published OSHB spine.`,
 
   compilerKicker: "Compiler",
   compilerTitle: book => `Manual skeleton — ${book}`,
@@ -200,7 +200,7 @@ const ES: UiStrings = {
   prefBook: "Libro",
   prefBible: "Texto bíblico (Lector)",
   prefBibleNote:
-    "El libro se comparte entre Lector, Observador (Marcar) y Compilador cuando hay texto LBF (Tito, 1 Pedro). Estructura / Generar aún necesitan alineación inversa (Tito por ahora). Las notas quedan ligadas a cada versículo.",
+    "El libro se comparte entre Lector, Observador y Compilador. Estructura / Generar requieren una alineación inversa LBF publicada. Las notas quedan ligadas a cada versículo.",
   prefRecovery: "Notas y respaldo",
   prefRecoveryNote: "Revise las notas guardadas en este navegador o descargue una copia del progreso actual.",
   loadingBook: "Cargando…",
@@ -222,7 +222,7 @@ const ES: UiStrings = {
   structureNeedsLbf: book =>
     `Estructura necesita alineación inversa LBF publicada. ${book} aún no tiene archivo de alineación en cgv-data.`,
   markNeedsMorphGnt: book =>
-    `Marcar necesita columna fuente para ${book}. Cambie a un libro con MorphGNT (NT) o OSHB (Daniel) cableado.`,
+    `Marcar necesita columna fuente para ${book}. Cambie a un libro con MorphGNT (NT) o una columna OSHB publicada.`,
 
   compilerKicker: "Compilador",
   compilerTitle: book => `Esqueleto del manual — ${book}`,

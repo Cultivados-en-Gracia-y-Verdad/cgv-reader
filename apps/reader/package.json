@@ -5,7 +5,9 @@
   "description": "The Reader — ultra-clean Scripture reading; Observer and Compiler unlock inside",
   "type": "module",
   "scripts": {
+    "predev": "node ../../scripts/update-reader-catalog.mjs",
     "dev": "vite",
+    "prebuild": "node ../../scripts/update-reader-catalog.mjs",
     "build": "tsc -p tsconfig.json && vite build",
     "preview": "vite preview"
   },

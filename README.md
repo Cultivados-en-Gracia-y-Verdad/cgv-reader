@@ -25,6 +25,23 @@ npm run dev
 
 Dev server: [http://localhost:1423](http://localhost:1423)
 
+### Automatic Reader catalog
+
+`npm run dev` and `npm run build` run `scripts/update-reader-catalog.mjs` first. The
+generator reads the configured, read-only `cgv-data` checkout and regenerates the Reader-owned
+book catalog and asset lists. The whole New Testament remains available; an Old Testament book
+is added automatically when `bibles/LBF/{book}.lbf.md` is published. Available Reader versions
+and source-language spine support are derived from files present in that same dataset.
+
+Run `npm run update:reader-catalog` directly to refresh the generated files, or
+`npm run check:reader-catalog` to fail when they are stale. Set `CGV_DATA_PATH` when the dataset
+is not the sibling `../cgv-data` checkout.
+
+Production uses the immutable commit in `config/cgv-data-version.json`. A `repository_dispatch`
+event named `cgv-data-published` may override it for one deployment by supplying
+`client_payload.cgv_data_commit` as a full 40-character Git SHA. The generated commit is visible
+in Reader preferences for provenance diagnostics.
+
 ## Public test site
 
 GitHub Pages (deploys from `main`):

@@ -10,6 +10,8 @@
     "vendor/*"
   ],
   "scripts": {
+    "update:reader-catalog": "node scripts/update-reader-catalog.mjs",
+    "check:reader-catalog": "node scripts/update-reader-catalog.mjs --check",
     "dev": "npm run dev -w @cgv/reader",
     "build": "npm run build -w @cgv/reader",
     "preview": "npm run preview -w @cgv/reader"

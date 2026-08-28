@@ -68,6 +68,11 @@ export {
 } from "./compiler-bible-version";
 
 export {
+  CGV_DATASET_PROVENANCE,
+  type GeneratedReaderBookInfo
+} from "./reader-books.generated";
+
+export {
   READER_BOOK_KEY,
   READER_BOOKS,
   DEFAULT_READER_BOOK,
