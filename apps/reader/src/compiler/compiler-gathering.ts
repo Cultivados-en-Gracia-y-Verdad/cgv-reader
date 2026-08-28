@@ -10,6 +10,18 @@ export interface ReaderNote {
   label: string;
   text: string;
   updatedAt: string;
+  verseTarget?: string;
+  progressSchemaVersion?: 2;
+  datasetId?: string;
+  datasetVersion?: string;
+  bibleVersion?: string;
+  anchor?: {
+    kind: "lbf-word";
+    wordIndex: number;
+    surface: string;
+    sourceTokenIds: string[];
+    alignmentUnitIds: string[];
+  };
 }
 
 export type CompilerAttachmentKind = "definition" | "xref";
@@ -258,7 +270,8 @@ export function remapAttachmentsToMarkdown(
 export function verseKeysFromNoteTarget(target: string): string[] {
   const [startRaw, endRaw] = target.split("--");
   const parse = (value: string): { chapter: number; verse: number } | null => {
-    const match = value.trim().match(/\.(\d+)\.(\d+)$/);
+    const base = value.trim().split("#")[0];
+    const match = base.match(/\.(\d+)\.(\d+)$/);
     if (!match) return null;
     return { chapter: Number(match[1]), verse: Number(match[2]) };
   };
@@ -289,7 +302,8 @@ export function readerNoteCommentLines(chapter: number, verse: number, notes: Re
   for (const note of notes) {
     if (!note.text.trim()) continue;
     if (!verseKeysFromNoteTarget(note.target).includes(verseKey)) continue;
-    lines.push(`> ${note.text.trim()}`);
+    const word = note.anchor?.surface.trim();
+    lines.push(word ? `> **${word}:** ${note.text.trim()}` : `> ${note.text.trim()}`);
   }
   return lines;
 }

@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { BibleVerse } from "cgv-bible";
 import {
+  CGV_DATASET_PROVENANCE,
   READER_BOOKS,
   getReaderBookInfo,
   readBibleVersion,
   readReaderBook,
+  readerBookHasLbfStructure,
   subscribeBibleVersion,
   subscribeReaderBook,
   workshopProgressKeys,
@@ -13,19 +15,41 @@ import {
   type ReaderBookId
 } from "@cgv/core";
 import { useUiLanguage } from "../core/UiLanguageContext";
-import { loadReaderBook, type ReaderBook } from "./reader-data";
+import {
+  loadLbfReaderVerseParts,
+  loadReaderBook,
+  type ReaderBook,
+  type ReaderVersePart
+} from "./reader-data";
+
+interface ReaderNoteAnchor {
+  kind: "lbf-word";
+  wordIndex: number;
+  surface: string;
+  sourceTokenIds: string[];
+  alignmentUnitIds: string[];
+}
 
 interface ReaderNote {
   id: string;
   target: string;
+  verseTarget?: string;
   label: string;
   text: string;
   updatedAt: string;
+  progressSchemaVersion?: 2;
+  datasetId?: string;
+  datasetVersion?: string;
+  bibleVersion?: BibleVersionId;
+  anchor?: ReaderNoteAnchor;
 }
 
 interface NoteTarget {
   key: string;
+  verseTarget: string;
   label: string;
+  bibleVersion: BibleVersionId;
+  anchor?: ReaderNoteAnchor;
 }
 
 function verseKey(verse: BibleVerse): string {
@@ -36,10 +60,17 @@ function verseLabel(verse: BibleVerse): string {
   return `${verse.book} ${verse.chapter}:${verse.verse}`;
 }
 
-function targetContainsVerse(target: string, key: string): boolean {
-  const [start, end] = target.split("--");
-  if (!end) return target === key;
+function targetContainsVerse(note: ReaderNote, key: string): boolean {
+  if (note.verseTarget) return note.verseTarget === key;
+  const [startRaw, endRaw] = note.target.split("--");
+  const start = startRaw.split("#")[0];
+  const end = endRaw?.split("#")[0];
+  if (!end) return start === key;
   return key >= start && key <= end;
+}
+
+function noteVerseTarget(note: ReaderNote): string {
+  return note.verseTarget ?? note.target.split("--")[0].split("#")[0];
 }
 
 function notesStorageKey(bookId: ReaderBookId): string {
@@ -144,14 +175,52 @@ export default function ReaderView() {
       const key = verseKey(verse);
       grouped.set(
         key,
-        notes.filter(note => targetContainsVerse(note.target, key))
+        notes.filter(note => targetContainsVerse(note, key))
       );
     }
     return grouped;
   }, [book, notes]);
 
+  const wordNotesEnabled = Boolean(
+    book && book.version === "LBF" && readerBookHasLbfStructure(book.id)
+  );
+
   function openVerseNote(verse: BibleVerse) {
-    setActiveTarget({ key: verseKey(verse), label: verseLabel(verse) });
+    const key = verseKey(verse);
+    setActiveTarget({ key, verseTarget: key, label: verseLabel(verse), bibleVersion: book?.version ?? bibleVersion });
+  }
+
+  function wordTargetKey(verse: BibleVerse, part: ReaderVersePart): string {
+    const sourceIds = part.sourceTokenIds?.join("+") || "unaligned";
+    return `${verseKey(verse)}#LBF:${CGV_DATASET_PROVENANCE.gitCommit}:${part.wordIndex}:${sourceIds}`;
+  }
+
+  function openWordNote(verse: BibleVerse, part: ReaderVersePart) {
+    if (part.wordIndex === undefined) return;
+    const key = wordTargetKey(verse, part);
+    setActiveTarget({
+      key,
+      verseTarget: verseKey(verse),
+      label: `${verseLabel(verse)} · «${part.text}»`,
+      bibleVersion: "LBF",
+      anchor: {
+        kind: "lbf-word",
+        wordIndex: part.wordIndex,
+        surface: part.text,
+        sourceTokenIds: part.sourceTokenIds ?? [],
+        alignmentUnitIds: part.alignmentUnitIds ?? []
+      }
+    });
+  }
+
+  function openSavedNote(note: ReaderNote) {
+    setActiveTarget({
+      key: note.target,
+      verseTarget: noteVerseTarget(note),
+      label: note.label,
+      bibleVersion: note.bibleVersion ?? book?.version ?? bibleVersion,
+      anchor: note.anchor
+    });
   }
 
   function saveDraft() {
@@ -166,9 +235,15 @@ export default function ReaderView() {
         {
           id: current.find(note => note.target === activeTarget.key)?.id ?? makeNoteId(),
           target: activeTarget.key,
+          verseTarget: activeTarget.verseTarget,
           label: activeTarget.label,
           text,
-          updatedAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
+          progressSchemaVersion: 2,
+          datasetId: CGV_DATASET_PROVENANCE.id,
+          datasetVersion: CGV_DATASET_PROVENANCE.gitCommit,
+          bibleVersion: activeTarget.bibleVersion,
+          anchor: activeTarget.anchor
         }
       ];
     });
@@ -204,6 +279,7 @@ export default function ReaderView() {
           </label>
           <h1>{book?.title ?? "…"}</h1>
           <p className="reader-version">{book?.versionLabel ?? ""}</p>
+          {wordNotesEnabled ? <p className="reader-word-note-hint">{t.wordNotesHint}</p> : null}
         </header>
 
         {loadError ? <p className="reader-load-error">{loadError}</p> : null}
@@ -220,7 +296,7 @@ export default function ReaderView() {
 
                   return (
                     <div
-                      className={`reader-line${activeTarget?.key === key ? " reader-line--active" : ""}`}
+                      className={`reader-line${activeTarget?.verseTarget === key ? " reader-line--active" : ""}`}
                       key={key}
                     >
                       <button
@@ -233,7 +309,30 @@ export default function ReaderView() {
                       </button>
                       <p className="reader-verse" onClick={() => openVerseNote(verse)}>
                         <sup>{verse.verse}</sup>
-                        {verse.text}
+                        {wordNotesEnabled
+                          ? loadLbfReaderVerseParts(book.id, verse).map((part, index) => {
+                              if (part.wordIndex === undefined) {
+                                return <span key={`text-${index}`}>{part.text}</span>;
+                              }
+                              const target = wordTargetKey(verse, part);
+                              const hasNote = notes.some(note => note.target === target);
+                              const isActive = activeTarget?.key === target;
+                              return (
+                                <button
+                                  type="button"
+                                  className={`reader-word${hasNote ? " reader-word--has-note" : ""}${isActive ? " reader-word--active" : ""}`}
+                                  key={`word-${part.wordIndex}`}
+                                  onClick={event => {
+                                    event.stopPropagation();
+                                    openWordNote(verse, part);
+                                  }}
+                                  aria-label={t.noteFor(`${verseLabel(verse)}, ${part.text}`)}
+                                >
+                                  {part.text}
+                                </button>
+                              );
+                            })
+                          : verse.text}
                       </p>
                       <aside className="reader-margin-notes" aria-label={t.notesFor(verseLabel(verse))}>
                         {verseNotes.map(note => (
@@ -241,9 +340,12 @@ export default function ReaderView() {
                             type="button"
                             className="reader-note"
                             key={note.id}
-                            onClick={() => setActiveTarget({ key: note.target, label: note.label })}
+                            onClick={() => openSavedNote(note)}
                           >
-                            {note.text}
+                            {note.anchor ? (
+                              <span className="reader-note-anchor">«{note.anchor.surface}»</span>
+                            ) : null}
+                            <span>{note.text}</span>
                           </button>
                         ))}
                       </aside>

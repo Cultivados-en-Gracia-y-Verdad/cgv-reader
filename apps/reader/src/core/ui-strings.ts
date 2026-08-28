@@ -64,6 +64,7 @@ export interface UiStrings {
 
   readerKicker: string;
   notePlaceholder: string;
+  wordNotesHint: string;
   close: string;
   delete: string;
   save: string;
@@ -103,7 +104,7 @@ const EN: UiStrings = {
   prefBook: "Book",
   prefBible: "Bible text (Reader)",
   prefBibleNote:
-    "Book selection is shared across Reader, Observer, and Compiler. Structure / Generate require a published LBF reverse-interlinear alignment. Notes stay keyed to each verse.",
+    "Book selection is shared across Reader, Observer, and Compiler. Structure / Generate require a published LBF reverse-interlinear alignment. LBF notes can be keyed to a verse or word.",
   prefRecovery: "Notes and backup",
   prefRecoveryNote: "Review notes saved in this browser or download a copy of your current progress.",
   loadingBook: "Loading…",
@@ -160,6 +161,7 @@ const EN: UiStrings = {
 
   readerKicker: "The Reader",
   notePlaceholder: "Write a short note...",
+  wordNotesHint: "Select any word to add a note.",
   close: "Close",
   delete: "Delete",
   save: "Save",
@@ -200,7 +202,7 @@ const ES: UiStrings = {
   prefBook: "Libro",
   prefBible: "Texto bíblico (Lector)",
   prefBibleNote:
-    "El libro se comparte entre Lector, Observador y Compilador. Estructura / Generar requieren una alineación inversa LBF publicada. Las notas quedan ligadas a cada versículo.",
+    "El libro se comparte entre Lector, Observador y Compilador. Estructura / Generar requieren una alineación inversa LBF publicada. En LBF, las notas pueden ligarse a un versículo o una palabra.",
   prefRecovery: "Notas y respaldo",
   prefRecoveryNote: "Revise las notas guardadas en este navegador o descargue una copia del progreso actual.",
   loadingBook: "Cargando…",
@@ -254,6 +256,7 @@ const ES: UiStrings = {
 
   readerKicker: "El Lector",
   notePlaceholder: "Escriba una nota breve...",
+  wordNotesHint: "Seleccione cualquier palabra para añadir una nota.",
   close: "Cerrar",
   delete: "Borrar",
   save: "Guardar",

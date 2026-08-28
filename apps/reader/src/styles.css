@@ -282,6 +282,14 @@ textarea {
   letter-spacing: 0;
 }
 
+.reader-word-note-hint {
+  margin: 0.42rem 0 0;
+  color: var(--reader-soft);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 1.08rem;
+  line-height: 1.45;
+}
+
 .reader-book-select {
   display: block;
   margin: 0.55rem 0 0;
@@ -370,11 +378,43 @@ textarea {
 .reader-verse {
   grid-column: 1;
   margin: 0 0 0.92rem;
-  font-size: clamp(1.9rem, 2.7vw, 2.5rem);
+  font-size: clamp(2.05rem, 2.9vw, 2.7rem);
   font-weight: 400;
   line-height: 1.72;
   letter-spacing: 0;
   cursor: text;
+}
+
+.reader-word {
+  display: inline;
+  margin: 0 -0.025em;
+  border: 0;
+  border-bottom: 0.08em solid transparent;
+  border-radius: 0.14em;
+  padding: 0 0.025em;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.reader-word:hover,
+.reader-word:focus-visible {
+  border-bottom-color: color-mix(in srgb, var(--reader-accent) 58%, transparent);
+  background: color-mix(in srgb, var(--reader-note-bg) 82%, transparent);
+  outline: none;
+}
+
+.reader-word--has-note {
+  border-bottom-color: var(--reader-accent);
+}
+
+.reader-word--active {
+  background: var(--reader-note-bg);
+  color: var(--reader-accent);
 }
 
 .reader-verse sup {
@@ -434,10 +474,18 @@ textarea {
   background: transparent;
   color: var(--reader-note-text);
   font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   line-height: 1.45;
   text-align: left;
   cursor: pointer;
+}
+
+.reader-note-anchor {
+  display: block;
+  margin-bottom: 0.12rem;
+  color: var(--reader-accent);
+  font-size: 0.92em;
+  font-weight: 600;
 }
 
 .reader-note:hover,
@@ -480,7 +528,7 @@ textarea {
   background: #fffdfa;
   color: var(--reader-text);
   font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  font-size: 1.12rem;
+  font-size: 1.2rem;
   line-height: 1.55;
 }
 
@@ -1671,7 +1719,7 @@ button.interlinear-token--pickable:focus-visible {
 
   .reader-verse {
     padding-right: 2.1rem;
-    font-size: clamp(1.48rem, 6.4vw, 1.8rem);
+    font-size: clamp(1.65rem, 6.6vw, 2rem);
     line-height: 1.68;
   }
 

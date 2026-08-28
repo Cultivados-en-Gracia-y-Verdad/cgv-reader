@@ -8,6 +8,11 @@ import {
 } from "@cgv/core";
 import { loadLbfRaw } from "../observer/book-assets";
 import {
+  loadLbfSourceTokenUnits,
+  loadLbfTokenWordIndexes,
+  loadLbfTokenWordMap
+} from "../observer/lbf-alignment";
+import {
   bleFiles,
   nblaFiles,
   rv1909Files,
@@ -20,6 +25,77 @@ export interface ReaderBook {
   version: BibleVersionId;
   versionLabel: string;
   verses: BibleVerse[];
+}
+
+export interface ReaderVersePart {
+  text: string;
+  wordIndex?: number;
+  sourceTokenIds?: string[];
+  alignmentUnitIds?: string[];
+}
+
+const LBF_WORD_PATTERN = /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ][\wÁÉÍÓÚÜÑáéíóúüñ'’\-]*/gu;
+
+/**
+ * Split an LBF verse into display-preserving text parts and word anchors.
+ * Published source-token ids are preferred. Older alignment records fall back
+ * to a dataset-bound book/chapter/verse/token id, never to the Greek surface.
+ */
+export function loadLbfReaderVerseParts(
+  bookId: ReaderBookId,
+  verse: BibleVerse
+): ReaderVersePart[] {
+  const sourceIdsByWord = new Map<number, Set<string>>();
+  const unitIdsByWord = new Map<number, Set<string>>();
+  const sourceUnits = loadLbfSourceTokenUnits(verse.chapter, verse.verse, bookId);
+
+  for (const [sourceTokenId, units] of sourceUnits) {
+    if (!/^[hn]\d+$/.test(sourceTokenId)) continue;
+    for (const unit of units) {
+      const indexes = unit.lbfWordIndexes.length ? unit.lbfWordIndexes : [unit.lbfWordIndex];
+      for (const index of indexes) {
+        const ids = sourceIdsByWord.get(index) ?? new Set<string>();
+        ids.add(sourceTokenId);
+        sourceIdsByWord.set(index, ids);
+        if (unit.unitId) {
+          const unitIds = unitIdsByWord.get(index) ?? new Set<string>();
+          unitIds.add(unit.unitId);
+          unitIdsByWord.set(index, unitIds);
+        }
+      }
+    }
+  }
+
+  // Local legacy alignments have stable token positions but no source-token id.
+  const primaryIndexes = loadLbfTokenWordMap(verse.chapter, verse.verse, bookId);
+  const multipleIndexes = loadLbfTokenWordIndexes(verse.chapter, verse.verse, bookId);
+  for (const [token, primaryIndex] of primaryIndexes) {
+    const indexes = multipleIndexes.get(token) ?? [primaryIndex];
+    for (const index of indexes) {
+      if (sourceIdsByWord.has(index)) continue;
+      const ids = sourceIdsByWord.get(index) ?? new Set<string>();
+      ids.add(`cgv:${bookId}:${verse.chapter}:${verse.verse}:${token}`);
+      sourceIdsByWord.set(index, ids);
+    }
+  }
+
+  const parts: ReaderVersePart[] = [];
+  let cursor = 0;
+  let wordIndex = 0;
+  for (const match of verse.text.matchAll(LBF_WORD_PATTERN)) {
+    const start = match.index ?? 0;
+    if (start > cursor) parts.push({ text: verse.text.slice(cursor, start) });
+    parts.push({
+      text: match[0],
+      wordIndex,
+      sourceTokenIds: Array.from(sourceIdsByWord.get(wordIndex) ?? []).sort(),
+      alignmentUnitIds: Array.from(unitIdsByWord.get(wordIndex) ?? []).sort()
+    });
+    cursor = start + match[0].length;
+    wordIndex += 1;
+  }
+  if (cursor < verse.text.length) parts.push({ text: verse.text.slice(cursor) });
+  return parts;
 }
 
 const VERSION_LABELS: Record<BibleVersionId, string> = {
