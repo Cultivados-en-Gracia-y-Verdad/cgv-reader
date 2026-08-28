@@ -1,0 +1,7678 @@
+const e=`# Reina Valera 1909
+
+## License Information
+
+**Reina Valera 1909** is based on and adapted from: _Reina Valera 1909_, [Public Domain](https://creativecommons.org/public-domain/cc0/), 1909, which is licensed under a [Public Domain CC0](https://creativecommons.org/public-domain/cc0/).
+
+This markdown version is provided under the same license.
+
+
+
+--------------------------------
+
+
+## Génesis 1:1 (id: 10001001001)
+
+1EN el principio crió Dios los cielos y la tierra.
+
+
+## Génesis 1:2 (id: 10001001002)
+
+2Y la tierra estaba desordenada y vacía, y las tinieblas estaban sobre la haz del abismo, y el Espíritu de Dios se movía sobre la haz de las aguas.
+
+
+## Génesis 1:3 (id: 10001001003)
+
+3Y dijo Dios: Sea la luz: y fué la luz.
+
+
+## Génesis 1:4 (id: 10001001004)
+
+4Y vió Dios que la luz era buena: y apartó Dios la luz de las tinieblas.
+
+
+## Génesis 1:5 (id: 10001001005)
+
+5Y llamó Dios á la luz Día, y á las tinieblas llamó Noche: y fué la tarde y la mañana un día.
+
+
+## Génesis 1:6 (id: 10001001006)
+
+6Y dijo Dios: Haya expansión en medio de las aguas, y separe las aguas de las aguas.
+
+
+## Génesis 1:7 (id: 10001001007)
+
+7E hizo Dios la expansión, y apartó las aguas que estaban debajo de la expansión, de las aguas que estaban sobre la expansión: y fué así.
+
+
+## Génesis 1:8 (id: 10001001008)
+
+8Y llamó Dios á la expansión Cielos: y fué la tarde y la mañana el día segundo.
+
+
+## Génesis 1:9 (id: 10001001009)
+
+9Y dijo Dios: Júntense las aguas que están debajo de los cielos en un lugar, y descúbrase la seca: y fué así.
+
+
+## Génesis 1:10 (id: 10001001010)
+
+10Y llamó Dios á la seca Tierra, y á la reunión de las aguas llamó Mares: y vió Dios que era bueno.
+
+
+## Génesis 1:11 (id: 10001001011)
+
+11Y dijo Dios: Produzca la tierra hierba verde, hierba que dé simiente; árbol de fruto que dé fruto según su género, que su simiente esté en él, sobre la tierra: y fué así.
+
+
+## Génesis 1:12 (id: 10001001012)
+
+12Y produjo la tierra hierba verde, hierba que da simiente según su naturaleza, y árbol que da fruto, cuya simiente está en él, según su género: y vió Dios que era bueno.
+
+
+## Génesis 1:13 (id: 10001001013)
+
+13Y fué la tarde y la mañana el día tercero.
+
+
+## Génesis 1:14 (id: 10001001014)
+
+14Y dijo Dios: Sean lumbreras en la expansión de los cielos para apartar el día y la noche: y sean por señales, y para las estaciones, y para días y años;
+
+
+## Génesis 1:15 (id: 10001001015)
+
+15Y sean por lumbreras en la expansión de los cielos para alumbrar sobre la tierra: y fué así.
+
+
+## Génesis 1:16 (id: 10001001016)
+
+16E hizo Dios las dos grandes lumbreras; la lumbrera mayor para que señorease en el día, y la lumbrera menor para que señorease en la noche: hizo también las estrellas.
+
+
+## Génesis 1:17 (id: 10001001017)
+
+17Y púsolas Dios en la expansión de los cielos, para alumbrar sobre la tierra,
+
+
+## Génesis 1:18 (id: 10001001018)
+
+18Y para señorear en el día y en la noche, y para apartar la luz y las tinieblas: y vió Dios que era bueno.
+
+
+## Génesis 1:19 (id: 10001001019)
+
+19Y fué la tarde y la mañana el día cuarto.
+
+
+## Génesis 1:20 (id: 10001001020)
+
+20Y dijo Dios: Produzcan las aguas reptil de ánima viviente, y aves que vuelen sobre la tierra, en la abierta expansión de los cielos.
+
+
+## Génesis 1:21 (id: 10001001021)
+
+21Y crió Dios las grandes ballenas, y toda cosa viva que anda arrastrando, que las aguas produjeron según su género, y toda ave alada según su especie: y vió Dios que era bueno.
+
+
+## Génesis 1:22 (id: 10001001022)
+
+22Y Dios los bendijo diciendo: Fructificad y multiplicad, y henchid las aguas en los mares, y las aves se multipliquen en la tierra.
+
+
+## Génesis 1:23 (id: 10001001023)
+
+23Y fué la tarde y la mañana el día quinto.
+
+
+## Génesis 1:24 (id: 10001001024)
+
+24Y dijo Dios: Produzca la tierra seres vivientes según su género, bestias y serpientes y animales de la tierra según su especie: y fué así.
+
+
+## Génesis 1:25 (id: 10001001025)
+
+25E hizo Dios animales de la tierra según su género, y ganado según su género, y todo animal que anda arrastrando sobre la tierra según su especie: y vió Dios que era bueno.
+
+
+## Génesis 1:26 (id: 10001001026)
+
+26Y dijo Dios: Hagamos al hombre á nuestra imagen, conforme á nuestra semejanza; y señoree en los peces de la mar, y en las aves de los cielos, y en las bestias, y en toda la tierra, y en todo animal que anda arrastrando sobre la tierra.
+
+
+## Génesis 1:27 (id: 10001001027)
+
+27Y crió Dios al hombre á su imagen, á imagen de Dios lo crió; varón y hembra los crió.
+
+
+## Génesis 1:28 (id: 10001001028)
+
+28Y los bendijo Dios; y díjoles Dios: Fructificad y multiplicad, y henchid la tierra, y sojuzgadla, y señoread en los peces de la mar, y en las aves de los cielos, y en todas las bestias que se mueven sobre la tierra.
+
+
+## Génesis 1:29 (id: 10001001029)
+
+29Y dijo Dios: He aquí que os he dado toda hierba que da simiente, que está sobre la haz de toda la tierra; y todo árbol en que hay fruto de árbol que da simiente, seros ha para comer.
+
+
+## Génesis 1:30 (id: 10001001030)
+
+30Y á toda bestia de la tierra, y á todas las aves de los cielos, y á todo lo que se mueve sobre la tierra, en que hay vida, toda hierba verde les será para comer: y fué así.
+
+
+## Génesis 1:31 (id: 10001001031)
+
+31Y vió Dios todo lo que había hecho, y he aquí que era bueno en gran manera. Y fué la tarde y la mañana el día sexto.
+
+
+## Génesis 2:1 (id: 10001002001)
+
+1Y FUERON acabados los cielos y la tierra, y todo su ornamento.
+
+
+## Génesis 2:2 (id: 10001002002)
+
+2Y acabó Dios en el día séptimo su obra que hizo, y reposó el día séptimo de toda su obra que había hecho.
+
+
+## Génesis 2:3 (id: 10001002003)
+
+3Y bendijo Dios al día séptimo, y santificólo, porque en él reposó de toda su obra que había Dios criado y hecho.
+
+
+## Génesis 2:4 (id: 10001002004)
+
+4Estos son los orígenes de los cielos y de la tierra cuando fueron criados, el día que Jehová Dios hizo la tierra y los cielos,
+
+
+## Génesis 2:5 (id: 10001002005)
+
+5Y toda planta del campo antes que fuese en la tierra, y toda hierba del campo antes que naciese: porque aun no había Jehová Dios hecho llover sobre la tierra, ni había hombre para que labrase la tierra;
+
+
+## Génesis 2:6 (id: 10001002006)
+
+6Mas subía de la tierra un vapor, que regaba toda la faz de la tierra.
+
+
+## Génesis 2:7 (id: 10001002007)
+
+7Formó, pues, Jehová Dios al hombre del polvo de la tierra, y alentó en su nariz soplo de vida; y fué el hombre en alma viviente.
+
+
+## Génesis 2:8 (id: 10001002008)
+
+8Y había Jehová Dios plantado un huerto en Edén al oriente, y puso allí al hombre que había formado.
+
+
+## Génesis 2:9 (id: 10001002009)
+
+9Y había Jehová Dios hecho nacer de la tierra todo árbol delicioso á la vista, y bueno para comer: también el árbol de vida en medio del huerto, y el árbol de ciencia del bien y del mal.
+
+
+## Génesis 2:10 (id: 10001002010)
+
+10Y salía de Edén un río para regar el huerto, y de allí se repartía en cuatro ramales.
+
+
+## Génesis 2:11 (id: 10001002011)
+
+11El nombre del uno era Pisón: éste es el que cerca toda la tierra de Havilah, donde hay oro:
+
+
+## Génesis 2:12 (id: 10001002012)
+
+12Y el oro de aquella tierra es bueno: hay allí también bdelio y piedra cornerina.
+
+
+## Génesis 2:13 (id: 10001002013)
+
+13El nombre del segundo río es Gihón: éste es el que rodea toda la tierra de Etiopía.
+
+
+## Génesis 2:14 (id: 10001002014)
+
+14Y el nombre del tercer río es Hiddekel: éste es el que va delante de Asiria. Y el cuarto río es el Eufrates.
+
+
+## Génesis 2:15 (id: 10001002015)
+
+15Tomó, pues, Jehová Dios al hombre, y le puso en el huerto de Edén, para que lo labrara y lo guardase.
+
+
+## Génesis 2:16 (id: 10001002016)
+
+16Y mandó Jehová Dios al hombre, diciendo: De todo árbol del huerto comerás;
+
+
+## Génesis 2:17 (id: 10001002017)
+
+17Mas del árbol de ciencia del bien y del mal no comerás de él; porque el día que de él comieres, morirás.
+
+
+## Génesis 2:18 (id: 10001002018)
+
+18Y dijo Jehová Dios: No es bueno que el hombre esté solo; haréle ayuda idónea para él.
+
+
+## Génesis 2:19 (id: 10001002019)
+
+19Formó, pues, Jehová Dios de la tierra toda bestia del campo, y toda ave de los cielos, y trájolas á Adam, para que viese cómo les había de llamar; y todo lo que Adam llamó á los animales vivientes, ese es su nombre.
+
+
+## Génesis 2:20 (id: 10001002020)
+
+20Y puso Adam nombres á toda bestia y ave de los cielos y á todo animal del campo: mas para Adam no halló ayuda que estuviese idónea para él.
+
+
+## Génesis 2:21 (id: 10001002021)
+
+21Y Jehová Dios hizo caer sueño sobre Adam, y se quedó dormido: entonces tomó una de sus costillas, y cerró la carne en su lugar;
+
+
+## Génesis 2:22 (id: 10001002022)
+
+22Y de la costilla que Jehová Dios tomó del hombre, hizo una mujer, y trájola al hombre.
+
+
+## Génesis 2:23 (id: 10001002023)
+
+23Y dijo Adam: Esto es ahora hueso de mis huesos, y carne de mi carne: ésta será llamada Varona, porque del varón fué tomada.
+
+
+## Génesis 2:24 (id: 10001002024)
+
+24Por tanto, dejará el hombre á su padre y á su madre, y allegarse ha á su mujer, y serán una sola carne.
+
+
+## Génesis 2:25 (id: 10001002025)
+
+25Y estaban ambos desnudos, Adam y su mujer, y no se avergonzaban.
+
+
+## Génesis 3:1 (id: 10001003001)
+
+1EMPERO la serpiente era astuta, más que todos los animales del campo que Jehová Dios había hecho; la cual dijo á la mujer: ¿Conque Dios os ha dicho: No comáis de todo árbol del huerto?
+
+
+## Génesis 3:2 (id: 10001003002)
+
+2Y la mujer respondió á la serpiente: Del fruto de los árboles del huerto comemos;
+
+
+## Génesis 3:3 (id: 10001003003)
+
+3Mas del fruto del árbol que está en medio del huerto dijo Dios: No comeréis de él, ni le tocaréis, porque no muráis.
+
+
+## Génesis 3:4 (id: 10001003004)
+
+4Entonces la serpiente dijo á la mujer: No moriréis;
+
+
+## Génesis 3:5 (id: 10001003005)
+
+5Mas sabe Dios que el día que comiereis de él, serán abiertos vuestros ojos, y seréis como dioses sabiendo el bien y el mal.
+
+
+## Génesis 3:6 (id: 10001003006)
+
+6Y vió la mujer que el árbol era bueno para comer, y que era agradable á los ojos, y árbol codiciable para alcanzar la sabiduría; y tomó de su fruto, y comió; y dió también á su marido, el cual comió así como ella.
+
+
+## Génesis 3:7 (id: 10001003007)
+
+7Y fueron abiertos los ojos de entrambos, y conocieron que estaban desnudos: entonces cosieron hojas de higuera, y se hicieron delantales.
+
+
+## Génesis 3:8 (id: 10001003008)
+
+8Y oyeron la voz de Jehová Dios que se paseaba en el huerto al aire del día: y escondióse el hombre y su mujer de la presencia de Jehová Dios entre los árboles del huerto.
+
+
+## Génesis 3:9 (id: 10001003009)
+
+9Y llamó Jehová Dios al hombre, y le dijo: ¿Dónde estás tú?
+
+
+## Génesis 3:10 (id: 10001003010)
+
+10Y él respondió: Oí tu voz en el huerto, y tuve miedo, porque estaba desnudo; y escondíme.
+
+
+## Génesis 3:11 (id: 10001003011)
+
+11Y díjole: ¿Quién te enseñó que estabas desnudo? ¿Has comido del árbol de que yo te mandé no comieses?
+
+
+## Génesis 3:12 (id: 10001003012)
+
+12Y el hombre respondió: La mujer que me diste por compañera me dió del árbol, y yo comí.
+
+
+## Génesis 3:13 (id: 10001003013)
+
+13Entonces Jehová Dios dijo á la mujer: ¿Qué es lo que has hecho? Y dijo la mujer: La serpiente me engañó, y comí.
+
+
+## Génesis 3:14 (id: 10001003014)
+
+14Y Jehová Dios dijo á la serpiente: Por cuanto esto hiciste, maldita serás entre todas las bestias y entre todos los animales del campo; sobre tu pecho andarás, y polvo comerás todos los días de tu vida:
+
+
+## Génesis 3:15 (id: 10001003015)
+
+15Y enemistad pondré entre ti y la mujer, y entre tu simiente y la simiente suya; ésta te herirá en la cabeza, y tú le herirás en el calcañar.
+
+
+## Génesis 3:16 (id: 10001003016)
+
+16A la mujer dijo: Multiplicaré en gran manera tus dolores y tus preñeces; con dolor parirás los hijos; y á tu marido será tu deseo, y él se enseñoreará de ti.
+
+
+## Génesis 3:17 (id: 10001003017)
+
+17Y al hombre dijo: Por cuanto obedeciste á la voz de tu mujer, y comiste del árbol de que te mandé diciendo, No comerás de él; maldita será la tierra por amor de ti; con dolor comerás de ella todos los días de tu vida;
+
+
+## Génesis 3:18 (id: 10001003018)
+
+18Espinos y cardos te producirá, y comerás hierba del campo;
+
+
+## Génesis 3:19 (id: 10001003019)
+
+19En el sudor de tu rostro comerás el pan hasta que vuelvas á la tierra; porque de ella fuiste tomado: pues polvo eres, y al polvo serás tornado.
+
+
+## Génesis 3:20 (id: 10001003020)
+
+20Y llamó el hombre el nombre de su mujer, Eva; por cuanto ella era madre de todos los vivientes.
+
+
+## Génesis 3:21 (id: 10001003021)
+
+21Y Jehová Dios hizo al hombre y á su mujer túnicas de pieles, y vistiólos.
+
+
+## Génesis 3:22 (id: 10001003022)
+
+22Y dijo Jehová Dios: He aquí el hombre es como uno de Nos sabiendo el bien y el mal: ahora, pues, porque no alargue su mano, y tome también del árbol de la vida, y coma, y viva para siempre:
+
+
+## Génesis 3:23 (id: 10001003023)
+
+23Y sacólo Jehová del huerto de Edén, para que labrase la tierra de que fué tomado.
+
+
+## Génesis 3:24 (id: 10001003024)
+
+24Echó, pues, fuera al hombre, y puso al oriente del huerto de Edén querubines, y una espada encendida que se revolvía á todos lados, para guardar el camino del árbol de la vida.
+
+
+## Génesis 4:1 (id: 10001004001)
+
+1Y CONOCIÓ Adam á su mujer Eva, la cual concibió y parió á Caín, y dijo: Adquirido he varón por Jehová.
+
+
+## Génesis 4:2 (id: 10001004002)
+
+2Y después parió á su hermano Abel. Y fué Abel pastor de ovejas, y Caín fué labrador de la tierra.
+
+
+## Génesis 4:3 (id: 10001004003)
+
+3Y aconteció andando el tiempo, que Caín trajo del fruto de la tierra una ofrenda á Jehová.
+
+
+## Génesis 4:4 (id: 10001004004)
+
+4Y Abel trajo también de los primogénitos de sus ovejas, y de su grosura. Y miró Jehová con agrado á Abel y á su ofrenda;
+
+
+## Génesis 4:5 (id: 10001004005)
+
+5Mas no miró propicio á Caín y á la ofrenda suya. Y ensañóse Caín en gran manera, y decayó su semblante.
+
+
+## Génesis 4:6 (id: 10001004006)
+
+6Entonces Jehová dijo á Caín: ¿Por qué te has ensañado, y por qué se ha inmutado tu rostro?
+
+
+## Génesis 4:7 (id: 10001004007)
+
+7Si bien hicieres, ¿no serás ensalzado? y si no hicieres bien, el pecado está á la puerta: con todo esto, á ti será su deseo, y tú te enseñorearás de él.
+
+
+## Génesis 4:8 (id: 10001004008)
+
+8Y habló Caín á su hermano Abel: y aconteció que estando ellos en el campo, Caín se levantó contra su hermano Abel, y le mató.
+
+
+## Génesis 4:9 (id: 10001004009)
+
+9Y Jehová dijo á Caín: ¿Dónde está Abel tu hermano? Y él respondió: No sé; ¿soy yo guarda de mi hermano?
+
+
+## Génesis 4:10 (id: 10001004010)
+
+10Y él le dijo: ¿Qué has hecho? La voz de la sangre de tu hermano clama á mí desde la tierra.
+
+
+## Génesis 4:11 (id: 10001004011)
+
+11Ahora pues, maldito seas tú de la tierra que abrió su boca para recibir la sangre de tu hermano de tu mano:
+
+
+## Génesis 4:12 (id: 10001004012)
+
+12Cuando labrares la tierra, no te volverá á dar su fuerza: errante y extranjero serás en la tierra.
+
+
+## Génesis 4:13 (id: 10001004013)
+
+13Y dijo Caín á Jehová: Grande es mi iniquidad para ser perdonada.
+
+
+## Génesis 4:14 (id: 10001004014)
+
+14He aquí me echas hoy de la faz de la tierra, y de tu presencia me esconderé; y seré errante y extranjero en la tierra; y sucederá que cualquiera que me hallare, me matará.
+
+
+## Génesis 4:15 (id: 10001004015)
+
+15Y respondióle Jehová: Cierto que cualquiera que matare á Caín, siete veces será castigado. Entonces Jehová puso señal en Caín, para que no lo hiriese cualquiera que le hallara.
+
+
+## Génesis 4:16 (id: 10001004016)
+
+16Y salió Caín de delante de Jehová, y habitó en tierra de Nod, al oriente de Edén.
+
+
+## Génesis 4:17 (id: 10001004017)
+
+17Y conoció Caín á su mujer, la cual concibió y parió á Henoch: y edificó una ciudad, y llamó el nombre de la ciudad del nombre de su hijo, Henoch.
+
+
+## Génesis 4:18 (id: 10001004018)
+
+18Y á Henoch nació Irad, é Irad engendró á Mehujael, y Mehujael engendró á Methusael, y Methusael engendró á Lamech.
+
+
+## Génesis 4:19 (id: 10001004019)
+
+19Y tomó para sí Lamech dos mujeres; el nombre de la una fué Ada, y el nombre de la otra Zilla.
+
+
+## Génesis 4:20 (id: 10001004020)
+
+20Y Ada parió á Jabal, el cual fué padre de los que habitan en tiendas, y crían ganados.
+
+
+## Génesis 4:21 (id: 10001004021)
+
+21Y el nombre de su hermano fué Jubal, el cual fué padre de todos los que manejan arpa y órgano.
+
+
+## Génesis 4:22 (id: 10001004022)
+
+22Y Zilla también parió á Tubal\\-Caín, acicalador de toda obra de metal y de hierro: y la hermana de Tubal\\-Caín fué Naama.
+
+
+## Génesis 4:23 (id: 10001004023)
+
+23Y dijo Lamech á sus mujeres: Ada y Zilla, oid mi voz; mujeres de Lamech, escuchad mi dicho: que varón mataré por mi herida, y mancebo por mi golpe:
+
+
+## Génesis 4:24 (id: 10001004024)
+
+24Si siete veces será vengado Caín, Lamech en verdad setenta veces siete lo será.
+
+
+## Génesis 4:25 (id: 10001004025)
+
+25Y conoció de nuevo Adam á su mujer, la cual parió un hijo, y llamó su nombre Seth: Porque Dios (dijo ella) me ha sustituído otra simiente en lugar de Abel, á quien mató Caín.
+
+
+## Génesis 4:26 (id: 10001004026)
+
+26Y á Seth también le nació un hijo, y llamó su nombre Enós. Entonces los hombres comenzaron á llamarse del nombre de Jehová.
+
+
+## Génesis 5:1 (id: 10001005001)
+
+1ESTE es el libro de las generaciones de Adam. El día en que crió Dios al hombre, á la semejanza de Dios lo hizo;
+
+
+## Génesis 5:2 (id: 10001005002)
+
+2Varón y hembra los crió; y los bendijo, y llamó el nombre de ellos Adam, el día en que fueron criados.
+
+
+## Génesis 5:3 (id: 10001005003)
+
+3Y vivió Adam ciento y treinta años, y engendró un hijo á su semejanza, conforme á su imagen, y llamó su nombre Seth.
+
+
+## Génesis 5:4 (id: 10001005004)
+
+4Y fueron los días de Adam, después que engendró á Seth, ochocientos años: y engendró hijos é hijas.
+
+
+## Génesis 5:5 (id: 10001005005)
+
+5Y fueron todos los días que vivió Adam novecientos y treinta años, y murió.
+
+
+## Génesis 5:6 (id: 10001005006)
+
+6Y vivió Seth ciento y cinco años, y engendró á Enós.
+
+
+## Génesis 5:7 (id: 10001005007)
+
+7Y vivió Seth, después que engendró á Enós, ochocientos y siete años: y engendró hijos é hijas.
+
+
+## Génesis 5:8 (id: 10001005008)
+
+8Y fueron todos los días de Seth novecientos y doce años; y murió.
+
+
+## Génesis 5:9 (id: 10001005009)
+
+9Y vivió Enós noventa años, y engendró á Cainán.
+
+
+## Génesis 5:10 (id: 10001005010)
+
+10Y vivió Enós después que engendró á Cainán, ochocientos y quince años: y engendró hijos é hijas.
+
+
+## Génesis 5:11 (id: 10001005011)
+
+11Y fueron todos los días de Enós novecientos y cinco años; y murió.
+
+
+## Génesis 5:12 (id: 10001005012)
+
+12Y vivió Cainán setenta años, y engendró á Mahalaleel.
+
+
+## Génesis 5:13 (id: 10001005013)
+
+13Y vivió Cainán, después que engendró á Mahalaleel, ochocientos y cuarenta años: y engendró hijos é hijas.
+
+
+## Génesis 5:14 (id: 10001005014)
+
+14Y fueron todos los días de Cainán novecientos y diez años; y murió.
+
+
+## Génesis 5:15 (id: 10001005015)
+
+15Y vivió Mahalaleel sesenta y cinco años, y engendró á Jared.
+
+
+## Génesis 5:16 (id: 10001005016)
+
+16Y vivió Mahalaleel, después que engendró á Jared, ochocientos y treinta años: y engendró hijos é hijas.
+
+
+## Génesis 5:17 (id: 10001005017)
+
+17Y fueron todos los días de Mahalaleel ochocientos noventa y cinco años; y murió.
+
+
+## Génesis 5:18 (id: 10001005018)
+
+18Y vivió Jared ciento sesenta y dos años, y engendró á Henoch.
+
+
+## Génesis 5:19 (id: 10001005019)
+
+19Y vivió Jared, después que engendró á Henoch, ochocientos años: y engendró hijos é hijas.
+
+
+## Génesis 5:20 (id: 10001005020)
+
+20Y fueron todos los días de Jared novecientos sesenta y dos años; y murió.
+
+
+## Génesis 5:21 (id: 10001005021)
+
+21Y vivió Henoch sesenta y cinco años, y engendró á Mathusalam.
+
+
+## Génesis 5:22 (id: 10001005022)
+
+22Y caminó Henoch con Dios, después que engendró á Mathusalam, trescientos años: y engendró hijos é hijas.
+
+
+## Génesis 5:23 (id: 10001005023)
+
+23Y fueron todos los días de Henoch trescientos sesenta y cinco años.
+
+
+## Génesis 5:24 (id: 10001005024)
+
+24Caminó, pues, Henoch con Dios, y desapareció, porque le llevó Dios.
+
+
+## Génesis 5:25 (id: 10001005025)
+
+25Y vivió Mathusalam ciento ochenta y siete años, y engendró á Lamech.
+
+
+## Génesis 5:26 (id: 10001005026)
+
+26Y vivió Mathusalam, después que engendró á Lamech, setecientos ochenta y dos años: y engendró hijos é hijas.
+
+
+## Génesis 5:27 (id: 10001005027)
+
+27Fueron, pues, todos los días de Mathusalam, novecientos sesenta y nueve años; y murió.
+
+
+## Génesis 5:28 (id: 10001005028)
+
+28Y vivió Lamech ciento ochenta y dos años, y engendró un hijo:
+
+
+## Génesis 5:29 (id: 10001005029)
+
+29Y llamó su nombre Noé, diciendo: Este nos aliviará de nuestras obras, y del trabajo de nuestras manos, á causa de la tierra que Jehová maldijo.
+
+
+## Génesis 5:30 (id: 10001005030)
+
+30Y vivió Lamech, después que engendró á Noé, quinientos noventa y cinco años: y engendró hijos é hijas.
+
+
+## Génesis 5:31 (id: 10001005031)
+
+31Y fueron todos los días de Lamech setecientos setenta y siete años; y murió.
+
+
+## Génesis 5:32 (id: 10001005032)
+
+32Y siendo Noé de quinientos años, engendró á Sem, Châm, y á Japhet.
+
+
+## Génesis 6:1 (id: 10001006001)
+
+1Y ACAECIÓ que, cuando comenzaron los hombres á multiplicarse sobre la faz de la tierra, y les nacieron hijas,
+
+
+## Génesis 6:2 (id: 10001006002)
+
+2Viendo los hijos de Dios que las hijas de los hombres eran hermosas, tomáronse mujeres, escogiendo entre todas.
+
+
+## Génesis 6:3 (id: 10001006003)
+
+3Y dijo Jehová: No contenderá mi espíritu con el hombre para siempre, porque ciertamente él es carne: mas serán sus días ciento y veinte años.
+
+
+## Génesis 6:4 (id: 10001006004)
+
+4Había gigantes en la tierra en aquellos días, y también después que entraron los hijos de Dios á las hijas de los hombres, y les engendraron hijos: éstos fueron los valientes que desde la antigüedad fueron varones de nombre.
+
+
+## Génesis 6:5 (id: 10001006005)
+
+5Y vió Jehová que la malicia de los hombres era mucha en la tierra, y que todo designio de los pensamientos del corazón de ellos era de continuo solamente el mal.
+
+
+## Génesis 6:6 (id: 10001006006)
+
+6Y arrepintióse Jehová de haber hecho hombre en la tierra, y pesóle en su corazón.
+
+
+## Génesis 6:7 (id: 10001006007)
+
+7Y dijo Jehová: Raeré los hombres que he criado de sobre la faz de la tierra, desde el hombre hasta la bestia, y hasta el reptil y las aves del cielo: porque me arrepiento de haberlos hecho.
+
+
+## Génesis 6:8 (id: 10001006008)
+
+8Empero Noé halló gracia en los ojos de Jehová.
+
+
+## Génesis 6:9 (id: 10001006009)
+
+9Estas son las generaciones de Noé: Noé, varón justo, perfecto fué en sus generaciones; con Dios caminó Noé.
+
+
+## Génesis 6:10 (id: 10001006010)
+
+10Y engendró Noé tres hijos: á Sem, á Châm, y á Japhet.
+
+
+## Génesis 6:11 (id: 10001006011)
+
+11Y corrompióse la tierra delante de Dios, y estaba la tierra llena de violencia.
+
+
+## Génesis 6:12 (id: 10001006012)
+
+12Y miró Dios la tierra, y he aquí que estaba corrompida; porque toda carne había corrompido su camino sobre la tierra.
+
+
+## Génesis 6:13 (id: 10001006013)
+
+13Y dijo Dios á Noé: El fin de toda carne ha venido delante de mí; porque la tierra está llena de violencia á causa de ellos; y he aquí que yo los destruiré con la tierra.
+
+
+## Génesis 6:14 (id: 10001006014)
+
+14Hazte un arca de madera de Gopher: harás aposentos en el arca, y la embetunarás con brea por dentro y por fuera.
+
+
+## Génesis 6:15 (id: 10001006015)
+
+15Y de esta manera la harás: de trescientos codos la longitud del arca, de cincuenta codos su anchura, y de treinta codos su altura.
+
+
+## Génesis 6:16 (id: 10001006016)
+
+16Una ventana harás al arca, y la acabarás á un codo de elevación por la parte de arriba: y pondrás la puerta del arca á su lado; y le harás piso bajo, segundo y tercero.
+
+
+## Génesis 6:17 (id: 10001006017)
+
+17Y yo, he aquí que yo traigo un diluvio de aguas sobre la tierra, para destruir toda carne en que haya espíritu de vida debajo del cielo; todo lo que hay en la tierra morirá.
+
+
+## Génesis 6:18 (id: 10001006018)
+
+18Mas estableceré mi pacto contigo, y entrarás en el arca tú, y tus hijos y tu mujer, y las mujeres de tus hijos contigo.
+
+
+## Génesis 6:19 (id: 10001006019)
+
+19Y de todo lo que vive, de toda carne, dos de cada especie meterás en el arca, para que tengan vida contigo; macho y hembra serán.
+
+
+## Génesis 6:20 (id: 10001006020)
+
+20De las aves según su especie, y de las bestias según su especie, de todo reptil de la tierra según su especie, dos de cada especie entrarán contigo para que hayan vida.
+
+
+## Génesis 6:21 (id: 10001006021)
+
+21Y toma contigo de toda vianda que se come, y allégala á ti; servirá de alimento para ti y para ellos.
+
+
+## Génesis 6:22 (id: 10001006022)
+
+22E hízolo así Noé; hizo conforme á todo lo que Dios le mandó.
+
+
+## Génesis 7:1 (id: 10001007001)
+
+1Y JEHOVÁ dijo á Noé: Entra tú y toda tu casa en el arca; porque á ti he visto justo delante de mí en esta generación.
+
+
+## Génesis 7:2 (id: 10001007002)
+
+2De todo animal limpio te tomarás de siete en siete, macho y su hembra; mas de los animales que no son limpios, dos, macho y su hembra.
+
+
+## Génesis 7:3 (id: 10001007003)
+
+3También de las aves de los cielos de siete en siete, macho y hembra; para guardar en vida la casta sobre la faz de toda la tierra.
+
+
+## Génesis 7:4 (id: 10001007004)
+
+4Porque pasados aún siete días, yo haré llover sobre la tierra cuarenta días y cuarenta noches; y raeré toda sustancia que hice de sobre la faz de la tierra.
+
+
+## Génesis 7:5 (id: 10001007005)
+
+5E hizo Noé conforme á todo lo que le mandó Jehová.
+
+
+## Génesis 7:6 (id: 10001007006)
+
+6Y siendo Noé de seiscientos años, el diluvio de las aguas fué sobre la tierra.
+
+
+## Génesis 7:7 (id: 10001007007)
+
+7Y vino Noé, y sus hijos, y su mujer, y las mujeres de sus hijos con él al arca, por las aguas del diluvio.
+
+
+## Génesis 7:8 (id: 10001007008)
+
+8De los animales limpios, y de los animales que no eran limpios, y de las aves, y de todo lo que anda arrastrando sobre la tierra,
+
+
+## Génesis 7:9 (id: 10001007009)
+
+9De dos en dos entraron á Noé en el arca: macho y hembra, como mandó Dios á Noé.
+
+
+## Génesis 7:10 (id: 10001007010)
+
+10Y sucedió que al séptimo día las aguas del diluvio fueron sobre la tierra.
+
+
+## Génesis 7:11 (id: 10001007011)
+
+11El año seiscientos de la vida de Noé, en el mes segundo, á diecisiete días del mes, aquel día fueron rotas todas las fuentes del grande abismo, y las cataratas de los cielos fueron abiertas;
+
+
+## Génesis 7:12 (id: 10001007012)
+
+12Y hubo lluvia sobre la tierra cuarenta días y cuarenta noches.
+
+
+## Génesis 7:13 (id: 10001007013)
+
+13En este mismo día entró Noé, y Sem y Châm y Japhet, hijos de Noé, la mujer de Noé, y las tres mujeres de sus hijos con él en el arca;
+
+
+## Génesis 7:14 (id: 10001007014)
+
+14Ellos, y todos los animales silvestres según sus especies, y todos los animales mansos según sus especies, y todo reptil que anda arrastrando sobre la tierra según su especie, y toda ave según su especie, todo pájaro, toda especie de volátil.
+
+
+## Génesis 7:15 (id: 10001007015)
+
+15Y vinieron á Noé al arca, de dos en dos de toda carne en que había espíritu de vida.
+
+
+## Génesis 7:16 (id: 10001007016)
+
+16Y los que vinieron, macho y hembra de toda carne vinieron, como le había mandado Dios: y Jehová le cerró la puerta.
+
+
+## Génesis 7:17 (id: 10001007017)
+
+17Y fué el diluvio cuarenta días sobre la tierra; y las aguas crecieron, y alzaron el arca, y se elevó sobre la tierra.
+
+
+## Génesis 7:18 (id: 10001007018)
+
+18Y prevalecieron las aguas, y crecieron en gran manera sobre la tierra; y andaba el arca sobre la faz de las aguas.
+
+
+## Génesis 7:19 (id: 10001007019)
+
+19Y las aguas prevalecieron mucho en extremo sobre la tierra; y todos los montes altos que había debajo de todos los cielos, fueron cubiertos.
+
+
+## Génesis 7:20 (id: 10001007020)
+
+20Quince codos en alto prevalecieron las aguas; y fueron cubiertos los montes.
+
+
+## Génesis 7:21 (id: 10001007021)
+
+21Y murió toda carne que se mueve sobre la tierra, así de aves como de ganados, y de bestias, y de todo reptil que anda arrastrando sobre la tierra, y todo hombre:
+
+
+## Génesis 7:22 (id: 10001007022)
+
+22Todo lo que tenía aliento de espíritu de vida en sus narices, de todo lo que había en la tierra, murió.
+
+
+## Génesis 7:23 (id: 10001007023)
+
+23Así fué destruída toda sustancia que vivía sobre la faz de la tierra, desde el hombre hasta la bestia, y los reptiles, y las aves del cielo; y fueron raídos de la tierra; y quedó solamente Noé, y lo que con él estaba en el arca.
+
+
+## Génesis 7:24 (id: 10001007024)
+
+24Y prevalecieron las aguas sobre la tierra ciento y cincuenta días.
+
+
+## Génesis 8:1 (id: 10001008001)
+
+1Y ACORDÓSE Dios de Noé, y de todos los animales, y de todas las bestias que estaban con él en el arca; é hizo pasar Dios un viento sobre la tierra, y disminuyeron las aguas.
+
+
+## Génesis 8:2 (id: 10001008002)
+
+2Y se cerraron las fuentes del abismo, y las cataratas de los cielos; y la lluvia de los cielos fué detenida.
+
+
+## Génesis 8:3 (id: 10001008003)
+
+3Y tornáronse las aguas de sobre la tierra, yendo y volviendo: y decrecieron las aguas al cabo de ciento y cincuenta días.
+
+
+## Génesis 8:4 (id: 10001008004)
+
+4Y reposó el arca en el mes séptimo, á diecisiete días del mes, sobre los montes de Armenia.
+
+
+## Génesis 8:5 (id: 10001008005)
+
+5Y las aguas fueron decreciendo hasta el mes décimo: en el décimo, al primero del mes, se descubrieron las cimas de los montes.
+
+
+## Génesis 8:6 (id: 10001008006)
+
+6Y sucedió que, al cabo de cuarenta días, abrió Noé la ventana del arca que había hecho,
+
+
+## Génesis 8:7 (id: 10001008007)
+
+7Y envió al cuervo, el cual salió, y estuvo yendo y tornando hasta que las aguas se secaron de sobre la tierra.
+
+
+## Génesis 8:8 (id: 10001008008)
+
+8Envió también de sí á la paloma, para ver si las aguas se habían retirado de sobre la faz de la tierra;
+
+
+## Génesis 8:9 (id: 10001008009)
+
+9Y no halló la paloma donde sentar la planta de su pie, y volvióse á él al arca, porque las aguas estaban aún sobre la faz de toda la tierra: entonces él extendió su mano, y cogiéndola, hízola entrar consigo en el arca.
+
+
+## Génesis 8:10 (id: 10001008010)
+
+10Y esperó aún otros siete días, y volvió á enviar la paloma fuera del arca.
+
+
+## Génesis 8:11 (id: 10001008011)
+
+11Y la paloma volvió á él á la hora de la tarde; y he aquí que traía una hoja de oliva tomada en su pico: y entendió Noé que las aguas se habían retirado de sobre la tierra.
+
+
+## Génesis 8:12 (id: 10001008012)
+
+12Y esperó aún otros siete días, y envió la paloma, la cual no volvió ya más á él.
+
+
+## Génesis 8:13 (id: 10001008013)
+
+13Y sucedió que en el año seiscientos y uno de Noé, en el mes primero, al primero del mes, las aguas se enjugaron de sobre la tierra; y quitó Noé la cubierta del arca, y miró, y he aquí que la faz de la tierra estaba enjuta.
+
+
+## Génesis 8:14 (id: 10001008014)
+
+14Y en el mes segundo, á los veintisiete días del mes, se secó la tierra.
+
+
+## Génesis 8:15 (id: 10001008015)
+
+15Y habló Dios á Noé diciendo:
+
+
+## Génesis 8:16 (id: 10001008016)
+
+16Sal del arca tú, y tu mujer, y tus hijos, y las mujeres de tus hijos contigo.
+
+
+## Génesis 8:17 (id: 10001008017)
+
+17Todos los animales que están contigo de toda carne, de aves y de bestias y de todo reptil que anda arrastrando sobre la tierra, sacarás contigo; y vayan por la tierra, y fructifiquen, y multiplíquense sobre la tierra.
+
+
+## Génesis 8:18 (id: 10001008018)
+
+18Entonces salió Noé, y sus hijos, y su mujer, y las mujeres de sus hijos con él.
+
+
+## Génesis 8:19 (id: 10001008019)
+
+19Todos los animales, y todo reptil y toda ave, todo lo que se mueve sobre la tierra según sus especies, salieron del arca.
+
+
+## Génesis 8:20 (id: 10001008020)
+
+20Y edificó Noé un altar á Jehová, y tomó de todo animal limpio y de toda ave limpia, y ofreció holocausto en el altar.
+
+
+## Génesis 8:21 (id: 10001008021)
+
+21Y percibió Jehová olor de suavidad; y dijo Jehová en su corazón: No tornaré más á maldecir la tierra por causa del hombre; porque el intento del corazón del hombre es malo desde su juventud: ni volveré más á destruir todo viviente, como he hecho.
+
+
+## Génesis 8:22 (id: 10001008022)
+
+22Todavía serán todos los tiempos de la tierra; la sementera y la siega, y el frío y calor, verano é invierno, y día y noche, no cesarán.
+
+
+## Génesis 9:1 (id: 10001009001)
+
+1Y BENDIJO Dios á Noé y á sus hijos, y díjoles: Fructificad, y multiplicad, y henchid la tierra:
+
+
+## Génesis 9:2 (id: 10001009002)
+
+2Y vuestro temor y vuestro pavor será sobre todo animal de la tierra, y sobre toda ave de los cielos, en todo lo que se moverá en la tierra, y en todos los peces del mar: en vuestra mano son entregados.
+
+
+## Génesis 9:3 (id: 10001009003)
+
+3Todo lo que se mueve y vive, os será para mantenimiento: así como las legumbres y hierbas, os lo he dado todo.
+
+
+## Génesis 9:4 (id: 10001009004)
+
+4Empero carne con su vida, que es su sangre, no comeréis.
+
+
+## Génesis 9:5 (id: 10001009005)
+
+5Porque ciertamente demandaré la sangre de vuestras vidas; de mano de todo animal la demandaré, y de mano del hombre; de mano del varón su hermano demandaré la vida del hombre.
+
+
+## Génesis 9:6 (id: 10001009006)
+
+6El que derramare sangre del hombre, por el hombre su sangre será derramada; porque á imagen de Dios es hecho el hombre.
+
+
+## Génesis 9:7 (id: 10001009007)
+
+7Mas vosotros fructificad, y multiplicaos; procread abundantemente en la tierra, y multiplicaos en ella.
+
+
+## Génesis 9:8 (id: 10001009008)
+
+8Y habló Dios á Noé y á sus hijos con él, diciendo:
+
+
+## Génesis 9:9 (id: 10001009009)
+
+9Yo, he aquí que yo establezco mi pacto con vosotros, y con vuestra simiente después de vosotros;
+
+
+## Génesis 9:10 (id: 10001009010)
+
+10Y con toda alma viviente que está con vosotros, de aves, de animales, y de toda bestia de la tierra que está con vosotros; desde todos los que salieron del arca hasta todo animal de la tierra.
+
+
+## Génesis 9:11 (id: 10001009011)
+
+11Estableceré mi pacto con vosotros, y no fenecerá ya más toda carne con aguas de diluvio; ni habrá más diluvio para destruir la tierra.
+
+
+## Génesis 9:12 (id: 10001009012)
+
+12Y dijo Dios: Esta será la señal del pacto que yo establezco entre mí y vosotros y toda alma viviente que está con vosotros, por siglos perpetuos:
+
+
+## Génesis 9:13 (id: 10001009013)
+
+13Mi arco pondré en las nubes, el cual será por señal de convenio entre mí y la tierra.
+
+
+## Génesis 9:14 (id: 10001009014)
+
+14Y será que cuando haré venir nubes sobre la tierra, se dejará ver entonces mi arco en las nubes.
+
+
+## Génesis 9:15 (id: 10001009015)
+
+15Y acordarme he del pacto mío, que hay entre mí y vosotros y toda alma viviente de toda carne; y no serán más las aguas por diluvio para destruir toda carne.
+
+
+## Génesis 9:16 (id: 10001009016)
+
+16Y estará el arco en las nubes, y verlo he para acordarme del pacto perpetuo entre Dios y toda alma viviente, con toda carne que hay sobre la tierra.
+
+
+## Génesis 9:17 (id: 10001009017)
+
+17Dijo, pues, Dios á Noé: Esta será la señal del pacto que he establecido entre mí y toda carne que está sobre la tierra.
+
+
+## Génesis 9:18 (id: 10001009018)
+
+18Y los hijos de Noé que salieron del arca fueron Sem, Châm y Japhet: y Châm es el padre de Canaán.
+
+
+## Génesis 9:19 (id: 10001009019)
+
+19Estos tres son los hijos de Noé; y de ellos fué llena toda la tierra.
+
+
+## Génesis 9:20 (id: 10001009020)
+
+20Y comenzó Noé á labrar la tierra, y plantó una viña:
+
+
+## Génesis 9:21 (id: 10001009021)
+
+21Y bebió del vino, y se embriagó, y estaba descubierto en medio de su tienda.
+
+
+## Génesis 9:22 (id: 10001009022)
+
+22Y Châm, padre de Canaán, vió la desnudez de su padre, y díjolo á sus dos hermanos á la parte de afuera.
+
+
+## Génesis 9:23 (id: 10001009023)
+
+23Entonces Sem y Japhet tomaron la ropa, y la pusieron sobre sus propios hombros, y andando hacia atrás, cubrieron la desnudez de su padre, teniendo vueltos sus rostros, y así no vieron la desnudez de su padre.
+
+
+## Génesis 9:24 (id: 10001009024)
+
+24Y despertó Noé de su vino, y supo lo que había hecho con él su hijo el más joven;
+
+
+## Génesis 9:25 (id: 10001009025)
+
+25Y dijo: Maldito sea Canaán; siervo de siervos será á sus hermanos.
+
+
+## Génesis 9:26 (id: 10001009026)
+
+26Dijo más: Bendito Jehová el Dios de Sem, y séale Canaán siervo.
+
+
+## Génesis 9:27 (id: 10001009027)
+
+27Engrandezca Dios á Japhet, y habite en las tiendas de Sem, y séale Canaán siervo.
+
+
+## Génesis 9:28 (id: 10001009028)
+
+28Y vivió Noé después del diluvio trescientos y cincuenta años.
+
+
+## Génesis 9:29 (id: 10001009029)
+
+29Y fueron todos los días de Noé novecientos y cincuenta años; y murió.
+
+
+## Génesis 10:1 (id: 10001010001)
+
+1ESTAS son las generaciones de los hijos de Noé: Sem, Châm y Japhet, á los cuales nacieron hijos después del diluvio.
+
+
+## Génesis 10:2 (id: 10001010002)
+
+2Los hijos de Japhet: Gomer, y Magog, y Madai, y Javán, y Tubal, y Meshech, y Tiras.
+
+
+## Génesis 10:3 (id: 10001010003)
+
+3Y los hijos de Gomer: Ashkenaz, y Riphat, y Togorma.
+
+
+## Génesis 10:4 (id: 10001010004)
+
+4Y los hijos de Javán: Elisa, y Tarsis, Kittim, y Dodanim.
+
+
+## Génesis 10:5 (id: 10001010005)
+
+5Por éstos fueron repartidas las islas de las gentes en sus tierras, cada cual según su lengua, conforme á sus familias en sus naciones.
+
+
+## Génesis 10:6 (id: 10001010006)
+
+6Los hijos de Châm: Cush, y Mizraim, y Phut, y Canaán.
+
+
+## Génesis 10:7 (id: 10001010007)
+
+7Y los hijos de Cush: Seba, Havila, y Sabta, y Raama, y Sabtecha. Y los hijos de Raama: Sheba y Dedán.
+
+
+## Génesis 10:8 (id: 10001010008)
+
+8Y Cush engendró á Nimrod: éste comenzó á ser poderoso en la tierra.
+
+
+## Génesis 10:9 (id: 10001010009)
+
+9Este fué vigoroso cazador delante de Jehová; por lo cual se dice: Así como Nimrod, vigoroso cazador delante de Jehová.
+
+
+## Génesis 10:10 (id: 10001010010)
+
+10Y fué la cabecera de su reino Babel, y Erech, y Accad, y Calneh, en la tierra de Shinar.
+
+
+## Génesis 10:11 (id: 10001010011)
+
+11De aquesta tierra salió Assur, y edificó á Nínive, y á Rehoboth, y á Calah,
+
+
+## Génesis 10:12 (id: 10001010012)
+
+12Y á Ressen entre Nínive y Calah; la cual es ciudad grande.
+
+
+## Génesis 10:13 (id: 10001010013)
+
+13Y Mizraim engendró á Ludim, y á Anamim, y á Lehabim, y á Naphtuhim,
+
+
+## Génesis 10:14 (id: 10001010014)
+
+14Y á Pathrusim, y á Casluim, de donde salieron los Filisteos, y á Caphtorim.
+
+
+## Génesis 10:15 (id: 10001010015)
+
+15Y Canaán engendró á Sidón, su primogénito, y á Heth,
+
+
+## Génesis 10:16 (id: 10001010016)
+
+16Y al Jebuseo, y al Amorrheo, y al Gergeseo,
+
+
+## Génesis 10:17 (id: 10001010017)
+
+17Y al Heveo, y al Araceo, y al Sineo,
+
+
+## Génesis 10:18 (id: 10001010018)
+
+18Y al Aradio, y al Samareo, y al Amatheo: y después se derramaron las familias de los Cananeos.
+
+
+## Génesis 10:19 (id: 10001010019)
+
+19Y fué el término de los Cananeos desde Sidón, viniendo á Gerar hasta Gaza, hasta entrar en Sodoma y Gomorra, Adma, y Zeboim hasta Lasa.
+
+
+## Génesis 10:20 (id: 10001010020)
+
+20Estos son los hijos de Châm por sus familias, por sus lenguas, en sus tierras, en sus naciones.
+
+
+## Génesis 10:21 (id: 10001010021)
+
+21También le nacieron hijos á Sem, padre de todos los hijos de Heber, y hermano mayor de Japhet.
+
+
+## Génesis 10:22 (id: 10001010022)
+
+22Y los hijos de Sem: Elam, y Assur, y Arphaxad, y Lud, y Aram.
+
+
+## Génesis 10:23 (id: 10001010023)
+
+23Y los hijos de Aram: Uz, y Hul, y Gether, y Mas.
+
+
+## Génesis 10:24 (id: 10001010024)
+
+24Y Arphaxad engendró á Sala, y Sala engendró á Heber.
+
+
+## Génesis 10:25 (id: 10001010025)
+
+25Y á Heber nacieron dos hijos: el nombre del uno fué Peleg, porque en sus días fué repartida la tierra; y el nombre de su hermano, Joctán.
+
+
+## Génesis 10:26 (id: 10001010026)
+
+26Y Joctán engendró á Almodad, y á Sheleph, y Hazarmaveth, y á Jera,
+
+
+## Génesis 10:27 (id: 10001010027)
+
+27Y á Hadoram, y á Uzal, y á Dicla,
+
+
+## Génesis 10:28 (id: 10001010028)
+
+28Y á Obal, y á Abimael, y á Seba,
+
+
+## Génesis 10:29 (id: 10001010029)
+
+29Y á Ophir, y á Havila, y á Jobad: todos estos fueron hijos de Joctán.
+
+
+## Génesis 10:30 (id: 10001010030)
+
+30Y fué su habitación desde Mesa viniendo de Sephar, monte á la parte del oriente.
+
+
+## Génesis 10:31 (id: 10001010031)
+
+31Estos fueron los hijos de Sem por sus familias, por sus lenguas, en sus tierras, en sus naciones.
+
+
+## Génesis 10:32 (id: 10001010032)
+
+32Estas son las familias de Noé por sus descendencias, en sus naciones; y de éstos fueron divididas las gentes en la tierra después del diluvio.
+
+
+## Génesis 11:1 (id: 10001011001)
+
+1ERA entonces toda la tierra de una lengua y unas mismas palabras.
+
+
+## Génesis 11:2 (id: 10001011002)
+
+2Y aconteció que, como se partieron de oriente, hallaron una vega en la tierra de Shinar, y asentaron allí.
+
+
+## Génesis 11:3 (id: 10001011003)
+
+3Y dijeron los unos á los otros: Vaya, hagamos ladrillo y cozámoslo con fuego. Y fuéles el ladrillo en lugar de piedra, y el betún en lugar de mezcla.
+
+
+## Génesis 11:4 (id: 10001011004)
+
+4Y dijeron: Vamos, edifiquémonos una ciudad y una torre, cuya cúspide llegue al cielo; y hagámonos un nombre, por si fuéremos esparcidos sobre la faz de toda la tierra.
+
+
+## Génesis 11:5 (id: 10001011005)
+
+5Y descendió Jehová para ver la ciudad y la torre que edificaban los hijos de los hombres.
+
+
+## Génesis 11:6 (id: 10001011006)
+
+6Y dijo Jehová: He aquí el pueblo es uno, y todos éstos tienen un lenguaje: y han comenzado á obrar, y nada les retraerá ahora de lo que han pensando hacer.
+
+
+## Génesis 11:7 (id: 10001011007)
+
+7Ahora pues, descendamos, y confundamos allí sus lenguas, para que ninguno entienda el habla de su compañero.
+
+
+## Génesis 11:8 (id: 10001011008)
+
+8Así los esparció Jehová desde allí sobre la faz de toda la tierra, y dejaron de edificar la ciudad.
+
+
+## Génesis 11:9 (id: 10001011009)
+
+9Por esto fué llamado el nombre de ella Babel, porque allí confundió Jehová el lenguaje de toda la tierra, y desde allí los esparció sobre la faz de toda la tierra.
+
+
+## Génesis 11:10 (id: 10001011010)
+
+10Estas son las generaciones de Sem: Sem, de edad de cien años, engendró á Arphaxad, dos años después del diluvio.
+
+
+## Génesis 11:11 (id: 10001011011)
+
+11Y vivió Sem, después que engendró á Arphaxad, quinientos años, y engendró hijos é hijas.
+
+
+## Génesis 11:12 (id: 10001011012)
+
+12Y Arphaxad vivió treinta y cinco años, y engendró á Sala.
+
+
+## Génesis 11:13 (id: 10001011013)
+
+13Y vivió Arphaxad, después que engendró á Sala, cuatrocientos y tres años, y engendró hijos é hijas.
+
+
+## Génesis 11:14 (id: 10001011014)
+
+14Y vivió Sala treinta años, y engendró á Heber.
+
+
+## Génesis 11:15 (id: 10001011015)
+
+15Y vivió Sala, después que engendró á Heber, cuatrocientos y tres años, y engendró hijos é hijas.
+
+
+## Génesis 11:16 (id: 10001011016)
+
+16Y vivió Heber treinta y cuatro años, y engendró á Peleg.
+
+
+## Génesis 11:17 (id: 10001011017)
+
+17Y vivió Heber, después que engendró á Peleg, cuatrocientos y treinta años, y engendró hijos é hijas.
+
+
+## Génesis 11:18 (id: 10001011018)
+
+18Y vivió Peleg treinta años, y engendró á Reu.
+
+
+## Génesis 11:19 (id: 10001011019)
+
+19Y vivió Peleg, después que engendró á Reu, doscientos y nueve años, y engendró hijos é hijas.
+
+
+## Génesis 11:20 (id: 10001011020)
+
+20Y Reu vivió treinta y dos años, y engendró á Serug.
+
+
+## Génesis 11:21 (id: 10001011021)
+
+21Y vivió Reu, después que engendró á Serug, doscientos y siete años, y engendró hijos é hijas.
+
+
+## Génesis 11:22 (id: 10001011022)
+
+22Y vivió Serug treinta años, y engendró á Nachôr.
+
+
+## Génesis 11:23 (id: 10001011023)
+
+23Y vivió Serug, después que engendró á Nachôr, doscientos años, y engendró hijos é hijas.
+
+
+## Génesis 11:24 (id: 10001011024)
+
+24Y vivió Nachôr veintinueve años, y engendró á Thare.
+
+
+## Génesis 11:25 (id: 10001011025)
+
+25Y vivió Nachôr, después que engendró á Thare, ciento diecinueve años, y engendró hijos é hijas.
+
+
+## Génesis 11:26 (id: 10001011026)
+
+26Y vivió Thare setenta años, y engendró á Abram, y á Nachôr, y á Harán.
+
+
+## Génesis 11:27 (id: 10001011027)
+
+27Estas son las generaciones de Thare: Thare engendró á Abram, y á Nachôr, y á Harán; y Harán engendró á Lot.
+
+
+## Génesis 11:28 (id: 10001011028)
+
+28Y murió Harán antes que su padre Thare en la tierra de su naturaleza, en Ur de los Caldeos.
+
+
+## Génesis 11:29 (id: 10001011029)
+
+29Y tomaron Abram y Nachôr para sí mujeres: el nombre de la mujer de Abram fué Sarai, y el nombre de la mujer de Nachôr, Milca, hija de Harán, padre de Milca y de Isca.
+
+
+## Génesis 11:30 (id: 10001011030)
+
+30Mas Sarai fué estéril, y no tenía hijo.
+
+
+## Génesis 11:31 (id: 10001011031)
+
+31Y tomó Thare á Abram su hijo, y á Lot hijo de Harán, hijo de su hijo, y á Sarai su nuera, mujer de Abram su hijo: y salió con ellos de Ur de los Caldeos, para ir á la tierra de Canaán: y vinieron hasta Harán, y asentaron allí.
+
+
+## Génesis 11:32 (id: 10001011032)
+
+32Y fueron los días de Thare doscientos y cinco años; y murió Thare en Harán.
+
+
+## Génesis 12:1 (id: 10001012001)
+
+1EMPERO Jehová había dicho á Abram: Vete de tu tierra y de tu parentela, y de la casa de tu padre, á la tierra que te mostraré;
+
+
+## Génesis 12:2 (id: 10001012002)
+
+2Y haré de ti una nación grande, y bendecirte he, y engrandeceré tu nombre, y serás bendición:
+
+
+## Génesis 12:3 (id: 10001012003)
+
+3Y bendeciré á los que te bendijeren, y á los que te maldijeren maldeciré: y serán benditas en ti todas las familias de la tierra.
+
+
+## Génesis 12:4 (id: 10001012004)
+
+4Y fuése Abram, como Jehová le dijo; y fué con él Lot: y era Abram de edad de setenta y cinco años cuando salió de Harán.
+
+
+## Génesis 12:5 (id: 10001012005)
+
+5Y tomó Abram á Sarai su mujer, y á Lot hijo de su hermano, y toda su hacienda que habían ganado, y las almas que habían adquirido en Harán, y salieron para ir á tierra de Canaán; y á tierra de Canaán llegaron.
+
+
+## Génesis 12:6 (id: 10001012006)
+
+6Y pasó Abram por aquella tierra hasta el lugar de Sichêm, hasta el valle de Moreh: y el Cananeo estaba entonces en la tierra.
+
+
+## Génesis 12:7 (id: 10001012007)
+
+7Y apareció Jehová á Abram, y le dijo: A tu simiente daré esta tierra. Y edificó allí un altar á Jehová, que le había aparecido.
+
+
+## Génesis 12:8 (id: 10001012008)
+
+8Y pasóse de allí á un monte al oriente de Bethel, y tendió su tienda, teniendo á Bethel al occidente y Hai al oriente: y edificó allí altar á Jehová, é invocó el nombre de Jehová.
+
+
+## Génesis 12:9 (id: 10001012009)
+
+9Y movió Abram de allí, caminando y yendo hacia el Mediodía.
+
+
+## Génesis 12:10 (id: 10001012010)
+
+10Y hubo hambre en la tierra, y descendió Abram á Egipto para peregrinar allá; porque era grande el hambre en la tierra.
+
+
+## Génesis 12:11 (id: 10001012011)
+
+11Y aconteció que cuando estaba para entrar en Egipto, dijo á Sarai su mujer: He aquí, ahora conozco que eres mujer hermosa de vista;
+
+
+## Génesis 12:12 (id: 10001012012)
+
+12Y será que cuando te habrán visto los Egipcios, dirán: Su mujer es: y me matarán á mí, y á ti te reservarán la vida.
+
+
+## Génesis 12:13 (id: 10001012013)
+
+13Ahora pues, di que eres mi hermana, para que yo haya bien por causa tuya, y viva mi alma por amor de ti.
+
+
+## Génesis 12:14 (id: 10001012014)
+
+14Y aconteció que, como entró Abram en Egipto, los Egipcios vieron la mujer que era hermosa en gran manera.
+
+
+## Génesis 12:15 (id: 10001012015)
+
+15Viéronla también los príncipes de Faraón, y se la alabaron; y fué llevada la mujer á casa de Faraón:
+
+
+## Génesis 12:16 (id: 10001012016)
+
+16E hizo bien á Abram por causa de ella; y tuvo ovejas, y vacas, y asnos, y siervos, y criadas, y asnas y camellos.
+
+
+## Génesis 12:17 (id: 10001012017)
+
+17Mas Jehová hirió á Faraón y á su casa con grandes plagas, por causa de Sarai mujer de Abram.
+
+
+## Génesis 12:18 (id: 10001012018)
+
+18Entonces Faraón llamó á Abram, y le dijo: ¿Qué es esto que has hecho conmigo? ¿Por qué no me declaraste que era tu mujer?
+
+
+## Génesis 12:19 (id: 10001012019)
+
+19¿Por qué dijiste: Es mi hermana? poniéndome en ocasión de tomarla para mí por mujer? Ahora pues, he aquí tu mujer, tómala y vete.
+
+
+## Génesis 12:20 (id: 10001012020)
+
+20Entonces Faraón dió orden á sus gentes acerca de Abram; y le acompañaron, y á su mujer con todo lo que tenía.
+
+
+## Génesis 13:1 (id: 10001013001)
+
+1SUBIÓ, pues, Abram de Egipto hacia el Mediodía, él, y su mujer, con todo lo que tenía, y con él Lot.
+
+
+## Génesis 13:2 (id: 10001013002)
+
+2Y Abram era riquísimo en ganado, en plata y oro.
+
+
+## Génesis 13:3 (id: 10001013003)
+
+3Y volvió por sus jornadas de la parte del Mediodía hacia Bethel, hasta el lugar donde había estado antes su tienda entre Bethel y Hai;
+
+
+## Génesis 13:4 (id: 10001013004)
+
+4Al lugar del altar que había hecho allí antes: é invocó allí Abram el nombre de Jehová.
+
+
+## Génesis 13:5 (id: 10001013005)
+
+5Y asimismo Lot, que andaba con Abram, tenía ovejas, y vacas, y tiendas.
+
+
+## Génesis 13:6 (id: 10001013006)
+
+6Y la tierra no podía darles para que habitasen juntos: porque su hacienda era mucha, y no podían morar en un mismo lugar.
+
+
+## Génesis 13:7 (id: 10001013007)
+
+7Y hubo contienda entre los pastores del ganado de Abram y los pastores del ganado de Lot: y el Cananeo y el Pherezeo habitaban entonces en la tierra.
+
+
+## Génesis 13:8 (id: 10001013008)
+
+8Entonces Abram dijo á Lot: No haya ahora altercado entre mí y ti, entre mis pastores y los tuyos, porque somos hermanos.
+
+
+## Génesis 13:9 (id: 10001013009)
+
+9¿No está toda la tierra delante de ti? Yo te ruego que te apartes de mí. Si fueres á la mano izquierda, yo iré á la derecha: y si tú á la derecha, yo iré á la izquierda.
+
+
+## Génesis 13:10 (id: 10001013010)
+
+10Y alzó Lot sus ojos, y vió toda la llanura del Jordán, que toda ella era de riego, antes que destruyese Jehová á Sodoma y á Gomorra, como el huerto de Jehová, como la tierra de Egipto entrando en Zoar.
+
+
+## Génesis 13:11 (id: 10001013011)
+
+11Entonces Lot escogió para sí toda la llanura del Jordán: y partióse Lot de Oriente, y apartáronse el uno del otro.
+
+
+## Génesis 13:12 (id: 10001013012)
+
+12Abram asentó en la tierra de Canaán, y Lot asentó en las ciudades de la llanura, y fué poniendo sus tiendas hasta Sodoma.
+
+
+## Génesis 13:13 (id: 10001013013)
+
+13Mas los hombres de Sodoma eran malos y pecadores para con Jehová en gran manera.
+
+
+## Génesis 13:14 (id: 10001013014)
+
+14Y Jehová dijo á Abram, después que Lot se apartó de él: Alza ahora tus ojos, y mira desde el lugar donde estás hacia el Aquilón, y al Mediodía, y al Oriente y al Occidente;
+
+
+## Génesis 13:15 (id: 10001013015)
+
+15Porque toda la tierra que ves, la daré á ti y á tu simiente para siempre.
+
+
+## Génesis 13:16 (id: 10001013016)
+
+16Y haré tu simiente como el polvo de la tierra: que si alguno podrá contar el polvo de la tierra, también tu simiente será contada.
+
+
+## Génesis 13:17 (id: 10001013017)
+
+17Levántate, ve por la tierra á lo largo de ella y á su ancho; porque á ti la tengo de dar.
+
+
+## Génesis 13:18 (id: 10001013018)
+
+18Abram, pues, removiendo su tienda, vino y moró en el alcornocal de Mamre, que es en Hebrón, y edificó allí altar á Jehová.
+
+
+## Génesis 14:1 (id: 10001014001)
+
+1Y ACONTECIÓ en los días de Amraphel, rey de Shinar, Arioch, rey de Elazar, Chêdorlaomer, rey de Elá, y Tidal, rey de naciones,
+
+
+## Génesis 14:2 (id: 10001014002)
+
+2Que éstos hicieron guerra contra Bera, rey de Sodoma, y contra Birsha, rey de Gomorra, y contra Shinab, rey de Adma, y contra Shemeber, rey de Zeboim, y contra el rey de Bela, la cual es Zoar.
+
+
+## Génesis 14:3 (id: 10001014003)
+
+3Todos estos se juntaron en el valle de Siddim, que es el mar salado.
+
+
+## Génesis 14:4 (id: 10001014004)
+
+4Doce años habían servido á Chêdorlaomer, y al décimotercio año se rebelaron.
+
+
+## Génesis 14:5 (id: 10001014005)
+
+5Y en el año décimocuarto vino Chêdorlaomer, y los reyes que estaban de su parte, y derrotaron á los Raphaitas en Ashteroth\\-carnaim, á los Zuzitas en Ham, y á los Emitas en Shave\\-Kiriataim.
+
+
+## Génesis 14:6 (id: 10001014006)
+
+6Y á los Horeos en el monte de Seir, hasta la llanura de Parán, que está junto al desierto.
+
+
+## Génesis 14:7 (id: 10001014007)
+
+7Y volvieron, y vinieron á Emmisphat, que es Cades, y devastaron todas las haciendas de los Amalecitas, y también al Amorrheo, que habitaba en Hazezón\\-tamar.
+
+
+## Génesis 14:8 (id: 10001014008)
+
+8Y salió el rey de Sodoma, y el rey de Gomorra, y el rey de Adma, y el rey de Zeboim, y el rey de Bela, que es Zoar, y ordenaron contra ellos batalla en el valle de Siddim;
+
+
+## Génesis 14:9 (id: 10001014009)
+
+9Es á saber, contra Chêdorlaomer, rey de Elam, y Tidal, rey de naciones, y Amraphel, rey de Shinar, y Arioch, rey de Elasar; cuatro reyes contra cinco.
+
+
+## Génesis 14:10 (id: 10001014010)
+
+10Y el valle de Siddim estaba lleno de pozos de betún: y huyeron el rey de Sodoma y el de Gomorra, y cayeron allí; y los demás huyeron al monte.
+
+
+## Génesis 14:11 (id: 10001014011)
+
+11Y tomaron toda la riqueza de Sodoma y de Gomorra, y todas sus vituallas, y se fueron.
+
+
+## Génesis 14:12 (id: 10001014012)
+
+12Tomaron también á Lot, hijo del hermano de Abram, que moraba en Sodoma, y su hacienda, y se fueron.
+
+
+## Génesis 14:13 (id: 10001014013)
+
+13Y vino uno de los que escaparon, y denunciólo á Abram el Hebreo, que habitaba en el valle de Mamre Amorrheo, hermano de Eschôl y hermano de Aner, los cuales estaban confederados con Abram.
+
+
+## Génesis 14:14 (id: 10001014014)
+
+14Y oyó Abram que su hermano estaba prisionero, y armó sus criados, los criados de su casa, trescientos dieciocho, y siguiólos hasta Dan.
+
+
+## Génesis 14:15 (id: 10001014015)
+
+15Y derramóse sobre ellos de noche él y sus siervos, é hiriólos, y fuélos siguiendo hasta Hobah, que está á la izquierda de Damasco.
+
+
+## Génesis 14:16 (id: 10001014016)
+
+16Y recobró todos los bienes, y también á Lot su hermano y su hacienda, y también las mujeres y gente.
+
+
+## Génesis 14:17 (id: 10001014017)
+
+17Y salió el rey de Sodoma á recibirlo, cuando volvía de la derrota de Chêdorlaomer y de los reyes que con él estaban, al valle de Shave, que es el valle del Rey.
+
+
+## Génesis 14:18 (id: 10001014018)
+
+18Entonces Melchîsedec, rey de Salem, sacó pan y vino; el cual era sacerdote del Dios alto;
+
+
+## Génesis 14:19 (id: 10001014019)
+
+19Y bendíjole, y dijo: Bendito sea Abram del Dios alto, poseedor de los cielos y de la tierra;
+
+
+## Génesis 14:20 (id: 10001014020)
+
+20Y bendito sea el Dios alto, que entregó tus enemigos en tu mano. Y dióle Abram los diezmos de todo.
+
+
+## Génesis 14:21 (id: 10001014021)
+
+21Entonces el rey de Sodoma dijo á Abram: Dame las personas, y toma para ti la hacienda.
+
+
+## Génesis 14:22 (id: 10001014022)
+
+22Y respondió Abram al rey de Sodoma: He alzado mi mano á Jehová Dios alto, poseedor de los cielos y de la tierra,
+
+
+## Génesis 14:23 (id: 10001014023)
+
+23Que desde un hilo hasta la correa de un calzado, nada tomaré de todo lo que es tuyo, porque no digas: Yo enriquecí á Abram:
+
+
+## Génesis 14:24 (id: 10001014024)
+
+24Sacando solamente lo que comieron los mancebos, y la porción de los varones que fueron conmigo, Aner, Eschôl, y Mamre; los cuales tomarán su parte.
+
+
+## Génesis 15:1 (id: 10001015001)
+
+1DESPUÉS de estas cosas fué la palabra de Jehová á Abram en visión, diciendo: No temas, Abram; yo soy tu escudo, y tu galardón sobremanera grande.
+
+
+## Génesis 15:2 (id: 10001015002)
+
+2Y respondió Abram: Señor Jehová ¿qué me has de dar, siendo así que ando sin hijo, y el mayordomo de mi casa es ese Damasceno Eliezer?
+
+
+## Génesis 15:3 (id: 10001015003)
+
+3Dijo más Abram: Mira que no me has dado prole, y he aquí que es mi heredero uno nacido en mi casa.
+
+
+## Génesis 15:4 (id: 10001015004)
+
+4Y luego la palabra de Jehová fué á él diciendo: No te heredará éste, sino el que saldrá de tus entrañas será el que te herede.
+
+
+## Génesis 15:5 (id: 10001015005)
+
+5Y sacóle fuera, y dijo: Mira ahora á los cielos, y cuenta las estrellas, si las puedes contar. Y le dijo: Así será tu simiente.
+
+
+## Génesis 15:6 (id: 10001015006)
+
+6Y creyó á Jehová, y contóselo por justicia.
+
+
+## Génesis 15:7 (id: 10001015007)
+
+7Y díjole: Yo soy Jehová, que te saqué de Ur de los Caldeos, para darte á heredar esta tierra.
+
+
+## Génesis 15:8 (id: 10001015008)
+
+8Y él respondió: Señor Jehová, ¿en qué conoceré que la tengo de heredar?
+
+
+## Génesis 15:9 (id: 10001015009)
+
+9Y le dijo: Apártame una becerra de tres años, y una cabra de tres años, y un carnero de tres años, una tórtola también, y un palomino.
+
+
+## Génesis 15:10 (id: 10001015010)
+
+10Y tomó él todas estas cosas, y partiólas por la mitad, y puso cada mitad una enfrente de otra; mas no partió las aves.
+
+
+## Génesis 15:11 (id: 10001015011)
+
+11Y descendían aves sobre los cuerpos muertos, y ojeábalas Abram.
+
+
+## Génesis 15:12 (id: 10001015012)
+
+12Mas á la caída del sol sobrecogió el sueño á Abram, y he aquí que el pavor de una grande obscuridad cayó sobre él.
+
+
+## Génesis 15:13 (id: 10001015013)
+
+13Entonces dijo á Abram: Ten por cierto que tu simiente será peregrina en tierra no suya, y servirá á los de allí, y serán por ellos afligidos cuatrocientos años.
+
+
+## Génesis 15:14 (id: 10001015014)
+
+14Mas también á la gente á quien servirán, juzgaré yo; y después de esto saldrán con grande riqueza.
+
+
+## Génesis 15:15 (id: 10001015015)
+
+15Y tú vendrás á tus padres en paz, y serás sepultado en buena vejez.
+
+
+## Génesis 15:16 (id: 10001015016)
+
+16Y en la cuarta generación volverán acá: porque aun no está cumplida la maldad del Amorrheo hasta aquí.
+
+
+## Génesis 15:17 (id: 10001015017)
+
+17Y sucedió que puesto el sol, y ya obscurecido, dejóse ver un horno humeando, y una antorcha de fuego que pasó por entre los animales divididos.
+
+
+## Génesis 15:18 (id: 10001015018)
+
+18En aquel día hizo Jehová un pacto con Abram diciendo: A tu simiente daré esta tierra desde el río de Egipto hasta el río grande, el río Eufrates;
+
+
+## Génesis 15:19 (id: 10001015019)
+
+19Los Cineos, y los Ceneceos, y los Cedmoneos,
+
+
+## Génesis 15:20 (id: 10001015020)
+
+20Y los Hetheos, y los Pherezeos, y los Raphaitas,
+
+
+## Génesis 15:21 (id: 10001015021)
+
+21Y los Amorrheos, y los Cananeos, y los Gergeseos, y los Jebuseos.
+
+
+## Génesis 16:1 (id: 10001016001)
+
+1Y SARAI, mujer de Abram, no le paría: y ella tenía una sierva egipcia, que se llamaba Agar.
+
+
+## Génesis 16:2 (id: 10001016002)
+
+2Dijo, pues, Sarai á Abram: Ya ves que Jehová me ha hecho estéril: ruégote que entres á mi sierva; quizá tendré hijos de ella. Y atendió Abram al dicho de Sarai.
+
+
+## Génesis 16:3 (id: 10001016003)
+
+3Y Sarai, mujer de Abram, tomó á Agar su sierva egipcia, al cabo de diez años que había habitado Abram en la tierra de Canaán, y dióla á Abram su marido por mujer.
+
+
+## Génesis 16:4 (id: 10001016004)
+
+4Y él cohabitó con Agar, la cual concibió: y cuando vió que había concebido, miraba con desprecio á su señora.
+
+
+## Génesis 16:5 (id: 10001016005)
+
+5Entonces Sarai dijo á Abram: Mi afrenta sea sobre ti: yo puse mi sierva en tu seno, y viéndose embarazada, me mira con desprecio; juzgue Jehová entre mí y ti.
+
+
+## Génesis 16:6 (id: 10001016006)
+
+6Y respondió Abram á Sarai: He ahí tu sierva en tu mano, haz con ella lo que bien te pareciere. Y como Sarai la afligiese, huyóse de su presencia.
+
+
+## Génesis 16:7 (id: 10001016007)
+
+7Y hallóla el ángel de Jehová junto á una fuente de agua en el desierto, junto á la fuente que está en el camino del Sur.
+
+
+## Génesis 16:8 (id: 10001016008)
+
+8Y le dijo: Agar, sierva de Sarai, ¿de dónde vienes tú, y á dónde vas? Y ella respondió: Huyo de delante de Sarai, mi señora.
+
+
+## Génesis 16:9 (id: 10001016009)
+
+9Y díjole el ángel de Jehová: Vuélvete á tu señora, y ponte sumisa bajo de su mano.
+
+
+## Génesis 16:10 (id: 10001016010)
+
+10Díjole también el ángel de Jehová: Multiplicaré tanto tu linaje, que no será contado á causa de la muchedumbre.
+
+
+## Génesis 16:11 (id: 10001016011)
+
+11Díjole aún el ángel de Jehová: He aquí que has concebido, y parirás un hijo, y llamarás su nombre Ismael, porque oído ha Jehová tu aflicción.
+
+
+## Génesis 16:12 (id: 10001016012)
+
+12Y él será hombre fiero; su mano contra todos, y las manos de todos contra él, y delante de todos sus hermanos habitará.
+
+
+## Génesis 16:13 (id: 10001016013)
+
+13Entonces llamó el nombre de Jehová que con ella hablaba: Tú eres el Dios de la vista; porque dijo: ¿No he visto también aquí al que me ve?
+
+
+## Génesis 16:14 (id: 10001016014)
+
+14Por lo cual llamó al pozo, Pozo del Viviente que me ve. He aquí está entre Cades y Bered.
+
+
+## Génesis 16:15 (id: 10001016015)
+
+15Y parió Agar á Abram un hijo, y llamó Abram el nombre de su hijo que le parió Agar, Ismael.
+
+
+## Génesis 16:16 (id: 10001016016)
+
+16Y era Abram de edad de ochenta y seis años, cuando parió Agar á Ismael.
+
+
+## Génesis 17:1 (id: 10001017001)
+
+1Y SIENDO Abram de edad de noventa y nueve años, aparecióle Jehová, y le dijo: Yo soy el Dios Todopoderoso; anda delante de mí, y sé perfecto.
+
+
+## Génesis 17:2 (id: 10001017002)
+
+2Y pondré mi pacto entre mí y ti, y multiplicarte he mucho en gran manera.
+
+
+## Génesis 17:3 (id: 10001017003)
+
+3Entonces Abram cayó sobre su rostro, y Dios habló con él diciendo:
+
+
+## Génesis 17:4 (id: 10001017004)
+
+4Yo, he aquí mi pacto contigo: Serás padre de muchedumbre de gentes:
+
+
+## Génesis 17:5 (id: 10001017005)
+
+5Y no se llamará más tu nombre Abram, sino que será tu nombre Abraham, porque te he puesto por padre de muchedumbre de gentes.
+
+
+## Génesis 17:6 (id: 10001017006)
+
+6Y multiplicarte he mucho en gran manera, y te pondré en gentes, y reyes saldrán de ti.
+
+
+## Génesis 17:7 (id: 10001017007)
+
+7Y estableceré mi pacto entre mí y ti, y tu simiente después de ti en sus generaciones, por alianza perpetua, para serte á ti por Dios, y á tu simiente después de ti.
+
+
+## Génesis 17:8 (id: 10001017008)
+
+8Y te daré á ti, y á tu simiente después de ti, la tierra de tus peregrinaciones, toda la tierra de Canaán en heredad perpetua; y seré el Dios de ellos.
+
+
+## Génesis 17:9 (id: 10001017009)
+
+9Dijo de nuevo Dios á Abraham: Tú empero guardarás mi pacto, tú y tu simiente después de ti por sus generaciones.
+
+
+## Génesis 17:10 (id: 10001017010)
+
+10Este será mi pacto, que guardaréis entre mí y vosotros y tu simiente después de ti: Será circuncidado todo varón de entre vosotros.
+
+
+## Génesis 17:11 (id: 10001017011)
+
+11Circuncidaréis, pues, la carne de vuestro prepucio, y será por señal del pacto entre mí y vosotros.
+
+
+## Génesis 17:12 (id: 10001017012)
+
+12Y de edad de ocho días será circuncidado todo varón entre vosotros por vuestras generaciones: el nacido en casa, y el comprado á dinero de cualquier extranjero, que no fuere de tu simiente.
+
+
+## Génesis 17:13 (id: 10001017013)
+
+13Debe ser circuncidado el nacido en tu casa, y el comprado por tu dinero: y estará mi pacto en vuestra carne para alianza perpetua.
+
+
+## Génesis 17:14 (id: 10001017014)
+
+14Y el varón incircunciso que no hubiere circuncidado la carne de su prepucio, aquella persona será borrada de su pueblo; ha violado mi pacto.
+
+
+## Génesis 17:15 (id: 10001017015)
+
+15Dijo también Dios á Abraham: A Sarai tu mujer no la llamarás Sarai, mas Sara será su nombre.
+
+
+## Génesis 17:16 (id: 10001017016)
+
+16Y bendecirla he, y también te daré de ella hijo; sí, la bendeciré, y vendrá á ser madre de naciones; reyes de pueblos serán de ella.
+
+
+## Génesis 17:17 (id: 10001017017)
+
+17Entonces Abraham cayó sobre su rostro, y rióse, y dijo en su corazón: ¿A hombre de cien años ha de nacer hijo? ¿y Sara, ya de noventa años, ha de parir?
+
+
+## Génesis 17:18 (id: 10001017018)
+
+18Y dijo Abraham á Dios: Ojalá Ismael viva delante de ti.
+
+
+## Génesis 17:19 (id: 10001017019)
+
+19Y respondió Dios: Ciertamente Sara tu mujer te parirá un hijo, y llamarás su nombre Isaac; y confirmaré mi pacto con él por alianza perpetua para su simiente después de él.
+
+
+## Génesis 17:20 (id: 10001017020)
+
+20Y en cuanto á Ismael, también te he oído: he aquí que le bendeciré, y le haré fructificar y multiplicar mucho en gran manera: doce príncipes engendrará, y ponerlo he por gran gente.
+
+
+## Génesis 17:21 (id: 10001017021)
+
+21Mas yo estableceré mi pacto con Isaac, al cual te parirá Sara por este tiempo el año siguiente.
+
+
+## Génesis 17:22 (id: 10001017022)
+
+22Y acabó de hablar con él, y subió Dios de con Abraham.
+
+
+## Génesis 17:23 (id: 10001017023)
+
+23Entonces tomó Abraham á Ismael su hijo, y á todos los siervos nacidos en su casa, y á todos los comprados por su dinero, á todo varón entre los domésticos de la casa de Abraham, y circuncidó la carne del prepucio de ellos en aquel mismo día, como Dios le había dicho.
+
+
+## Génesis 17:24 (id: 10001017024)
+
+24Era Abraham de edad de noventa y nueve años cuando circuncidó la carne de su prepucio.
+
+
+## Génesis 17:25 (id: 10001017025)
+
+25E Ismael su hijo era de trece años, cuando fué circuncidada la carne de su prepucio.
+
+
+## Génesis 17:26 (id: 10001017026)
+
+26En el mismo día fué circuncidado Abraham é Ismael su hijo.
+
+
+## Génesis 17:27 (id: 10001017027)
+
+27Y todos los varones de su casa, el siervo nacido en casa, y el comprado por dinero del extranjero, fueron circuncidados con él.
+
+
+## Génesis 18:1 (id: 10001018001)
+
+1Y APARECIÓLE Jehová en el valle de Mamre, estando él sentado á la puerta de su tienda en el calor del día.
+
+
+## Génesis 18:2 (id: 10001018002)
+
+2Y alzó sus ojos y miró, y he aquí tres varones que estaban junto á él: y cuando los vió, salió corriendo de la puerta de su tienda á recibirlos, é inclinóse hacia la tierra,
+
+
+## Génesis 18:3 (id: 10001018003)
+
+3Y dijo: Señor, si ahora he hallado gracia en tus ojos, ruégote que no pases de tu siervo.
+
+
+## Génesis 18:4 (id: 10001018004)
+
+4Que se traiga ahora un poco de agua, y lavad vuestros pies; y recostaos debajo de un árbol,
+
+
+## Génesis 18:5 (id: 10001018005)
+
+5Y traeré un bocado de pan, y sustentad vuestro corazón; después pasaréis: porque por eso habéis pasado cerca de vuestro siervo. Y ellos dijeron: Haz así como has dicho.
+
+
+## Génesis 18:6 (id: 10001018006)
+
+6Entonces Abraham fué de priesa á la tienda á Sara, y le dijo: Toma presto tres medidas de flor de harina, amasa y haz panes cocidos debajo del rescoldo.
+
+
+## Génesis 18:7 (id: 10001018007)
+
+7Y corrió Abraham á las vacas, y tomó un becerro tierno y bueno, y diólo al mozo, y dióse éste priesa á aderezarlo.
+
+
+## Génesis 18:8 (id: 10001018008)
+
+8Tomó también manteca y leche, y el becerro que había aderezado, y púsolo delante de ellos; y él estaba junto á ellos debajo del árbol; y comieron.
+
+
+## Génesis 18:9 (id: 10001018009)
+
+9Y le dijeron: ¿Dónde está Sara tu mujer? Y él respondió: Aquí en la tienda.
+
+
+## Génesis 18:10 (id: 10001018010)
+
+10Entonces dijo: De cierto volveré á ti según el tiempo de la vida, y he aquí, tendrá un hijo Sara tu mujer. Y Sara escuchaba á la puerta de la tienda, que estaba detrás de él.
+
+
+## Génesis 18:11 (id: 10001018011)
+
+11Y Abraham y Sara eran viejos, entrados en días: á Sara había cesado ya la costumbre de las mujeres.
+
+
+## Génesis 18:12 (id: 10001018012)
+
+12Rióse, pues, Sara entre sí, diciendo: ¿Después que he envejecido tendré deleite, siendo también mi señor ya viejo?
+
+
+## Génesis 18:13 (id: 10001018013)
+
+13Entonces Jehová dijo á Abraham: ¿Por qué se ha reído Sara diciendo: Será cierto que he de parir siendo ya vieja?
+
+
+## Génesis 18:14 (id: 10001018014)
+
+14¿Hay para Dios alguna cosa difícil? Al tiempo señalado volveré á ti, según el tiempo de la vida, y Sara tendrá un hijo.
+
+
+## Génesis 18:15 (id: 10001018015)
+
+15Entonces Sara negó diciendo: No me reí; porque tuvo miedo. Y él dijo: No es así, sino que te has reído.
+
+
+## Génesis 18:16 (id: 10001018016)
+
+16Y los varones se levantaron de allí, y miraron hacia Sodoma: y Abraham iba con ellos acompañándolos.
+
+
+## Génesis 18:17 (id: 10001018017)
+
+17Y Jehová dijo: ¿Encubriré yo á Abraham lo que voy á hacer,
+
+
+## Génesis 18:18 (id: 10001018018)
+
+18Habiendo de ser Abraham en una nación grande y fuerte, y habiendo de ser benditas en él todas las gentes de la tierra?
+
+
+## Génesis 18:19 (id: 10001018019)
+
+19Porque yo lo he conocido, sé que mandará á sus hijos y á su casa después de sí, que guarden el camino de Jehová, haciendo justicia y juicio, para que haga venir Jehová sobre Abraham lo que ha hablado acerca de él.
+
+
+## Génesis 18:20 (id: 10001018020)
+
+20Entonces Jehová le dijo: Por cuanto el clamor de Sodoma y Gomorra se aumenta más y más, y el pecado de ellos se ha agravado en extremo,
+
+
+## Génesis 18:21 (id: 10001018021)
+
+21Descenderé ahora, y veré si han consumado su obra según el clamor que ha venido hasta mí; y si no, saberlo he.
+
+
+## Génesis 18:22 (id: 10001018022)
+
+22Y apartáronse de allí los varones, y fueron hacia Sodoma: mas Abraham estaba aún delante de Jehová.
+
+
+## Génesis 18:23 (id: 10001018023)
+
+23Y acercóse Abraham y dijo: ¿Destruirás también al justo con el impío?
+
+
+## Génesis 18:24 (id: 10001018024)
+
+24Quizá hay cincuenta justos dentro de la ciudad: ¿destruirás también y no perdonarás al lugar por cincuenta justos que estén dentro de él?
+
+
+## Génesis 18:25 (id: 10001018025)
+
+25Lejos de ti el hacer tal, que hagas morir al justo con el impío, y que sea el justo tratado como el impío; nunca tal hagas. El juez de toda la tierra, ¿no ha de hacer lo que es justo?
+
+
+## Génesis 18:26 (id: 10001018026)
+
+26Entonces respondió Jehová: Si hallare en Sodoma cincuenta justos dentro de la ciudad, perdonaré á todo este lugar por amor de ellos.
+
+
+## Génesis 18:27 (id: 10001018027)
+
+27Y Abraham replicó y dijo: He aquí ahora que he comenzado á hablar á mi Señor, aunque soy polvo y ceniza:
+
+
+## Génesis 18:28 (id: 10001018028)
+
+28Quizá faltarán de cincuenta justos cinco: ¿destruirás por aquellos cinco toda la ciudad? Y dijo: No la destruiré, si hallare allí cuarenta y cinco.
+
+
+## Génesis 18:29 (id: 10001018029)
+
+29Y volvió á hablarle, y dijo: Quizá se hallarán allí cuarenta. Y respondió: No lo haré por amor de los cuarenta.
+
+
+## Génesis 18:30 (id: 10001018030)
+
+30Y dijo: No se enoje ahora mi Señor, si hablare: quizá se hallarán allí treinta. Y respondió: No lo haré si hallare allí treinta.
+
+
+## Génesis 18:31 (id: 10001018031)
+
+31Y dijo: He aquí ahora que he emprendido el hablar á mi Señor: quizá se hallarán allí veinte. No la destruiré, respondió, por amor de los veinte.
+
+
+## Génesis 18:32 (id: 10001018032)
+
+32Y volvió á decir: No se enoje ahora mi Señor, si hablare solamente una vez: quizá se hallarán allí diez. No la destruiré, respondió, por amor de los diez.
+
+
+## Génesis 18:33 (id: 10001018033)
+
+33Y fuése Jehová, luego que acabó de hablar á Abraham: y Abraham se volvió á su lugar.
+
+
+## Génesis 19:1 (id: 10001019001)
+
+1LLEGARON, pues, los dos ángeles á Sodoma á la caída de la tarde: y Lot estaba sentado á la puerta de Sodoma. Y viéndolos Lot, levantóse á recibirlos, é inclinóse hacia el suelo;
+
+
+## Génesis 19:2 (id: 10001019002)
+
+2Y dijo: Ahora, pues, mis señores, os ruego que vengáis á casa de vuestro siervo y os hospedéis, y lavaréis vuestros pies: y por la mañana os levantaréis, y seguiréis vuestro camino. Y ellos respondieron: No, que en la plaza nos quedaremos esta noche.
+
+
+## Génesis 19:3 (id: 10001019003)
+
+3Mas él porfió con ellos mucho, y se vinieron con él, y entraron en su casa; é hízoles banquete, y coció panes sin levadura, y comieron.
+
+
+## Génesis 19:4 (id: 10001019004)
+
+4Y antes que se acostasen, cercaron la casa los hombres de la ciudad, los varones de Sodoma, todo el pueblo junto, desde el más joven hasta el más viejo;
+
+
+## Génesis 19:5 (id: 10001019005)
+
+5Y llamaron á Lot, y le dijeron: ¿Dónde están los varones que vinieron á ti esta noche? sácanoslos, para que los conozcamos.
+
+
+## Génesis 19:6 (id: 10001019006)
+
+6Entonces Lot salió á ellos á la puerta, y cerró las puertas tras sí,
+
+
+## Génesis 19:7 (id: 10001019007)
+
+7Y dijo: Os ruego, hermanos míos, que no hagáis tal maldad.
+
+
+## Génesis 19:8 (id: 10001019008)
+
+8He aquí ahora yo tengo dos hijas que no han conocido varón; os las sacaré afuera, y haced de ellas como bien os pareciere: solamente á estos varones no hagáis nada, pues que vinieron á la sombra de mi tejado.
+
+
+## Génesis 19:9 (id: 10001019009)
+
+9Y ellos respondieron: Quita allá: y añadieron: Vino éste aquí para habitar como un extraño, ¿y habrá de erigirse en juez? Ahora te haremos más mal que á ellos. Y hacían gran violencia al varón, á Lot, y se acercaron para romper las puertas.
+
+
+## Génesis 19:10 (id: 10001019010)
+
+10Entonces los varones alargaron la mano, y metieron á Lot en casa con ellos, y cerraron las puertas.
+
+
+## Génesis 19:11 (id: 10001019011)
+
+11Y á los hombres que estaban á la puerta de la casa desde el menor hasta el mayor, hirieron con ceguera; mas ellos se fatigaban por hallar la puerta.
+
+
+## Génesis 19:12 (id: 10001019012)
+
+12Y dijeron los varones á Lot: ¿Tienes aquí alguno más? Yernos, y tus hijos y tus hijas, y todo lo que tienes en la ciudad, sácalo de este lugar:
+
+
+## Génesis 19:13 (id: 10001019013)
+
+13Porque vamos á destruir este lugar, por cuanto el clamor de ellos ha subido de punto delante de Jehová; por tanto Jehová nos ha enviado para destruirlo.
+
+
+## Génesis 19:14 (id: 10001019014)
+
+14Entonces salió Lot, y habló á sus yernos, los que habían de tomar sus hijas, y les dijo: Levantaos, salid de este lugar; porque Jehová va á destruir esta ciudad. Mas pareció á sus yernos como que se burlaba.
+
+
+## Génesis 19:15 (id: 10001019015)
+
+15Y al rayar el alba, los ángeles daban prisa á Lot, diciendo: Levántate, toma tu mujer, y tus dos hijas que se hallan aquí, porque no perezcas en el castigo de la ciudad.
+
+
+## Génesis 19:16 (id: 10001019016)
+
+16Y deteniéndose él, los varones asieron de su mano, y de la mano de su mujer, y de las manos de sus dos hijas, según la misericordia de Jehová para con él; y le sacaron, y le pusieron fuera de la ciudad.
+
+
+## Génesis 19:17 (id: 10001019017)
+
+17Y fué que cuando los hubo sacado fuera, dijo: Escapa por tu vida; no mires tras ti, ni pares en toda esta llanura; escapa al monte, no sea que perezcas.
+
+
+## Génesis 19:18 (id: 10001019018)
+
+18Y Lot les dijo: No, yo os ruego, señores míos;
+
+
+## Génesis 19:19 (id: 10001019019)
+
+19He aquí ahora ha hallado tu siervo gracia en tus ojos, y has engrandecido tu misericordia que has hecho conmigo dándome la vida; mas yo no podré escapar al monte, no sea caso que me alcance el mal, y muera.
+
+
+## Génesis 19:20 (id: 10001019020)
+
+20He aquí ahora esta ciudad está cerca para huir allá, la cual es pequeña; escaparé ahora allá, (¿no es ella pequeña?) y vivirá mi alma.
+
+
+## Génesis 19:21 (id: 10001019021)
+
+21Y le respondió: He aquí he recibido también tu súplica sobre esto, y no destruiré la ciudad de que has hablado.
+
+
+## Génesis 19:22 (id: 10001019022)
+
+22Date priesa, escápate allá; porque nada podré hacer hasta que allí hayas llegado. Por esto fué llamado el nombre de la ciudad, Zoar.
+
+
+## Génesis 19:23 (id: 10001019023)
+
+23El sol salía sobre la tierra, cuando Lot llegó á Zoar.
+
+
+## Génesis 19:24 (id: 10001019024)
+
+24Entonces llovió Jehová sobre Sodoma y sobre Gomorra azufre y fuego de parte de Jehová desde los cielos;
+
+
+## Génesis 19:25 (id: 10001019025)
+
+25Y destruyó las ciudades, y toda aquella llanura, con todos los moradores de aquellas ciudades, y el fruto de la tierra.
+
+
+## Génesis 19:26 (id: 10001019026)
+
+26Entonces la mujer de Lot miró atrás, á espaldas de él, y se volvió estatua de sal.
+
+
+## Génesis 19:27 (id: 10001019027)
+
+27Y subió Abraham por la mañana al lugar donde había estado delante de Jehová:
+
+
+## Génesis 19:28 (id: 10001019028)
+
+28Y miró hacia Sodoma y Gomorra, y hacia toda la tierra de aquella llanura miró; y he aquí que el humo subía de la tierra como el humo de un horno.
+
+
+## Génesis 19:29 (id: 10001019029)
+
+29Así fué que, cuando destruyó Dios las ciudades de la llanura, acordóse Dios de Abraham, y envió fuera á Lot de en medio de la destrucción, al asolar las ciudades donde Lot estaba.
+
+
+## Génesis 19:30 (id: 10001019030)
+
+30Empero Lot subió de Zoar, y asentó en el monte, y sus dos hijas con él; porque tuvo miedo de quedar en Zoar, y se alojó en una cueva él y sus dos hijas.
+
+
+## Génesis 19:31 (id: 10001019031)
+
+31Entonces la mayor dijo á la menor: Nuestro padre es viejo, y no queda varón en la tierra que entre á nosotras conforme á la costumbre de toda la tierra:
+
+
+## Génesis 19:32 (id: 10001019032)
+
+32Ven, demos á beber vino á nuestro padre, y durmamos con él, y conservaremos de nuestro padre generación.
+
+
+## Génesis 19:33 (id: 10001019033)
+
+33Y dieron á beber vino á su padre aquella noche: y entró la mayor, y durmió con su padre; mas él no sintió cuándo se acostó ella, ni cuándo se levantó.
+
+
+## Génesis 19:34 (id: 10001019034)
+
+34El día siguiente dijo la mayor á la menor: He aquí yo dormí la noche pasada con mi padre; démosle á beber vino también esta noche, y entra y duerme con él, para que conservemos de nuestro padre generación.
+
+
+## Génesis 19:35 (id: 10001019035)
+
+35Y dieron á beber vino á su padre también aquella noche: y levantóse la menor, y durmió con él; pero no echó de ver cuándo se acostó ella, ni cuándo se levantó.
+
+
+## Génesis 19:36 (id: 10001019036)
+
+36Y concibieron las dos hijas de Lot, de su padre.
+
+
+## Génesis 19:37 (id: 10001019037)
+
+37Y parió la mayor un hijo, y llamó su nombre Moab, el cual es padre de los Moabitas hasta hoy.
+
+
+## Génesis 19:38 (id: 10001019038)
+
+38La menor también parió un hijo, y llamó su nombre Ben\\-ammí, el cual es padre de los Ammonitas hasta hoy.
+
+
+## Génesis 20:1 (id: 10001020001)
+
+1DE allí partió Abraham á la tierra del Mediodía, y asentó entre Cades y Shur, y habitó como forastero en Gerar.
+
+
+## Génesis 20:2 (id: 10001020002)
+
+2Y dijo Abraham de Sara su mujer: Mi hermana es. Y Abimelech, rey de Gerar, envió y tomó á Sara.
+
+
+## Génesis 20:3 (id: 10001020003)
+
+3Empero Dios vino á Abimelech en sueños de noche, y le dijo: He aquí muerto eres á causa de la mujer que has tomado, la cual es casada con marido.
+
+
+## Génesis 20:4 (id: 10001020004)
+
+4Mas Abimelech no había llegado á ella, y dijo: Señor, ¿matarás también la gente justa?
+
+
+## Génesis 20:5 (id: 10001020005)
+
+5¿No me dijo él: Mi hermana es; y ella también dijo: Es mi hermano? Con sencillez de mi corazón, y con limpieza de mis manos he hecho esto.
+
+
+## Génesis 20:6 (id: 10001020006)
+
+6Y díjole Dios en sueños: Yo también sé que con integridad de tu corazón has hecho esto; y yo también te detuve de pecar contra mí, y así no te permití que la tocases.
+
+
+## Génesis 20:7 (id: 10001020007)
+
+7Ahora, pues, vuelve la mujer á su marido; porque es profeta, y orará por ti, y vivirás. Y si tú no la volvieres, sabe que de cierto morirás, con todo lo que fuere tuyo.
+
+
+## Génesis 20:8 (id: 10001020008)
+
+8Entonces Abimelech se levantó de mañana, y llamó á todos sus siervos, y dijo todas estas palabras en los oídos de ellos; y temieron los hombres en gran manera.
+
+
+## Génesis 20:9 (id: 10001020009)
+
+9Después llamó Abimelech á Abraham, y le dijo: ¿Qué nos has hecho? ¿y en qué pequé yo contra ti, que has atraído sobre mí y sobre mi reino tan gran pecado? lo que no debiste hacer has hecho conmigo.
+
+
+## Génesis 20:10 (id: 10001020010)
+
+10Y dijo más Abimelech á Abraham: ¿Qué viste para que hicieses esto?
+
+
+## Génesis 20:11 (id: 10001020011)
+
+11Y Abraham respondió: Porque dije para mí: Cierto no hay temor de Dios en este lugar, y me matarán por causa de mi mujer.
+
+
+## Génesis 20:12 (id: 10001020012)
+
+12Y á la verdad también es mi hermana, hija de mi padre, mas no hija de mi madre, y toméla por mujer.
+
+
+## Génesis 20:13 (id: 10001020013)
+
+13Y fué que, cuando Dios me hizo salir errante de la casa de mi padre, yo le dije: Esta es la merced que tú me harás, que en todos los lugares donde llegáremos, digas de mí: Mi hermano es.
+
+
+## Génesis 20:14 (id: 10001020014)
+
+14Entonces Abimelech tomó ovejas y vacas, y siervos y siervas, y diólo á Abraham, y devolvióle á Sara su mujer.
+
+
+## Génesis 20:15 (id: 10001020015)
+
+15Y dijo Abimelech: He aquí mi tierra está delante de ti, habita donde bien te pareciere.
+
+
+## Génesis 20:16 (id: 10001020016)
+
+16Y á Sara dijo: He aquí he dado mil monedas de plata á tu hermano; mira que él te es por velo de ojos para todos los que están contigo, y para con todos: así fué reprendida.
+
+
+## Génesis 20:17 (id: 10001020017)
+
+17Entonces Abraham oró á Dios; y Dios sanó á Abimelech y á su mujer, y á sus siervas, y parieron.
+
+
+## Génesis 20:18 (id: 10001020018)
+
+18Porque había del todo cerrado Jehová toda matriz de la casa de Abimelech, á causa de Sara mujer de Abraham.
+
+
+## Génesis 21:1 (id: 10001021001)
+
+1Y VISITÓ Jehová á Sara, como había dicho, é hizo Jehová con Sara como había hablado.
+
+
+## Génesis 21:2 (id: 10001021002)
+
+2Y concibió y parió Sara á Abraham un hijo en su vejez, en el tiempo que Dios le había dicho.
+
+
+## Génesis 21:3 (id: 10001021003)
+
+3Y llamó Abraham el nombre de su hijo que le nació, que le parió Sara, Isaac.
+
+
+## Génesis 21:4 (id: 10001021004)
+
+4Y circuncidó Abraham á su hijo Isaac de ocho días, como Dios le había mandado.
+
+
+## Génesis 21:5 (id: 10001021005)
+
+5Y era Abraham de cien años, cuando le nació Isaac su hijo.
+
+
+## Génesis 21:6 (id: 10001021006)
+
+6Entonces dijo Sara: Dios me ha hecho reir, y cualquiera que lo oyere, se reirá conmigo.
+
+
+## Génesis 21:7 (id: 10001021007)
+
+7Y añadió: ¿Quién dijera á Abraham que Sara había de dar de mamar á hijos? pues que le he parido un hijo á su vejez.
+
+
+## Génesis 21:8 (id: 10001021008)
+
+8Y creció el niño, y fué destetado; é hizo Abraham gran banquete el día que fué destetado Isaac.
+
+
+## Génesis 21:9 (id: 10001021009)
+
+9Y vió Sara al hijo de Agar la Egipcia, el cual había ésta parido á Abraham, que se burlaba.
+
+
+## Génesis 21:10 (id: 10001021010)
+
+10Por tanto dijo á Abraham: Echa á esta sierva y á su hijo; que el hijo de esta sierva no ha de heredar con mi hijo, con Isaac.
+
+
+## Génesis 21:11 (id: 10001021011)
+
+11Este dicho pareció grave en gran manera á Abraham á causa de su hijo.
+
+
+## Génesis 21:12 (id: 10001021012)
+
+12Entonces dijo Dios á Abraham: No te parezca grave á causa del muchacho y de tu sierva; en todo lo que te dijere Sara, oye su voz, porque en Isaac te será llamada descendencia.
+
+
+## Génesis 21:13 (id: 10001021013)
+
+13Y también al hijo de la sierva pondré en gente, porque es tu simiente.
+
+
+## Génesis 21:14 (id: 10001021014)
+
+14Entonces Abraham se levantó muy de mañana, y tomó pan, y un odre de agua, y diólo á Agar, poniéndolo sobre su hombro, y entrególe el muchacho, y despidióla. Y ella partió, y andaba errante por el desierto de Beer\\-seba.
+
+
+## Génesis 21:15 (id: 10001021015)
+
+15Y faltó el agua del odre, y echó al muchacho debajo de un árbol;
+
+
+## Génesis 21:16 (id: 10001021016)
+
+16Y fuése y sentóse enfrente, alejándose como un tiro de arco; porque decía: No veré cuando el muchacho morirá: y sentóse enfrente, y alzó su voz y lloró.
+
+
+## Génesis 21:17 (id: 10001021017)
+
+17Y oyó Dios la voz del muchacho; y el ángel de Dios llamó á Agar desde el cielo, y le dijo: ¿Qué tienes, Agar? No temas; porque Dios ha oído la voz del muchacho en donde está.
+
+
+## Génesis 21:18 (id: 10001021018)
+
+18Levántate, alza al muchacho, y ásele de tu mano, porque en gran gente lo tengo de poner.
+
+
+## Génesis 21:19 (id: 10001021019)
+
+19Entonces abrió Dios sus ojos, y vió una fuente de agua; y fué, y llenó el odre de agua, y dió de beber al muchacho.
+
+
+## Génesis 21:20 (id: 10001021020)
+
+20Y fué Dios con el muchacho; y creció, y habitó en el desierto, y fué tirador de arco.
+
+
+## Génesis 21:21 (id: 10001021021)
+
+21Y habitó en el desierto de Parán; y su madre le tomó mujer de la tierra de Egipto.
+
+
+## Génesis 21:22 (id: 10001021022)
+
+22Y aconteció en aquel mismo tiempo que habló Abimelech, y Phicol, príncipe de su ejército, á Abraham diciendo: Dios es contigo en todo cuanto haces:
+
+
+## Génesis 21:23 (id: 10001021023)
+
+23Ahora pues, júrame aquí por Dios, que no faltarás á mí, ni á mi hijo, ni á mi nieto; sino que conforme á la bondad que yo hice contigo, harás tú conmigo, y con la tierra donde has peregrinado.
+
+
+## Génesis 21:24 (id: 10001021024)
+
+24Y respondió Abraham: Yo juraré.
+
+
+## Génesis 21:25 (id: 10001021025)
+
+25Y Abraham reconvino á Abimelech á causa de un pozo de agua, que los siervos de Abimelech le habían quitado.
+
+
+## Génesis 21:26 (id: 10001021026)
+
+26Y respondió Abimelech: No sé quién haya hecho esto, ni tampoco tú me lo hiciste saber, ni yo lo he oído hasta hoy.
+
+
+## Génesis 21:27 (id: 10001021027)
+
+27Y tomó Abraham ovejas y vacas, y dió á Abimelech; é hicieron ambos alianza.
+
+
+## Génesis 21:28 (id: 10001021028)
+
+28Y puso Abraham siete corderas del rebaño aparte.
+
+
+## Génesis 21:29 (id: 10001021029)
+
+29Y dijo Abimelech á Abraham: ¿Qué significan esas siete corderas que has puesto aparte?
+
+
+## Génesis 21:30 (id: 10001021030)
+
+30Y él respondió: Que estas siete corderas tomarás de mi mano, para que me sean en testimonio de que yo cavé este pozo.
+
+
+## Génesis 21:31 (id: 10001021031)
+
+31Por esto llamó á aquel lugar Beer\\-seba; porque allí juraron ambos.
+
+
+## Génesis 21:32 (id: 10001021032)
+
+32Así hicieron alianza en Beer\\-seba: y levantóse Abimelech, y Phicol, príncipe de su ejército, y se volvieron á tierra de los Filisteos.
+
+
+## Génesis 21:33 (id: 10001021033)
+
+33Y plantó Abraham un bosque en Beer\\-seba, é invocó allí el nombre de Jehová Dios eterno.
+
+
+## Génesis 21:34 (id: 10001021034)
+
+34Y moró Abraham en tierra de los Filisteos muchos días.
+
+
+## Génesis 22:1 (id: 10001022001)
+
+1Y ACONTECIÓ después de estas cosas, que tentó Dios á Abraham, y le dijo: Abraham. Y él respondió: Heme aquí.
+
+
+## Génesis 22:2 (id: 10001022002)
+
+2Y dijo: Toma ahora tu hijo, tu único, Isaac, á quien amas, y vete á tierra de Moriah, y ofrécelo allí en holocausto sobre uno de los montes que yo te diré.
+
+
+## Génesis 22:3 (id: 10001022003)
+
+3Y Abraham se levantó muy de mañana, y enalbardó su asno, y tomó consigo dos mozos suyos, y á Isaac su hijo: y cortó leña para el holocausto, y levantóse, y fué al lugar que Dios le dijo.
+
+
+## Génesis 22:4 (id: 10001022004)
+
+4Al tercer día alzó Abraham sus ojos, y vió el lugar de lejos.
+
+
+## Génesis 22:5 (id: 10001022005)
+
+5Entonces dijo Abraham á sus mozos: Esperaos aquí con el asno, y yo y el muchacho iremos hasta allí, y adoraremos, y volveremos á vosotros.
+
+
+## Génesis 22:6 (id: 10001022006)
+
+6Y tomó Abraham la leña del holocausto, y púsola sobre Isaac su hijo: y él tomó en su mano el fuego y el cuchillo; y fueron ambos juntos.
+
+
+## Génesis 22:7 (id: 10001022007)
+
+7Entonces habló Isaac á Abraham su padre, y dijo: Padre mío. Y él respondió: Heme aquí, mi hijo. Y él dijo: He aquí el fuego y la leña; mas ¿dónde está el cordero para el holocausto?
+
+
+## Génesis 22:8 (id: 10001022008)
+
+8Y respondió Abraham: Dios se proveerá de cordero para el holocausto, hijo mío. E iban juntos.
+
+
+## Génesis 22:9 (id: 10001022009)
+
+9Y como llegaron al lugar que Dios le había dicho, edificó allí Abraham un altar, y compuso la leña, y ató á Isaac su hijo, y púsole en el altar sobre la leña.
+
+
+## Génesis 22:10 (id: 10001022010)
+
+10Y extendió Abraham su mano, y tomó el cuchillo, para degollar á su hijo.
+
+
+## Génesis 22:11 (id: 10001022011)
+
+11Entonces el ángel de Jehová le dió voces del cielo, y dijo: Abraham, Abraham. Y él respondió: Heme aquí.
+
+
+## Génesis 22:12 (id: 10001022012)
+
+12Y dijo: No extiendas tu mano sobre el muchacho, ni le hagas nada; que ya conozco que temes á Dios, pues que no me rehusaste tu hijo, tu único.
+
+
+## Génesis 22:13 (id: 10001022013)
+
+13Entonces alzó Abraham sus ojos, y miró, y he aquí un carnero á sus espaldas trabado en un zarzal por sus cuernos: y fué Abraham, y tomó el carnero, y ofrecióle en holocausto en lugar de su hijo.
+
+
+## Génesis 22:14 (id: 10001022014)
+
+14Y llamó Abraham el nombre de aquel lugar, Jehová proveerá. Por tanto se dice hoy: En el monte de Jehová será provisto.
+
+
+## Génesis 22:15 (id: 10001022015)
+
+15Y llamó el ángel de Jehová á Abraham segunda vez desde el cielo,
+
+
+## Génesis 22:16 (id: 10001022016)
+
+16Y dijo: Por mí mismo he jurado, dice Jehová, que por cuanto has hecho esto, y no me has rehusado tu hijo, tu único;
+
+
+## Génesis 22:17 (id: 10001022017)
+
+17Bendiciendo te bendeciré, y multiplicando multiplicaré tu simiente como las estrellas del cielo, y como la arena que está á la orilla del mar; y tu simiente poseerá las puertas de sus enemigos:
+
+
+## Génesis 22:18 (id: 10001022018)
+
+18En tu simiente serán benditas todas las gentes de la tierra, por cuanto obedeciste á mi voz.
+
+
+## Génesis 22:19 (id: 10001022019)
+
+19Y tornóse Abraham á sus mozos, y levantáronse y se fueron juntos á Beer\\-seba; y habitó Abraham en Beer\\-seba.
+
+
+## Génesis 22:20 (id: 10001022020)
+
+20Y aconteció después de estas cosas, que fué dada nueva á Abraham, diciendo: He aquí que también Milca ha parido hijos á Nachôr tu hermano:
+
+
+## Génesis 22:21 (id: 10001022021)
+
+21A Huz su primogénito, y á Buz su hermano, y á Kemuel padre de Aram,
+
+
+## Génesis 22:22 (id: 10001022022)
+
+22Y á Chêsed, y á Hazo, y á Pildas, y á Jidlaph, y á Bethuel.
+
+
+## Génesis 22:23 (id: 10001022023)
+
+23Y Bethuel engendró á Rebeca. Estos ocho parió Milca á Nachôr, hermano de Abraham.
+
+
+## Génesis 22:24 (id: 10001022024)
+
+24Y su concubina, que se llamaba Reúma, parió también á Teba, y á Gaham, y á Taas, y á Maachâ.
+
+
+## Génesis 23:1 (id: 10001023001)
+
+1Y FUÉ la vida de Sara ciento veintisiete años: tantos fueron los años de la vida de Sara.
+
+
+## Génesis 23:2 (id: 10001023002)
+
+2Y murió Sara en Kiriath\\-arba, que es Hebrón, en la tierra de Canaán: y vino Abraham á hacer el duelo á Sara, y á llorarla.
+
+
+## Génesis 23:3 (id: 10001023003)
+
+3Y levantóse Abraham de delante de su muerto, y habló á los hijos de Heth, diciendo:
+
+
+## Génesis 23:4 (id: 10001023004)
+
+4Peregrino y advenedizo soy entre vosotros; dadme heredad de sepultura con vosotros, y sepultaré mi muerto de delante de mí.
+
+
+## Génesis 23:5 (id: 10001023005)
+
+5Y respondieron los hijos de Heth á Abraham, y dijéronle:
+
+
+## Génesis 23:6 (id: 10001023006)
+
+6Oyenos, señor mío, eres un príncipe de Dios entre nosotros; en lo mejor de nuestras sepulturas sepulta á tu muerto; ninguno de nosotros te impedirá su sepultura, para que entierres tu muerto.
+
+
+## Génesis 23:7 (id: 10001023007)
+
+7Y Abraham se levantó, é inclinóse al pueblo de aquella tierra, á los hijos de Heth;
+
+
+## Génesis 23:8 (id: 10001023008)
+
+8Y habló con ellos, diciendo: Si tenéis voluntad que yo sepulte mi muerto de delante de mí, oidme, é interceded por mí con Ephrón, hijo de Zohar,
+
+
+## Génesis 23:9 (id: 10001023009)
+
+9Para que me dé la cueva de Macpela, que tiene al cabo de su heredad: que por su justo precio me la dé, para posesión de sepultura en medio de vosotros.
+
+
+## Génesis 23:10 (id: 10001023010)
+
+10Este Ephrón hallábase entre los hijos de Heth: y respondió Ephrón Hetheo á Abraham, en oídos de los hijos de Heth, de todos los que entraban por la puerta de su ciudad, diciendo:
+
+
+## Génesis 23:11 (id: 10001023011)
+
+11No, señor mío, óyeme: te doy la heredad, y te doy también la cueva que está en ella; delante de los hijos de mi pueblo te la doy; sepulta tu muerto.
+
+
+## Génesis 23:12 (id: 10001023012)
+
+12Y Abraham se inclinó delante del pueblo de la tierra.
+
+
+## Génesis 23:13 (id: 10001023013)
+
+13Y respondió á Ephrón en oídos del pueblo de la tierra, diciendo: Antes, si te place, ruégote que me oigas; yo daré el precio de la heredad, tómalo de mí, y sepultaré en ella mi muerto.
+
+
+## Génesis 23:14 (id: 10001023014)
+
+14Y respondió Ephrón á Abraham, diciéndole:
+
+
+## Génesis 23:15 (id: 10001023015)
+
+15Señor mío, escúchame: la tierra vale cuatrocientos siclos de plata: ¿qué es esto entre mí y ti? entierra pues tu muerto.
+
+
+## Génesis 23:16 (id: 10001023016)
+
+16Entonces Abraham se convino con Ephrón, y pesó Abraham á Ephrón el dinero que dijo, oyéndolo los hijos de Heth, cuatrocientos siclos de plata, de buena ley entre mercaderes.
+
+
+## Génesis 23:17 (id: 10001023017)
+
+17Y quedó la heredad de Ephrón que estaba en Macpela enfrente de Mamre, la heredad y la cueva que estaba en ella, y todos los árboles que había en la heredad, y en todo su término al derredor,
+
+
+## Génesis 23:18 (id: 10001023018)
+
+18Por de Abraham en posesión, á vista de los hijos de Heth, y de todos los que entraban por la puerta de la ciudad.
+
+
+## Génesis 23:19 (id: 10001023019)
+
+19Y después de esto sepultó Abraham á Sara su mujer en la cueva de la heredad de Macpela enfrente de Mamre, que es Hebrón en la tierra de Canaán.
+
+
+## Génesis 23:20 (id: 10001023020)
+
+20Y quedó la heredad y la cueva que en ella había, por de Abraham, en posesión de sepultura adquirida de los hijos de Heth.
+
+
+## Génesis 24:1 (id: 10001024001)
+
+1Y ABRAHAM era viejo, y bien entrado en días; y Jehová había bendecido á Abraham en todo.
+
+
+## Génesis 24:2 (id: 10001024002)
+
+2Y dijo Abraham á un criado suyo, el más viejo de su casa, que era el que gobernaba en todo lo que tenía: Pon ahora tu mano debajo de mi muslo,
+
+
+## Génesis 24:3 (id: 10001024003)
+
+3Y te juramentaré por Jehová, Dios de los cielos y Dios de la tierra, que no has de tomar mujer para mi hijo de las hijas de los Cananeos, entre los cuales yo habito;
+
+
+## Génesis 24:4 (id: 10001024004)
+
+4Sino que irás á mi tierra y á mi parentela, y tomarás mujer para mi hijo Isaac.
+
+
+## Génesis 24:5 (id: 10001024005)
+
+5Y el criado le respondió: Quizá la mujer no querrá venir en pos de mí á esta tierra: ¿volveré, pues, tu hijo á la tierra de donde saliste?
+
+
+## Génesis 24:6 (id: 10001024006)
+
+6Y Abraham le dijo: Guárdate que no vuelvas á mi hijo allá.
+
+
+## Génesis 24:7 (id: 10001024007)
+
+7Jehová, Dios de los cielos, que me tomó de la casa de mi padre y de la tierra de mi parentela, y me habló y me juró, diciendo: A tu simiente daré esta tierra; él enviará su ángel delante de ti, y tú tomarás de allá mujer para mi hijo.
+
+
+## Génesis 24:8 (id: 10001024008)
+
+8Y si la mujer no quisiere venir en pos de ti, serás libre de este mi juramento; solamente que no vuelvas allá á mi hijo.
+
+
+## Génesis 24:9 (id: 10001024009)
+
+9Entonces el criado puso su mano debajo del muslo de Abraham su señor, y juróle sobre este negocio.
+
+
+## Génesis 24:10 (id: 10001024010)
+
+10Y el criado tomó diez camellos de los camellos de su señor, y fuése, pues tenía á su disposición todos los bienes de su señor: y puesto en camino, llegó á Mesopotamia, á la ciudad de Nachôr.
+
+
+## Génesis 24:11 (id: 10001024011)
+
+11E hizo arrodillar los camellos fuera de la ciudad, junto á un pozo de agua, á la hora de la tarde, á la hora en que salen las mozas por agua.
+
+
+## Génesis 24:12 (id: 10001024012)
+
+12Y dijo: Jehová, Dios de mi señor Abraham, dame, te ruego, el tener hoy buen encuentro, y haz misericordia con mi señor Abraham.
+
+
+## Génesis 24:13 (id: 10001024013)
+
+13He aquí yo estoy junto á la fuente de agua, y las hijas de los varones de esta ciudad salen por agua:
+
+
+## Génesis 24:14 (id: 10001024014)
+
+14Sea, pues, que la moza á quien yo dijere: Baja tu cántaro, te ruego, para que yo beba; y ella respondiere: Bebe, y también daré de beber á tus camellos: que sea ésta la que tú has destinado para tu siervo Isaac; y en esto conoceré que habrás hecho misericordia con mi señor.
+
+
+## Génesis 24:15 (id: 10001024015)
+
+15Y aconteció que antes que él acabase de hablar, he aquí Rebeca, que había nacido á Bethuel, hijo de Milca, mujer de Nachôr hermano de Abraham, la cual salía con su cántaro sobre su hombro.
+
+
+## Génesis 24:16 (id: 10001024016)
+
+16Y la moza era de muy hermoso aspecto, virgen, á la que varón no había conocido; la cual descendió á la fuente, y llenó su cántaro, y se volvía.
+
+
+## Génesis 24:17 (id: 10001024017)
+
+17Entonces el criado corrió hacia ella, y dijo: Ruégote que me des á beber un poco de agua de tu cántaro.
+
+
+## Génesis 24:18 (id: 10001024018)
+
+18Y ella respondió: Bebe, señor mío: y dióse prisa á bajar su cántaro sobre su mano, y le dió á beber.
+
+
+## Génesis 24:19 (id: 10001024019)
+
+19Y cuando acabó de darle á beber, dijo: También para tus camellos sacaré agua, hasta que acaben de beber.
+
+
+## Génesis 24:20 (id: 10001024020)
+
+20Y dióse prisa, y vació su cántaro en la pila, y corrió otra vez al pozo para sacar agua, y sacó para todos sus camellos.
+
+
+## Génesis 24:21 (id: 10001024021)
+
+21Y el hombre estaba maravillado de ella, callando, para saber si Jehová había prosperado ó no su viaje.
+
+
+## Génesis 24:22 (id: 10001024022)
+
+22Y fué que como los camellos acabaron de beber, presentóle el hombre un pendiente de oro que pesaba medio siclo, y dos brazaletes que pesaban diez:
+
+
+## Génesis 24:23 (id: 10001024023)
+
+23Y dijo: ¿De quién eres hija? Ruégote me digas, ¿hay lugar en casa de tu padre donde posemos?
+
+
+## Génesis 24:24 (id: 10001024024)
+
+24Y ella respondió: Soy hija de Bethuel, hijo de Milca, el cual parió ella á Nachôr.
+
+
+## Génesis 24:25 (id: 10001024025)
+
+25Y añadió: También hay en nuestra casa paja y mucho forraje, y lugar para posar.
+
+
+## Génesis 24:26 (id: 10001024026)
+
+26El hombre entonces se inclinó, y adoró á Jehová.
+
+
+## Génesis 24:27 (id: 10001024027)
+
+27Y dijo: Bendito sea Jehová, Dios de mi amo Abraham, que no apartó su misericordia y su verdad de mi amo, guiándome Jehová en el camino á casa de los hermanos de mi amo.
+
+
+## Génesis 24:28 (id: 10001024028)
+
+28Y la moza corrió, é hizo saber en casa de su madre estas cosas.
+
+
+## Génesis 24:29 (id: 10001024029)
+
+29Y Rebeca tenía un hermano que se llamaba Labán, el cual corrió afuera al hombre, á la fuente;
+
+
+## Génesis 24:30 (id: 10001024030)
+
+30Y fué que como vió el pendiente y los brazaletes en las manos de su hermana, que decía, Así me habló aquel hombre; vino á él: y he aquí que estaba junto á los camellos á la fuente.
+
+
+## Génesis 24:31 (id: 10001024031)
+
+31Y díjole: Ven, bendito de Jehová; ¿por qué estás fuera? yo he limpiado la casa, y el lugar para los camellos.
+
+
+## Génesis 24:32 (id: 10001024032)
+
+32Entonces el hombre vino á casa, y Labán desató los camellos; y dióles paja y forraje, y agua para lavar los piés de él, y los piés de los hombres que con él venían.
+
+
+## Génesis 24:33 (id: 10001024033)
+
+33Y pusiéronle delante qué comer; mas él dijo: No comeré hasta que haya dicho mi mensaje. Y él le dijo: Habla.
+
+
+## Génesis 24:34 (id: 10001024034)
+
+34Entonces dijo: Yo soy criado de Abraham;
+
+
+## Génesis 24:35 (id: 10001024035)
+
+35Y Jehová ha bendecido mucho á mi amo, y él se ha engrandecido: y le ha dado ovejas y vacas, plata y oro, siervos y siervas, camellos y asnos.
+
+
+## Génesis 24:36 (id: 10001024036)
+
+36Y Sara, mujer de mi amo, parió en su vejez un hijo á mi señor, quien le ha dado todo cuanto tiene.
+
+
+## Génesis 24:37 (id: 10001024037)
+
+37Y mi amo me hizo jurar, diciendo: No tomarás mujer para mi hijo de las hijas de los Cananeos, en cuya tierra habito;
+
+
+## Génesis 24:38 (id: 10001024038)
+
+38Sino que irás á la casa de mi padre, y á mi parentela, y tomarás mujer para mi hijo.
+
+
+## Génesis 24:39 (id: 10001024039)
+
+39Y yo dije: Quizás la mujer no querrá seguirme.
+
+
+## Génesis 24:40 (id: 10001024040)
+
+40Entonces él me respondió: Jehová, en cuya presencia he andado, enviará su ángel contigo, y prosperará tu camino; y tomarás mujer para mi hijo de mi linaje y de la casa de mi padre:
+
+
+## Génesis 24:41 (id: 10001024041)
+
+41Entonces serás libre de mi juramento, cuando hubieres llegado á mi linaje; y si no te la dieren, serás libre de mi juramento.
+
+
+## Génesis 24:42 (id: 10001024042)
+
+42Llegué, pues, hoy á la fuente, y dije: Jehová, Dios de mi señor Abraham, si tú prosperas ahora mi camino por el cual ando;
+
+
+## Génesis 24:43 (id: 10001024043)
+
+43He aquí yo estoy junto á la fuente de agua; sea, pues, que la doncella que saliere por agua, á la cual dijere: Dame á beber, te ruego, un poco de agua de tu cántaro;
+
+
+## Génesis 24:44 (id: 10001024044)
+
+44Y ella me respondiere, Bebe tú, y también para tus camellos sacaré agua: ésta sea la mujer que destinó Jehová para el hijo de mi señor.
+
+
+## Génesis 24:45 (id: 10001024045)
+
+45Y antes que acabase de hablar en mi corazón, he aquí Rebeca, que salía con su cántaro sobre su hombro; y descendió á la fuente, y sacó agua; y le dije: Ruégote que me des á beber.
+
+
+## Génesis 24:46 (id: 10001024046)
+
+46Y prestamente bajó su cántaro de encima de sí, y dijo: Bebe, y también á tus camellos daré á beber. Y bebí, y dió también de beber á mis camellos.
+
+
+## Génesis 24:47 (id: 10001024047)
+
+47Entonces preguntéle, y dije: ¿De quién eres hija? Y ella respondió: Hija de Bethuel, hijo de Nachôr, que le parió Milca. Entonces púsele un pendiente sobre su nariz, y brazaletes sobre sus manos:
+
+
+## Génesis 24:48 (id: 10001024048)
+
+48E inclinéme, y adoré á Jehová, y bendije á Jehová, Dios de mi señor Abraham, que me había guiado por camino de verdad para tomar la hija del hermano de mi señor para su hijo.
+
+
+## Génesis 24:49 (id: 10001024049)
+
+49Ahora pues, si vosotros hacéis misericordia y verdad con mi señor, declarádmelo; y si no, declarádmelo; y echaré á la diestra ó á la siniestra.
+
+
+## Génesis 24:50 (id: 10001024050)
+
+50Entonces Labán y Bethuel respondieron y dijeron: De Jehová ha salido esto; no podemos hablarte malo ni bueno.
+
+
+## Génesis 24:51 (id: 10001024051)
+
+51He ahí Rebeca delante de ti; tómala y vete, y sea mujer del hijo de tu señor, como lo ha dicho Jehová.
+
+
+## Génesis 24:52 (id: 10001024052)
+
+52Y fué, que como el criado de Abraham oyó sus palabras, inclinóse á tierra á Jehová.
+
+
+## Génesis 24:53 (id: 10001024053)
+
+53Y sacó el criado vasos de plata, y vasos de oro y vestidos, y dió á Rebeca: también dió cosas preciosas á su hermano y á su madre.
+
+
+## Génesis 24:54 (id: 10001024054)
+
+54Y comieron y bebieron él y los varones que venían con él, y durmieron; y levantándose de mañana, dijo: Enviadme á mi señor.
+
+
+## Génesis 24:55 (id: 10001024055)
+
+55Entonces respondió su hermano y su madre: Espere la moza con nosotros á lo menos diez días, y después irá.
+
+
+## Génesis 24:56 (id: 10001024056)
+
+56Y él les dijo: No me detengáis, pues que Jehová ha prosperado mi camino; despachadme para que me vaya á mi señor.
+
+
+## Génesis 24:57 (id: 10001024057)
+
+57Ellos respondieron entonces: Llamemos la moza y preguntémosle.
+
+
+## Génesis 24:58 (id: 10001024058)
+
+58Y llamaron á Rebeca, y dijéronle: ¿Irás tú con este varón? Y ella respondió: Sí, iré.
+
+
+## Génesis 24:59 (id: 10001024059)
+
+59Entonces dejaron ir á Rebeca su hermana, y á su nodriza, y al criado de Abraham y á sus hombres.
+
+
+## Génesis 24:60 (id: 10001024060)
+
+60Y bendijeron á Rebeca, y dijéronle: Nuestra hermana eres; seas en millares de millares, y tu generación posea la puerta de sus enemigos.
+
+
+## Génesis 24:61 (id: 10001024061)
+
+61Levantóse entonces Rebeca y sus mozas, y subieron sobre los camellos, y siguieron al hombre; y el criado tomó á Rebeca, y fuése.
+
+
+## Génesis 24:62 (id: 10001024062)
+
+62Y venía Isaac del pozo del Viviente que me ve; porque él habitaba en la tierra del Mediodía;
+
+
+## Génesis 24:63 (id: 10001024063)
+
+63Y había salido Isaac á orar al campo, á la hora de la tarde; y alzando sus ojos miró, y he aquí los camellos que venían.
+
+
+## Génesis 24:64 (id: 10001024064)
+
+64Rebeca también alzó sus ojos, y vió á Isaac, y descendió del camello;
+
+
+## Génesis 24:65 (id: 10001024065)
+
+65Porque había preguntado al criado: ¿Quién es este varón que viene por el campo hacia nosotros? Y el siervo había respondido: Este es mi señor. Ella entonces tomó el velo, y cubrióse.
+
+
+## Génesis 24:66 (id: 10001024066)
+
+66Entonces el criado contó á Isaac todo lo que había hecho.
+
+
+## Génesis 24:67 (id: 10001024067)
+
+67E introdújola Isaac á la tienda de su madre Sara, y tomó á Rebeca por mujer; y amóla: y consolóse Isaac después de la muerte de su madre.
+
+
+## Génesis 25:1 (id: 10001025001)
+
+1Y ABRAHAM tomó otra mujer, cuyo nombre fué Cetura;
+
+
+## Génesis 25:2 (id: 10001025002)
+
+2La cual le parió á Zimram, y á Joksan, y á Medan, y á Midiam, y á Ishbak, y á Sua.
+
+
+## Génesis 25:3 (id: 10001025003)
+
+3Y Joksan engendró á Seba, y á Dedán: é hijos de Dedán fueron Assurim, y Letusim, y Leummim.
+
+
+## Génesis 25:4 (id: 10001025004)
+
+4E hijos de Midiam: Epha, y Epher, y Enech, y Abida, y Eldaa. Todos estos fueron hijos de Cetura.
+
+
+## Génesis 25:5 (id: 10001025005)
+
+5Y Abraham dió todo cuanto tenía á Isaac.
+
+
+## Génesis 25:6 (id: 10001025006)
+
+6Y á los hijos de sus concubinas dió Abraham dones, y enviólos de junto Isaac su hijo, mientras él vivía, hacia el oriente, á la tierra oriental.
+
+
+## Génesis 25:7 (id: 10001025007)
+
+7Y estos fueron los días de vida que vivió Abraham: ciento setenta y cinco años.
+
+
+## Génesis 25:8 (id: 10001025008)
+
+8Y exhaló el espíritu, y murió Abraham en buena vejez, anciano y lleno de días, y fué unido á su pueblo.
+
+
+## Génesis 25:9 (id: 10001025009)
+
+9Y sepultáronlo Isaac é Ismael sus hijos en la cueva de Macpela, en la heredad de Ephrón, hijo de Zoar Hetheo, que está enfrente de Mamre;
+
+
+## Génesis 25:10 (id: 10001025010)
+
+10Heredad que compró Abraham de los hijos de Heth; allí fué Abraham sepultado, y Sara su mujer.
+
+
+## Génesis 25:11 (id: 10001025011)
+
+11Y sucedió, después de muerto Abraham, que Dios bendijo á Isaac su hijo: y habitó Isaac junto al pozo del Viviente que me ve.
+
+
+## Génesis 25:12 (id: 10001025012)
+
+12Y estas son las generaciones de Ismael, hijo de Abraham, que le parió Agar Egipcia, sierva de Sara:
+
+
+## Génesis 25:13 (id: 10001025013)
+
+13Estos, pues, son los nombres de los hijos de Ismael, por sus nombres, por sus linajes: El primogénito de Ismael, Nabaioth; luego Cedar, y Abdeel, y Mibsam,
+
+
+## Génesis 25:14 (id: 10001025014)
+
+14Y Misma, y Duma, y Massa,
+
+
+## Génesis 25:15 (id: 10001025015)
+
+15Hadad, y Tema, y Jetur, y Naphis, y Cedema.
+
+
+## Génesis 25:16 (id: 10001025016)
+
+16Estos son los hijos de Ismael, y estos sus nombres, por sus villas y por sus campamentos; doce príncipes por sus familias.
+
+
+## Génesis 25:17 (id: 10001025017)
+
+17Y estos fueron los años de la vida de Ismael, ciento treinta y siete años: y exhaló el espíritu Ismael, y murió; y fué unido á su pueblo.
+
+
+## Génesis 25:18 (id: 10001025018)
+
+18Y habitaron desde Havila hasta Shur, que está enfrente de Egipto viniendo á Asiria; y murió en presencia de todos sus hermanos.
+
+
+## Génesis 25:19 (id: 10001025019)
+
+19Y estas son las generaciones de Isaac, hijo de Abraham. Abraham engendró á Isaac:
+
+
+## Génesis 25:20 (id: 10001025020)
+
+20Y era Isaac de cuarenta años cuando tomó por mujer á Rebeca, hija de Bethuel Arameo de Padan\\-aram, hermana de Labán Arameo.
+
+
+## Génesis 25:21 (id: 10001025021)
+
+21Y oró Isaac á Jehová por su mujer, que era estéril; y aceptólo Jehová, y concibió Rebeca su mujer.
+
+
+## Génesis 25:22 (id: 10001025022)
+
+22Y los hijos se combatían dentro de ella; y dijo: Si es así ¿para qué vivo yo? Y fué á consultar á Jehová.
+
+
+## Génesis 25:23 (id: 10001025023)
+
+23Y respondióle Jehová: Dos gentes hay en tu seno, y dos pueblos serán divididos desde tus entrañas: y el un pueblo será más fuerte que el otro pueblo, y el mayor servirá al menor.
+
+
+## Génesis 25:24 (id: 10001025024)
+
+24Y como se cumplieron sus días para parir, he aquí mellizos en su vientre.
+
+
+## Génesis 25:25 (id: 10001025025)
+
+25Y salió el primero rubio, y todo él velludo como una pelliza; y llamaron su nombre Esaú.
+
+
+## Génesis 25:26 (id: 10001025026)
+
+26Y después salió su hermano, trabada su mano al calcañar de Esaú: y fué llamado su nombre Jacob. Y era Isaac de edad de sesenta años cuando ella los parió.
+
+
+## Génesis 25:27 (id: 10001025027)
+
+27Y crecieron los niños, y Esaú fué diestro en la caza, hombre del campo: Jacob empero era varón quieto, que habitaba en tiendas.
+
+
+## Génesis 25:28 (id: 10001025028)
+
+28Y amó Isaac á Esaú, porque comía de su caza; mas Rebeca amaba á Jacob.
+
+
+## Génesis 25:29 (id: 10001025029)
+
+29Y guisó Jacob un potaje; y volviendo Esaú del campo cansado,
+
+
+## Génesis 25:30 (id: 10001025030)
+
+30Dijo á Jacob: Ruégote que me des á comer de eso bermejo, pues estoy muy cansado. Por tanto fué llamado su nombre Edom.
+
+
+## Génesis 25:31 (id: 10001025031)
+
+31Y Jacob respondió: Véndeme en este día tu primogenitura.
+
+
+## Génesis 25:32 (id: 10001025032)
+
+32Entonces dijo Esaú: He aquí yo me voy á morir; ¿para qué, pues, me servirá la primogenitura?
+
+
+## Génesis 25:33 (id: 10001025033)
+
+33Y dijo Jacob: Júramelo en este día. Y él le juró, y vendió á Jacob su primogenitura.
+
+
+## Génesis 25:34 (id: 10001025034)
+
+34Entonces Jacob dió á Esaú pan y del guisado de las lentejas; y él comió y bebió, y levantóse, y fuése. Así menospreció Esaú la primogenitura.
+
+
+## Génesis 26:1 (id: 10001026001)
+
+1Y HUBO hambre en la tierra, además de la primera hambre que fué en los días de Abraham: y fuése Isaac á Abimelech rey de los Filisteos, en Gerar.
+
+
+## Génesis 26:2 (id: 10001026002)
+
+2Y apareciósele Jehová, y díjole: No desciendas á Egipto: habita en la tierra que yo te diré;
+
+
+## Génesis 26:3 (id: 10001026003)
+
+3Habita en esta tierra, y seré contigo, y te bendeciré; porque á ti y á tu simiente daré todas estas tierras, y confirmaré el juramento que juré á Abraham tu padre:
+
+
+## Génesis 26:4 (id: 10001026004)
+
+4Y multiplicaré tu simiente como las estrellas del cielo, y daré á tu simiente todas estas tierras; y todas las gentes de la tierra serán benditas en tu simiente:
+
+
+## Génesis 26:5 (id: 10001026005)
+
+5Por cuanto oyó Abraham mi voz, y guardó mi precepto, mis mandamientos, mis estatutos y mis leyes.
+
+
+## Génesis 26:6 (id: 10001026006)
+
+6Habitó, pues, Isaac en Gerar.
+
+
+## Génesis 26:7 (id: 10001026007)
+
+7Y los hombres de aquel lugar le preguntaron acerca de su mujer; y él respondió: Es mi hermana; porque tuvo miedo de decir: Es mi mujer; que tal vez, dijo, los hombres del lugar me matarían por causa de Rebeca; porque era de hermoso aspecto.
+
+
+## Génesis 26:8 (id: 10001026008)
+
+8Y sucedió que, después que él estuvo allí muchos días, Abimelech, rey de los Filisteos, mirando por una ventana, vió á Isaac que jugaba con Rebeca su mujer.
+
+
+## Génesis 26:9 (id: 10001026009)
+
+9Y llamó Abimelech á Isaac, y dijo: He aquí ella es de cierto tu mujer: ¿cómo, pues, dijiste: Es mi hermana? E Isaac le respondió: Porque dije: Quizá moriré por causa de ella.
+
+
+## Génesis 26:10 (id: 10001026010)
+
+10Y Abimelech dijo: ¿Por qué nos has hecho esto? Por poco hubiera dormido alguno del pueblo con tu mujer, y hubieras traído sobre nosotros el pecado.
+
+
+## Génesis 26:11 (id: 10001026011)
+
+11Entonces Abimelech mandó á todo el pueblo, diciendo: El que tocare á este hombre ó á su mujer, de cierto morirá.
+
+
+## Génesis 26:12 (id: 10001026012)
+
+12Y sembró Isaac en aquella tierra, y halló aquel año ciento por uno: y bendíjole Jehová.
+
+
+## Génesis 26:13 (id: 10001026013)
+
+13Y el varón se engrandeció, y fué adelantando y engrandeciéndose, hasta hacerse muy poderoso:
+
+
+## Génesis 26:14 (id: 10001026014)
+
+14Y tuvo hato de ovejas, y hato de vacas, y grande apero; y los Filisteos le tuvieron envidia.
+
+
+## Génesis 26:15 (id: 10001026015)
+
+15Y todos los pozos que habían abierto los criados de Abraham su padre en sus días, los Filisteos los habían cegado y llenado de tierra.
+
+
+## Génesis 26:16 (id: 10001026016)
+
+16Y dijo Abimelech á Isaac: Apártate de nosotros, porque mucho más poderoso que nosotros te has hecho.
+
+
+## Génesis 26:17 (id: 10001026017)
+
+17E Isaac se fué de allí; y asentó sus tiendas en el valle de Gerar, y habitó allí.
+
+
+## Génesis 26:18 (id: 10001026018)
+
+18Y volvió á abrir Isaac los pozos de agua que habían abierto en los días de Abraham su padre, y que los Filisteos habían cegado, muerto Abraham; y llamólos por los nombres que su padre los había llamado.
+
+
+## Génesis 26:19 (id: 10001026019)
+
+19Y los siervos de Isaac cavaron en el valle, y hallaron allí un pozo de aguas vivas.
+
+
+## Génesis 26:20 (id: 10001026020)
+
+20Y los pastores de Gerar riñeron con los pastores de Isaac, diciendo: El agua es nuestra: por eso llamó el nombre del pozo Esek, porque habían altercado con él.
+
+
+## Génesis 26:21 (id: 10001026021)
+
+21Y abrieron otro pozo, y también riñeron sobre él: y llamó su nombre Sitnah.
+
+
+## Génesis 26:22 (id: 10001026022)
+
+22Y apartóse de allí, y abrió otro pozo, y no riñeron sobre él: y llamó su nombre Rehoboth, y dijo: Porque ahora nos ha hecho ensanchar Jehová, y fructificaremos en la tierra.
+
+
+## Génesis 26:23 (id: 10001026023)
+
+23Y de allí subió á Beer\\-seba.
+
+
+## Génesis 26:24 (id: 10001026024)
+
+24Y apareciósele Jehová aquella noche, y dijo: Yo soy el Dios de Abraham tu padre; no temas, que yo soy contigo, y yo te bendeciré, y multiplicaré tu simiente por amor de Abraham mi siervo.
+
+
+## Génesis 26:25 (id: 10001026025)
+
+25Y edificó allí un altar, é invocó el nombre de Jehová, y tendió allí su tienda: y abrieron allí los siervos de Isaac un pozo.
+
+
+## Génesis 26:26 (id: 10001026026)
+
+26Y Abimelech vino á él desde Gerar, y Ahuzzath, amigo suyo, y Phicol, capitán de su ejército.
+
+
+## Génesis 26:27 (id: 10001026027)
+
+27Y díjoles Isaac: ¿Por qué venís á mí, pues que me habéis aborrecido, y me echasteis de entre vosotros?
+
+
+## Génesis 26:28 (id: 10001026028)
+
+28Y ellos respondieron: Hemos visto que Jehová es contigo; y dijimos: Haya ahora juramento entre nosotros, entre nosotros y ti, y haremos alianza contigo:
+
+
+## Génesis 26:29 (id: 10001026029)
+
+29Que no nos hagas mal, como nosotros no te hemos tocado, y como solamente te hemos hecho bien, y te enviamos en paz: tú ahora, bendito de Jehová.
+
+
+## Génesis 26:30 (id: 10001026030)
+
+30Entonces él les hizo banquete, y comieron y bebieron.
+
+
+## Génesis 26:31 (id: 10001026031)
+
+31Y se levantaron de madrugada, y juraron el uno al otro; é Isaac los despidió, y ellos se partieron de él en paz.
+
+
+## Génesis 26:32 (id: 10001026032)
+
+32Y en aquel día sucedió que vinieron los criados de Isaac, y diéronle nuevas acerca del pozo que habían abierto, y le dijeron: Agua hemos hallado.
+
+
+## Génesis 26:33 (id: 10001026033)
+
+33Y llamólo Seba: por cuya causa el nombre de aquella ciudad es Beer\\-seba hasta este día.
+
+
+## Génesis 26:34 (id: 10001026034)
+
+34Y cuando Esaú fué de cuarenta años, tomó por mujer á Judith hija de Beeri Hetheo, y á Basemat hija de Elón Hetheo:
+
+
+## Génesis 26:35 (id: 10001026035)
+
+35Y fueron amargura de espíritu á Isaac y á Rebeca.
+
+
+## Génesis 27:1 (id: 10001027001)
+
+1Y ACONTECIÓ que cuando hubo Isaac envejecido, y sus ojos se ofuscaron quedando sin vista, llamó á Esaú, su hijo el mayor, y díjole: Mi hijo. Y él respondió: Heme aquí.
+
+
+## Génesis 27:2 (id: 10001027002)
+
+2Y él dijo: He aquí ya soy viejo, no sé el día de mi muerte:
+
+
+## Génesis 27:3 (id: 10001027003)
+
+3Toma, pues, ahora tus armas, tu aljaba y tu arco, y sal al campo, y cógeme caza;
+
+
+## Génesis 27:4 (id: 10001027004)
+
+4Y hazme un guisado, como yo gusto, y tráemelo, y comeré; para que te bendiga mi alma antes que muera.
+
+
+## Génesis 27:5 (id: 10001027005)
+
+5Y Rebeca estaba oyendo, cuando hablaba Isaac á Esaú su hijo: y fuése Esaú al campo para coger la caza que había de traer.
+
+
+## Génesis 27:6 (id: 10001027006)
+
+6Entonces Rebeca habló á Jacob su hijo, diciendo: He aquí yo he oído á tu padre que hablaba con Esaú tu hermano, diciendo:
+
+
+## Génesis 27:7 (id: 10001027007)
+
+7Tráeme caza, y hazme un guisado, para que coma, y te bendiga delante de Jehová antes que yo muera.
+
+
+## Génesis 27:8 (id: 10001027008)
+
+8Ahora pues, hijo mío, obedece á mi voz en lo que te mando;
+
+
+## Génesis 27:9 (id: 10001027009)
+
+9Ve ahora al ganado, y tráeme de allí dos buenos cabritos de las cabras, y haré de ellos viandas para tu padre, como él gusta;
+
+
+## Génesis 27:10 (id: 10001027010)
+
+10Y tú las llevarás á tu padre, y comerá, para que te bendiga antes de su muerte.
+
+
+## Génesis 27:11 (id: 10001027011)
+
+11Y Jacob dijo á Rebeca su madre: He aquí, Esaú mi hermano es hombre velloso, y yo lampiño:
+
+
+## Génesis 27:12 (id: 10001027012)
+
+12Quizá me tentará mi padre, y me tendrá por burlador, y traeré sobre mí maldición y no bendición.
+
+
+## Génesis 27:13 (id: 10001027013)
+
+13Y su madre respondió: Hijo mío, sobre mí tu maldición: solamente obedece á mi voz, y ve y tráemelos.
+
+
+## Génesis 27:14 (id: 10001027014)
+
+14Entonces él fué, y tomó, y trájolos á su madre: y su madre hizo guisados, como su padre gustaba.
+
+
+## Génesis 27:15 (id: 10001027015)
+
+15Y tomó Rebeca los vestidos de Esaú su hijo mayor, los preciosos, que ella tenía en casa, y vistió á Jacob su hijo menor:
+
+
+## Génesis 27:16 (id: 10001027016)
+
+16E hízole vestir sobre sus manos, y sobre la cerviz donde no tenía vello, las pieles de los cabritos de las cabras;
+
+
+## Génesis 27:17 (id: 10001027017)
+
+17Y entregó los guisados y el pan que había aderezado, en mano de Jacob su hijo.
+
+
+## Génesis 27:18 (id: 10001027018)
+
+18Y él fué á su padre, y dijo: Padre mío: y él respondió: Heme aquí, ¿quién eres, hijo mío?
+
+
+## Génesis 27:19 (id: 10001027019)
+
+19Y Jacob dijo á su padre: Yo soy Esaú tu primogénito; he hecho como me dijiste: levántate ahora, y siéntate, y come de mi caza, para que me bendiga tu alma.
+
+
+## Génesis 27:20 (id: 10001027020)
+
+20Entonces Isaac dijo á su hijo: ¿Cómo es que la hallaste tan presto, hijo mío? Y él respondió: Porque Jehová tu Dios hizo que se encontrase delante de mí.
+
+
+## Génesis 27:21 (id: 10001027021)
+
+21E Isaac dijo á Jacob: Acércate ahora, y te palparé, hijo mío, por si eres mi hijo Esaú, ó no.
+
+
+## Génesis 27:22 (id: 10001027022)
+
+22Y llegóse Jacob á su padre Isaac; y él le palpó, y dijo: La voz es la voz de Jacob, mas las manos, las manos de Esaú.
+
+
+## Génesis 27:23 (id: 10001027023)
+
+23Y no le conoció, porque sus manos eran vellosas como las manos de Esaú: y le bendijo.
+
+
+## Génesis 27:24 (id: 10001027024)
+
+24Y dijo: ¿Eres tú mi hijo Esaú? Y él respondió: Yo soy.
+
+
+## Génesis 27:25 (id: 10001027025)
+
+25Y dijo: Acércamela, y comeré de la caza de mi hijo, para que te bendiga mi alma; y él se la acercó, y comió: trájole también vino, y bebió.
+
+
+## Génesis 27:26 (id: 10001027026)
+
+26Y díjole Isaac su padre: Acércate ahora, y bésame, hijo mío.
+
+
+## Génesis 27:27 (id: 10001027027)
+
+27Y él se llegó, y le besó; y olió Isaac el olor de sus vestidos, y le bendijo, y dijo: Mira, el olor de mi hijo como el olor del campo que Jehová ha bendecido:
+
+
+## Génesis 27:28 (id: 10001027028)
+
+28Dios, pues, te dé del rocío del cielo, y de las grosuras de la tierra, y abundancia de trigo y de mosto.
+
+
+## Génesis 27:29 (id: 10001027029)
+
+29Sírvante pueblos, y naciones se inclinen á ti: sé señor de tus hermanos, e inclínense á ti los hijos de tu madre: malditos los que te maldijeren, y benditos los que te bendijeren.
+
+
+## Génesis 27:30 (id: 10001027030)
+
+30Y aconteció, luego que hubo Isaac acabado de bendecir á Jacob, y apenas había salido Jacob de delante de Isaac su padre, que Esaú su hermano vino de su caza.
+
+
+## Génesis 27:31 (id: 10001027031)
+
+31E hizo él también guisados, y trajo á su padre, y díjole: Levántese mi padre, y coma de la caza de su hijo, para que me bendiga tu alma.
+
+
+## Génesis 27:32 (id: 10001027032)
+
+32Entonces Isaac su padre le dijo: ¿Quién eres tú? Y él dijo: Yo soy tu hijo, tu primogénito, Esaú.
+
+
+## Génesis 27:33 (id: 10001027033)
+
+33Y estremecióse Isaac con grande estremecimiento, y dijo: ¿Quién es el que vino aquí, que cogió caza, y me trajo, y comí de todo antes que vinieses? Yo le bendije, y será bendito.
+
+
+## Génesis 27:34 (id: 10001027034)
+
+34Como Esaú oyó las palabras de su padre, clamó con una muy grande y muy amarga exclamación, y le dijo: Bendíceme también á mí, padre mío.
+
+
+## Génesis 27:35 (id: 10001027035)
+
+35Y él dijo: Vino tu hermano con engaño, y tomó tu bendición.
+
+
+## Génesis 27:36 (id: 10001027036)
+
+36Y él respondió: Bien llamaron su nombre Jacob, que ya me ha engañado dos veces; alzóse con mi primogenitura, y he aquí ahora ha tomado mi bendición. Y dijo: ¿No has guardado bendición para mí?
+
+
+## Génesis 27:37 (id: 10001027037)
+
+37Isaac respondió y dijo á Esaú: He aquí yo le he puesto por señor tuyo, y le he dado por siervos á todos sus hermanos: de trigo y de vino le he provisto: ¿qué, pues, te haré á ti ahora, hijo mío?
+
+
+## Génesis 27:38 (id: 10001027038)
+
+38Y Esaú respondió á su padre: ¿No tienes más que una sola bendición, padre mío? bendíceme también á mí, padre mío. Y alzó Esaú su voz, y lloró.
+
+
+## Génesis 27:39 (id: 10001027039)
+
+39Entonces Isaac su padre habló y díjole: He aquí será tu habitación en grosuras de la tierra, y del rocío de los cielos de arriba;
+
+
+## Génesis 27:40 (id: 10001027040)
+
+40Y por tu espada vivirás, y á tu hermano servirás: y sucederá cuando te enseñorees, que descargarás su yugo de tu cerviz.
+
+
+## Génesis 27:41 (id: 10001027041)
+
+41Y aborreció Esaú á Jacob por la bendición con que le había bendecido, y dijo en su corazón: Llegarán los días del luto de mi padre, y yo mataré á Jacob mi hermano.
+
+
+## Génesis 27:42 (id: 10001027042)
+
+42Y fueron dichas á Rebeca las palabras de Esaú su hijo mayor: y ella envió y llamó á Jacob su hijo menor, y díjole: He aquí, Esaú tu hermano se consuela acerca de ti con la idea de matarte.
+
+
+## Génesis 27:43 (id: 10001027043)
+
+43Ahora pues, hijo mío, obedece á mi voz; levántate, y húyete á Labán mi hermano, á Harán;
+
+
+## Génesis 27:44 (id: 10001027044)
+
+44Y mora con él algunos días, hasta que el enojo de tu hermano se mitigue;
+
+
+## Génesis 27:45 (id: 10001027045)
+
+45Hasta que se aplaque la ira de tu hermano contra ti, y se olvide de lo que le has hecho: yo enviaré entonces, y te traeré de allá: ¿por qué seré privada de vosotros ambos en un día?
+
+
+## Génesis 27:46 (id: 10001027046)
+
+46Y dijo Rebeca á Isaac: Fastidio tengo de mi vida, á causa de las hijas de Heth. Si Jacob toma mujer de las hijas de Heth, como éstas, de las hijas de esta tierra, ¿para qué quiero la vida?
+
+
+## Génesis 28:1 (id: 10001028001)
+
+1ENTONCES Isaac llamó á Jacob, y bendíjolo, y mandóle diciendo: No tomes mujer de las hijas de Canaán.
+
+
+## Génesis 28:2 (id: 10001028002)
+
+2Levántate, ve á Padan\\-aram, á casa de Bethuel, padre de tu madre, y toma allí mujer de las hijas de Labán, hermano de tu madre.
+
+
+## Génesis 28:3 (id: 10001028003)
+
+3Y el Dios omnipotente te bendiga, y te haga fructificar, y te multiplique, hasta venir á ser congregación de pueblos;
+
+
+## Génesis 28:4 (id: 10001028004)
+
+4Y te dé la bendición de Abraham, y á tu simiente contigo, para que heredes la tierra de tus peregrinaciones, que Dios dió á Abraham.
+
+
+## Génesis 28:5 (id: 10001028005)
+
+5Así envió Isaac á Jacob, el cual fué á Padan\\-aram, á Labán, hijo de Bethuel Arameo, hermano de Rebeca, madre de Jacob y de Esaú.
+
+
+## Génesis 28:6 (id: 10001028006)
+
+6Y vió Esaú cómo Isaac había bendecido á Jacob, y le había enviado á Padan\\-aram, para tomar para sí mujer de allí; y que cuando le bendijo, le había mandado, diciendo: No tomarás mujer de las hijas de Canaán;
+
+
+## Génesis 28:7 (id: 10001028007)
+
+7Y que Jacob había obedecido á su padre y á su madre, y se había ido á Padan\\-aram.
+
+
+## Génesis 28:8 (id: 10001028008)
+
+8Vió asimismo Esaú que las hijas de Canaán parecían mal á Isaac su padre;
+
+
+## Génesis 28:9 (id: 10001028009)
+
+9Y fuése Esaú á Ismael, y tomó para sí por mujer á Mahaleth, hija de Ismael, hijo de Abraham, hermana de Nabaioth, además de sus otras mujeres.
+
+
+## Génesis 28:10 (id: 10001028010)
+
+10Y salió Jacob de Beer\\-seba, y fué á Harán;
+
+
+## Génesis 28:11 (id: 10001028011)
+
+11Y encontró con un lugar, y durmió allí, porque ya el sol se había puesto: y tomó de las piedras de aquel paraje y puso á su cabecera, y acostóse en aquel lugar.
+
+
+## Génesis 28:12 (id: 10001028012)
+
+12Y soñó, y he aquí una escala que estaba apoyada en tierra, y su cabeza tocaba en el cielo: y he aquí ángeles de Dios que subían y descendían por ella.
+
+
+## Génesis 28:13 (id: 10001028013)
+
+13Y he aquí, Jehová estaba en lo alto de ella, el cual dijo: Yo soy Jehová, el Dios de Abraham tu padre, y el Dios de Isaac: la tierra en que estás acostado te la daré á ti y á tu simiente.
+
+
+## Génesis 28:14 (id: 10001028014)
+
+14Y será tu simiente como el polvo de la tierra, y te extenderás al occidente, y al oriente, y al aquilón, y al mediodía; y todas las familias de la tierra serán benditas en ti y en tu simiente.
+
+
+## Génesis 28:15 (id: 10001028015)
+
+15Y he aquí, yo soy contigo, y te guardaré por donde quiera que fueres, y te volveré á esta tierra; porque no te dejaré hasta tanto que haya hecho lo que te he dicho.
+
+
+## Génesis 28:16 (id: 10001028016)
+
+16Y despertó Jacob de su sueño, y dijo: Ciertamente Jehová está en este lugar, y yo no lo sabía.
+
+
+## Génesis 28:17 (id: 10001028017)
+
+17Y tuvo miedo, y dijo: ¡Cuán terrible es este lugar! No es otra cosa que casa de Dios, y puerta del cielo.
+
+
+## Génesis 28:18 (id: 10001028018)
+
+18Y levantóse Jacob de mañana, y tomó la piedra que había puesto de cabecera, y alzóla por título, y derramó aceite encima de ella.
+
+
+## Génesis 28:19 (id: 10001028019)
+
+19Y llamó el nombre de aquel lugar Beth\\-el, bien que Luz era el nombre de la ciudad primero.
+
+
+## Génesis 28:20 (id: 10001028020)
+
+20E hizo Jacob voto, diciendo: Si fuere Dios conmigo, y me guardare en este viaje que voy, y me diere pan para comer y vestido para vestir,
+
+
+## Génesis 28:21 (id: 10001028021)
+
+21Y si tornare en paz á casa de mi padre, Jehová será mi Dios,
+
+
+## Génesis 28:22 (id: 10001028022)
+
+22Y esta piedra que he puesto por título, será casa de Dios: y de todo lo que me dieres, el diezmo lo he de apartar para ti.
+
+
+## Génesis 29:1 (id: 10001029001)
+
+1Y SIGUIÓ Jacob su camino, y fué á la tierra de los orientales.
+
+
+## Génesis 29:2 (id: 10001029002)
+
+2Y miró, y vió un pozo en el campo: y he aquí tres rebaños de ovejas que yacían cerca de él; porque de aquel pozo abrevaban los ganados: y había una gran piedra sobre la boca del pozo.
+
+
+## Génesis 29:3 (id: 10001029003)
+
+3Y juntábanse allí todos los rebaños; y revolvían la piedra de sobre la boca del pozo, y abrevaban las ovejas; y volvían la piedra sobre la boca del pozo á su lugar.
+
+
+## Génesis 29:4 (id: 10001029004)
+
+4Y díjoles Jacob: Hermanos míos, ¿de dónde sois? Y ellos respondieron: De Harán somos.
+
+
+## Génesis 29:5 (id: 10001029005)
+
+5Y él les dijo: ¿Conocéis á Labán, hijo de Nachôr? Y ellos dijeron: Sí, le conocemos.
+
+
+## Génesis 29:6 (id: 10001029006)
+
+6Y él les dijo: ¿Tiene paz? Y ellos dijeron: Paz; y he aquí Rachêl su hija viene con el ganado.
+
+
+## Génesis 29:7 (id: 10001029007)
+
+7Y él dijo: He aquí el día es aún grande; no es tiempo todavía de recoger el ganado; abrevad las ovejas, é id á apacentarlas.
+
+
+## Génesis 29:8 (id: 10001029008)
+
+8Y ellos respondieron: No podemos, hasta que se junten todos los ganados, y remuevan la piedra de sobre la boca del pozo, para que abrevemos las ovejas.
+
+
+## Génesis 29:9 (id: 10001029009)
+
+9Estando aún él hablando con ellos, Rachêl vino con el ganado de su padre, porque ella era la pastora.
+
+
+## Génesis 29:10 (id: 10001029010)
+
+10Y sucedió que, como Jacob vió á Rachêl, hija de Labán hermano de su madre, y á las ovejas de Labán el hermano de su madre, llegóse Jacob, y removió la piedra de sobre la boca del pozo, y abrevó el ganado de Labán hermano de su madre.
+
+
+## Génesis 29:11 (id: 10001029011)
+
+11Y Jacob besó á Rachêl, y alzó su voz, y lloró.
+
+
+## Génesis 29:12 (id: 10001029012)
+
+12Y Jacob dijo á Rachêl como él era hermano de su padre, y como era hijo de Rebeca: y ella corrió, y dió las nuevas á su padre.
+
+
+## Génesis 29:13 (id: 10001029013)
+
+13Y así que oyó Labán las nuevas de Jacob, hijo de su hermana, corrió á recibirlo, y abrazólo, y besólo, y trájole á su casa: y él contó á Labán todas estas cosas.
+
+
+## Génesis 29:14 (id: 10001029014)
+
+14Y Labán le dijo: Ciertamente hueso mío y carne mía eres. Y estuvo con él el tiempo de un mes.
+
+
+## Génesis 29:15 (id: 10001029015)
+
+15Entonces dijo Labán á Jacob: ¿Por ser tú mi hermano, me has de servir de balde? declárame qué será tu salario.
+
+
+## Génesis 29:16 (id: 10001029016)
+
+16Y Labán tenía dos hijas: el nombre de la mayor era Lea, y el nombre de la menor, Rachêl.
+
+
+## Génesis 29:17 (id: 10001029017)
+
+17Y los ojos de Lea eran tiernos, pero Rachêl era de lindo semblante y de hermoso parecer.
+
+
+## Génesis 29:18 (id: 10001029018)
+
+18Y Jacob amó á Rachêl, y dijo: Yo te serviré siete años por Rachêl tu hija menor.
+
+
+## Génesis 29:19 (id: 10001029019)
+
+19Y Labán respondió: Mejor es que te la dé á ti, que no que la dé á otro hombre: estáte conmigo.
+
+
+## Génesis 29:20 (id: 10001029020)
+
+20Así sirvió Jacob por Rachêl siete años: y pareciéronle como pocos días, porque la amaba.
+
+
+## Génesis 29:21 (id: 10001029021)
+
+21Y dijo Jacob á Labán: Dame mi mujer, porque mi tiempo es cumplido, para que cohabite con ella.
+
+
+## Génesis 29:22 (id: 10001029022)
+
+22Entonces Labán juntó á todos los varones de aquel lugar, é hizo banquete.
+
+
+## Génesis 29:23 (id: 10001029023)
+
+23Y sucedió que á la noche tomó á Lea su hija, y se la trajo: y él entró á ella.
+
+
+## Génesis 29:24 (id: 10001029024)
+
+24Y dió Labán su sierva Zilpa á su hija Lea por criada.
+
+
+## Génesis 29:25 (id: 10001029025)
+
+25Y venida la mañana, he aquí que era Lea: y él dijo á Labán: ¿Qué es esto que me has hecho? ¿no te he servido por Rachêl? ¿por qué, pues, me has engañado?
+
+
+## Génesis 29:26 (id: 10001029026)
+
+26Y Labán respondió: No se hace así en nuestro lugar, que se dé la menor antes de la mayor.
+
+
+## Génesis 29:27 (id: 10001029027)
+
+27Cumple la semana de ésta, y se te dará también la otra, por el servicio que hicieres conmigo otros siete años.
+
+
+## Génesis 29:28 (id: 10001029028)
+
+28E hizo Jacob así, y cumplió la semana de aquélla: y él le dió á Rachêl su hija por mujer.
+
+
+## Génesis 29:29 (id: 10001029029)
+
+29Y dió Labán á Rachêl su hija por criada á su sierva Bilha.
+
+
+## Génesis 29:30 (id: 10001029030)
+
+30Y entró también á Rachêl: y amóla también más que á Lea: y sirvió con él aún otros siete años.
+
+
+## Génesis 29:31 (id: 10001029031)
+
+31Y vió Jehová que Lea era aborrecida, y abrió su matriz: pero Rachêl era estéril.
+
+
+## Génesis 29:32 (id: 10001029032)
+
+32Y concibió Lea, y parió un hijo, y llamó su nombre Rubén, porque dijo: Ya que ha mirado Jehová mi aflicción; ahora por tanto me amará mi marido.
+
+
+## Génesis 29:33 (id: 10001029033)
+
+33Y concibió otra vez, y parió un hijo, y dijo: Por cuanto oyó Jehová que yo era aborrecida, me ha dado también éste. Y llamó su nombre Simeón.
+
+
+## Génesis 29:34 (id: 10001029034)
+
+34Y concibió otra vez, y parió un hijo, y dijo: Ahora esta vez se unirá mi marido conmigo, porque le he parido tres hijos: por tanto, llamó su nombre Leví.
+
+
+## Génesis 29:35 (id: 10001029035)
+
+35Y concibió otra vez, y parió un hijo, y dijo: Esta vez alabaré á Jehová: por esto llamó su nombre Judá: y dejó de parir.
+
+
+## Génesis 30:1 (id: 10001030001)
+
+1Y VIENDO Rachêl que no daba hijos á Jacob, tuvo envidia de su hermana, y decía á Jacob: Dame hijos, ó si no, me muero.
+
+
+## Génesis 30:2 (id: 10001030002)
+
+2Y Jacob se enojaba contra Rachêl, y decía: ¿Soy yo en lugar de Dios, que te impidió el fruto de tu vientre?
+
+
+## Génesis 30:3 (id: 10001030003)
+
+3Y ella dijo: He aquí mi sierva Bilha; entra á ella, y parirá sobre mis rodillas, y yo también tendré hijos de ella.
+
+
+## Génesis 30:4 (id: 10001030004)
+
+4Así le dió á Bilha su sierva por mujer; y Jacob entró á ella.
+
+
+## Génesis 30:5 (id: 10001030005)
+
+5Y concibió Bilha, y parió á Jacob un hijo.
+
+
+## Génesis 30:6 (id: 10001030006)
+
+6Y dijo Rachêl: Juzgóme Dios, y también oyó mi voz, y dióme un hijo. Por tanto llamó su nombre Dan.
+
+
+## Génesis 30:7 (id: 10001030007)
+
+7Y concibió otra vez Bilha, la sierva de Rachêl, y parió el hijo segundo á Jacob.
+
+
+## Génesis 30:8 (id: 10001030008)
+
+8Y dijo Rachêl: Con luchas de Dios he contendido con mi hermana, y he vencido. Y llamó su nombre Nephtalí.
+
+
+## Génesis 30:9 (id: 10001030009)
+
+9Y viendo Lea que había dejado de parir, tomó á Zilpa su sierva, y dióla á Jacob por mujer.
+
+
+## Génesis 30:10 (id: 10001030010)
+
+10Y Zilpa, sierva de Lea, parió á Jacob un hijo.
+
+
+## Génesis 30:11 (id: 10001030011)
+
+11Y dijo Lea: Vino la ventura. Y llamó su nombre Gad.
+
+
+## Génesis 30:12 (id: 10001030012)
+
+12Y Zilpa, la sierva de Lea, parió otro hijo á Jacob.
+
+
+## Génesis 30:13 (id: 10001030013)
+
+13Y dijo Lea: Para dicha mía; porque las mujeres me dirán dichosa: y llamó su nombre Aser.
+
+
+## Génesis 30:14 (id: 10001030014)
+
+14Y fué Rubén en tiempo de la siega de los trigos, y halló mandrágoras en el campo, y trájolas á Lea su madre: y dijo Rachêl á Lea: Ruégote que me des de las mandrágoras de tu hijo.
+
+
+## Génesis 30:15 (id: 10001030015)
+
+15Y ella respondió: ¿Es poco que hayas tomado mi marido, sino que también te has de llevar las mandrágoras de mi hijo? y dijo Rachêl: Pues dormirá contigo esta noche por las mandrágoras de tu hijo.
+
+
+## Génesis 30:16 (id: 10001030016)
+
+16Y cuando Jacob volvía del campo á la tarde, salió Lea á él, y le dijo: A mí has de entrar, porque á la verdad te he alquilado por las mandrágoras de mi hijo. Y durmió con ella aquella noche.
+
+
+## Génesis 30:17 (id: 10001030017)
+
+17Y oyó Dios á Lea: y concibió, y parió á Jacob el quinto hijo.
+
+
+## Génesis 30:18 (id: 10001030018)
+
+18Y dijo Lea: Dios me ha dado mi recompensa, por cuanto dí mi sierva á mi marido: por eso llamó su nombre Issachâr.
+
+
+## Génesis 30:19 (id: 10001030019)
+
+19Y concibió Lea otra vez, y parió el sexto hijo á Jacob.
+
+
+## Génesis 30:20 (id: 10001030020)
+
+20Y dijo Lea: Dios me ha dado una buena dote: ahora morará conmigo mi marido, porque le he parido seis hijos: y llamó su nombre Zabulón.
+
+
+## Génesis 30:21 (id: 10001030021)
+
+21Y después parió una hija, y llamó su nombre Dina.
+
+
+## Génesis 30:22 (id: 10001030022)
+
+22Y acordóse Dios de Rachêl, y oyóla Dios, y abrió su matriz.
+
+
+## Génesis 30:23 (id: 10001030023)
+
+23Y concibió, y parió un hijo: y dijo: Quitado ha Dios mi afrenta:
+
+
+## Génesis 30:24 (id: 10001030024)
+
+24Y llamó su nombre José, diciendo: Añádame Jehová otro hijo.
+
+
+## Génesis 30:25 (id: 10001030025)
+
+25Y aconteció, cuando Rachêl hubo parido á José, que Jacob dijo á Labán: Envíame, é iré á mi lugar, y á mi tierra.
+
+
+## Génesis 30:26 (id: 10001030026)
+
+26Dame mis mujeres y mis hijos, por las cuales he servido contigo, y déjame ir; pues tú sabes los servicios que te he hecho.
+
+
+## Génesis 30:27 (id: 10001030027)
+
+27Y Labán le respondió: Halle yo ahora gracia en tus ojos, y quédate; experimentado he que Jehová me ha bendecido por tu causa.
+
+
+## Génesis 30:28 (id: 10001030028)
+
+28Y dijo: Señálame tu salario, que yo lo daré.
+
+
+## Génesis 30:29 (id: 10001030029)
+
+29Y él respondió: Tú sabes cómo te he servido, y cómo ha estado tu ganado conmigo;
+
+
+## Génesis 30:30 (id: 10001030030)
+
+30Porque poco tenías antes de mi venida, y ha crecido en gran número; y Jehová te ha bendecido con mi llegada: y ahora ¿cuándo tengo de hacer yo también por mi propia casa?
+
+
+## Génesis 30:31 (id: 10001030031)
+
+31Y él dijo: ¿Qué te daré? Y respondió Jacob: No me des nada: si hicieres por mí esto, volveré á apacentar tus ovejas.
+
+
+## Génesis 30:32 (id: 10001030032)
+
+32Yo pasaré hoy por todas tus ovejas, poniendo aparte todas las reses manchadas y de color vario, y todas las reses de color oscuro entre las ovejas, y las manchadas y de color vario entre las cabras; y esto será mi salario.
+
+
+## Génesis 30:33 (id: 10001030033)
+
+33Así responderá por mí mi justicia mañana, cuando me viniere mi salario delante de ti: toda la que no fuere pintada ni manchada en las cabras y de color oscuro en las ovejas mías, se me ha de tener por de hurto.
+
+
+## Génesis 30:34 (id: 10001030034)
+
+34Y dijo Labán: Mira, ojalá fuese como tú dices.
+
+
+## Génesis 30:35 (id: 10001030035)
+
+35Y apartó aquel día los machos de cabrío rayados y manchados; y todas las cabras manchadas y de color vario, y toda res que tenía en sí algo de blanco, y todas las de color oscuro entre las ovejas, y púsolas en manos de sus hijos;
+
+
+## Génesis 30:36 (id: 10001030036)
+
+36Y puso tres días de camino entre sí y Jacob: y Jacob apacentaba las otras ovejas de Labán.
+
+
+## Génesis 30:37 (id: 10001030037)
+
+37Y tomóse Jacob varas de álamo verdes, y de avellano, y de castaño, y descortezó en ellas mondaduras blancas, descubriendo así lo blanco de las varas.
+
+
+## Génesis 30:38 (id: 10001030038)
+
+38Y puso las varas que había mondado en las pilas, delante del ganado, en los abrevaderos del agua donde venían á beber las ovejas, las cuales se recalentaban viniendo á beber.
+
+
+## Génesis 30:39 (id: 10001030039)
+
+39Y concebían las ovejas delante de las varas, y parían borregos listados, pintados y salpicados de diversos colores.
+
+
+## Génesis 30:40 (id: 10001030040)
+
+40Y apartaba Jacob los corderos, y poníalos con su rebaño, los listados, y todo lo que era oscuro en el hato de Labán. Y ponía su hato aparte, y no lo ponía con las ovejas de Labán.
+
+
+## Génesis 30:41 (id: 10001030041)
+
+41Y sucedía que cuantas veces se recalentaban las tempranas, Jacob ponía las varas delante de las ovejas en las pilas, para que concibiesen á la vista de las varas.
+
+
+## Génesis 30:42 (id: 10001030042)
+
+42Y cuando venían las ovejas tardías, no las ponía: así eran las tardías para Labán, y las tempranas para Jacob.
+
+
+## Génesis 30:43 (id: 10001030043)
+
+43Y acreció el varón muy mucho, y tuvo muchas ovejas, y siervas y siervos, y camellos y asnos.
+
+
+## Génesis 31:1 (id: 10001031001)
+
+1Y OÍA él las palabras de los hijos de Labán, que decían: Jacob ha tomado todo lo que era de nuestro padre; y de lo que era de nuestro padre ha adquirido toda esta grandeza.
+
+
+## Génesis 31:2 (id: 10001031002)
+
+2Miraba también Jacob el semblante de Labán, y veía que no era para con él como ayer y antes de ayer.
+
+
+## Génesis 31:3 (id: 10001031003)
+
+3También Jehová dijo á Jacob: Vuélvete á la tierra de tus padres, y á tu parentela; que yo seré contigo.
+
+
+## Génesis 31:4 (id: 10001031004)
+
+4Y envió Jacob, y llamó á Rachêl y á Lea al campo á sus ovejas,
+
+
+## Génesis 31:5 (id: 10001031005)
+
+5Y díjoles: Veo que el semblante de vuestro padre no es para conmigo como ayer y antes de ayer: mas el Dios de mi padre ha sido conmigo.
+
+
+## Génesis 31:6 (id: 10001031006)
+
+6Y vosotras sabéis que con todas mis fuerzas he servido á vuestro padre:
+
+
+## Génesis 31:7 (id: 10001031007)
+
+7Y vuestro padre me ha engañado, y me ha mudado el salario diez veces: pero Dios no le ha permitido que me hiciese mal.
+
+
+## Génesis 31:8 (id: 10001031008)
+
+8Si él decía así: Los pintados serán tu salario; entonces todas las ovejas parían pintados: y si decía así: Los listados serán tu salario; entonces todas las ovejas parían listados.
+
+
+## Génesis 31:9 (id: 10001031009)
+
+9Así quitó Dios el ganado de vuestro padre, y diómelo á mí.
+
+
+## Génesis 31:10 (id: 10001031010)
+
+10Y sucedió que al tiempo que las ovejas se recalentaban, alcé yo mis ojos y vi en sueños, y he aquí los machos que cubrían á las hembras eran listados, pintados y abigarrados.
+
+
+## Génesis 31:11 (id: 10001031011)
+
+11Y díjome el ángel de Dios en sueños: Jacob. Y yo dije: Heme aquí.
+
+
+## Génesis 31:12 (id: 10001031012)
+
+12Y él dijo: Alza ahora tus ojos, y verás todos los machos que cubren á las ovejas listados, pintados y abigarrados; porque yo he visto todo lo que Labán te ha hecho.
+
+
+## Génesis 31:13 (id: 10001031013)
+
+13Yo soy el Dios de Beth\\-el, donde tú ungiste el título, y donde me hiciste un voto. Levántate ahora, y sal de esta tierra, y vuélvete á la tierra de tu naturaleza.
+
+
+## Génesis 31:14 (id: 10001031014)
+
+14Y respondió Rachêl y Lea, y dijéronle: ¿Tenemos ya parte ni heredad en la casa de nuestro padre?
+
+
+## Génesis 31:15 (id: 10001031015)
+
+15¿No nos tiene ya como por extrañas, pues que nos vendió, y aun se ha comido del todo nuestro precio?
+
+
+## Génesis 31:16 (id: 10001031016)
+
+16Porque toda la riqueza que Dios ha quitado á nuestro padre, nuestra es y de nuestros hijos: ahora pues, haz todo lo que Dios te ha dicho.
+
+
+## Génesis 31:17 (id: 10001031017)
+
+17Entonces se levantó Jacob, y subió sus hijos y sus mujeres sobre los camellos.
+
+
+## Génesis 31:18 (id: 10001031018)
+
+18Y puso en camino todo su ganado, y toda su hacienda que había adquirido, el ganado de su ganancia que había obtenido en Padan\\-aram, para volverse á Isaac su padre en la tierra de Canaán.
+
+
+## Génesis 31:19 (id: 10001031019)
+
+19Y Labán había ido á trasquilar sus ovejas: y Rachêl hurtó los ídolos de su padre.
+
+
+## Génesis 31:20 (id: 10001031020)
+
+20Y recató Jacob el corazón de Labán Arameo, en no hacerle saber que se huía.
+
+
+## Génesis 31:21 (id: 10001031021)
+
+21Huyó, pues, con todo lo que tenía; y levantóse, y pasó el río, y puso su rostro al monte de Galaad.
+
+
+## Génesis 31:22 (id: 10001031022)
+
+22Y fué dicho á Labán al tercero día como Jacob se había huído.
+
+
+## Génesis 31:23 (id: 10001031023)
+
+23Entonces tomó á sus hermanos consigo, y fué tras él camino de siete días, y alcanzóle en el monte de Galaad.
+
+
+## Génesis 31:24 (id: 10001031024)
+
+24Y vino Dios á Labán Arameo en sueños aquella noche, y le dijo: Guárdate que no hables á Jacob descomedidamente.
+
+
+## Génesis 31:25 (id: 10001031025)
+
+25Alcanzó pues Labán á Jacob, y éste había fijado su tienda en el monte: y Labán plantóla con sus hermanos en el monte de Galaad.
+
+
+## Génesis 31:26 (id: 10001031026)
+
+26Y dijo Labán á Jacob: ¿Qué has hecho, que me hurtaste el corazón, y has traído á mis hijas como prisioneras de guerra?
+
+
+## Génesis 31:27 (id: 10001031027)
+
+27¿Por qué te escondiste para huir, y me hurtaste, y no me diste noticia, para que yo te enviara con alegría y con cantares, con tamborín y vihuela?
+
+
+## Génesis 31:28 (id: 10001031028)
+
+28Que aun no me dejaste besar mis hijos y mis hijas. Ahora locamente has hecho.
+
+
+## Génesis 31:29 (id: 10001031029)
+
+29Poder hay en mi mano para haceros mal: mas el Dios de vuestro padre me habló anoche diciendo: Guárdate que no hables á Jacob descomedidamente.
+
+
+## Génesis 31:30 (id: 10001031030)
+
+30Y ya que te ibas, porque tenías deseo de la casa de tu padre, ¿por qué me hurtaste mis dioses?
+
+
+## Génesis 31:31 (id: 10001031031)
+
+31Y Jacob respondió, y dijo á Labán: Porque tuve miedo; pues dije, que quizá me quitarías por fuerza tus hijas.
+
+
+## Génesis 31:32 (id: 10001031032)
+
+32En quien hallares tus dioses, no viva: delante de nuestros hermanos reconoce lo que yo tuviere tuyo, y llévatelo. Jacob no sabía que Rachêl los había hurtado.
+
+
+## Génesis 31:33 (id: 10001031033)
+
+33Y entró Labán en la tienda de Jacob, y en la tienda de Lea, y en la tienda de las dos siervas, y no los halló, y salió de la tienda de Lea, y vino á la tienda de Rachêl.
+
+
+## Génesis 31:34 (id: 10001031034)
+
+34Y tomó Rachêl los ídolos, y púsolos en una albarda de un camello, y sentóse sobre ellos: y tentó Labán toda la tienda, y no los halló.
+
+
+## Génesis 31:35 (id: 10001031035)
+
+35Y ella dijo á su padre: No se enoje mi señor, porque no me puedo levantar delante de ti; pues estoy con la costumbre de las mujeres. Y él buscó, pero no halló los ídolos.
+
+
+## Génesis 31:36 (id: 10001031036)
+
+36Entonces Jacob se enojó, y regañó con Labán; y respondió Jacob y dijo á Labán: ¿Qué prevaricación es la mía? ¿cuál es mi pecado, que con tanto ardor has venido en seguimiento mío?
+
+
+## Génesis 31:37 (id: 10001031037)
+
+37Pues que has tentado todos mis muebles, ¿qué has hallado de todas las alhajas de tu casa? Ponlo aquí delante de mis hermanos y tuyos, y juzguen entre nosotros ambos.
+
+
+## Génesis 31:38 (id: 10001031038)
+
+38Estos veinte años he estado contigo: tus ovejas y tus cabras nunca abortaron, ni yo comí carnero de tus ovejas.
+
+
+## Génesis 31:39 (id: 10001031039)
+
+39Nunca te traje lo arrebatado por las fieras; yo pagaba el daño; lo hurtado así de día como de noche, de mi mano lo requerías.
+
+
+## Génesis 31:40 (id: 10001031040)
+
+40De día me consumía el calor, y de noche la helada, y el sueño se huía de mis ojos.
+
+
+## Génesis 31:41 (id: 10001031041)
+
+41Así he estado veinte años en tu casa: catorce años te serví por tus dos hijas, y seis años por tu ganado; y has mudado mi salario diez veces.
+
+
+## Génesis 31:42 (id: 10001031042)
+
+42Si el Dios de mi padre, el Dios de Abraham, y el temor de Isaac, no fuera conmigo, de cierto me enviarías ahora vacío: vió Dios mi aflicción y el trabajo de mis manos, y reprendióte anoche.
+
+
+## Génesis 31:43 (id: 10001031043)
+
+43Y respondió Labán, y dijo á Jacob: Las hijas son hijas mías, y los hijos, hijos míos son, y las ovejas son mis ovejas, y todo lo que tú ves es mío: ¿y qué puedo yo hacer hoy á estas mis hijas, ó á sus hijos que ellas han parido?
+
+
+## Génesis 31:44 (id: 10001031044)
+
+44Ven pues ahora, y hagamos alianza yo y tú; y sea en testimonio entre mí y entre ti.
+
+
+## Génesis 31:45 (id: 10001031045)
+
+45Entonces Jacob tomó una piedra, y levantóla por título.
+
+
+## Génesis 31:46 (id: 10001031046)
+
+46Y dijo Jacob á sus hermanos: Coged piedras. Y tomaron piedras é hicieron un majano; y comieron allí sobre aquel majano.
+
+
+## Génesis 31:47 (id: 10001031047)
+
+47Y llamólo Labán Jegar Sahadutha: y lo llamó Jacob Galaad.
+
+
+## Génesis 31:48 (id: 10001031048)
+
+48Porque Labán dijo: Este majano es testigo hoy entre mí y entre ti; por eso fué llamado su nombre Galaad;
+
+
+## Génesis 31:49 (id: 10001031049)
+
+49Y Mizpa, por cuanto dijo: Atalaye Jehová entre mí y entre ti, cuando nos apartáremos el uno del otro.
+
+
+## Génesis 31:50 (id: 10001031050)
+
+50Si afligieres mis hijas, ó si tomares otras mujeres además de mis hijas, nadie está con nosotros; mira, Dios es testigo entre mí y entre ti.
+
+
+## Génesis 31:51 (id: 10001031051)
+
+51Dijo más Labán á Jacob: He aquí este majano, y he aquí este título, que he erigido entre mí y ti.
+
+
+## Génesis 31:52 (id: 10001031052)
+
+52Testigo sea este majano, y testigo sea este título, que ni yo pasaré contra ti este majano, ni tú pasarás contra mí este majano ni este título, para mal.
+
+
+## Génesis 31:53 (id: 10001031053)
+
+53El Dios de Abraham, y el Dios de Nachôr juzgue entre nosotros, el Dios de sus padres. Y Jacob juró por el temor de Isaac su padre.
+
+
+## Génesis 31:54 (id: 10001031054)
+
+54Entonces Jacob inmoló víctimas en el monte, y llamó á sus hermanos á comer pan: y comieron pan, y durmieron aquella noche en el monte.
+
+
+## Génesis 31:55 (id: 10001031055)
+
+55Y levantóse Labán de mañana, y besó sus hijos y sus hijas, y los bendijo; y retrocedió y volvióse á su lugar.
+
+
+## Génesis 32:1 (id: 10001032001)
+
+1Y JACOB se fué su camino, y saliéronle al encuentro ángeles de Dios.
+
+
+## Génesis 32:2 (id: 10001032002)
+
+2Y dijo Jacob cuando los vió: El campo de Dios es este: y llamó el nombre de aquel lugar Mahanaim.
+
+
+## Génesis 32:3 (id: 10001032003)
+
+3Y envió Jacob mensajeros delante de sí á Esaú su hermano, á la tierra de Seir, campo de Edom.
+
+
+## Génesis 32:4 (id: 10001032004)
+
+4Y mandóles diciendo: Así diréis á mi señor Esaú: Así dice tu siervo Jacob: Con Labán he morado, y detenídome hasta ahora;
+
+
+## Génesis 32:5 (id: 10001032005)
+
+5Y tengo vacas, y asnos, y ovejas, y siervos y siervas; y envío á decirlo á mi señor, por hallar gracia en tus ojos.
+
+
+## Génesis 32:6 (id: 10001032006)
+
+6Y los mensajeros volvieron á Jacob, diciendo: Vinimos á tu hermano Esaú, y él también viene á recibirte, y cuatrocientos hombres con él.
+
+
+## Génesis 32:7 (id: 10001032007)
+
+7Entonces Jacob tuvo gran temor, y angustióse; y partió el pueblo que tenía consigo, y las ovejas y las vacas y los camellos, en dos cuadrillas;
+
+
+## Génesis 32:8 (id: 10001032008)
+
+8Y dijo: Si viniere Esaú á la una cuadrilla y la hiriere, la otra cuadrilla escapará.
+
+
+## Génesis 32:9 (id: 10001032009)
+
+9Y dijo Jacob: Dios de mi padre Abraham, y Dios de mi padre Isaac, Jehová, que me dijiste: Vuélvete á tu tierra y á tu parentela, y yo te haré bien;
+
+
+## Génesis 32:10 (id: 10001032010)
+
+10Menor soy que todas las misericordias, y que toda la verdad que has usado para con tu siervo; que con mi bordón pasé este Jordán, y ahora estoy sobre dos cuadrillas.
+
+
+## Génesis 32:11 (id: 10001032011)
+
+11Líbrame ahora de la mano de mi hermano, de la mano de Esaú, porque le temo; no venga quizá, y me hiera la madre con los hijos.
+
+
+## Génesis 32:12 (id: 10001032012)
+
+12Y tú has dicho: Yo te haré bien, y pondré tu simiente como la arena del mar, que no se puede contar por la multitud.
+
+
+## Génesis 32:13 (id: 10001032013)
+
+13Y durmió allí aquella noche, y tomó de lo que le vino á la mano un presente para su hermano Esaú:
+
+
+## Génesis 32:14 (id: 10001032014)
+
+14Doscientas cabras y veinte machos de cabrío, doscientas ovejas y veinte carneros,
+
+
+## Génesis 32:15 (id: 10001032015)
+
+15Treinta camellas paridas, con sus hijos, cuarenta vacas y diez novillos, veinte asnas y diez borricos.
+
+
+## Génesis 32:16 (id: 10001032016)
+
+16Y entrególo en mano de sus siervos, cada manada de por sí; y dijo á sus siervos: Pasad delante de mí, y poned espacio entre manada y manada.
+
+
+## Génesis 32:17 (id: 10001032017)
+
+17Y mandó al primero, diciendo: Si Esaú mi hermano te encontrare, y te preguntare, diciendo: ¿De quién eres? ¿y adónde vas? ¿y para quién es esto que llevas delante de ti?
+
+
+## Génesis 32:18 (id: 10001032018)
+
+18Entonces dirás: Presente es de tu siervo Jacob, que envía á mi señor Esaú; y he aquí también él viene tras nosotros.
+
+
+## Génesis 32:19 (id: 10001032019)
+
+19Y mandó también al segundo, y al tercero, y á todos los que iban tras aquellas manadas, diciendo: Conforme á esto hablaréis á Esaú, cuando le hallareis.
+
+
+## Génesis 32:20 (id: 10001032020)
+
+20Y diréis también: He aquí tu siervo Jacob viene tras nosotros. Porque dijo: Apaciguaré su ira con el presente que va delante de mí, y después veré su rostro: quizá le seré acepto.
+
+
+## Génesis 32:21 (id: 10001032021)
+
+21Y pasó el presente delante de él; y él durmió aquella noche en el campamento.
+
+
+## Génesis 32:22 (id: 10001032022)
+
+22Y levantóse aquella noche, y tomó sus dos mujeres, y sus dos siervas, y sus once hijos, y pasó el vado de Jaboc.
+
+
+## Génesis 32:23 (id: 10001032023)
+
+23Tomólos pues, y pasólos el arroyo, é hizo pasar lo que tenía.
+
+
+## Génesis 32:24 (id: 10001032024)
+
+24Y quedóse Jacob solo, y luchó con él un varón hasta que rayaba el alba.
+
+
+## Génesis 32:25 (id: 10001032025)
+
+25Y como vió que no podía con él, tocó en el sitio del encaje de su muslo, y descoyuntóse el muslo de Jacob mientras con él luchaba.
+
+
+## Génesis 32:26 (id: 10001032026)
+
+26Y dijo: Déjame, que raya el alba. Y él dijo: No te dejaré, si no me bendices.
+
+
+## Génesis 32:27 (id: 10001032027)
+
+27Y él le dijo: ¿Cuál es tu nombre? Y él respondió: Jacob.
+
+
+## Génesis 32:28 (id: 10001032028)
+
+28Y él dijo: No se dirá más tu nombre Jacob, sino Israel: porque has peleado con Dios y con los hombres, y has vencido.
+
+
+## Génesis 32:29 (id: 10001032029)
+
+29Entonces Jacob le preguntó, y dijo: Declárame ahora tu nombre. Y él respondió: ¿Por qué preguntas por mi nombre? Y bendíjolo allí.
+
+
+## Génesis 32:30 (id: 10001032030)
+
+30Y llamó Jacob el nombre de aquel lugar, Peniel: porque vi á Dios cara á cara, y fué librada mi alma.
+
+
+## Génesis 32:31 (id: 10001032031)
+
+31Y salióle el sol pasado que hubo á Peniel; y cojeaba de su anca.
+
+
+## Génesis 32:32 (id: 10001032032)
+
+32Por esto no comen los hijos de Israel, hasta hoy día, del tendón que se contrajo, el cual está en el encaje del muslo: porque tocó á Jacob este sitio de su muslo en el tendón que se contrajo.
+
+
+## Génesis 33:1 (id: 10001033001)
+
+1Y ALZANDO Jacob sus ojos miró, y he aquí venía Esaú, y los cuatrocientos hombres con él: entonces repartió él los niños entre Lea y Rachêl y las dos siervas.
+
+
+## Génesis 33:2 (id: 10001033002)
+
+2Y puso las siervas y sus niños delante; luego á Lea y á sus niños; y á Rachêl y á José los postreros.
+
+
+## Génesis 33:3 (id: 10001033003)
+
+3Y él pasó delante de ellos, é inclinóse á tierra siete veces, hasta que llegó á su hermano.
+
+
+## Génesis 33:4 (id: 10001033004)
+
+4Y Esaú corrió á su encuentro, y abrazóle, y echóse sobre su cuello, y le besó; y lloraron.
+
+
+## Génesis 33:5 (id: 10001033005)
+
+5Y alzó sus ojos, y vió las mujeres y los niños, y dijo: ¿Qué te tocan éstos? Y él respondió: Son los niños que Dios ha dado á tu siervo.
+
+
+## Génesis 33:6 (id: 10001033006)
+
+6Y se llegaron las siervas, ellas y sus niños, é inclináronse.
+
+
+## Génesis 33:7 (id: 10001033007)
+
+7Y llegóse Lea con sus niños, é inclináronse: y después llegó José y Rachêl, y también se inclinaron.
+
+
+## Génesis 33:8 (id: 10001033008)
+
+8Y él dijo: ¿Qué te propones con todas estas cuadrillas que he encontrado? Y él respondió: El hallar gracia en los ojos de mi señor.
+
+
+## Génesis 33:9 (id: 10001033009)
+
+9Y dijo Esaú: Harto tengo yo, hermano mío: sea para ti lo que es tuyo.
+
+
+## Génesis 33:10 (id: 10001033010)
+
+10Y dijo Jacob: No, yo te ruego, si he hallado ahora gracia en tus ojos, toma mi presente de mi mano, pues que así he visto tu rostro, como si hubiera visto el rostro de Dios; y hazme placer.
+
+
+## Génesis 33:11 (id: 10001033011)
+
+11Toma, te ruego, mi dádiva que te es traída; porque Dios me ha hecho merced, y todo lo que hay aquí es mío. Y porfió con él, y tomóla.
+
+
+## Génesis 33:12 (id: 10001033012)
+
+12Y dijo: Anda, y vamos; y yo iré delante de ti.
+
+
+## Génesis 33:13 (id: 10001033013)
+
+13Y él le dijo: Mi señor sabe que los niños son tiernos, y que tengo ovejas y vacas paridas; y si las fatigan, en un día morirán todas las ovejas.
+
+
+## Génesis 33:14 (id: 10001033014)
+
+14Pase ahora mi señor delante de su siervo, y yo me iré poco á poco al paso de la hacienda que va delante de mí, y al paso de los niños, hasta que llegue á mi señor á Seir.
+
+
+## Génesis 33:15 (id: 10001033015)
+
+15Y Esaú dijo: Dejaré ahora contigo de la gente que viene conmigo. Y él dijo: ¿Para qué esto? halle yo gracia en los ojos de mi señor.
+
+
+## Génesis 33:16 (id: 10001033016)
+
+16Así se volvió Esaú aquel día por su camino á Seir.
+
+
+## Génesis 33:17 (id: 10001033017)
+
+17Y Jacob se partió á Succoth, y edificó allí casa para sí, é hizo cabañas para su ganado: por tanto llamó el nombre de aquel lugar Succoth.
+
+
+## Génesis 33:18 (id: 10001033018)
+
+18Y vino Jacob sano á la ciudad de Sichêm, que está en la tierra de Canaán, cuando venía de Padan\\-aram; y acampó delante de la ciudad.
+
+
+## Génesis 33:19 (id: 10001033019)
+
+19Y compró una parte del campo, donde tendió su tienda, de mano de los hijos de Hamor, padre de Sichêm, por cien piezas de moneda.
+
+
+## Génesis 33:20 (id: 10001033020)
+
+20Y erigió allí un altar, y llamóle: El Dios de Israel.
+
+
+## Génesis 34:1 (id: 10001034001)
+
+1Y SALIÓ Dina la hija de Lea, la cual había ésta parido á Jacob, á ver las hijas del país.
+
+
+## Génesis 34:2 (id: 10001034002)
+
+2Y vióla Sichêm, hijo de Hamor Heveo, príncipe de aquella tierra, y tomóla, y echóse con ella, y la deshonró.
+
+
+## Génesis 34:3 (id: 10001034003)
+
+3Mas su alma se apegó á Dina la hija de Lea, y enamoróse de la moza, y habló al corazón de la joven.
+
+
+## Génesis 34:4 (id: 10001034004)
+
+4Y habló Sichêm á Hamor su padre, diciendo: Tómame por mujer esta moza.
+
+
+## Génesis 34:5 (id: 10001034005)
+
+5Y oyó Jacob que había Sichêm amancillado á Dina su hija: y estando sus hijos con su ganado en el campo, calló Jacob hasta que ellos viniesen.
+
+
+## Génesis 34:6 (id: 10001034006)
+
+6Y dirigióse Hamor padre de Sichêm á Jacob, para hablar con él.
+
+
+## Génesis 34:7 (id: 10001034007)
+
+7Y los hijos de Jacob vinieron del campo cuando lo supieron; y se entristecieron los varones, y se ensañaron mucho, porque hizo vileza en Israel echándose con la hija de Jacob, lo que no se debía haber hecho.
+
+
+## Génesis 34:8 (id: 10001034008)
+
+8Y Hamor habló con ellos, diciendo: El alma de mi hijo Sichêm se ha apegado á vuestra hija; ruégoos que se la deis por mujer.
+
+
+## Génesis 34:9 (id: 10001034009)
+
+9Y emparentad con nosotros; dadnos vuestras hijas, y tomad vosotros las nuestras.
+
+
+## Génesis 34:10 (id: 10001034010)
+
+10Y habitad con nosotros; porque la tierra estará delante de vosotros; morad y negociad en ella, y tomad en ella posesión.
+
+
+## Génesis 34:11 (id: 10001034011)
+
+11Sichêm también dijo á su padre y á sus hermanos: Halle yo gracia en vuestros ojos, y daré lo que me dijereis.
+
+
+## Génesis 34:12 (id: 10001034012)
+
+12Aumentad á cargo mío mucho dote y dones, que yo daré cuanto me dijereis, y dadme la moza por mujer.
+
+
+## Génesis 34:13 (id: 10001034013)
+
+13Y respondieron los hijos de Jacob á Sichêm y á Hamor su padre con engaño; y parlaron, por cuanto había amancillado á Dina su hermana.
+
+
+## Génesis 34:14 (id: 10001034014)
+
+14Y dijéronles: No podemos hacer esto de dar nuestra hermana á hombre que tiene prepucio; porque entre nosotros es abominación.
+
+
+## Génesis 34:15 (id: 10001034015)
+
+15Mas con esta condición os haremos placer: si habéis de ser como nosotros, que se circuncide entre vosotros todo varón;
+
+
+## Génesis 34:16 (id: 10001034016)
+
+16Entonces os daremos nuestras hijas, y tomaremos nosotros las vuestras; y habitaremos con vosotros, y seremos un pueblo.
+
+
+## Génesis 34:17 (id: 10001034017)
+
+17Mas si no nos prestareis oído para circuncidaros, tomaremos nuestra hija, y nos iremos.
+
+
+## Génesis 34:18 (id: 10001034018)
+
+18Y parecieron bien sus palabras á Hamor y á Sichêm, hijo de Hamor.
+
+
+## Génesis 34:19 (id: 10001034019)
+
+19Y no dilató el mozo hacer aquello, porque la hija de Jacob le había agradado: y él era el más honrado de toda la casa de su padre.
+
+
+## Génesis 34:20 (id: 10001034020)
+
+20Entonces Hamor y Sichêm su hijo vinieron á la puerta de su ciudad, y hablaron á los varones de su ciudad, diciendo:
+
+
+## Génesis 34:21 (id: 10001034021)
+
+21Estos varones son pacíficos con nosotros, y habitarán en el país, y traficarán en él: pues he aquí la tierra es bastante ancha para ellos: nosotros tomaremos sus hijas por mujeres, y les daremos las nuestras.
+
+
+## Génesis 34:22 (id: 10001034022)
+
+22Mas con esta condición nos harán estos hombres el placer de habitar con nosotros, para que seamos un pueblo: si se circuncidare en nosotros todo varón, así como ellos son circuncidados.
+
+
+## Génesis 34:23 (id: 10001034023)
+
+23Sus ganados, y su hacienda y todas sus bestias, serán nuestras: solamente convengamos con ellos, y habitarán con nosotros.
+
+
+## Génesis 34:24 (id: 10001034024)
+
+24Y obedecieron á Hamor y á Sichêm su hijo todos los que salían por la puerta de la ciudad, y circuncidaron á todo varón, á cuantos salían por la puerta de su ciudad.
+
+
+## Génesis 34:25 (id: 10001034025)
+
+25Y sucedió que al tercer día, cuando sentían ellos el mayor dolor, los dos hijos de Jacob, Simeón y Leví, hermanos de Dina, tomaron cada uno su espada, y vinieron contra la ciudad animosamente, y mataron á todo varón.
+
+
+## Génesis 34:26 (id: 10001034026)
+
+26Y á Hamor y á Sichêm su hijo los mataron á filo de espada: y tomaron á Dina de casa de Sichêm, y saliéronse.
+
+
+## Génesis 34:27 (id: 10001034027)
+
+27Y los hijos de Jacob vinieron á los muertos, y saquearon la ciudad; por cuanto habían amancillado á su hermana.
+
+
+## Génesis 34:28 (id: 10001034028)
+
+28Tomaron sus ovejas y vacas y sus asnos, y lo que había en la ciudad y en el campo,
+
+
+## Génesis 34:29 (id: 10001034029)
+
+29Y toda su hacienda; se llevaron cautivos á todos sus niños y sus mujeres, y robaron todo lo que había en casa.
+
+
+## Génesis 34:30 (id: 10001034030)
+
+30Entonces dijo Jacob á Simeón y á Leví: Habéisme turbado con hacerme abominable á los moradores de aquesta tierra, el Cananeo y el Pherezeo; y teniendo yo pocos hombres, juntarse han contra mí, y me herirán, y seré destruído yo y mi casa.
+
+
+## Génesis 34:31 (id: 10001034031)
+
+31Y ellos respondieron: ¿Había él de tratar á nuestra hermana como á una ramera?
+
+
+## Génesis 35:1 (id: 10001035001)
+
+1Y DIJO Dios á Jacob: Levántate, sube á Beth\\-el, y estáte allí; y haz allí un altar al Dios que te apareció cuando huías de tu hermano Esaú.
+
+
+## Génesis 35:2 (id: 10001035002)
+
+2Entonces Jacob dijo á su familia y á todos los que con él estaban: Quitad los dioses ajenos que hay entre vosotros, y limpiaos, y mudad vuestros vestidos.
+
+
+## Génesis 35:3 (id: 10001035003)
+
+3Y levantémonos, y subamos á Beth\\-el; y haré allí altar al Dios que me respondió en el día de mi angustia, y ha sido conmigo en el camino que he andado.
+
+
+## Génesis 35:4 (id: 10001035004)
+
+4Así dieron á Jacob todos los dioses ajenos que había en poder de ellos, y los zarzillos que estaban en sus orejas; y Jacob los escondió debajo de una encina, que estaba junto á Sichêm.
+
+
+## Génesis 35:5 (id: 10001035005)
+
+5Y partiéronse, y el terror de Dios fué sobre las ciudades que había en sus alrededores, y no siguieron tras los hijos de Jacob.
+
+
+## Génesis 35:6 (id: 10001035006)
+
+6Y llegó Jacob á Luz, que está en tierra de Canaán, (esta es Beth\\-el) él y todo el pueblo que con él estaba;
+
+
+## Génesis 35:7 (id: 10001035007)
+
+7Y edificó allí un altar, y llamó al lugar El\\-Beth\\-el, porque allí le había aparecido Dios, cuando huía de su hermano.
+
+
+## Génesis 35:8 (id: 10001035008)
+
+8Entonces murió Débora, ama de Rebeca, y fué sepultada á las raíces de Beth\\-el, debajo de una encina: y llamóse su nombre Allon\\-Bacuth.
+
+
+## Génesis 35:9 (id: 10001035009)
+
+9Y aparecióse otra vez Dios á Jacob, cuando se había vuelto de Padan\\-aram, y bendíjole.
+
+
+## Génesis 35:10 (id: 10001035010)
+
+10Y díjole Dios: Tu nombre es Jacob; no se llamará más tu nombre Jacob, sino Israel será tu nombre: y llamó su nombre Israel.
+
+
+## Génesis 35:11 (id: 10001035011)
+
+11Y díjole Dios: Yo soy el Dios Omnipotente: crece y multiplícate; una nación y conjunto de naciones procederá de ti, y reyes saldrán de tus lomos:
+
+
+## Génesis 35:12 (id: 10001035012)
+
+12Y la tierra que yo he dado á Abraham y á Isaac, la daré á ti: y á tu simiente después de ti daré la tierra.
+
+
+## Génesis 35:13 (id: 10001035013)
+
+13Y fuése de él Dios, del lugar donde con él había hablado.
+
+
+## Génesis 35:14 (id: 10001035014)
+
+14Y Jacob erigió un título en el lugar donde había hablado con él, un título de piedra, y derramó sobre él libación, y echó sobre él aceite.
+
+
+## Génesis 35:15 (id: 10001035015)
+
+15Y llamó Jacob el nombre de aquel lugar donde Dios había hablado con él, Beth\\-el.
+
+
+## Génesis 35:16 (id: 10001035016)
+
+16Y partieron de Beth\\-el, y había aún como media legua de tierra para llegar á Ephrata, cuando parió Rachêl, y hubo trabajo en su parto.
+
+
+## Génesis 35:17 (id: 10001035017)
+
+17Y aconteció, que como había trabajo en su parir, díjole la partera: No temas, que también tendrás este hijo.
+
+
+## Génesis 35:18 (id: 10001035018)
+
+18Y acaeció que al salírsele el alma, (pues murió) llamó su nombre Benoni; mas su padre lo llamó Benjamín.
+
+
+## Génesis 35:19 (id: 10001035019)
+
+19Así murió Rachêl, y fué sepultada en el camino de Ephrata, la cual es Beth\\-lehem.
+
+
+## Génesis 35:20 (id: 10001035020)
+
+20Y puso Jacob un título sobre su sepultura: este es el título de la sepultura de Rachêl hasta hoy.
+
+
+## Génesis 35:21 (id: 10001035021)
+
+21Y partió Israel, y tendió su tienda de la otra parte de Migdaleder.
+
+
+## Génesis 35:22 (id: 10001035022)
+
+22Y acaeció, morando Israel en aquella tierra, que fué Rubén y durmió con Bilha la concubina de su padre; lo cual llegó á entender Israel. Ahora bien, los hijos de Israel fueron doce:
+
+
+## Génesis 35:23 (id: 10001035023)
+
+23Los hijos de Lea: Rubén el primogénito de Jacob, y Simeón, y Leví, y Judá, é Issachâr, y Zabulón.
+
+
+## Génesis 35:24 (id: 10001035024)
+
+24Los hijos de Rachêl: José, y Benjamín.
+
+
+## Génesis 35:25 (id: 10001035025)
+
+25Y los hijos de Bilha, sierva de Rachêl: Dan, y Nephtalí.
+
+
+## Génesis 35:26 (id: 10001035026)
+
+26Y los hijos de Zilpa, sierva de Lea: Gad, y Aser. Estos fueron los hijos de Jacob, que le nacieron en Padan\\-aram.
+
+
+## Génesis 35:27 (id: 10001035027)
+
+27Y vino Jacob á Isaac su padre á Mamre, á la ciudad de Arba, que es Hebrón, donde habitaron Abraham é Isaac.
+
+
+## Génesis 35:28 (id: 10001035028)
+
+28Y fueron los días de Isaac ciento ochenta años.
+
+
+## Génesis 35:29 (id: 10001035029)
+
+29Y exhaló Isaac el espíritu, y murió, y fué recogido á sus pueblos, viejo y harto de días; y sepultáronlo Esaú y Jacob sus hijos.
+
+
+## Génesis 36:1 (id: 10001036001)
+
+1Y ESTAS son las generaciones de Esaú, el cual es Edom.
+
+
+## Génesis 36:2 (id: 10001036002)
+
+2Esaú tomó sus mujeres de las hijas de Canaán: á Ada, hija de Elón Hetheo, y á Aholibama, hija de Ana, hija de Zibeón el Heveo;
+
+
+## Génesis 36:3 (id: 10001036003)
+
+3Y á Basemath, hija de Ismael, hermana de Navaioth.
+
+
+## Génesis 36:4 (id: 10001036004)
+
+4Y Ada parió á Esaú á Eliphaz; y Basemath parió á Reuel.
+
+
+## Génesis 36:5 (id: 10001036005)
+
+5Y Aholibama parió á Jeús, y á Jaalam, y á Cora: estos son los hijos de Esaú, que le nacieron en la tierra de Canaán.
+
+
+## Génesis 36:6 (id: 10001036006)
+
+6Y Esaú tomó sus mujeres, y sus hijos, y sus hijas, y todas las personas de su casa, y sus ganados, y todas sus bestias, y toda su hacienda que había adquirido en la tierra de Canaán, y fuése á otra tierra de delante de Jacob su hermano:
+
+
+## Génesis 36:7 (id: 10001036007)
+
+7Porque la hacienda de ellos era grande, y no podían habitar juntos, ni la tierra de su peregrinación los podía sostener á causa de sus ganados.
+
+
+## Génesis 36:8 (id: 10001036008)
+
+8Y Esaú habitó en el monte de Seir: Esaú es Edom.
+
+
+## Génesis 36:9 (id: 10001036009)
+
+9Estos son los linajes de Esaú, padre de Edom, en el monte de Seir.
+
+
+## Génesis 36:10 (id: 10001036010)
+
+10Estos son los nombres de los hijos de Esaú: Eliphaz, hijo de Ada, mujer de Esaú; Reuel, hijo de Basemath, mujer de Esaú.
+
+
+## Génesis 36:11 (id: 10001036011)
+
+11Y los hijos de Eliphaz fueron Temán, Omar, Zepho, Gatam, y Cenaz.
+
+
+## Génesis 36:12 (id: 10001036012)
+
+12Y Timna fué concubina de Eliphaz, hijo de Esaú, la cual le parió á Amalec: estos son los hijos de Ada, mujer de Esaú.
+
+
+## Génesis 36:13 (id: 10001036013)
+
+13Y los hijos de Reuel fueron Nahath, Zera, Samma, y Mizza: estos son los hijos de Basemath, mujer de Esaú.
+
+
+## Génesis 36:14 (id: 10001036014)
+
+14Estos fueron los hijos de Aholibama, mujer de Esaú, hija de Ana, que fué hija de Zibeón: ella parió á Esaú á Jeús, Jaalam, y Cora.
+
+
+## Génesis 36:15 (id: 10001036015)
+
+15Estos son los duques de los hijos de Esaú. Hijos de Eliphaz, primogénito de Esaú: el duque Temán, el duque Omar, el duque Zepho, el duque Cenaz,
+
+
+## Génesis 36:16 (id: 10001036016)
+
+16El duque Cora, el duque Gatam, y el duque Amalec: estos son los duques de Eliphaz en la tierra de Edom; estos fueron los hijos de Ada.
+
+
+## Génesis 36:17 (id: 10001036017)
+
+17Y estos son los hijos de Reuel, hijo de Esaú: el duque Nahath, el duque Zera, el duque Samma, y el duque Mizza: estos son los duques de la línea de Reuel en la tierra de Edom; estos hijos vienen de Basemath, mujer de Esaú.
+
+
+## Génesis 36:18 (id: 10001036018)
+
+18Y estos son los hijos de Aholibama, mujer de Esaú: el duque Jeús, el duque Jaalam, y el duque Cora: estos fueron los duques que salieron de Aholibama, mujer de Esaú, hija de Ana.
+
+
+## Génesis 36:19 (id: 10001036019)
+
+19Estos, pues, son los hijos de Esaú, y sus duques: él es Edom.
+
+
+## Génesis 36:20 (id: 10001036020)
+
+20Y estos son los hijos de Seir Horeo, moradores de aquella tierra: Lotán, Sobal, Zibeón, Ana,
+
+
+## Génesis 36:21 (id: 10001036021)
+
+21Disón, Ezer, y Disán: estos son los duques de los Horeos, hijos de Seir en la tierra de Edom.
+
+
+## Génesis 36:22 (id: 10001036022)
+
+22Los hijos de Lotán fueron Hori y Hemán; y Timna fué hermana de Lotán.
+
+
+## Génesis 36:23 (id: 10001036023)
+
+23Y los hijos de Sobal fueron Alván, Manahath, Ebal, Sepho, y Onán.
+
+
+## Génesis 36:24 (id: 10001036024)
+
+24Y los hijos de Zibeón fueron Aja, y Ana. Este Ana es el que descubrió los mulos en el desierto, cuando apacentaba los asnos de Zibeón su padre.
+
+
+## Génesis 36:25 (id: 10001036025)
+
+25Los hijos de Ana fueron Disón, y Aholibama, hija de Ana.
+
+
+## Génesis 36:26 (id: 10001036026)
+
+26Y estos fueron los hijos de Disón: Hemdán, Eshbán, Ithram, y Cherán.
+
+
+## Génesis 36:27 (id: 10001036027)
+
+27Y estos fueron los hijos de Ezer: Bilhán, Zaaván, y Acán.
+
+
+## Génesis 36:28 (id: 10001036028)
+
+28Estos fueron los hijos de Disán: Huz, y Arán.
+
+
+## Génesis 36:29 (id: 10001036029)
+
+29Y estos fueron los duques de los Horeos: el duque Lotán, el duque Sobal, el duque Zibeón, el duque Ana,
+
+
+## Génesis 36:30 (id: 10001036030)
+
+30El duque Disón, el duque Ezer, el duque Disán: estos fueron los duques de los Horeos: por sus ducados en la tierra de Seir.
+
+
+## Génesis 36:31 (id: 10001036031)
+
+31Y los reyes que reinaron en la tierra de Edom, antes que reinase rey sobre los hijos de Israel, fueron estos:
+
+
+## Génesis 36:32 (id: 10001036032)
+
+32Bela, hijo de Beor, reinó en Edom: y el nombre de su ciudad fué Dinaba.
+
+
+## Génesis 36:33 (id: 10001036033)
+
+33Y murió Bela, y reinó en su lugar Jobab, hijo de Zera, de Bosra.
+
+
+## Génesis 36:34 (id: 10001036034)
+
+34Y murió Jobab, y en su lugar reinó Husam, de tierra de Temán.
+
+
+## Génesis 36:35 (id: 10001036035)
+
+35Y murió Husam, y reinó en su lugar Adad, hijo de Badad, el que hirió á Midián en el campo de Moab: y el nombre de su ciudad fué Avith.
+
+
+## Génesis 36:36 (id: 10001036036)
+
+36Y murió Adad, y en su lugar reinó Samla, de Masreca.
+
+
+## Génesis 36:37 (id: 10001036037)
+
+37Y murió Samla, y reinó en su lugar Saúl, de Rehoboth del Río.
+
+
+## Génesis 36:38 (id: 10001036038)
+
+38Y murió Saúl, y en lugar suyo reinó Baalanán, hijo de Achbor.
+
+
+## Génesis 36:39 (id: 10001036039)
+
+39Y murió Baalanán, hijo de Achbor, y reinó Adar en lugar suyo: y el nombre de su ciudad fué Pau; y el nombre de su mujer Meetabel, hija de Matred, hija de Mezaab.
+
+
+## Génesis 36:40 (id: 10001036040)
+
+40Estos, pues, son los nombres de los duques de Esaú por sus linajes, por sus lugares, y sus nombres: el duque Timna, el duque Alva, el duque Jetheth,
+
+
+## Génesis 36:41 (id: 10001036041)
+
+41El duque Aholibama, el duque Ela, el duque Pinón,
+
+
+## Génesis 36:42 (id: 10001036042)
+
+42El duque Cenaz, el duque Temán, el duque Mibzar,
+
+
+## Génesis 36:43 (id: 10001036043)
+
+43El duque Magdiel, y el duque Hiram. Estos fueron los duques de Edom por sus habitaciones en la tierra de su posesión. Edom es el mismo Esaú, padre de los Idumeos.
+
+
+## Génesis 37:1 (id: 10001037001)
+
+1Y HABITÓ Jacob en la tierra donde peregrinó su padre, en la tierra de Canaán.
+
+
+## Génesis 37:2 (id: 10001037002)
+
+2Estas fueron las generaciones de Jacob. José, siendo de edad de diez y siete años apacentaba las ovejas con sus hermanos; y el joven estaba con los hijos de Bilha, y con los hijos de Zilpa, mujeres de su padre: y noticiaba José á su padre la mala fama de ellos.
+
+
+## Génesis 37:3 (id: 10001037003)
+
+3Y amaba Israel á José más que á todos sus hijos, porque le había tenido en su vejez: y le hizo una ropa de diversos colores.
+
+
+## Génesis 37:4 (id: 10001037004)
+
+4Y viendo sus hermanos que su padre lo amaba más que á todos sus hermanos, aborrecíanle, y no le podían hablar pacíficamente.
+
+
+## Génesis 37:5 (id: 10001037005)
+
+5Y soñó José un sueño, y contólo á sus hermanos; y ellos vinieron á aborrecerle más todavía.
+
+
+## Génesis 37:6 (id: 10001037006)
+
+6Y él les dijo: Oíd ahora este sueño que he soñado:
+
+
+## Génesis 37:7 (id: 10001037007)
+
+7He aquí que atábamos manojos en medio del campo, y he aquí que mi manojo se levantaba, y estaba derecho, y que vuestros manojos estaban alrededor, y se inclinaban al mío.
+
+
+## Génesis 37:8 (id: 10001037008)
+
+8Y respondiéronle sus hermanos: ¿Has de reinar tú sobre nosotros, ó te has de enseñorear sobre nosotros? Y le aborrecieron aún más á causa de sus sueños y de sus palabras.
+
+
+## Génesis 37:9 (id: 10001037009)
+
+9Y soñó aún otro sueño, y contólo á sus hermanos, diciendo: He aquí que he soñado otro sueño, y he aquí que el sol y la luna y once estrellas se inclinaban á mí.
+
+
+## Génesis 37:10 (id: 10001037010)
+
+10Y contólo á su padre y á sus hermanos: y su padre le reprendió, y díjole: ¿Qué sueño es este que soñaste? ¿Hemos de venir yo y tu madre, y tus hermanos, á inclinarnos á ti á tierra?
+
+
+## Génesis 37:11 (id: 10001037011)
+
+11Y sus hermanos le tenían envidia, mas su padre paraba la consideración en ello.
+
+
+## Génesis 37:12 (id: 10001037012)
+
+12Y fueron sus hermanos á apacentar las ovejas de su padre en Sichêm.
+
+
+## Génesis 37:13 (id: 10001037013)
+
+13Y dijo Israel á José: Tus hermanos apacientan las ovejas en Sichêm: ven, y te enviaré á ellos. Y él respondió: Heme aquí.
+
+
+## Génesis 37:14 (id: 10001037014)
+
+14Y él le dijo: Ve ahora, mira cómo están tus hermanos y cómo están las ovejas, y tráeme la respuesta. Y enviólo del valle de Hebrón, y llegó á Sichêm.
+
+
+## Génesis 37:15 (id: 10001037015)
+
+15Y hallólo un hombre, andando él perdido por el campo, y preguntóle aquel hombre, diciendo: ¿Qué buscas?
+
+
+## Génesis 37:16 (id: 10001037016)
+
+16Y él respondió: Busco á mis hermanos: ruégote que me muestres dónde pastan.
+
+
+## Génesis 37:17 (id: 10001037017)
+
+17Y aquel hombre respondió: Ya se han ido de aquí; y yo les oí decir: Vamos á Dothán. Entonces José fué tras de sus hermanos, y hallólos en Dothán.
+
+
+## Génesis 37:18 (id: 10001037018)
+
+18Y como ellos lo vieron de lejos, antes que cerca de ellos llegara, proyectaron contra él para matarle.
+
+
+## Génesis 37:19 (id: 10001037019)
+
+19Y dijeron el uno al otro: He aquí viene el soñador;
+
+
+## Génesis 37:20 (id: 10001037020)
+
+20Ahora pues, venid, y matémoslo y echémosle en una cisterna, y diremos: Alguna mala bestia le devoró: y veremos qué serán sus sueños.
+
+
+## Génesis 37:21 (id: 10001037021)
+
+21Y como Rubén oyó esto, librólo de sus manos, y dijo: No lo matemos.
+
+
+## Génesis 37:22 (id: 10001037022)
+
+22Y díjoles Rubén: No derraméis sangre; echadlo en esta cisterna que está en el desierto, y no pongáis mano en él; por librarlo así de sus manos, para hacerlo volver á su padre.
+
+
+## Génesis 37:23 (id: 10001037023)
+
+23Y sucedió que, cuando llegó José á sus hermanos, ellos hicieron desnudar á José su ropa, la ropa de colores que tenía sobre sí;
+
+
+## Génesis 37:24 (id: 10001037024)
+
+24Y tomáronlo, y echáronle en la cisterna; mas la cisterna estaba vacía, no había en ella agua.
+
+
+## Génesis 37:25 (id: 10001037025)
+
+25Y sentáronse á comer pan: y alzando los ojos miraron, y he aquí una compañía de Ismaelitas que venía de Galaad, y sus camellos traían aromas y bálsamo y mirra, é iban á llevarlo á Egipto.
+
+
+## Génesis 37:26 (id: 10001037026)
+
+26Entonces Judá dijo á sus hermanos: ¿Qué provecho el que matemos á nuestro hermano y encubramos su muerte?
+
+
+## Génesis 37:27 (id: 10001037027)
+
+27Venid, y vendámosle á los Ismaelitas, y no sea nuestra mano sobre él; que nuestro hermano es nuestra carne. Y sus hermanos acordaron con él.
+
+
+## Génesis 37:28 (id: 10001037028)
+
+28Y como pasaban los Midianitas mercaderes, sacaron ellos á José de la cisterna, y trajéronle arriba, y le vendieron á los Ismaelitas por veinte piezas de plata. Y llevaron á José á Egipto.
+
+
+## Génesis 37:29 (id: 10001037029)
+
+29Y Rubén volvió á la cisterna, y no halló á José dentro, y rasgó sus vestidos.
+
+
+## Génesis 37:30 (id: 10001037030)
+
+30Y tornó á sus hermanos, y dijo: El mozo no parece; y yo, ¿adónde iré yo?
+
+
+## Génesis 37:31 (id: 10001037031)
+
+31Entonces tomaron ellos la ropa de José, y degollaron un cabrito de las cabras, y tiñeron la ropa con la sangre;
+
+
+## Génesis 37:32 (id: 10001037032)
+
+32Y enviaron la ropa de colores y trajéronla á su padre, y dijeron: Esta hemos hallado, reconoce ahora si es ó no la ropa de tu hijo.
+
+
+## Génesis 37:33 (id: 10001037033)
+
+33Y él la conoció, y dijo: La ropa de mi hijo es; alguna mala bestia le devoró; José ha sido despedazado.
+
+
+## Génesis 37:34 (id: 10001037034)
+
+34Entonces Jacob rasgó sus vestidos, y puso saco sobre sus lomos, y enlutóse por su hijo muchos días.
+
+
+## Génesis 37:35 (id: 10001037035)
+
+35Y levantáronse todos sus hijos y todas sus hijas para consolarlo; mas él no quiso tomar consolación, y dijo: Porque yo tengo de descender á mi hijo enlutado hasta la sepultura. Y llorólo su padre.
+
+
+## Génesis 37:36 (id: 10001037036)
+
+36Y los Midianitas lo vendieron en Egipto á Potiphar, eunuco de Faraón, capitán de los de la guardia.
+
+
+## Génesis 38:1 (id: 10001038001)
+
+1Y ACONTECIÓ en aquel tiempo, que Judá descendió de con sus hermanos, y fuése á un varón Adullamita, que se llamaba Hira.
+
+
+## Génesis 38:2 (id: 10001038002)
+
+2Y vió allí Judá la hija de un hombre Cananeo, el cual se llamaba Súa; y tomóla, y entró á ella:
+
+
+## Génesis 38:3 (id: 10001038003)
+
+3La cual concibió, y parió un hijo; y llamó su nombre Er.
+
+
+## Génesis 38:4 (id: 10001038004)
+
+4Y concibió otra vez, y parió un hijo, y llamó su nombre Onán.
+
+
+## Génesis 38:5 (id: 10001038005)
+
+5Y volvió á concebir, y parió un hijo, y llamó su nombre Sela. Y estaba en Chezib cuando lo parió.
+
+
+## Génesis 38:6 (id: 10001038006)
+
+6Y Judá tomó mujer para su primogénito Er, la cual se llamaba Thamar.
+
+
+## Génesis 38:7 (id: 10001038007)
+
+7Y Er, el primogénito de Judá, fué malo á los ojos de Jehová, y quitóle Jehová la vida.
+
+
+## Génesis 38:8 (id: 10001038008)
+
+8Entonces Judá dijo á Onán: Entra á la mujer de tu hermano, y despósate con ella, y suscita simiente á tu hermano.
+
+
+## Génesis 38:9 (id: 10001038009)
+
+9Y sabiendo Onán que la simiente no había de ser suya, sucedía que cuando entraba á la mujer de su hermano vertía en tierra, por no dar simiente á su hermano.
+
+
+## Génesis 38:10 (id: 10001038010)
+
+10Y desagradó en ojos de Jehová lo que hacía, y también quitó á él la vida.
+
+
+## Génesis 38:11 (id: 10001038011)
+
+11Y Judá dijo á Thamar su nuera: Estáte viuda en casa de tu padre, hasta que crezca Sela mi hijo; porque dijo: Que quizá no muera él también como sus hermanos. Y fuése Thamar, y estúvose en casa de su padre.
+
+
+## Génesis 38:12 (id: 10001038012)
+
+12Y pasaron muchos días, y murió la hija de Súa, mujer de Judá; y Judá se consoló, y subía á los trasquiladores de sus ovejas á Timnath, él y su amigo Hira el Adullamita.
+
+
+## Génesis 38:13 (id: 10001038013)
+
+13Y fué dado aviso á Thamar, diciendo: He aquí tu suegro sube á Timnath á trasquilar sus ovejas.
+
+
+## Génesis 38:14 (id: 10001038014)
+
+14Entonces quitó ella de sobre sí los vestidos de su viudez, y cubrióse con un velo, y arrebozóse, y se puso á la puerta de las aguas que están junto al camino de Timnath; porque veía que había crecido Sela, y ella no era dada á él por mujer.
+
+
+## Génesis 38:15 (id: 10001038015)
+
+15Y vióla Judá, y túvola por ramera, porque había ella cubierto su rostro.
+
+
+## Génesis 38:16 (id: 10001038016)
+
+16Y apartóse del camino hacia ella, y díjole: Ea, pues, ahora entraré á ti; porque no sabía que era su nuera; y ella dijo: ¿Qué me has de dar, si entrares á mí?
+
+
+## Génesis 38:17 (id: 10001038017)
+
+17El respondió: Yo te enviaré del ganado un cabrito de las cabras. Y ella dijo: Hasme de dar prenda hasta que lo envíes.
+
+
+## Génesis 38:18 (id: 10001038018)
+
+18Entonces él dijo: ¿Qué prenda te daré? Ella respondió: Tu anillo, y tu manto, y tu bordón que tienes en tu mano. Y él se los dió, y entró á ella, la cual concibió de él.
+
+
+## Génesis 38:19 (id: 10001038019)
+
+19Y levantóse, y fuése: y quitóse el velo de sobre sí, y vistióse las ropas de su viudez.
+
+
+## Génesis 38:20 (id: 10001038020)
+
+20Y Judá envió el cabrito de las cabras por mano de su amigo el Adullamita, para que tomase la prenda de mano de la mujer; mas no la halló.
+
+
+## Génesis 38:21 (id: 10001038021)
+
+21Y preguntó á los hombres de aquel lugar, diciendo: ¿Dónde está la ramera de las aguas junto al camino? Y ellos le dijeron: No ha estado aquí ramera.
+
+
+## Génesis 38:22 (id: 10001038022)
+
+22Entonces él se volvió á Judá, y dijo: No la he hallado; y también los hombres del lugar dijeron: Aquí no ha estado ramera.
+
+
+## Génesis 38:23 (id: 10001038023)
+
+23Y Judá dijo: Tómeselo para sí, porque no seamos menospreciados: he aquí yo he enviado este cabrito, y tú no la hallaste.
+
+
+## Génesis 38:24 (id: 10001038024)
+
+24Y acaeció que al cabo de unos tres meses fué dado aviso á Judá, diciendo: Thamar tu nuera ha fornicado, y aun cierto está preñada de las fornicaciones. Y Judá dijo: Sacadla, y sea quemada.
+
+
+## Génesis 38:25 (id: 10001038025)
+
+25Y ella, cuando la sacaban, envió á decir á su suegro: Del varón cuyas son estas cosas, estoy preñada: y dijo más: Mira ahora cúyas son estas cosas, el anillo, y el manto, y el bordón.
+
+
+## Génesis 38:26 (id: 10001038026)
+
+26Entonces Judá los reconoció, y dijo: Más justa es que yo, por cuanto no la he dado á Sela mi hijo. Y nunca más la conoció.
+
+
+## Génesis 38:27 (id: 10001038027)
+
+27Y aconteció que al tiempo del parir, he aquí había dos en su vientre.
+
+
+## Génesis 38:28 (id: 10001038028)
+
+28Y sucedió, cuando paría, que sacó la mano el uno, y la partera tomó y ató á su mano un hilo de grana, diciendo: Este salió primero.
+
+
+## Génesis 38:29 (id: 10001038029)
+
+29Empero fué que tornando él á meter la mano, he aquí su hermano salió; y ella dijo: ¿Por qué has hecho sobre ti rotura? Y llamó su nombre Phares.
+
+
+## Génesis 38:30 (id: 10001038030)
+
+30Y después salió su hermano, el que tenía en su mano el hilo de grana, y llamó su nombre Zara.
+
+
+## Génesis 39:1 (id: 10001039001)
+
+1Y LLEVADO José á Egipto, comprólo Potiphar, eunuco de Faraón, capitán de los de la guardia, varón Egipcio, de mano de los Ismaelitas que lo habían llevado allá.
+
+
+## Génesis 39:2 (id: 10001039002)
+
+2Mas Jehová fué con José, y fué varón prosperado: y estaba en la casa de su señor el Egipcio.
+
+
+## Génesis 39:3 (id: 10001039003)
+
+3Y vió su señor que Jehová era con él, y que todo lo que él hacía, Jehová lo hacía prosperar en su mano.
+
+
+## Génesis 39:4 (id: 10001039004)
+
+4Así halló José gracia en sus ojos, y servíale; y él le hizo mayordomo de su casa, y entregó en su poder todo lo que tenía.
+
+
+## Génesis 39:5 (id: 10001039005)
+
+5Y aconteció que, desde cuando le dió el encargo de su casa, y de todo lo que tenía, Jehová bendijo la casa del Egipcio á causa de José; y la bendición de Jehová fué sobre todo lo que tenía, así en casa como en el campo.
+
+
+## Génesis 39:6 (id: 10001039006)
+
+6Y dejó todo lo que tenía en mano de José; ni con él sabía de nada más que del pan que comía. Y era José de hermoso semblante y bella presencia.
+
+
+## Génesis 39:7 (id: 10001039007)
+
+7Y aconteció después de esto, que la mujer de su señor puso sus ojos en José, y dijo: Duerme conmigo.
+
+
+## Génesis 39:8 (id: 10001039008)
+
+8Y él no quiso, y dijo á la mujer de su señor: He aquí que mi señor no sabe conmigo lo que hay en casa, y ha puesto en mi mano todo lo que tiene:
+
+
+## Génesis 39:9 (id: 10001039009)
+
+9No hay otro mayor que yo en esta casa, y ninguna cosa me ha reservado sino á ti, por cuanto tú eres su mujer; ¿cómo, pues, haría yo este grande mal, y pecaría contra Dios?
+
+
+## Génesis 39:10 (id: 10001039010)
+
+10Y fué que hablando ella á José cada día, y no escuchándola él para acostarse al lado de ella, para estar con ella,
+
+
+## Génesis 39:11 (id: 10001039011)
+
+11Aconteció que entró él un día en casa para hacer su oficio, y no había nadie de los de casa allí en casa:
+
+
+## Génesis 39:12 (id: 10001039012)
+
+12Y asiólo ella por su ropa, diciendo: Duerme conmigo. Entonces dejóla él su ropa en las manos, y huyó, y salióse fuera.
+
+
+## Génesis 39:13 (id: 10001039013)
+
+13Y acaeció que cuando vió ella que le había dejado su ropa en sus manos, y había huído fuera,
+
+
+## Génesis 39:14 (id: 10001039014)
+
+14Llamó á los de casa, y hablóles diciendo: Mirad, nos ha traído un Hebreo, para que hiciese burla de nosotros: vino él á mí para dormir conmigo, y yo dí grandes voces;
+
+
+## Génesis 39:15 (id: 10001039015)
+
+15Y viendo que yo alzaba la voz y gritaba, dejó junto á mí su ropa, y huyó, y salióse fuera.
+
+
+## Génesis 39:16 (id: 10001039016)
+
+16Y ella puso junto á sí la ropa de él, hasta que vino su señor á su casa.
+
+
+## Génesis 39:17 (id: 10001039017)
+
+17Entonces le habló ella semejantes palabras, diciendo: El siervo Hebreo que nos trajiste, vino á mí para deshonrarme;
+
+
+## Génesis 39:18 (id: 10001039018)
+
+18Y como yo alcé mi voz y grité, él dejó su ropa junto á mí, y huyó fuera.
+
+
+## Génesis 39:19 (id: 10001039019)
+
+19Y sucedió que como oyó su señor las palabras que su mujer le hablara, diciendo: Así me ha tratado tu siervo; encendióse su furor.
+
+
+## Génesis 39:20 (id: 10001039020)
+
+20Y tomó su señor á José, y púsole en la casa de la cárcel, donde estaban los presos del rey, y estuvo allí en la casa de la cárcel.
+
+
+## Génesis 39:21 (id: 10001039021)
+
+21Mas Jehová fué con José, y extendió á él su misericordia, y dióle gracia en ojos del principal de la casa de la cárcel.
+
+
+## Génesis 39:22 (id: 10001039022)
+
+22Y el principal de la casa de la cárcel entregó en mano de José todos los presos que había en aquella prisión; todo lo que hacían allí, él lo hacía.
+
+
+## Génesis 39:23 (id: 10001039023)
+
+23No veía el principal de la cárcel cosa alguna que en su mano estaba; porque Jehová era con él, y lo que él hacía, Jehová lo prosperaba.
+
+
+## Génesis 40:1 (id: 10001040001)
+
+1Y ACONTECIÓ después de estas cosas, que el copero del rey de Egipto y el panadero delinquieron contra su señor el rey de Egipto.
+
+
+## Génesis 40:2 (id: 10001040002)
+
+2Y enojóse Faraón contra sus dos eunucos, contra el principal de los coperos, y contra el principal de los panaderos:
+
+
+## Génesis 40:3 (id: 10001040003)
+
+3Y púsolos en prisión en la casa del capitán de los de la guardia, en la casa de la cárcel donde José estaba preso.
+
+
+## Génesis 40:4 (id: 10001040004)
+
+4Y el capitán de los de la guardia dió cargo de ellos á José, y él les servía: y estuvieron días en la prisión.
+
+
+## Génesis 40:5 (id: 10001040005)
+
+5Y ambos á dos, el copero y el panadero del rey de Egipto, que estaban arrestados en la prisión, vieron un sueño, cada uno su sueño en una misma noche, cada uno conforme á la declaración de su sueño.
+
+
+## Génesis 40:6 (id: 10001040006)
+
+6Y vino á ellos José por la mañana, y mirólos, y he aquí que estaban tristes.
+
+
+## Génesis 40:7 (id: 10001040007)
+
+7Y él preguntó á aquellos eunucos de Faraón, que estaban con él en la prisión de la casa de su señor, diciendo: ¿Por qué parecen hoy mal vuestros semblantes?
+
+
+## Génesis 40:8 (id: 10001040008)
+
+8Y ellos le dijeron: Hemos tenido un sueño, y no hay quien lo declare. Entonces les dijo José: ¿No son de Dios las declaraciones? Contádmelo ahora.
+
+
+## Génesis 40:9 (id: 10001040009)
+
+9Entonces el principal de los coperos contó su sueño á José, y díjole: Yo soñaba que veía una vid delante de mí,
+
+
+## Génesis 40:10 (id: 10001040010)
+
+10Y en la vid tres sarmientos; y ella como que brotaba, y arrojaba su flor, viniendo á madurar sus racimos de uvas:
+
+
+## Génesis 40:11 (id: 10001040011)
+
+11Y que la copa de Faraón estaba en mi mano, y tomaba yo las uvas, y las exprimía en la copa de Faraón, y daba yo la copa en mano de Faraón.
+
+
+## Génesis 40:12 (id: 10001040012)
+
+12Y díjole José: Esta es su declaración: Los tres sarmientos son tres días:
+
+
+## Génesis 40:13 (id: 10001040013)
+
+13Al cabo de tres días Faraón te hará levantar cabeza, y te restituirá á tu puesto: y darás la copa á Faraón en su mano, como solías cuando eras su copero.
+
+
+## Génesis 40:14 (id: 10001040014)
+
+14Acuérdate, pues, de mí para contigo cuando tuvieres ese bien, y ruégote que uses conmigo de misericordia, y hagas mención de mí á Faraón, y me saques de esta casa:
+
+
+## Génesis 40:15 (id: 10001040015)
+
+15Porque hurtado he sido de la tierra de los Hebreos; y tampoco he hecho aquí porqué me hubiesen de poner en la cárcel.
+
+
+## Génesis 40:16 (id: 10001040016)
+
+16Y viendo el principal de los panaderos que había declarado para bien, dijo á José: También yo soñaba que veía tres canastillos blancos sobre mi cabeza;
+
+
+## Génesis 40:17 (id: 10001040017)
+
+17Y en el canastillo más alto había de todas las viandas de Faraón, obra de panadero; y que las aves las comían del canastillo de sobre mi cabeza.
+
+
+## Génesis 40:18 (id: 10001040018)
+
+18Entonces respondió José, y dijo: Esta es su declaración: Los tres canastillos tres días son;
+
+
+## Génesis 40:19 (id: 10001040019)
+
+19Al cabo de tres días quitará Faraón tu cabeza de sobre ti, y te hará colgar en la horca, y las aves comerán tu carne de sobre ti.
+
+
+## Génesis 40:20 (id: 10001040020)
+
+20Y fué el tercero día el día del nacimiento de Faraón, é hizo banquete á todos sus sirvientes: y alzó la cabeza del principal de los coperos, y la cabeza del principal de los panaderos, entre sus servidores.
+
+
+## Génesis 40:21 (id: 10001040021)
+
+21E hizo volver á su oficio al principal de los coperos; y dió él la copa en mano de Faraón.
+
+
+## Génesis 40:22 (id: 10001040022)
+
+22Mas hizo ahorcar al principal de los panaderos, como le había declarado José.
+
+
+## Génesis 40:23 (id: 10001040023)
+
+23Y el principal de los coperos no se acordó de José, sino que le olvidó.
+
+
+## Génesis 41:1 (id: 10001041001)
+
+1Y ACONTECIÓ que pasados dos años tuvo Faraón un sueño: Parecíale que estaba junto al río;
+
+
+## Génesis 41:2 (id: 10001041002)
+
+2Y que del río subían siete vacas, hermosas á la vista, y muy gordas, y pacían en el prado:
+
+
+## Génesis 41:3 (id: 10001041003)
+
+3Y que otras siete vacas subían tras ellas del río, de fea vista, y enjutas de carne, y se pararon cerca de las vacas hermosas á la orilla del río:
+
+
+## Génesis 41:4 (id: 10001041004)
+
+4Y que las vacas de fea vista y enjutas de carne devoraban á las siete vacas hermosas y muy gordas. Y despertó Faraón.
+
+
+## Génesis 41:5 (id: 10001041005)
+
+5Durmióse de nuevo, y soñó la segunda vez: Que siete espigas llenas y hermosas subían de una sola caña:
+
+
+## Génesis 41:6 (id: 10001041006)
+
+6Y que otras siete espigas menudas y abatidas del Solano, salían después de ellas:
+
+
+## Génesis 41:7 (id: 10001041007)
+
+7Y las siete espigas menudas devoraban á las siete espigas gruesas y llenas. Y despertó Faraón, y he aquí que era sueño.
+
+
+## Génesis 41:8 (id: 10001041008)
+
+8Y acaeció que á la mañana estaba agitado su espíritu; y envió é hizo llamar á todos los magos de Egipto, y á todos sus sabios: y contóles Faraón sus sueños, mas no había quien á Faraón los declarase.
+
+
+## Génesis 41:9 (id: 10001041009)
+
+9Entonces el principal de los coperos habló á Faraón, diciendo: Acuérdome hoy de mis faltas:
+
+
+## Génesis 41:10 (id: 10001041010)
+
+10Faraón se enojó contra sus siervos, y á mí me echó á la prisión de la casa del capitán de los de la guardia, á mí y al principal de los panaderos:
+
+
+## Génesis 41:11 (id: 10001041011)
+
+11Y yo y él vimos un sueño una misma noche: cada uno soñó conforme á la declaración de su sueño.
+
+
+## Génesis 41:12 (id: 10001041012)
+
+12Y estaba allí con nosotros un mozo Hebreo, sirviente del capitán de los de la guardia; y se lo contamos, y él nos declaró nuestros sueños, y declaró á cada uno conforme á su sueño.
+
+
+## Génesis 41:13 (id: 10001041013)
+
+13Y aconteció que como él nos declaró, así fué: á mí me hizo volver á mi puesto, é hizo colgar al otro.
+
+
+## Génesis 41:14 (id: 10001041014)
+
+14Entonces Faraón envió y llamó á José; é hiciéronle salir corriendo de la cárcel, y le cortaron el pelo, y mudaron sus vestidos, y vino á Faraón.
+
+
+## Génesis 41:15 (id: 10001041015)
+
+15Y dijo Faraón á José: Yo he tenido un sueño, y no hay quien lo declare; mas he oído decir de ti, que oyes sueños para declararlos.
+
+
+## Génesis 41:16 (id: 10001041016)
+
+16Y respondió José á Faraón, diciendo: No está en mí; Dios será el que responda paz á Faraón.
+
+
+## Génesis 41:17 (id: 10001041017)
+
+17Entonces Faraón dijo á José: En mi sueño parecíame que estaba á la orilla del río:
+
+
+## Génesis 41:18 (id: 10001041018)
+
+18Y que del río subían siete vacas de gruesas carnes y hermosa apariencia, que pacían en el prado:
+
+
+## Génesis 41:19 (id: 10001041019)
+
+19Y que otras siete vacas subían después de ellas, flacas y de muy fea traza; tan extenuadas, que no he visto otras semejantes en toda la tierra de Egipto en fealdad:
+
+
+## Génesis 41:20 (id: 10001041020)
+
+20Y las vacas flacas y feas devoraban á las siete primeras vacas gruesas:
+
+
+## Génesis 41:21 (id: 10001041021)
+
+21Y entraban en sus entrañas, mas no se conocía que hubiesen entrado en ellas, porque su parecer era aún malo, como de primero. Y yo desperté.
+
+
+## Génesis 41:22 (id: 10001041022)
+
+22Vi también soñando, que siete espigas subían en una misma caña llenas y hermosas;
+
+
+## Génesis 41:23 (id: 10001041023)
+
+23Y que otras siete espigas menudas, marchitas, abatidas del Solano, subían después de ellas:
+
+
+## Génesis 41:24 (id: 10001041024)
+
+24Y las espigas menudas devoraban á las siete espigas hermosas: y helo dicho á los magos, mas no hay quien me lo declare.
+
+
+## Génesis 41:25 (id: 10001041025)
+
+25Entonces respondió José á Faraón: El sueño de Faraón es uno mismo: Dios ha mostrado á Faraón lo que va á hacer.
+
+
+## Génesis 41:26 (id: 10001041026)
+
+26Las siete vacas hermosas siete años son; y las espigas hermosas son siete años: el sueño es uno mismo.
+
+
+## Génesis 41:27 (id: 10001041027)
+
+27También las siete vacas flacas y feas que subían tras ellas, son siete años; y las siete espigas menudas y marchitas del Solano, siete años serán de hambre.
+
+
+## Génesis 41:28 (id: 10001041028)
+
+28Esto es lo que respondo á Faraón. Lo que Dios va á hacer, halo mostrado á Faraón.
+
+
+## Génesis 41:29 (id: 10001041029)
+
+29He aquí vienen siete años de grande hartura en toda la tierra de Egipto:
+
+
+## Génesis 41:30 (id: 10001041030)
+
+30Y levantarse han tras ellos siete años de hambre; y toda la hartura será olvidada en la tierra de Egipto; y el hambre consumirá la tierra;
+
+
+## Génesis 41:31 (id: 10001041031)
+
+31Y aquella abundancia no se echará de ver á causa del hambre siguiente, la cual será gravísima.
+
+
+## Génesis 41:32 (id: 10001041032)
+
+32Y el suceder el sueño á Faraón dos veces, significa que la cosa es firme de parte de Dios, y que Dios se apresura á hacerla.
+
+
+## Génesis 41:33 (id: 10001041033)
+
+33Por tanto, provéase ahora Faraón de un varón prudente y sabio, y póngalo sobre la tierra de Egipto.
+
+
+## Génesis 41:34 (id: 10001041034)
+
+34Haga esto Faraón, y ponga gobernadores sobre el país, y quinte la tierra de Egipto en los siete años de la hartura;
+
+
+## Génesis 41:35 (id: 10001041035)
+
+35Y junten toda la provisión de estos buenos años que vienen, y alleguen el trigo bajo la mano de Faraón para mantenimiento de las ciudades; y guárdenlo.
+
+
+## Génesis 41:36 (id: 10001041036)
+
+36Y esté aquella provisión en depósito para el país, para los siete años del hambre que serán en la tierra de Egipto; y el país no perecerá de hambre.
+
+
+## Génesis 41:37 (id: 10001041037)
+
+37Y el negocio pareció bien á Faraón, y á sus siervos.
+
+
+## Génesis 41:38 (id: 10001041038)
+
+38Y dijo Faraón á sus siervos: ¿Hemos de hallar otro hombre como éste, en quien haya espíritu de Dios?
+
+
+## Génesis 41:39 (id: 10001041039)
+
+39Y dijo Faraón á José: Pues que Dios te ha hecho saber todo esto, no hay entendido ni sabio como tú:
+
+
+## Génesis 41:40 (id: 10001041040)
+
+40Tú serás sobre mi casa, y por tu dicho se gobernará todo mi pueblo: solamente en el trono seré yo mayor que tú.
+
+
+## Génesis 41:41 (id: 10001041041)
+
+41Dijo más Faraón á José: He aquí yo te he puesto sobre toda la tierra de Egipto.
+
+
+## Génesis 41:42 (id: 10001041042)
+
+42Entonces Faraón quitó su anillo de su mano, y púsolo en la mano de José, é hízole vestir de ropas de lino finísimo, y puso un collar de oro en su cuello;
+
+
+## Génesis 41:43 (id: 10001041043)
+
+43E hízolo subir en su segundo carro, y pregonaron delante de él: Doblad la rodilla: y púsole sobre toda la tierra de Egipto.
+
+
+## Génesis 41:44 (id: 10001041044)
+
+44Y dijo Faraón á José: Yo Faraón; y sin ti ninguno alzará su mano ni su pie en toda la tierra de Egipto.
+
+
+## Génesis 41:45 (id: 10001041045)
+
+45Y llamó Faraón el nombre de José, Zaphnath\\-paaneah; y dióle por mujer á Asenath, hija de Potipherah, sacerdote de On. Y salió José por toda la tierra de Egipto.
+
+
+## Génesis 41:46 (id: 10001041046)
+
+46Y era José de edad de treinta años cuando fué presentado delante de Faraón, rey de Egipto: y salió José de delante de Faraón, y transitó por toda la tierra de Egipto.
+
+
+## Génesis 41:47 (id: 10001041047)
+
+47E hizo la tierra en aquellos siete años de hartura á montones.
+
+
+## Génesis 41:48 (id: 10001041048)
+
+48Y él juntó todo el mantenimiento de los siete años que fueron en la tierra de Egipto, y guardó mantenimiento en las ciudades, poniendo en cada ciudad el mantenimiento del campo de sus alrededores.
+
+
+## Génesis 41:49 (id: 10001041049)
+
+49Y acopió José trigo como arena de la mar, mucho en extremo, hasta no poderse contar, porque no tenía número.
+
+
+## Génesis 41:50 (id: 10001041050)
+
+50Y nacieron á José dos hijos antes que viniese el primer año del hambre, los cuales le parió Asenath, hija de Potipherah, sacerdote de On.
+
+
+## Génesis 41:51 (id: 10001041051)
+
+51Y llamó José el nombre del primogénito Manasés; porque Dios (dijo) me hizo olvidar todo mi trabajo, y toda la casa de mi padre.
+
+
+## Génesis 41:52 (id: 10001041052)
+
+52Y el nombre del segundo llamólo Ephraim; porque Dios (dijo) me hizo fértil en la tierra de mi aflicción.
+
+
+## Génesis 41:53 (id: 10001041053)
+
+53Y cumpliéronse los siete años de la hartura, que hubo en la tierra de Egipto.
+
+
+## Génesis 41:54 (id: 10001041054)
+
+54Y comenzaron á venir los siete años del hambre, como José había dicho: y hubo hambre en todos los países, mas en toda la tierra de Egipto había pan.
+
+
+## Génesis 41:55 (id: 10001041055)
+
+55Y cuando se sintió el hambre en toda la tierra de Egipto, el pueblo clamó á Faraón por pan. Y dijo Faraón á todos los Egipcios: Id á José, y haced lo que él os dijere.
+
+
+## Génesis 41:56 (id: 10001041056)
+
+56Y el hambre estaba por toda la extensión del país. Entonces abrió José todo granero donde había, y vendía á los Egipcios; porque había crecido el hambre en la tierra de Egipto.
+
+
+## Génesis 41:57 (id: 10001041057)
+
+57Y toda la tierra venía á Egipto para comprar de José, porque por toda la tierra había crecido el hambre.
+
+
+## Génesis 42:1 (id: 10001042001)
+
+1Y VIENDO Jacob que en Egipto había alimentos, dijo á sus hijos: ¿Por qué os estáis mirando?
+
+
+## Génesis 42:2 (id: 10001042002)
+
+2Y dijo: He aquí, yo he oído que hay víveres en Egipto; descended allá, y comprad de allí para nosotros, para que podamos vivir, y no nos muramos.
+
+
+## Génesis 42:3 (id: 10001042003)
+
+3Y descendieron los diez hermanos de José á comprar trigo á Egipto.
+
+
+## Génesis 42:4 (id: 10001042004)
+
+4Mas Jacob no envió á Benjamín hermano de José con sus hermanos; porque dijo: No sea acaso que le acontezca algún desastre.
+
+
+## Génesis 42:5 (id: 10001042005)
+
+5Y vinieron los hijos de Israel á comprar entre los que venían: porque había hambre en la tierra de Canaán.
+
+
+## Génesis 42:6 (id: 10001042006)
+
+6Y José era el señor de la tierra, que vendía á todo el pueblo de la tierra: y llegaron los hermanos de José, é inclináronse á él rostro por tierra.
+
+
+## Génesis 42:7 (id: 10001042007)
+
+7Y José como vió á sus hermanos, conociólos; mas hizo que no los conocía, y hablóles ásperamente, y les dijo: ¿De dónde habéis venido? Ellos respondieron: De la tierra de Canaán á comprar alimentos.
+
+
+## Génesis 42:8 (id: 10001042008)
+
+8José, pues, conoció á sus hermanos; pero ellos no le conocieron.
+
+
+## Génesis 42:9 (id: 10001042009)
+
+9Entonces se acordó José de los sueños que había tenido de ellos, y díjoles: Espías sois; por ver lo descubierto del país habéis venido.
+
+
+## Génesis 42:10 (id: 10001042010)
+
+10Y ellos le respondieron: No, señor mío: mas tus siervos han venido á comprar alimentos.
+
+
+## Génesis 42:11 (id: 10001042011)
+
+11Todos nosotros somos hijos de un varón: somos hombres de verdad: tus siervos nunca fueron espías.
+
+
+## Génesis 42:12 (id: 10001042012)
+
+12Y él les dijo: No; á ver lo descubierto del país habéis venido.
+
+
+## Génesis 42:13 (id: 10001042013)
+
+13Y ellos respondieron: Tus siervos somos doce hermanos, hijos de un varón en la tierra de Canaán; y he aquí el menor está hoy con nuestro padre, y otro no parece.
+
+
+## Génesis 42:14 (id: 10001042014)
+
+14Y José les dijo: Eso es lo que os he dicho, afirmando que sois espías:
+
+
+## Génesis 42:15 (id: 10001042015)
+
+15En esto seréis probados: Vive Faraón que no saldréis de aquí, sino cuando vuestro hermano menor aquí viniere.
+
+
+## Génesis 42:16 (id: 10001042016)
+
+16Enviad uno de vosotros, y traiga á vuestro hermano; y vosotros quedad presos, y vuestras palabras serán probadas, si hay verdad con vosotros: y si no, vive Faraón, que sois espías.
+
+
+## Génesis 42:17 (id: 10001042017)
+
+17Y juntólos en la cárcel por tres días.
+
+
+## Génesis 42:18 (id: 10001042018)
+
+18Y al tercer día díjoles José: Haced esto, y vivid: Yo temo á Dios:
+
+
+## Génesis 42:19 (id: 10001042019)
+
+19Si sois hombres de verdad, quede preso en la casa de vuestra cárcel uno de vuestros hermanos; y vosotros id, llevad el alimento para el hambre de vuestra casa:
+
+
+## Génesis 42:20 (id: 10001042020)
+
+20Pero habéis de traerme á vuestro hermano menor, y serán verificadas vuestras palabras, y no moriréis. Y ellos lo hicieron así.
+
+
+## Génesis 42:21 (id: 10001042021)
+
+21Y decían el uno al otro: Verdaderamente hemos pecado contra nuestro hermano, que vimos la angustia de su alma cuando nos rogaba, y no le oímos: por eso ha venido sobre nosotros esta angustia.
+
+
+## Génesis 42:22 (id: 10001042022)
+
+22Entonces Rubén les respondió, diciendo: ¿No os hablé yo y dije: No pequéis contra el mozo; y no escuchasteis? He aquí también su sangre es requerida.
+
+
+## Génesis 42:23 (id: 10001042023)
+
+23Y ellos no sabían que los entendía José, porque había intérprete entre ellos.
+
+
+## Génesis 42:24 (id: 10001042024)
+
+24Y apartóse él de ellos, y lloró: después volvió á ellos, y les habló, y tomó de entre ellos á Simeón, y aprisionóle á vista de ellos.
+
+
+## Génesis 42:25 (id: 10001042025)
+
+25Y mandó José que llenaran sus sacos de trigo, y devolviesen el dinero de cada uno de ellos, poniéndolo en su saco, y les diesen comida para el camino: é hízose así con ellos.
+
+
+## Génesis 42:26 (id: 10001042026)
+
+26Y ellos pusieron su trigo sobre sus asnos, y fuéronse de allí.
+
+
+## Génesis 42:27 (id: 10001042027)
+
+27Y abriendo uno de ellos su saco para dar de comer á su asno en el mesón, vió su dinero que estaba en la boca de su costal.
+
+
+## Génesis 42:28 (id: 10001042028)
+
+28Y dijo á sus hermanos: Mi dinero se me ha devuelto, y aun helo aquí en mi saco. Sobresaltóseles entonces el corazón, y espantados dijeron el uno al otro: ¿Qué es esto que nos ha hecho Dios?
+
+
+## Génesis 42:29 (id: 10001042029)
+
+29Y venidos á Jacob su padre en tierra de Canaán, contáronle todo lo que les había acaecido, diciendo:
+
+
+## Génesis 42:30 (id: 10001042030)
+
+30Aquel varón, señor de la tierra, nos habló ásperamente, y nos trató como á espías de la tierra:
+
+
+## Génesis 42:31 (id: 10001042031)
+
+31Y nosotros le dijimos: Somos hombres de verdad, nunca fuimos espías:
+
+
+## Génesis 42:32 (id: 10001042032)
+
+32Somos doce hermanos, hijos de nuestro padre; uno no parece, y el menor está hoy con nuestro padre en la tierra de Canaán.
+
+
+## Génesis 42:33 (id: 10001042033)
+
+33Y aquel varón, señor de la tierra, nos dijo: En esto conoceré que sois hombres de verdad; dejad conmigo uno de vuestros hermanos, y tomad para el hambre de vuestras casas, y andad,
+
+
+## Génesis 42:34 (id: 10001042034)
+
+34Y traedme á vuestro hermano el menor, para que yo sepa que no sois espías, sino hombres de verdad: así os daré á vuestro hermano, y negociaréis en la tierra.
+
+
+## Génesis 42:35 (id: 10001042035)
+
+35Y aconteció que vaciando ellos sus sacos, he aquí que en el saco de cada uno estaba el atado de su dinero: y viendo ellos y su padre los atados de su dinero, tuvieron temor.
+
+
+## Génesis 42:36 (id: 10001042036)
+
+36Entonces su padre Jacob les dijo: Habéisme privado de mis hijos; José no parece, ni Simeón tampoco, y á Benjamín le llevaréis: contra mí son todas estas cosas.
+
+
+## Génesis 42:37 (id: 10001042037)
+
+37Y Rubén habló á su padre, diciendo: Harás morir á mis dos hijos, si no te lo volviere; entrégalo en mi mano, que yo lo volveré á ti.
+
+
+## Génesis 42:38 (id: 10001042038)
+
+38Y él dijo: No descenderá mi hijo con vosotros; que su hermano es muerto, y él solo ha quedado: y si le aconteciere algún desastre en el camino por donde vais, haréis descender mis canas con dolor á la sepultura.
+
+
+## Génesis 43:1 (id: 10001043001)
+
+1Y EL hambre era grande en la tierra.
+
+
+## Génesis 43:2 (id: 10001043002)
+
+2Y aconteció que como acabaron de comer el trigo que trajeron de Egipto, díjoles su padre: Volved, y comprad para nosotros un poco de alimento.
+
+
+## Génesis 43:3 (id: 10001043003)
+
+3Y respondió Judá, diciendo: Aquel varón nos protestó con ánimo resuelto, diciendo: No veréis mi rostro sin vuestro hermano con vosotros.
+
+
+## Génesis 43:4 (id: 10001043004)
+
+4Si enviares á nuestro hermano con nosotros, descenderemos y te compraremos alimento:
+
+
+## Génesis 43:5 (id: 10001043005)
+
+5Pero si no le enviares, no descenderemos: porque aquel varón nos dijo: No veréis mi rostro sin vuestro hermano con vosotros.
+
+
+## Génesis 43:6 (id: 10001043006)
+
+6Y dijo Israel: ¿Por qué me hicisteis tanto mal, declarando al varón que teníais más hermano?
+
+
+## Génesis 43:7 (id: 10001043007)
+
+7Y ellos respondieron: Aquel varón nos preguntó expresamente por nosotros, y por nuestra parentela, diciendo: ¿Vive aún vuestro padre? ¿tenéis otro hermano? y declarámosle conforme á estas palabras. ¿Podíamos nosotros saber que había de decir: Haced venir á vuestro hermano?
+
+
+## Génesis 43:8 (id: 10001043008)
+
+8Entonces Judá dijo á Israel su padre: Envía al mozo conmigo, y nos levantaremos é iremos, á fin que vivamos y no muramos nosotros, y tú, y nuestros niños.
+
+
+## Génesis 43:9 (id: 10001043009)
+
+9Yo lo fío; á mí me pedirás cuenta de él: si yo no te lo volviere y lo pusiere delante de ti, seré para ti el culpante todos los días:
+
+
+## Génesis 43:10 (id: 10001043010)
+
+10Que si no nos hubiéramos detenido, cierto ahora hubiéramos ya vuelto dos veces.
+
+
+## Génesis 43:11 (id: 10001043011)
+
+11Entonces Israel su padre les respondió: Pues que así es, hacedlo; tomad de lo mejor de la tierra en vuestros vasos, y llevad á aquel varón un presente, un poco de bálsamo, y un poco de miel, aromas y mirra, nueces y almendras.
+
+
+## Génesis 43:12 (id: 10001043012)
+
+12Y tomad en vuestras manos doblado dinero, y llevad en vuestra mano el dinero vuelto en las bocas de vuestros costales; quizá fué yerro.
+
+
+## Génesis 43:13 (id: 10001043013)
+
+13Tomad también á vuestro hermano, y levantaos, y volved á aquel varón.
+
+
+## Génesis 43:14 (id: 10001043014)
+
+14Y el Dios Omnipotente os dé misericordias delante de aquel varón, y os suelte al otro vuestro hermano, y á este Benjamín. Y si he de ser privado de mis hijos, séalo.
+
+
+## Génesis 43:15 (id: 10001043015)
+
+15Entonces tomaron aquellos varones el presente, y tomaron en su mano doblado dinero, y á Benjamín; y se levantaron, y descendieron á Egipto, y presentáronse delante de José.
+
+
+## Génesis 43:16 (id: 10001043016)
+
+16Y vió José á Benjamín con ellos, y dijo al mayordomo de su casa: Mete en casa á esos hombres, y degüella víctima, y aderézala; porque estos hombres comerán conmigo al medio día.
+
+
+## Génesis 43:17 (id: 10001043017)
+
+17E hizo el hombre como José dijo; y metió aquel hombre á los hombres en casa de José.
+
+
+## Génesis 43:18 (id: 10001043018)
+
+18Y aquellos hombres tuvieron temor, cuando fueron metidos en casa de José, y decían: Por el dinero que fué vuelto en nuestros costales la primera vez nos han metido aquí, para revolver contra nosotros, y dar sobre nosotros, y tomarnos por siervos á nosotros, y á nuestros asnos.
+
+
+## Génesis 43:19 (id: 10001043019)
+
+19Y llegáronse al mayordomo de la casa de José, y le hablaron á la entrada de la casa.
+
+
+## Génesis 43:20 (id: 10001043020)
+
+20Y dijeron: Ay, señor mío, nosotros en realidad de verdad descendimos al principio á comprar alimentos:
+
+
+## Génesis 43:21 (id: 10001043021)
+
+21Y aconteció que como vinimos al mesón y abrimos nuestros costales, he aquí el dinero de cada uno estaba en la boca de su costal, nuestro dinero en su justo peso; y hémoslo vuelto en nuestras manos.
+
+
+## Génesis 43:22 (id: 10001043022)
+
+22Hemos también traído en nuestras manos otro dinero para comprar alimentos: nosotros no sabemos quién haya puesto nuestro dinero en nuestros costales.
+
+
+## Génesis 43:23 (id: 10001043023)
+
+23Y él respondió: Paz á vosotros, no temáis; vuestro Dios y el Dios de vuestro padre os dió el tesoro en vuestros costales: vuestro dinero vino á mí. Y sacó á Simeón á ellos.
+
+
+## Génesis 43:24 (id: 10001043024)
+
+24Y metió aquel varón á aquellos hombres en casa de José: y dióles agua, y lavaron sus pies: y dió de comer á sus asnos.
+
+
+## Génesis 43:25 (id: 10001043025)
+
+25Y ellos prepararon el presente entretanto que venía José al medio día, porque habían oído que allí habían de comer pan.
+
+
+## Génesis 43:26 (id: 10001043026)
+
+26Y vino José á casa, y ellos le trajeron el presente que tenían en su mano dentro de casa, é inclináronse á él hasta tierra.
+
+
+## Génesis 43:27 (id: 10001043027)
+
+27Entonces les preguntó él cómo estaban, y dijo: ¿Vuestro padre, el anciano que dijisteis, lo pasa bien? ¿vive todavía?
+
+
+## Génesis 43:28 (id: 10001043028)
+
+28Y ellos respondieron: Bien va á tu siervo nuestro padre; aun vive. Y se inclinaron, é hicieron reverencia.
+
+
+## Génesis 43:29 (id: 10001043029)
+
+29Y alzando él sus ojos vió á Benjamín su hermano, hijo de su madre, y dijo: ¿Es éste vuestro hermano menor, de quien me hablasteis? Y dijo: Dios tenga misericordia de ti, hijo mío.
+
+
+## Génesis 43:30 (id: 10001043030)
+
+30Entonces José se apresuró, porque se conmovieron sus entrañas á causa de su hermano, y procuró donde llorar: y entróse en su cámara, y lloró allí.
+
+
+## Génesis 43:31 (id: 10001043031)
+
+31Y lavó su rostro, y salió fuera, y reprimióse, y dijo: Poned pan.
+
+
+## Génesis 43:32 (id: 10001043032)
+
+32Y pusieron para él aparte, y separadamente para ellos, y aparte para los Egipcios que con él comían: porque los Egipcios no pueden comer pan con los Hebreos, lo cual es abominación á los Egipcios.
+
+
+## Génesis 43:33 (id: 10001043033)
+
+33Y sentáronse delante de él, el mayor conforme á su mayoría, y el menor conforme á su menoría; y estaban aquellos hombres atónitos mirándose el uno al otro.
+
+
+## Génesis 43:34 (id: 10001043034)
+
+34Y él tomó viandas de delante de sí para ellos; mas la porción de Benjamín era cinco veces como cualquiera de las de ellos. Y bebieron, y alegráronse con él.
+
+
+## Génesis 44:1 (id: 10001044001)
+
+1Y MANDÓ José al mayordomo de su casa, diciendo: Hinche los costales de aquestos varones de alimentos, cuanto pudieren llevar, y pon el dinero de cada uno en la boca de su costal:
+
+
+## Génesis 44:2 (id: 10001044002)
+
+2Y pondrás mi copa, la copa de plata, en la boca del costal del menor, con el dinero de su trigo. Y él hizo como dijo José.
+
+
+## Génesis 44:3 (id: 10001044003)
+
+3Venida la mañana, los hombres fueron despedidos con sus asnos.
+
+
+## Génesis 44:4 (id: 10001044004)
+
+4Habiendo ellos salido de la ciudad, de la que aun no se habían alejado, dijo José á su mayordomo: Levántate, y sigue á esos hombres; y cuando los alcanzares, diles: ¿Por qué habéis vuelto mal por bien?
+
+
+## Génesis 44:5 (id: 10001044005)
+
+5¿No es ésta en la que bebe mi señor, y por la que suele adivinar? habéis hecho mal en lo que hicisteis.
+
+
+## Génesis 44:6 (id: 10001044006)
+
+6Y como él los alcanzó, díjoles estas palabras.
+
+
+## Génesis 44:7 (id: 10001044007)
+
+7Y ellos le respondieron: ¿Por qué dice mi señor tales cosas? Nunca tal hagan tus siervos.
+
+
+## Génesis 44:8 (id: 10001044008)
+
+8He aquí, el dinero que hallamos en la boca de nuestros costales, te lo volvimos á traer desde la tierra de Canaán; ¿cómo, pues, habíamos de hurtar de casa de tu señor plata ni oro?
+
+
+## Génesis 44:9 (id: 10001044009)
+
+9Aquel de tus siervos en quien fuere hallada la copa, que muera, y aun nosotros seremos siervos de mi señor.
+
+
+## Génesis 44:10 (id: 10001044010)
+
+10Y él dijo: También ahora sea conforme á vuestras palabras; aquél en quien se hallare, será mi siervo, y vosotros seréis sin culpa.
+
+
+## Génesis 44:11 (id: 10001044011)
+
+11Ellos entonces se dieron prisa, y derribando cada uno su costal en tierra, abrió cada cual el costal suyo.
+
+
+## Génesis 44:12 (id: 10001044012)
+
+12Y buscó; desde el mayor comenzó, y acabó en el menor; y la copa fué hallada en el costal de Benjamín.
+
+
+## Génesis 44:13 (id: 10001044013)
+
+13Entonces ellos rasgaron sus vestidos, y cargó cada uno su asno, y volvieron á la ciudad.
+
+
+## Génesis 44:14 (id: 10001044014)
+
+14Y llegó Judá con sus hermanos á casa de José, que aun estaba allí, y postráronse delante de él en tierra.
+
+
+## Génesis 44:15 (id: 10001044015)
+
+15Y díjoles José: ¿Qué obra es esta que habéis hecho? ¿no sabéis que un hombre como yo sabe adivinar?
+
+
+## Génesis 44:16 (id: 10001044016)
+
+16Entonces dijo Judá: ¿Qué diremos á mi señor? ¿qué hablaremos? ¿ó con qué nos justificaremos? Dios ha hallado la maldad de tus siervos: he aquí, nosotros somos siervos de mi señor, nosotros, y también aquél en cuyo poder fué hallada la copa.
+
+
+## Génesis 44:17 (id: 10001044017)
+
+17Y él respondió: Nunca yo tal haga: el varón en cuyo poder fué hallada la copa, él será mi siervo; vosotros id en paz á vuestro padre.
+
+
+## Génesis 44:18 (id: 10001044018)
+
+18Entonces Judá se llegó á él, y dijo: Ay señor mío, ruégote que hable tu siervo una palabra en oídos de mi señor, y no se encienda tu enojo contra tu siervo, pues que tú eres como Faraón.
+
+
+## Génesis 44:19 (id: 10001044019)
+
+19Mi señor preguntó á sus siervos, diciendo: ¿Tenéis padre ó hermano?
+
+
+## Génesis 44:20 (id: 10001044020)
+
+20Y nosotros respondimos á mi señor: Tenemos un padre anciano, y un mozo que le nació en su vejez, pequeño aún; y un hermano suyo murió, y él quedó solo de su madre, y su padre lo ama.
+
+
+## Génesis 44:21 (id: 10001044021)
+
+21Y tú dijiste á tus siervos: Traédmelo, y pondré mis ojos sobre él.
+
+
+## Génesis 44:22 (id: 10001044022)
+
+22Y nosotros dijimos á mi señor: El mozo no puede dejar á su padre, porque si le dejare, su padre morirá.
+
+
+## Génesis 44:23 (id: 10001044023)
+
+23Y dijiste á tus siervos: Si vuestro hermano menor no descendiere con vosotros, no veáis más mi rostro.
+
+
+## Génesis 44:24 (id: 10001044024)
+
+24Aconteció pues, que como llegamos á mi padre tu siervo, contámosle las palabras de mi señor.
+
+
+## Génesis 44:25 (id: 10001044025)
+
+25Y dijo nuestro padre: Volved á comprarnos un poco de alimento.
+
+
+## Génesis 44:26 (id: 10001044026)
+
+26Y nosotros respondimos: No podemos ir: si nuestro hermano fuere con nosotros, iremos; porque no podemos ver el rostro del varón, no estando con nosotros nuestro hermano el menor.
+
+
+## Génesis 44:27 (id: 10001044027)
+
+27Entonces tu siervo mi padre nos dijo: Vosotros sabéis que dos me parió mi mujer;
+
+
+## Génesis 44:28 (id: 10001044028)
+
+28Y el uno salió de conmigo, y pienso de cierto que fué despedazado, y hasta ahora no le he visto;
+
+
+## Génesis 44:29 (id: 10001044029)
+
+29Y si tomareis también éste de delante de mí, y le aconteciere algún desastre, haréis descender mis canas con dolor á la sepultura.
+
+
+## Génesis 44:30 (id: 10001044030)
+
+30Ahora, pues, cuando llegare yo á tu siervo mi padre, y el mozo no fuere conmigo, como su alma está ligada al alma de él,
+
+
+## Génesis 44:31 (id: 10001044031)
+
+31Sucederá que cuando no vea al mozo, morirá: y tus siervos harán descender las canas de tu siervo nuestro padre con dolor á la sepultura.
+
+
+## Génesis 44:32 (id: 10001044032)
+
+32Como tu siervo salió por fiador del mozo con mi padre, diciendo: Si no te lo volviere, entonces yo seré culpable para mi padre todos los días;
+
+
+## Génesis 44:33 (id: 10001044033)
+
+33Ruégote por tanto que quede ahora tu siervo por el mozo por siervo de mi señor, y que el mozo vaya con sus hermanos.
+
+
+## Génesis 44:34 (id: 10001044034)
+
+34Porque ¿cómo iré yo á mi padre sin el mozo? No podré, por no ver el mal que sobrevendrá á mi padre.
+
+
+## Génesis 45:1 (id: 10001045001)
+
+1NO podía ya José contenerse delante de todos los que estaban al lado suyo, y clamó: Haced salir de conmigo á todos. Y no quedó nadie con él, al darse á conocer José á sus hermanos.
+
+
+## Génesis 45:2 (id: 10001045002)
+
+2Entonces se dió á llorar á voz en grito; y oyeron los Egipcios, y oyó también la casa de Faraón.
+
+
+## Génesis 45:3 (id: 10001045003)
+
+3Y dijo José á sus hermanos: Yo soy José: ¿vive aún mi padre? Y sus hermanos no pudieron responderle, porque estaban turbados delante de él.
+
+
+## Génesis 45:4 (id: 10001045004)
+
+4Entonces dijo José á sus hermanos: Llegaos ahora á mí. Y ellos se llegaron. Y él dijo: Yo soy José vuestro hermano el que vendisteis para Egipto.
+
+
+## Génesis 45:5 (id: 10001045005)
+
+5Ahora pues, no os entristezcáis, ni os pese de haberme vendido acá; que para preservación de vida me envió Dios delante de vosotros:
+
+
+## Génesis 45:6 (id: 10001045006)
+
+6Que ya ha habido dos años de hambre en medio de la tierra, y aun quedan cinco años en que ni habrá arada ni siega.
+
+
+## Génesis 45:7 (id: 10001045007)
+
+7Y Dios me envió delante de vosotros, para que vosotros quedaseis en la tierra, y para daros vida por medio de grande salvamento.
+
+
+## Génesis 45:8 (id: 10001045008)
+
+8Así pues, no me enviasteis vosotros acá, sino Dios, que me ha puesto por padre de Faraón, y por señor de toda su casa, y por gobernador en toda la tierra de Egipto.
+
+
+## Génesis 45:9 (id: 10001045009)
+
+9Daos priesa, id á mi padre y decidle: Así dice tu hijo José: Dios me ha puesto por señor de todo Egipto; ven á mí, no te detengas:
+
+
+## Génesis 45:10 (id: 10001045010)
+
+10Y habitarás en la tierra de Gosén, y estarás cerca de mí, tú y tus hijos, y los hijos de tus hijos, tus ganados y tus vacas, y todo lo que tienes.
+
+
+## Génesis 45:11 (id: 10001045011)
+
+11Y allí te alimentaré, pues aun quedan cinco años de hambre, porque no perezcas de pobreza tú y tu casa, y todo lo que tienes:
+
+
+## Génesis 45:12 (id: 10001045012)
+
+12Y he aquí, vuestros ojos ven, y los ojos de mi hermano Benjamín, que mi boca os habla.
+
+
+## Génesis 45:13 (id: 10001045013)
+
+13Haréis pues saber á mi padre toda mi gloria en Egipto, y todo lo que habéis visto: y daos priesa, y traed á mi padre acá.
+
+
+## Génesis 45:14 (id: 10001045014)
+
+14Y echóse sobre el cuello de Benjamín su hermano, y lloró; y también Benjamín lloró sobre su cuello.
+
+
+## Génesis 45:15 (id: 10001045015)
+
+15Y besó á todos sus hermanos, y lloró sobre ellos: y después sus hermanos hablaron con él.
+
+
+## Génesis 45:16 (id: 10001045016)
+
+16Y oyóse la noticia en la casa de Faraón, diciendo: Los hermanos de José han venido. Y plugo en los ojos de Faraón y de sus siervos.
+
+
+## Génesis 45:17 (id: 10001045017)
+
+17Y dijo Faraón á José: Di á tus hermanos: Haced esto: cargad vuestras bestias, é id, volved á la tierra de Canaán;
+
+
+## Génesis 45:18 (id: 10001045018)
+
+18Y tomad á vuestro padre y vuestras familias, y venid á mí, que yo os daré lo bueno de la tierra de Egipto y comeréis la grosura de la tierra.
+
+
+## Génesis 45:19 (id: 10001045019)
+
+19Y tú manda: Haced esto: tomaos de la tierra de Egipto carros para vuestros niños y vuestras mujeres; y tomad á vuestro padre, y venid.
+
+
+## Génesis 45:20 (id: 10001045020)
+
+20Y no se os dé nada de vuestras alhajas, porque el bien de la tierra de Egipto será vuestro.
+
+
+## Génesis 45:21 (id: 10001045021)
+
+21E hiciéronlo así los hijos de Israel: y dióles José carros conforme á la orden de Faraón, y suministróles víveres para el camino.
+
+
+## Génesis 45:22 (id: 10001045022)
+
+22A cada uno de todos ellos dió mudas de vestidos, y á Benjamín dió trescientas piezas de plata, y cinco mudas de vestidos.
+
+
+## Génesis 45:23 (id: 10001045023)
+
+23Y á su padre envió esto: diez asnos cargados de lo mejor de Egipto, y diez asnas cargadas de trigo, y pan y comida, para su padre en el camino.
+
+
+## Génesis 45:24 (id: 10001045024)
+
+24Y despidió á sus hermanos, y fuéronse. Y él les dijo: No riñáis por el camino.
+
+
+## Génesis 45:25 (id: 10001045025)
+
+25Y subieron de Egipto, y llegaron á la tierra de Canaán á Jacob su padre.
+
+
+## Génesis 45:26 (id: 10001045026)
+
+26Y diéronle las nuevas, diciendo: José vive aún; y él es señor en toda la tierra de Egipto. Y su corazón se desmayó; pues no los creía.
+
+
+## Génesis 45:27 (id: 10001045027)
+
+27Y ellos le contaron todas las palabras de José, que él les había hablado; y viendo él los carros que José enviaba para llevarlo, el espíritu de Jacob su padre revivió.
+
+
+## Génesis 45:28 (id: 10001045028)
+
+28Entonces dijo Israel: Basta; José mi hijo vive todavía: iré, y le veré antes que yo muera.
+
+
+## Génesis 46:1 (id: 10001046001)
+
+1Y PARTIÓSE Israel con todo lo que tenía, y vino á Beer\\-seba, y ofreció sacrificios al Dios de su padre Isaac.
+
+
+## Génesis 46:2 (id: 10001046002)
+
+2Y habló Dios á Israel en visiones de noche, y dijo: Jacob, Jacob. Y él respondió: Heme aquí.
+
+
+## Génesis 46:3 (id: 10001046003)
+
+3Y dijo: Yo soy Dios, el Dios de tu padre; no temas de descender á Egipto, porque yo te pondré allí en gran gente.
+
+
+## Génesis 46:4 (id: 10001046004)
+
+4Yo descenderé contigo á Egipto, y yo también te haré volver: y José pondrá su mano sobre tus ojos.
+
+
+## Génesis 46:5 (id: 10001046005)
+
+5Y levantóse Jacob de Beer\\-seba; y tomaron los hijos de Israel á su padre Jacob, y á sus niños, y á sus mujeres, en los carros que Faraón había enviado para llevarlo.
+
+
+## Génesis 46:6 (id: 10001046006)
+
+6Y tomaron sus ganados, y su hacienda que había adquirido en la tierra de Canaán, y viniéronse á Egipto, Jacob, y toda su simiente consigo;
+
+
+## Génesis 46:7 (id: 10001046007)
+
+7Sus hijos, y los hijos de sus hijos consigo; sus hijas, y las hijas de sus hijos, y á toda su simiente trajo consigo á Egipto.
+
+
+## Génesis 46:8 (id: 10001046008)
+
+8Y estos son los nombres de los hijos de Israel, que entraron en Egipto, Jacob y sus hijos: Rubén, el primogénito de Jacob.
+
+
+## Génesis 46:9 (id: 10001046009)
+
+9Y los hijos de Rubén: Hanoch, y Phallu, y Hezrón, y Carmi.
+
+
+## Génesis 46:10 (id: 10001046010)
+
+10Y los hijos de Simeón: Jemuel, y Jamín, y Ohad, y Jachîn, y Zohar, y Saúl, hijo de la Cananea.
+
+
+## Génesis 46:11 (id: 10001046011)
+
+11Y los hijos de Leví: Gersón, y Coath, y Merari.
+
+
+## Génesis 46:12 (id: 10001046012)
+
+12Y los hijos de Judá: Er, y Onán, y Sela, y Phares, y Zara: mas Er y Onán, murieron en la tierra de Canaán. Y los hijos de Phares fueron Hezrón y Hamul.
+
+
+## Génesis 46:13 (id: 10001046013)
+
+13Y los hijos de Issachâr: Thola, y Phua, y Job, y Simrón.
+
+
+## Génesis 46:14 (id: 10001046014)
+
+14Y los hijos de Zabulón: Sered, y Elón, y Jahleel.
+
+
+## Génesis 46:15 (id: 10001046015)
+
+15Estos fueron los hijos de Lea, los que parió á Jacob en Padan\\-aram, y además su hija Dina: treinta y tres las almas todas de sus hijos é hijas.
+
+
+## Génesis 46:16 (id: 10001046016)
+
+16Y los hijos de Gad: Ziphión, y Aggi, y Ezbón, y Suni, y Heri, y Arodi, y Areli.
+
+
+## Génesis 46:17 (id: 10001046017)
+
+17Y los hijos de Aser: Jimna, é Ishua, é Isui, y Beria, y Sera, hermana de ellos. Los hijos de Beria: Heber, y Malchîel.
+
+
+## Génesis 46:18 (id: 10001046018)
+
+18Estos fueron los hijos de Zilpa, la que Labán dió á su hija Lea, y parió estos á Jacob; todas diez y seis almas.
+
+
+## Génesis 46:19 (id: 10001046019)
+
+19Y los hijos de Rachêl, mujer de Jacob: José y Benjamín.
+
+
+## Génesis 46:20 (id: 10001046020)
+
+20Y nacieron á José en la tierra de Egipto Manasés y Ephraim, los que le parió Asenath, hija de Potipherah, sacerdote de On.
+
+
+## Génesis 46:21 (id: 10001046021)
+
+21Y los hijos de Benjamín fueron Bela, y Bechêr y Asbel, y Gera, y Naamán, y Ehi, y Ros y Muppim, y Huppim, y Ard.
+
+
+## Génesis 46:22 (id: 10001046022)
+
+22Estos fueron los hijos de Rachêl, que nacieron á Jacob: en todas, catorce almas.
+
+
+## Génesis 46:23 (id: 10001046023)
+
+23Y los hijos de Dan: Husim.
+
+
+## Génesis 46:24 (id: 10001046024)
+
+24Y los hijos de Nephtalí: Jahzeel, y Guni, y Jezer, y Shillem.
+
+
+## Génesis 46:25 (id: 10001046025)
+
+25Estos fueron los hijos de Bilha, la que dió Labán á Rachêl su hija, y parió estos á Jacob; todas siete almas.
+
+
+## Génesis 46:26 (id: 10001046026)
+
+26Todas las personas que vinieron con Jacob á Egipto, procedentes de sus lomos, sin las mujeres de los hijos de Jacob, todas las personas fueron sesenta y seis.
+
+
+## Génesis 46:27 (id: 10001046027)
+
+27Y los hijos de José, que le nacieron en Egipto, dos personas. Todas las almas de la casa de Jacob, que entraron en Egipto, fueron setenta.
+
+
+## Génesis 46:28 (id: 10001046028)
+
+28Y envió á Judá delante de sí á José, para que le viniese á ver á Gosén; y llegaron á la tierra de Gosén.
+
+
+## Génesis 46:29 (id: 10001046029)
+
+29Y José unció su carro y vino á recibir á Israel su padre á Gosén; y se manifestó á él, y echóse sobre su cuello, y lloró sobre su cuello bastante.
+
+
+## Génesis 46:30 (id: 10001046030)
+
+30Entonces Israel dijo á José: Muera yo ahora, ya que he visto tu rostro, pues aun vives.
+
+
+## Génesis 46:31 (id: 10001046031)
+
+31Y José dijo á sus hermanos, y á la casa de su padre: Subiré y haré saber á Faraón, y diréle: Mis hermanos y la casa de mi padre, que estaban en la tierra de Canaán, han venido á mí;
+
+
+## Génesis 46:32 (id: 10001046032)
+
+32Y los hombres son pastores de ovejas, porque son hombres ganaderos: y han traído sus ovejas y sus vacas, y todo lo que tenían.
+
+
+## Génesis 46:33 (id: 10001046033)
+
+33Y cuando Faraón os llamare y dijere: ¿cuál es vuestro oficio?
+
+
+## Génesis 46:34 (id: 10001046034)
+
+34Entonces diréis: Hombres de ganadería han sido tus siervos desde nuestra mocedad hasta ahora, nosotros y nuestros padres; á fin que moréis en la tierra de Gosén, porque los Egipcios abominan todo pastor de ovejas.
+
+
+## Génesis 47:1 (id: 10001047001)
+
+1Y JOSÉ vino, é hizo saber á Faraón, y dijo: Mi padre y mis hermanos, y sus ovejas y sus vacas, con todo lo que tienen, han venido de la tierra de Canaán, y he aquí, están en la tierra de Gosén.
+
+
+## Génesis 47:2 (id: 10001047002)
+
+2Y de los postreros de sus hermanos tomó cinco varones, y presentólos delante de Faraón.
+
+
+## Génesis 47:3 (id: 10001047003)
+
+3Y Faraón dijo á sus hermanos: ¿Cuál es vuestro oficio? Y ellos respondieron á Faraón: Pastores de ovejas son tus siervos, así nosotros como nuestros padres.
+
+
+## Génesis 47:4 (id: 10001047004)
+
+4Dijeron además á Faraón: Por morar en esta tierra hemos venido; porque no hay pasto para las ovejas de tus siervos, pues el hambre es grave en la tierra de Canaán: por tanto, te rogamos ahora que habiten tus siervos en la tierra de Gosén.
+
+
+## Génesis 47:5 (id: 10001047005)
+
+5Entonces Faraón habló á José, diciendo: Tu padre y tus hermanos han venido á ti;
+
+
+## Génesis 47:6 (id: 10001047006)
+
+6La tierra de Egipto delante de ti está; en lo mejor de la tierra haz habitar á tu padre y á tus hermanos; habiten en la tierra de Gosén; y si entiendes que hay entre ellos hombres eficaces, ponlos por mayorales del ganado mío.
+
+
+## Génesis 47:7 (id: 10001047007)
+
+7Y José introdujo á su padre, y presentólo delante de Faraón; y Jacob bendijo á Faraón.
+
+
+## Génesis 47:8 (id: 10001047008)
+
+8Y dijo Faraón á Jacob: ¿Cuántos son los días de los años de tu vida?
+
+
+## Génesis 47:9 (id: 10001047009)
+
+9Y Jacob respondió á Faraón: Los días de los años de mi peregrinación son ciento treinta años; pocos y malos han sido los días de los años de mi vida, y no han llegado á los días de los años de la vida de mis padres en los días de su peregrinación.
+
+
+## Génesis 47:10 (id: 10001047010)
+
+10Y Jacob bendijo á Faraón, y salióse de delante de Faraón.
+
+
+## Génesis 47:11 (id: 10001047011)
+
+11Así José hizo habitar á su padre y á sus hermanos, y dióles posesión en la tierra de Egipto, en lo mejor de la tierra, en la tierra de Rameses como mandó Faraón.
+
+
+## Génesis 47:12 (id: 10001047012)
+
+12Y alimentaba José á su padre y á sus hermanos, y á toda la casa de su padre, de pan, hasta la boca del niño.
+
+
+## Génesis 47:13 (id: 10001047013)
+
+13Y no había pan en toda la tierra, y el hambre era muy grave; por lo que desfalleció de hambre la tierra de Egipto y la tierra de Canaán.
+
+
+## Génesis 47:14 (id: 10001047014)
+
+14Y recogió José todo el dinero que se halló en la tierra de Egipto y en la tierra de Canaán, por los alimentos que de él compraban; y metió José el dinero en casa de Faraón.
+
+
+## Génesis 47:15 (id: 10001047015)
+
+15Y acabado el dinero de la tierra de Egipto y de la tierra de Canaán, vino todo Egipto á José diciendo: Danos pan: ¿por qué moriremos delante de ti, por haberse acabado el dinero?
+
+
+## Génesis 47:16 (id: 10001047016)
+
+16Y José dijo: Dad vuestros ganados, y yo os daré por vuestros ganados, si se ha acabado el dinero.
+
+
+## Génesis 47:17 (id: 10001047017)
+
+17Y ellos trajeron sus ganados á José; y José les dió alimentos por caballos, y por el ganado de las ovejas, y por el ganado de las vacas, y por asnos: y sustentólos de pan por todos sus ganados aquel año.
+
+
+## Génesis 47:18 (id: 10001047018)
+
+18Y acabado aquel año, vinieron á él el segundo año, y le dijeron: No encubriremos á nuestro señor que el dinero ciertamente se ha acabado; también el ganado es ya de nuestro señor; nada ha quedado delante de nuestro señor sino nuestros cuerpos y nuestra tierra.
+
+
+## Génesis 47:19 (id: 10001047019)
+
+19¿Por qué moriremos delante de tus ojos, así nosotros como nuestra tierra? Cómpranos á nosotros y á nuestra tierra por pan, y seremos nosotros y nuestra tierra siervos de Faraón: y danos simiente para que vivamos y no muramos, y no sea asolada la tierra.
+
+
+## Génesis 47:20 (id: 10001047020)
+
+20Entonces compró José toda la tierra de Egipto para Faraón; pues los Egipcios vendieron cada uno sus tierras, porque se agravó el hambre sobre ellos: y la tierra vino á ser de Faraón.
+
+
+## Génesis 47:21 (id: 10001047021)
+
+21Y al pueblo hízolo pasar á las ciudades desde el un cabo del término de Egipto hasta el otro cabo.
+
+
+## Génesis 47:22 (id: 10001047022)
+
+22Solamente la tierra de los sacerdotes no compró, por cuanto los sacerdotes tenían ración de Faraón, y ellos comían su ración que Faraón les daba: por eso no vendieron su tierra.
+
+
+## Génesis 47:23 (id: 10001047023)
+
+23Y José dijo al pueblo: He aquí os he hoy comprado y á vuestra tierra para Faraón: ved aquí simiente, y sembraréis la tierra.
+
+
+## Génesis 47:24 (id: 10001047024)
+
+24Y será que de los frutos daréis el quinto á Faraón, y las cuatro partes serán vuestras para sembrar las tierras, y para vuestro mantenimiento, y de los que están en vuestras casas, y para que coman vuestros niños.
+
+
+## Génesis 47:25 (id: 10001047025)
+
+25Y ellos respondieron: La vida nos has dado: hallemos gracia en ojos de mi señor, y seamos siervos de Faraón.
+
+
+## Génesis 47:26 (id: 10001047026)
+
+26Entonces José lo puso por fuero hasta hoy sobre la tierra de Egipto, señalando para Faraón el quinto; excepto sólo la tierra de los sacerdotes, que no fué de Faraón.
+
+
+## Génesis 47:27 (id: 10001047027)
+
+27Así habitó Israel en la tierra de Egipto, en la tierra de Gosén; y aposesionáronse en ella, y se aumentaron, y multiplicaron en gran manera.
+
+
+## Génesis 47:28 (id: 10001047028)
+
+28Y vivió Jacob en la tierra de Egipto diecisiete años: y fueron los días de Jacob, los años de su vida, ciento cuarenta y siete años.
+
+
+## Génesis 47:29 (id: 10001047029)
+
+29Y llegáronse los días de Israel para morir, y llamó á José su hijo, y le dijo: Si he hallado ahora gracia en tus ojos, ruégote que pongas tu mano debajo de mi muslo, y harás conmigo misericordia y verdad; ruégote que no me entierres en Egipto;
+
+
+## Génesis 47:30 (id: 10001047030)
+
+30Mas cuando durmiere con mis padres, llevarme has de Egipto, y me sepultarás en el sepulcro de ellos. Y él respondió: Yo haré como tú dices.
+
+
+## Génesis 47:31 (id: 10001047031)
+
+31Y él dijo: Júramelo. Y él le juró. Entonces Israel se inclinó sobre la cabecera de la cama.
+
+
+## Génesis 48:1 (id: 10001048001)
+
+1Y SUCEDIÓ después de estas cosas el haberse dicho á José: He aquí tu padre está enfermo. Y él tomó consigo sus dos hijos Manasés y Ephraim.
+
+
+## Génesis 48:2 (id: 10001048002)
+
+2Y se hizo saber á Jacob, diciendo: He aquí tu hijo José viene á ti. Entonces se esforzó Israel, y sentóse sobre la cama;
+
+
+## Génesis 48:3 (id: 10001048003)
+
+3Y dijo á José: El Dios Omnipotente me apareció en Luz en la tierra de Canaán, y me bendijo,
+
+
+## Génesis 48:4 (id: 10001048004)
+
+4Y díjome: He aquí, yo te haré crecer, y te multiplicaré, y te pondré por estirpe de pueblos: y daré esta tierra á tu simiente después de ti por heredad perpetua.
+
+
+## Génesis 48:5 (id: 10001048005)
+
+5Y ahora tus dos hijos Ephraim y Manasés, que te nacieron en la tierra de Egipto, antes que viniese á ti á la tierra de Egipto, míos son; como Rubén y Simeón, serán míos:
+
+
+## Génesis 48:6 (id: 10001048006)
+
+6Y los que después de ellos has engendrado, serán tuyos; por el nombre de sus hermanos serán llamados en sus heredades.
+
+
+## Génesis 48:7 (id: 10001048007)
+
+7Porque cuando yo venía de Padan\\-aram, se me murió Rachêl en la tierra de Canaán, en el camino, como media legua de tierra viniendo á Ephrata; y sepultéla allí en el camino de Ephrata, que es Bethlehem.
+
+
+## Génesis 48:8 (id: 10001048008)
+
+8Y vió Israel los hijos de José, y dijo: ¿Quiénes son éstos?
+
+
+## Génesis 48:9 (id: 10001048009)
+
+9Y respondió José á su padre: Son mis hijos, que Dios me ha dado aquí. Y él dijo: Allégalos ahora á mí, y los bendeciré.
+
+
+## Génesis 48:10 (id: 10001048010)
+
+10Y los ojos de Israel estaban tan agravados de la vejez, que no podía ver. Hízoles, pues, llegar á él, y él los besó y abrazó.
+
+
+## Génesis 48:11 (id: 10001048011)
+
+11Y dijo Israel á José: No pensaba yo ver tu rostro, y he aquí Dios me ha hecho ver también tu simiente.
+
+
+## Génesis 48:12 (id: 10001048012)
+
+12Entonces José los sacó de entre sus rodillas, é inclinóse á tierra.
+
+
+## Génesis 48:13 (id: 10001048013)
+
+13Y tomólos José á ambos, Ephraim á su diestra, á la siniestra de Israel; y á Manasés á su izquierda, á la derecha de Israel; é hízoles llegar á él.
+
+
+## Génesis 48:14 (id: 10001048014)
+
+14Entonces Israel extendió su diestra, y púsola sobre la cabeza de Ephraim, que era el menor, y su siniestra sobre la cabeza de Manasés, colocando así sus manos adrede, aunque Manasés era el primogénito.
+
+
+## Génesis 48:15 (id: 10001048015)
+
+15Y bendijo á José, y dijo: El Dios en cuya presencia anduvieron mis padres Abraham é Isaac, el Dios que me mantiene desde que yo soy hasta este día,
+
+
+## Génesis 48:16 (id: 10001048016)
+
+16El Angel que me liberta de todo mal, bendiga á estos mozos: y mi nombre sea llamado en ellos, y el nombre de mis padres Abraham é Isaac: y multipliquen en gran manera en medio de la tierra.
+
+
+## Génesis 48:17 (id: 10001048017)
+
+17Entonces viendo José que su padre ponía la mano derecha sobre la cabeza de Ephraim, causóle esto disgusto; y asió la mano de su padre, para mudarla de sobre la cabeza de Ephraim á la cabeza de Manasés.
+
+
+## Génesis 48:18 (id: 10001048018)
+
+18Y dijo José á su padre: No así, padre mío, porque éste es el primogénito; pon tu diestra sobre su cabeza.
+
+
+## Génesis 48:19 (id: 10001048019)
+
+19Mas su padre no quiso, y dijo: Lo sé, hijo mío, lo sé: también él vendrá á ser un pueblo, y será también acrecentado; pero su hermano menor será más grande que él, y su simiente será plenitud de gentes.
+
+
+## Génesis 48:20 (id: 10001048020)
+
+20Y bendíjolos aquel día, diciendo: En ti bendecirá Israel, diciendo: Póngate Dios como á Ephraim y como á Manasés. Y puso á Ephraim delante de Manasés.
+
+
+## Génesis 48:21 (id: 10001048021)
+
+21Y dijo Israel á José: He aquí, yo muero, mas Dios será con vosotros, y os hará volver á la tierra de vuestros padres.
+
+
+## Génesis 48:22 (id: 10001048022)
+
+22Y yo te he dado á ti una parte sobre tus hermanos, la cual tomé yo de mano del Amorrheo con mi espada y con mi arco.
+
+
+## Génesis 49:1 (id: 10001049001)
+
+1Y LLAMÓ Jacob á sus hijos, y dijo: Juntaos, y os declararé lo que os ha de acontecer en los postreros días.
+
+
+## Génesis 49:2 (id: 10001049002)
+
+2Juntaos y oid, hijos de Jacob; y escuchad á vuestro padre Israel.
+
+
+## Génesis 49:3 (id: 10001049003)
+
+3Rubén, tú eres mi primogénito, mi fortaleza, y el principio de mi vigor; principal en dignidad, principal en poder.
+
+
+## Génesis 49:4 (id: 10001049004)
+
+4Corriente como las aguas, no seas el principal; por cuanto subiste al lecho de tu padre: entonces te envileciste, subiendo á mi estrado.
+
+
+## Génesis 49:5 (id: 10001049005)
+
+5Simeón y Leví, hermanos: armas de iniquidad sus armas.
+
+
+## Génesis 49:6 (id: 10001049006)
+
+6En su secreto no entre mi alma, ni mi honra se junte en su compañía; que en su furor mataron varón, y en su voluntad arrancaron muro.
+
+
+## Génesis 49:7 (id: 10001049007)
+
+7Maldito su furor, que fué fiero; y su ira, que fué dura: yo los apartaré en Jacob, y los esparciré en Israel.
+
+
+## Génesis 49:8 (id: 10001049008)
+
+8Judá, alabarte han tus hermanos: tu mano en la cerviz de tus enemigos: los hijos de tu padre se inclinarán á ti.
+
+
+## Génesis 49:9 (id: 10001049009)
+
+9Cachorro de león Judá: de la presa subiste, hijo mío: encorvóse, echóse como león, así como león viejo; ¿quién lo despertará?
+
+
+## Génesis 49:10 (id: 10001049010)
+
+10No será quitado el cetro de Judá, y el legislador de entre sus piés, hasta que venga Shiloh; y á él se congregarán los pueblos.
+
+
+## Génesis 49:11 (id: 10001049011)
+
+11Atando á la vid su pollino, y á la cepa el hijo de su asna, lavó en el vino su vestido, y en la sangre de uvas su manto:
+
+
+## Génesis 49:12 (id: 10001049012)
+
+12Sus ojos bermejos del vino, y los dientes blancos de la leche.
+
+
+## Génesis 49:13 (id: 10001049013)
+
+13Zabulón en puertos de mar habitará, y será para puerto de navíos; y su término hasta Sidón.
+
+
+## Génesis 49:14 (id: 10001049014)
+
+14Issachâr, asno huesudo echado entre dos tercios:
+
+
+## Génesis 49:15 (id: 10001049015)
+
+15Y vió que el descanso era bueno, y que la tierra era deleitosa; y bajó su hombro para llevar, y sirvió en tributo.
+
+
+## Génesis 49:16 (id: 10001049016)
+
+16Dan juzgará á su pueblo, como una de las tribus de Israel.
+
+
+## Génesis 49:17 (id: 10001049017)
+
+17Será Dan serpiente junto al camino, cerasta junto á la senda, que muerde los talones de los caballos, y hace caer por detrás al cabalgador de ellos.
+
+
+## Génesis 49:18 (id: 10001049018)
+
+18Tu salud esperé, oh Jehová.
+
+
+## Génesis 49:19 (id: 10001049019)
+
+19Gad, ejército lo acometerá; mas él acometerá al fin.
+
+
+## Génesis 49:20 (id: 10001049020)
+
+20El pan de Aser será grueso, y él dará deleites al rey.
+
+
+## Génesis 49:21 (id: 10001049021)
+
+21Nephtalí, sierva dejada, que dará dichos hermosos.
+
+
+## Génesis 49:22 (id: 10001049022)
+
+22Ramo fructífero José, ramo fructífero junto á fuente, cuyos vástagos se extienden sobre el muro.
+
+
+## Génesis 49:23 (id: 10001049023)
+
+23Y causáronle amargura, y asaeteáronle, y aborreciéronle los archeros:
+
+
+## Génesis 49:24 (id: 10001049024)
+
+24Mas su arco quedó en fortaleza, y los brazos de sus manos se corroboraron por las manos del Fuerte de Jacob, (de allí el pastor, y la piedra de Israel,)
+
+
+## Génesis 49:25 (id: 10001049025)
+
+25Del Dios de tu padre, el cual te ayudará, y del Omnipotente, el cual te bendecirá con bendiciones de los cielos de arriba, con bendiciones del abismo que está abajo, con bendiciones del seno y de la matriz.
+
+
+## Génesis 49:26 (id: 10001049026)
+
+26Las bendiciones de tu padre fueron mayores que las bendiciones de mis progenitores: hasta el término de los collados eternos serán sobre la cabeza de José, y sobre la mollera del Nazareo de sus hermanos.
+
+
+## Génesis 49:27 (id: 10001049027)
+
+27Benjamín, lobo arrebatador: á la mañana comerá la presa, y á la tarde repartirá los despojos.
+
+
+## Génesis 49:28 (id: 10001049028)
+
+28Todos estos fueron las doce tribus de Israel: y esto fué lo que su padre les dijo, y bendíjolos; á cada uno por su bendición los bendijo.
+
+
+## Génesis 49:29 (id: 10001049029)
+
+29Mandóles luego, y díjoles: Yo voy á ser reunido con mi pueblo: sepultadme con mis padres en la cueva que está en el campo de Ephrón el Hetheo;
+
+
+## Génesis 49:30 (id: 10001049030)
+
+30En la cueva que está en el campo de Macpela, que está delante de Mamre en la tierra de Canaán, la cual compró Abraham con el mismo campo de Ephrón el Hetheo, para heredad de sepultura.
+
+
+## Génesis 49:31 (id: 10001049031)
+
+31Allí sepultaron á Abraham y á Sara su mujer; allí sepultaron á Isaac y á Rebeca su mujer; allí también sepulté yo á Lea.
+
+
+## Génesis 49:32 (id: 10001049032)
+
+32La compra del campo y de la cueva que está en él, fué de los hijos de Heth.
+
+
+## Génesis 49:33 (id: 10001049033)
+
+33Y como acabó Jacob de dar órdenes á sus hijos, encogió sus pies en la cama, y espiró: y fué reunido con sus padres.
+
+
+## Génesis 50:1 (id: 10001050001)
+
+1ENTONCES se echó José sobre el rostro de su padre, y lloró sobre él, y besólo.
+
+
+## Génesis 50:2 (id: 10001050002)
+
+2Y mandó José á sus médicos familiares que embalsamasen á su padre: y los médicos embalsamaron á Israel.
+
+
+## Génesis 50:3 (id: 10001050003)
+
+3Y cumpliéronle cuarenta días, porque así cumplían los días de los embalsamados, y lloráronlo los Egipcios setenta días.
+
+
+## Génesis 50:4 (id: 10001050004)
+
+4Y pasados los días de su luto, habló José á los de la casa de Faraón, diciendo: Si he hallado ahora gracia en vuestros ojos, os ruego que habléis en oídos de Faraón, diciendo:
+
+
+## Génesis 50:5 (id: 10001050005)
+
+5Mi padre me conjuró diciendo: He aquí yo muero; en mi sepulcro que yo cavé para mí en la tierra de Canaán, allí me sepultarás; ruego pues que vaya yo ahora, y sepultaré á mi padre, y volveré.
+
+
+## Génesis 50:6 (id: 10001050006)
+
+6Y Faraón dijo: Ve, y sepulta á tu padre, como él te conjuró.
+
+
+## Génesis 50:7 (id: 10001050007)
+
+7Entonces José subió á sepultar á su padre; y subieron con él todos los siervos de Faraón, los ancianos de su casa, y todos los ancianos de la tierra de Egipto,
+
+
+## Génesis 50:8 (id: 10001050008)
+
+8Y toda la casa de José, y sus hermanos, y la casa de su padre: solamente dejaron en la tierra de Gosén sus niños, y sus ovejas y sus vacas.
+
+
+## Génesis 50:9 (id: 10001050009)
+
+9Y subieron también con él carros y gente de á caballo, é hízose un escuadrón muy grande.
+
+
+## Génesis 50:10 (id: 10001050010)
+
+10Y llegaron hasta la era de Atad, que está á la otra parte del Jordán, y endecharon allí con grande y muy grave lamentación: y José hizo á su padre duelo por siete días.
+
+
+## Génesis 50:11 (id: 10001050011)
+
+11Y viendo los moradores de la tierra, los Cananeos, el llanto en la era de Atad, dijeron: Llanto grande es este de los Egipcios: por eso fué llamado su nombre Abelmizraim, que está á la otra parte del Jordán.
+
+
+## Génesis 50:12 (id: 10001050012)
+
+12Hicieron, pues, sus hijos con él, según les había mandado:
+
+
+## Génesis 50:13 (id: 10001050013)
+
+13Pues lleváronlo sus hijos á la tierra de Canaán, y le sepultaron en la cueva del campo de Macpela, la que había comprado Abraham con el mismo campo, para heredad de sepultura, de Ephrón el Hetheo, delante de Mamre.
+
+
+## Génesis 50:14 (id: 10001050014)
+
+14Y tornóse José á Egipto, él y sus hermanos, y todos los que subieron con él á sepultar á su padre, después que le hubo sepultado.
+
+
+## Génesis 50:15 (id: 10001050015)
+
+15Y viendo los hermanos de José que su padre era muerto, dijeron: Quizá nos aborrecerá José, y nos dará el pago de todo el mal que le hicimos.
+
+
+## Génesis 50:16 (id: 10001050016)
+
+16Y enviaron á decir á José: Tu padre mandó antes de su muerte, diciendo:
+
+
+## Génesis 50:17 (id: 10001050017)
+
+17Así diréis á José: Ruégote que perdones ahora la maldad de tus hermanos y su pecado, porque mal te trataron: por tanto ahora te rogamos que perdones la maldad de los siervos del Dios de tu padre. Y José lloró mientras hablaban.
+
+
+## Génesis 50:18 (id: 10001050018)
+
+18Y vinieron también sus hermanos, y postráronse delante de él, y dijeron: Henos aquí por tus siervos.
+
+
+## Génesis 50:19 (id: 10001050019)
+
+19Y respondióles José: No temáis: ¿estoy yo en lugar de Dios?
+
+
+## Génesis 50:20 (id: 10001050020)
+
+20Vosotros pensasteis mal sobre mí, mas Dios lo encaminó á bien, para hacer lo que vemos hoy, para mantener en vida á mucho pueblo.
+
+
+## Génesis 50:21 (id: 10001050021)
+
+21Ahora, pues, no tengáis miedo; yo os sustentaré á vosotros y á vuestros hijos. Así los consoló, y les habló al corazón.
+
+
+## Génesis 50:22 (id: 10001050022)
+
+22Y estuvo José en Egipto, él y la casa de su padre: y vivió José ciento diez años.
+
+
+## Génesis 50:23 (id: 10001050023)
+
+23Y vió José los hijos de Ephraim hasta la tercera generación: también los hijos de Machîr, hijo de Manasés, fueron criados sobre las rodillas de José.
+
+
+## Génesis 50:24 (id: 10001050024)
+
+24Y José dijo á sus hermanos: Yo me muero; mas Dios ciertamente os visitará, y os hará subir de aquesta tierra á la tierra que juró á Abraham, á Isaac, y á Jacob.
+
+
+## Génesis 50:25 (id: 10001050025)
+
+25Y conjuró José á los hijos de Israel, diciendo: Dios ciertamente os visitará, y haréis llevar de aquí mis huesos.
+
+
+## Génesis 50:26 (id: 10001050026)
+
+26Y murió José de edad de ciento diez años; y embalsamáronlo, y fué puesto en un ataúd en Egipto.
+
+`;export{e as default};
