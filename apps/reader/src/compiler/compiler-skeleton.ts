@@ -647,6 +647,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   nominalHeadIds.forEach(id => moodReviewedVerbIds.add(id));
   const participleMarkedAlignmentIds = readMarkedAlignmentIds(progressKeys.participleMarks, bookId);
   const participleSubjectHosts = readParticipleSubjectHosts(bookId);
+  const clauseActors = readClauseActors(bookId);
 
   const clauses: CompilerClause[] = [];
   for (const finiteVerb of finiteVerbs) {
@@ -779,22 +780,76 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   /**
    * H3/H4 claim = full independent-clause span by default (Version A).
    * Only peel leading words into `+` when the prefix is real participle
-   * scaffolding (ἐραυνῶντες…). Never peel 1B heads, a prefix that already
-   * holds a finite (*Cayó*, cayó), or a leftover 1–2 word stub.
+   * scaffolding (ἐραυνῶντες…). Never peel a prefix that already holds a
+   * finite (*Cayó*, cayó), or a leftover 1–2 word stub.
+   *
+   * Brick 1B (nominal): when actors mark a short core (subject ± object), that
+   * core is the H4 claim and the rest of selectedSpan peels to trailing `+`
+   * (e.g. epistolary χάρις…ἀπὸ…ἀπὸ… — greeting core vs source PPs). Without this,
+   * one verbless independent becomes an unpresentable mega-H4.
    */
-  function splitClaimAtFinite(finiteVerbId: string): { prefixWordIds: string[]; claimText: string } {
+  function formatIdsAsSpanText(ids: string[]): string {
+    const claimParts: string[] = [];
+    let runIds: string[] = [];
+    let runKey = "";
+    const flushRun = () => {
+      if (!runIds.length) return;
+      const key = runKey;
+      const text = formatClauseSpan(runIds, wordsByVerse.get(key) ?? [], verseTextByKey.get(key) ?? "").trim();
+      if (text) claimParts.push(text);
+      runIds = [];
+    };
+    for (const id of ids) {
+      const word = wordById.get(id);
+      if (!word) continue;
+      const key = `${word.chapter}:${word.verse}`;
+      if (runKey && key !== runKey) flushRun();
+      runKey = key;
+      runIds.push(id);
+    }
+    flushRun();
+    return claimParts.join(" ").trim();
+  }
+
+  function splitClaimAtFinite(finiteVerbId: string): {
+    prefixWordIds: string[];
+    trailingWordIds: string[];
+    claimText: string;
+  } {
     const full = spanTextFor(finiteVerbId);
     const assignment = assignments[finiteVerbId];
     const clause = clauseById.get(finiteVerbId);
     const finiteWord = finiteVerbWordById.get(finiteVerbId);
     if (!assignment?.selectedSpan.length || !clause || !finiteWord) {
-      return { prefixWordIds: [], claimText: full };
+      return { prefixWordIds: [], trailingWordIds: [], claimText: full };
     }
+
+    // 1B actor-core peel (NT and OT): H4 = subject (+ object); remainder → trailing +.
+    if (nominalHeadIds.has(finiteVerbId)) {
+      const stored = clauseActors[finiteVerbId];
+      const subject = stored?.subjectSpan ?? [];
+      if (subject.length) {
+        const core = new Set<string>([
+          ...subject,
+          ...(stored?.objectSpan ?? []),
+          ...(stored?.verbSpan ?? [])
+        ]);
+        const ids = assignment.selectedSpan;
+        const claimIds = ids.filter(id => core.has(id));
+        const trailingWordIds = ids.filter(id => !core.has(id));
+        if (claimIds.length >= 2 && trailingWordIds.length >= 3) {
+          const claimText = formatIdsAsSpanText(claimIds) || full;
+          return { prefixWordIds: [], trailingWordIds, claimText };
+        }
+      }
+      return { prefixWordIds: [], trailingWordIds: [], claimText: full };
+    }
+
     // OT / OSHB: Brick-4 Hebrew participles are dense and often misaligned onto
     // Spanish nouns. Peeling the claim at the finite leaves stub H4s («fortaleza»,
     // «interpretación»). Keep the full span; Greek scaffolding peel is NT-only.
     if (readerBookHasOshb(bookId)) {
-      return { prefixWordIds: [], claimText: full };
+      return { prefixWordIds: [], trailingWordIds: [], claimText: full };
     }
     const ids = assignment.selectedSpan;
     let cut = ids.indexOf(finiteWord.id);
@@ -809,7 +864,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
         );
       });
     }
-    if (cut <= 0) return { prefixWordIds: [], claimText: full };
+    if (cut <= 0) return { prefixWordIds: [], trailingWordIds: [], claimText: full };
 
     const prefixWordIds = ids.slice(0, cut);
     const claimIds = ids.slice(cut);
@@ -852,31 +907,10 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
         prefixContainsFinite
       })
     ) {
-      return { prefixWordIds: [], claimText: full };
+      return { prefixWordIds: [], trailingWordIds: [], claimText: full };
     }
-    // Prefer same-verse formatting; fall back to full span text from cut onward
-    // by rebuilding from word texts when the span crosses verses.
-    const claimParts: string[] = [];
-    let runIds: string[] = [];
-    let runKey = "";
-    const flushRun = () => {
-      if (!runIds.length) return;
-      const key = runKey;
-      const text = formatClauseSpan(runIds, wordsByVerse.get(key) ?? [], verseTextByKey.get(key) ?? "").trim();
-      if (text) claimParts.push(text);
-      runIds = [];
-    };
-    for (const id of claimIds) {
-      const word = wordById.get(id);
-      if (!word) continue;
-      const key = `${word.chapter}:${word.verse}`;
-      if (runKey && key !== runKey) flushRun();
-      runKey = key;
-      runIds.push(id);
-    }
-    flushRun();
-    const claimText = claimParts.join(" ").trim() || full;
-    return { prefixWordIds, claimText };
+    const claimText = formatIdsAsSpanText(claimIds) || full;
+    return { prefixWordIds, trailingWordIds: [], claimText };
   }
 
   /**
@@ -1104,7 +1138,6 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     (a, b) => (clauseById.get(a.finiteVerbId)?.order ?? 0) - (clauseById.get(b.finiteVerbId)?.order ?? 0)
   );
 
-  const clauseActors = readClauseActors(bookId);
   function actorSpanText(ids: string[]): string {
     if (!ids.length) return "";
     return formatClauseSpanAcrossVerses(ids, wordById, wordsByVerse, verseTextByKey);
@@ -1890,13 +1923,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     const spanText = applyProtasisMarker(node.finiteVerbId, rawSpan);
     lines.push(...slide(`${indent}- ${scripture(spanText)}`));
     if (nominalHeadIds.has(node.finiteVerbId)) {
-      lines.push(
-        ...starSlides(indent, [
-          readerBookHasOshb(bookId)
-            ? "Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse."
-            : "Cláusula nominal: en griego esta cláusula no tiene verbo; el español lo suple para poder leerse."
-        ])
-      );
+      lines.push(...starSlides(indent, ["Cláusula nominal[^nom]."]));
     }
     const dependentActor = actorTripleScripture(node.finiteVerbId);
     if (dependentActor) lines.push(...starSlides(indent, [dependentActor]));
@@ -2297,7 +2324,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     // H3 reference = independent-clause id only (Version A).
     const reference = formatClauseUnitReference(root.finiteVerbId);
 
-    const { prefixWordIds, claimText } = splitClaimAtFinite(root.finiteVerbId);
+    const { prefixWordIds, trailingWordIds, claimText } = splitClaimAtFinite(root.finiteVerbId);
     const rootQuote = scripture(claimText || root.spanText || clause.finiteVerbText);
     const block: string[] = [];
     // H3 unit claim on its own slide. No large reading-block verse quotes after
@@ -2356,16 +2383,37 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
         // The Spanish reads with a verb the Greek doesn't have, so the H4 would
         // otherwise imply one. Say where it came from instead.
         if (nominalHeadIds.has(root.finiteVerbId)) {
-          block.push(
-            ...starSlides("", [
-              readerBookHasOshb(bookId)
-                ? "Cláusula nominal: en hebreo esta cláusula no tiene verbo finito; el español lo suple para poder leerse."
-                : "Cláusula nominal: en griego esta cláusula no tiene verbo; el español lo suple para poder leerse."
-            ])
-          );
+          block.push(...starSlides("", ["Cláusula nominal[^nom]."]));
         }
         const rootActor = actorTripleScripture(root.finiteVerbId);
         if (rootActor) block.push(...starSlides("", [rootActor]));
+        // 1B trailing peel (source PPs, titles, etc.) → `+` after the short claim.
+        if (trailingWordIds.length) {
+          const groups: string[][] = [];
+          let current: string[] = [];
+          for (let i = 0; i < trailingWordIds.length; i++) {
+            const id = trailingWordIds[i]!;
+            const text = (wordById.get(id)?.text ?? "").replace(/[.,:;!?»«]/g, "").toLowerCase();
+            const next = trailingWordIds[i + 1];
+            const nextText = next
+              ? (wordById.get(next)?.text ?? "").replace(/[.,:;!?»«]/g, "").toLowerCase()
+              : "";
+            // New source PP: "y de …" or a bare "de …" after material already started.
+            if (
+              current.length &&
+              ((text === "y" && nextText === "de") || (text === "de" && current.length >= 2))
+            ) {
+              groups.push(current);
+              current = [];
+            }
+            current.push(id);
+          }
+          if (current.length) groups.push(current);
+          for (const group of groups) {
+            const part = formatIdsAsSpanText(group);
+            if (part) block.push(...slide(`+ ${scripture(part)}`));
+          }
+        }
         block.push(...commentSlides(takeReaderNoteComments(clause.chapter, clause.verse)));
         block.push(...starSlides("", rootExplanationLines(clause)));
         block.push(...emitInfinitiveSlides("", root.finiteVerbId, null));

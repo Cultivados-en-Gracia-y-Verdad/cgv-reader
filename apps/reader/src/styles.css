@@ -282,14 +282,6 @@ textarea {
   letter-spacing: 0;
 }
 
-.reader-word-note-hint {
-  margin: 0.42rem 0 0;
-  color: var(--reader-soft);
-  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  font-size: 1.08rem;
-  line-height: 1.45;
-}
-
 .reader-book-select {
   display: block;
   margin: 0.55rem 0 0;
@@ -395,8 +387,9 @@ textarea {
   background: transparent;
   color: inherit;
   font: inherit;
-  line-height: inherit;
+  line-height: 1.08;
   letter-spacing: inherit;
+  vertical-align: baseline;
   cursor: pointer;
   transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
 }
@@ -415,6 +408,71 @@ textarea {
 .reader-word--active {
   background: var(--reader-note-bg);
   color: var(--reader-accent);
+}
+
+.reader-word-morphology {
+  display: flex;
+  flex-direction: column;
+  gap: 0.42rem;
+  width: min(15rem, calc(100vw - 1.5rem));
+}
+
+.reader-word-morphology-entry {
+  display: grid;
+  grid-template-columns: minmax(4.5rem, auto) minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 0.7rem;
+  row-gap: 0.14rem;
+  text-align: left;
+}
+
+.reader-word-morphology-entry + .reader-word-morphology-entry {
+  border-top: 1px solid var(--reader-border);
+  padding-top: 0.52rem;
+}
+
+.reader-word-morphology .token-detail-surface {
+  grid-column: 1;
+  grid-row: 1;
+  font-size: 1.08rem;
+}
+
+.reader-word-morphology .token-detail-lemma {
+  grid-column: 1;
+  grid-row: 2;
+  overflow-wrap: anywhere;
+  font-size: 0.78rem;
+  white-space: normal;
+}
+
+.reader-word-morphology .token-detail-codes {
+  grid-column: 2;
+  grid-row: 1;
+  justify-content: flex-start;
+}
+
+.reader-word-morphology .token-detail-rmac {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 0.84rem;
+  letter-spacing: 0.015em;
+}
+
+.reader-word-morphology .token-detail-morph-desc {
+  grid-column: 2;
+  grid-row: 2;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.reader-word-morphology .token-detail-gloss {
+  display: none;
+}
+
+.reader-word-morphology-empty {
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 .reader-verse sup {

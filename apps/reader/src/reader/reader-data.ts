@@ -3,15 +3,18 @@ import {
   getReaderBookInfo,
   readerBookHasBibleVersion,
   readerBookHasLbf,
+  readerBookHasOshb,
   type BibleVersionId,
   type ReaderBookId
 } from "@cgv/core";
-import { loadLbfRaw } from "../observer/book-assets";
+import { loadLbfRaw, loadTokensRaw } from "../observer/book-assets";
 import {
   loadLbfSourceTokenUnits,
   loadLbfTokenWordIndexes,
   loadLbfTokenWordMap
 } from "../observer/lbf-alignment";
+import { describeMorph, morphGntToRmac } from "../observer/morph-describe";
+import { mtToProtestant } from "../observer/oshb";
 import {
   bleFiles,
   nblaFiles,
@@ -32,6 +35,78 @@ export interface ReaderVersePart {
   wordIndex?: number;
   sourceTokenIds?: string[];
   alignmentUnitIds?: string[];
+}
+
+export interface ReaderMorphologyToken {
+  chapter: number;
+  verse: number;
+  token: number;
+  surface: string;
+  lemma: string;
+  morph: string;
+  description: string;
+  gloss: string;
+}
+
+export type ReaderMorphologyIndex = Map<string, ReaderMorphologyToken>;
+
+const readerMorphologyCache = new Map<ReaderBookId, Promise<ReaderMorphologyIndex>>();
+
+/** Read-only morphology index from the selected cgv-data token spine. */
+export function loadReaderMorphologyIndex(
+  bookId: ReaderBookId
+): Promise<ReaderMorphologyIndex> {
+  const cached = readerMorphologyCache.get(bookId);
+  if (cached) return cached;
+
+  const pending = loadTokensRaw(bookId)
+    .then(raw => {
+      const index: ReaderMorphologyIndex = new Map();
+      for (const line of raw.replace(/\r\n/g, "\n").split("\n")) {
+        if (!line.trim()) continue;
+        let row: Record<string, unknown>;
+        try {
+          row = JSON.parse(line) as Record<string, unknown>;
+        } catch {
+          continue;
+        }
+        if (
+          row.book !== bookId ||
+          typeof row.ch !== "number" ||
+          typeof row.vs !== "number" ||
+          typeof row.surface !== "string" ||
+          typeof row.morph !== "string"
+        ) {
+          continue;
+        }
+        const token =
+          typeof row.tok === "number" ? row.tok : typeof row.w === "number" ? row.w : null;
+        if (token === null) continue;
+        const reference = mtToProtestant(bookId, row.ch, row.vs);
+        const lemma = typeof row.lemma === "string" ? row.lemma : "";
+        const morphSystem = readerBookHasOshb(bookId) ? "OSHB" : "RMAC";
+        const morph = morphSystem === "RMAC" ? morphGntToRmac(row.morph, lemma) : row.morph;
+        const morphology: ReaderMorphologyToken = {
+          chapter: reference.chapter,
+          verse: reference.verse,
+          token,
+          surface: row.surface,
+          lemma,
+          morph,
+          description: describeMorph(morph),
+          gloss: typeof row.es === "string" ? row.es.replace(/·/g, " ") : ""
+        };
+        index.set(`${morphology.chapter}:${morphology.verse}:${token}`, morphology);
+      }
+      return index;
+    })
+    .catch(error => {
+      readerMorphologyCache.delete(bookId);
+      throw error;
+    });
+
+  readerMorphologyCache.set(bookId, pending);
+  return pending;
 }
 
 const LBF_WORD_PATTERN = /[A-Za-zÁÉÍÓÚÜÑáéíóúüñ][\wÁÉÍÓÚÜÑáéíóúüñ'’\-]*/gu;

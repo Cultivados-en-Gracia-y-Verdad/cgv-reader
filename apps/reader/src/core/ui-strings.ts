@@ -64,7 +64,7 @@ export interface UiStrings {
 
   readerKicker: string;
   notePlaceholder: string;
-  wordNotesHint: string;
+  morphologyUnavailable: string;
   close: string;
   delete: string;
   save: string;
@@ -161,7 +161,7 @@ const EN: UiStrings = {
 
   readerKicker: "The Reader",
   notePlaceholder: "Write a short note...",
-  wordNotesHint: "Select any word to add a note.",
+  morphologyUnavailable: "No aligned source morphology for this word.",
   close: "Close",
   delete: "Delete",
   save: "Save",
@@ -256,7 +256,7 @@ const ES: UiStrings = {
 
   readerKicker: "El Lector",
   notePlaceholder: "Escriba una nota breve...",
-  wordNotesHint: "Seleccione cualquier palabra para añadir una nota.",
+  morphologyUnavailable: "Esta palabra no tiene morfología fuente alineada.",
   close: "Cerrar",
   delete: "Borrar",
   save: "Guardar",

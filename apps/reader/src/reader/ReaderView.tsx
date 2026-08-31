@@ -15,10 +15,14 @@ import {
   type ReaderBookId
 } from "@cgv/core";
 import { useUiLanguage } from "../core/UiLanguageContext";
+import { TokenDetailAnchor } from "../observer/TokenDetailPopover";
 import {
   loadLbfReaderVerseParts,
+  loadReaderMorphologyIndex,
   loadReaderBook,
   type ReaderBook,
+  type ReaderMorphologyIndex,
+  type ReaderMorphologyToken,
   type ReaderVersePart
 } from "./reader-data";
 
@@ -73,6 +77,29 @@ function noteVerseTarget(note: ReaderNote): string {
   return note.verseTarget ?? note.target.split("--")[0].split("#")[0];
 }
 
+function sourceTokenNumber(sourceTokenId: string): number | null {
+  if (/^[hn]\d{11}$/.test(sourceTokenId)) return Number(sourceTokenId.slice(-3));
+  const fallback = sourceTokenId.match(/^cgv:[^:]+:\d+:\d+:(\d+)$/);
+  return fallback ? Number(fallback[1]) : null;
+}
+
+function morphologyForWord(
+  verse: BibleVerse,
+  part: ReaderVersePart,
+  index: ReaderMorphologyIndex
+): ReaderMorphologyToken[] {
+  const seen = new Set<number>();
+  const morphology: ReaderMorphologyToken[] = [];
+  for (const sourceTokenId of part.sourceTokenIds ?? []) {
+    const token = sourceTokenNumber(sourceTokenId);
+    if (token === null || seen.has(token)) continue;
+    seen.add(token);
+    const match = index.get(`${verse.chapter}:${verse.verse}:${token}`);
+    if (match) morphology.push(match);
+  }
+  return morphology;
+}
+
 function notesStorageKey(bookId: ReaderBookId): string {
   return workshopProgressKeys(bookId).readerNotes;
 }
@@ -110,6 +137,7 @@ export default function ReaderView() {
   const [bookId, setBookId] = useState<ReaderBookId>(() => readReaderBook());
   const [book, setBook] = useState<ReaderBook | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [morphologyIndex, setMorphologyIndex] = useState<ReaderMorphologyIndex>(new Map());
   const [notes, setNotes] = useState<ReaderNote[]>(() => readNotes(readReaderBook()));
   const [activeTarget, setActiveTarget] = useState<NoteTarget | null>(null);
   const [draft, setDraft] = useState("");
@@ -139,6 +167,28 @@ export default function ReaderView() {
       cancelled = true;
     };
   }, [bookId, bibleVersion]);
+
+  useEffect(() => {
+    let cancelled = false;
+    setMorphologyIndex(new Map());
+    if (!book || book.version !== "LBF" || !readerBookHasLbfStructure(book.id)) {
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    void loadReaderMorphologyIndex(book.id)
+      .then(index => {
+        if (!cancelled) setMorphologyIndex(index);
+      })
+      .catch(() => {
+        // Reading and note-taking remain available when morphology is absent.
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [book]);
 
   useEffect(() => {
     // Do not persist another book's notes into this book's key during the
@@ -279,7 +329,6 @@ export default function ReaderView() {
           </label>
           <h1>{book?.title ?? "…"}</h1>
           <p className="reader-version">{book?.versionLabel ?? ""}</p>
-          {wordNotesEnabled ? <p className="reader-word-note-hint">{t.wordNotesHint}</p> : null}
         </header>
 
         {loadError ? <p className="reader-load-error">{loadError}</p> : null}
@@ -317,9 +366,9 @@ export default function ReaderView() {
                               const target = wordTargetKey(verse, part);
                               const hasNote = notes.some(note => note.target === target);
                               const isActive = activeTarget?.key === target;
+                              const morphology = morphologyForWord(verse, part, morphologyIndex);
                               return (
-                                <button
-                                  type="button"
+                                <TokenDetailAnchor
                                   className={`reader-word${hasNote ? " reader-word--has-note" : ""}${isActive ? " reader-word--active" : ""}`}
                                   key={`word-${part.wordIndex}`}
                                   onClick={event => {
@@ -327,9 +376,39 @@ export default function ReaderView() {
                                     openWordNote(verse, part);
                                   }}
                                   aria-label={t.noteFor(`${verseLabel(verse)}, ${part.text}`)}
-                                >
-                                  {part.text}
-                                </button>
+                                  data-token-id={part.sourceTokenIds?.[0]}
+                                  surface={part.text}
+                                  detail={
+                                    morphology.length ? (
+                                      <span className="reader-word-morphology">
+                                        {morphology.map(token => (
+                                          <span
+                                            className="reader-word-morphology-entry"
+                                            key={`${token.chapter}:${token.verse}:${token.token}`}
+                                          >
+                                            <span className="token-detail-surface">{token.surface}</span>
+                                            {token.lemma && token.lemma !== token.surface ? (
+                                              <span className="token-detail-lemma">{token.lemma}</span>
+                                            ) : null}
+                                            <span className="token-detail-codes">
+                                              <span className="token-detail-rmac">{token.morph}</span>
+                                            </span>
+                                            <span className="token-detail-morph-desc">
+                                              {token.description}
+                                            </span>
+                                            {token.gloss ? (
+                                              <span className="token-detail-gloss">{token.gloss}</span>
+                                            ) : null}
+                                          </span>
+                                        ))}
+                                      </span>
+                                    ) : (
+                                      <span className="reader-word-morphology-empty">
+                                        {t.morphologyUnavailable}
+                                      </span>
+                                    )
+                                  }
+                                />
                               );
                             })
                           : verse.text}

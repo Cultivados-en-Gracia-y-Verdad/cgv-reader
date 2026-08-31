@@ -134,6 +134,12 @@ export function TokenDetailAnchor({
     setOpen(true);
   };
   const hide = () => setOpen(false);
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    // A click changes the word's state (mark it or open its note editor). Do
+    // not leave the hover card covering the result just because focus remains.
+    hide();
+    onClick?.(event);
+  };
 
   return (
     <>
@@ -145,7 +151,7 @@ export function TokenDetailAnchor({
         aria-pressed={ariaPressed}
         aria-label={ariaLabel}
         data-token-id={dataTokenId}
-        onClick={onClick}
+        onClick={handleClick}
         onMouseEnter={show}
         onMouseLeave={hide}
         onFocus={show}
