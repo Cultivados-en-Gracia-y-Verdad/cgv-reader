@@ -21,6 +21,7 @@ import {
   rv1909Files,
   spnbesFiles
 } from "../core/reader-assets.generated";
+import { takeTrailingPunctuation } from "./reader-emphasis";
 
 export interface ReaderBook {
   id: ReaderBookId;
@@ -32,6 +33,7 @@ export interface ReaderBook {
 
 export interface ReaderVersePart {
   text: string;
+  trailingPunctuation?: string;
   wordIndex?: number;
   sourceTokenIds?: string[];
   alignmentUnitIds?: string[];
@@ -170,6 +172,19 @@ export function loadLbfReaderVerseParts(
     wordIndex += 1;
   }
   if (cursor < verse.text.length) parts.push({ text: verse.text.slice(cursor) });
+
+  // Keep closing punctuation in the same inline box as its preceding word.
+  // Otherwise an aligned word button followed by a separate text span gives
+  // the browser a wrap opportunity before commas (Tito 3:1), periods, etc.
+  for (let index = 0; index < parts.length - 1; index += 1) {
+    const word = parts[index];
+    const following = parts[index + 1];
+    if (word.wordIndex === undefined || following.wordIndex !== undefined) continue;
+    const { punctuation, remainder } = takeTrailingPunctuation(following.text);
+    if (!punctuation) continue;
+    word.trailingPunctuation = punctuation;
+    following.text = remainder;
+  }
   return parts;
 }
 
@@ -178,7 +193,7 @@ const VERSION_LABELS: Record<BibleVersionId, string> = {
   BLE: "BLE",
   SPNBES: "SPNBES",
   RV1909: "RV1909",
-  LBF: "LBF"
+  LBF: "LPF"
 };
 
 function findLoader(
@@ -194,7 +209,7 @@ async function loadRaw(bookId: ReaderBookId, version: BibleVersionId): Promise<s
 
   if (version === "LBF") {
     if (!readerBookHasLbf(bookId)) {
-      throw new Error(`LBF is not available for ${info.displayName} yet.`);
+      throw new Error(`LPF is not available for ${info.displayName} yet.`);
     }
     return loadLbfRaw(bookId);
   }

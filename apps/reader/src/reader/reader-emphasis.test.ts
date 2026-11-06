@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { readerDisplayText, splitReaderEmphasis } from "./reader-emphasis.ts";
+import { readerDisplayText, splitReaderEmphasis, takeTrailingPunctuation } from "./reader-emphasis.ts";
 
 test("NBLA postfix markers become emphasized words without visible asterisks", () => {
   assert.deepEqual(splitReaderEmphasis("Jesús les dijo*: Ven y vio* la casa."), [
@@ -20,4 +20,15 @@ test("unmarked text stays unchanged", () => {
 
 test("plain display text removes only postfix presentation markers", () => {
   assert.equal(readerDisplayText("podría* contener los libros"), "podría contener los libros");
+});
+
+test("trailing punctuation can stay attached to its preceding word", () => {
+  assert.deepEqual(takeTrailingPunctuation(", ser no contenciosos"), {
+    punctuation: ",",
+    remainder: " ser no contenciosos"
+  });
+  assert.deepEqual(takeTrailingPunctuation("». Después"), {
+    punctuation: "».",
+    remainder: " Después"
+  });
 });

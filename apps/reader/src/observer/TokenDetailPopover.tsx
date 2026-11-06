@@ -4,6 +4,7 @@ import {
   type ReactNode,
   useCallback,
   useEffect,
+  useId,
   useLayoutEffect,
   useRef,
   useState
@@ -23,10 +24,12 @@ const ESTIMATED_HEIGHT = 96;
 export function TokenDetailPopover({
   open,
   anchor,
+  id,
   children
 }: {
   open: boolean;
   anchor: HTMLElement | null;
+  id?: string;
   children: ReactNode;
 }) {
   const tipRef = useRef<HTMLSpanElement>(null);
@@ -94,6 +97,7 @@ export function TokenDetailPopover({
 
   return createPortal(
     <span
+      id={id}
       ref={tipRef}
       className={`token-detail-floating token-detail-floating--${place}`}
       role="tooltip"
@@ -126,6 +130,7 @@ export function TokenDetailAnchor({
   detail: ReactNode;
 }) {
   const ref = useRef<HTMLButtonElement>(null);
+  const tooltipId = useId();
   const [open, setOpen] = useState(false);
   const [anchor, setAnchor] = useState<HTMLElement | null>(null);
 
@@ -146,10 +151,11 @@ export function TokenDetailAnchor({
       <button
         ref={ref}
         type="button"
-        className={className}
+        className={`${className}${open ? " token-detail-anchor--open" : ""}`}
         disabled={disabled}
         aria-pressed={ariaPressed}
         aria-label={ariaLabel}
+        aria-describedby={open ? tooltipId : undefined}
         data-token-id={dataTokenId}
         onClick={handleClick}
         onMouseEnter={show}
@@ -159,7 +165,7 @@ export function TokenDetailAnchor({
       >
         {surface}
       </button>
-      <TokenDetailPopover open={open} anchor={anchor}>
+      <TokenDetailPopover id={tooltipId} open={open} anchor={anchor}>
         {detail}
       </TokenDetailPopover>
     </>

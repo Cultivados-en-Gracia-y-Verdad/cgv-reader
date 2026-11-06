@@ -223,14 +223,14 @@ function lbfMarkdownPath(bookId: ReaderBookId): string {
   const endsWith = `/${bookId}.lbf.md`;
   const key = Object.keys(lbfMdFiles).find(path => path.endsWith(endsWith));
   if (!key) {
-    throw new Error(`Missing LBF markdown for ${getReaderBookInfo(bookId).displayName}`);
+    throw new Error(`Missing LPF markdown for ${getReaderBookInfo(bookId).displayName}`);
   }
   return key;
 }
 
 export function loadLbfRaw(bookId: ReaderBookId): string {
   if (!publishedLbfExists(bookId)) {
-    throw new Error(`LBF is not available for ${getReaderBookInfo(bookId).displayName} yet.`);
+    throw new Error(`LPF is not available for ${getReaderBookInfo(bookId).displayName} yet.`);
   }
   return lbfMdFiles[lbfMarkdownPath(bookId)];
 }

@@ -27,3 +27,14 @@ export function splitReaderEmphasis(text: string): ReaderTextSegment[] {
 export function readerDisplayText(text: string): string {
   return splitReaderEmphasis(text).map(segment => segment.text).join("");
 }
+
+const TRAILING_PUNCTUATION = /^([,.;:!?…»”’\)\]\}]+)/u;
+
+export function takeTrailingPunctuation(text: string): {
+  punctuation: string;
+  remainder: string;
+} {
+  const match = text.match(TRAILING_PUNCTUATION);
+  const punctuation = match?.[1] ?? "";
+  return { punctuation, remainder: text.slice(punctuation.length) };
+}

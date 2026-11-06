@@ -403,9 +403,12 @@ textarea {
 }
 
 .reader-word:hover,
-.reader-word:focus-visible {
-  border-bottom-color: color-mix(in srgb, var(--reader-accent) 58%, transparent);
-  background: color-mix(in srgb, var(--reader-note-bg) 82%, transparent);
+.reader-word:focus-visible,
+.reader-word.token-detail-anchor--open {
+  border-bottom-color: var(--reader-accent);
+  background: color-mix(in srgb, var(--reader-accent) 18%, var(--reader-note-bg));
+  box-shadow: 0 0 0 0.12em color-mix(in srgb, var(--reader-accent) 22%, transparent);
+  color: color-mix(in srgb, var(--reader-text) 82%, var(--reader-accent));
   outline: none;
 }
 
@@ -423,6 +426,20 @@ textarea {
   flex-direction: column;
   gap: 0.42rem;
   width: min(15rem, calc(100vw - 1.5rem));
+}
+
+.reader-word-tooltip-label {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.35rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--reader-border);
+  color: var(--reader-accent);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 700;
+  text-align: center;
 }
 
 .reader-word-morphology-entry {
@@ -956,6 +973,28 @@ textarea {
   pointer-events: none;
   white-space: normal;
   text-align: center;
+}
+
+.token-detail-floating::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: #fffef9;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.token-detail-floating--below::before {
+  top: -0.42rem;
+  border-top: 1px solid #cfc4b2;
+  border-left: 1px solid #cfc4b2;
+}
+
+.token-detail-floating--above::before {
+  bottom: -0.42rem;
+  border-right: 1px solid #cfc4b2;
+  border-bottom: 1px solid #cfc4b2;
 }
 
 .token-detail-floating .token-detail-morph-desc {
@@ -6841,6 +6880,11 @@ html[data-theme="dark"] .token-detail-floating {
   background: #1f1c18;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
   color: #f3efe6;
+}
+
+html[data-theme="dark"] .token-detail-floating::before {
+  border-color: #4a4338;
+  background: #1f1c18;
 }
 
 html[data-theme="dark"] .token-detail-popover {

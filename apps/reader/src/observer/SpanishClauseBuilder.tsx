@@ -3215,7 +3215,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
         <p className="reader-kicker">Observer · Structure</p>
         <h1>{bookInfo.displayName}</h1>
         <p className="clause-builder-scope">
-          Greek in token order with aligned LBF under each word. The verse line below is LBF in Spanish reading
+          Greek in token order with aligned LPF under each word. The verse line below is LPF in Spanish reading
           order (word order will differ). Open Skeleton anytime to read the settled tree.
         </p>
       </header>
@@ -4562,7 +4562,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
             </div>
             <p className="clause-section-note">
               Greek is authoritative. These clauses’ saved Spanish word-span no longer matches what their
-              stored Greek range maps to in LBF (often after an alignment fix). Resync keeps the Greek
+              stored Greek range maps to in LPF (often after an alignment fix). Resync keeps the Greek
               boundary and rewrites the Spanish span — or open the verb and Save after adjusting Greek.
             </p>
             {Object.entries(
@@ -4702,7 +4702,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
             .join(" ")}
           aria-label={
             showSpanishOnly
-              ? `LBF Spanish text of ${bookInfo.displayName} (settled reading)`
+              ? `LPF Spanish text of ${bookInfo.displayName} (settled reading)`
               : `${sourceLanguage} text of ${bookInfo.displayName}, Spanish alongside`
           }
         >
@@ -4776,7 +4776,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                             </span>
                             <span className="token-detail-morph-desc">{describeMorph(token.morph)}</span>
                             <span className="token-detail-gloss">
-                              {lbfAid ? `LBF: ${lbfAid}` : "LBF: (unaligned)"}
+                              {lbfAid ? `LPF: ${lbfAid}` : "LPF: (unaligned)"}
                             </span>
                           </span>
                         }
@@ -4795,7 +4795,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                   ]
                     .filter(Boolean)
                     .join(" ")}
-                  aria-label="LBF verse in Spanish reading order"
+                  aria-label="LPF verse in Spanish reading order"
                 >
                   {groupSpanishPhrases(
                     verse.words,
@@ -4945,7 +4945,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                         {token.greek}
                       </span>
                     ))}
-                    <span className="clause-beginning-label">LBF</span>
+                    <span className="clause-beginning-label">LPF</span>
                     {activeBeginningRow.beginningTokens.map(token => {
                       const [ch, vs, tok] = token.id.split(":").map(Number);
                       const lbf =

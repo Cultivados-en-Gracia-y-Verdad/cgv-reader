@@ -104,7 +104,7 @@ const EN: UiStrings = {
   prefBook: "Book",
   prefBible: "Bible text (Reader)",
   prefBibleNote:
-    "Book selection is shared across Reader, Observer, and Compiler. Structure / Generate require a published LBF reverse-interlinear alignment. LBF notes can be keyed to a verse or word.",
+    "Book selection is shared across Reader, Observer, and Compiler. Structure / Generate require a published LPF reverse-interlinear alignment. LPF notes can be keyed to a verse or word.",
   prefRecovery: "Notes and backup",
   prefRecoveryNote: "Review notes saved in this browser or download a copy of your current progress.",
   loadingBook: "Loading…",
@@ -124,7 +124,7 @@ const EN: UiStrings = {
   mark: "Mark",
   structure: "Structure",
   structureNeedsLbf: book =>
-    `Structure needs published LBF reverse-interlinear alignment. ${book} does not have an alignment file in cgv-data yet.`,
+    `Structure needs published LPF reverse-interlinear alignment. ${book} does not have an alignment file in cgv-data yet.`,
   markNeedsMorphGnt: book =>
     `Mark needs a source-language spine for ${book}. Switch to a book with MorphGNT (NT) or a published OSHB spine.`,
 
@@ -133,10 +133,10 @@ const EN: UiStrings = {
   compilerScope:
     "Generate from Observer, then pin definitions and cross-refs. Pins survive regenerate when their target line text still exists. Tools stay along the bottom. Reader notes and pins never mix into Observer * grammar slides.",
   compilerNeedsLbf: book =>
-    `Compiler needs Observer Structure. ${book} has no published LBF alignment yet.`,
+    `Compiler needs Observer Structure. ${book} has no published LPF alignment yet.`,
   compilerBible: "Reading text (Compiler)",
   compilerBibleNote:
-    "Version for the reading quotes after each H3. Outline #### / - / + stays LBF from Observer.",
+    "Version for the reading quotes after each H3. Outline #### / - / + stays LPF from Observer.",
   generate: "Generate from O's current data",
   exportMd: "Export as .md",
   lineSelected: n => `Line ${n} selected`,
@@ -202,7 +202,7 @@ const ES: UiStrings = {
   prefBook: "Libro",
   prefBible: "Texto bíblico (Lector)",
   prefBibleNote:
-    "El libro se comparte entre Lector, Observador y Compilador. Estructura / Generar requieren una alineación inversa LBF publicada. En LBF, las notas pueden ligarse a un versículo o una palabra.",
+    "El libro se comparte entre Lector, Observador y Compilador. Estructura / Generar requieren una alineación inversa LPF publicada. En LPF, las notas pueden ligarse a un versículo o una palabra.",
   prefRecovery: "Notas y respaldo",
   prefRecoveryNote: "Revise las notas guardadas en este navegador o descargue una copia del progreso actual.",
   loadingBook: "Cargando…",
@@ -222,7 +222,7 @@ const ES: UiStrings = {
   mark: "Marcar",
   structure: "Estructura",
   structureNeedsLbf: book =>
-    `Estructura necesita alineación inversa LBF publicada. ${book} aún no tiene archivo de alineación en cgv-data.`,
+    `Estructura necesita alineación inversa LPF publicada. ${book} aún no tiene archivo de alineación en cgv-data.`,
   markNeedsMorphGnt: book =>
     `Marcar necesita columna fuente para ${book}. Cambie a un libro con MorphGNT (NT) o una columna OSHB publicada.`,
 
@@ -231,10 +231,10 @@ const ES: UiStrings = {
   compilerScope:
     "Genere desde Observador; luego fije definiciones y referencias. Los pines sobreviven al regenerar si el texto de la línea sigue existiendo. Las herramientas están abajo. Las notas del Lector y los pines no se mezclan con las diapositivas gramaticales * de Observador.",
   compilerNeedsLbf: book =>
-    `El Compilador necesita Estructura en Observador. ${book} aún no tiene alineación LBF publicada.`,
+    `El Compilador necesita Estructura en Observador. ${book} aún no tiene alineación LPF publicada.`,
   compilerBible: "Texto de lectura (Compilador)",
   compilerBibleNote:
-    "Versión para las citas de lectura después de cada H3. El esquema #### / - / + sigue en LBF desde Observador.",
+    "Versión para las citas de lectura después de cada H3. El esquema #### / - / + sigue en LPF desde Observador.",
   generate: "Generar desde los datos actuales de O",
   exportMd: "Exportar como .md",
   lineSelected: n => `Línea ${n} seleccionada`,

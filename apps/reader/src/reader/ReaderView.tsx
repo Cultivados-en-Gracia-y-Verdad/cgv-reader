@@ -390,36 +390,46 @@ export default function ReaderView() {
                                   }}
                                   aria-label={t.noteFor(`${verseLabel(verse)}, ${readerDisplayText(part.text)}`)}
                                   data-token-id={part.sourceTokenIds?.[0]}
-                                  surface={renderReaderText(part.text, `word-${part.wordIndex}`)}
+                                  surface={
+                                    <>
+                                      {renderReaderText(part.text, `word-${part.wordIndex}`)}
+                                      {part.trailingPunctuation}
+                                    </>
+                                  }
                                   detail={
-                                    morphology.length ? (
-                                      <span className="reader-word-morphology">
-                                        {morphology.map(token => (
-                                          <span
-                                            className="reader-word-morphology-entry"
-                                            key={`${token.chapter}:${token.verse}:${token.token}`}
-                                          >
-                                            <span className="token-detail-surface">{token.surface}</span>
-                                            {token.lemma && token.lemma !== token.surface ? (
-                                              <span className="token-detail-lemma">{token.lemma}</span>
-                                            ) : null}
-                                            <span className="token-detail-codes">
-                                              <span className="token-detail-rmac">{token.morph}</span>
-                                            </span>
-                                            <span className="token-detail-morph-desc">
-                                              {token.description}
-                                            </span>
-                                            {token.gloss ? (
-                                              <span className="token-detail-gloss">{token.gloss}</span>
-                                            ) : null}
-                                          </span>
-                                        ))}
+                                    <>
+                                      <span className="reader-word-tooltip-label">
+                                        {readerDisplayText(part.text)}
                                       </span>
-                                    ) : (
-                                      <span className="reader-word-morphology-empty">
-                                        {t.morphologyUnavailable}
-                                      </span>
-                                    )
+                                      {morphology.length ? (
+                                        <span className="reader-word-morphology">
+                                          {morphology.map(token => (
+                                            <span
+                                              className="reader-word-morphology-entry"
+                                              key={`${token.chapter}:${token.verse}:${token.token}`}
+                                            >
+                                              <span className="token-detail-surface">{token.surface}</span>
+                                              {token.lemma && token.lemma !== token.surface ? (
+                                                <span className="token-detail-lemma">{token.lemma}</span>
+                                              ) : null}
+                                              <span className="token-detail-codes">
+                                                <span className="token-detail-rmac">{token.morph}</span>
+                                              </span>
+                                              <span className="token-detail-morph-desc">
+                                                {token.description}
+                                              </span>
+                                              {token.gloss ? (
+                                                <span className="token-detail-gloss">{token.gloss}</span>
+                                              ) : null}
+                                            </span>
+                                          ))}
+                                        </span>
+                                      ) : (
+                                        <span className="reader-word-morphology-empty">
+                                          {t.morphologyUnavailable}
+                                        </span>
+                                      )}
+                                    </>
                                   }
                                 />
                               );

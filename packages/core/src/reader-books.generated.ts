@@ -3,7 +3,7 @@ import type { BibleVersionId } from "./bible-version";
 
 export const CGV_DATASET_PROVENANCE = {
   id: "cgv-data",
-  gitCommit: "b49748afeb185de7c09abb22e51eed76188b28cc"
+  gitCommit: "52c4df0b1c87cd9db79b6def3b48270e29dba5f7"
 } as const;
 
 export interface GeneratedReaderBookInfo {
@@ -19,6 +19,7 @@ export interface GeneratedReaderBookInfo {
 export const GENERATED_READER_BOOKS = [
   { id: "genesis", displayName: "Génesis", rv1909: "01", testament: "ot", versions: ["NBLA", "BLE", "SPNBES", "RV1909", "LBF"], morphGntStem: "", hasOshb: true },
   { id: "daniel", displayName: "Daniel", rv1909: "27", testament: "ot", versions: ["BLE", "SPNBES", "RV1909", "LBF"], morphGntStem: "", hasOshb: true },
+  { id: "habacuc", displayName: "Habacuc", rv1909: "35", testament: "ot", versions: ["BLE", "SPNBES", "RV1909", "LBF"], morphGntStem: "", hasOshb: true },
   { id: "zacarias", displayName: "Zacarías", rv1909: "38", testament: "ot", versions: ["NBLA", "BLE", "SPNBES", "RV1909", "LBF"], morphGntStem: "", hasOshb: true },
   { id: "mateo", displayName: "Mateo", rv1909: "40", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909"], morphGntStem: "61-Mt", hasOshb: false },
   { id: "marcos", displayName: "Marcos", rv1909: "41", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909"], morphGntStem: "62-Mk", hasOshb: false },

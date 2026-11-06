@@ -40,6 +40,7 @@ export const bleFiles = import.meta.glob(
   [
     "@cgv-data/bibles/BLE/genesis.ble.md",
     "@cgv-data/bibles/BLE/daniel.ble.md",
+    "@cgv-data/bibles/BLE/habacuc.ble.md",
     "@cgv-data/bibles/BLE/zacarias.ble.md",
     "@cgv-data/bibles/BLE/mateo.ble.md",
     "@cgv-data/bibles/BLE/marcos.ble.md",
@@ -76,6 +77,7 @@ export const spnbesFiles = import.meta.glob(
   [
     "@cgv-data/bibles/SPNBES/genesis.txt",
     "@cgv-data/bibles/SPNBES/daniel.txt",
+    "@cgv-data/bibles/SPNBES/habacuc.txt",
     "@cgv-data/bibles/SPNBES/zacarias.txt",
     "@cgv-data/bibles/SPNBES/mateo.txt",
     "@cgv-data/bibles/SPNBES/marcos.txt",
@@ -112,6 +114,7 @@ export const rv1909Files = import.meta.glob(
   [
     "@cgv-data/bibles/RV1909/md/01.content.md",
     "@cgv-data/bibles/RV1909/md/27.content.md",
+    "@cgv-data/bibles/RV1909/md/35.content.md",
     "@cgv-data/bibles/RV1909/md/38.content.md",
     "@cgv-data/bibles/RV1909/md/40.content.md",
     "@cgv-data/bibles/RV1909/md/41.content.md",
