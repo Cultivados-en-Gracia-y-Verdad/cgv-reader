@@ -1948,11 +1948,11 @@ button.interlinear-token--pickable:focus-visible {
   gap: 0.8rem;
 }
 
-/* Three direct children now (label, Greek row, Spanish reference row)
+/* Three direct children now (label, source-language row, Spanish reference row)
    against only two explicit columns — without explicit placement, grid
    auto-flow wraps the 3rd child into column 1 (the ~45px label column),
    squeezing every Spanish word onto its own line. Label spans both content
-   rows; Greek and Spanish reference both pin to column 2. */
+   rows; source text and Spanish reference both pin to column 2. */
 .clause-verse-label {
   grid-column: 1;
   grid-row: 1 / -1;
@@ -2052,7 +2052,7 @@ button.interlinear-token--pickable:focus-visible {
   box-shadow: 0 0 0 1px rgba(90, 140, 145, 0.28);
 }
 
-/* The Greek interlinear row — now the authoritative tap target for building
+/* The Greek or Hebrew/Aramaic row — the authoritative tap target for building
    a clause span. Mirrors O Prototype's token-flow/token-surface/token-morph
    pattern for visual consistency across both marking screens. */
 .clause-greek-row {

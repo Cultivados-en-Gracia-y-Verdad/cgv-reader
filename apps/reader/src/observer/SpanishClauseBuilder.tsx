@@ -312,8 +312,9 @@ function parseGreekTokenId(id: string): { chapter: number; verse: number; token:
 // Spanish surface is primary; Greek is secondary confirmation of Brick 4.
 export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId }) {
   const bookInfo = getReaderBookInfo(bookId);
-  const sourceLanguage = readerBookHasOshb(bookId) ? "Hebrew / Aramaic" : "Greek";
-  const sourceDirection = readerBookHasOshb(bookId) ? "rtl" : "ltr";
+  const isHebrewAramaic = readerBookHasOshb(bookId);
+  const sourceLanguage = isHebrewAramaic ? "Hebrew / Aramaic" : "Greek";
+  const sourceDirection = isHebrewAramaic ? "rtl" : "ltr";
   const progressKeys = useMemo(() => workshopProgressKeys(bookId), [bookId]);
   const [interlinearReady, setInterlinearReady] = useState(false);
   const verses = useMemo(() => loadClauseVerses(bookId), [bookId]);
@@ -3215,8 +3216,10 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
         <p className="reader-kicker">Observer · Structure</p>
         <h1>{bookInfo.displayName}</h1>
         <p className="clause-builder-scope">
-          Greek in token order with aligned LPF under each word. The verse line below is LPF in Spanish reading
-          order (word order will differ). Open Skeleton anytime to read the settled tree.
+          {isHebrewAramaic
+            ? "Hebrew / Aramaic in token order. The line below is LPF in Spanish reading order; aligned LPF remains available in each word popup."
+            : "Greek in token order with aligned LPF under each word. The verse line below is LPF in Spanish reading order (word order will differ)."}{" "}
+          Open Skeleton anytime to read the settled tree.
         </p>
       </header>
 
@@ -4762,7 +4765,9 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                             <span className="clause-greek-token-surface">
                               {token.surface.replace(/[⸀⸁⸂⸃,.;·]/g, "")}
                             </span>
-                            <span className="clause-greek-token-gloss">{aidText || "·"}</span>
+                            {!isHebrewAramaic ? (
+                              <span className="clause-greek-token-gloss">{aidText || "·"}</span>
+                            ) : null}
                           </>
                         }
                         detail={
