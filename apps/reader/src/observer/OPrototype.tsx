@@ -387,6 +387,7 @@ function OPrototypeLoaded({
   keys: ReturnType<typeof workshopProgressKeys>;
   data: BookMorphData;
 }) {
+  const sourceLanguage = readerBookHasOshb(bookId) ? "Hebrew / Aramaic" : "Greek";
   const [participation, setParticipation] = useState<ParticipationMode>("finite");
   const [finiteMarkedIds, setFiniteMarkedIds] = useState<Set<string>>(
     () => new Set(readMarks(keys.finiteMarks))
@@ -1247,7 +1248,7 @@ function OPrototypeLoaded({
       <header className="o-header">
         <div>
           <p className="o-kicker">O Prototype 0.2</p>
-          <h1>Greek Participation Environment</h1>
+          <h1>{sourceLanguage} Participation Environment</h1>
         </div>
       </header>
 
@@ -1268,7 +1269,7 @@ function OPrototypeLoaded({
       <section className="o-layout">
         <article
           className="greek-panel"
-          aria-label="Greek text"
+          aria-label={`${sourceLanguage} text`}
         >
           <div className="participation-switch" aria-label="Participation">
             <button
@@ -1386,7 +1387,7 @@ function OPrototypeLoaded({
                     >
                       {verse.verse}
                     </button>
-                    <div className="token-flow">
+                    <div className="token-flow" dir={readerBookHasOshb(bookId) ? "rtl" : "ltr"}>
                       {(() => {
                         const interlinear = getVerseInterlinear(verse.chapter, verse.verse, bookId);
                         return verse.tokens.map(token => (

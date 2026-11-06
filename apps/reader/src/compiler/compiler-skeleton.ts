@@ -326,14 +326,23 @@ function relationalConnectorLine(spanish: string, lemma: string, greek?: string 
   const fn = footnoteKeyForLemma(lemma);
   switch (lemma) {
     case "καί":
+    case "ו":
+    case "גַּם":
       return `${word}[^${fn}] une esta cláusula con la anterior.`;
     case "ἀλλά":
+    case "אֲבָל":
+    case "אַךְ":
+    case "אוּלָם":
       return `${word}[^${fn}] introduce un contraste.`;
     case "γάρ":
     case "διότι":
       return `${word}[^${fn}] introduce la razón.`;
     case "οὖν":
+    case "כֵּן":
+    case "לָכֵן":
       return `${word}[^${fn}] introduce la conclusión.`;
+    case "אוֹ":
+      return `${word}[^${fn}] introduce una alternativa.`;
     case "δέ":
       return `${word}[^${fn}] continúa el desarrollo.`;
     default:
@@ -1643,6 +1652,15 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
       ];
     }
     if (marker.kind === "coordinator") {
+      return [
+        relationalConnectorLine(
+          passageSpanishForMarker(marker.token, bookId),
+          marker.lemma,
+          marker.token.greek
+        )
+      ];
+    }
+    if (marker.kind === "connector") {
       return [
         relationalConnectorLine(
           passageSpanishForMarker(marker.token, bookId),

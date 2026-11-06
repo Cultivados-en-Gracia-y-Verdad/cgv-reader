@@ -312,6 +312,8 @@ function parseGreekTokenId(id: string): { chapter: number; verse: number; token:
 // Spanish surface is primary; Greek is secondary confirmation of Brick 4.
 export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId }) {
   const bookInfo = getReaderBookInfo(bookId);
+  const sourceLanguage = readerBookHasOshb(bookId) ? "Hebrew / Aramaic" : "Greek";
+  const sourceDirection = readerBookHasOshb(bookId) ? "rtl" : "ltr";
   const progressKeys = useMemo(() => workshopProgressKeys(bookId), [bookId]);
   const [interlinearReady, setInterlinearReady] = useState(false);
   const verses = useMemo(() => loadClauseVerses(bookId), [bookId]);
@@ -4701,7 +4703,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
           aria-label={
             showSpanishOnly
               ? `LBF Spanish text of ${bookInfo.displayName} (settled reading)`
-              : `Greek text of ${bookInfo.displayName}, Spanish alongside`
+              : `${sourceLanguage} text of ${bookInfo.displayName}, Spanish alongside`
           }
         >
           {verses.map(verse => {
@@ -4715,11 +4717,11 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                   {verse.chapter}:{verse.verse}
                 </p>
 
-                {/* Greek workstation — omit entirely in Spanish-only mode.
+                {/* Source-language workstation — omit entirely in Spanish-only mode.
                     (Do not use the HTML hidden attribute: .clause-greek-row's
-                    display:flex overrides [hidden] and left Greek on screen.) */}
+                    display:flex overrides [hidden] and leaves source text on screen.) */}
                 {!showSpanishOnly ? (
-                <p className="clause-greek-row">
+                <p className="clause-greek-row" dir={sourceDirection}>
                   {verseTokens.map((token, index) => {
                     const tokenNumber = index + 1;
                     const tokenId = `${verse.chapter}:${verse.verse}:${tokenNumber}`;
@@ -4912,7 +4914,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                       className="clause-greek-toggle"
                       onClick={() => setShowGreekBeginning(current => !current)}
                     >
-                      {showGreekBeginning ? "Hide Greek" : "View Greek"}
+                      {showGreekBeginning ? `Hide ${sourceLanguage}` : `View ${sourceLanguage}`}
                     </button>
                   </div>
                   <p className="clause-active-span">{renderClauseLine(activeBeginningRow)}</p>
@@ -4931,9 +4933,10 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                 {showGreekBeginning && activeBeginningRow.beginningTokens.length ? (
                   <div
                     className="clause-beginning-grid clause-beginning-grid--inline"
+                    dir={sourceDirection}
                     style={{ gridTemplateColumns: `auto repeat(${activeBeginningRow.beginningTokens.length}, max-content)` }}
                   >
-                    <span className="clause-beginning-label">Greek</span>
+                    <span className="clause-beginning-label">{sourceLanguage}</span>
                     {activeBeginningRow.beginningTokens.map((token, index) => (
                       <span
                         className={index === 0 ? "clause-beginning-token clause-beginning-token--first" : "clause-beginning-token"}

@@ -120,6 +120,22 @@ export const CONTENT_VERB_LEMMAS = new Set([
   "ἐπίσταμαι"
 ]);
 
+// Strong's heads used by the Hebrew/Aramaic source. This is deliberately a
+// separate table: OSHB lemmas are numeric (and may carry prefixes such as
+// "c/559"), so comparing them with Greek lemma strings silently makes every
+// כִּי clause look causal even after a verb of saying or knowing.
+const HEBREW_CONTENT_VERB_STRONGS = new Set([
+  "559",  // אמר, say
+  "1696", // דבר, speak
+  "3045", // ידע, know
+  "5046", // נגד, tell / declare
+  "7200", // ראה, see
+  "8085", // שמע, hear
+  "2803", // חשב, think / reckon
+  "2142", // זכר, remember
+  "7911"  // שכח, forget
+]);
+
 function stripAccentless(lemma: string): string {
   return lemma.trim();
 }
@@ -141,10 +157,11 @@ export const PLAIN_COORDINATORS = new Set(["καί", "δέ", "ἤ"]);
 // the student gets no signal at all — which is exactly what happened on Daniel.
 //
 // Same discipline as the Greek side:
-//   - only a conjunction/particle reading may subordinate a verb. עַד and
-//     לְמַעַן are tagged HR (preposition) here; a bare preposition governs a
-//     substantive, so it is NOT treated as a subordinator, just as ὡς tagged P
-//     is not.
+//   - morphology normally distinguishes clause-opening conjunctions from
+//     prepositions. A few Hebrew lexical subordinators (especially לְמַעַן,
+//     עַד before a finite, and טֶרֶם) retain a preposition/adverb tag in OSHB;
+//     those must be recognized by lexeme rather than forced through Greek POS
+//     expectations.
 //   - כִּי is the Hebrew ὅτι. It spans because / that / when / if and the word
 //     alone never settles which, so it is surfaced as a judgment call and is
 //     never resolved in code.
@@ -185,8 +202,12 @@ const HEBREW_FRAME_PARTICLES: Record<string, FrameType> = {
   "518": "condition",  // אִם
   "4616": "purpose",   // לְמַעַן
   "6435": "purpose",   // פֶּן  (negative purpose, "lest")
-  "3282": "reason"     // יַעַן
+  "3282": "reason",    // יַעַן
+  "5704": "time",      // עַד before a finite clause (until)
+  "2962": "time"       // טֶרֶם / בְּטֶרֶם (before / not yet)
 };
+
+const HEBREW_LEXICAL_SUBORDINATORS = new Set(["4616", "5704", "2962"]);
 
 const HEBREW_RELATIVE_STRONGS = new Set(["834", "7945"]);
 
@@ -213,7 +234,7 @@ function frameTypeOfToken(token: ClauseBeginningToken): FrameType | undefined {
   const strongs = hebrewStrongs(token.lemma);
   if (!strongs) return undefined;
   if (HEBREW_RELATIVE_STRONGS.has(strongs) && hasKafPrefix(token.lemma)) return "time";
-  if (!hebrewCanSubordinate(token.morph)) return undefined;
+  if (!hebrewCanSubordinate(token.morph) && !HEBREW_LEXICAL_SUBORDINATORS.has(strongs)) return undefined;
   return HEBREW_FRAME_PARTICLES[strongs];
 }
 
@@ -228,6 +249,18 @@ function ambiguousNoteForToken(token: ClauseBeginningToken): string | undefined 
 /** Display form of a token's lemma: Greek prints the lemma, Hebrew the surface. */
 function markerLabel(token: ClauseBeginningToken): string {
   return isHebrewToken(token) ? token.greek : stripAccentless(token.lemma);
+}
+
+function isContentVerbToken(token: ClauseBeginningToken): boolean {
+  if (!isHebrewToken(token)) return CONTENT_VERB_LEMMAS.has(stripAccentless(token.lemma));
+  const strongs = hebrewStrongs(token.lemma);
+  return Boolean(strongs && HEBREW_CONTENT_VERB_STRONGS.has(strongs));
+}
+
+function isContentVerbLemma(lemma: string): boolean {
+  if (CONTENT_VERB_LEMMAS.has(stripAccentless(lemma))) return true;
+  const strongs = hebrewStrongs(lemma);
+  return Boolean(strongs && HEBREW_CONTENT_VERB_STRONGS.has(strongs));
 }
 
 function clauseOrderKey(clause: ClauseSignalInput): number {
@@ -397,15 +430,16 @@ export function detectClauseSignal(
     clause.finiteVerbId
   );
   if (ambiguousToken) {
-    const ambiguousLemma = stripAccentless(ambiguousToken.lemma);
-    const otiHint = ambiguousLemma === "ὅτι" ? findOtiGoverningHint(clause, allClauses) : null;
+    const ambiguousLemma = markerLabel(ambiguousToken);
+    const ambiguousNote = ambiguousNoteForToken(ambiguousToken) as string;
+    const governingHint = findOtiGoverningHint(clause, allClauses);
     let reason =
-      `Opens with “${ambiguousToken.greek}” (${ambiguousLemma}) — ${AMBIGUOUS_PARTICLES[ambiguousLemma]}. `;
-    if (otiHint) {
+      `Opens with “${ambiguousToken.greek}” (${ambiguousLemma}) — ${ambiguousNote}. `;
+    if (governingHint) {
       const place =
-        otiHint.where === "leading-window"
-          ? `right here before it (“${otiHint.greek}”, ${otiHint.lemma})`
-          : `in the previous clause (${otiHint.lemma})`;
+        governingHint.where === "leading-window"
+          ? `right here before it (“${governingHint.greek}”, ${governingHint.lemma})`
+          : `in the previous clause (${governingHint.lemma})`;
       reason +=
         `A saying/knowing/perceiving verb sits ${place}, which often means content (“that…”) — ` +
         `but check whether “because…” still fits better. You decide.`;
@@ -423,7 +457,7 @@ export function detectClauseSignal(
       kind: "uncertain",
       reason:
         `Nothing at the very front of this clause, but “${buried.token.greek}” (${buried.token.lemma}) — ` +
-        `${buried.role} — sits several words in, past where Greek puts a clause's opening marker. That normally means ` +
+        `${buried.role} — sits several words in, past the language's normal clause-opening position. That normally means ` +
         `the span starts too early and is carrying words that belong to the clause before it. Tighten the span first: ` +
         `until the front of the clause is right, “independent” isn't a safe read of it.`
     };
@@ -513,9 +547,13 @@ export function detectLeadingFrameType(
   finiteVerbId?: string
 ): FrameType | undefined {
   const frameToken = findLeadingToken(beginningTokens, isFrameParticle, finiteVerbId);
-  if (frameToken) return FRAME_PARTICLES[stripAccentless(frameToken.lemma)];
-  const otiToken = findLeadingToken(beginningTokens, token => stripAccentless(token.lemma) === "ὅτι", finiteVerbId);
-  if (otiToken) return "reason";
+  if (frameToken) return frameTypeOfToken(frameToken);
+  const ambiguousToken = findLeadingToken(
+    beginningTokens,
+    token => Boolean(ambiguousNoteForToken(token)),
+    finiteVerbId
+  );
+  if (ambiguousToken) return "reason";
   return undefined;
 }
 
@@ -525,7 +563,7 @@ export function detectLeadingFrameType(
  * the Greek lemma — not a guess, but not a forced answer either.
  */
 export function isLikelyContentParent(candidate: { finiteVerbLemma?: string }): boolean {
-  return Boolean(candidate.finiteVerbLemma && CONTENT_VERB_LEMMAS.has(stripAccentless(candidate.finiteVerbLemma)));
+  return Boolean(candidate.finiteVerbLemma && isContentVerbLemma(candidate.finiteVerbLemma));
 }
 
 export type OtiGoverningHint = {
@@ -545,9 +583,7 @@ export function findOtiGoverningHint(
   clause: ClauseSignalInput,
   allClauses: ClauseSignalInput[]
 ): OtiGoverningHint | null {
-  const contentToken = findLeadingToken(clause.beginningTokens, token =>
-    CONTENT_VERB_LEMMAS.has(stripAccentless(token.lemma))
-  );
+  const contentToken = findLeadingToken(clause.beginningTokens, isContentVerbToken);
   if (contentToken) {
     return {
       lemma: stripAccentless(contentToken.lemma),
@@ -558,7 +594,7 @@ export function findOtiGoverningHint(
 
   const prevId = nearestPrecedingClauseId(clause, allClauses);
   const prev = prevId ? allClauses.find(candidate => candidate.finiteVerbId === prevId) : undefined;
-  if (prev?.finiteVerbLemma && CONTENT_VERB_LEMMAS.has(stripAccentless(prev.finiteVerbLemma))) {
+  if (prev?.finiteVerbLemma && isContentVerbLemma(prev.finiteVerbLemma)) {
     return {
       lemma: stripAccentless(prev.finiteVerbLemma),
       greek: prev.finiteVerbLemma,
@@ -641,11 +677,12 @@ export function buildClauseChoiceGuidance(
   const relative = findLeadingToken(tokens, isRelativeToken, verbId);
   const connection = detectRelativeOfConnection(tokens);
   const frameToken = findLeadingToken(tokens, isFrameParticle, verbId);
-  const ambiguousToken = findLeadingToken(tokens, token => Boolean(AMBIGUOUS_PARTICLES[stripAccentless(token.lemma)]), verbId);
+  const ambiguousToken = findLeadingToken(tokens, token => Boolean(ambiguousNoteForToken(token)), verbId);
   const otiToken = findLeadingToken(tokens, token => stripAccentless(token.lemma) === "ὅτι", verbId);
-  const otiHint = otiToken || (ambiguousToken && stripAccentless(ambiguousToken.lemma) === "ὅτι")
+  const ambiguousHint = ambiguousToken
     ? findOtiGoverningHint(clause, allClauses)
     : null;
+  const sourceIsHebrew = tokens.some(isHebrewToken);
   const eisPhrase = detectEisGoalPhrase(tokens);
   const openSurface = tokens
     .slice(0, 3)
@@ -665,7 +702,7 @@ export function buildClauseChoiceGuidance(
   // 1 Pet 1:10 περὶ ἧς σωτηρίας / Titus 1:13 δι' ἣν αἰτίαν: the relative is a
   // connective idiom, so Independent is the usual lean — still the student's call.
   else if (signal.kind === "uncertain" && (connection || overImperative)) suggested = "root";
-  else if (signal.kind === "uncertain" && otiToken) suggested = otiHint ? "content" : "frame";
+  else if (signal.kind === "uncertain" && ambiguousToken) suggested = ambiguousHint ? "content" : "frame";
 
   let summary: string;
   if (signal.kind === "none") {
@@ -694,17 +731,19 @@ export function buildClauseChoiceGuidance(
   } else if (relative) {
     describesEvidence = `Opens with “${relative.greek}” (${relative.lemma}) — a relative pronoun.`;
   } else {
-    describesEvidence = "No relative pronoun (ὅς / ἥ / ὅ…) in the opening window.";
+    describesEvidence = sourceIsHebrew
+      ? "No relative marker (אֲשֶׁר / שֶׁ־) in the opening window."
+      : "No relative pronoun (ὅς / ἥ / ὅ…) in the opening window.";
   }
 
   let contentEvidence: string;
-  if (otiToken || (ambiguousToken && stripAccentless(ambiguousToken.lemma) === "ὅτι")) {
-    const token = otiToken ?? ambiguousToken!;
-    if (otiHint) {
+  if (ambiguousToken) {
+    const token = ambiguousToken;
+    if (ambiguousHint) {
       const place =
-        otiHint.where === "leading-window"
-          ? `“${otiHint.greek}” (${otiHint.lemma}) in the opening window`
-          : `${otiHint.lemma} in the previous clause`;
+        ambiguousHint.where === "leading-window"
+          ? `“${ambiguousHint.greek}” (${ambiguousHint.lemma}) in the opening window`
+          : `${ambiguousHint.lemma} in the previous clause`;
       contentEvidence =
         `Suggested lean: “${token.greek}” often means “that…” here — ${place} is a saying/knowing/perceiving verb that commonly governs content.`;
     } else {
@@ -713,9 +752,9 @@ export function buildClauseChoiceGuidance(
     }
   } else if (prevIsContentVerb) {
     contentEvidence =
-      "No ὅτι up front; a nearby saying/thinking verb makes content possible only if something else marks it.";
+      `No ${sourceIsHebrew ? "כִּי" : "ὅτι"} up front; a nearby saying/thinking verb makes content possible only if something else marks it.`;
   } else {
-    contentEvidence = "No ὅτι up front, and no nearby saying/thinking verb standing out.";
+    contentEvidence = `No ${sourceIsHebrew ? "כִּי" : "ὅτι"} up front, and no nearby saying/thinking verb standing out.`;
   }
 
   let frameEvidence: string;
@@ -723,9 +762,9 @@ export function buildClauseChoiceGuidance(
     const frameLemma = markerLabel(frameToken);
     const frameType = frameTypeOfToken(frameToken) as FrameType;
     frameEvidence = `Opens with “${frameToken.greek}” (${frameLemma}) → ${frameType}.`;
-  } else if (otiToken || (ambiguousToken && stripAccentless(ambiguousToken.lemma) === "ὅτι")) {
-    const token = otiToken ?? ambiguousToken!;
-    if (otiHint) {
+  } else if (ambiguousToken) {
+    const token = ambiguousToken;
+    if (ambiguousHint) {
       frameEvidence =
         `“${token.greek}” can still mean “because…” (reason / Adverbial) — only if it isn’t the content of that nearby saying/knowing verb.`;
     } else {
@@ -741,7 +780,9 @@ export function buildClauseChoiceGuidance(
       `No ἵνα / ὅπως / γάρ / εἰ… opener. Note: “${eisPhrase.eis.greek}” + “${eisPhrase.noun.greek}” is a purpose/goal ` +
       `phrase (εἰς + noun), not a purpose clause (those need ἵνα / ὅπως + a verb).`;
   } else {
-    frameEvidence = "No ἵνα / ὅπως / γάρ / εἰ / ὅτε… in the opening window.";
+    frameEvidence = sourceIsHebrew
+      ? "No אִם / לְמַעַן / פֶּן / יַעַן / כַּאֲשֶׁר… in the opening window."
+      : "No ἵνα / ὅπως / γάρ / εἰ / ὅτε… in the opening window.";
   }
 
   const hasRealSubordinatingOpener = Boolean(
@@ -756,8 +797,8 @@ export function buildClauseChoiceGuidance(
     rootEvidence =
       `Suggested lean: “${connection.relative.greek} … ${connection.antecedent.greek}” is doing connective work ` +
       `(like “concerning this salvation” / “therefore”), so the finite clause usually stands on its own. You still decide.`;
-  } else if (otiToken) {
-    rootEvidence = "Usually avoid: ὅτι typically subordinates (content or reason), rather than standing alone.";
+  } else if (ambiguousToken) {
+    rootEvidence = `Usually avoid: ${ambiguousToken.greek} typically subordinates (content, reason, time, or condition), rather than standing alone.`;
   } else if (suggested === "root") {
     rootEvidence = "Suggested: nothing in the opening window subordinates this clause.";
   } else if (hasRealSubordinatingOpener) {
@@ -837,6 +878,61 @@ const RELATIONAL_CONNECTIVE_SUBTYPES: Record<string, string> = {
   "οὖν": "inferencia"
 };
 
+const HEBREW_RELATIONAL_CONNECTIVE_SUBTYPES: Record<string, string> = {
+  "1571": "adición",     // גַּם
+  "61": "contraste",     // אֲבָל
+  "389": "contraste",    // אַךְ
+  "199": "contraste",    // אוּלָם
+  "3651": "inferencia",  // כֵּן / לָכֵן
+  "176": "alternativa"   // אוֹ
+};
+
+type RelationalConnector = {
+  token: ClauseBeginningToken;
+  lemma: string;
+  subtype: string;
+};
+
+function hebrewHasWawConnector(token: ClauseBeginningToken): boolean {
+  if (!isHebrewToken(token)) return false;
+  return /(^|\/)c\//i.test(token.lemma) || hebrewMorphSegments(token.morph)[0] === "C";
+}
+
+function relationalConnectorForToken(token: ClauseBeginningToken): RelationalConnector | null {
+  if (!isHebrewToken(token)) {
+    const lemma = stripAccentless(token.lemma);
+    const subtype = RELATIONAL_CONNECTIVE_SUBTYPES[lemma];
+    return subtype ? { token, lemma, subtype } : null;
+  }
+
+  if (hebrewHasWawConnector(token)) {
+    return { token, lemma: "ו", subtype: "adición" };
+  }
+  const strongs = hebrewStrongs(token.lemma);
+  const subtype = strongs ? HEBREW_RELATIONAL_CONNECTIVE_SUBTYPES[strongs] : undefined;
+  return subtype ? { token, lemma: markerLabel(token), subtype } : null;
+}
+
+function findRelationalConnector(
+  beginningTokens: ClauseBeginningToken[],
+  finiteVerbId?: string
+): RelationalConnector | null {
+  const greek = findLeadingToken(
+    beginningTokens,
+    token => !isHebrewToken(token) && Boolean(relationalConnectorForToken(token)),
+    finiteVerbId
+  );
+  if (greek) return relationalConnectorForToken(greek);
+
+  // Hebrew conjunctions are commonly prefixed to the finite verb itself
+  // (וַיֹּאמֶר), so the Greek "must stand before the verb" rule cannot apply.
+  for (const token of beginningTokens.slice(0, LEADING_WINDOW)) {
+    const connector = relationalConnectorForToken(token);
+    if (connector) return connector;
+  }
+  return null;
+}
+
 const FRAME_TYPE_SUBTYPE_ES: Record<FrameType, string> = {
   purpose: "propósito",
   reason: "razón/fundamento",
@@ -850,6 +946,7 @@ export type LeadingMarker =
   | { kind: "frame"; token: ClauseBeginningToken; frameType: FrameType }
   | { kind: "content"; token: ClauseBeginningToken }
   | { kind: "coordinator"; token: ClauseBeginningToken; lemma: string }
+  | { kind: "connector"; token: ClauseBeginningToken; lemma: string; subtype: string }
   | { kind: "none" };
 
 // Same priority order detectClauseSignal already checks, but returns the
@@ -889,6 +986,9 @@ export function findLeadingMarkerToken(
     return { kind: "coordinator", token: coordToken, lemma: stripAccentless(coordToken.lemma) };
   }
 
+  const connector = findRelationalConnector(beginningTokens, finiteVerbId);
+  if (connector) return { kind: "connector", ...connector };
+
   return { kind: "none" };
 }
 
@@ -912,17 +1012,16 @@ export function findSubordinatorPastLeadingWindow(
   finiteVerbId?: string
 ): { token: ClauseBeginningToken; role: string } | null {
   const leading = findLeadingMarkerToken(beginningTokens, finiteVerbId);
-  if (leading.kind !== "none" && leading.kind !== "coordinator") return null;
+  if (leading.kind !== "none" && leading.kind !== "coordinator" && leading.kind !== "connector") return null;
 
   const verbIndex = finiteVerbId ? beginningTokens.findIndex(token => token.id === finiteVerbId) : -1;
   const scanned = verbIndex >= 0 ? beginningTokens.slice(0, verbIndex) : beginningTokens;
 
   for (const token of scanned.slice(LEADING_WINDOW)) {
-    if (token.morph.startsWith(RELATIVE_PRONOUN_PREFIX)) return { token, role: "a relative pronoun" };
-    const lemma = stripAccentless(token.lemma);
-    const frameType = FRAME_PARTICLES[lemma];
+    if (isRelativeToken(token)) return { token, role: "a relative marker" };
+    const frameType = frameTypeOfToken(token);
     if (frameType) return { token, role: `a ${frameType} particle` };
-    if (AMBIGUOUS_PARTICLES[lemma]) return { token, role: "a content-or-reason particle" };
+    if (ambiguousNoteForToken(token)) return { token, role: "an ambiguous subordinating particle" };
   }
   return null;
 }
@@ -956,21 +1055,19 @@ export function detectClauseMarker(
     return { word: relative.greek, lemma: stripAccentless(relative.lemma), type: "subordinating", subtype: "descripción" };
   }
 
-  const connectiveToken = findLeadingToken(
-    beginningTokens,
-    token => Boolean(RELATIONAL_CONNECTIVE_SUBTYPES[stripAccentless(token.lemma)]),
-    finiteVerbId
-  );
+  const connector = findRelationalConnector(beginningTokens, finiteVerbId);
   const frameToken = findLeadingToken(beginningTokens, isFrameParticle, finiteVerbId);
 
   if (relation === "root") {
-    if (connectiveToken) {
-      const lemma = stripAccentless(connectiveToken.lemma);
-      return { word: connectiveToken.greek, lemma, type: "relational", subtype: RELATIONAL_CONNECTIVE_SUBTYPES[lemma] };
+    if (connector) {
+      return { word: connector.token.greek, lemma: connector.lemma, type: "relational", subtype: connector.subtype };
     }
     if (frameToken) {
-      const lemma = stripAccentless(frameToken.lemma);
-      return { word: frameToken.greek, lemma, type: "relational", subtype: FRAME_TYPE_SUBTYPE_ES[FRAME_PARTICLES[lemma]] };
+      const lemma = markerLabel(frameToken);
+      const frameType = frameTypeOfToken(frameToken);
+      if (frameType) {
+        return { word: frameToken.greek, lemma, type: "relational", subtype: FRAME_TYPE_SUBTYPE_ES[frameType] };
+      }
     }
     return null;
   }
@@ -981,16 +1078,15 @@ export function detectClauseMarker(
   if (relation === "content") {
     const contentToken = findLeadingToken(
       beginningTokens,
-      token => stripAccentless(token.lemma) === stripAccentless("ὅτι"),
+      token => Boolean(ambiguousNoteForToken(token)),
       finiteVerbId
     );
     if (contentToken) {
-      return { word: contentToken.greek, lemma: stripAccentless(contentToken.lemma), type: "subordinating", subtype: "contenido" };
+      return { word: contentToken.greek, lemma: markerLabel(contentToken), type: "subordinating", subtype: "contenido" };
     }
   }
-  if (connectiveToken) {
-    const lemma = stripAccentless(connectiveToken.lemma);
-    return { word: connectiveToken.greek, lemma, type: "relational", subtype: RELATIONAL_CONNECTIVE_SUBTYPES[lemma] };
+  if (connector) {
+    return { word: connector.token.greek, lemma: connector.lemma, type: "relational", subtype: connector.subtype };
   }
 
   return null;

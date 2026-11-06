@@ -25,6 +25,7 @@ import {
   type ReaderMorphologyToken,
   type ReaderVersePart
 } from "./reader-data";
+import { readerDisplayText, splitReaderEmphasis } from "./reader-emphasis";
 
 interface ReaderNoteAnchor {
   kind: "lbf-word";
@@ -62,6 +63,18 @@ function verseKey(verse: BibleVerse): string {
 
 function verseLabel(verse: BibleVerse): string {
   return `${verse.book} ${verse.chapter}:${verse.verse}`;
+}
+
+function renderReaderText(text: string, keyPrefix: string) {
+  return splitReaderEmphasis(text).map((segment, index) =>
+    segment.emphasized ? (
+      <em className="reader-supplied-word" key={`${keyPrefix}-em-${index}`}>
+        {segment.text}
+      </em>
+    ) : (
+      <span key={`${keyPrefix}-text-${index}`}>{segment.text}</span>
+    )
+  );
 }
 
 function targetContainsVerse(note: ReaderNote, key: string): boolean {
@@ -361,7 +374,7 @@ export default function ReaderView() {
                         {wordNotesEnabled
                           ? loadLbfReaderVerseParts(book.id, verse).map((part, index) => {
                               if (part.wordIndex === undefined) {
-                                return <span key={`text-${index}`}>{part.text}</span>;
+                                return <span key={`text-${index}`}>{renderReaderText(part.text, `part-${index}`)}</span>;
                               }
                               const target = wordTargetKey(verse, part);
                               const hasNote = notes.some(note => note.target === target);
@@ -375,9 +388,9 @@ export default function ReaderView() {
                                     event.stopPropagation();
                                     openWordNote(verse, part);
                                   }}
-                                  aria-label={t.noteFor(`${verseLabel(verse)}, ${part.text}`)}
+                                  aria-label={t.noteFor(`${verseLabel(verse)}, ${readerDisplayText(part.text)}`)}
                                   data-token-id={part.sourceTokenIds?.[0]}
-                                  surface={part.text}
+                                  surface={renderReaderText(part.text, `word-${part.wordIndex}`)}
                                   detail={
                                     morphology.length ? (
                                       <span className="reader-word-morphology">
@@ -411,7 +424,7 @@ export default function ReaderView() {
                                 />
                               );
                             })
-                          : verse.text}
+                          : renderReaderText(verse.text, key)}
                       </p>
                       <aside className="reader-margin-notes" aria-label={t.notesFor(verseLabel(verse))}>
                         {verseNotes.map(note => (

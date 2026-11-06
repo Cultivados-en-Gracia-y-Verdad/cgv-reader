@@ -36,6 +36,10 @@ body,
   margin: 0;
 }
 
+html {
+  font-size: 18px;
+}
+
 body {
   background: var(--reader-bg);
   color: var(--reader-text);
@@ -375,6 +379,10 @@ textarea {
   line-height: 1.72;
   letter-spacing: 0;
   cursor: text;
+}
+
+.reader-supplied-word {
+  font-style: italic;
 }
 
 .reader-word {
