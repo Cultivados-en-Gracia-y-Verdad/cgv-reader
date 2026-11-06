@@ -69,6 +69,17 @@ const cacheByBook = new Map<
   }
 >();
 
+/**
+ * Alignment surfaces are matching labels, not running prose. Keep only words
+ * and whitespace here; the full LPF verse remains the punctuation authority.
+ */
+function alignmentSurface(text: string): string {
+  return text
+    .replace(/[\p{P}\p{S}]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function ensureCaches(bookId: ReaderBookId = getWorkshopBookId()): void {
   const raw = loadLbfAlignmentRaw(bookId);
   const cached = cacheByBook.get(bookId);
@@ -88,7 +99,7 @@ function ensureCaches(bookId: ReaderBookId = getWorkshopBookId()): void {
     const surfaceMap = surfaces.get(key) ?? new Map<number, string>();
     const multiMap = indexes.get(key) ?? new Map<number, number[]>();
     indexMap.set(record.token, record.lbfWordIndex);
-    surfaceMap.set(record.token, record.lbfSurface);
+    surfaceMap.set(record.token, alignmentSurface(record.lbfSurface));
     if (record.lbfWordIndexes?.length) {
       multiMap.set(record.token, [...record.lbfWordIndexes]);
     }
@@ -129,7 +140,9 @@ function applyReverseLinkUnitSurfaces(
       const indexesForToken = Array.from(
         new Set(orderedUnits.flatMap(unit => (unit.lbfWordIndexes.length ? unit.lbfWordIndexes : [unit.lbfWordIndex])))
       ).sort((a, b) => a - b);
-      const surface = Array.from(new Set(orderedUnits.map(unit => unit.surface))).join(" / ");
+      const surface = Array.from(new Set(orderedUnits.map(unit => alignmentSurface(unit.surface))))
+        .filter(Boolean)
+        .join(" ");
       indexMap.set(parsed.token, orderedUnits[orderedUnits.length - 1]!.lbfWordIndex);
       surfaceMap.set(parsed.token, surface);
       if (indexesForToken.length) multiMap.set(parsed.token, indexesForToken);

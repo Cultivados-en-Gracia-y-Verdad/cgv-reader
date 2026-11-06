@@ -3217,7 +3217,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
         <h1>{bookInfo.displayName}</h1>
         <p className="clause-builder-scope">
           {isHebrewAramaic
-            ? "Hebrew / Aramaic in token order. The line below is LPF in Spanish reading order; aligned LPF remains available in each word popup."
+            ? "Hebrew / Aramaic in token order with punctuation-free aligned LPF under each word. The verse line below is the same LPF in Spanish reading order, with its punctuation restored."
             : "Greek in token order with aligned LPF under each word. The verse line below is LPF in Spanish reading order (word order will differ)."}{" "}
           Open Skeleton anytime to read the settled tree.
         </p>
@@ -4765,9 +4765,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                             <span className="clause-greek-token-surface">
                               {token.surface.replace(/[⸀⸁⸂⸃,.;·]/g, "")}
                             </span>
-                            {!isHebrewAramaic ? (
-                              <span className="clause-greek-token-gloss">{aidText || "·"}</span>
-                            ) : null}
+                            <span className="clause-greek-token-gloss">{aidText || "·"}</span>
                           </>
                         }
                         detail={
@@ -4817,19 +4815,21 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                       .join(" ");
                     return (
                       <span className={phraseClass} key={`${phrase.key}:${phraseIndex}`}>
-                        {phraseIndex > 0 ? " " : null}
-                        {phrase.words.map((word, wordIndex) => {
+                        {phrase.words.map(word => {
                           const isActiveVerb = Boolean(activeVerbId && word.finiteVerbId === activeVerbId);
                           const isSavedVerb = Boolean(
                             word.finiteVerbId && assignments[word.finiteVerbId]?.selectedSpan.length
                           );
+                          const previousWord = verse.words[word.index - 1];
+                          const separatorStart = previousWord?.endChar ?? 0;
+                          const separator = verse.text.slice(separatorStart, word.startChar).replace(/\*/g, "");
                           let wordClass = "clause-word clause-word--reference";
                           if (word.finiteVerbId) wordClass += " clause-word--verb";
                           if (isSavedVerb) wordClass += " clause-word--verb-saved";
                           if (isActiveVerb) wordClass += " clause-word--active-verb";
                           return (
                             <span className={wordClass} key={word.id}>
-                              {wordIndex > 0 ? " " : null}
+                              {separator}
                               {word.text}
                             </span>
                           );
@@ -4837,6 +4837,9 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
                       </span>
                     );
                   })}
+                  {verse.text
+                    .slice(verse.words[verse.words.length - 1]?.endChar ?? 0)
+                    .replace(/\*/g, "")}
                 </p>
               </article>
             );
