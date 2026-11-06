@@ -3,20 +3,23 @@ export interface ReaderTextSegment {
   emphasized: boolean;
 }
 
-// NBLA uses a postfix asterisk to identify a supplied word ("dijo*"). It is
-// a presentation marker, not a literal character and not paired Markdown.
-// Keep this conversion in Reader rendering so canonical dataset text remains
-// unchanged and alignment continues to use the source string.
-const SUPPLIED_WORD = /([\p{L}\p{M}]+(?:[’'\-][\p{L}\p{M}]+)*)\*/gu;
+// Reader sources use both paired Markdown emphasis (`*están*`) and NBLA's
+// postfix supplied-word marker (`dijo*`). These are presentation markers, not
+// literal characters. Keep the conversion in Reader rendering so canonical
+// dataset text remains unchanged and alignment continues to use the source.
+// A paired opener cannot immediately follow a letter; that distinction keeps
+// two NBLA postfix markers (`dijo*: ... vio*`) from becoming one large span.
+const READER_EMPHASIS =
+  /(?<![\p{L}\p{M}])\*([^*\n]+?)\*|([\p{L}\p{M}]+(?:[’'\-][\p{L}\p{M}]+)*)\*/gu;
 
 export function splitReaderEmphasis(text: string): ReaderTextSegment[] {
   const segments: ReaderTextSegment[] = [];
   let cursor = 0;
 
-  for (const match of text.matchAll(SUPPLIED_WORD)) {
+  for (const match of text.matchAll(READER_EMPHASIS)) {
     const start = match.index ?? 0;
     if (start > cursor) segments.push({ text: text.slice(cursor, start), emphasized: false });
-    segments.push({ text: match[1], emphasized: true });
+    segments.push({ text: match[1] ?? match[2], emphasized: true });
     cursor = start + match[0].length;
   }
 

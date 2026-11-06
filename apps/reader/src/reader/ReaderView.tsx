@@ -77,6 +77,16 @@ function renderReaderText(text: string, keyPrefix: string) {
   );
 }
 
+function renderReaderPart(part: ReaderVersePart, keyPrefix: string) {
+  return part.emphasized ? (
+    <em className="reader-supplied-word" key={`${keyPrefix}-em`}>
+      {part.text}
+    </em>
+  ) : (
+    <span key={`${keyPrefix}-text`}>{part.text}</span>
+  );
+}
+
 function targetContainsVerse(note: ReaderNote, key: string): boolean {
   if (note.verseTarget) return note.verseTarget === key;
   const [startRaw, endRaw] = note.target.split("--");
@@ -374,7 +384,7 @@ export default function ReaderView() {
                         {wordNotesEnabled
                           ? loadLbfReaderVerseParts(book.id, verse).map((part, index) => {
                               if (part.wordIndex === undefined) {
-                                return <span key={`text-${index}`}>{renderReaderText(part.text, `part-${index}`)}</span>;
+                                return <span key={`text-${index}`}>{renderReaderPart(part, `part-${index}`)}</span>;
                               }
                               const target = wordTargetKey(verse, part);
                               const hasNote = notes.some(note => note.target === target);
@@ -392,7 +402,7 @@ export default function ReaderView() {
                                   data-token-id={part.sourceTokenIds?.[0]}
                                   surface={
                                     <>
-                                      {renderReaderText(part.text, `word-${part.wordIndex}`)}
+                                      {renderReaderPart(part, `word-${part.wordIndex}`)}
                                       {part.trailingPunctuation}
                                     </>
                                   }

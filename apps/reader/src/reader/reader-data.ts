@@ -21,7 +21,7 @@ import {
   rv1909Files,
   spnbesFiles
 } from "../core/reader-assets.generated";
-import { takeTrailingPunctuation } from "./reader-emphasis";
+import { splitReaderEmphasis, takeTrailingPunctuation } from "./reader-emphasis";
 
 export interface ReaderBook {
   id: ReaderBookId;
@@ -33,6 +33,7 @@ export interface ReaderBook {
 
 export interface ReaderVersePart {
   text: string;
+  emphasized?: boolean;
   trailingPunctuation?: string;
   wordIndex?: number;
   sourceTokenIds?: string[];
@@ -157,21 +158,28 @@ export function loadLbfReaderVerseParts(
   }
 
   const parts: ReaderVersePart[] = [];
-  let cursor = 0;
   let wordIndex = 0;
-  for (const match of verse.text.matchAll(LBF_WORD_PATTERN)) {
-    const start = match.index ?? 0;
-    if (start > cursor) parts.push({ text: verse.text.slice(cursor, start) });
-    parts.push({
-      text: match[0],
-      wordIndex,
-      sourceTokenIds: Array.from(sourceIdsByWord.get(wordIndex) ?? []).sort(),
-      alignmentUnitIds: Array.from(unitIdsByWord.get(wordIndex) ?? []).sort()
-    });
-    cursor = start + match[0].length;
-    wordIndex += 1;
+  for (const segment of splitReaderEmphasis(verse.text)) {
+    let cursor = 0;
+    for (const match of segment.text.matchAll(LBF_WORD_PATTERN)) {
+      const start = match.index ?? 0;
+      if (start > cursor) {
+        parts.push({ text: segment.text.slice(cursor, start), emphasized: segment.emphasized });
+      }
+      parts.push({
+        text: match[0],
+        emphasized: segment.emphasized,
+        wordIndex,
+        sourceTokenIds: Array.from(sourceIdsByWord.get(wordIndex) ?? []).sort(),
+        alignmentUnitIds: Array.from(unitIdsByWord.get(wordIndex) ?? []).sort()
+      });
+      cursor = start + match[0].length;
+      wordIndex += 1;
+    }
+    if (cursor < segment.text.length) {
+      parts.push({ text: segment.text.slice(cursor), emphasized: segment.emphasized });
+    }
   }
-  if (cursor < verse.text.length) parts.push({ text: verse.text.slice(cursor) });
 
   // Keep closing punctuation in the same inline box as its preceding word.
   // Otherwise an aligned word button followed by a separate text span gives

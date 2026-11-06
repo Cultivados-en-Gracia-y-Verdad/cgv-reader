@@ -12,6 +12,18 @@ test("NBLA postfix markers become emphasized words without visible asterisks", (
   ]);
 });
 
+test("paired Markdown markers become emphasis without visible asterisks", () => {
+  assert.deepEqual(splitReaderEmphasis("devastación y violencia *están* delante de mí"), [
+    { text: "devastación y violencia ", emphasized: false },
+    { text: "están", emphasized: true },
+    { text: " delante de mí", emphasized: false }
+  ]);
+  assert.equal(
+    readerDisplayText("devastación y violencia *están* delante de mí"),
+    "devastación y violencia están delante de mí"
+  );
+});
+
 test("unmarked text stays unchanged", () => {
   assert.deepEqual(splitReaderEmphasis("La gracia sea con ustedes."), [
     { text: "La gracia sea con ustedes.", emphasized: false }
