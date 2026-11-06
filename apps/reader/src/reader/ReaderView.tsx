@@ -26,6 +26,7 @@ import {
   type ReaderVersePart
 } from "./reader-data";
 import { readerDisplayText, splitReaderEmphasis } from "./reader-emphasis";
+import { groupReaderHoverParts } from "./reader-word-groups";
 
 interface ReaderNoteAnchor {
   kind: "lbf-word";
@@ -382,9 +383,14 @@ export default function ReaderView() {
                       <p className="reader-verse" onClick={() => openVerseNote(verse)}>
                         <sup>{verse.verse}</sup>
                         {wordNotesEnabled
-                          ? loadLbfReaderVerseParts(book.id, verse).map((part, index) => {
-                              if (part.wordIndex === undefined) {
-                                return <span key={`text-${index}`}>{renderReaderPart(part, `part-${index}`)}</span>;
+                          ? groupReaderHoverParts(loadLbfReaderVerseParts(book.id, verse)).map((group, index) => {
+                              const part = group.anchor;
+                              if (!part) {
+                                return group.parts.map((textPart, partIndex) => (
+                                  <span key={`text-${index}-${partIndex}`}>
+                                    {renderReaderPart(textPart, `part-${index}-${partIndex}`)}
+                                  </span>
+                                ));
                               }
                               const target = wordTargetKey(verse, part);
                               const hasNote = notes.some(note => note.target === target);
@@ -402,7 +408,15 @@ export default function ReaderView() {
                                   data-token-id={part.sourceTokenIds?.[0]}
                                   surface={
                                     <>
-                                      {renderReaderPart(part, `word-${part.wordIndex}`)}
+                                      {group.parts.map((displayPart, partIndex) => (
+                                        <span key={`word-${part.wordIndex}-${partIndex}`}>
+                                          {renderReaderPart(displayPart, `word-${part.wordIndex}-${partIndex}`)}
+                                          {displayPart.wordIndex !== undefined &&
+                                          displayPart !== group.parts[group.parts.length - 1]
+                                            ? displayPart.trailingPunctuation
+                                            : null}
+                                        </span>
+                                      ))}
                                       {part.trailingPunctuation}
                                     </>
                                   }
