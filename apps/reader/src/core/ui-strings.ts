@@ -32,6 +32,11 @@ export interface UiStrings {
   observerTitle: (book: string) => string;
   observerLede: string;
   workshopLayersAria: string;
+  studyScope: string;
+  wholeBook: string;
+  passage: string;
+  passageFrom: string;
+  passageTo: string;
   mark: string;
   structure: string;
   structureNeedsLbf: (book: string) => string;
@@ -121,6 +126,11 @@ const EN: UiStrings = {
   observerLede:
     "The text sits at the center. Mark what the Greek shows, then let structure settle in place — never by drag-and-drop.",
   workshopLayersAria: "Workshop layers",
+  studyScope: "Study scope",
+  wholeBook: "Whole book",
+  passage: "Passage",
+  passageFrom: "From",
+  passageTo: "To",
   mark: "Mark",
   structure: "Structure",
   structureNeedsLbf: book =>
@@ -219,6 +229,11 @@ const ES: UiStrings = {
   observerLede:
     "El texto está en el centro. Marque lo que muestra el griego; luego deje que la estructura se asiente en su lugar — nunca por arrastrar y soltar.",
   workshopLayersAria: "Capas del taller",
+  studyScope: "Alcance del estudio",
+  wholeBook: "Libro completo",
+  passage: "Pasaje",
+  passageFrom: "Desde",
+  passageTo: "Hasta",
   mark: "Marcar",
   structure: "Estructura",
   structureNeedsLbf: book =>

@@ -15,6 +15,7 @@ import {
   tokenAlignmentId
 } from "./mark-ids";
 import { TokenDetailAnchor } from "./TokenDetailPopover";
+import { observerPassageContains, type ObserverPassage } from "./observer-passage";
 import { getWorkshopBookId } from "./workshop-book";
 
 type ParticipationMode =
@@ -333,7 +334,13 @@ const GreekTokenButton = memo(function GreekTokenButton({
   );
 });
 
-export default function OPrototype({ bookId = getWorkshopBookId() }: { bookId?: ReaderBookId }) {
+export default function OPrototype({
+  bookId = getWorkshopBookId(),
+  passage = { kind: "book" }
+}: {
+  bookId?: ReaderBookId;
+  passage?: ObserverPassage;
+}) {
   const bookName = getReaderBookInfo(bookId).displayName;
   const keys = useMemo(() => workshopProgressKeys(bookId), [bookId]);
   const [data, setData] = useState<BookMorphData | null>(null);
@@ -373,7 +380,18 @@ export default function OPrototype({ bookId = getWorkshopBookId() }: { bookId?: 
     );
   }
 
-  return <OPrototypeLoaded bookId={bookId} bookName={bookName} keys={keys} data={data} />;
+  const scopedData: BookMorphData = {
+    alignment: data.alignment.filter(token => observerPassageContains(passage, token.chapter, token.verse)),
+    greek: data.greek
+      .map(([chapter, verses]) => [
+        chapter,
+        verses.filter(verse => observerPassageContains(passage, verse.chapter, verse.verse))
+      ] as [number, GreekVerse[]])
+      .filter(([, verses]) => verses.length > 0),
+    spanish: data.spanish.filter(verse => observerPassageContains(passage, verse.chapter, verse.verse))
+  };
+
+  return <OPrototypeLoaded bookId={bookId} bookName={bookName} keys={keys} data={scopedData} />;
 }
 
 function OPrototypeLoaded({
@@ -533,22 +551,33 @@ function OPrototypeLoaded({
     (marked: Set<string>) => normalizeObserverMarkIds(marked, morphTokenIds, alignmentToTokenId),
     [alignmentToTokenId, morphTokenIds]
   );
-  const brick1Confirmed = brickConfirmed(remapMarks(finiteMarkedIds), groundTruth.finiteIds);
-  const brick2Confirmed = brickConfirmed(remapMarks(withoutNominalHeads(commandMarkedIds)), groundTruth.byMood.imperative);
-  const brick2cConfirmed = brickConfirmed(remapMarks(withoutNominalHeads(statementMarkedIds)), groundTruth.byMood.indicative);
-  const brick3Confirmed = brickConfirmed(remapMarks(withoutNominalHeads(subjunctiveMarkedIds)), groundTruth.byMood.subjunctive);
-  const brick3cConfirmed = brickConfirmed(remapMarks(withoutNominalHeads(optativeMarkedIds)), groundTruth.byMood.optative);
-  const brick4Confirmed = brickConfirmed(remapMarks(participleMarkedIds), groundTruth.participleIds);
+  const marksInPassage = useCallback(
+    (marked: Set<string>) => new Set(Array.from(remapMarks(marked)).filter(id => morphTokenIds.has(id))),
+    [morphTokenIds, remapMarks]
+  );
+  const scopedFiniteMarkedIds = marksInPassage(finiteMarkedIds);
+  const scopedNominalHeadIds = marksInPassage(nominalHeadIds);
+  const scopedCommandMarkedIds = marksInPassage(commandMarkedIds);
+  const scopedStatementMarkedIds = marksInPassage(statementMarkedIds);
+  const scopedSubjunctiveMarkedIds = marksInPassage(subjunctiveMarkedIds);
+  const scopedOptativeMarkedIds = marksInPassage(optativeMarkedIds);
+  const scopedParticipleMarkedIds = marksInPassage(participleMarkedIds);
+  const brick1Confirmed = brickConfirmed(scopedFiniteMarkedIds, groundTruth.finiteIds);
+  const brick2Confirmed = brickConfirmed(marksInPassage(withoutNominalHeads(commandMarkedIds)), groundTruth.byMood.imperative);
+  const brick2cConfirmed = brickConfirmed(marksInPassage(withoutNominalHeads(statementMarkedIds)), groundTruth.byMood.indicative);
+  const brick3Confirmed = brickConfirmed(marksInPassage(withoutNominalHeads(subjunctiveMarkedIds)), groundTruth.byMood.subjunctive);
+  const brick3cConfirmed = brickConfirmed(marksInPassage(withoutNominalHeads(optativeMarkedIds)), groundTruth.byMood.optative);
+  const brick4Confirmed = brickConfirmed(scopedParticipleMarkedIds, groundTruth.participleIds);
 
   // Marks that are not participles in the Greek — these alone will block the ✓
   // even when every real participle is already found (infinitives are the usual mix-up).
   const participleExtraIds = useMemo(() => {
     const extras: string[] = [];
-    for (const id of remapMarks(participleMarkedIds)) {
+    for (const id of scopedParticipleMarkedIds) {
       if (!groundTruth.participleIds.has(id)) extras.push(id);
     }
     return extras;
-  }, [groundTruth.participleIds, participleMarkedIds, remapMarks]);
+  }, [groundTruth.participleIds, scopedParticipleMarkedIds]);
 
   // Mood is mutually exclusive — toggleToken below already prevents a NEW
   // conflict (assigning a mood clears the other three), but that guard only
@@ -567,9 +596,9 @@ function OPrototypeLoaded({
     subjunctiveMarkedIds.forEach(bump);
     optativeMarkedIds.forEach(bump);
     return Array.from(counts.entries())
-      .filter(([, count]) => count > 1)
+      .filter(([id, count]) => count > 1 && morphTokenIds.has(id))
       .map(([id]) => id);
-  }, [alignmentToTokenId, commandMarkedIds, optativeMarkedIds, statementMarkedIds, subjunctiveMarkedIds]);
+  }, [alignmentToTokenId, commandMarkedIds, morphTokenIds, optativeMarkedIds, statementMarkedIds, subjunctiveMarkedIds]);
 
   useEffect(() => {
     window.localStorage.setItem(keys.finiteMarks, JSON.stringify(Array.from(finiteMarkedIds)));
@@ -612,18 +641,18 @@ function OPrototypeLoaded({
 
   const activeMarkedIds =
     participation === "finite"
-      ? finiteMarkedIds
+      ? scopedFiniteMarkedIds
       : participation === "nominal"
-        ? nominalHeadIds
+        ? scopedNominalHeadIds
         : participation === "mood-statements"
-        ? statementMarkedIds
+        ? scopedStatementMarkedIds
         : participation === "mood-subjunctive"
-          ? subjunctiveMarkedIds
+          ? scopedSubjunctiveMarkedIds
           : participation === "mood-optative"
-            ? optativeMarkedIds
+            ? scopedOptativeMarkedIds
             : participation === "participles"
-              ? participleMarkedIds
-              : commandMarkedIds;
+              ? scopedParticipleMarkedIds
+              : scopedCommandMarkedIds;
   const activeLabel =
     participation === "finite"
       ? "Finite verbs"
@@ -667,6 +696,17 @@ function OPrototypeLoaded({
     return assigned;
   }, [commandRecipientGroups]);
 
+  const scopedCommandRecipientGroups = useMemo(
+    () =>
+      commandRecipientGroups
+        .map(group => ({
+          ...group,
+          tokenIds: group.tokenIds.filter(id => morphTokenIds.has(alignmentToTokenId.get(id) ?? id))
+        }))
+        .filter(group => group.tokenIds.length > 0),
+    [alignmentToTokenId, commandRecipientGroups, morphTokenIds]
+  );
+
   /** Recipients already named from the text in this book — for reuse / lens. */
   const knownRecipients = useMemo(() => {
     const seen = new Set<string>();
@@ -685,8 +725,8 @@ function OPrototypeLoaded({
   // command has been assigned to some recipient group. Empty marks must not
   // count as done (unlike optative, where zero finds is a real answer).
   const brick2bConfirmed =
-    commandMarkedIds.size > 0 &&
-    brickConfirmed(allAssignedCommandTokenIds, commandMarkedIds);
+    scopedCommandMarkedIds.size > 0 &&
+    brickConfirmed(marksInPassage(allAssignedCommandTokenIds), scopedCommandMarkedIds);
 
   const displayedCommandTokens = useMemo(() => {
     if (recipientLens === "All Commands") return commandTokens;
@@ -1067,30 +1107,40 @@ function OPrototypeLoaded({
   }, [commandMarkedIds, commandTokenIndex, commandTokens]);
 
   const clearMarks = useCallback(() => {
+    const clearPassage = (current: Set<string>) => {
+      const next = new Set(current);
+      for (const id of current) {
+        const resolved = alignmentToTokenId.get(id) ?? id;
+        if (morphTokenIds.has(resolved)) next.delete(id);
+      }
+      return next;
+    };
     if (participation === "finite") {
-      setFiniteMarkedIds(new Set());
+      setFiniteMarkedIds(clearPassage);
     } else if (participation === "nominal") {
-      setNominalHeadIds(new Set());
+      setNominalHeadIds(clearPassage);
     } else if (participation === "mood-commands") {
-      setCommandMarkedIds(new Set());
+      setCommandMarkedIds(clearPassage);
     } else if (participation === "mood-statements") {
-      setStatementMarkedIds(new Set());
+      setStatementMarkedIds(clearPassage);
       setStatementLens("All finite verbs");
     } else if (participation === "mood-subjunctive") {
-      setSubjunctiveMarkedIds(new Set());
+      setSubjunctiveMarkedIds(clearPassage);
     } else if (participation === "mood-optative") {
-      setOptativeMarkedIds(new Set());
+      setOptativeMarkedIds(clearPassage);
     } else if (participation === "participles") {
-      setParticipleMarkedIds(new Set());
+      setParticipleMarkedIds(clearPassage);
     } else {
       if (draftGroupTokenIds.length) {
         setDraftGroupTokenIds([]);
       } else {
-        setCommandRecipientGroups([]);
+        setCommandRecipientGroups(current =>
+          current.filter(group => !group.tokenIds.some(id => morphTokenIds.has(alignmentToTokenId.get(id) ?? id)))
+        );
         setRecipientLens("All Commands");
       }
     }
-  }, [draftGroupTokenIds.length, participation]);
+  }, [alignmentToTokenId, draftGroupTokenIds.length, morphTokenIds, participation]);
 
   const saveCommandRecipientGroup = useCallback(() => {
     if (!draftGroupTokenIds.length || !draftRecipient) return;
@@ -1298,7 +1348,7 @@ function OPrototypeLoaded({
               className={`participation-option${
                 participation === "mood-commands" ? " participation-option--active" : ""
               }`}
-              disabled={!finiteMarkedIds.size}
+              disabled={!scopedFiniteMarkedIds.size}
               onClick={() => setParticipation("mood-commands")}
               aria-pressed={participation === "mood-commands"}
             >
@@ -1310,7 +1360,7 @@ function OPrototypeLoaded({
               className={`participation-option${
                 participation === "mood-statements" ? " participation-option--active" : ""
               }`}
-              disabled={!finiteMarkedIds.size}
+              disabled={!scopedFiniteMarkedIds.size}
               onClick={() => setParticipation("mood-statements")}
               aria-pressed={participation === "mood-statements"}
             >
@@ -1322,7 +1372,7 @@ function OPrototypeLoaded({
               className={`participation-option${
                 participation === "command-recipients" ? " participation-option--active" : ""
               }`}
-              disabled={!commandMarkedIds.size}
+              disabled={!scopedCommandMarkedIds.size}
               onClick={() => setParticipation("command-recipients")}
               aria-pressed={participation === "command-recipients"}
             >
@@ -1334,7 +1384,7 @@ function OPrototypeLoaded({
               className={`participation-option${
                 participation === "mood-subjunctive" ? " participation-option--active" : ""
               }`}
-              disabled={!finiteMarkedIds.size}
+              disabled={!scopedFiniteMarkedIds.size}
               onClick={() => setParticipation("mood-subjunctive")}
               aria-pressed={participation === "mood-subjunctive"}
             >
@@ -1346,7 +1396,7 @@ function OPrototypeLoaded({
               className={`participation-option${
                 participation === "mood-optative" ? " participation-option--active" : ""
               }`}
-              disabled={!finiteMarkedIds.size}
+              disabled={!scopedFiniteMarkedIds.size}
               onClick={() => setParticipation("mood-optative")}
               aria-pressed={participation === "mood-optative"}
             >
@@ -1423,7 +1473,7 @@ function OPrototypeLoaded({
               <p className="result-label">Current Participation</p>
               <h2>Brick 2 — Commands</h2>
               <p className="participation-note">Find every finite verb that is a command.</p>
-              {commandMarkedIds.size > 0 && (
+              {scopedCommandMarkedIds.size > 0 && (
                 <p className="terminology-note">Term: imperative mood</p>
               )}
             </section>
@@ -1766,7 +1816,7 @@ function OPrototypeLoaded({
                 <h2>{activeLabel}</h2>
                 <p className="result-count">
                   {participation === "command-recipients"
-                    ? `${commandRecipientGroups.length} assigned`
+                    ? `${scopedCommandRecipientGroups.length} assigned`
                     : `${activeMarkedIds.size} marked`}
                 </p>
               </div>
@@ -1775,7 +1825,7 @@ function OPrototypeLoaded({
                 onClick={clearMarks}
                 disabled={
                   participation === "command-recipients"
-                    ? !draftGroupTokenIds.length && !commandRecipientGroups.length
+                    ? !draftGroupTokenIds.length && !scopedCommandRecipientGroups.length
                     : !activeMarkedIds.size
                 }
               >
@@ -1838,8 +1888,8 @@ function OPrototypeLoaded({
                     {participleExtraIds.includes(token.id) ? " ✕" : ""}
                   </span>
                 ))
-              ) : participation === "command-recipients" && commandRecipientGroups.length ? (
-                commandRecipientGroups
+              ) : participation === "command-recipients" && scopedCommandRecipientGroups.length ? (
+                scopedCommandRecipientGroups
                   .filter(group => recipientLens === "All Commands" || group.recipient === recipientLens)
                   .map(group => (
                     <span className="marked-token recipient-token" key={group.id}>

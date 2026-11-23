@@ -6605,8 +6605,49 @@ div.compiler-search-hit {
   margin: 0 auto 1.1rem;
   max-width: 34rem;
   color: var(--reader-soft);
-  font-size: 1.02rem;
+  font-size: 1.12rem;
   line-height: 1.55;
+}
+
+.workshop-passage-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: end;
+  gap: 0.65rem 0.8rem;
+  margin: 0 auto 1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--reader-border);
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, var(--reader-page) 94%, transparent);
+  text-align: left;
+}
+
+.workshop-passage-picker label {
+  display: grid;
+  gap: 0.25rem;
+  color: var(--reader-soft);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 650;
+}
+
+.workshop-passage-picker select {
+  min-width: 7rem;
+  border: 1px solid var(--reader-border);
+  border-radius: 0.4rem;
+  padding: 0.5rem 2rem 0.5rem 0.65rem;
+  background: var(--reader-page);
+  color: var(--reader-text);
+  font: inherit;
+  font-size: 1.05rem;
+}
+
+.workshop-passage-picker strong {
+  align-self: center;
+  color: var(--reader-text);
+  font-size: 1.05rem;
+  font-weight: 650;
 }
 
 .workshop-lbf-gate {
@@ -6634,7 +6675,7 @@ div.compiler-search-hit {
   background: transparent;
   color: var(--reader-soft);
   font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  font-size: 0.84rem;
+  font-size: 1rem;
   font-weight: 650;
   cursor: pointer;
 }
@@ -7258,7 +7299,15 @@ html[data-theme="dark"] :is(
   }
 
   .workshop-lede {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
+  }
+
+  .workshop-passage-picker {
+    align-items: stretch;
+  }
+
+  .workshop-passage-picker label {
+    flex: 1 1 8rem;
   }
 
   .compiler-shell,

@@ -11,6 +11,15 @@ import { useUiLanguage } from "../core/UiLanguageContext";
 import { ensureWorkshopSources } from "./book-assets";
 import OPrototype from "./OPrototype";
 import SpanishClauseBuilder from "./SpanishClauseBuilder";
+import { loadBookData } from "./o-data";
+import {
+  WHOLE_BOOK_PASSAGE,
+  observerPassageKey,
+  observerPassageLabel,
+  observerVerseRefKey,
+  type ObserverPassage,
+  type ObserverVerseRef
+} from "./observer-passage";
 import { setWorkshopBookId } from "./workshop-book";
 
 type WorkshopLayer = "mark" | "structure";
@@ -39,6 +48,8 @@ export default function ObserverShell() {
   const hasMarkSpine = readerBookHasObserverMark(bookId);
   const [sourcesReady, setSourcesReady] = useState(false);
   const [sourcesError, setSourcesError] = useState<string | null>(null);
+  const [verseRefs, setVerseRefs] = useState<ObserverVerseRef[]>([]);
+  const [passage, setPassage] = useState<ObserverPassage>(WHOLE_BOOK_PASSAGE);
 
   // Keep the module workshop book aligned before children render. Structure
   // helpers still read getWorkshopBookId() in places; a useEffect sync would
@@ -81,9 +92,67 @@ export default function ObserverShell() {
     };
   }, [bookId, hasLbfStructure, layer]);
 
+  useEffect(() => {
+    let live = true;
+    setVerseRefs([]);
+    setPassage(WHOLE_BOOK_PASSAGE);
+    if (!hasMarkSpine) {
+      return () => {
+        live = false;
+      };
+    }
+
+    void loadBookData(bookId).then(
+      data => {
+        if (!live) return;
+        setVerseRefs(
+          data.greek.flatMap(([, verses]) =>
+            verses.map(verse => ({ chapter: verse.chapter, verse: verse.verse }))
+          )
+        );
+      },
+      () => {
+        // The layer itself reports source-loading errors. Passage controls
+        // simply stay unavailable until a usable verse index exists.
+      }
+    );
+    return () => {
+      live = false;
+    };
+  }, [bookId, hasMarkSpine]);
+
   function openLayer(next: WorkshopLayer) {
     window.location.hash = next === "structure" ? "clause" : "workshop";
     setLayer(next);
+  }
+
+  const passageStartIndex =
+    passage.kind === "range"
+      ? verseRefs.findIndex(reference => observerVerseRefKey(reference) === observerVerseRefKey(passage.start))
+      : -1;
+  const passageEndIndex =
+    passage.kind === "range"
+      ? verseRefs.findIndex(reference => observerVerseRefKey(reference) === observerVerseRefKey(passage.end))
+      : -1;
+
+  function choosePassageMode(kind: "book" | "range") {
+    if (kind === "book" || !verseRefs.length) {
+      setPassage(WHOLE_BOOK_PASSAGE);
+      return;
+    }
+    setPassage({ kind: "range", start: verseRefs[0], end: verseRefs[0] });
+  }
+
+  function choosePassageStart(index: number) {
+    if (passage.kind !== "range" || !verseRefs[index]) return;
+    const endIndex = passageEndIndex < index ? index : passageEndIndex;
+    setPassage({ kind: "range", start: verseRefs[index], end: verseRefs[endIndex] });
+  }
+
+  function choosePassageEnd(index: number) {
+    if (passage.kind !== "range" || !verseRefs[index]) return;
+    const startIndex = passageStartIndex > index ? index : passageStartIndex;
+    setPassage({ kind: "range", start: verseRefs[startIndex], end: verseRefs[index] });
   }
 
   return (
@@ -92,6 +161,47 @@ export default function ObserverShell() {
         <p className="reader-kicker">{t.observerKicker}</p>
         <h1>{t.observerTitle(bookInfo.displayName)}</h1>
         <p className="workshop-lede">{t.observerLede}</p>
+        {verseRefs.length ? (
+          <div className="workshop-passage-picker" aria-label={t.studyScope}>
+            <label>
+              <span>{t.studyScope}</span>
+              <select
+                value={passage.kind}
+                onChange={event => choosePassageMode(event.target.value as "book" | "range")}
+              >
+                <option value="book">{t.wholeBook}</option>
+                <option value="range">{t.passage}</option>
+              </select>
+            </label>
+            {passage.kind === "range" ? (
+              <>
+                <label>
+                  <span>{t.passageFrom}</span>
+                  <select value={passageStartIndex} onChange={event => choosePassageStart(Number(event.target.value))}>
+                    {verseRefs.map((reference, index) => (
+                      <option key={observerVerseRefKey(reference)} value={index}>
+                        {observerVerseRefKey(reference)}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  <span>{t.passageTo}</span>
+                  <select value={passageEndIndex} onChange={event => choosePassageEnd(Number(event.target.value))}>
+                    {verseRefs.map((reference, index) => (
+                      <option key={observerVerseRefKey(reference)} value={index}>
+                        {observerVerseRefKey(reference)}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <strong>
+                  {bookInfo.displayName} {observerPassageLabel(passage)}
+                </strong>
+              </>
+            ) : null}
+          </div>
+        ) : null}
         <div className="workshop-layers" role="tablist" aria-label={t.workshopLayersAria}>
           <button
             type="button"
@@ -122,7 +232,11 @@ export default function ObserverShell() {
                 {sourcesError}
               </p>
             ) : sourcesReady ? (
-              <SpanishClauseBuilder key={bookId} bookId={bookId} />
+              <SpanishClauseBuilder
+                key={`${bookId}:${observerPassageKey(passage)}`}
+                bookId={bookId}
+                passage={passage}
+              />
             ) : (
               <p className="workshop-lbf-gate" role="status">
                 {t.loadingBook}
@@ -134,7 +248,11 @@ export default function ObserverShell() {
             </p>
           )
         ) : hasMarkSpine ? (
-          <OPrototype key={bookId} bookId={bookId} />
+          <OPrototype
+            key={`${bookId}:${observerPassageKey(passage)}`}
+            bookId={bookId}
+            passage={passage}
+          />
         ) : (
           <p className="workshop-lbf-gate" role="status">
             {t.markNeedsMorphGnt(bookInfo.displayName)}

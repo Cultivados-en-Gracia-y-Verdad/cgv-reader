@@ -80,6 +80,7 @@ import {
 } from "./clause-outline";
 import { loadLbfTokenSurfaces } from "./lbf-alignment";
 import { describeMorph, ensureVerseInterlinear, getVerseInterlinear } from "./o-data";
+import { observerPassageContains, type ObserverPassage } from "./observer-passage";
 import { TokenDetailAnchor } from "./TokenDetailPopover";
 import { getReaderBookInfo, readerBookHasOshb, workshopProgressKeys, type ReaderBookId } from "@cgv/core";
 import {
@@ -310,14 +311,26 @@ function parseGreekTokenId(id: string): { chapter: number; verse: number; token:
 
 
 // Spanish surface is primary; Greek is secondary confirmation of Brick 4.
-export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId }) {
+export default function SpanishClauseBuilder({
+  bookId,
+  passage = { kind: "book" }
+}: {
+  bookId: ReaderBookId;
+  passage?: ObserverPassage;
+}) {
   const bookInfo = getReaderBookInfo(bookId);
   const isHebrewAramaic = readerBookHasOshb(bookId);
   const sourceLanguage = isHebrewAramaic ? "Hebrew / Aramaic" : "Greek";
   const sourceDirection = isHebrewAramaic ? "rtl" : "ltr";
   const progressKeys = useMemo(() => workshopProgressKeys(bookId), [bookId]);
   const [interlinearReady, setInterlinearReady] = useState(false);
-  const verses = useMemo(() => loadClauseVerses(bookId), [bookId]);
+  const verses = useMemo(
+    () =>
+      loadClauseVerses(bookId).filter(verse =>
+        observerPassageContains(passage, verse.chapter, verse.verse)
+      ),
+    [bookId, passage]
+  );
 
   useEffect(() => {
     let cancelled = false;
@@ -387,14 +400,28 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   }, [verses]);
 
   const [assignments, setAssignments] = useState<ClauseAssignments>(() => readClauseAssignments(bookId));
+  const scopedAssignments = useMemo<ClauseAssignments>(
+    () =>
+      Object.fromEntries(
+        Object.entries(assignments).filter(([finiteVerbId]) => {
+          const [chapter, verse] = finiteVerbId.split(":").map(Number);
+          return (
+            Number.isFinite(chapter) &&
+            Number.isFinite(verse) &&
+            observerPassageContains(passage, chapter, verse)
+          );
+        })
+      ),
+    [assignments, passage]
+  );
 
   // Read-only audit (clause-selection-greek-spec.md): before Greek becomes
   // the authoritative span, surface every existing clause whose stored
   // Greek range no longer matches what deriving it fresh from the current
   // Spanish span would produce, rather than assuming old data is fine.
   const greekSpanAudit = useMemo(
-    () => auditGreekSpanConsistency(verses, assignments, bookId),
-    [assignments, bookId, verses]
+    () => auditGreekSpanConsistency(verses, scopedAssignments, bookId),
+    [bookId, scopedAssignments, verses]
   );
   const greekSpanMismatches = useMemo(() => greekSpanAudit.filter(entry => entry.mismatch), [greekSpanAudit]);
 
@@ -663,7 +690,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
   // new Greek-token interaction — consistency isn't correctness. Tracks real
   // migration progress, not just data hygiene. See ClauseAssignment.greekConfirmedAt.
   const greekReconfirmationProgress = useMemo(() => {
-    const entries = Object.values(assignments);
+    const entries = Object.values(scopedAssignments);
     const confirmed = entries.filter(assignment => assignment.greekConfirmedAt);
     const unconfirmed = entries
       .filter(assignment => !assignment.greekConfirmedAt)
@@ -673,7 +700,7 @@ export default function SpanishClauseBuilder({ bookId }: { bookId: ReaderBookId 
       })
       .sort((a, b) => (a.row?.reference ?? "").localeCompare(b.row?.reference ?? ""));
     return { total: entries.length, confirmedCount: confirmed.length, unconfirmed };
-  }, [assignments, clauseRows]);
+  }, [clauseRows, scopedAssignments]);
 
   const savedClauseRows = useMemo(
     () => clauseRows.filter(row => row.spanText),
