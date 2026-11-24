@@ -3179,6 +3179,115 @@ button.interlinear-token--pickable:focus-visible {
   line-height: 1.35;
 }
 
+.macula-hint-button {
+  margin: 0 0 1rem;
+  border: 1px solid #6b929d;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  background: rgba(207, 229, 231, 0.22);
+  color: #294f59;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.macula-hint-button:hover,
+.macula-hint-button:focus-visible {
+  background: rgba(207, 229, 231, 0.5);
+  outline: 2px solid rgba(107, 146, 157, 0.38);
+  outline-offset: 2px;
+}
+
+.macula-advisory {
+  margin: 0 0 1rem;
+  border: 1px solid rgba(107, 146, 157, 0.7);
+  border-left-width: 4px;
+  border-radius: 9px;
+  padding: 0.9rem 1rem;
+  background: rgba(207, 229, 231, 0.18);
+  color: #23201b;
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
+.macula-advisory--agrees {
+  border-color: rgba(95, 125, 81, 0.72);
+  background: rgba(218, 232, 205, 0.24);
+}
+
+.macula-advisory--partly-agrees,
+.macula-advisory--conflicts {
+  border-color: rgba(181, 137, 29, 0.78);
+  background: rgba(243, 212, 140, 0.2);
+}
+
+.macula-advisory-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.4rem 0.8rem;
+  margin-bottom: 0.45rem;
+  color: #294f59;
+  font-size: 0.9rem;
+  font-weight: 750;
+  letter-spacing: 0.035em;
+  text-transform: uppercase;
+}
+
+.macula-advisory-heading strong {
+  color: #6a5a2c;
+  font-size: 0.88rem;
+}
+
+.macula-advisory p {
+  margin: 0.35rem 0 0;
+}
+
+.macula-advisory-proposal {
+  color: #294f59;
+  font-size: 1.08rem;
+  font-weight: 750;
+}
+
+.macula-advisory-range,
+.macula-advisory-detail {
+  color: #5f584e;
+}
+
+.macula-advisory-caution {
+  font-weight: 650;
+}
+
+.macula-advisory-provenance {
+  margin-top: 0.65rem;
+  color: #5f584e;
+  font-size: 0.95rem;
+}
+
+.macula-advisory-provenance summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.macula-advisory-provenance span {
+  display: block;
+  margin-top: 0.35rem;
+  overflow-wrap: anywhere;
+}
+
+.macula-advisory-error {
+  margin: 0 0 1rem;
+  border-left: 4px solid #9c4a3a;
+  padding: 0.7rem 0.85rem;
+  background: rgba(156, 74, 58, 0.07);
+  color: #6c3328;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
 /* Unresolved-participle data warning — distinct from the plum participle
    palette on purpose, since this isn't a sorting task, it's a bug report. */
 

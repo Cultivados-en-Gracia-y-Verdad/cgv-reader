@@ -80,6 +80,13 @@ import {
 } from "./clause-outline";
 import { loadLbfTokenSurfaces } from "./lbf-alignment";
 import { describeMorph, ensureVerseInterlinear, getVerseInterlinear } from "./o-data";
+import { loadMaculaAdvisory } from "./book-assets";
+import {
+  verifyWithMacula,
+  type MaculaAdvisoryDataset,
+  type MaculaProposalKind,
+  type MaculaVerificationStatus
+} from "./macula-advisory";
 import { observerPassageContains, type ObserverPassage } from "./observer-passage";
 import { TokenDetailAnchor } from "./TokenDetailPopover";
 import { getReaderBookInfo, readerBookHasOshb, workshopProgressKeys, type ReaderBookId } from "@cgv/core";
@@ -192,6 +199,22 @@ interface ClauseOutputRow {
 
 function capitalize(value: string): string {
   return value.charAt(0).toUpperCase() + value.slice(1);
+}
+
+function maculaKindLabel(kind: MaculaProposalKind | null, frameType?: FrameType): string {
+  if (kind === "describes") return "Relative clause";
+  if (kind === "content") return "Content clause";
+  if (kind === "frame") return frameType ? `${capitalize(frameType)} clause` : "Adverbial clause";
+  if (kind === "root") return "Independent clause";
+  return "No safe CGV classification";
+}
+
+function maculaStatusLabel(status: MaculaVerificationStatus): string {
+  if (status === "agrees") return "Agrees with your reading";
+  if (status === "partly-agrees") return "Partly agrees";
+  if (status === "conflicts") return "A second witness differs";
+  if (status === "cannot-compare") return "Evidence only";
+  return "Hint requested";
 }
 
 /** `chapter:verse` from a `chapter:verse:n` id, or null. */
@@ -324,6 +347,9 @@ export default function SpanishClauseBuilder({
   const sourceDirection = isHebrewAramaic ? "rtl" : "ltr";
   const progressKeys = useMemo(() => workshopProgressKeys(bookId), [bookId]);
   const [interlinearReady, setInterlinearReady] = useState(false);
+  const [maculaDataset, setMaculaDataset] = useState<MaculaAdvisoryDataset | null>(null);
+  const [maculaLoadError, setMaculaLoadError] = useState<string | null>(null);
+  const [revealedMaculaIds, setRevealedMaculaIds] = useState<Set<string>>(() => new Set());
   const verses = useMemo(
     () =>
       loadClauseVerses(bookId).filter(verse =>
@@ -338,6 +364,26 @@ export default function SpanishClauseBuilder({
     void ensureVerseInterlinear(bookId).then(() => {
       if (!cancelled) setInterlinearReady(true);
     });
+    return () => {
+      cancelled = true;
+    };
+  }, [bookId]);
+
+  useEffect(() => {
+    let cancelled = false;
+    setMaculaDataset(null);
+    setMaculaLoadError(null);
+    setRevealedMaculaIds(new Set());
+    void loadMaculaAdvisory(bookId).then(
+      dataset => {
+        if (!cancelled) setMaculaDataset(dataset);
+      },
+      error => {
+        if (!cancelled) {
+          setMaculaLoadError(error instanceof Error ? error.message : "Unknown MACULA advisory error.");
+        }
+      }
+    );
     return () => {
       cancelled = true;
     };
@@ -805,6 +851,36 @@ export default function SpanishClauseBuilder({
     },
     [coordinateContinuationIds, observations]
   );
+
+  const activeMaculaEvidence = activeBeginningVerbId
+    ? maculaDataset?.clauses[activeBeginningVerbId]
+    : undefined;
+  const activeMaculaVerification = useMemo(
+    () =>
+      activeMaculaEvidence && activeBeginningVerbId
+        ? verifyWithMacula(
+            activeMaculaEvidence,
+            assignments[activeBeginningVerbId],
+            observations[activeBeginningVerbId]
+          )
+        : null,
+    [activeBeginningVerbId, activeMaculaEvidence, assignments, observations]
+  );
+  const activeMaculaIsVisible = Boolean(
+    activeMaculaEvidence &&
+      activeBeginningVerbId &&
+      (revealedMaculaIds.has(activeBeginningVerbId) ||
+        (activeBeginningRow && getClauseReviewState(activeBeginningRow) !== "Unreviewed"))
+  );
+
+  const revealActiveMacula = useCallback(() => {
+    if (!activeBeginningVerbId) return;
+    setRevealedMaculaIds(current => {
+      const next = new Set(current);
+      next.add(activeBeginningVerbId);
+      return next;
+    });
+  }, [activeBeginningVerbId]);
 
   const workspaceClauseRows = reviewClauseRows;
 
@@ -5076,6 +5152,66 @@ export default function SpanishClauseBuilder({
                 </div>
 
                 <section className="clause-observation" aria-label="Current observation">
+                  {maculaLoadError ? (
+                    <p className="macula-advisory-error" role="alert">
+                      MACULA evidence unavailable: {maculaLoadError}
+                    </p>
+                  ) : null}
+
+                  {activeMaculaEvidence && activeMaculaVerification ? (
+                    activeMaculaIsVisible ? (
+                      <aside
+                        className={`macula-advisory macula-advisory--${activeMaculaVerification.status}`}
+                        aria-label="MACULA second witness"
+                      >
+                        <div className="macula-advisory-heading">
+                          <span>MACULA second witness</span>
+                          <strong>{maculaStatusLabel(activeMaculaVerification.status)}</strong>
+                        </div>
+                        <p className="macula-advisory-proposal">
+                          {maculaKindLabel(
+                            activeMaculaVerification.proposal.kind,
+                            activeMaculaVerification.proposal.frameType
+                          )}
+                        </p>
+                        <p>{activeMaculaVerification.proposal.reason}</p>
+                        <p className="macula-advisory-range">
+                          Finite-clause evidence: {activeMaculaEvidence.exerciseSpan.startTokenId}–
+                          {activeMaculaEvidence.exerciseSpan.endTokenId}
+                          {activeMaculaEvidence.constituentSpan &&
+                          (activeMaculaEvidence.constituentSpan.startTokenId !==
+                            activeMaculaEvidence.exerciseSpan.startTokenId ||
+                            activeMaculaEvidence.constituentSpan.endTokenId !==
+                              activeMaculaEvidence.exerciseSpan.endTokenId)
+                            ? ` · broader constituent: ${activeMaculaEvidence.constituentSpan.startTokenId}–${activeMaculaEvidence.constituentSpan.endTokenId}`
+                            : ""}
+                        </p>
+                        {activeMaculaVerification.status !== "unanswered" &&
+                        activeMaculaVerification.spanMatches === false ? (
+                          <p className="macula-advisory-detail">
+                            Your saved boundary differs from this witness. Compare the edges; a broader MACULA
+                            constituent is not automatically the exercise answer.
+                          </p>
+                        ) : null}
+                        <p className="macula-advisory-caution">
+                          Compare the evidence yourself. This does not select, save, or replace your answer.
+                        </p>
+                        <details className="macula-advisory-provenance">
+                          <summary>Evidence provenance</summary>
+                          <span>
+                            {maculaDataset?.datasetId} {maculaDataset?.datasetVersion} · {maculaDataset?.source.edition}
+                            {" · "}{maculaDataset?.source.repository}@{maculaDataset?.source.commit.slice(0, 12)}
+                            {" · "}{maculaDataset?.source.license}
+                          </span>
+                        </details>
+                      </aside>
+                    ) : (
+                      <button type="button" className="macula-hint-button" onClick={revealActiveMacula}>
+                        Ask MACULA for a hint
+                      </button>
+                    )
+                  ) : null}
+
                   {activeObservation.describesNoun === "yes" ? (
                     <div className="clause-noun-picker">
                       <p className="clause-observation-term">Relative clause</p>

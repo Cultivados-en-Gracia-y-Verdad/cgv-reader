@@ -6,6 +6,10 @@ import {
   type ReaderBookId
 } from "@cgv/core";
 import { nblaFiles } from "../core/reader-assets.generated";
+import {
+  parseMaculaAdvisoryDataset,
+  type MaculaAdvisoryDataset
+} from "./macula-advisory";
 
 /** Eager so Reader / Mark can load LBF sync when the book has text. */
 const lbfMdFiles = import.meta.glob(
@@ -90,6 +94,15 @@ const interlinearFiles = import.meta.glob(
     "@cgv-data/interlinears/NT/*.interlinear.txt",
     "@cgv-data/interlinears/OT/*.interlinear.txt"
   ],
+  {
+    query: "?raw",
+    import: "default"
+  }
+) as Record<string, () => Promise<string>>;
+
+/** Optional until a reviewed cgv-data clause release exists for the book. */
+const maculaAdvisoryFiles = import.meta.glob(
+  "@cgv-data/advisories/macula/*.macula-advisory.json",
   {
     query: "?raw",
     import: "default"
@@ -187,6 +200,25 @@ export function loadMorphRawSync(bookId: ReaderBookId): string {
 
 export async function loadTokensRaw(bookId: ReaderBookId): Promise<string> {
   return loadByEndsWith(tokenFiles, `/${bookId}.tokens.jsonl`);
+}
+
+async function sha256Hex(value: string): Promise<string> {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, "0")).join("");
+}
+
+/**
+ * Load read-only MACULA clause evidence for a book. Absence means the optional
+ * evidence has not been published; malformed or stale evidence fails clearly.
+ */
+export async function loadMaculaAdvisory(
+  bookId: ReaderBookId
+): Promise<MaculaAdvisoryDataset | null> {
+  const key = globKey(maculaAdvisoryFiles, `/${bookId}.macula-advisory.json`);
+  if (!key) return null;
+  const [raw, tokensRaw] = await Promise.all([maculaAdvisoryFiles[key](), loadTokensRaw(bookId)]);
+  return parseMaculaAdvisoryDataset(raw, bookId, await sha256Hex(tokensRaw));
 }
 
 export function loadTokensRawSync(bookId: ReaderBookId): string {
