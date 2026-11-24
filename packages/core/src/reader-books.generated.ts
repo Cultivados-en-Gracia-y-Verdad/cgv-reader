@@ -3,7 +3,7 @@ import type { BibleVersionId } from "./bible-version";
 
 export const CGV_DATASET_PROVENANCE = {
   id: "cgv-data",
-  gitCommit: "4bfb1451bf71e260df2984ba51d8e24af72c5c13"
+  gitCommit: "79870e65150b0f651b04ebd1c99445531e151251"
 } as const;
 
 export interface GeneratedReaderBookInfo {
