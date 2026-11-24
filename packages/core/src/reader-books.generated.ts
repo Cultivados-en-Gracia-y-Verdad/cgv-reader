@@ -3,7 +3,7 @@ import type { BibleVersionId } from "./bible-version";
 
 export const CGV_DATASET_PROVENANCE = {
   id: "cgv-data",
-  gitCommit: "52c4df0b1c87cd9db79b6def3b48270e29dba5f7"
+  gitCommit: "4bfb1451bf71e260df2984ba51d8e24af72c5c13"
 } as const;
 
 export interface GeneratedReaderBookInfo {
@@ -26,7 +26,7 @@ export const GENERATED_READER_BOOKS = [
   { id: "lucas", displayName: "Lucas", rv1909: "42", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909"], morphGntStem: "63-Lk", hasOshb: false },
   { id: "juan", displayName: "Juan", rv1909: "43", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909"], morphGntStem: "64-Jn", hasOshb: false },
   { id: "hechos", displayName: "Hechos", rv1909: "44", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909"], morphGntStem: "65-Ac", hasOshb: false },
-  { id: "romanos", displayName: "Romanos", rv1909: "45", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909"], morphGntStem: "66-Ro", hasOshb: false },
+  { id: "romanos", displayName: "Romanos", rv1909: "45", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909", "LBF"], morphGntStem: "66-Ro", hasOshb: false },
   { id: "1corintios", displayName: "1 Corintios", rv1909: "46", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909"], morphGntStem: "67-1Co", hasOshb: false },
   { id: "2corintios", displayName: "2 Corintios", rv1909: "47", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909"], morphGntStem: "68-2Co", hasOshb: false },
   { id: "galatas", displayName: "Gálatas", rv1909: "48", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909"], morphGntStem: "69-Ga", hasOshb: false },
