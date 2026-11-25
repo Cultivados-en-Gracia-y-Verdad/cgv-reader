@@ -134,6 +134,24 @@ Only after an attempt, or after an explicit request for the final hint, disclose
 
 No hint writes Q1–Q3 fields, a span, a parent, a frame subtype, or user progress.
 
+## Grammatical-role proposals
+
+Subject, object, indirect-object/recipient, and predicate-attribute proposals are a separate,
+learner-controlled aid after the clause decision. They are not inferred in the Reader from raw
+MACULA token ranges. A schema-v2 advisory must publish the reviewed TR1894 word ids together with
+its attachment status and, for exact or adapted MACULA evidence, the source role and source token
+ids. It must be checksum-bound both to the source token spine and to the exact published LBF text;
+either mismatch makes the entire advisory unavailable.
+
+The learner opens the proposal, inspects the quoted TR1894 words, and explicitly chooses **Use in
+this field** or **Choose different words**. Opening the proposal never writes progress. The explicit
+**Use** action may write only that learner-owned subject, object/recipient, or attribute observation;
+it never changes a clause span, classification, dependency, or published advisory.
+
+The interface must state that a grammatical subject is not necessarily the semantic actor. In a
+passive clause the grammatical subject may receive the action. Therefore the proposal is evidence
+beside the existing “who acts” field, not an unreviewed automatic actor assignment.
+
 ## Visual language
 
 Each visual treatment must mean exactly one thing:
@@ -201,6 +219,8 @@ The improvement is ready when:
 - every box or highlight has one labeled meaning;
 - MACULA is hidden until requested or until after an answer;
 - no hint or verification action mutates progress;
+- grammatical-role proposals quote reviewed TR1894 words and require an explicit learner confirmation;
+- a raw MACULA grammatical subject is never silently equated with the semantic actor;
 - exact, adapted, TR-native, and no-syntax states render differently;
 - raw token IDs are absent from the ordinary learning view;
 - existing progress resolves to the same clause tree;

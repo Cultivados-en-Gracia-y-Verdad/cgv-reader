@@ -9,11 +9,13 @@ import {
 
 const COMMIT = "8423afe47b9e8f24b7772e808af45c7159a6fe7e";
 const SPINE = "d".repeat(64);
+const TARGET_TEXT = "e".repeat(64);
 
 function dataset(overrides: Record<string, unknown> = {}): string {
+  const schemaVersion = overrides.schemaVersion === 2 ? 2 : 1;
   return JSON.stringify({
     schema: "cgv.macula-advisory",
-    schemaVersion: 1,
+    schemaVersion,
     datasetId: "macula-greek-sblgnt",
     datasetVersion: "1.0.0",
     bookId: "tito",
@@ -24,6 +26,9 @@ function dataset(overrides: Record<string, unknown> = {}): string {
       license: "CC BY 4.0"
     },
     tokenSpine: { datasetId: "cgv-data", sha256: SPINE },
+    ...(schemaVersion === 2
+      ? { targetText: { datasetId: "cgv-data", sha256: TARGET_TEXT } }
+      : {}),
     clauses: {
       "1:5:10": {
         finiteVerbId: "1:5:10",
@@ -39,6 +44,25 @@ function dataset(overrides: Record<string, unknown> = {}): string {
   });
 }
 
+function versionTwoClause(overrides: Record<string, unknown> = {}): Record<string, unknown> {
+  return {
+    finiteVerbId: "1:5:10",
+    exerciseSpan: { startTokenId: "1:5:7", endTokenId: "1:5:10" },
+    standing: "dependent",
+    role: "adv",
+    attachmentStatus: "exact",
+    grammaticalRoles: [
+      {
+        role: "subject",
+        targetWordIds: ["1:5:2", "1:5:3"],
+        sourceRole: "s",
+        sourceTokenIds: ["1:5:8", "1:5:9"]
+      }
+    ],
+    ...overrides
+  };
+}
+
 function purposeEvidence(): MaculaClauseEvidence {
   return parseMaculaAdvisoryDataset(dataset(), "tito", SPINE).clauses["1:5:10"];
 }
@@ -51,7 +75,7 @@ test("strictly accepts a pinned, matching advisory dataset", () => {
 
 test("fails closed on unsupported schemas and token spines", () => {
   assert.throws(
-    () => parseMaculaAdvisoryDataset(dataset({ schemaVersion: 2 }), "tito", SPINE),
+    () => parseMaculaAdvisoryDataset(dataset({ schemaVersion: 3 }), "tito", SPINE),
     /Unsupported MACULA advisory schema version/
   );
   assert.throws(
@@ -65,6 +89,107 @@ test("fails closed on unsupported schemas and token spines", () => {
   assert.throws(
     () => parseMaculaAdvisoryDataset(dataset({ tokenSpine: { datasetId: "cgv-data", sha256: "not-a-sha" } }), "tito", SPINE),
     /tokenSpine.sha256/
+  );
+});
+
+test("accepts reviewed TR1894 grammatical-role proposals in schema v2", () => {
+  const parsed = parseMaculaAdvisoryDataset(
+    dataset({
+      schemaVersion: 2,
+      clauses: { "1:5:10": versionTwoClause() }
+    }),
+    "tito",
+    SPINE,
+    TARGET_TEXT
+  );
+  assert.equal(parsed.schemaVersion, 2);
+  assert.equal(parsed.clauses["1:5:10"].attachmentStatus, "exact");
+  assert.deepEqual(parsed.clauses["1:5:10"].grammaticalRoles?.[0], {
+    role: "subject",
+    targetWordIds: ["1:5:2", "1:5:3"],
+    sourceRole: "s",
+    sourceTokenIds: ["1:5:8", "1:5:9"]
+  });
+});
+
+test("binds schema-v2 target word ids to the exact published LBF text", () => {
+  const raw = dataset({
+    schemaVersion: 2,
+    clauses: { "1:5:10": versionTwoClause() }
+  });
+  assert.throws(
+    () => parseMaculaAdvisoryDataset(raw, "tito", SPINE),
+    /target text cannot be validated/
+  );
+  assert.throws(
+    () => parseMaculaAdvisoryDataset(raw, "tito", SPINE, "f".repeat(64)),
+    /target text mismatch/
+  );
+});
+
+test("keeps v1 compatible but rejects v2 role fields disguised as v1", () => {
+  assert.equal(parseMaculaAdvisoryDataset(dataset(), "tito", SPINE).schemaVersion, 1);
+  assert.throws(
+    () => parseMaculaAdvisoryDataset(
+      dataset({ clauses: { "1:5:10": versionTwoClause() } }),
+      "tito",
+      SPINE
+    ),
+    /v2 fields require schemaVersion 2/
+  );
+});
+
+test("fails closed on untraceable or contradictory grammatical-role proposals", () => {
+  assert.throws(
+    () => parseMaculaAdvisoryDataset(
+      dataset({
+        schemaVersion: 2,
+        clauses: {
+          "1:5:10": versionTwoClause({
+            grammaticalRoles: [{ role: "subject", targetWordIds: ["1:5:2"] }]
+          })
+        }
+      }),
+      "tito",
+      SPINE,
+      TARGET_TEXT
+    ),
+    /require sourceRole and sourceTokenIds/
+  );
+
+  assert.throws(
+    () => parseMaculaAdvisoryDataset(
+      dataset({
+        schemaVersion: 2,
+        clauses: {
+          "1:5:10": versionTwoClause({
+            attachmentStatus: "adapted",
+            textualDifference: undefined
+          })
+        }
+      }),
+      "tito",
+      SPINE,
+      TARGET_TEXT
+    ),
+    /requires textualDifference/
+  );
+
+  assert.throws(
+    () => parseMaculaAdvisoryDataset(
+      dataset({
+        schemaVersion: 2,
+        clauses: {
+          "1:5:10": versionTwoClause({
+            attachmentStatus: "no-macula-syntax"
+          })
+        }
+      }),
+      "tito",
+      SPINE,
+      TARGET_TEXT
+    ),
+    /cannot publish grammatical role proposals/
   );
 });
 

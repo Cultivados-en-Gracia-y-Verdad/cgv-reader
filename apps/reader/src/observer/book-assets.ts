@@ -218,7 +218,11 @@ export async function loadMaculaAdvisory(
   const key = globKey(maculaAdvisoryFiles, `/${bookId}.macula-advisory.json`);
   if (!key) return null;
   const [raw, tokensRaw] = await Promise.all([maculaAdvisoryFiles[key](), loadTokensRaw(bookId)]);
-  return parseMaculaAdvisoryDataset(raw, bookId, await sha256Hex(tokensRaw));
+  const [tokenSpineSha256, targetTextSha256] = await Promise.all([
+    sha256Hex(tokensRaw),
+    sha256Hex(loadLbfRaw(bookId))
+  ]);
+  return parseMaculaAdvisoryDataset(raw, bookId, tokenSpineSha256, targetTextSha256);
 }
 
 export function loadTokensRawSync(bookId: ReaderBookId): string {

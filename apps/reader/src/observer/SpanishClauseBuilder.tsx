@@ -20,6 +20,7 @@ import {
   readClauseObservations,
   readCommandRecipientAssignments,
   readMarkedAlignmentIds,
+  readMorphologicalFiniteVerbIds,
   readNominalClauseHeadIds,
   spanFromRange,
   wordInSpan,
@@ -81,6 +82,8 @@ import { loadMaculaAdvisory } from "./book-assets";
 import {
   verifyWithMacula,
   type MaculaAdvisoryDataset,
+  type MaculaAttachmentStatus,
+  type MaculaGrammaticalRole,
   type MaculaProposalKind,
   type MaculaVerificationStatus
 } from "./macula-advisory";
@@ -128,6 +131,47 @@ import {
   type ReasonHit,
   type VerseConvergence
 } from "./convergence-engine";
+
+type ActorField = "subject" | "verb" | "object" | "complement";
+
+function actorFieldForMaculaRole(role: MaculaGrammaticalRole): Exclude<ActorField, "verb"> {
+  if (role === "subject") return "subject";
+  if (role === "predicate-attribute") return "complement";
+  return "object";
+}
+
+function maculaRoleLabel(role: MaculaGrammaticalRole, language: "en" | "es"): string {
+  if (language === "es") {
+    if (role === "subject") return "Sujeto gramatical";
+    if (role === "object") return "Objeto directo";
+    if (role === "indirect-object") return "Objeto indirecto / receptor";
+    return "Atributo / complemento del sujeto";
+  }
+  if (role === "subject") return "Grammatical subject";
+  if (role === "object") return "Direct object";
+  if (role === "indirect-object") return "Indirect object / recipient";
+  return "Predicate attribute / subject complement";
+}
+
+function maculaAttachmentStatusLabel(
+  status: MaculaAttachmentStatus,
+  language: "en" | "es"
+): string {
+  if (language === "es") {
+    if (status === "exact") return "Adjunto MACULA exacto";
+    if (status === "adapted") return "Adjunto MACULA adaptado a TR1894";
+    if (status === "tr-native-reviewed") return "Estructura TR1894 revisada por una persona";
+    return "Sin sintaxis MACULA comparable";
+  }
+  if (status === "exact") return "Exact MACULA attachment";
+  if (status === "adapted") return "MACULA attachment adapted to TR1894";
+  if (status === "tr-native-reviewed") return "Human-reviewed TR1894 structure";
+  return "No comparable MACULA syntax";
+}
+
+function sameWordIds(left: string[], right: string[]): boolean {
+  return left.length === right.length && left.every((id, index) => id === right[index]);
+}
 
 /** Highlight tracked surfaces inside a definition collage line (evidence only). */
 function highlightDefinitionSurfaces(text: string, surfaces: string[]): ReactNode[] {
@@ -207,6 +251,13 @@ const CLAUSE_DECISION_COPY = {
     relative: "Relative clause",
     content: "Tells what was said, thought, known, or perceived",
     contentClause: "Content clause",
+    adverbial: "Adds when, why, a condition, purpose, result, or comparison",
+    adverbialClause: "Adverbial clause",
+    adverbialHelp:
+      "Choose this when the clause qualifies another clause by giving its circumstances, condition, purpose, result, or comparison.",
+    frameStep: "Kind of adverbial relationship",
+    frameQuestion: "How does this clause qualify the clause it depends on?",
+    frameAria: "Kind of adverbial relationship",
     condition: "Sets a condition — if this is true…",
     conditionalClause: "Conditional clause",
     reason: "Gives a reason — because…",
@@ -217,6 +268,8 @@ const CLAUSE_DECISION_COPY = {
     purposeClause: "Purpose clause",
     result: "Gives the resulting outcome — with the result that…",
     resultClause: "Result clause",
+    comparison: "Sets up a comparison — just as… so also…",
+    comparisonClause: "Comparative clause",
     continues: "Continues the same dependency as the previous clause",
     coordinated: "Coordinated dependent clause",
     suggested: "Suggested by the current grammatical evidence",
@@ -232,17 +285,33 @@ const CLAUSE_DECISION_COPY = {
     timeHelp: "This clause tells when the action or situation of another clause occurs.",
     purposeHelp: "This clause states the intended aim of another action: in order that or so that.",
     resultHelp: "This clause states the outcome produced by another action or situation.",
+    comparisonHelp:
+      "This clause supplies one side of a comparison and anticipates or corresponds to the other: just as this, so also that.",
     actorAria: "Subject, verb, and object or recipient observation",
     actorHeading: "SUBJECT → VERB → OBJECT / RECIPIENT",
     actorNote:
-      "Who acts, what the actor does, and who or what receives the action. Select the words in the chapter text below; this does not change the clause boundary.",
+      "Who acts, what the actor does, and its object, recipient, or subject complement. Select the words in the chapter text below; this does not change the clause boundary.",
     actorSubject: "Who acts",
     actorVerb: "What the actor does",
     actorObject: "Who or what receives the action",
+    actorComplement: "Attribute / subject complement",
+    actorSubjectImplicit: "Subject is implicit in the verb",
+    actorObjectAbsent: "No explicit object or recipient",
+    maculaGrammarSummary: "Second-witness grammar proposals",
+    maculaGrammarIntro:
+      "These are reviewed TR1894 word proposals, not saved work. Inspect each proposal before deciding whether to use it.",
+    maculaGrammarPassive:
+      "A grammatical subject is not always the actor. In a passive clause, the grammatical subject can receive the action.",
+    maculaGrammarUse: "Use in this field",
+    maculaGrammarChoose: "Choose different words",
+    maculaGrammarConfirmed: "Confirmed in your observation",
+    maculaGrammarUnavailable:
+      "This published word span does not match the loaded LBF dataset, so the Reader will not use it.",
+    maculaGrammarDifference: "Textual difference",
     savedClassification: "Saved classification",
     currentIndependent: "Independent clause — expresses a complete statement, command, or question.",
     reviewClassification: "Review or change this classification",
-    laterAnalysis: "Later analysis: outline and participants",
+    laterAnalysis: "Next observation: subject, verb, and object",
     selectedRelationship: "Selected relationship",
     changeRelationship: "Change relationship",
     chooseHost: "Choose the clause this relationship depends on:",
@@ -280,8 +349,8 @@ const CLAUSE_DECISION_COPY = {
       },
       condition: {
         label: "Conditional clause",
-        question: "Which clause states what follows if this condition is met?",
-        help: "Choose the main clause that states what happens when the condition holds."
+        question: "Which clause contains the situation governed by this condition?",
+        help: "Choose the main clause whose assertion, command, or situation is qualified by the condition."
       },
       purpose: {
         label: "Purpose clause",
@@ -292,9 +361,15 @@ const CLAUSE_DECISION_COPY = {
         label: "Result clause",
         question: "Which clause produces this result?",
         help: "Choose the main action or situation from which this result follows."
+      },
+      comparison: {
+        label: "Comparative clause",
+        question: "Which clause states the corresponding side of this comparison?",
+        help: "Look for the matching so or so also clause that corresponds to just as or as."
       }
     },
-    back: "Back to the first decision"
+    back: "Back to the first decision",
+    backToRelationships: "Back to dependent relationships"
   },
   es: {
     firstStep: "Primera decisión",
@@ -318,6 +393,13 @@ const CLAUSE_DECISION_COPY = {
     relative: "Cláusula relativa",
     content: "Expresa lo dicho, pensado, conocido o percibido",
     contentClause: "Cláusula de contenido",
+    adverbial: "Añade cuándo, por qué, una condición, propósito, resultado o comparación",
+    adverbialClause: "Cláusula adverbial",
+    adverbialHelp:
+      "Elige esta opción cuando la cláusula precisa las circunstancias, condición, propósito, resultado o comparación de otra cláusula.",
+    frameStep: "Tipo de relación adverbial",
+    frameQuestion: "¿Cómo precisa esta cláusula a la cláusula de la cual depende?",
+    frameAria: "Tipo de relación adverbial",
     condition: "Establece una condición: si esto es cierto…",
     conditionalClause: "Cláusula condicional",
     reason: "Da una razón: porque…",
@@ -328,6 +410,8 @@ const CLAUSE_DECISION_COPY = {
     purposeClause: "Cláusula de propósito",
     result: "Indica el resultado: de modo que…",
     resultClause: "Cláusula de resultado",
+    comparison: "Establece una comparación: así como… así también…",
+    comparisonClause: "Cláusula comparativa",
     continues: "Continúa la misma dependencia que la cláusula anterior",
     coordinated: "Cláusula dependiente coordinada",
     suggested: "Sugerido por la evidencia gramatical actual",
@@ -344,17 +428,33 @@ const CLAUSE_DECISION_COPY = {
     timeHelp: "Esta cláusula indica cuándo ocurre la acción o situación de otra cláusula.",
     purposeHelp: "Esta cláusula expresa la finalidad de otra acción: para que o a fin de que.",
     resultHelp: "Esta cláusula expresa el resultado producido por otra acción o situación.",
+    comparisonHelp:
+      "Esta cláusula presenta un lado de una comparación y anticipa o corresponde al otro: así como esto, así también aquello.",
     actorAria: "Observación de sujeto, verbo y objeto o receptor",
     actorHeading: "SUJETO → VERBO → OBJETO / RECEPTOR",
     actorNote:
-      "Quién actúa, qué hace y sobre quién o qué recae la acción. Selecciona las palabras en el texto del capítulo; esto no cambia el límite de la cláusula.",
+      "Quién actúa, qué hace y cuál es su objeto, receptor o atributo del sujeto. Selecciona las palabras en el texto del capítulo; esto no cambia el límite de la cláusula.",
     actorSubject: "Quién actúa",
     actorVerb: "Qué hace",
     actorObject: "Sobre quién o qué recae la acción",
+    actorComplement: "Atributo / complemento del sujeto",
+    actorSubjectImplicit: "El sujeto está implícito en el verbo",
+    actorObjectAbsent: "No hay objeto ni receptor explícito",
+    maculaGrammarSummary: "Propuestas gramaticales del segundo testigo",
+    maculaGrammarIntro:
+      "Estas son propuestas revisadas de palabras de TR1894, no trabajo guardado. Examina cada propuesta antes de decidir si la usarás.",
+    maculaGrammarPassive:
+      "El sujeto gramatical no siempre es quien actúa. En una cláusula pasiva, el sujeto gramatical puede recibir la acción.",
+    maculaGrammarUse: "Usar en este campo",
+    maculaGrammarChoose: "Elegir otras palabras",
+    maculaGrammarConfirmed: "Confirmado en tu observación",
+    maculaGrammarUnavailable:
+      "Este tramo de palabras publicado no coincide con el conjunto LBF cargado; el Reader no lo usará.",
+    maculaGrammarDifference: "Diferencia textual",
     savedClassification: "Clasificación guardada",
     currentIndependent: "Cláusula independiente: expresa una afirmación, mandato o pregunta completa.",
     reviewClassification: "Revisar o cambiar esta clasificación",
-    laterAnalysis: "Análisis posterior: bosquejo y participantes",
+    laterAnalysis: "Siguiente observación: sujeto, verbo y objeto",
     selectedRelationship: "Relación elegida",
     changeRelationship: "Cambiar la relación",
     chooseHost: "Elige la cláusula de la cual depende esta relación:",
@@ -393,8 +493,8 @@ const CLAUSE_DECISION_COPY = {
       },
       condition: {
         label: "Cláusula condicional",
-        question: "¿Qué cláusula expresa lo que sucede si se cumple esta condición?",
-        help: "Elige la cláusula principal que expresa lo que sucede cuando se cumple la condición."
+        question: "¿Qué cláusula contiene la situación regida por esta condición?",
+        help: "Elige la cláusula principal cuya afirmación, mandato o situación queda limitada por la condición."
       },
       purpose: {
         label: "Cláusula de propósito",
@@ -405,9 +505,15 @@ const CLAUSE_DECISION_COPY = {
         label: "Cláusula de resultado",
         question: "¿Qué cláusula produce este resultado?",
         help: "Elige la acción o situación principal de la cual se deriva este resultado."
+      },
+      comparison: {
+        label: "Cláusula comparativa",
+        question: "¿Qué cláusula expresa el lado correspondiente de esta comparación?",
+        help: "Busca la cláusula introducida por así o así también que corresponde a así como o como."
       }
     },
-    back: "Volver a la primera decisión"
+    back: "Volver a la primera decisión",
+    backToRelationships: "Volver a las relaciones dependientes"
   }
 } as const;
 
@@ -545,6 +651,7 @@ export default function SpanishClauseBuilder({
   const [interlinearReady, setInterlinearReady] = useState(false);
   const [maculaDataset, setMaculaDataset] = useState<MaculaAdvisoryDataset | null>(null);
   const [maculaLoadError, setMaculaLoadError] = useState<string | null>(null);
+  const [maculaLoadComplete, setMaculaLoadComplete] = useState(false);
   const [revealedMaculaIds, setRevealedMaculaIds] = useState<Set<string>>(() => new Set());
   const verses = useMemo(
     () =>
@@ -569,14 +676,19 @@ export default function SpanishClauseBuilder({
     let cancelled = false;
     setMaculaDataset(null);
     setMaculaLoadError(null);
+    setMaculaLoadComplete(false);
     setRevealedMaculaIds(new Set());
     void loadMaculaAdvisory(bookId).then(
       dataset => {
-        if (!cancelled) setMaculaDataset(dataset);
+        if (!cancelled) {
+          setMaculaDataset(dataset);
+          setMaculaLoadComplete(true);
+        }
       },
       error => {
         if (!cancelled) {
           setMaculaLoadError(error instanceof Error ? error.message : "Unknown MACULA advisory error.");
+          setMaculaLoadComplete(true);
         }
       }
     );
@@ -599,6 +711,7 @@ export default function SpanishClauseBuilder({
   // impossible to assign in Structure.
   const markedClauseHeadIds = useMemo(() => {
     const ids = readMarkedAlignmentIds(progressKeys.finiteMarks, bookId);
+    readMorphologicalFiniteVerbIds(bookId).forEach(id => ids.add(id));
     readNominalClauseHeadIds(bookId).forEach(id => ids.add(id));
     return ids;
   }, [bookId, progressKeys]);
@@ -663,6 +776,7 @@ export default function SpanishClauseBuilder({
   // unreachable if subjunctive clauses never enter the review workspace.
   const moodReviewedVerbIds = useMemo(() => {
     const ids = new Set<string>();
+    readMorphologicalFiniteVerbIds(bookId).forEach(id => ids.add(id));
     readMarkedAlignmentIds(progressKeys.commandMarks, bookId).forEach(id => ids.add(id));
     readMarkedAlignmentIds(progressKeys.statementMarks, bookId).forEach(id => ids.add(id));
     readMarkedAlignmentIds(progressKeys.subjunctiveMarks, bookId).forEach(id => ids.add(id));
@@ -772,10 +886,10 @@ export default function SpanishClauseBuilder({
   const [pickingSubjectHostKey, setPickingSubjectHostKey] = useState<string | null>(null);
   const pickingSubjectHostKeysRef = useRef<string[]>([]);
   /** Active clause SVO field being tapped in the passage. */
-  const [pickingActorField, setPickingActorField] = useState<"subject" | "verb" | "object" | null>(null);
+  const [pickingActorField, setPickingActorField] = useState<ActorField | null>(null);
   const [actorAnchorId, setActorAnchorId] = useState<string | null>(null);
   const [forceChoices, setForceChoices] = useState(false);
-  const [dependencyDecision, setDependencyDecision] = useState<"dependent" | null>(null);
+  const [dependencyDecision, setDependencyDecision] = useState<"dependent" | "adverbial" | null>(null);
   // Set only when the active clause changed via moveToNextClause (confirming
   // a clause auto-advances to the next one) rather than a direct click on a
   // specific row/node — see clause-review-focus-bug-and-interaction-model.md
@@ -895,9 +1009,10 @@ export default function SpanishClauseBuilder({
       draftGreekRange.start,
       draftGreekRange.end,
       activeVerseWords,
-      bookId
+      bookId,
+      activeVerseText
     );
-  }, [activeVerb, activeVerseWords, bookId, draftGreekRange]);
+  }, [activeVerb, activeVerseText, activeVerseWords, bookId, draftGreekRange]);
 
   const clausesHaveSavedDependency = useCallback(
     (leftId: string, rightId: string) => {
@@ -981,6 +1096,7 @@ export default function SpanishClauseBuilder({
       )
     };
   }, [assignments, clausesHaveSavedDependency]);
+
 
   const draftText = useMemo(
     () => (draftSpan.length ? formatClauseSpan(draftSpan, activeVerseWords, activeVerseText) : ""),
@@ -1190,13 +1306,19 @@ export default function SpanishClauseBuilder({
     [getClauseReviewState, reviewClauseRows]
   );
 
-  // Actor SVO: span saved, but Quién actúa not yet observed (verb defaults alone don't count).
+  // Actor SVO is a second observation pass. A blank field is pending, while
+  // an implicit subject / no explicit object is an affirmative observation.
   const missingActorClauseRows = useMemo(
     () =>
       reviewClauseRows.filter(row => {
         const id = row.finiteVerb.finiteVerbId;
         if (!id || !row.selectedWords.length) return false;
-        return !(clauseActors[id]?.subjectSpan?.length);
+        const actor = clauseActors[id];
+        const subjectDone = Boolean(actor?.subjectSpan?.length || actor?.subjectImplicit);
+        const objectDone = Boolean(
+          actor?.objectSpan?.length || actor?.complementSpan?.length || actor?.objectAbsent
+        );
+        return !subjectDone || !objectDone;
       }),
     [clauseActors, reviewClauseRows]
   );
@@ -1372,20 +1494,22 @@ export default function SpanishClauseBuilder({
         activeBeginningRow.selectedWords.some(word => /^quién$/iu.test(word.text)))
   );
 
-  const activeSuggestedKind =
-    activeHasInterrogativeWho
-      ? "root"
-      : activeSignal?.kind === "confident"
-      ? activeSignal.choice
-      : activeFrameType
-        ? "frame"
-        : activeBeginningRow?.hasDependentIntroducer === false
-          ? "root"
-          : null;
-  const activeSuggestedFrameType =
-    activeSignal?.kind === "confident" && activeSignal.choice === "frame"
-      ? activeSignal.frameType
-      : activeFrameType;
+  const activeCoordinateSuggestedResolution = useMemo(() => {
+    if (!activeBeginningVerbId || !coordinateContinuationIds.has(activeBeginningVerbId)) return null;
+    const sorted = [...clauseSpanInfos].sort((left, right) => left.order - right.order);
+    const index = sorted.findIndex(clause => clause.finiteVerbId === activeBeginningVerbId);
+    if (index <= 0) return null;
+    const previous = sorted[index - 1];
+    const resolved = resolveClause(previous, augmentedObservations[previous.finiteVerbId], clauseSpanInfos);
+    if (!resolved.relation || resolved.relation === "root" || resolved.parked) return null;
+    if (resolved.parentClauseId === activeBeginningVerbId) return null;
+    return resolved;
+  }, [activeBeginningVerbId, augmentedObservations, clauseSpanInfos, coordinateContinuationIds]);
+  const activeCoordinateSuggestedRelation = activeCoordinateSuggestedResolution?.relation ?? null;
+
+  const activeBoundaryNeedsTightening = Boolean(
+    activeSignal?.kind === "uncertain" && activeSignal.reason.includes("Tighten the span first")
+  );
 
   // What the parent-picker header should actually show while it's open: the
   // raw draft frameType (activeObservation.frameType) can be temporarily
@@ -1414,6 +1538,64 @@ export default function SpanishClauseBuilder({
     activeSignal?.kind === "confident" && activeSignal.choice === "frame"
       ? activeSignal.target
       : null;
+  const containingClauseParentId = (() => {
+    const activeRange = activeBeginningRow?.greekRange;
+    if (!activeBeginningRow || !activeRange) return null;
+    const activeStart = parseGreekTokenId(activeRange.greekStartTokenId);
+    const activeEnd = parseGreekTokenId(activeRange.greekEndTokenId);
+    if (!activeStart || !activeEnd) return null;
+    return clauseRows
+      .filter(row => {
+        const id = row.finiteVerb.finiteVerbId;
+        const range = row.greekRange;
+        if (!id || id === activeBeginningVerbId || !range) return false;
+        const start = parseGreekTokenId(range.greekStartTokenId);
+        const end = parseGreekTokenId(range.greekEndTokenId);
+        return Boolean(
+          start &&
+          end &&
+          start.chapter === activeStart.chapter &&
+          start.verse === activeStart.verse &&
+          start.token <= activeStart.token &&
+          end.token >= activeEnd.token &&
+          (start.token < activeStart.token || end.token > activeEnd.token)
+        );
+      })
+      .sort((left, right) => {
+        const leftStart = parseGreekTokenId(left.greekRange!.greekStartTokenId)!.token;
+        const leftEnd = parseGreekTokenId(left.greekRange!.greekEndTokenId)!.token;
+        const rightStart = parseGreekTokenId(right.greekRange!.greekStartTokenId)!.token;
+        const rightEnd = parseGreekTokenId(right.greekRange!.greekEndTokenId)!.token;
+        return leftEnd - leftStart - (rightEnd - rightStart);
+      })[0]?.finiteVerb.finiteVerbId ?? null;
+  })();
+  // A protasis at the front of a verse normally leans forward on its
+  // apodosis, not backward on the nearest assertion in the preceding verse.
+  // Skip a bare coordinated continuation of the protasis and offer the first
+  // following main clause in the same verse. A containing matrix clause still
+  // has priority for embedded conditions (e.g. Rom 11:23).
+  const preposedConditionParentId = (() => {
+    if (activeEffectiveFrameType !== "condition" || containingClauseParentId || !activeBeginningRow?.greekRange) {
+      return null;
+    }
+    const activeStart = parseGreekTokenId(activeBeginningRow.greekRange.greekStartTokenId);
+    if (!activeStart || activeStart.token > 3) return null;
+    const activeOrder =
+      activeBeginningRow.finiteVerb.chapter * 100000 +
+      activeBeginningRow.finiteVerb.verse * 1000 +
+      activeBeginningRow.finiteVerb.index;
+    return clauseRows.find(row => {
+      const id = row.finiteVerb.finiteVerbId;
+      const rowOrder = row.finiteVerb.chapter * 100000 + row.finiteVerb.verse * 1000 + row.finiteVerb.index;
+      return Boolean(
+        id &&
+        row.finiteVerb.chapter === activeStart.chapter &&
+        row.finiteVerb.verse === activeStart.verse &&
+        rowOrder > activeOrder &&
+        !coordinateContinuationIds.has(id)
+      );
+    })?.finiteVerb.finiteVerbId ?? null;
+  })();
   const nearestPrecedingRootId = activeBeginningRow
     ? [...nearbyParentClauseRows]
         .filter(row => {
@@ -1432,6 +1614,9 @@ export default function SpanishClauseBuilder({
         })?.finiteVerb.finiteVerbId ?? null
     : null;
   const activeSuggestedParentId =
+    (activeEffectiveFrameType === "condition"
+      ? containingClauseParentId ?? preposedConditionParentId
+      : null) ??
     signalSuggestedParentId ??
     (activeEffectiveFrameType === "reason" ? nearestPrecedingRootId : null);
 
@@ -2041,7 +2226,8 @@ export default function SpanishClauseBuilder({
         Math.min(start.token, end.token),
         Math.max(start.token, end.token),
         verseWords,
-        bookId
+        bookId,
+        verseTextByKey.get(`${start.chapter}:${start.verse}`) ?? ""
       );
       if (!selectedSpan.length) return;
       setAssignments(current => {
@@ -2059,8 +2245,28 @@ export default function SpanishClauseBuilder({
         return next;
       });
     },
-    [assignments, bookId, wordsByVerse]
+    [assignments, bookId, verseTextByKey, wordsByVerse]
   );
+
+  const resyncAllSpanishFromStoredGreek = useCallback(() => {
+    setAssignments(current => {
+      let changed = false;
+      const next = { ...current };
+      for (const entry of greekSpanMismatches) {
+        const assignment = next[entry.finiteVerbId];
+        if (!assignment || !entry.expectedSpanishSpan.length) continue;
+        next[entry.finiteVerbId] = {
+          ...assignment,
+          selectedSpan: entry.expectedSpanishSpan,
+          greekConfirmedAt: assignment.greekConfirmedAt ?? new Date().toISOString()
+        };
+        changed = true;
+      }
+      if (!changed) return current;
+      writeClauseAssignments(next, bookId);
+      return next;
+    });
+  }, [bookId, greekSpanMismatches]);
 
   const saveActive = useCallback(() => {
     if (!activeVerbId || !activeVerb || !draftGreekRange) return;
@@ -2204,7 +2410,8 @@ export default function SpanishClauseBuilder({
         Math.min(start.token, end.token),
         Math.max(start.token, end.token),
         verseWords,
-        bookId
+        bookId,
+        verseTextByKey.get(`${start.chapter}:${start.verse}`) ?? ""
       );
       if (!selectedSpan.length || !sameVerseNounIds.every(id => selectedSpan.includes(id))) {
         // Couldn’t cover the noun from Greek — fall back to manual expand.
@@ -2230,7 +2437,7 @@ export default function SpanishClauseBuilder({
       setDraftGreekRange(null);
       setGreekRangeAnchorToken(null);
     },
-    [assignments, bookId, openHostToIncludeNoun, wordsByVerse]
+    [assignments, bookId, openHostToIncludeNoun, verseTextByKey, wordsByVerse]
   );
 
   const updateActiveObservation = useCallback(
@@ -2263,7 +2470,7 @@ export default function SpanishClauseBuilder({
         </p>
         <p className="clause-tutor-note">{outlineStandingReason(result.source)}</p>
         <p className="clause-tutor-note">
-          Q1–Q3 stay as you answered them. Do not change Q2 to force a heading.
+          The saved grammatical relationship stays unchanged. Do not reclassify a clause merely to force a heading.
         </p>
         <div className="clause-step-actions">
           <button
@@ -2387,6 +2594,63 @@ export default function SpanishClauseBuilder({
       describedNounSpan: [],
       expressedParentClauseId: "",
       frameType
+    });
+  }, [updateActiveObservation]);
+
+  const chooseCoordinateContinuation = useCallback(() => {
+    setForceChoices(false);
+    setDependencyDecision(null);
+    if (activeCoordinateSuggestedResolution?.relation === "describes") {
+      updateActiveObservation({
+        describesNoun: "yes",
+        isWhatWasExpressed: undefined,
+        tellsWhenOrIf: undefined,
+        describedNounSpan: activeCoordinateSuggestedResolution.describedNounSpan ?? [],
+        expressedParentClauseId: "",
+        whenIfParentClauseId: "",
+        frameType: undefined
+      });
+    } else if (
+      activeCoordinateSuggestedResolution?.relation === "content" &&
+      activeCoordinateSuggestedResolution.parentClauseId
+    ) {
+      updateActiveObservation({
+        describesNoun: undefined,
+        isWhatWasExpressed: "yes",
+        tellsWhenOrIf: undefined,
+        describedNounSpan: [],
+        expressedParentClauseId: activeCoordinateSuggestedResolution.parentClauseId,
+        whenIfParentClauseId: "",
+        frameType: undefined
+      });
+    } else if (
+      activeCoordinateSuggestedResolution?.relation === "frame" &&
+      activeCoordinateSuggestedResolution.parentClauseId
+    ) {
+      updateActiveObservation({
+        describesNoun: undefined,
+        isWhatWasExpressed: undefined,
+        tellsWhenOrIf: "yes",
+        describedNounSpan: [],
+        expressedParentClauseId: "",
+        whenIfParentClauseId: activeCoordinateSuggestedResolution.parentClauseId,
+        frameType: activeCoordinateSuggestedResolution.frameType
+      });
+    }
+    moveToNextClause();
+  }, [activeCoordinateSuggestedResolution, moveToNextClause, updateActiveObservation]);
+
+  const reconsiderSavedClassification = useCallback(() => {
+    setForceChoices(true);
+    setDependencyDecision(null);
+    updateActiveObservation({
+      describesNoun: undefined,
+      isWhatWasExpressed: undefined,
+      tellsWhenOrIf: undefined,
+      describedNounSpan: [],
+      expressedParentClauseId: "",
+      whenIfParentClauseId: "",
+      frameType: undefined
     });
   }, [updateActiveObservation]);
 
@@ -2699,40 +2963,54 @@ export default function SpanishClauseBuilder({
 
   const actorObservationFor = useCallback(
     (finiteVerbId: string | null | undefined): ClauseActorObservation => {
-      if (!finiteVerbId) return { subjectSpan: [], verbSpan: [], objectSpan: [] };
+      if (!finiteVerbId) return { subjectSpan: [], verbSpan: [], objectSpan: [], complementSpan: [] };
       const stored = clauseActors[finiteVerbId];
       const verbSpan = stored?.verbSpan?.length
         ? stored.verbSpan
         : defaultVerbSpanFor(finiteVerbId);
       return {
         subjectSpan: stored?.subjectSpan ?? [],
+        subjectImplicit: stored?.subjectImplicit ?? false,
         verbSpan,
-        objectSpan: stored?.objectSpan ?? []
+        objectSpan: stored?.objectSpan ?? [],
+        complementSpan: stored?.complementSpan ?? [],
+        objectAbsent: stored?.objectAbsent ?? false
       };
     },
     [clauseActors, defaultVerbSpanFor]
   );
 
   const updateActorField = useCallback(
-    (finiteVerbId: string, field: "subject" | "verb" | "object", span: string[]) => {
+    (finiteVerbId: string, field: ActorField, span: string[]) => {
       setClauseActors(current => {
         const prior = current[finiteVerbId] ?? {
           subjectSpan: [],
+          subjectImplicit: false,
           verbSpan: defaultVerbSpanFor(finiteVerbId),
-          objectSpan: []
+          objectSpan: [],
+          complementSpan: [],
+          objectAbsent: false
         };
         const nextRow: ClauseActorObservation = {
           subjectSpan: field === "subject" ? span : prior.subjectSpan,
+          subjectImplicit: field === "subject" ? false : prior.subjectImplicit,
           verbSpan:
             field === "verb"
               ? span
               : prior.verbSpan.length
                 ? prior.verbSpan
                 : defaultVerbSpanFor(finiteVerbId),
-          objectSpan: field === "object" ? span : prior.objectSpan
+          objectSpan: field === "object" ? span : prior.objectSpan,
+          complementSpan: field === "complement" ? span : prior.complementSpan,
+          objectAbsent: field === "object" || field === "complement" ? false : prior.objectAbsent
         };
         const next = { ...current };
-        if (!nextRow.subjectSpan.length && !nextRow.objectSpan.length && !nextRow.verbSpan.length) {
+        if (
+          !nextRow.subjectSpan.length &&
+          !nextRow.objectSpan.length &&
+          !nextRow.complementSpan?.length &&
+          !nextRow.verbSpan.length
+        ) {
           delete next[finiteVerbId];
         } else {
           next[finiteVerbId] = nextRow;
@@ -2744,8 +3022,35 @@ export default function SpanishClauseBuilder({
     [bookId, defaultVerbSpanFor]
   );
 
+  const setActorAbsence = useCallback(
+    (finiteVerbId: string, field: "subject" | "object") => {
+      setClauseActors(current => {
+        const prior = current[finiteVerbId] ?? {
+          subjectSpan: [],
+          subjectImplicit: false,
+          verbSpan: defaultVerbSpanFor(finiteVerbId),
+          objectSpan: [],
+          complementSpan: [],
+          objectAbsent: false
+        };
+        const nextRow: ClauseActorObservation = {
+          ...prior,
+          ...(field === "subject"
+            ? { subjectSpan: [], subjectImplicit: true }
+            : { objectSpan: [], complementSpan: [], objectAbsent: true })
+        };
+        const next = { ...current, [finiteVerbId]: nextRow };
+        writeClauseActors(next, bookId);
+        return next;
+      });
+      setPickingActorField(null);
+      setActorAnchorId(null);
+    },
+    [bookId, defaultVerbSpanFor]
+  );
+
   const beginActorFieldPick = useCallback(
-    (field: "subject" | "verb" | "object") => {
+    (field: ActorField) => {
       setPickingSubjectHostKey(null);
       setActiveVerbId(null);
       setDraftGreekRange(null);
@@ -2766,7 +3071,9 @@ export default function SpanishClauseBuilder({
         ? actor.subjectSpan
         : pickingActorField === "verb"
           ? actor.verbSpan
-          : actor.objectSpan;
+          : pickingActorField === "complement"
+            ? actor.complementSpan ?? []
+            : actor.objectSpan;
     let verseKey = `${activeBeginningRow.finiteVerb.chapter}:${activeBeginningRow.finiteVerb.verse}`;
     if (span.length) {
       const first = wordById.get(span[0]);
@@ -2796,7 +3103,7 @@ export default function SpanishClauseBuilder({
   ]);
 
   const selectActorWord = useCallback(
-    (finiteVerbId: string, field: "subject" | "verb" | "object", word: SpanishWord, event: MouseEvent<HTMLButtonElement>) => {
+    (finiteVerbId: string, field: ActorField, word: SpanishWord, event: MouseEvent<HTMLButtonElement>) => {
       if (event.shiftKey && actorAnchorId) {
         const anchor = wordById.get(actorAnchorId);
         if (anchor) {
@@ -2819,6 +3126,20 @@ export default function SpanishClauseBuilder({
   const activeActor = useMemo(
     () => actorObservationFor(activeBeginningVerbId),
     [activeBeginningVerbId, actorObservationFor]
+  );
+
+  const activeMaculaGrammarProposals = useMemo(
+    () =>
+      (activeMaculaEvidence?.grammaticalRoles ?? []).map(evidence => {
+        const targetAvailable = evidence.targetWordIds.every(id => wordById.has(id));
+        return {
+          evidence,
+          field: actorFieldForMaculaRole(evidence.role),
+          targetAvailable,
+          targetText: targetAvailable ? spanTextFromIds(evidence.targetWordIds) : ""
+        };
+      }),
+    [activeMaculaEvidence, spanTextFromIds, wordById]
   );
 
   const actorConcentration = useMemo(() => {
@@ -2850,10 +3171,11 @@ export default function SpanishClauseBuilder({
     (finiteVerbId: string | null | undefined): string => {
       if (!finiteVerbId) return "";
       const actor = actorObservationFor(finiteVerbId);
+      const tail = spanTextFromIds(actor.objectSpan) || spanTextFromIds(actor.complementSpan ?? []);
       return formatActorTriple(
         spanTextFromIds(actor.subjectSpan),
         spanTextFromIds(actor.verbSpan),
-        spanTextFromIds(actor.objectSpan)
+        tail
       );
     },
     [actorObservationFor, spanTextFromIds]
@@ -2867,9 +3189,9 @@ export default function SpanishClauseBuilder({
       const subject = spanTextFromIds(actor.subjectSpan);
       if (!subject) continue;
       const verb = spanTextFromIds(actor.verbSpan);
-      const object = spanTextFromIds(actor.objectSpan);
-      if (!formatActorTriple(subject, verb, object)) continue;
-      const predicate = formatActorPredicate(verb, object);
+      const tail = spanTextFromIds(actor.objectSpan) || spanTextFromIds(actor.complementSpan ?? []);
+      if (!formatActorTriple(subject, verb, tail)) continue;
+      const predicate = formatActorPredicate(verb, tail);
       if (!predicate) continue;
       const key = subject.toLowerCase();
       const group = byActor.get(key) ?? { label: subject, actions: [] };
@@ -4962,7 +5284,7 @@ export default function SpanishClauseBuilder({
               </div>
               <p className="clause-section-note">
                 Span is saved, but the clause shape is still open — Independent, relative, content, or
-                adverbial (time / reason / condition / purpose / result). Open one to finish it.
+                adverbial (time / reason / condition / purpose / result / comparison). Open one to finish it.
               </p>
               <ul className="clause-audit-list">
                 {unreviewedClauseRows.map(row => (
@@ -4996,13 +5318,13 @@ export default function SpanishClauseBuilder({
             <section className="clause-unresolved-participles" aria-label="Clauses without actor">
               <div className="clause-audit-header">
                 <h3>
-                  Actor not yet observed — {missingActorClauseRows.length} of {reviewClauseRows.length}{" "}
+                  Subject/object observation pending — {missingActorClauseRows.length} of {reviewClauseRows.length}{" "}
                   mood-tagged clause{reviewClauseRows.length === 1 ? "" : "s"}
                 </h3>
               </div>
               <p className="clause-section-note">
-                Span is saved, but Quién actúa is still open. Open a clause and tap the subject in the chapter
-                text — this does not change the clause span.
+                Structure is saved, but the second pass is incomplete. Open a clause and identify its subject
+                and object, or explicitly mark an implicit subject or no explicit object.
               </p>
               <ul className="clause-audit-list">
                 {missingActorClauseRows.map(row => (
@@ -5024,9 +5346,9 @@ export default function SpanishClauseBuilder({
               className="clause-unresolved-participles clause-unresolved-participles--clear"
               aria-label="All actors observed"
             >
-              <h3>All mood-tagged clauses have Quién actúa</h3>
+              <h3>All mood-tagged clauses have subject/object observations</h3>
               <p className="clause-section-note">
-                Every saved mood-tagged clause has a subject actor. Object / receptor remains optional.
+                Every saved mood-tagged clause has a subject decision and an object/recipient decision.
               </p>
             </section>
           ) : null}
@@ -5069,6 +5391,13 @@ export default function SpanishClauseBuilder({
                 Greek span audit — {greekSpanMismatches.length} of {greekSpanAudit.length} clause
                 {greekSpanAudit.length === 1 ? "" : "s"} drifted
               </h3>
+              <button
+                type="button"
+                className="clause-reconsider"
+                onClick={resyncAllSpanishFromStoredGreek}
+              >
+                Resync all {greekSpanMismatches.length}
+              </button>
             </div>
             <p className="clause-section-note">
               Greek is authoritative. These clauses’ saved Spanish word-span no longer matches what their
@@ -5562,6 +5891,14 @@ export default function SpanishClauseBuilder({
                     </p>
                   ) : null}
 
+                  {maculaLoadComplete && !maculaLoadError && activeBeginningVerbId && !activeMaculaEvidence ? (
+                    <p className="macula-advisory-unavailable" role="status">
+                      {language === "es"
+                        ? "La ayuda del segundo testigo no está disponible para esta cláusula. No se ha publicado una asesoría aprobada en la versión seleccionada de cgv-data."
+                        : "Second-witness help is unavailable for this clause. No approved advisory has been published in the selected cgv-data release."}
+                    </p>
+                  ) : null}
+
                   {activeMaculaEvidence && activeMaculaVerification ? (
                     activeMaculaIsVisible ? (
                       <aside
@@ -5572,25 +5909,36 @@ export default function SpanishClauseBuilder({
                           <span>MACULA second witness</span>
                           <strong>{maculaStatusLabel(activeMaculaVerification.status)}</strong>
                         </div>
-                        <p className="macula-advisory-proposal">
-                          {maculaKindLabel(
-                            activeMaculaVerification.proposal.kind,
-                            activeMaculaVerification.proposal.frameType
-                          )}
-                        </p>
-                        <p>{activeMaculaVerification.proposal.reason}</p>
-                        <p className="macula-advisory-range">
-                          Finite-clause evidence: {activeMaculaEvidence.exerciseSpan.startTokenId}–
-                          {activeMaculaEvidence.exerciseSpan.endTokenId}
-                          {activeMaculaEvidence.constituentSpan &&
-                          (activeMaculaEvidence.constituentSpan.startTokenId !==
-                            activeMaculaEvidence.exerciseSpan.startTokenId ||
-                            activeMaculaEvidence.constituentSpan.endTokenId !==
-                              activeMaculaEvidence.exerciseSpan.endTokenId)
-                            ? ` · broader constituent: ${activeMaculaEvidence.constituentSpan.startTokenId}–${activeMaculaEvidence.constituentSpan.endTokenId}`
-                            : ""}
-                        </p>
-                        {activeMaculaVerification.status !== "unanswered" &&
+                        {activeMaculaEvidence.attachmentStatus ? (
+                          <p className="macula-advisory-status">
+                            {maculaAttachmentStatusLabel(activeMaculaEvidence.attachmentStatus, language)}
+                          </p>
+                        ) : null}
+                        {activeMaculaEvidence.attachmentStatus === "no-macula-syntax" ? (
+                          <p className="macula-advisory-proposal">
+                            {language === "es"
+                              ? "No hay una propuesta sintáctica comparable para esta cláusula."
+                              : "There is no comparable syntactic proposal for this clause."}
+                          </p>
+                        ) : (
+                          <>
+                            <p className="macula-advisory-proposal">
+                              {maculaKindLabel(
+                                activeMaculaVerification.proposal.kind,
+                                activeMaculaVerification.proposal.frameType
+                              )}
+                            </p>
+                            <p>{activeMaculaVerification.proposal.reason}</p>
+                          </>
+                        )}
+                        {activeMaculaEvidence.textualDifference ? (
+                          <p className="macula-advisory-detail">
+                            <strong>{decisionCopy.maculaGrammarDifference}:</strong>{" "}
+                            {activeMaculaEvidence.textualDifference}
+                          </p>
+                        ) : null}
+                        {activeMaculaEvidence.attachmentStatus !== "no-macula-syntax" &&
+                        activeMaculaVerification.status !== "unanswered" &&
                         activeMaculaVerification.spanMatches === false ? (
                           <p className="macula-advisory-detail">
                             Your saved boundary differs from this witness. Compare the edges; a broader MACULA
@@ -5598,14 +5946,37 @@ export default function SpanishClauseBuilder({
                           </p>
                         ) : null}
                         <p className="macula-advisory-caution">
-                          Compare the evidence yourself. This does not select, save, or replace your answer.
+                          {activeMaculaEvidence.attachmentStatus === "no-macula-syntax"
+                            ? language === "es"
+                              ? "El Reader no sustituirá esta ausencia con una conjetura."
+                              : "The Reader will not replace that absence with a guess."
+                            : language === "es"
+                              ? "Compara tú mismo la evidencia. Esto no selecciona, guarda ni reemplaza tu respuesta."
+                              : "Compare the evidence yourself. This does not select, save, or replace your answer."}
                         </p>
                         <details className="macula-advisory-provenance">
-                          <summary>Evidence provenance</summary>
+                          <summary>Technical evidence and provenance</summary>
+                          <span className="macula-advisory-range">
+                            Finite-clause evidence: {activeMaculaEvidence.exerciseSpan.startTokenId}–
+                            {activeMaculaEvidence.exerciseSpan.endTokenId}
+                            {activeMaculaEvidence.constituentSpan &&
+                            (activeMaculaEvidence.constituentSpan.startTokenId !==
+                              activeMaculaEvidence.exerciseSpan.startTokenId ||
+                              activeMaculaEvidence.constituentSpan.endTokenId !==
+                                activeMaculaEvidence.exerciseSpan.endTokenId)
+                              ? ` · broader constituent: ${activeMaculaEvidence.constituentSpan.startTokenId}–${activeMaculaEvidence.constituentSpan.endTokenId}`
+                              : ""}
+                          </span>
                           <span>
                             {maculaDataset?.datasetId} {maculaDataset?.datasetVersion} · {maculaDataset?.source.edition}
                             {" · "}{maculaDataset?.source.repository}@{maculaDataset?.source.commit.slice(0, 12)}
                             {" · "}{maculaDataset?.source.license}
+                          </span>
+                          <span>
+                            Source spine: {maculaDataset?.tokenSpine.sha256.slice(0, 12)}
+                            {maculaDataset?.targetText
+                              ? ` · LBF text: ${maculaDataset.targetText.sha256.slice(0, 12)}`
+                              : " · legacy advisory without target-text roles"}
                           </span>
                         </details>
                       </aside>
@@ -5619,6 +5990,19 @@ export default function SpanishClauseBuilder({
                   {activeObservation.describesNoun === "yes" ? (
                     <div className="clause-noun-picker">
                       <p className="clause-observation-term">{decisionCopy.relative}</p>
+                      {activeSignal?.kind === "confident" && activeSignal.choice !== "describes" ? (
+                        <aside className="clause-connector-note">
+                          <strong>
+                            {language === "es"
+                              ? "La evidencia griega no apoya una relativa"
+                              : "The Greek evidence does not support a relative clause"}
+                          </strong>
+                          <span>{activeSignal.reason}</span>
+                          <button type="button" className="clause-reconsider" onClick={reconsiderSavedClassification}>
+                            {decisionCopy.reviewClassification}
+                          </button>
+                        </aside>
+                      ) : null}
                       {activeHasInterrogativeWho ? (
                         <aside className="clause-connector-note">
                           <strong>{decisionCopy.interrogativeTitle}</strong>
@@ -5777,6 +6161,20 @@ export default function SpanishClauseBuilder({
                       ) : (
                         <p className="clause-parent-prompt">{decisionCopy.relationshipQuestion}</p>
                       )}
+                      {activeSignal?.kind === "confident" &&
+                      activeSignal.choice === "frame" &&
+                      (activeObservation.frameType !== activeSignal.frameType ||
+                        (activeObservation.whenIfParentClauseId &&
+                          activeObservation.whenIfParentClauseId !== activeSignal.target)) ? (
+                        <aside className="clause-connector-note">
+                          <strong>
+                            {language === "es"
+                              ? "La relación guardada no coincide con la evidencia griega"
+                              : "The saved relationship does not match the Greek evidence"}
+                          </strong>
+                          <span>{activeSignal.reason}</span>
+                        </aside>
+                      ) : null}
                       <p className="clause-parent-instruction">{decisionCopy.chooseHost}</p>
                       {unassignedSameVerseNotice}
                       <div className="clause-parent-list">
@@ -5843,8 +6241,8 @@ export default function SpanishClauseBuilder({
                         · continues previous
                       </p>
                       <p className="clause-tutor-note">
-                        Opens with a bare coordinator and shares the previous clause&apos;s dependency — not an
-                        independent root, even if Q1–Q3 would all read &quot;no&quot; on their own.
+                        Opens with a bare coordinator and shares the previous clause&apos;s dependency. It does not
+                        become independent merely because it has no new subordinating marker of its own.
                       </p>
                       <div className="clause-step-actions">
                         <button type="button" className="clause-reconsider" onClick={() => setForceChoices(true)}>
@@ -5869,9 +6267,13 @@ export default function SpanishClauseBuilder({
                         where it can still be fixed, instead of letting the outline
                         carry a dependent clause as an H3.
                       */}
-                      {activeSignal && activeSignal.kind !== "none" ? (
+                      {(activeSignal && activeSignal.kind !== "none") || activeCoordinateSuggestedRelation ? (
                         <p className="clause-tutor-note clause-tutor-note--conflict">
-                          But the Greek disagrees: {activeSignal.reason}
+                          {activeCoordinateSuggestedRelation
+                            ? language === "es"
+                              ? "Pero el coordinador griego continúa la dependencia de la cláusula anterior. Revísala como continuación coordinada."
+                              : "But the Greek coordinator continues the previous clause's dependency. Review it as a coordinated continuation."
+                            : `But the Greek disagrees: ${activeSignal?.reason ?? ""}`}
                         </p>
                       ) : null}
                       <div className="clause-step-actions">
@@ -5898,135 +6300,89 @@ export default function SpanishClauseBuilder({
                               <span>{decisionCopy.interrogativeHelp}</span>
                             </aside>
                           ) : null}
+                          {activeSignal?.kind === "uncertain" ? (
+                            <aside className="clause-connector-note">
+                              <strong>
+                                {language === "es" ? "Revisa primero el límite" : "Review the boundary first"}
+                              </strong>
+                              <span>{activeSignal.reason}</span>
+                              {activeBoundaryNeedsTightening && activeBeginningRow ? (
+                                <button
+                                  type="button"
+                                  className="clause-reconsider"
+                                  onClick={() => selectVerb(activeBeginningRow.finiteVerb, { scrollTo: "passage" })}
+                                >
+                                  {language === "es" ? "Corregir el límite griego" : "Fix the Greek boundary"}
+                                </button>
+                              ) : null}
+                            </aside>
+                          ) : null}
                           <div className="clause-decision-options" role="group" aria-label={decisionCopy.firstAria}>
                             <button
                               type="button"
-                              className={`clause-decision-btn${activeSuggestedKind === "root" ? " clause-decision-btn--suggested" : ""}`}
+                              className="clause-decision-btn"
                               onClick={chooseRoot}
+                              disabled={activeBoundaryNeedsTightening}
                             >
                               <strong>{decisionCopy.complete}</strong>
                               <span>{decisionCopy.independent}</span>
-                              {activeSuggestedKind === "root" ? (
-                                <small className="clause-decision-suggestion">{decisionCopy.suggested}</small>
-                              ) : null}
                               <span className="clause-decision-hover-help">{decisionCopy.independentHelp}</span>
                             </button>
                             <button
                               type="button"
-                              className={`clause-decision-btn${activeSuggestedKind && activeSuggestedKind !== "root" ? " clause-decision-btn--suggested" : ""}`}
+                              className="clause-decision-btn"
                               onClick={() => setDependencyDecision("dependent")}
+                              disabled={activeBoundaryNeedsTightening}
                             >
                               <strong>{decisionCopy.incomplete}</strong>
                               <span>{decisionCopy.dependent}</span>
-                              {activeSuggestedKind && activeSuggestedKind !== "root" ? (
-                                <small className="clause-decision-suggestion">{decisionCopy.suggested}</small>
-                              ) : null}
                               <span className="clause-decision-hover-help">{decisionCopy.dependentHelp}</span>
                             </button>
                           </div>
-                          {activeSuggestedKind ? (
-                            <p className="clause-decision-suggestion-note">{decisionCopy.suggestionNote}</p>
-                          ) : null}
                         </>
-                      ) : (
+                      ) : dependencyDecision === "dependent" ? (
                         <>
                           <p className="clause-decision-step">{decisionCopy.relationshipStep}</p>
                           <h3 className="clause-decision-question">{decisionCopy.relationshipQuestion}</h3>
                           <div className="clause-decision-options" role="group" aria-label={decisionCopy.relationshipAria}>
                             <button
                               type="button"
-                              className={`clause-decision-btn${activeSuggestedKind === "describes" ? " clause-decision-btn--suggested" : ""}`}
+                              className="clause-decision-btn"
                               onClick={chooseDescribes}
                             >
                               <strong>{decisionCopy.describes}</strong>
                               <span>{decisionCopy.relative}</span>
-                              {activeSuggestedKind === "describes" ? (
-                                <small className="clause-decision-suggestion">{decisionCopy.suggested}</small>
-                              ) : null}
                               <span className="clause-decision-hover-help">{decisionCopy.relativeHelp}</span>
                             </button>
                             <button
                               type="button"
-                              className={`clause-decision-btn${activeSuggestedKind === "content" ? " clause-decision-btn--suggested" : ""}`}
+                              className="clause-decision-btn"
                               onClick={chooseContent}
                             >
                               <strong>{decisionCopy.content}</strong>
                               <span>{decisionCopy.contentClause}</span>
-                              {activeSuggestedKind === "content" ? (
-                                <small className="clause-decision-suggestion">{decisionCopy.suggested}</small>
-                              ) : null}
                               <span className="clause-decision-hover-help">{decisionCopy.contentHelp}</span>
                             </button>
                             <button
                               type="button"
-                              className={`clause-decision-btn${activeSuggestedFrameType === "condition" ? " clause-decision-btn--suggested" : ""}`}
-                              onClick={() => chooseFrame("condition")}
+                              className="clause-decision-btn"
+                              onClick={() => setDependencyDecision("adverbial")}
                             >
-                              <strong>{decisionCopy.condition}</strong>
-                              <span>{decisionCopy.conditionalClause}</span>
-                              {activeSuggestedFrameType === "condition" ? (
-                                <small className="clause-decision-suggestion">{decisionCopy.suggested}</small>
-                              ) : null}
-                              <span className="clause-decision-hover-help">{decisionCopy.conditionHelp}</span>
+                              <strong>{decisionCopy.adverbial}</strong>
+                              <span>{decisionCopy.adverbialClause}</span>
+                              <span className="clause-decision-hover-help">{decisionCopy.adverbialHelp}</span>
                             </button>
-                            <button
-                              type="button"
-                              className={`clause-decision-btn${activeSuggestedFrameType === "reason" ? " clause-decision-btn--suggested" : ""}`}
-                              onClick={() => chooseFrame("reason")}
-                            >
-                              <strong>{decisionCopy.reason}</strong>
-                              <span>{decisionCopy.reasonClause}</span>
-                              {activeSuggestedFrameType === "reason" ? (
-                                <small className="clause-decision-suggestion">{decisionCopy.suggested}</small>
-                              ) : null}
-                              <span className="clause-decision-hover-help">{decisionCopy.reasonHelp}</span>
-                            </button>
-                            <button
-                              type="button"
-                              className={`clause-decision-btn${activeSuggestedFrameType === "time" ? " clause-decision-btn--suggested" : ""}`}
-                              onClick={() => chooseFrame("time")}
-                            >
-                              <strong>{decisionCopy.time}</strong>
-                              <span>{decisionCopy.timeClause}</span>
-                              {activeSuggestedFrameType === "time" ? (
-                                <small className="clause-decision-suggestion">{decisionCopy.suggested}</small>
-                              ) : null}
-                              <span className="clause-decision-hover-help">{decisionCopy.timeHelp}</span>
-                            </button>
-                            <button
-                              type="button"
-                              className={`clause-decision-btn${activeSuggestedFrameType === "purpose" ? " clause-decision-btn--suggested" : ""}`}
-                              onClick={() => chooseFrame("purpose")}
-                            >
-                              <strong>{decisionCopy.purpose}</strong>
-                              <span>{decisionCopy.purposeClause}</span>
-                              {activeSuggestedFrameType === "purpose" ? (
-                                <small className="clause-decision-suggestion">{decisionCopy.suggested}</small>
-                              ) : null}
-                              <span className="clause-decision-hover-help">{decisionCopy.purposeHelp}</span>
-                            </button>
-                            <button
-                              type="button"
-                              className={`clause-decision-btn${activeSuggestedFrameType === "result" ? " clause-decision-btn--suggested" : ""}`}
-                              onClick={() => chooseFrame("result")}
-                            >
-                              <strong>{decisionCopy.result}</strong>
-                              <span>{decisionCopy.resultClause}</span>
-                              {activeSuggestedFrameType === "result" ? (
-                                <small className="clause-decision-suggestion">{decisionCopy.suggested}</small>
-                              ) : null}
-                              <span className="clause-decision-hover-help">{decisionCopy.resultHelp}</span>
-                            </button>
-                            {activeBeginningVerbId && coordinateContinuationIds.has(activeBeginningVerbId) ? (
-                              <button type="button" className="clause-decision-btn" onClick={moveToNextClause}>
+                            {activeCoordinateSuggestedResolution ? (
+                              <button
+                                type="button"
+                                className="clause-decision-btn"
+                                onClick={chooseCoordinateContinuation}
+                              >
                                 <strong>{decisionCopy.continues}</strong>
                                 <span>{decisionCopy.coordinated}</span>
                               </button>
                             ) : null}
                           </div>
-                          {activeSuggestedKind ? (
-                            <p className="clause-decision-suggestion-note">{decisionCopy.suggestionNote}</p>
-                          ) : null}
                           <button
                             type="button"
                             className="clause-reconsider clause-decision-back"
@@ -6035,31 +6391,168 @@ export default function SpanishClauseBuilder({
                             {decisionCopy.back}
                           </button>
                         </>
+                      ) : (
+                        <>
+                          <p className="clause-decision-step">{decisionCopy.frameStep}</p>
+                          <h3 className="clause-decision-question">{decisionCopy.frameQuestion}</h3>
+                          <div className="clause-decision-options" role="group" aria-label={decisionCopy.frameAria}>
+                            {(
+                              [
+                                ["condition", decisionCopy.condition, decisionCopy.conditionalClause, decisionCopy.conditionHelp],
+                                ["reason", decisionCopy.reason, decisionCopy.reasonClause, decisionCopy.reasonHelp],
+                                ["time", decisionCopy.time, decisionCopy.timeClause, decisionCopy.timeHelp],
+                                ["purpose", decisionCopy.purpose, decisionCopy.purposeClause, decisionCopy.purposeHelp],
+                                ["result", decisionCopy.result, decisionCopy.resultClause, decisionCopy.resultHelp],
+                                ["comparison", decisionCopy.comparison, decisionCopy.comparisonClause, decisionCopy.comparisonHelp]
+                              ] as const
+                            ).map(([frameType, label, term, help]) => (
+                              <button
+                                type="button"
+                                className="clause-decision-btn"
+                                key={frameType}
+                                onClick={() => chooseFrame(frameType)}
+                              >
+                                <strong>{label}</strong>
+                                <span>{term}</span>
+                                <span className="clause-decision-hover-help">{help}</span>
+                              </button>
+                            ))}
+                          </div>
+                          <button
+                            type="button"
+                            className="clause-reconsider clause-decision-back"
+                            onClick={() => setDependencyDecision("dependent")}
+                          >
+                            {decisionCopy.backToRelationships}
+                          </button>
+                        </>
                       )}
                     </div>
                   )}
                 </section>
 
                 {activeBeginningVerbId && activeBeginningRow.selectedWords.length && activeReadyForActorPass ? (
-                  <details className="clause-later-analysis">
+                  <details
+                    className="clause-later-analysis"
+                    key={`actors-${activeBeginningVerbId}`}
+                    open={
+                      unreviewedClauseRows.length === 0 ||
+                      (!activeActor.subjectSpan.length && !activeActor.subjectImplicit) ||
+                      (!activeActor.objectSpan.length &&
+                        !activeActor.complementSpan?.length &&
+                        !activeActor.objectAbsent)
+                        ? true
+                        : undefined
+                    }
+                  >
                     <summary>{decisionCopy.laterAnalysis}</summary>
                     {renderOutlineStandingPanel(activeBeginningVerbId)}
                     <section className="clause-actor-svo" aria-label={decisionCopy.actorAria}>
                     <p className="clause-observation-term">{decisionCopy.actorHeading}</p>
                     <p className="clause-section-note">{decisionCopy.actorNote}</p>
                     <p className="clause-actor-summary" role="status">
-                      <span>{spanTextFromIds(activeActor.subjectSpan) || "—"}</span>
+                      <span>
+                        {spanTextFromIds(activeActor.subjectSpan) ||
+                          (activeActor.subjectImplicit
+                            ? language === "es" ? "(sujeto implícito)" : "(implicit subject)"
+                            : "—")}
+                      </span>
                       <span aria-hidden="true"> → </span>
                       <span>{spanTextFromIds(activeActor.verbSpan) || "—"}</span>
                       <span aria-hidden="true"> → </span>
-                      <span>{spanTextFromIds(activeActor.objectSpan) || "—"}</span>
+                      <span>
+                        {spanTextFromIds(activeActor.objectSpan) ||
+                          spanTextFromIds(activeActor.complementSpan ?? []) ||
+                          (activeActor.objectAbsent
+                            ? language === "es" ? "(sin objeto explícito)" : "(no explicit object)"
+                            : "—")}
+                      </span>
                     </p>
+                    {activeMaculaIsVisible &&
+                    activeMaculaEvidence?.attachmentStatus &&
+                    activeMaculaGrammarProposals.length ? (
+                      <details className="macula-grammar-proposals">
+                        <summary>{decisionCopy.maculaGrammarSummary}</summary>
+                        <p>{decisionCopy.maculaGrammarIntro}</p>
+                        {activeMaculaGrammarProposals.some(({ evidence }) => evidence.role === "subject") ? (
+                          <p className="macula-grammar-caution">{decisionCopy.maculaGrammarPassive}</p>
+                        ) : null}
+                        <p className="macula-grammar-status">
+                          {maculaAttachmentStatusLabel(activeMaculaEvidence.attachmentStatus, language)}
+                        </p>
+                        {activeMaculaEvidence.textualDifference ? (
+                          <p className="macula-grammar-difference">
+                            <strong>{decisionCopy.maculaGrammarDifference}:</strong>{" "}
+                            {activeMaculaEvidence.textualDifference}
+                          </p>
+                        ) : null}
+                        <div className="macula-grammar-proposal-list">
+                          {activeMaculaGrammarProposals.map(({ evidence, field, targetAvailable, targetText }, index) => {
+                            const savedSpan = field === "subject"
+                              ? activeActor.subjectSpan
+                              : field === "complement"
+                                ? activeActor.complementSpan ?? []
+                                : activeActor.objectSpan;
+                            const confirmed = targetAvailable && sameWordIds(savedSpan, evidence.targetWordIds);
+                            const fieldLabel = field === "subject"
+                              ? decisionCopy.actorSubject
+                              : field === "complement"
+                                ? decisionCopy.actorComplement
+                                : decisionCopy.actorObject;
+                            return (
+                              <article
+                                className="macula-grammar-proposal"
+                                key={`${evidence.role}:${evidence.targetWordIds.join(",")}:${index}`}
+                              >
+                                <div className="macula-grammar-proposal-heading">
+                                  <strong>{maculaRoleLabel(evidence.role, language)}</strong>
+                                  <span>{fieldLabel}</span>
+                                </div>
+                                {targetAvailable && targetText ? (
+                                  <q className="macula-grammar-target">{targetText}</q>
+                                ) : (
+                                  <p className="macula-grammar-unavailable" role="alert">
+                                    {decisionCopy.maculaGrammarUnavailable}
+                                  </p>
+                                )}
+                                <div className="macula-grammar-actions">
+                                  {confirmed ? (
+                                    <span className="macula-grammar-confirmed" role="status">
+                                      {decisionCopy.maculaGrammarConfirmed}
+                                    </span>
+                                  ) : (
+                                    <button
+                                      type="button"
+                                      className="macula-grammar-use"
+                                      disabled={!targetAvailable || !targetText}
+                                      onClick={() =>
+                                        updateActorField(activeBeginningVerbId, field, evidence.targetWordIds)
+                                      }
+                                    >
+                                      {decisionCopy.maculaGrammarUse}: {fieldLabel}
+                                    </button>
+                                  )}
+                                  <button
+                                    type="button"
+                                    className="macula-grammar-change"
+                                    onClick={() => beginActorFieldPick(field)}
+                                  >
+                                    {decisionCopy.maculaGrammarChoose}
+                                  </button>
+                                </div>
+                              </article>
+                            );
+                          })}
+                        </div>
+                      </details>
+                    ) : null}
                     <div className="clause-actor-fields">
                       {(
                         [
                           ["subject", decisionCopy.actorSubject, activeActor.subjectSpan],
                           ["verb", decisionCopy.actorVerb, activeActor.verbSpan],
-                          ["object", decisionCopy.actorObject, activeActor.objectSpan]
+                          ["object", decisionCopy.actorObject, activeActor.objectSpan],
+                          ["complement", decisionCopy.actorComplement, activeActor.complementSpan ?? []]
                         ] as const
                       ).map(([field, label, span]) => (
                         <div className="clause-actor-field" key={field}>
@@ -6073,10 +6566,33 @@ export default function SpanishClauseBuilder({
                             onClick={() => beginActorFieldPick(field)}
                           >
                             {pickingActorField === field
-                              ? "Tap a word below →"
+                              ? language === "es" ? "Selecciona una palabra abajo →" : "Tap a word below →"
                               : `${label}${span.length ? `: ${spanTextFromIds(span)}` : ""}`}
                           </button>
-                          {span.length && field !== "verb" ? (
+                          {field === "subject" && !span.length && !activeActor.subjectImplicit ? (
+                            <button
+                              type="button"
+                              className="clause-participle-host-clear"
+                              onClick={() => setActorAbsence(activeBeginningVerbId, "subject")}
+                            >
+                              {decisionCopy.actorSubjectImplicit}
+                            </button>
+                          ) : null}
+                          {field === "object" &&
+                          !span.length &&
+                          !activeActor.complementSpan?.length &&
+                          !activeActor.objectAbsent ? (
+                            <button
+                              type="button"
+                              className="clause-participle-host-clear"
+                              onClick={() => setActorAbsence(activeBeginningVerbId, "object")}
+                            >
+                              {decisionCopy.actorObjectAbsent}
+                            </button>
+                          ) : null}
+                          {(span.length ||
+                            (field === "subject" && activeActor.subjectImplicit) ||
+                            (field === "object" && activeActor.objectAbsent)) && field !== "verb" ? (
                             <button
                               type="button"
                               className="clause-participle-host-clear"
@@ -6098,7 +6614,9 @@ export default function SpanishClauseBuilder({
                             ? "Quién actúa — tap the subject (shift-click for a span)."
                             : pickingActorField === "verb"
                               ? "Qué hace — tap the verb (defaults to the finite verb; retap to change)."
-                              : "Sobre quién o qué — tap the object or receptor (optional; shift-click for a span)."}
+                              : pickingActorField === "complement"
+                                ? "Atributo del sujeto — selecciona lo que se afirma del sujeto."
+                                : "Sobre quién o qué — tap the object or receptor (optional; shift-click for a span)."}
                         </p>
                         {verses
                           .filter(v => v.chapter === activeBeginningRow.finiteVerb.chapter)
@@ -6111,7 +6629,9 @@ export default function SpanishClauseBuilder({
                                 ? activeActor.subjectSpan
                                 : pickingActorField === "verb"
                                   ? activeActor.verbSpan
-                                  : activeActor.objectSpan
+                                  : pickingActorField === "complement"
+                                    ? activeActor.complementSpan ?? []
+                                    : activeActor.objectSpan
                             );
                             return (
                               <p
@@ -6857,7 +7377,7 @@ export default function SpanishClauseBuilder({
                 Manual trunk — what Generate will print as ####. Grammar can still be
                 “content of said.” An H4 badge on a nested row in the tree below is the
                 same decision. Use Auto / Stand as H4 / Keep nested on the clause card
-                if the auto call is wrong. Do not change Q2 to force a heading.
+                if the automatic decision is wrong. Do not change the grammatical relationship merely to force a heading.
               </p>
               {outline.length ? (
                 <ol className="clause-outline-h4-list">
@@ -6882,7 +7402,7 @@ export default function SpanishClauseBuilder({
                   })}
                 </ol>
               ) : (
-                <p className="clause-output-empty">No outline H4s yet — finish Q1–Q3 and mood marks.</p>
+                <p className="clause-output-empty">No outline H4s yet — finish clause relationships and mood marks.</p>
               )}
             </details>
 

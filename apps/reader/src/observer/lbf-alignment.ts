@@ -46,12 +46,8 @@ interface ReverseLinkUnit {
   surface: string;
   charStart: number;
   charEnd: number;
+  /** Reader-basis ids (SBLGNT/MorphGNT), already passed through the published TR bridge. */
   sourceTokenIds: string[];
-  /**
-   * Stable token ids from the approved alignment. Older artifacts also retain
-   * sourceTokenIds, whose positions can predate a token-bridge correction.
-   */
-  canonicalSourceTokenIds?: string[];
 }
 
 interface ReverseLinkRecord {
@@ -61,10 +57,6 @@ interface ReverseLinkRecord {
 
 interface ReverseLinkFile {
   links: ReverseLinkRecord[];
-}
-
-function approvedSourceTokenIds(unit: ReverseLinkUnit): string[] {
-  return unit.canonicalSourceTokenIds?.length ? unit.canonicalSourceTokenIds : unit.sourceTokenIds ?? [];
 }
 
 const cacheByBook = new Map<
@@ -182,7 +174,10 @@ function reverseLinksToRecords(data: ReverseLinkFile, bookId: ReaderBookId): Lbf
       if (!anchorWords.length) continue;
       const anchor = preferFirstWord(anchorWords[0]?.text ?? "") ? anchorWords[0]!.index : anchorWords[anchorWords.length - 1]!.index;
 
-      for (const sourceTokenId of approvedSourceTokenIds(unit)) {
+      // Structure's clickable Greek row is MorphGNT/SBLGNT. Do not substitute
+      // canonicalSourceTokenIds here: those are TR-basis ids and their ordinal
+      // token numbers are not interchangeable with the Reader row.
+      for (const sourceTokenId of unit.sourceTokenIds ?? []) {
         const token = tokenFromSourceTokenId(bookId, sourceTokenId);
         if (!token || token.chapter !== chapter || token.verse !== verse) continue;
         records.set(`${chapter}:${verse}:${token.token}`, {
@@ -226,7 +221,7 @@ function reverseLinksToSourceUnits(data: ReverseLinkFile, bookId: ReaderBookId):
       const anchor = preferFirstWord(anchorWords[0]?.text ?? "") ? anchorWords[0]!.index : anchorWords[anchorWords.length - 1]!.index;
       const wordIndexes = anchorWords.map(word => word.index);
 
-      for (const sourceTokenId of approvedSourceTokenIds(unit)) {
+      for (const sourceTokenId of unit.sourceTokenIds ?? []) {
         const token = tokenFromSourceTokenId(bookId, sourceTokenId);
         if (!token || token.chapter !== chapter || token.verse !== verse) continue;
         const entries = tokenUnits.get(sourceTokenId) ?? [];

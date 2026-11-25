@@ -66,6 +66,66 @@ test("Hebrew lexical subordinators work even when OSHB retains a preposition tag
   assert.equal(detectLeadingFrameType(tokens, "1:2:2"), "purpose");
 });
 
+test("Greek hosper proposes a comparison and targets its houtos correlative", () => {
+  const comparison = clause("1:1:5", [
+    token("1:1:1", "ὥσπερ", "ὥσπερ", "C---------"),
+    token("1:1:2", "γὰρ", "γάρ", "C---------"),
+    token("1:1:5", "ἠπειθήσατε", "ἀπειθέω", "V-2AAI-P--")
+  ], "ἀπειθέω", 1);
+  const coordinated = clause("1:1:10", [
+    token("1:1:9", "δὲ", "δέ", "C---------"),
+    token("1:1:10", "ἠλεήθητε", "ἐλεάω", "V-2API-P--")
+  ], "ἐλεάω", 1);
+  const correlative = clause("1:2:5", [
+    token("1:2:1", "οὕτως", "οὕτως", "D---------"),
+    token("1:2:5", "ἠπείθησαν", "ἀπειθέω", "V-3AAI-P--")
+  ], "ἀπειθέω", 2);
+
+  const signal = detectClauseSignal(comparison, [comparison, coordinated, correlative]);
+  assert.equal(signal.kind, "confident");
+  if (signal.kind === "confident" && signal.choice === "frame") {
+    assert.equal(signal.frameType, "comparison");
+    assert.equal(signal.target, correlative.finiteVerbId);
+  } else {
+    assert.fail("Expected a confident comparison-frame signal");
+  }
+  assert.equal(detectLeadingFrameType(comparison.beginningTokens, comparison.finiteVerbId), "comparison");
+});
+
+test("Greek achri hou is temporal as a compound and not an ordinary relative", () => {
+  const previous = clause("1:1:10", [token("1:1:10", "γέγονεν", "γίνομαι", "V-3RAI-S--")]);
+  const current = clause("1:1:15", [
+    token("1:1:11", "ἄχρι", "ἄχρι", "R---------"),
+    token("1:1:12", "οὗ", "ὅς", "RR----GSM-"),
+    token("1:1:15", "εἰσέλθῃ", "εἰσέρχομαι", "V-3AAS-S--")
+  ]);
+  const signal = detectClauseSignal(current, [previous, current]);
+  assert.equal(signal.kind, "confident");
+  if (signal.kind === "confident" && signal.choice === "frame") {
+    assert.equal(signal.frameType, "time");
+    assert.equal(signal.target, previous.finiteVerbId);
+  } else {
+    assert.fail("Expected a confident temporal-frame signal");
+  }
+  assert.equal(detectLeadingFrameType(current.beginningTokens, current.finiteVerbId), "time");
+});
+
+test("a matrix verb after an embedded condition is not itself classified as conditional", () => {
+  const child = clause("1:1:5", [
+    token("1:1:3", "ἐὰν", "ἐάν", "C---------"),
+    token("1:1:4", "μὴ", "μή", "D---------"),
+    token("1:1:5", "ἐπιμένωσι", "ἐπιμένω", "V-3PAS-P--")
+  ]);
+  const matrix = clause("1:1:8", [
+    token("1:1:2", "δέ", "δέ", "C---------"),
+    token("1:1:3", "ἐὰν", "ἐάν", "C---------"),
+    token("1:1:4", "μὴ", "μή", "D---------"),
+    token("1:1:5", "ἐπιμένωσι", "ἐπιμένω", "V-3PAS-P--"),
+    token("1:1:8", "ἐγκεντρισθήσονται", "ἐγκεντρίζω", "V-3FPI-P--")
+  ]);
+  assert.equal(detectClauseSignal(matrix, [child, matrix]).kind, "none");
+});
+
 test("Hebrew ki remains ambiguous but leans content after a saying verb", () => {
   const previous = clause("1:1:1", [token("1:1:1", "אָמַר", "559", "HVqp3ms")], "559", 1);
   const current = clause("1:2:2", [

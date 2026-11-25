@@ -117,6 +117,8 @@ const RELATION_TYPE_GENDER: Record<string, GenderInfo> = {
   reason: { indefiniteArticle: "una", definiteArticle: "la", noun: "razón", adjectiveEnding: "a" },
   condition: { indefiniteArticle: "una", definiteArticle: "la", noun: "condición", adjectiveEnding: "a" },
   time: { indefiniteArticle: "un", definiteArticle: "el", noun: "tiempo", adjectiveEnding: "o" },
+  result: { indefiniteArticle: "un", definiteArticle: "el", noun: "resultado", adjectiveEnding: "o" },
+  comparison: { indefiniteArticle: "una", definiteArticle: "la", noun: "comparación", adjectiveEnding: "a" },
   content: { indefiniteArticle: "un", definiteArticle: "el", noun: "contenido", adjectiveEnding: "o" },
   describes: { indefiniteArticle: "una", definiteArticle: "la", noun: "descripción", adjectiveEnding: "a" }
 };
@@ -386,6 +388,10 @@ function subordinatingLine(
       return parent
         ? `${word}[^${hebrew ? "ki" : "hoste"}] introduce el resultado de ${parent}.`
         : `${word}[^${hebrew ? "ki" : "hoste"}] introduce el resultado.`;
+    case "comparison":
+      return parent
+        ? `${word}[^${hebrew ? "kaasher" : "hosper"}] introduce una comparación con ${parent}.`
+        : `${word}[^${hebrew ? "kaasher" : "hosper"}] introduce una comparación.`;
     default:
       // No connector comment when none is visible — silence, not a generic note.
       return "";
@@ -841,6 +847,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
         const core = new Set<string>([
           ...subject,
           ...(stored?.objectSpan ?? []),
+          ...(stored?.complementSpan ?? []),
           ...(stored?.verbSpan ?? [])
         ]);
         const ids = assignment.selectedSpan;
@@ -1187,10 +1194,10 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     const verb = actorSpanText(
       stored?.verbSpan?.length ? stored.verbSpan : defaultVerbSpan(finiteVerbId)
     );
-    const object = actorSpanText(stored?.objectSpan ?? []);
-    if (!formatActorTriple(subject, verb, object)) return "";
-    return object
-      ? `${scripture(subject)} → ${scripture(verb)} → ${scripture(object)}`
+    const tail = actorSpanText(stored?.objectSpan ?? []) || actorSpanText(stored?.complementSpan ?? []);
+    if (!formatActorTriple(subject, verb, tail)) return "";
+    return tail
+      ? `${scripture(subject)} → ${scripture(verb)} → ${scripture(tail)}`
       : `${scripture(subject)} → ${scripture(verb)}`;
   }
 
@@ -1201,9 +1208,9 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     const verb = actorSpanText(
       stored?.verbSpan?.length ? stored.verbSpan : defaultVerbSpan(finiteVerbId)
     );
-    const object = actorSpanText(stored?.objectSpan ?? []);
-    if (!formatActorTriple(subject, verb, object)) return "";
-    return object ? `${scripture(verb)} → ${scripture(object)}` : `${scripture(verb)}`;
+    const tail = actorSpanText(stored?.objectSpan ?? []) || actorSpanText(stored?.complementSpan ?? []);
+    if (!formatActorTriple(subject, verb, tail)) return "";
+    return tail ? `${scripture(verb)} → ${scripture(tail)}` : `${scripture(verb)}`;
   }
 
   // Participle emission: same-verse clause attachment only (mechanical).
@@ -1602,6 +1609,11 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
               return {
                 antecedentText: null,
                 explanations: [parent ? `Introduce el resultado de ${parent}.` : "Introduce el resultado."]
+              };
+            case "comparison":
+              return {
+                antecedentText: null,
+                explanations: [parent ? `Establece una comparación con ${parent}.` : "Establece una comparación."]
               };
             default:
               return { antecedentText: null, explanations: [] };

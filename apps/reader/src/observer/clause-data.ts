@@ -426,6 +426,25 @@ function isFiniteMorphTag(morph: string): boolean {
   return /^V-[123]/.test(morph) || isOshbFiniteVerb(morph);
 }
 
+// MorphGNT tags these fossilized imperatival forms as particles (X), although
+// they function as verbal commands and anchor a clause in discourse.
+const LEXICAL_CLAUSE_HEADS = new Set(["ἴδε", "ἰδού"]);
+
+/** Every finite verb supplied by the source morphology, independent of user marks. */
+export function readMorphologicalFiniteVerbIds(
+  bookId: ReaderBookId = getWorkshopBookId()
+): Set<string> {
+  const oshb = readerBookHasOshb(bookId);
+  return new Set(
+    parseTokenRows(bookId)
+      .filter(row => isFiniteMorphTag(row.morph) || LEXICAL_CLAUSE_HEADS.has(row.lemma.trim()))
+      .map(row => {
+        const mapped = oshb ? mtToProtestant(bookId, row.ch, row.vs) : { chapter: row.ch, verse: row.vs };
+        return finiteAlignmentId(mapped.chapter, mapped.verse, row.tok);
+      })
+  );
+}
+
 function parseFiniteAlignments(bookId: ReaderBookId = getWorkshopBookId()): FiniteAlignment[] {
   const nominalHeadIds = readNominalClauseHeadIds(bookId);
   const oshb = readerBookHasOshb(bookId);
@@ -885,10 +904,16 @@ export function writeParticipleSubjectHosts(
 export type ClauseActorObservation = {
   /** Quién actúa — Spanish word ids. */
   subjectSpan: string[];
+  /** The actor is grammatically present in the verb but not written separately. */
+  subjectImplicit?: boolean;
   /** Qué hace — defaults to the finite verb’s Spanish word. */
   verbSpan: string[];
   /** Sobre quién/qué recae — optional. */
   objectSpan: string[];
+  /** Attribute / subject complement after a copular verb (ser, estar, parecer). */
+  complementSpan?: string[];
+  /** The clause has been checked and has no explicit object/recipient. */
+  objectAbsent?: boolean;
 };
 
 export type ClauseActors = Record<string, ClauseActorObservation>;
@@ -910,8 +935,18 @@ export function readClauseActors(bookId: ReaderBookId = getWorkshopBookId()): Cl
       const subjectSpan = sanitizeIdSpan(row.subjectSpan);
       const verbSpan = sanitizeIdSpan(row.verbSpan);
       const objectSpan = sanitizeIdSpan(row.objectSpan);
-      if (!subjectSpan.length && !verbSpan.length && !objectSpan.length) continue;
-      actors[key] = { subjectSpan, verbSpan, objectSpan };
+      const complementSpan = sanitizeIdSpan(row.complementSpan);
+      const subjectImplicit = row.subjectImplicit === true;
+      const objectAbsent = row.objectAbsent === true;
+      if (
+        !subjectSpan.length &&
+        !verbSpan.length &&
+        !objectSpan.length &&
+        !complementSpan.length &&
+        !subjectImplicit &&
+        !objectAbsent
+      ) continue;
+      actors[key] = { subjectSpan, subjectImplicit, verbSpan, objectSpan, complementSpan, objectAbsent };
     }
     return actors;
   } catch {
@@ -1663,7 +1698,8 @@ export function deriveSpanishSpanFromGreekRange(
   startToken: number,
   endToken: number,
   verseWords: SpanishWord[],
-  bookId: ReaderBookId = getWorkshopBookId()
+  bookId: ReaderBookId = getWorkshopBookId(),
+  verseText?: string
 ): string[] {
   const tokenToWord = buildVerseTokenWordMap(chapter, verse, verseWords, bookId);
   const multi = loadLbfTokenWordIndexes(chapter, verse, bookId);
@@ -1682,6 +1718,72 @@ export function deriveSpanishSpanFromGreekRange(
   let low = Math.min(...wordIndexes);
   let high = Math.max(...wordIndexes);
   ({ low, high } = expandAlignedPhrases(low, high, verseWords, chapter, verse, startToken, endToken, bookId));
+
+  // Approved translations can contain words with no Reader-token bridge of
+  // their own. This is common when the LBF renders one source expression
+  // idiomatically: μὴ ὑψηλὰ φρόνει becomes «No seas arrogante», while only
+  // «No» has a bridged SBLGNT token; «seas arrogante» is an approved but
+  // unbridged alignment unit. Keep those edge words with the clause by
+  // extending to the nearest Spanish word claimed by a token outside the
+  // Greek range. This also preserves articles and auxiliary verbs without
+  // weakening Greek as the authoritative boundary.
+  const outsideWordIndexes = new Set<number>();
+  for (const [token, wordIndex] of tokenToWord) {
+    if (token >= startToken && token <= endToken) continue;
+    const many = multi.get(token);
+    if (many?.length) {
+      for (const index of many) outsideWordIndexes.add(index);
+    } else {
+      outsideWordIndexes.add(wordIndex);
+    }
+  }
+  if (verseText) {
+    const previousOutside = Math.max(-1, ...Array.from(outsideWordIndexes).filter(index => index < low));
+    const nextOutside = Math.min(
+      verseWords.length,
+      ...Array.from(outsideWordIndexes).filter(index => index > high)
+    );
+    const originalLow = low;
+    const originalHigh = high;
+    const previousEnd = previousOutside >= 0 ? verseWords[previousOutside]?.endChar ?? 0 : 0;
+    const currentStart = verseWords[originalLow]?.startChar ?? previousEnd;
+    const backwardGap = verseText.slice(previousEnd, currentStart);
+    const lastBoundaryOffset = Math.max(
+      backwardGap.lastIndexOf(","),
+      backwardGap.lastIndexOf(";"),
+      backwardGap.lastIndexOf(":"),
+      backwardGap.lastIndexOf("."),
+      backwardGap.lastIndexOf("?"),
+      backwardGap.lastIndexOf("!")
+    );
+    const backwardBoundary = lastBoundaryOffset >= 0 ? previousEnd + lastBoundaryOffset : previousEnd;
+    const expandedLow = verseWords.findIndex(
+      (word, index) => index > previousOutside && index <= originalLow && word.startChar >= backwardBoundary
+    );
+    if (expandedLow >= 0) low = expandedLow;
+
+    const currentEnd = verseWords[originalHigh]?.endChar ?? 0;
+    const nextStart = nextOutside < verseWords.length
+      ? verseWords[nextOutside]?.startChar ?? verseText.length
+      : verseText.length;
+    const forwardGap = verseText.slice(currentEnd, nextStart);
+    const boundaryOffsets = [",", ";", ":", ".", "?", "!"]
+      .map(mark => forwardGap.indexOf(mark))
+      .filter(offset => offset >= 0);
+    const forwardBoundary = boundaryOffsets.length
+      ? currentEnd + Math.min(...boundaryOffsets)
+      : nextStart;
+    const forwardBoundaryConnectors = new Set(["y", "e", "o", "u", "pero", "sino", "pues"]);
+    for (let index = originalHigh + 1; index < nextOutside; index += 1) {
+      const word = verseWords[index];
+      if (!word || word.endChar > forwardBoundary) break;
+      // An unbridged coordinator at the right edge opens the following
+      // clause; do not let both adjacent Greek ranges claim it. The backward
+      // expansion of the following range will retain it there.
+      if (index === originalHigh + 1 && forwardBoundaryConnectors.has(normalizeSpanishWord(word.text))) break;
+      high = index;
+    }
+  }
 
   // Clamp to the verse. A word index past the last word is not a word: the Compiler drops
   // it silently, so the damage is invisible until a gate counts it — and when EVERY index
@@ -1743,7 +1845,12 @@ export function auditGreekSpanConsistency(
   bookId: ReaderBookId = getWorkshopBookId()
 ): GreekSpanAuditEntry[] {
   const wordsByVerse = new Map<string, SpanishWord[]>();
-  for (const verse of verses) wordsByVerse.set(`${verse.chapter}:${verse.verse}`, verse.words);
+  const textByVerse = new Map<string, string>();
+  for (const verse of verses) {
+    const key = `${verse.chapter}:${verse.verse}`;
+    wordsByVerse.set(key, verse.words);
+    textByVerse.set(key, verse.text);
+  }
 
   const entries: GreekSpanAuditEntry[] = [];
   for (const [finiteVerbId, assignment] of Object.entries(assignments)) {
@@ -1768,7 +1875,8 @@ export function auditGreekSpanConsistency(
           Math.min(start.token, end.token),
           Math.max(start.token, end.token),
           verseWords,
-          bookId
+          bookId,
+          textByVerse.get(`${start.chapter}:${start.verse}`) ?? ""
         );
       }
     }

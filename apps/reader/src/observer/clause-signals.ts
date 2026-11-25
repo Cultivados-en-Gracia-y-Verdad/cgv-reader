@@ -1,8 +1,8 @@
 import type { ClauseBeginningToken } from "./clause-data";
 
-export type FrameType = "time" | "reason" | "condition" | "purpose" | "result";
+export type FrameType = "time" | "reason" | "condition" | "purpose" | "result" | "comparison";
 
-export const FRAME_TYPES: FrameType[] = ["time", "reason", "condition", "purpose", "result"];
+export const FRAME_TYPES: FrameType[] = ["time", "reason", "condition", "purpose", "result", "comparison"];
 
 export interface ClauseSignalInput {
   finiteVerbId: string;
@@ -75,8 +75,54 @@ export const FRAME_PARTICLES: Record<string, FrameType> = {
   "ὅτε": "time",
   "ὡς": "time",
   "ἐπεί": "time",
-  "ὥστε": "result"
+  "ὥστε": "result",
+  "ὥσπερ": "comparison",
+  "καθάπερ": "comparison",
+  "καθώς": "comparison"
 };
+
+const COMPOUND_FRAME_PAIRS: Record<string, FrameType> = {
+  "ἄχρι ὅς": "time",
+  "μέχρι ὅς": "time",
+  "ἕως ὅς": "time",
+  "πρὶν ἤ": "time"
+};
+
+function findCompoundFrame(
+  tokens: ClauseBeginningToken[],
+  finiteVerbId?: string
+): { token: ClauseBeginningToken; frameType: FrameType } | null {
+  const leading = tokens.slice(0, LEADING_WINDOW);
+  for (let index = 0; index < leading.length - 1; index += 1) {
+    const first = leading[index];
+    const second = leading[index + 1];
+    if (!standsBeforeFiniteVerb(tokens, first, finiteVerbId)) continue;
+    const key = `${stripAccentless(first.lemma)} ${stripAccentless(second.lemma)}`;
+    const frameType = COMPOUND_FRAME_PAIRS[key];
+    if (frameType) return { token: first, frameType };
+  }
+  return null;
+}
+
+function tokenOrdinal(id: string): number {
+  return Number(id.split(":")[2] ?? Number.NaN);
+}
+
+function frameBelongsToEmbeddedClause(
+  frameToken: ClauseBeginningToken,
+  clause: ClauseSignalInput,
+  allClauses: ClauseSignalInput[]
+): boolean {
+  const frameOrdinal = tokenOrdinal(frameToken.id);
+  const currentOrdinal = tokenOrdinal(clause.finiteVerbId);
+  if (!Number.isFinite(frameOrdinal) || !Number.isFinite(currentOrdinal)) return false;
+  return allClauses.some(candidate => {
+    if (candidate.finiteVerbId === clause.finiteVerbId) return false;
+    if (candidate.chapter !== clause.chapter || candidate.verse !== clause.verse) return false;
+    const candidateOrdinal = tokenOrdinal(candidate.finiteVerbId);
+    return candidateOrdinal > frameOrdinal && candidateOrdinal < currentOrdinal;
+  });
+}
 
 // ὅτι genuinely introduces both content clauses ("that") and reason clauses
 // ("because") in Greek, and nothing about the word itself disambiguates — it
@@ -277,6 +323,26 @@ function nearestPrecedingClauseId(
   return ordered[index - 1].finiteVerbId;
 }
 
+function comparisonCorrelativeClauseId(
+  clause: ClauseSignalInput,
+  allClauses: ClauseSignalInput[]
+): string | null {
+  const ordered = [...allClauses].sort((a, b) => {
+    const byVerse = clauseOrderKey(a) - clauseOrderKey(b);
+    if (byVerse) return byVerse;
+    return Number(a.finiteVerbId.split(":")[2] ?? 0) - Number(b.finiteVerbId.split(":")[2] ?? 0);
+  });
+  const index = ordered.findIndex(candidate => candidate.finiteVerbId === clause.finiteVerbId);
+  if (index < 0) return null;
+  const following = ordered.slice(index + 1);
+  const correlative = following.find(candidate =>
+    candidate.beginningTokens
+      .slice(0, LEADING_WINDOW)
+      .some(token => stripAccentless(token.lemma) === "οὕτως")
+  );
+  return correlative?.finiteVerbId ?? following[0]?.finiteVerbId ?? null;
+}
+
 // The Greek clause-boundary heuristic sometimes leaves a stray word or two from
 // the *previous* clause's own trailing material (e.g. an object pronoun) at the
 // front of this one's token range — a preposition-phrase complement that never
@@ -370,6 +436,21 @@ export function detectClauseSignal(
   clause: ClauseSignalInput,
   allClauses: ClauseSignalInput[]
 ): ClauseSignal {
+  const compoundFrame = findCompoundFrame(clause.beginningTokens, clause.finiteVerbId);
+  if (compoundFrame) {
+    const target = nearestPrecedingClauseId(clause, allClauses);
+    if (target) {
+      return {
+        kind: "confident",
+        choice: "frame",
+        frameType: compoundFrame.frameType,
+        target,
+        reason:
+          `Opens with the compound connector “${compoundFrame.token.greek} …” — read as one temporal expression, ` +
+          `not as an ordinary relative pronoun.`
+      };
+    }
+  }
   const relative = findLeadingToken(clause.beginningTokens, isRelativeToken, clause.finiteVerbId);
   if (relative) {
     const overImperative = detectRelativeOverImperative(clause);
@@ -405,10 +486,15 @@ export function detectClauseSignal(
   }
 
   const frameToken = findLeadingToken(clause.beginningTokens, isFrameParticle, clause.finiteVerbId);
-  if (frameToken) {
-    const frameLemma = markerLabel(frameToken);
-    const frameType = frameTypeOfToken(frameToken) as FrameType;
-    const target = nearestPrecedingClauseId(clause, allClauses);
+  const usableFrameToken = frameToken && !frameBelongsToEmbeddedClause(frameToken, clause, allClauses)
+    ? frameToken
+    : null;
+  if (usableFrameToken) {
+    const frameLemma = markerLabel(usableFrameToken);
+    const frameType = frameTypeOfToken(usableFrameToken) as FrameType;
+    const target = frameType === "comparison"
+      ? comparisonCorrelativeClauseId(clause, allClauses)
+      : nearestPrecedingClauseId(clause, allClauses);
     if (target) {
       return {
         kind: "confident",
@@ -416,8 +502,8 @@ export function detectClauseSignal(
         frameType,
         target,
         reason:
-          `Opens with “${frameToken.greek}” (${frameLemma}) — that maps straight to a ${frameType} clause, ` +
-          (isHebrewToken(frameToken)
+          `Opens with “${usableFrameToken.greek}” (${frameLemma}) — that maps straight to a ${frameType} clause, ` +
+          (isHebrewToken(usableFrameToken)
             ? `the same particle table a Hebrew grammar would use (אִם → condition, לְמַעַן/פֶן → purpose, יַעַן → reason, כַּאֲשֶׁר → time).`
             : `the same particle table a Greek grammar would use (ἵνα/ὅπως → purpose, γάρ/διότι → reason, and so on).`)
       };
@@ -546,6 +632,8 @@ export function detectLeadingFrameType(
   beginningTokens: ClauseBeginningToken[],
   finiteVerbId?: string
 ): FrameType | undefined {
+  const compound = findCompoundFrame(beginningTokens, finiteVerbId);
+  if (compound) return compound.frameType;
   const frameToken = findLeadingToken(beginningTokens, isFrameParticle, finiteVerbId);
   if (frameToken) return frameTypeOfToken(frameToken);
   const ambiguousToken = findLeadingToken(
@@ -938,7 +1026,8 @@ const FRAME_TYPE_SUBTYPE_ES: Record<FrameType, string> = {
   reason: "razón/fundamento",
   condition: "condición",
   time: "tiempo",
-  result: "resultado"
+  result: "resultado",
+  comparison: "comparación"
 };
 
 export type LeadingMarker =
@@ -957,6 +1046,8 @@ export function findLeadingMarkerToken(
   beginningTokens: ClauseBeginningToken[],
   finiteVerbId?: string
 ): LeadingMarker {
+  const compound = findCompoundFrame(beginningTokens, finiteVerbId);
+  if (compound) return { kind: "frame", token: compound.token, frameType: compound.frameType };
   const relative = findLeadingToken(beginningTokens, isRelativeToken, finiteVerbId);
   if (relative) return { kind: "relative", token: relative };
 
@@ -1040,6 +1131,15 @@ export function detectClauseMarker(
   frameType?: FrameType,
   finiteVerbId?: string
 ): ClauseMarker | null {
+  const compound = findCompoundFrame(beginningTokens, finiteVerbId);
+  if (relation === "frame" && compound) {
+    return {
+      word: compound.token.greek,
+      lemma: stripAccentless(compound.token.lemma),
+      type: "subordinating",
+      subtype: FRAME_TYPE_SUBTYPE_ES[compound.frameType]
+    };
+  }
   // Same tolerant leading-window search detectClauseSignal already uses for
   // relative pronouns/frame particles above — genuinely required here too,
   // not just for consistency: γάρ/δέ/οὖν are postpositive in Greek (they

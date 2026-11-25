@@ -3066,7 +3066,7 @@ button.interlinear-token--pickable:focus-visible {
   color: #23201b;
   font: inherit;
   font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   line-height: 1.35;
   text-align: left;
   cursor: pointer;
@@ -3076,7 +3076,7 @@ button.interlinear-token--pickable:focus-visible {
   display: block;
   color: #82796d;
   font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.94rem;
   line-height: 1.25;
 }
 
@@ -3374,13 +3374,13 @@ button.interlinear-token--pickable:focus-visible {
 }
 
 .clause-decision-btn strong {
-  font-size: 1.12rem;
+  font-size: 1.24rem;
   line-height: 1.35;
 }
 
 .clause-decision-btn span {
   color: #6b706d;
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.35;
 }
 
@@ -3410,18 +3410,13 @@ button.interlinear-token--pickable:focus-visible {
 }
 
 .clause-decision-btn .clause-decision-hover-help {
-  display: none;
+  display: block;
   margin-top: 0.45rem;
   border-top: 1px solid rgba(107, 146, 157, 0.28);
   padding-top: 0.55rem;
   color: #4f5f61;
   font-size: 1rem;
   line-height: 1.5;
-}
-
-.clause-decision-btn:hover .clause-decision-hover-help,
-.clause-decision-btn:focus-visible .clause-decision-hover-help {
-  display: block;
 }
 
 .clause-decision-btn:hover,
@@ -3510,6 +3505,12 @@ button.interlinear-token--pickable:focus-visible {
   font-weight: 750;
 }
 
+.macula-advisory-status {
+  color: #48646b;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
 .macula-advisory-range,
 .macula-advisory-detail {
   color: #5f584e;
@@ -3544,6 +3545,16 @@ button.interlinear-token--pickable:focus-visible {
   color: #6c3328;
   font-size: 1rem;
   line-height: 1.45;
+}
+
+.macula-advisory-unavailable {
+  margin: 0 0 1rem;
+  border-left: 4px solid rgba(107, 146, 157, 0.72);
+  padding: 0.75rem 0.9rem;
+  background: rgba(207, 229, 231, 0.14);
+  color: var(--reader-text, #39342d);
+  font-size: 1.05rem;
+  line-height: 1.5;
 }
 
 /* Unresolved-participle data warning — distinct from the plum participle
@@ -4250,7 +4261,7 @@ button.interlinear-token--pickable:focus-visible {
   margin: 0 0 0.65rem;
   line-height: 1.55;
   font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  font-size: 1.05rem;
+  font-size: 1.2rem;
 }
 
 .clause-subject-host-picker .clause-subject-host-verse--current {
@@ -4317,6 +4328,139 @@ button.interlinear-token--pickable:focus-visible {
   color: var(--reader-text, #23201b);
 }
 
+.macula-grammar-proposals {
+  margin: 0.85rem 0 1rem;
+  border: 1px solid rgba(107, 146, 157, 0.62);
+  border-radius: 10px;
+  padding: 0.8rem 0.9rem;
+  background: rgba(207, 229, 231, 0.18);
+  color: var(--reader-text, #23201b);
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.macula-grammar-proposals > summary {
+  color: #294f59;
+  font-size: 1.1rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.macula-grammar-proposals[open] > summary {
+  margin-bottom: 0.65rem;
+}
+
+.macula-grammar-proposals p {
+  margin: 0.4rem 0;
+}
+
+.macula-grammar-caution {
+  border-left: 3px solid #b5891d;
+  padding-left: 0.7rem;
+  font-weight: 650;
+}
+
+.macula-grammar-status,
+.macula-grammar-difference {
+  color: #5f584e;
+  font-size: 1rem;
+}
+
+.macula-grammar-proposal-list {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.8rem;
+}
+
+.macula-grammar-proposal {
+  border: 1px solid rgba(107, 146, 157, 0.4);
+  border-radius: 8px;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.macula-grammar-proposal-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 0.8rem;
+}
+
+.macula-grammar-proposal-heading strong {
+  color: #294f59;
+  font-size: 1.08rem;
+}
+
+.macula-grammar-proposal-heading span {
+  color: #686158;
+  font-size: 1rem;
+}
+
+.macula-grammar-target {
+  display: block;
+  margin-top: 0.55rem;
+  color: var(--reader-text, #23201b);
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 650;
+}
+
+.macula-grammar-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.7rem;
+}
+
+.macula-grammar-use,
+.macula-grammar-change {
+  border: 1px solid #6b929d;
+  border-radius: 8px;
+  padding: 0.62rem 0.85rem;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.macula-grammar-use {
+  background: #294f59;
+  color: #fff;
+}
+
+.macula-grammar-change {
+  background: transparent;
+  color: #294f59;
+}
+
+.macula-grammar-use:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.macula-grammar-use:not(:disabled):hover,
+.macula-grammar-use:not(:disabled):focus-visible,
+.macula-grammar-change:hover,
+.macula-grammar-change:focus-visible {
+  outline: 2px solid rgba(107, 146, 157, 0.38);
+  outline-offset: 2px;
+}
+
+.macula-grammar-confirmed {
+  color: #49663d;
+  font-size: 1rem;
+  font-weight: 750;
+}
+
+.macula-grammar-unavailable {
+  color: #8a3f32;
+  font-size: 1rem;
+  font-weight: 650;
+}
+
 .clause-actor-fields {
   display: flex;
   flex-direction: column;
@@ -4368,7 +4512,7 @@ button.interlinear-token--pickable:focus-visible {
 .clause-actor-flow-actor {
   margin: 0 0 0.25rem;
   font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.94rem;
   font-weight: 700;
   letter-spacing: 0.04em;
 }
