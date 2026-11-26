@@ -163,6 +163,8 @@ export interface WorkshopProgressKeys {
   participleSubjectHosts: string;
   /** Per finite clause: subject / verb / object spans (SVO actor observations). */
   clauseActors: string;
+  /** Dataset-bound grammatical roles; kept separate from legacy semantic-actor observations. */
+  clauseGrammar: string;
   /** H3 flow: accepted development breaks + ignored suggestions. */
   h3Flow: string;
   /** Student-marked contrast pairs (poleA / poleB on a verse). */
@@ -192,6 +194,7 @@ export function workshopProgressKeys(bookId: ReaderBookId): WorkshopProgressKeys
     participleObservations: `the-reader:spanish-clause-builder:${s}:participles:v1`,
     participleSubjectHosts: `the-reader:spanish-clause-builder:${s}:participle-subjects:v1`,
     clauseActors: `the-reader:spanish-clause-builder:${s}:clause-actors:v1`,
+    clauseGrammar: `the-reader:spanish-clause-builder:${s}:clause-grammar:v2`,
     h3Flow: `the-reader:spanish-clause-builder:${s}:h3-flow:v1`,
     contrasts: `the-reader:spanish-clause-builder:${s}:contrasts:v1`,
     bookDefinitions: `the-reader:spanish-clause-builder:${s}:book-definitions:v1`,

@@ -40,6 +40,7 @@ import {
   readBookDefinitions,
   readBookThread,
   readClauseActors,
+  readClauseGrammar,
   readClauseAssignments,
   readClauseObservations,
   readContrastObservations,
@@ -663,6 +664,7 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
   const participleMarkedAlignmentIds = readMarkedAlignmentIds(progressKeys.participleMarks, bookId);
   const participleSubjectHosts = readParticipleSubjectHosts(bookId);
   const clauseActors = readClauseActors(bookId);
+  const clauseGrammar = readClauseGrammar(bookId);
 
   const clauses: CompilerClause[] = [];
   for (const finiteVerb of finiteVerbs) {
@@ -842,13 +844,17 @@ export function generateManualSkeleton(metaOrOptions?: ManualMeta | GenerateManu
     // 1B actor-core peel (NT and OT): H4 = subject (+ object); remainder → trailing +.
     if (nominalHeadIds.has(finiteVerbId)) {
       const stored = clauseActors[finiteVerbId];
-      const subject = stored?.subjectSpan ?? [];
+      const grammar = clauseGrammar[finiteVerbId];
+      const subject = grammar?.grammaticalSubjectSpan?.length
+        ? grammar.grammaticalSubjectSpan
+        : stored?.subjectSpan ?? [];
       if (subject.length) {
         const core = new Set<string>([
           ...subject,
-          ...(stored?.objectSpan ?? []),
-          ...(stored?.complementSpan ?? []),
-          ...(stored?.verbSpan ?? [])
+          ...(grammar?.directObjectSpan ?? stored?.objectSpan ?? []),
+          ...(grammar?.indirectObjectSpan ?? []),
+          ...(grammar?.predicateAttributeSpan ?? stored?.complementSpan ?? []),
+          ...(grammar?.verbSpan ?? stored?.verbSpan ?? [])
         ]);
         const ids = assignment.selectedSpan;
         const claimIds = ids.filter(id => core.has(id));

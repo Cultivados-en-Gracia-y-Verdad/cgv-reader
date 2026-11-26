@@ -149,8 +149,14 @@ this field** or **Choose different words**. Opening the proposal never writes pr
 it never changes a clause span, classification, dependency, or published advisory.
 
 The interface must state that a grammatical subject is not necessarily the semantic actor. In a
-passive clause the grammatical subject may receive the action. Therefore the proposal is evidence
-beside the existing “who acts” field, not an unreviewed automatic actor assignment.
+passive clause the grammatical subject may receive the action. Grammatical roles therefore live in
+a dataset-bound v2 progress record separate from the legacy “who acts” observations. Existing actor
+records remain intact and require explicit grammatical review; they are never silently migrated.
+
+The grammatical pass records the subject (explicit, implicit, or genuinely absent in an impersonal
+clause), predicate mode (active, middle/reflexive, passive, copular, or impersonal), direct object, indirect object/recipient, predicate
+attribute, or an explicit finding that none of those complements is written. Semantic actor remains
+a separate, optional discourse observation and is not required to complete grammatical analysis.
 
 ## Visual language
 
@@ -221,6 +227,7 @@ The improvement is ready when:
 - no hint or verification action mutates progress;
 - grammatical-role proposals quote reviewed TR1894 words and require an explicit learner confirmation;
 - a raw MACULA grammatical subject is never silently equated with the semantic actor;
+- legacy “who acts” observations remain separate until the learner explicitly reviews them;
 - exact, adapted, TR-native, and no-syntax states render differently;
 - raw token IDs are absent from the ordinary learning view;
 - existing progress resolves to the same clause tree;

@@ -1,5 +1,6 @@
 import type { BibleVerse } from "cgv-bible";
 import {
+  CGV_DATASET_PROVENANCE,
   getReaderBookInfo,
   readerBookHasOshb,
   workshopProgressKeys,
@@ -959,6 +960,173 @@ export function writeClauseActors(
   bookId: ReaderBookId = getWorkshopBookId()
 ): void {
   window.localStorage.setItem(progressKeys(bookId).clauseActors, JSON.stringify(actors));
+}
+
+export const CLAUSE_GRAMMAR_PROGRESS_SCHEMA = "cgv.clause-grammar-progress";
+export const CLAUSE_GRAMMAR_PROGRESS_VERSION = 2;
+
+export type ClausePredicateMode =
+  | "active"
+  | "middle-reflexive"
+  | "passive"
+  | "copular"
+  | "impersonal"
+  | "unsure";
+
+/**
+ * Learner-confirmed grammatical roles for one finite clause.
+ * This deliberately does not reuse ClauseActorObservation: grammatical
+ * subject and semantic actor are different witnesses in passive clauses.
+ */
+export type ClauseGrammarObservation = {
+  grammaticalSubjectSpan: string[];
+  subjectImplicit?: boolean;
+  /** A genuinely impersonal clause, not a merely unexpressed subject. */
+  subjectAbsent?: boolean;
+  verbSpan: string[];
+  predicateMode?: ClausePredicateMode;
+  directObjectSpan: string[];
+  indirectObjectSpan: string[];
+  predicateAttributeSpan: string[];
+  /** The learner checked the predicate and found none of the three explicit complements. */
+  noExplicitComplements?: boolean;
+};
+
+export type ClauseGrammarObservations = Record<string, ClauseGrammarObservation>;
+
+type ClauseGrammarProgressStore = {
+  schema: typeof CLAUSE_GRAMMAR_PROGRESS_SCHEMA;
+  schemaVersion: typeof CLAUSE_GRAMMAR_PROGRESS_VERSION;
+  datasetId: string;
+  datasetVersion: string;
+  bookId: ReaderBookId;
+  observations: ClauseGrammarObservations;
+};
+
+const PREDICATE_MODES = new Set<ClausePredicateMode>([
+  "active",
+  "middle-reflexive",
+  "passive",
+  "copular",
+  "impersonal",
+  "unsure"
+]);
+
+function sanitizeClauseGrammarObservations(raw: unknown): ClauseGrammarObservations {
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return {};
+  const observations: ClauseGrammarObservations = {};
+  for (const [finiteVerbId, value] of Object.entries(raw)) {
+    if (!value || typeof value !== "object" || Array.isArray(value)) continue;
+    const row = value as Record<string, unknown>;
+    const grammaticalSubjectSpan = sanitizeIdSpan(row.grammaticalSubjectSpan);
+    const verbSpan = sanitizeIdSpan(row.verbSpan);
+    const directObjectSpan = sanitizeIdSpan(row.directObjectSpan);
+    const indirectObjectSpan = sanitizeIdSpan(row.indirectObjectSpan);
+    const predicateAttributeSpan = sanitizeIdSpan(row.predicateAttributeSpan);
+    const subjectImplicit = row.subjectImplicit === true;
+    const subjectAbsent = row.subjectAbsent === true;
+    const noExplicitComplements = row.noExplicitComplements === true;
+    const predicateMode = typeof row.predicateMode === "string" &&
+      PREDICATE_MODES.has(row.predicateMode as ClausePredicateMode)
+      ? row.predicateMode as ClausePredicateMode
+      : undefined;
+    if (
+      !grammaticalSubjectSpan.length &&
+      !verbSpan.length &&
+      !directObjectSpan.length &&
+      !indirectObjectSpan.length &&
+      !predicateAttributeSpan.length &&
+      !subjectImplicit &&
+      !subjectAbsent &&
+      !predicateMode &&
+      !noExplicitComplements
+    ) {
+      continue;
+    }
+    observations[finiteVerbId] = {
+      grammaticalSubjectSpan,
+      subjectImplicit,
+      subjectAbsent,
+      verbSpan,
+      predicateMode,
+      directObjectSpan,
+      indirectObjectSpan,
+      predicateAttributeSpan,
+      noExplicitComplements
+    };
+  }
+  return observations;
+}
+
+/**
+ * Fail closed across dataset changes: word ids address one exact published
+ * LBF dataset and are not reinterpreted against a newer release.
+ */
+export type ClauseGrammarReadResult = {
+  observations: ClauseGrammarObservations;
+  issue: string | null;
+};
+
+export function readClauseGrammarProgress(
+  bookId: ReaderBookId = getWorkshopBookId()
+): ClauseGrammarReadResult {
+  try {
+    const stored = window.localStorage.getItem(progressKeys(bookId).clauseGrammar);
+    if (!stored) return { observations: {}, issue: null };
+    const parsed = JSON.parse(stored) as Partial<ClauseGrammarProgressStore>;
+    if (
+      parsed.schema !== CLAUSE_GRAMMAR_PROGRESS_SCHEMA ||
+      parsed.schemaVersion !== CLAUSE_GRAMMAR_PROGRESS_VERSION
+    ) {
+      return {
+        observations: {},
+        issue: "Saved grammatical-role progress uses an unsupported schema and was not loaded."
+      };
+    }
+    if (parsed.bookId !== bookId) {
+      return {
+        observations: {},
+        issue: `Saved grammatical-role progress belongs to ${String(parsed.bookId)}, not ${bookId}.`
+      };
+    }
+    if (
+      parsed.datasetId !== CGV_DATASET_PROVENANCE.id ||
+      parsed.datasetVersion !== CGV_DATASET_PROVENANCE.gitCommit
+    ) {
+      return {
+        observations: {},
+        issue:
+          "Saved grammatical-role progress belongs to a different cgv-data release. It was preserved but not reinterpreted."
+      };
+    }
+    return { observations: sanitizeClauseGrammarObservations(parsed.observations), issue: null };
+  } catch {
+    return {
+      observations: {},
+      issue: "Saved grammatical-role progress is malformed and was not loaded."
+    };
+  }
+}
+
+export function readClauseGrammar(
+  bookId: ReaderBookId = getWorkshopBookId()
+): ClauseGrammarObservations {
+  return readClauseGrammarProgress(bookId).observations;
+}
+
+export function writeClauseGrammar(
+  observations: ClauseGrammarObservations,
+  bookId: ReaderBookId = getWorkshopBookId()
+): void {
+  const store: ClauseGrammarProgressStore = {
+    schema: CLAUSE_GRAMMAR_PROGRESS_SCHEMA,
+    schemaVersion: CLAUSE_GRAMMAR_PROGRESS_VERSION,
+    datasetId: CGV_DATASET_PROVENANCE.id,
+    datasetVersion: CGV_DATASET_PROVENANCE.gitCommit,
+    bookId,
+    observations: sanitizeClauseGrammarObservations(observations)
+  };
+  window.localStorage.setItem(progressKeys(bookId).clauseGrammar, JSON.stringify(store));
 }
 
 export function readH3FlowState(bookId: ReaderBookId = getWorkshopBookId()): H3FlowState {
