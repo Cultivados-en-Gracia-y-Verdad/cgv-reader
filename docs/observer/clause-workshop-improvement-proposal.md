@@ -143,9 +143,14 @@ its attachment status and, for exact or adapted MACULA evidence, the source role
 ids. It must be checksum-bound both to the source token spine and to the exact published LBF text;
 either mismatch makes the entire advisory unavailable.
 
-The learner opens the proposal, inspects the quoted TR1894 words, and explicitly chooses **Use in
-this field** or **Choose different words**. Opening the proposal never writes progress. The explicit
-**Use** action may write only that learner-owned subject, object/recipient, or attribute observation;
+The grammar panel is proposal-first. Published Greek morphology may suggest active, middle,
+passive, or the high-confidence copular use of εἰμί. Reviewed advisory data may suggest subject,
+object/recipient, or predicate-attribute spans. Existing “who acts” observations may be displayed as
+clearly labeled starting proposals, but they are never silently reinterpreted as grammatical roles.
+
+The learner inspects the evidence and explicitly chooses **Confirm this suggestion** or **Choose
+different words**. Displaying a suggestion never writes progress. The explicit **Confirm** action may
+write only that learner-owned predicate-mode, subject, object/recipient, or attribute observation;
 it never changes a clause span, classification, dependency, or published advisory.
 
 The interface must state that a grammatical subject is not necessarily the semantic actor. In a
