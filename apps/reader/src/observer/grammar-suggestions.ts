@@ -27,11 +27,16 @@ export function suggestPredicateMode(
     return { mode: "copular", evidence: "copular-lemma" };
   }
 
-  // MorphGNT finite tags use V- + person, tense, voice, mood. For example,
-  // V-1PAI-S-- has active voice at index 4. Participles and infinitives are
-  // excluded because this panel describes the finite-clause predicate.
-  if (!/^V-.{3}[ISOM]/.test(morph)) return null;
-  const voice = morph.charAt(4);
+  // Both published NT tag forms put voice and mood at the end of the first
+  // non-empty verb segment:
+  //   MorphGNT token spine: V-1PAI-S--
+  //   Reader interlinear:  V-PAI-1S
+  // Non-finite forms such as V--PAN---- have an empty first segment and are
+  // deliberately excluded from this finite-predicate proposal.
+  const finiteCode = morph.match(/^V-([^-]+)-/)?.[1] ?? "";
+  const mood = finiteCode.charAt(finiteCode.length - 1);
+  const voice = finiteCode.charAt(finiteCode.length - 2);
+  if (!mood || !"ISOM".includes(mood)) return null;
   if (voice === "A") {
     return { mode: "active", evidence: "greek-voice", greekVoice: "active" };
   }
