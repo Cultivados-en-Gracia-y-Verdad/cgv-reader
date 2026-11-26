@@ -158,12 +158,12 @@ function grammarFieldForMaculaRole(role: MaculaGrammaticalRole): Exclude<Grammar
 function maculaRoleLabel(role: MaculaGrammaticalRole, language: "en" | "es"): string {
   if (language === "es") {
     if (role === "subject") return "Sujeto gramatical";
-    if (role === "object") return "Objeto directo";
+    if (role === "object") return "Objeto directo / complemento de contenido";
     if (role === "indirect-object") return "Objeto indirecto / receptor";
     return "Atributo / complemento del sujeto";
   }
   if (role === "subject") return "Grammatical subject";
-  if (role === "object") return "Direct object";
+  if (role === "object") return "Direct object / content complement";
   if (role === "indirect-object") return "Indirect object / recipient";
   return "Predicate attribute / subject complement";
 }
@@ -351,7 +351,7 @@ const CLAUSE_DECISION_COPY = {
       "Identify the grammatical subject and how the predicate is completed. This is separate from the semantic actor: in a passive clause, the grammatical subject receives the action.",
     grammarSubject: "Grammatical subject",
     grammarVerb: "Predicate verb",
-    grammarDirectObject: "Direct object",
+    grammarDirectObject: "Direct object / content complement",
     grammarIndirectObject: "Indirect object / recipient",
     grammarAttribute: "Predicate attribute / subject complement",
     grammarSubjectImplicit: "The grammatical subject is implicit in the verb",
@@ -511,7 +511,7 @@ const CLAUSE_DECISION_COPY = {
       "Identifica el sujeto gramatical y cómo se completa el predicado. Esto es distinto del actor semántico: en una cláusula pasiva, el sujeto gramatical recibe la acción.",
     grammarSubject: "Sujeto gramatical",
     grammarVerb: "Verbo del predicado",
-    grammarDirectObject: "Objeto directo",
+    grammarDirectObject: "Objeto directo / complemento de contenido",
     grammarIndirectObject: "Objeto indirecto / receptor",
     grammarAttribute: "Atributo / complemento del sujeto",
     grammarSubjectImplicit: "El sujeto gramatical está implícito en el verbo",
@@ -3338,6 +3338,51 @@ export default function SpanishClauseBuilder({
     () => grammarObservationFor(activeBeginningVerbId),
     [activeBeginningVerbId, grammarObservationFor]
   );
+
+  const activeGrammarMissingParts = useMemo(() => {
+    const missing: string[] = [];
+    const subjectDone = Boolean(
+      activeGrammar.grammaticalSubjectSpan.length ||
+        activeGrammar.subjectImplicit ||
+        activeGrammar.subjectAbsent
+    );
+    const modeDone = Boolean(
+      activeGrammar.predicateMode && activeGrammar.predicateMode !== "unsure"
+    );
+    const complementsDone = Boolean(
+      activeGrammar.directObjectSpan.length ||
+        activeGrammar.indirectObjectSpan.length ||
+        activeGrammar.predicateAttributeSpan.length ||
+        activeGrammar.noExplicitComplements
+    );
+
+    if (!subjectDone) {
+      missing.push(language === "es" ? "el sujeto gramatical" : "the grammatical subject");
+    }
+    if (!modeDone) {
+      missing.push(language === "es" ? "el modo del predicado" : "the predicate mode");
+    }
+    if (!complementsDone) {
+      missing.push(
+        language === "es"
+          ? "si hay objeto, receptor o atributo explícito"
+          : "whether there is an explicit object, recipient, or attribute"
+      );
+    }
+    if (
+      subjectDone &&
+      modeDone &&
+      ((activeGrammar.predicateMode === "impersonal" && !activeGrammar.subjectAbsent) ||
+        (activeGrammar.subjectAbsent && activeGrammar.predicateMode !== "impersonal"))
+    ) {
+      missing.push(
+        language === "es"
+          ? "hacer concordar la decisión de sujeto con el modo impersonal"
+          : "make the subject decision agree with impersonal mode"
+      );
+    }
+    return missing;
+  }, [activeGrammar, language]);
 
   const activeLegacyActor = useMemo(
     () => actorObservationFor(activeBeginningVerbId),
@@ -6841,15 +6886,27 @@ export default function SpanishClauseBuilder({
                           {activeLegacyActor.objectSpan.length ? (
                             <div className="clause-legacy-suggestion-row">
                               <span>
-                                {language === "es" ? "Receptor observado antes" : "Previously observed receiver"}: {" "}
+                                {language === "es"
+                                  ? "Objeto o complemento observado antes"
+                                  : "Previously observed object or complement"}: {" "}
                                 <strong>{spanTextFromIds(activeLegacyActor.objectSpan)}</strong>
                               </span>
                               <div className="clause-legacy-suggestion-actions">
                                 {sameWordIds(activeGrammar.directObjectSpan, activeLegacyActor.objectSpan) ? (
                                   <span className="clause-grammar-confirmed" role="status">
-                                    {language === "es" ? "Confirmado como objeto directo" : "Confirmed as direct object"}
+                                    {language === "es"
+                                      ? "Confirmado como objeto directo / complemento de contenido"
+                                      : "Confirmed as direct object / content complement"}
+                                  </span>
+                                ) : sameWordIds(
+                                    activeGrammar.indirectObjectSpan,
+                                    activeLegacyActor.objectSpan
+                                  ) ? (
+                                  <span className="clause-grammar-confirmed" role="status">
+                                    {language === "es" ? "Confirmado como receptor" : "Confirmed as recipient"}
                                   </span>
                                 ) : (
+                                  <>
                                   <button
                                     type="button"
                                     className="clause-grammar-confirm-suggestion"
@@ -6861,14 +6918,10 @@ export default function SpanishClauseBuilder({
                                       )
                                     }
                                   >
-                                    {language === "es" ? "Confirmar como objeto directo" : "Confirm as direct object"}
+                                    {language === "es"
+                                      ? "Confirmar como objeto directo / contenido"
+                                      : "Confirm as direct object / content"}
                                   </button>
-                                )}
-                                {sameWordIds(activeGrammar.indirectObjectSpan, activeLegacyActor.objectSpan) ? (
-                                  <span className="clause-grammar-confirmed" role="status">
-                                    {language === "es" ? "Confirmado como receptor" : "Confirmed as recipient"}
-                                  </span>
-                                ) : (
                                   <button
                                     type="button"
                                     className="clause-grammar-confirm-suggestion clause-grammar-confirm-suggestion--secondary"
@@ -6882,6 +6935,7 @@ export default function SpanishClauseBuilder({
                                   >
                                     {language === "es" ? "Confirmar como receptor" : "Confirm as recipient"}
                                   </button>
+                                  </>
                                 )}
                               </div>
                             </div>
@@ -7302,8 +7356,8 @@ export default function SpanishClauseBuilder({
                     ) : (
                       <p className="clause-grammar-incomplete" role="status">
                         {language === "es"
-                          ? "Para completar: confirma el sujeto gramatical, el modo del predicado y sus complementos explícitos —o confirma que no hay ninguno."
-                          : "To complete: confirm the grammatical subject, predicate mode, and its explicit complements—or confirm that there are none."}
+                          ? `Falta confirmar: ${activeGrammarMissingParts.join("; ")}.`
+                          : `Still needed: ${activeGrammarMissingParts.join("; ")}.`}
                       </p>
                     )}
                     </section>
