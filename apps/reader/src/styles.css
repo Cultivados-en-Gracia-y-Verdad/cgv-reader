@@ -4505,7 +4505,7 @@ button.interlinear-token--pickable:focus-visible {
   gap: 0.65rem 1rem;
   border-top: 1px solid rgba(181, 137, 29, 0.28);
   padding-top: 0.7rem;
-  font-size: 1.05rem;
+  font-size: 1.12rem;
 }
 
 .clause-legacy-suggestion-actions {
@@ -4522,6 +4522,7 @@ button.interlinear-token--pickable:focus-visible {
   padding: 0.9rem;
   background: rgba(207, 229, 231, 0.2);
   color: var(--reader-text, #39342d);
+  font-size: 1.08rem;
 }
 
 .clause-grammar-suggestions-heading {
@@ -4542,7 +4543,7 @@ button.interlinear-token--pickable:focus-visible {
   border-radius: 8px;
   padding: 0.8rem;
   background: rgba(255, 255, 255, 0.5);
-  font-size: 1.08rem;
+  font-size: 1.16rem;
   line-height: 1.5;
 }
 
@@ -4567,7 +4568,7 @@ button.interlinear-token--pickable:focus-visible {
   background: #294f59;
   color: #fff;
   font: inherit;
-  font-size: 1.02rem;
+  font-size: 1.08rem;
   font-weight: 750;
   cursor: pointer;
 }
@@ -4599,7 +4600,7 @@ button.interlinear-token--pickable:focus-visible {
 .clause-grammar-mode legend {
   padding: 0 0.35rem;
   color: var(--reader-text, #39342d);
-  font-size: 1.08rem;
+  font-size: 1.15rem;
   font-weight: 750;
 }
 
@@ -4620,7 +4621,7 @@ button.interlinear-token--pickable:focus-visible {
   background: transparent;
   color: #294f59;
   font: inherit;
-  font-size: 1rem;
+  font-size: 1.08rem;
   font-weight: 700;
   cursor: pointer;
 }
@@ -4652,6 +4653,16 @@ button.interlinear-token--pickable:focus-visible {
 .clause-grammar-mode-btn:focus-visible {
   outline: 2px solid rgba(107, 146, 157, 0.38);
   outline-offset: 2px;
+}
+
+.clause-greek-grammar-evidence {
+  margin: 0.8rem 0;
+  border-left: 4px solid rgba(107, 146, 157, 0.72);
+  padding: 0.72rem 0.85rem;
+  background: rgba(207, 229, 231, 0.13);
+  color: var(--reader-soft);
+  font-size: 1.08rem;
+  line-height: 1.5;
 }
 
 .clause-grammar-no-complement {
