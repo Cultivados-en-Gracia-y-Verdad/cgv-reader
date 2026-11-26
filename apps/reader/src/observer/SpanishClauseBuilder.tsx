@@ -93,7 +93,11 @@ import {
   type MaculaVerificationStatus
 } from "./macula-advisory";
 import {
-  suggestPredicateMode,
+  isStoredSpanConfirmation,
+  readGreekPredicateVoice,
+  suggestCopularRoles,
+  suggestSpanishPredicateMode,
+  type GreekPredicateVoice,
   type PredicateModeSuggestion
 } from "./grammar-suggestions";
 import { observerPassageContains, type ObserverPassage } from "./observer-passage";
@@ -187,28 +191,32 @@ function predicateModeLabel(mode: ClausePredicateMode, language: "en" | "es"): s
 
 function predicateModeSuggestionReason(
   suggestion: PredicateModeSuggestion,
+  language: "en" | "es"
+): string {
+  return language === "es"
+    ? `La unidad LPF «${suggestion.targetSurface}» contiene el verbo de enlace «${suggestion.verbSurface}».`
+    : `The LPF unit “${suggestion.targetSurface}” contains the linking verb “${suggestion.verbSurface}.”`;
+}
+
+function greekPredicateVoiceReason(
+  voice: GreekPredicateVoice,
   greekSurface: string,
   language: "en" | "es"
 ): string {
-  if (suggestion.evidence === "copular-lemma") {
-    return language === "es"
-      ? `El verbo griego ${greekSurface} es una forma de εἰμί, el verbo de enlace «ser/estar».`
-      : `The Greek verb ${greekSurface} is a form of εἰμί, the linking verb “to be.”`;
-  }
-  const voice = language === "es"
-    ? suggestion.greekVoice === "active"
+  const voiceLabel = language === "es"
+    ? voice === "active"
       ? "voz activa"
-      : suggestion.greekVoice === "middle"
+      : voice === "middle"
         ? "voz media"
         : "voz pasiva"
-    : suggestion.greekVoice === "active"
+    : voice === "active"
       ? "active voice"
-      : suggestion.greekVoice === "middle"
+      : voice === "middle"
         ? "middle voice"
         : "passive voice";
   return language === "es"
-    ? `La forma griega publicada de ${greekSurface} está marcada como ${voice}.`
-    : `The published Greek form of ${greekSurface} is tagged as ${voice}.`;
+    ? `Evidencia de la fuente: la forma griega ${greekSurface} está marcada como ${voiceLabel}. Esto no decide cómo funciona el predicado español de LPF.`
+    : `Source evidence: the Greek form ${greekSurface} is tagged as ${voiceLabel}. This does not decide how the LPF Spanish predicate functions.`;
 }
 
 function maculaAttachmentStatusLabel(
@@ -1363,13 +1371,23 @@ export default function SpanishClauseBuilder({
   const activeMaculaEvidence = activeBeginningVerbId
     ? maculaDataset?.clauses[activeBeginningVerbId]
     : undefined;
+  const activeAlignedPredicateSurface = useMemo(() => {
+    if (!activeBeginningVerbId) return undefined;
+    const token = parseGreekTokenId(activeBeginningVerbId);
+    if (!token) return undefined;
+    return loadLbfTokenSurfaces(token.chapter, token.verse, bookId).get(token.token);
+  }, [activeBeginningVerbId, bookId]);
   const activePredicateModeSuggestion = useMemo(
-    () =>
-      suggestPredicateMode(
-        activeBeginningRow?.finiteVerb.greekLemma,
-        activeBeginningRow?.finiteVerb.greekMorph
-      ),
-    [activeBeginningRow?.finiteVerb.greekLemma, activeBeginningRow?.finiteVerb.greekMorph]
+    () => suggestSpanishPredicateMode(activeAlignedPredicateSurface),
+    [activeAlignedPredicateSurface]
+  );
+  const activeCopularRoleSuggestion = useMemo(
+    () => suggestCopularRoles(activeAlignedPredicateSurface, activeBeginningRow?.selectedWords ?? []),
+    [activeAlignedPredicateSurface, activeBeginningRow?.selectedWords]
+  );
+  const activeGreekPredicateVoice = useMemo(
+    () => readGreekPredicateVoice(activeBeginningRow?.finiteVerb.greekMorph),
+    [activeBeginningRow?.finiteVerb.greekMorph]
   );
   const activeMaculaVerification = useMemo(
     () =>
@@ -3175,7 +3193,7 @@ export default function SpanishClauseBuilder({
           grammaticalSubjectSpan: [],
           subjectImplicit: false,
           subjectAbsent: false,
-          verbSpan: defaultVerbSpanFor(finiteVerbId),
+          verbSpan: [],
           directObjectSpan: [],
           indirectObjectSpan: [],
           predicateAttributeSpan: [],
@@ -3191,9 +3209,7 @@ export default function SpanishClauseBuilder({
           verbSpan:
             field === "verb"
               ? span
-              : prior.verbSpan.length
-                ? prior.verbSpan
-                : defaultVerbSpanFor(finiteVerbId),
+              : prior.verbSpan,
           predicateMode: prior.predicateMode,
           directObjectSpan: field === "directObject" ? span : prior.directObjectSpan,
           indirectObjectSpan: field === "indirectObject" ? span : prior.indirectObjectSpan,
@@ -3206,7 +3222,7 @@ export default function SpanishClauseBuilder({
         return next;
       });
     },
-    [bookId, defaultVerbSpanFor]
+    [bookId]
   );
 
   const setGrammarAbsence = useCallback(
@@ -3216,7 +3232,7 @@ export default function SpanishClauseBuilder({
           grammaticalSubjectSpan: [],
           subjectImplicit: false,
           subjectAbsent: false,
-          verbSpan: defaultVerbSpanFor(finiteVerbId),
+          verbSpan: [],
           directObjectSpan: [],
           indirectObjectSpan: [],
           predicateAttributeSpan: [],
@@ -3240,7 +3256,7 @@ export default function SpanishClauseBuilder({
       setPickingGrammarField(null);
       setGrammarAnchorId(null);
     },
-    [bookId, defaultVerbSpanFor]
+    [bookId]
   );
 
   const setPredicateMode = useCallback(
@@ -3250,7 +3266,7 @@ export default function SpanishClauseBuilder({
           grammaticalSubjectSpan: [],
           subjectImplicit: false,
           subjectAbsent: false,
-          verbSpan: defaultVerbSpanFor(finiteVerbId),
+          verbSpan: [],
           directObjectSpan: [],
           indirectObjectSpan: [],
           predicateAttributeSpan: [],
@@ -3261,7 +3277,7 @@ export default function SpanishClauseBuilder({
         return next;
       });
     },
-    [bookId, defaultVerbSpanFor]
+    [bookId]
   );
 
   const beginGrammarFieldPick = useCallback((field: GrammarField) => {
@@ -3338,6 +3354,9 @@ export default function SpanishClauseBuilder({
     () => grammarObservationFor(activeBeginningVerbId),
     [activeBeginningVerbId, grammarObservationFor]
   );
+  const activeStoredGrammar = activeBeginningVerbId
+    ? clauseGrammar[activeBeginningVerbId]
+    : undefined;
 
   const activeGrammarMissingParts = useMemo(() => {
     const missing: string[] = [];
@@ -7013,9 +7032,6 @@ export default function SpanishClauseBuilder({
                             <p>
                               {predicateModeSuggestionReason(
                                 activePredicateModeSuggestion,
-                                activeBeginningRow.finiteVerb.greekSurface ??
-                                  activeBeginningRow.finiteVerb.greekLemma ??
-                                  (language === "es" ? "el verbo" : "the verb"),
                                 language
                               )}
                             </p>
@@ -7036,7 +7052,102 @@ export default function SpanishClauseBuilder({
                             </button>
                           )}
                         </article>
+                        {activeCopularRoleSuggestion?.subjectImplicit ? (
+                          <div className="clause-legacy-suggestion-row">
+                            <span>
+                              {language === "es"
+                                ? "Posible sujeto gramatical implícito"
+                                : "Possible implicit grammatical subject"}
+                            </span>
+                            {activeGrammar.subjectImplicit ? (
+                              <span className="clause-grammar-confirmed" role="status">
+                                {decisionCopy.grammarSuggestionConfirmed}
+                              </span>
+                            ) : (
+                              <button
+                                type="button"
+                                className="clause-grammar-confirm-suggestion"
+                                onClick={() => setGrammarAbsence(activeBeginningVerbId, "implicitSubject")}
+                              >
+                                {decisionCopy.grammarSuggestionConfirm}
+                              </button>
+                            )}
+                          </div>
+                        ) : null}
+                        {activeCopularRoleSuggestion?.verbWordIds.length ? (
+                          <div className="clause-legacy-suggestion-row">
+                            <span>
+                              {decisionCopy.grammarVerb}: {" "}
+                              <strong>{spanTextFromIds(activeCopularRoleSuggestion.verbWordIds)}</strong>
+                            </span>
+                            {isStoredSpanConfirmation(
+                              activeStoredGrammar?.verbSpan ?? [],
+                              activeCopularRoleSuggestion.verbWordIds
+                            ) ? (
+                              <span className="clause-grammar-confirmed" role="status">
+                                {decisionCopy.grammarSuggestionConfirmed}
+                              </span>
+                            ) : (
+                              <button
+                                type="button"
+                                className="clause-grammar-confirm-suggestion"
+                                onClick={() =>
+                                  updateGrammarField(
+                                    activeBeginningVerbId,
+                                    "verb",
+                                    activeCopularRoleSuggestion.verbWordIds
+                                  )
+                                }
+                              >
+                                {decisionCopy.grammarSuggestionConfirm}
+                              </button>
+                            )}
+                          </div>
+                        ) : null}
+                        {activeCopularRoleSuggestion?.predicateAttributeWordIds.length ? (
+                          <div className="clause-legacy-suggestion-row">
+                            <span>
+                              {decisionCopy.grammarAttribute}: {" "}
+                              <strong>
+                                {spanTextFromIds(activeCopularRoleSuggestion.predicateAttributeWordIds)}
+                              </strong>
+                            </span>
+                            {sameWordIds(
+                              activeGrammar.predicateAttributeSpan,
+                              activeCopularRoleSuggestion.predicateAttributeWordIds
+                            ) ? (
+                              <span className="clause-grammar-confirmed" role="status">
+                                {decisionCopy.grammarSuggestionConfirmed}
+                              </span>
+                            ) : (
+                              <button
+                                type="button"
+                                className="clause-grammar-confirm-suggestion"
+                                onClick={() =>
+                                  updateGrammarField(
+                                    activeBeginningVerbId,
+                                    "predicateAttribute",
+                                    activeCopularRoleSuggestion.predicateAttributeWordIds
+                                  )
+                                }
+                              >
+                                {decisionCopy.grammarSuggestionConfirm}
+                              </button>
+                            )}
+                          </div>
+                        ) : null}
                       </section>
+                    ) : null}
+                    {activeGreekPredicateVoice ? (
+                      <aside className="clause-greek-grammar-evidence">
+                        {greekPredicateVoiceReason(
+                          activeGreekPredicateVoice,
+                          activeBeginningRow.finiteVerb.greekSurface ??
+                            activeBeginningRow.finiteVerb.greekLemma ??
+                            (language === "es" ? "el verbo" : "the verb"),
+                          language
+                        )}
+                      </aside>
                     ) : null}
                     <fieldset className="clause-grammar-mode">
                       <legend>{decisionCopy.grammarModeHeading}</legend>

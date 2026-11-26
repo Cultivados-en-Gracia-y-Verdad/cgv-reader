@@ -2,6 +2,7 @@ import type { ReaderBookId } from "@cgv/core";
 import { getWorkshopBookId } from "./workshop-book";
 import { loadLbfAlignmentRaw, loadLbfRaw } from "./book-assets";
 import { mtToProtestant } from "./oshb";
+import { isSpanishCopularForm } from "./grammar-suggestions";
 
 /**
  * Greek (MorphGNT/BLE token number) → LBF Spanish word index.
@@ -324,9 +325,10 @@ function tokenFromSourceTokenId(
 }
 
 function preferFirstWord(text: string): boolean {
-  return /^(esta|estan|estoy|estamos|esteis|es|son|soy|somos|sois|sea|sean|ser|sera|seran|fue|fueron|fui|era|eran|hay|habra|vino|vinieron|dijo|dijeron|dio|hubo|habia|puso|busco|estuvo|estuvieron|sono|soño|respondio|mando|envio|llamo)$/u.test(
-    normalizeSpanish(text)
-  );
+  return isSpanishCopularForm(text) ||
+    /^(ser|hay|habra|vino|vinieron|dijo|dijeron|dio|hubo|habia|puso|busco|sono|soño|respondio|mando|envio|llamo)$/u.test(
+      normalizeSpanish(text)
+    );
 }
 
 /** token number → LBF word index for one verse */
@@ -464,6 +466,7 @@ function isSpanishPreposition(text: string): boolean {
 function looksLikeSpanishFiniteForm(text: string): boolean {
   const n = normalizeSpanish(text);
   if (!n || n.length < 2) return false;
+  if (isSpanishCopularForm(text)) return true;
   if (
     /^(lo|la|los|las|le|les|me|te|se|nos|os|el|un|una|unos|unas|de|del|al|a|en|con|por|para|sin|y|o|que|no|si|cuando|pues|pero)$/.test(
       n
@@ -471,9 +474,7 @@ function looksLikeSpanishFiniteForm(text: string): boolean {
   ) {
     return false;
   }
-  if (
-    /^(es|son|soy|somos|fue|fueron|era|eran|hay|he|ha|han|hemos|sea|sean|esta|estan|estoy|estamos)$/.test(n)
-  ) {
+  if (/^(hay|he|ha|han|hemos)$/.test(n)) {
     return true;
   }
   // Explicit 1sg presents that do not match the tense-ending list (*escribo*).
