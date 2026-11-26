@@ -39,6 +39,7 @@ export function progressKeysForBook(bookId: ReaderBookId): ProgressKeyInfo[] {
     { key: keys.participleObservations, label: "Participle classifications" },
     { key: keys.participleSubjectHosts, label: "Participle subject hosts" },
     { key: keys.clauseActors, label: "Clause actors (SVO)" },
+    { key: keys.clauseGrammar, label: "Clause grammatical roles (v2)" },
     { key: keys.h3Flow, label: "H3 flow developments" },
     { key: keys.contrasts, label: "Contrast observations" },
     { key: keys.bookDefinitions, label: "Book definitions" },

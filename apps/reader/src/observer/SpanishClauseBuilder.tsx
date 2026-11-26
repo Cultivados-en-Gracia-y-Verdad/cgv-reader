@@ -32,12 +32,14 @@ import {
   readBookDefinitions,
   readBookThread,
   readClauseActors,
+  readClauseGrammar,
+  readClauseGrammarProgress,
   readContrastObservations,
   readH3FlowState,
   readParticipleSubjectHosts,
   writeBookDefinitions,
   writeBookThread,
-  writeClauseActors,
+  writeClauseGrammar,
   writeContrastObservations,
   writeH3FlowState,
   writeParticipleSubjectHosts,
@@ -48,6 +50,9 @@ import {
   type BookThreadStep,
   type ClauseActorObservation,
   type ClauseActors,
+  type ClauseGrammarObservation,
+  type ClauseGrammarObservations,
+  type ClausePredicateMode,
   type ContrastObservation,
   type ContrastObservationsState,
   type H3FlowState,
@@ -132,12 +137,18 @@ import {
   type VerseConvergence
 } from "./convergence-engine";
 
-type ActorField = "subject" | "verb" | "object" | "complement";
+type GrammarField =
+  | "grammaticalSubject"
+  | "verb"
+  | "directObject"
+  | "indirectObject"
+  | "predicateAttribute";
 
-function actorFieldForMaculaRole(role: MaculaGrammaticalRole): Exclude<ActorField, "verb"> {
-  if (role === "subject") return "subject";
-  if (role === "predicate-attribute") return "complement";
-  return "object";
+function grammarFieldForMaculaRole(role: MaculaGrammaticalRole): Exclude<GrammarField, "verb"> {
+  if (role === "subject") return "grammaticalSubject";
+  if (role === "predicate-attribute") return "predicateAttribute";
+  if (role === "indirect-object") return "indirectObject";
+  return "directObject";
 }
 
 function maculaRoleLabel(role: MaculaGrammaticalRole, language: "en" | "es"): string {
@@ -287,16 +298,28 @@ const CLAUSE_DECISION_COPY = {
     resultHelp: "This clause states the outcome produced by another action or situation.",
     comparisonHelp:
       "This clause supplies one side of a comparison and anticipates or corresponds to the other: just as this, so also that.",
-    actorAria: "Subject, verb, and object or recipient observation",
-    actorHeading: "SUBJECT → VERB → OBJECT / RECIPIENT",
-    actorNote:
-      "Who acts, what the actor does, and its object, recipient, or subject complement. Select the words in the chapter text below; this does not change the clause boundary.",
-    actorSubject: "Who acts",
-    actorVerb: "What the actor does",
-    actorObject: "Who or what receives the action",
-    actorComplement: "Attribute / subject complement",
-    actorSubjectImplicit: "Subject is implicit in the verb",
-    actorObjectAbsent: "No explicit object or recipient",
+    grammarAria: "Grammatical subject and predicate roles",
+    grammarHeading: "GRAMMATICAL SUBJECT → PREDICATE",
+    grammarNote:
+      "Identify the grammatical subject and how the predicate is completed. This is separate from the semantic actor: in a passive clause, the grammatical subject receives the action.",
+    grammarSubject: "Grammatical subject",
+    grammarVerb: "Predicate verb",
+    grammarDirectObject: "Direct object",
+    grammarIndirectObject: "Indirect object / recipient",
+    grammarAttribute: "Predicate attribute / subject complement",
+    grammarSubjectImplicit: "The grammatical subject is implicit in the verb",
+    grammarSubjectAbsent: "No grammatical subject — impersonal clause",
+    grammarNoComplements: "No explicit object, recipient, or predicate attribute",
+    grammarModeHeading: "How does this predicate work?",
+    grammarModeActive: "Active",
+    grammarModeMiddle: "Middle / reflexive",
+    grammarModePassive: "Passive",
+    grammarModeCopular: "Copular / linking",
+    grammarModeImpersonal: "Impersonal",
+    grammarModeUnsure: "Not sure yet",
+    grammarLegacyTitle: "Previous actor observation — grammatical review required",
+    grammarLegacyNote:
+      "These words were saved under the old “who acts” question. They remain intact, but the Reader will not silently relabel them as grammatical roles.",
     maculaGrammarSummary: "Second-witness grammar proposals",
     maculaGrammarIntro:
       "These are reviewed TR1894 word proposals, not saved work. Inspect each proposal before deciding whether to use it.",
@@ -311,7 +334,7 @@ const CLAUSE_DECISION_COPY = {
     savedClassification: "Saved classification",
     currentIndependent: "Independent clause — expresses a complete statement, command, or question.",
     reviewClassification: "Review or change this classification",
-    laterAnalysis: "Next observation: subject, verb, and object",
+    laterAnalysis: "Next observation: grammatical roles",
     selectedRelationship: "Selected relationship",
     changeRelationship: "Change relationship",
     chooseHost: "Choose the clause this relationship depends on:",
@@ -430,16 +453,28 @@ const CLAUSE_DECISION_COPY = {
     resultHelp: "Esta cláusula expresa el resultado producido por otra acción o situación.",
     comparisonHelp:
       "Esta cláusula presenta un lado de una comparación y anticipa o corresponde al otro: así como esto, así también aquello.",
-    actorAria: "Observación de sujeto, verbo y objeto o receptor",
-    actorHeading: "SUJETO → VERBO → OBJETO / RECEPTOR",
-    actorNote:
-      "Quién actúa, qué hace y cuál es su objeto, receptor o atributo del sujeto. Selecciona las palabras en el texto del capítulo; esto no cambia el límite de la cláusula.",
-    actorSubject: "Quién actúa",
-    actorVerb: "Qué hace",
-    actorObject: "Sobre quién o qué recae la acción",
-    actorComplement: "Atributo / complemento del sujeto",
-    actorSubjectImplicit: "El sujeto está implícito en el verbo",
-    actorObjectAbsent: "No hay objeto ni receptor explícito",
+    grammarAria: "Sujeto gramatical y funciones del predicado",
+    grammarHeading: "SUJETO GRAMATICAL → PREDICADO",
+    grammarNote:
+      "Identifica el sujeto gramatical y cómo se completa el predicado. Esto es distinto del actor semántico: en una cláusula pasiva, el sujeto gramatical recibe la acción.",
+    grammarSubject: "Sujeto gramatical",
+    grammarVerb: "Verbo del predicado",
+    grammarDirectObject: "Objeto directo",
+    grammarIndirectObject: "Objeto indirecto / receptor",
+    grammarAttribute: "Atributo / complemento del sujeto",
+    grammarSubjectImplicit: "El sujeto gramatical está implícito en el verbo",
+    grammarSubjectAbsent: "No hay sujeto gramatical — cláusula impersonal",
+    grammarNoComplements: "No hay objeto, receptor ni atributo explícito",
+    grammarModeHeading: "¿Cómo funciona este predicado?",
+    grammarModeActive: "Activo",
+    grammarModeMiddle: "Medio / reflexivo",
+    grammarModePassive: "Pasivo",
+    grammarModeCopular: "Copulativo / de enlace",
+    grammarModeImpersonal: "Impersonal",
+    grammarModeUnsure: "Aún no estoy seguro",
+    grammarLegacyTitle: "Observación anterior del actor — requiere revisión gramatical",
+    grammarLegacyNote:
+      "Estas palabras se guardaron con la pregunta anterior «quién actúa». Se conservan intactas, pero el Reader no las renombrará silenciosamente como funciones gramaticales.",
     maculaGrammarSummary: "Propuestas gramaticales del segundo testigo",
     maculaGrammarIntro:
       "Estas son propuestas revisadas de palabras de TR1894, no trabajo guardado. Examina cada propuesta antes de decidir si la usarás.",
@@ -454,7 +489,7 @@ const CLAUSE_DECISION_COPY = {
     savedClassification: "Clasificación guardada",
     currentIndependent: "Cláusula independiente: expresa una afirmación, mandato o pregunta completa.",
     reviewClassification: "Revisar o cambiar esta clasificación",
-    laterAnalysis: "Siguiente observación: sujeto, verbo y objeto",
+    laterAnalysis: "Siguiente observación: funciones gramaticales",
     selectedRelationship: "Relación elegida",
     changeRelationship: "Cambiar la relación",
     chooseHost: "Elige la cláusula de la cual depende esta relación:",
@@ -862,6 +897,12 @@ export default function SpanishClauseBuilder({
     readParticipleSubjectHosts(bookId)
   );
   const [clauseActors, setClauseActors] = useState<ClauseActors>(() => readClauseActors(bookId));
+  const [clauseGrammar, setClauseGrammar] = useState<ClauseGrammarObservations>(() =>
+    readClauseGrammar(bookId)
+  );
+  const [clauseGrammarLoadIssue, setClauseGrammarLoadIssue] = useState<string | null>(
+    () => readClauseGrammarProgress(bookId).issue
+  );
   const [h3FlowState, setH3FlowState] = useState<H3FlowState>(() => readH3FlowState(bookId));
   const [contrastState, setContrastState] = useState<ContrastObservationsState>(() =>
     readContrastObservations(bookId)
@@ -885,9 +926,9 @@ export default function SpanishClauseBuilder({
   /** participleId / clauseId / verseKey currently picking a nominative subject host for. */
   const [pickingSubjectHostKey, setPickingSubjectHostKey] = useState<string | null>(null);
   const pickingSubjectHostKeysRef = useRef<string[]>([]);
-  /** Active clause SVO field being tapped in the passage. */
-  const [pickingActorField, setPickingActorField] = useState<ActorField | null>(null);
-  const [actorAnchorId, setActorAnchorId] = useState<string | null>(null);
+  /** Active grammatical-role field being tapped in the passage. */
+  const [pickingGrammarField, setPickingGrammarField] = useState<GrammarField | null>(null);
+  const [grammarAnchorId, setGrammarAnchorId] = useState<string | null>(null);
   const [forceChoices, setForceChoices] = useState(false);
   const [dependencyDecision, setDependencyDecision] = useState<"dependent" | "adverbial" | null>(null);
   // Set only when the active clause changed via moveToNextClause (confirming
@@ -906,8 +947,8 @@ export default function SpanishClauseBuilder({
   useEffect(() => {
     setForceChoices(false);
     setDependencyDecision(null);
-    setPickingActorField(null);
-    setActorAnchorId(null);
+    setPickingGrammarField(null);
+    setGrammarAnchorId(null);
   }, [activeBeginningVerbId]);
 
   useEffect(() => {
@@ -956,6 +997,9 @@ export default function SpanishClauseBuilder({
     setObservations(readClauseObservations(bookId));
     setParticipleSubjectHosts(readParticipleSubjectHosts(bookId));
     setClauseActors(readClauseActors(bookId));
+    const grammarProgress = readClauseGrammarProgress(bookId);
+    setClauseGrammar(grammarProgress.observations);
+    setClauseGrammarLoadIssue(grammarProgress.issue);
     setH3FlowState(readH3FlowState(bookId));
     setContrastState(readContrastObservations(bookId));
     setBookDefinitions(readBookDefinitions(bookId));
@@ -1306,21 +1350,72 @@ export default function SpanishClauseBuilder({
     [getClauseReviewState, reviewClauseRows]
   );
 
-  // Actor SVO is a second observation pass. A blank field is pending, while
-  // an implicit subject / no explicit object is an affirmative observation.
-  const missingActorClauseRows = useMemo(
+  const grammarObservationComplete = useCallback(
+    (finiteVerbId: string | null | undefined): boolean => {
+      if (!finiteVerbId) return false;
+      const grammar = clauseGrammar[finiteVerbId];
+      if (!grammar) return false;
+      const subjectDone = Boolean(
+        grammar.grammaticalSubjectSpan.length || grammar.subjectImplicit || grammar.subjectAbsent
+      );
+      const predicateDone = Boolean(
+        grammar.directObjectSpan.length ||
+          grammar.indirectObjectSpan.length ||
+          grammar.predicateAttributeSpan.length ||
+          grammar.noExplicitComplements
+      );
+      const subjectModeCoherent = grammar.predicateMode === "impersonal"
+        ? grammar.subjectAbsent === true
+        : grammar.subjectAbsent !== true;
+      return subjectDone &&
+        Boolean(grammar.predicateMode && grammar.predicateMode !== "unsure") &&
+        predicateDone &&
+        subjectModeCoherent;
+    },
+    [clauseGrammar]
+  );
+
+  const legacyActorObservationComplete = useCallback(
+    (finiteVerbId: string | null | undefined): boolean => {
+      if (!finiteVerbId) return false;
+      const actor = clauseActors[finiteVerbId];
+      return Boolean(
+        (actor?.subjectSpan?.length || actor?.subjectImplicit) &&
+          (actor?.objectSpan?.length || actor?.complementSpan?.length || actor?.objectAbsent)
+      );
+    },
+    [clauseActors]
+  );
+
+  // Untouched clauses keep the familiar remaining-work count. Previously
+  // completed actor rows are preserved separately and require explicit
+  // grammatical review rather than being silently reinterpreted.
+  const missingGrammarClauseRows = useMemo(
     () =>
       reviewClauseRows.filter(row => {
         const id = row.finiteVerb.finiteVerbId;
-        if (!id || !row.selectedWords.length) return false;
-        const actor = clauseActors[id];
-        const subjectDone = Boolean(actor?.subjectSpan?.length || actor?.subjectImplicit);
-        const objectDone = Boolean(
-          actor?.objectSpan?.length || actor?.complementSpan?.length || actor?.objectAbsent
+        return Boolean(
+          id &&
+            row.selectedWords.length &&
+            !grammarObservationComplete(id) &&
+            !legacyActorObservationComplete(id)
         );
-        return !subjectDone || !objectDone;
       }),
-    [clauseActors, reviewClauseRows]
+    [grammarObservationComplete, legacyActorObservationComplete, reviewClauseRows]
+  );
+
+  const legacyGrammarReviewRows = useMemo(
+    () =>
+      reviewClauseRows.filter(row => {
+        const id = row.finiteVerb.finiteVerbId;
+        return Boolean(
+          id &&
+            row.selectedWords.length &&
+            !grammarObservationComplete(id) &&
+            legacyActorObservationComplete(id)
+        );
+      }),
+    [grammarObservationComplete, legacyActorObservationComplete, reviewClauseRows]
   );
 
   // Tokens belonging to the clause currently open in the review panel —
@@ -1628,7 +1723,8 @@ export default function SpanishClauseBuilder({
   );
 
   const isActiveClauseRoot = activeResolved?.relation === "root";
-  const activeReadyForActorPass = Boolean(
+  const activeReadyForGrammarPass = Boolean(
+    !clauseGrammarLoadIssue &&
     activeBeginningRow &&
       (isActiveClauseRoot || getClauseReviewState(activeBeginningRow) === "Attached")
   );
@@ -2752,8 +2848,8 @@ export default function SpanishClauseBuilder({
           : [hostKey]
         : [];
       setPickingSubjectHostKey(nextKey);
-      setPickingActorField(null);
-      setActorAnchorId(null);
+      setPickingGrammarField(null);
+      setGrammarAnchorId(null);
       // Naming a subject host must not also edit clause belonging — clear any
       // open Save/Clear span session.
       setActiveVerbId(null);
@@ -2980,100 +3076,153 @@ export default function SpanishClauseBuilder({
     [clauseActors, defaultVerbSpanFor]
   );
 
-  const updateActorField = useCallback(
-    (finiteVerbId: string, field: ActorField, span: string[]) => {
-      setClauseActors(current => {
-        const prior = current[finiteVerbId] ?? {
-          subjectSpan: [],
-          subjectImplicit: false,
-          verbSpan: defaultVerbSpanFor(finiteVerbId),
-          objectSpan: [],
-          complementSpan: [],
-          objectAbsent: false
+  const grammarObservationFor = useCallback(
+    (finiteVerbId: string | null | undefined): ClauseGrammarObservation => {
+      if (!finiteVerbId) {
+        return {
+          grammaticalSubjectSpan: [],
+          verbSpan: [],
+          directObjectSpan: [],
+          indirectObjectSpan: [],
+          predicateAttributeSpan: []
         };
-        const nextRow: ClauseActorObservation = {
-          subjectSpan: field === "subject" ? span : prior.subjectSpan,
-          subjectImplicit: field === "subject" ? false : prior.subjectImplicit,
+      }
+      const stored = clauseGrammar[finiteVerbId];
+      return {
+        grammaticalSubjectSpan: stored?.grammaticalSubjectSpan ?? [],
+        subjectImplicit: stored?.subjectImplicit ?? false,
+        subjectAbsent: stored?.subjectAbsent ?? false,
+        verbSpan: stored?.verbSpan?.length ? stored.verbSpan : defaultVerbSpanFor(finiteVerbId),
+        predicateMode: stored?.predicateMode,
+        directObjectSpan: stored?.directObjectSpan ?? [],
+        indirectObjectSpan: stored?.indirectObjectSpan ?? [],
+        predicateAttributeSpan: stored?.predicateAttributeSpan ?? [],
+        noExplicitComplements: stored?.noExplicitComplements ?? false
+      };
+    },
+    [clauseGrammar, defaultVerbSpanFor]
+  );
+
+  const updateGrammarField = useCallback(
+    (finiteVerbId: string, field: GrammarField, span: string[]) => {
+      setClauseGrammar(current => {
+        const prior = current[finiteVerbId] ?? {
+          grammaticalSubjectSpan: [],
+          subjectImplicit: false,
+          subjectAbsent: false,
+          verbSpan: defaultVerbSpanFor(finiteVerbId),
+          directObjectSpan: [],
+          indirectObjectSpan: [],
+          predicateAttributeSpan: [],
+          noExplicitComplements: false
+        };
+        const isComplementField =
+          field === "directObject" || field === "indirectObject" || field === "predicateAttribute";
+        const nextRow: ClauseGrammarObservation = {
+          grammaticalSubjectSpan:
+            field === "grammaticalSubject" ? span : prior.grammaticalSubjectSpan,
+          subjectImplicit: field === "grammaticalSubject" ? false : prior.subjectImplicit,
+          subjectAbsent: field === "grammaticalSubject" ? false : prior.subjectAbsent,
           verbSpan:
             field === "verb"
               ? span
               : prior.verbSpan.length
                 ? prior.verbSpan
                 : defaultVerbSpanFor(finiteVerbId),
-          objectSpan: field === "object" ? span : prior.objectSpan,
-          complementSpan: field === "complement" ? span : prior.complementSpan,
-          objectAbsent: field === "object" || field === "complement" ? false : prior.objectAbsent
-        };
-        const next = { ...current };
-        if (
-          !nextRow.subjectSpan.length &&
-          !nextRow.objectSpan.length &&
-          !nextRow.complementSpan?.length &&
-          !nextRow.verbSpan.length
-        ) {
-          delete next[finiteVerbId];
-        } else {
-          next[finiteVerbId] = nextRow;
-        }
-        writeClauseActors(next, bookId);
-        return next;
-      });
-    },
-    [bookId, defaultVerbSpanFor]
-  );
-
-  const setActorAbsence = useCallback(
-    (finiteVerbId: string, field: "subject" | "object") => {
-      setClauseActors(current => {
-        const prior = current[finiteVerbId] ?? {
-          subjectSpan: [],
-          subjectImplicit: false,
-          verbSpan: defaultVerbSpanFor(finiteVerbId),
-          objectSpan: [],
-          complementSpan: [],
-          objectAbsent: false
-        };
-        const nextRow: ClauseActorObservation = {
-          ...prior,
-          ...(field === "subject"
-            ? { subjectSpan: [], subjectImplicit: true }
-            : { objectSpan: [], complementSpan: [], objectAbsent: true })
+          predicateMode: prior.predicateMode,
+          directObjectSpan: field === "directObject" ? span : prior.directObjectSpan,
+          indirectObjectSpan: field === "indirectObject" ? span : prior.indirectObjectSpan,
+          predicateAttributeSpan:
+            field === "predicateAttribute" ? span : prior.predicateAttributeSpan,
+          noExplicitComplements: isComplementField ? false : prior.noExplicitComplements
         };
         const next = { ...current, [finiteVerbId]: nextRow };
-        writeClauseActors(next, bookId);
+        writeClauseGrammar(next, bookId);
         return next;
       });
-      setPickingActorField(null);
-      setActorAnchorId(null);
     },
     [bookId, defaultVerbSpanFor]
   );
 
-  const beginActorFieldPick = useCallback(
-    (field: ActorField) => {
-      setPickingSubjectHostKey(null);
-      setActiveVerbId(null);
-      setDraftGreekRange(null);
-      setGreekRangeAnchorToken(null);
-      setActorAnchorId(null);
-      setPickingActorField(current => (current === field ? null : field));
+  const setGrammarAbsence = useCallback(
+    (finiteVerbId: string, field: "implicitSubject" | "absentSubject" | "complements") => {
+      setClauseGrammar(current => {
+        const prior = current[finiteVerbId] ?? {
+          grammaticalSubjectSpan: [],
+          subjectImplicit: false,
+          subjectAbsent: false,
+          verbSpan: defaultVerbSpanFor(finiteVerbId),
+          directObjectSpan: [],
+          indirectObjectSpan: [],
+          predicateAttributeSpan: [],
+          noExplicitComplements: false
+        };
+        const nextRow: ClauseGrammarObservation = field === "implicitSubject"
+          ? { ...prior, grammaticalSubjectSpan: [], subjectImplicit: true, subjectAbsent: false }
+          : field === "absentSubject"
+            ? { ...prior, grammaticalSubjectSpan: [], subjectImplicit: false, subjectAbsent: true }
+            : {
+              ...prior,
+              directObjectSpan: [],
+              indirectObjectSpan: [],
+              predicateAttributeSpan: [],
+              noExplicitComplements: true
+            };
+        const next = { ...current, [finiteVerbId]: nextRow };
+        writeClauseGrammar(next, bookId);
+        return next;
+      });
+      setPickingGrammarField(null);
+      setGrammarAnchorId(null);
     },
-    []
+    [bookId, defaultVerbSpanFor]
   );
 
+  const setPredicateMode = useCallback(
+    (finiteVerbId: string, predicateMode: ClausePredicateMode) => {
+      setClauseGrammar(current => {
+        const prior = current[finiteVerbId] ?? {
+          grammaticalSubjectSpan: [],
+          subjectImplicit: false,
+          subjectAbsent: false,
+          verbSpan: defaultVerbSpanFor(finiteVerbId),
+          directObjectSpan: [],
+          indirectObjectSpan: [],
+          predicateAttributeSpan: [],
+          noExplicitComplements: false
+        };
+        const next = { ...current, [finiteVerbId]: { ...prior, predicateMode } };
+        writeClauseGrammar(next, bookId);
+        return next;
+      });
+    },
+    [bookId, defaultVerbSpanFor]
+  );
+
+  const beginGrammarFieldPick = useCallback((field: GrammarField) => {
+    setPickingSubjectHostKey(null);
+    setActiveVerbId(null);
+    setDraftGreekRange(null);
+    setGreekRangeAnchorToken(null);
+    setGrammarAnchorId(null);
+    setPickingGrammarField(current => (current === field ? null : field));
+  }, []);
+
   // Keep the clause verse (or an existing field pick’s verse) visible inside
-  // the actor chapter list — scroll only that picker, not the window.
+  // the grammar chapter list — scroll only that picker, not the window.
   useEffect(() => {
-    if (!pickingActorField || !activeBeginningRow || !activeBeginningVerbId) return;
-    const actor = actorObservationFor(activeBeginningVerbId);
+    if (!pickingGrammarField || !activeBeginningRow || !activeBeginningVerbId) return;
+    const grammar = grammarObservationFor(activeBeginningVerbId);
     const span =
-      pickingActorField === "subject"
-        ? actor.subjectSpan
-        : pickingActorField === "verb"
-          ? actor.verbSpan
-          : pickingActorField === "complement"
-            ? actor.complementSpan ?? []
-            : actor.objectSpan;
+      pickingGrammarField === "grammaticalSubject"
+        ? grammar.grammaticalSubjectSpan
+        : pickingGrammarField === "verb"
+          ? grammar.verbSpan
+          : pickingGrammarField === "directObject"
+            ? grammar.directObjectSpan
+            : pickingGrammarField === "indirectObject"
+              ? grammar.indirectObjectSpan
+              : grammar.predicateAttributeSpan;
     let verseKey = `${activeBeginningRow.finiteVerb.chapter}:${activeBeginningRow.finiteVerb.verse}`;
     if (span.length) {
       const first = wordById.get(span[0]);
@@ -3081,52 +3230,78 @@ export default function SpanishClauseBuilder({
     }
     const timer = window.setTimeout(() => {
       const node = document.querySelector<HTMLElement>(
-        `[data-actor-verse="${CSS.escape(verseKey)}"]`
+        `[data-grammar-verse="${CSS.escape(verseKey)}"]`
       );
       const panel = node?.closest<HTMLElement>(".clause-subject-host-picker");
       if (!node || !panel) return;
       const panelRect = panel.getBoundingClientRect();
       const nodeRect = node.getBoundingClientRect();
       const delta = nodeRect.top - panelRect.top - 8;
-      if (delta < 0 || nodeRect.bottom > panelRect.bottom) {
-        panel.scrollTop += delta;
-      }
+      if (delta < 0 || nodeRect.bottom > panelRect.bottom) panel.scrollTop += delta;
     }, 40);
     return () => window.clearTimeout(timer);
   }, [
-    pickingActorField,
+    pickingGrammarField,
     activeBeginningVerbId,
     activeBeginningRow,
-    actorObservationFor,
+    grammarObservationFor,
     wordById,
-    clauseActors
+    clauseGrammar
   ]);
 
-  const selectActorWord = useCallback(
-    (finiteVerbId: string, field: ActorField, word: SpanishWord, event: MouseEvent<HTMLButtonElement>) => {
-      if (event.shiftKey && actorAnchorId) {
-        const anchor = wordById.get(actorAnchorId);
+  const selectGrammarWord = useCallback(
+    (finiteVerbId: string, field: GrammarField, word: SpanishWord, event: MouseEvent<HTMLButtonElement>) => {
+      if (event.shiftKey && grammarAnchorId) {
+        const anchor = wordById.get(grammarAnchorId);
         if (anchor) {
           const span = spanFromRange(anchor, word);
           if (span) {
-            updateActorField(finiteVerbId, field, span);
-            setPickingActorField(null);
-            setActorAnchorId(null);
+            updateGrammarField(finiteVerbId, field, span);
+            setPickingGrammarField(null);
+            setGrammarAnchorId(null);
           }
           return;
         }
       }
-      // Keep picker open after the first tap so shift-click can extend the span.
-      setActorAnchorId(word.id);
-      updateActorField(finiteVerbId, field, [word.id]);
+      setGrammarAnchorId(word.id);
+      updateGrammarField(finiteVerbId, field, [word.id]);
     },
-    [actorAnchorId, updateActorField, wordById]
+    [grammarAnchorId, updateGrammarField, wordById]
   );
 
-  const activeActor = useMemo(
+  const activeGrammar = useMemo(
+    () => grammarObservationFor(activeBeginningVerbId),
+    [activeBeginningVerbId, grammarObservationFor]
+  );
+
+  const activeLegacyActor = useMemo(
     () => actorObservationFor(activeBeginningVerbId),
     [activeBeginningVerbId, actorObservationFor]
   );
+  const activeHasLegacyActorObservation = Boolean(
+    activeLegacyActor.subjectSpan.length ||
+      activeLegacyActor.subjectImplicit ||
+      activeLegacyActor.objectSpan.length ||
+      activeLegacyActor.complementSpan?.length ||
+      activeLegacyActor.objectAbsent
+  );
+
+  const moveToNextGrammarClause = useCallback(() => {
+    if (!activeBeginningVerbId) return;
+    const currentIndex = reviewClauseRows.findIndex(
+      row => row.finiteVerb.finiteVerbId === activeBeginningVerbId
+    );
+    const isPending = (row: ClauseOutputRow) =>
+      Boolean(
+        row.finiteVerb.finiteVerbId &&
+          row.selectedWords.length &&
+          !grammarObservationComplete(row.finiteVerb.finiteVerbId)
+      );
+    const next =
+      reviewClauseRows.slice(currentIndex + 1).find(isPending) ??
+      reviewClauseRows.slice(0, Math.max(currentIndex, 0)).find(isPending);
+    if (next) inspectClauseBeginning(next);
+  }, [activeBeginningVerbId, grammarObservationComplete, inspectClauseBeginning, reviewClauseRows]);
 
   const activeMaculaGrammarProposals = useMemo(
     () =>
@@ -3134,7 +3309,7 @@ export default function SpanishClauseBuilder({
         const targetAvailable = evidence.targetWordIds.every(id => wordById.has(id));
         return {
           evidence,
-          field: actorFieldForMaculaRole(evidence.role),
+          field: grammarFieldForMaculaRole(evidence.role),
           targetAvailable,
           targetText: targetAvailable ? spanTextFromIds(evidence.targetWordIds) : ""
         };
@@ -3888,7 +4063,11 @@ export default function SpanishClauseBuilder({
             <span className="clause-tree-text">
               {row ? renderClauseWords(row.selectedWords, node.finiteVerbId) : node.spanText || node.reference}
             </span>
-            {actorTriple ? <span className="clause-actor-triple">{actorTriple}</span> : null}
+            {actorTriple ? (
+              <span className="clause-actor-triple" title="Legacy semantic-actor observation">
+                actor: {actorTriple}
+              </span>
+            ) : null}
             {marker ? (
               <span className="clause-marker-line">
                 “{marker.word}” — {marker.type === "relational" ? "conector relacional" : "marcador subordinante"} ·{" "}
@@ -5314,21 +5493,35 @@ export default function SpanishClauseBuilder({
             </section>
           ) : null}
 
-          {missingActorClauseRows.length ? (
-            <section className="clause-unresolved-participles" aria-label="Clauses without actor">
+          {clauseGrammarLoadIssue ? (
+            <section className="clause-unresolved-participles" aria-label="Grammatical-role progress unavailable">
+              <h3>Grammatical-role progress was not loaded</h3>
+              <p className="clause-section-note">{clauseGrammarLoadIssue}</p>
+            </section>
+          ) : null}
+
+          {!clauseGrammarLoadIssue && missingGrammarClauseRows.length ? (
+            <section className="clause-unresolved-participles" aria-label="Clauses without grammatical roles">
               <div className="clause-audit-header">
                 <h3>
-                  Subject/object observation pending — {missingActorClauseRows.length} of {reviewClauseRows.length}{" "}
-                  mood-tagged clause{reviewClauseRows.length === 1 ? "" : "s"}
+                  Grammatical-role observation pending — {missingGrammarClauseRows.length} new clause
+                  {missingGrammarClauseRows.length === 1 ? "" : "s"}
                 </h3>
+                <button
+                  type="button"
+                  className="clause-reconsider"
+                  onClick={() => inspectClauseBeginning(missingGrammarClauseRows[0])}
+                >
+                  Start next pending clause
+                </button>
               </div>
               <p className="clause-section-note">
-                Structure is saved, but the second pass is incomplete. Open a clause and identify its subject
-                and object, or explicitly mark an implicit subject or no explicit object.
+                Identify the grammatical subject, predicate mode, and any direct object, recipient, or
+                predicate attribute. These are not the same as the semantic actor in a passive clause.
               </p>
               <ul className="clause-audit-list">
-                {missingActorClauseRows.map(row => (
-                  <li key={`actor-${row.finiteVerb.finiteVerbId}`}>
+                {missingGrammarClauseRows.map(row => (
+                  <li key={`grammar-${row.finiteVerb.finiteVerbId}`}>
                     <button
                       type="button"
                       className="clause-audit-ref clause-audit-ref--link"
@@ -5341,14 +5534,54 @@ export default function SpanishClauseBuilder({
                 ))}
               </ul>
             </section>
-          ) : reviewClauseRows.length ? (
+          ) : null}
+
+          {!clauseGrammarLoadIssue && legacyGrammarReviewRows.length ? (
+            <section className="clause-unresolved-participles" aria-label="Legacy actor observations to review">
+              <div className="clause-audit-header">
+                <h3>
+                  Previous actor observations need grammatical review — {legacyGrammarReviewRows.length}
+                </h3>
+                <button
+                  type="button"
+                  className="clause-reconsider"
+                  onClick={() => inspectClauseBeginning(legacyGrammarReviewRows[0])}
+                >
+                  Review next legacy clause
+                </button>
+              </div>
+              <p className="clause-section-note">
+                Your earlier work is preserved. Open each clause and confirm grammatical roles explicitly;
+                the Reader will not reinterpret “who acts” as “grammatical subject.”
+              </p>
+              <ul className="clause-audit-list">
+                {legacyGrammarReviewRows.map(row => (
+                  <li key={`legacy-grammar-${row.finiteVerb.finiteVerbId}`}>
+                    <button
+                      type="button"
+                      className="clause-audit-ref clause-audit-ref--link"
+                      onClick={() => inspectClauseBeginning(row)}
+                    >
+                      {row.reference}
+                    </button>
+                    <span className="clause-audit-range">{row.spanText || "(no span text)"}</span>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+
+          {!clauseGrammarLoadIssue &&
+          !missingGrammarClauseRows.length &&
+          !legacyGrammarReviewRows.length &&
+          reviewClauseRows.length ? (
             <section
               className="clause-unresolved-participles clause-unresolved-participles--clear"
-              aria-label="All actors observed"
+              aria-label="All grammatical roles observed"
             >
-              <h3>All mood-tagged clauses have subject/object observations</h3>
+              <h3>All mood-tagged clauses have grammatical-role observations</h3>
               <p className="clause-section-note">
-                Every saved mood-tagged clause has a subject decision and an object/recipient decision.
+                Every clause has a grammatical-subject decision, predicate mode, and explicit predicate-role review.
               </p>
             </section>
           ) : null}
@@ -6431,43 +6664,101 @@ export default function SpanishClauseBuilder({
                   )}
                 </section>
 
-                {activeBeginningVerbId && activeBeginningRow.selectedWords.length && activeReadyForActorPass ? (
+                {activeBeginningVerbId && activeBeginningRow.selectedWords.length && activeReadyForGrammarPass ? (
                   <details
                     className="clause-later-analysis"
-                    key={`actors-${activeBeginningVerbId}`}
+                    key={`grammar-${activeBeginningVerbId}`}
                     open={
                       unreviewedClauseRows.length === 0 ||
-                      (!activeActor.subjectSpan.length && !activeActor.subjectImplicit) ||
-                      (!activeActor.objectSpan.length &&
-                        !activeActor.complementSpan?.length &&
-                        !activeActor.objectAbsent)
+                      !grammarObservationComplete(activeBeginningVerbId)
                         ? true
                         : undefined
                     }
                   >
                     <summary>{decisionCopy.laterAnalysis}</summary>
                     {renderOutlineStandingPanel(activeBeginningVerbId)}
-                    <section className="clause-actor-svo" aria-label={decisionCopy.actorAria}>
-                    <p className="clause-observation-term">{decisionCopy.actorHeading}</p>
-                    <p className="clause-section-note">{decisionCopy.actorNote}</p>
+                    <section className="clause-actor-svo" aria-label={decisionCopy.grammarAria}>
+                    <p className="clause-observation-term">{decisionCopy.grammarHeading}</p>
+                    <p className="clause-section-note">{decisionCopy.grammarNote}</p>
                     <p className="clause-actor-summary" role="status">
                       <span>
-                        {spanTextFromIds(activeActor.subjectSpan) ||
-                          (activeActor.subjectImplicit
+                        {spanTextFromIds(activeGrammar.grammaticalSubjectSpan) ||
+                          (activeGrammar.subjectImplicit
                             ? language === "es" ? "(sujeto implícito)" : "(implicit subject)"
+                            : activeGrammar.subjectAbsent
+                              ? language === "es" ? "(sin sujeto gramatical)" : "(no grammatical subject)"
                             : "—")}
                       </span>
                       <span aria-hidden="true"> → </span>
-                      <span>{spanTextFromIds(activeActor.verbSpan) || "—"}</span>
+                      <span>{spanTextFromIds(activeGrammar.verbSpan) || "—"}</span>
                       <span aria-hidden="true"> → </span>
                       <span>
-                        {spanTextFromIds(activeActor.objectSpan) ||
-                          spanTextFromIds(activeActor.complementSpan ?? []) ||
-                          (activeActor.objectAbsent
-                            ? language === "es" ? "(sin objeto explícito)" : "(no explicit object)"
+                        {[
+                          spanTextFromIds(activeGrammar.directObjectSpan),
+                          spanTextFromIds(activeGrammar.indirectObjectSpan),
+                          spanTextFromIds(activeGrammar.predicateAttributeSpan)
+                        ].filter(Boolean).join(" · ") ||
+                          (activeGrammar.noExplicitComplements
+                            ? language === "es" ? "(sin complemento explícito)" : "(no explicit complement)"
                             : "—")}
                       </span>
                     </p>
+                    {activeHasLegacyActorObservation ? (
+                      <aside className="clause-legacy-actor-note">
+                        <strong>{decisionCopy.grammarLegacyTitle}</strong>
+                        <p>{decisionCopy.grammarLegacyNote}</p>
+                        <p>
+                          {language === "es" ? "Guardado anteriormente" : "Previously saved"}: {" "}
+                          {spanTextFromIds(activeLegacyActor.subjectSpan) ||
+                            (activeLegacyActor.subjectImplicit
+                              ? language === "es" ? "(actor implícito)" : "(implicit actor)"
+                              : "—")}
+                          {" → "}{spanTextFromIds(activeLegacyActor.verbSpan) || "—"}
+                          {" → "}
+                          {spanTextFromIds(activeLegacyActor.objectSpan) ||
+                            spanTextFromIds(activeLegacyActor.complementSpan ?? []) ||
+                            (activeLegacyActor.objectAbsent
+                              ? language === "es" ? "(sin receptor explícito)" : "(no explicit receiver)"
+                              : "—")}
+                        </p>
+                      </aside>
+                    ) : null}
+                    <fieldset className="clause-grammar-mode">
+                      <legend>{decisionCopy.grammarModeHeading}</legend>
+                      <div className="clause-grammar-mode-options">
+                        {(
+                          [
+                            ["active", decisionCopy.grammarModeActive],
+                            ["middle-reflexive", decisionCopy.grammarModeMiddle],
+                            ["passive", decisionCopy.grammarModePassive],
+                            ["copular", decisionCopy.grammarModeCopular],
+                            ["impersonal", decisionCopy.grammarModeImpersonal],
+                            ["unsure", decisionCopy.grammarModeUnsure]
+                          ] as const
+                        ).map(([mode, label]) => (
+                          <button
+                            type="button"
+                            className={
+                              activeGrammar.predicateMode === mode
+                                ? "clause-grammar-mode-btn clause-grammar-mode-btn--active"
+                                : "clause-grammar-mode-btn"
+                            }
+                            key={mode}
+                            onClick={() => setPredicateMode(activeBeginningVerbId, mode)}
+                          >
+                            {label}
+                          </button>
+                        ))}
+                      </div>
+                    </fieldset>
+                    {(activeGrammar.predicateMode === "impersonal" && !activeGrammar.subjectAbsent) ||
+                    (activeGrammar.subjectAbsent && activeGrammar.predicateMode !== "impersonal") ? (
+                      <p className="clause-grammar-incomplete" role="alert">
+                        {language === "es"
+                          ? "«Impersonal» y «no hay sujeto gramatical» deben confirmarse juntos. Un sujeto meramente implícito no es lo mismo que la ausencia de sujeto."
+                          : "“Impersonal” and “no grammatical subject” must be confirmed together. An implicit subject is not the same as no subject."}
+                      </p>
+                    ) : null}
                     {activeMaculaIsVisible &&
                     activeMaculaEvidence?.attachmentStatus &&
                     activeMaculaGrammarProposals.length ? (
@@ -6488,17 +6779,21 @@ export default function SpanishClauseBuilder({
                         ) : null}
                         <div className="macula-grammar-proposal-list">
                           {activeMaculaGrammarProposals.map(({ evidence, field, targetAvailable, targetText }, index) => {
-                            const savedSpan = field === "subject"
-                              ? activeActor.subjectSpan
-                              : field === "complement"
-                                ? activeActor.complementSpan ?? []
-                                : activeActor.objectSpan;
+                            const savedSpan = field === "grammaticalSubject"
+                              ? activeGrammar.grammaticalSubjectSpan
+                              : field === "predicateAttribute"
+                                ? activeGrammar.predicateAttributeSpan
+                                : field === "indirectObject"
+                                  ? activeGrammar.indirectObjectSpan
+                                  : activeGrammar.directObjectSpan;
                             const confirmed = targetAvailable && sameWordIds(savedSpan, evidence.targetWordIds);
-                            const fieldLabel = field === "subject"
-                              ? decisionCopy.actorSubject
-                              : field === "complement"
-                                ? decisionCopy.actorComplement
-                                : decisionCopy.actorObject;
+                            const fieldLabel = field === "grammaticalSubject"
+                              ? decisionCopy.grammarSubject
+                              : field === "predicateAttribute"
+                                ? decisionCopy.grammarAttribute
+                                : field === "indirectObject"
+                                  ? decisionCopy.grammarIndirectObject
+                                  : decisionCopy.grammarDirectObject;
                             return (
                               <article
                                 className="macula-grammar-proposal"
@@ -6526,7 +6821,7 @@ export default function SpanishClauseBuilder({
                                       className="macula-grammar-use"
                                       disabled={!targetAvailable || !targetText}
                                       onClick={() =>
-                                        updateActorField(activeBeginningVerbId, field, evidence.targetWordIds)
+                                        updateGrammarField(activeBeginningVerbId, field, evidence.targetWordIds)
                                       }
                                     >
                                       {decisionCopy.maculaGrammarUse}: {fieldLabel}
@@ -6535,7 +6830,7 @@ export default function SpanishClauseBuilder({
                                   <button
                                     type="button"
                                     className="macula-grammar-change"
-                                    onClick={() => beginActorFieldPick(field)}
+                                    onClick={() => beginGrammarFieldPick(field)}
                                   >
                                     {decisionCopy.maculaGrammarChoose}
                                   </button>
@@ -6549,56 +6844,57 @@ export default function SpanishClauseBuilder({
                     <div className="clause-actor-fields">
                       {(
                         [
-                          ["subject", decisionCopy.actorSubject, activeActor.subjectSpan],
-                          ["verb", decisionCopy.actorVerb, activeActor.verbSpan],
-                          ["object", decisionCopy.actorObject, activeActor.objectSpan],
-                          ["complement", decisionCopy.actorComplement, activeActor.complementSpan ?? []]
+                          ["grammaticalSubject", decisionCopy.grammarSubject, activeGrammar.grammaticalSubjectSpan],
+                          ["verb", decisionCopy.grammarVerb, activeGrammar.verbSpan],
+                          ["directObject", decisionCopy.grammarDirectObject, activeGrammar.directObjectSpan],
+                          ["indirectObject", decisionCopy.grammarIndirectObject, activeGrammar.indirectObjectSpan],
+                          ["predicateAttribute", decisionCopy.grammarAttribute, activeGrammar.predicateAttributeSpan]
                         ] as const
                       ).map(([field, label, span]) => (
                         <div className="clause-actor-field" key={field}>
                           <button
                             type="button"
                             className={
-                              pickingActorField === field
+                              pickingGrammarField === field
                                 ? "clause-participle-host-pick clause-participle-host-pick--active"
                                 : "clause-participle-host-pick"
                             }
-                            onClick={() => beginActorFieldPick(field)}
+                            onClick={() => beginGrammarFieldPick(field)}
                           >
-                            {pickingActorField === field
+                            {pickingGrammarField === field
                               ? language === "es" ? "Selecciona una palabra abajo →" : "Tap a word below →"
                               : `${label}${span.length ? `: ${spanTextFromIds(span)}` : ""}`}
                           </button>
-                          {field === "subject" && !span.length && !activeActor.subjectImplicit ? (
-                            <button
-                              type="button"
-                              className="clause-participle-host-clear"
-                              onClick={() => setActorAbsence(activeBeginningVerbId, "subject")}
-                            >
-                              {decisionCopy.actorSubjectImplicit}
-                            </button>
-                          ) : null}
-                          {field === "object" &&
+                          {field === "grammaticalSubject" &&
                           !span.length &&
-                          !activeActor.complementSpan?.length &&
-                          !activeActor.objectAbsent ? (
-                            <button
-                              type="button"
-                              className="clause-participle-host-clear"
-                              onClick={() => setActorAbsence(activeBeginningVerbId, "object")}
-                            >
-                              {decisionCopy.actorObjectAbsent}
-                            </button>
+                          !activeGrammar.subjectImplicit &&
+                          !activeGrammar.subjectAbsent ? (
+                            <>
+                              <button
+                                type="button"
+                                className="clause-participle-host-clear"
+                                onClick={() => setGrammarAbsence(activeBeginningVerbId, "implicitSubject")}
+                              >
+                                {decisionCopy.grammarSubjectImplicit}
+                              </button>
+                              <button
+                                type="button"
+                                className="clause-participle-host-clear"
+                                onClick={() => setGrammarAbsence(activeBeginningVerbId, "absentSubject")}
+                              >
+                                {decisionCopy.grammarSubjectAbsent}
+                              </button>
+                            </>
                           ) : null}
                           {(span.length ||
-                            (field === "subject" && activeActor.subjectImplicit) ||
-                            (field === "object" && activeActor.objectAbsent)) && field !== "verb" ? (
+                            (field === "grammaticalSubject" &&
+                              (activeGrammar.subjectImplicit || activeGrammar.subjectAbsent))) && field !== "verb" ? (
                             <button
                               type="button"
                               className="clause-participle-host-clear"
                               onClick={() => {
-                                updateActorField(activeBeginningVerbId, field, []);
-                                if (pickingActorField === field) setPickingActorField(null);
+                                updateGrammarField(activeBeginningVerbId, field, []);
+                                if (pickingGrammarField === field) setPickingGrammarField(null);
                               }}
                             >
                               Clear
@@ -6607,16 +6903,52 @@ export default function SpanishClauseBuilder({
                         </div>
                       ))}
                     </div>
-                    {pickingActorField ? (
-                      <div className="clause-subject-host-picker" aria-label="Pick actor span">
+                    <div className="clause-grammar-no-complement">
+                      {activeGrammar.noExplicitComplements ? (
+                        <>
+                          <span role="status">{decisionCopy.grammarNoComplements}</span>
+                          <button
+                            type="button"
+                            className="clause-participle-host-clear"
+                            onClick={() => updateGrammarField(activeBeginningVerbId, "directObject", [])}
+                          >
+                            Clear
+                          </button>
+                        </>
+                      ) : !activeGrammar.directObjectSpan.length &&
+                        !activeGrammar.indirectObjectSpan.length &&
+                        !activeGrammar.predicateAttributeSpan.length ? (
+                        <button
+                          type="button"
+                          className="clause-participle-host-clear"
+                          onClick={() => setGrammarAbsence(activeBeginningVerbId, "complements")}
+                        >
+                          {decisionCopy.grammarNoComplements}
+                        </button>
+                      ) : null}
+                    </div>
+                    {pickingGrammarField ? (
+                      <div className="clause-subject-host-picker" aria-label="Pick grammatical-role span">
                         <p className="clause-participle-host-picker-note" role="status">
-                          {pickingActorField === "subject"
-                            ? "Quién actúa — tap the subject (shift-click for a span)."
-                            : pickingActorField === "verb"
-                              ? "Qué hace — tap the verb (defaults to the finite verb; retap to change)."
-                              : pickingActorField === "complement"
-                                ? "Atributo del sujeto — selecciona lo que se afirma del sujeto."
-                                : "Sobre quién o qué — tap the object or receptor (optional; shift-click for a span)."}
+                          {pickingGrammarField === "grammaticalSubject"
+                            ? language === "es"
+                              ? "Sujeto gramatical — selecciona la palabra (Mayús-clic para un tramo)."
+                              : "Grammatical subject — select the word (shift-click for a span)."
+                            : pickingGrammarField === "verb"
+                              ? language === "es"
+                                ? "Verbo del predicado — selecciona el verbo."
+                                : "Predicate verb — select the verb."
+                              : pickingGrammarField === "predicateAttribute"
+                                ? language === "es"
+                                  ? "Atributo — selecciona lo que se afirma del sujeto."
+                                  : "Predicate attribute — select what is asserted about the subject."
+                                : pickingGrammarField === "indirectObject"
+                                  ? language === "es"
+                                    ? "Objeto indirecto / receptor — selecciona quién recibe algo."
+                                    : "Indirect object / recipient — select who receives something."
+                                  : language === "es"
+                                    ? "Objeto directo — selecciona lo afectado directamente por el verbo."
+                                    : "Direct object — select what the verb directly affects."}
                         </p>
                         {verses
                           .filter(v => v.chapter === activeBeginningRow.finiteVerb.chapter)
@@ -6625,13 +6957,15 @@ export default function SpanishClauseBuilder({
                               chapterVerse.chapter === activeBeginningRow.finiteVerb.chapter &&
                               chapterVerse.verse === activeBeginningRow.finiteVerb.verse;
                             const selectedIds = new Set(
-                              pickingActorField === "subject"
-                                ? activeActor.subjectSpan
-                                : pickingActorField === "verb"
-                                  ? activeActor.verbSpan
-                                  : pickingActorField === "complement"
-                                    ? activeActor.complementSpan ?? []
-                                    : activeActor.objectSpan
+                              pickingGrammarField === "grammaticalSubject"
+                                ? activeGrammar.grammaticalSubjectSpan
+                                : pickingGrammarField === "verb"
+                                  ? activeGrammar.verbSpan
+                                  : pickingGrammarField === "directObject"
+                                    ? activeGrammar.directObjectSpan
+                                    : pickingGrammarField === "indirectObject"
+                                      ? activeGrammar.indirectObjectSpan
+                                      : activeGrammar.predicateAttributeSpan
                             );
                             return (
                               <p
@@ -6640,8 +6974,8 @@ export default function SpanishClauseBuilder({
                                     ? "clause-subject-host-verse clause-subject-host-verse--current"
                                     : "clause-subject-host-verse"
                                 }
-                                data-actor-verse={`${chapterVerse.chapter}:${chapterVerse.verse}`}
-                                key={`actor-${chapterVerse.chapter}:${chapterVerse.verse}`}
+                                data-grammar-verse={`${chapterVerse.chapter}:${chapterVerse.verse}`}
+                                key={`grammar-${chapterVerse.chapter}:${chapterVerse.verse}`}
                               >
                                 <span className="clause-subject-host-verse-label">
                                   {chapterVerse.chapter}:{chapterVerse.verse}
@@ -6658,9 +6992,9 @@ export default function SpanishClauseBuilder({
                                             : "clause-noun-word clause-noun-word--subject-host"
                                         }
                                         onClick={event =>
-                                          selectActorWord(
+                                          selectGrammarWord(
                                             activeBeginningVerbId,
-                                            pickingActorField,
+                                            pickingGrammarField,
                                             word,
                                             event
                                           )
@@ -6676,6 +7010,32 @@ export default function SpanishClauseBuilder({
                           })}
                       </div>
                     ) : null}
+                    {grammarObservationComplete(activeBeginningVerbId) ? (
+                      <div className="clause-grammar-complete" role="status">
+                        <strong>
+                          {language === "es"
+                            ? "Observación gramatical completa."
+                            : "Grammatical-role observation complete."}
+                        </strong>
+                        {[...missingGrammarClauseRows, ...legacyGrammarReviewRows].some(
+                          row => row.finiteVerb.finiteVerbId !== activeBeginningVerbId
+                        ) ? (
+                          <button
+                            type="button"
+                            className="clause-reconsider"
+                            onClick={moveToNextGrammarClause}
+                          >
+                            {language === "es" ? "Siguiente cláusula pendiente" : "Next pending clause"}
+                          </button>
+                        ) : null}
+                      </div>
+                    ) : (
+                      <p className="clause-grammar-incomplete" role="status">
+                        {language === "es"
+                          ? "Para completar: confirma el sujeto gramatical, el modo del predicado y sus complementos explícitos —o confirma que no hay ninguno."
+                          : "To complete: confirm the grammatical subject, predicate mode, and its explicit complements—or confirm that there are none."}
+                      </p>
+                    )}
                     </section>
                   </details>
                 ) : null}
@@ -7305,9 +7665,9 @@ export default function SpanishClauseBuilder({
                                       ? "clause-h3-flow-subject"
                                       : "clause-h3-flow-subject clause-h3-flow-subject--empty"
                                   }
-                                  title="Quién actúa (H3 root)"
+                                  title="Legacy semantic actor (not grammatical subject)"
                                 >
-                                  <span className="clause-h3-flow-subject-label">sujeto</span>
+                                  <span className="clause-h3-flow-subject-label">actor</span>
                                   <span className="clause-h3-flow-subject-value">
                                     {unit.subject ?? "—"}
                                   </span>
@@ -7324,9 +7684,9 @@ export default function SpanishClauseBuilder({
             ) : null}
 
             <div className="clause-actor-concentration">
-              <h3>B. Actor concentration</h3>
+              <h3>B. Legacy semantic-actor concentration</h3>
               <p className="clause-section-note">
-                Who dominates the passage — how many actions each observed subject carries.
+                Preserved “who acts” observations. These are not grammatical-subject assignments.
               </p>
               {actorConcentration.length ? (
                 <ul className="clause-actor-concentration-list">
@@ -7341,15 +7701,15 @@ export default function SpanishClauseBuilder({
                 </ul>
               ) : (
                 <p className="clause-output-empty">
-                  No actors yet. On a clause with a saved span, answer Quién actúa.
+                  No legacy semantic actors have been recorded.
                 </p>
               )}
             </div>
 
             <div className="clause-actor-flow">
-              <h3>C. Actor flow</h3>
+              <h3>C. Legacy semantic-actor flow</h3>
               <p className="clause-section-note">
-                Actions gathered under each subject — verbo → objeto. The heading is the subject.
+                Earlier actor observations gathered as actor → action → receiver.
               </p>
               {actorFlow.length ? (
                 <div className="clause-actor-flow-list">
@@ -7366,7 +7726,7 @@ export default function SpanishClauseBuilder({
                 </div>
               ) : (
                 <p className="clause-output-empty">
-                  No actor flow yet. Observe Quién actúa and Qué hace on saved clauses.
+                  No legacy semantic-actor flow has been recorded.
                 </p>
               )}
             </div>
