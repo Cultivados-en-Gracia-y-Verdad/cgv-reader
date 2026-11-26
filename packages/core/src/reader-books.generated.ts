@@ -3,7 +3,7 @@ import type { BibleVersionId } from "./bible-version";
 
 export const CGV_DATASET_PROVENANCE = {
   id: "cgv-data",
-  gitCommit: "79870e65150b0f651b04ebd1c99445531e151251"
+  gitCommit: "9a2b198e724cbe7b6d5ffde79d9424e00d700712"
 } as const;
 
 export interface GeneratedReaderBookInfo {
@@ -38,7 +38,7 @@ export const GENERATED_READER_BOOKS = [
   { id: "1timoteo", displayName: "1 Timoteo", rv1909: "54", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909"], morphGntStem: "75-1Ti", hasOshb: false },
   { id: "2timoteo", displayName: "2 Timoteo", rv1909: "55", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909"], morphGntStem: "76-2Ti", hasOshb: false },
   { id: "tito", displayName: "Tito", rv1909: "56", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909", "LBF"], morphGntStem: "77-Tit", hasOshb: false },
-  { id: "filemon", displayName: "Filemón", rv1909: "57", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909"], morphGntStem: "78-Phm", hasOshb: false },
+  { id: "filemon", displayName: "Filemón", rv1909: "57", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909", "LBF"], morphGntStem: "78-Phm", hasOshb: false },
   { id: "hebreos", displayName: "Hebreos", rv1909: "58", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909"], morphGntStem: "79-Heb", hasOshb: false },
   { id: "santiago", displayName: "Santiago", rv1909: "59", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909"], morphGntStem: "80-Jas", hasOshb: false },
   { id: "1pedro", displayName: "1 Pedro", rv1909: "60", testament: "nt", versions: ["NBLA", "BLE", "SPNBES", "RV1909", "LBF"], morphGntStem: "81-1Pe", hasOshb: false },
